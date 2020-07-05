@@ -1,0 +1,5 @@
+/* GNU ld script
+   Use the shared library, but some functions are only in
+   the static library, so try that secondarily.  */
+OUTPUT_FORMAT(elf64-littleaarch64)
+GROUP ( /home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc.so.6 /home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc_nonshared.a  AS_NEEDED ( /home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1 ) )
