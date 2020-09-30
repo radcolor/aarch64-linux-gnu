@@ -217,8 +217,7 @@ abmon   "Yan";/
         "Okt";/
         "Noy";/
         "Dek"
-d_t_fmt   "%A, %d %B %Y %T"
-date_fmt  "%A, %d %B %Y %T %Z"
+d_t_fmt "%A, %d %B %Y %T"
 d_fmt     "%d.%m.%Y"
 t_fmt     "%T"
 am_pm     "";""
@@ -244,7 +243,7 @@ country_ab3 "AZE"
 country_num 031
 country_car    "AZ"
 % Azərbaycanca
-lang_name    "az<U0259>rbaycan"
+lang_name    "az<U0259>rbaycan dili"
 lang_ab      "az"
 lang_term    "aze"
 lang_lib    "aze"

@@ -132,46 +132,34 @@ END LC_NUMERIC
 
 LC_TIME
 abday   "niy";"py<U0144>";/
-        "wto";"str";/
-        "szt";"pi<U014D>";/
+        "wt<U014F>";"str";/
+        "szt";"pj<U014D>";/
         "sob"
 day     "niydziela";/
-        "py<U0144>dzia<U0142>ek";/
-        "wtorek";/
-        "strzoda";/
+        "py<U0144>dzi<U014F>ek";/
+        "wt<U014F>rek";/
+        "strz<U014F>da";/
         "sztwortek";/
-        "pi<U014D>ntek";/
-        "sobota"
+        "pj<U014D>ntek";/
+        "sob<U014F>ta"
 abmon   "sty";"lut";/
-        "mar";"kwi";/
+        "mer";"kwj";/
         "moj";"czy";/
-        "lip";"sie";/
+        "lip";"siy";/
         "wrz";"pa<U017A>";/
         "lis";"gru"
-alt_mon "styczy<U0144>";/
+mon     "styczy<U0144>";/
         "luty";/
-        "marzec";/
-        "kwieciy<U0144>";/
+        "merc";/
+        "kwjeciy<U0144>";/
         "moj";/
-        "czyrwiec";/
-        "lipiec";/
-        "sierpiy<U0144>";/
+        "czyrwjy<U0144>";/
+        "lipjy<U0144>";/
+        "siyrpjy<U0144>";/
         "wrzesiy<U0144>";/
         "pa<U017A>dziernik";/
         "listopad";/
         "grudziy<U0144>"
-mon     "stycznia";/
-        "lutego";/
-        "marca";/
-        "kwietnia";/
-        "moja";/
-        "czyrwca";/
-        "lipca";/
-        "sierpnia";/
-        "wrze<U015B>nia";/
-        "pa<U017A>dziernika";/
-        "listopada";/
-        "grudnia"
 d_t_fmt "%a, %-d %b %Y, %T"
 d_fmt   "%d.%m.%Y"
 t_fmt   "%T"
@@ -200,7 +188,6 @@ END LC_NAME
 
 LC_ADDRESS
 postal_fmt    "%f%N%a%N%d%N%b%N%s %h %e %r%N%z %T%N%c%N"
-country_name "Polska"
 country_ab2 "PL"
 country_ab3 "POL"
 country_num 616

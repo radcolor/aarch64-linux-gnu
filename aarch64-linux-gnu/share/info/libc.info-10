@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2094,922 +2075,9 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
-File: libc.info,  Node: Formatting Calendar Time,  Next: Parsing Date and Time,  Prev: Broken-down Time,  Up: Calendar Time
-
-21.5.4 Formatting Calendar Time
--------------------------------
-
-The functions described in this section format calendar time values as
-strings.  These functions are declared in the header file ‘time.h’.
-
- -- Function: char * asctime (const struct tm *BROKENTIME)
-
-     Preliminary: | MT-Unsafe race:asctime locale | AS-Unsafe | AC-Safe
-     | *Note POSIX Safety Concepts::.
-
-     The ‘asctime’ function converts the broken-down time value that
-     BROKENTIME points to into a string in a standard format:
-
-          "Tue May 21 13:46:22 1991\n"
-
-     The abbreviations for the days of week are: ‘Sun’, ‘Mon’, ‘Tue’,
-     ‘Wed’, ‘Thu’, ‘Fri’, and ‘Sat’.
-
-     The abbreviations for the months are: ‘Jan’, ‘Feb’, ‘Mar’, ‘Apr’,
-     ‘May’, ‘Jun’, ‘Jul’, ‘Aug’, ‘Sep’, ‘Oct’, ‘Nov’, and ‘Dec’.
-
-     The return value points to a statically allocated string, which
-     might be overwritten by subsequent calls to ‘asctime’ or ‘ctime’.
-     (But no other library function overwrites the contents of this
-     string.)
-
- -- Function: char * asctime_r (const struct tm *BROKENTIME, char
-          *BUFFER)
-
-     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
-     Safety Concepts::.
-
-     This function is similar to ‘asctime’ but instead of placing the
-     result in a static buffer it writes the string in the buffer
-     pointed to by the parameter BUFFER.  This buffer should have room
-     for at least 26 bytes, including the terminating null.
-
-     If no error occurred the function returns a pointer to the string
-     the result was written into, i.e., it returns BUFFER.  Otherwise it
-     returns ‘NULL’.
-
- -- Function: char * ctime (const time_t *TIME)
-
-     Preliminary: | MT-Unsafe race:tmbuf race:asctime env locale |
-     AS-Unsafe heap lock | AC-Unsafe lock mem fd | *Note POSIX Safety
-     Concepts::.
-
-     The ‘ctime’ function is similar to ‘asctime’, except that you
-     specify the calendar time argument as a ‘time_t’ simple time value
-     rather than in broken-down local time format.  It is equivalent to
-
-          asctime (localtime (TIME))
-
-     Calling ‘ctime’ also sets the current time zone as if ‘tzset’ were
-     called.  *Note Time Zone Functions::.
-
- -- Function: char * ctime_r (const time_t *TIME, char *BUFFER)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘ctime’, but places the result in the
-     string pointed to by BUFFER.  It is equivalent to (written using
-     gcc extensions, *note (gcc)Statement Exprs::):
-
-          ({ struct tm tm; asctime_r (localtime_r (time, &tm), buf); })
-
-     If no error occurred the function returns a pointer to the string
-     the result was written into, i.e., it returns BUFFER.  Otherwise it
-     returns ‘NULL’.
-
- -- Function: size_t strftime (char *S, size_t SIZE, const char
-          *TEMPLATE, const struct tm *BROKENTIME)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe corrupt heap lock
-     dlopen | AC-Unsafe corrupt lock mem fd | *Note POSIX Safety
-     Concepts::.
-
-     This function is similar to the ‘sprintf’ function (*note Formatted
-     Input::), but the conversion specifications that can appear in the
-     format template TEMPLATE are specialized for printing components of
-     the date and time BROKENTIME according to the locale currently
-     specified for time conversion (*note Locales::) and the current
-     time zone (*note Time Zone Functions::).
-
-     Ordinary characters appearing in the TEMPLATE are copied to the
-     output string S; this can include multibyte character sequences.
-     Conversion specifiers are introduced by a ‘%’ character, followed
-     by an optional flag which can be one of the following.  These flags
-     are all GNU extensions.  The first three affect only the output of
-     numbers:
-
-     ‘_’
-          The number is padded with spaces.
-
-     ‘-’
-          The number is not padded at all.
-
-     ‘0’
-          The number is padded with zeros even if the format specifies
-          padding with spaces.
-
-     ‘^’
-          The output uses uppercase characters, but only if this is
-          possible (*note Case Conversion::).
-
-     The default action is to pad the number with zeros to keep it a
-     constant width.  Numbers that do not have a range indicated below
-     are never padded, since there is no natural width for them.
-
-     Following the flag an optional specification of the width is
-     possible.  This is specified in decimal notation.  If the natural
-     size of the output of the field has less than the specified number
-     of characters, the result is written right adjusted and space
-     padded to the given size.
-
-     An optional modifier can follow the optional flag and width
-     specification.  The modifiers, which were first standardized by
-     POSIX.2-1992 and by ISO C99, are:
-
-     ‘E’
-          Use the locale’s alternative representation for date and time.
-          This modifier applies to the ‘%c’, ‘%C’, ‘%x’, ‘%X’, ‘%y’ and
-          ‘%Y’ format specifiers.  In a Japanese locale, for example,
-          ‘%Ex’ might yield a date format based on the Japanese
-          Emperors’ reigns.
-
-     ‘O’
-          With all format specifiers that produce numbers: use the
-          locale’s alternative numeric symbols.
-
-          With ‘%B’, ‘%b’, and ‘%h’: use the grammatical form for month
-          names that is appropriate when the month is named by itself,
-          rather than the form that is appropriate when the month is
-          used as part of a complete date.  The ‘%OB’ and ‘%Ob’ formats
-          are a C2X feature, specified in C2X to use the locale’s
-          ‘alternative’ month name; the GNU C Library extends this
-          specification to say that the form used in a complete date is
-          the default and the form naming the month by itself is the
-          alternative.
-
-     If the format supports the modifier but no alternative
-     representation is available, it is ignored.
-
-     The conversion specifier ends with a format specifier taken from
-     the following list.  The whole ‘%’ sequence is replaced in the
-     output string as follows:
-
-     ‘%a’
-          The abbreviated weekday name according to the current locale.
-
-     ‘%A’
-          The full weekday name according to the current locale.
-
-     ‘%b’
-          The abbreviated month name according to the current locale, in
-          the grammatical form used when the month is part of a complete
-          date.  As a C2X feature (with a more detailed specification in
-          the GNU C Library), the ‘O’ modifier can be used (‘%Ob’) to
-          get the grammatical form used when the month is named by
-          itself.
-
-     ‘%B’
-          The full month name according to the current locale, in the
-          grammatical form used when the month is part of a complete
-          date.  As a C2X feature (with a more detailed specification in
-          the GNU C Library), the ‘O’ modifier can be used (‘%OB’) to
-          get the grammatical form used when the month is named by
-          itself.
-
-          Note that not all languages need two different forms of the
-          month names, so the text produced by ‘%B’ and ‘%OB’, and by
-          ‘%b’ and ‘%Ob’, may or may not be the same, depending on the
-          locale.
-
-     ‘%c’
-          The preferred calendar time representation for the current
-          locale.
-
-     ‘%C’
-          The century of the year.  This is equivalent to the greatest
-          integer not greater than the year divided by 100.
-
-          If the ‘E’ modifier is specified (‘%EC’), instead produces the
-          name of the period for the year (e.g. an era name) in the
-          locale’s alternative calendar.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%d’
-          The day of the month as a decimal number (range ‘01’ through
-          ‘31’).
-
-     ‘%D’
-          The date using the format ‘%m/%d/%y’.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%e’
-          The day of the month like with ‘%d’, but padded with spaces
-          (range ‘ 1’ through ‘31’).
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%F’
-          The date using the format ‘%Y-%m-%d’.  This is the form
-          specified in the ISO 8601 standard and is the preferred form
-          for all uses.
-
-          This format was first standardized by ISO C99 and by
-          POSIX.1-2001.
-
-     ‘%g’
-          The year corresponding to the ISO week number, but without the
-          century (range ‘00’ through ‘99’).  This has the same format
-          and value as ‘%y’, except that if the ISO week number (see
-          ‘%V’) belongs to the previous or next year, that year is used
-          instead.
-
-          This format was first standardized by ISO C99 and by
-          POSIX.1-2001.
-
-     ‘%G’
-          The year corresponding to the ISO week number.  This has the
-          same format and value as ‘%Y’, except that if the ISO week
-          number (see ‘%V’) belongs to the previous or next year, that
-          year is used instead.
-
-          This format was first standardized by ISO C99 and by
-          POSIX.1-2001 but was previously available as a GNU extension.
-
-     ‘%h’
-          The abbreviated month name according to the current locale.
-          The action is the same as for ‘%b’.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%H’
-          The hour as a decimal number, using a 24-hour clock (range
-          ‘00’ through ‘23’).
-
-     ‘%I’
-          The hour as a decimal number, using a 12-hour clock (range
-          ‘01’ through ‘12’).
-
-     ‘%j’
-          The day of the year as a decimal number (range ‘001’ through
-          ‘366’).
-
-     ‘%k’
-          The hour as a decimal number, using a 24-hour clock like ‘%H’,
-          but padded with spaces (range ‘ 0’ through ‘23’).
-
-          This format is a GNU extension.
-
-     ‘%l’
-          The hour as a decimal number, using a 12-hour clock like ‘%I’,
-          but padded with spaces (range ‘ 1’ through ‘12’).
-
-          This format is a GNU extension.
-
-     ‘%m’
-          The month as a decimal number (range ‘01’ through ‘12’).
-
-     ‘%M’
-          The minute as a decimal number (range ‘00’ through ‘59’).
-
-     ‘%n’
-          A single ‘\n’ (newline) character.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%p’
-          Either ‘AM’ or ‘PM’, according to the given time value; or the
-          corresponding strings for the current locale.  Noon is treated
-          as ‘PM’ and midnight as ‘AM’.  In most locales ‘AM’/‘PM’
-          format is not supported, in such cases ‘"%p"’ yields an empty
-          string.
-
-     ‘%P’
-          Either ‘am’ or ‘pm’, according to the given time value; or the
-          corresponding strings for the current locale, printed in
-          lowercase characters.  Noon is treated as ‘pm’ and midnight as
-          ‘am’.  In most locales ‘AM’/‘PM’ format is not supported, in
-          such cases ‘"%P"’ yields an empty string.
-
-          This format is a GNU extension.
-
-     ‘%r’
-          The complete calendar time using the AM/PM format of the
-          current locale.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.  In the POSIX locale, this format is equivalent to
-          ‘%I:%M:%S %p’.
-
-     ‘%R’
-          The hour and minute in decimal numbers using the format
-          ‘%H:%M’.
-
-          This format was first standardized by ISO C99 and by
-          POSIX.1-2001 but was previously available as a GNU extension.
-
-     ‘%s’
-          The number of seconds since the epoch, i.e., since 1970-01-01
-          00:00:00 UTC. Leap seconds are not counted unless leap second
-          support is available.
-
-          This format is a GNU extension.
-
-     ‘%S’
-          The seconds as a decimal number (range ‘00’ through ‘60’).
-
-     ‘%t’
-          A single ‘\t’ (tabulator) character.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%T’
-          The time of day using decimal numbers using the format
-          ‘%H:%M:%S’.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%u’
-          The day of the week as a decimal number (range ‘1’ through
-          ‘7’), Monday being ‘1’.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%U’
-          The week number of the current year as a decimal number (range
-          ‘00’ through ‘53’), starting with the first Sunday as the
-          first day of the first week.  Days preceding the first Sunday
-          in the year are considered to be in week ‘00’.
-
-     ‘%V’
-          The ISO 8601:1988 week number as a decimal number (range ‘01’
-          through ‘53’).  ISO weeks start with Monday and end with
-          Sunday.  Week ‘01’ of a year is the first week which has the
-          majority of its days in that year; this is equivalent to the
-          week containing the year’s first Thursday, and it is also
-          equivalent to the week containing January 4.  Week ‘01’ of a
-          year can contain days from the previous year.  The week before
-          week ‘01’ of a year is the last week (‘52’ or ‘53’) of the
-          previous year even if it contains days from the new year.
-
-          This format was first standardized by POSIX.2-1992 and by
-          ISO C99.
-
-     ‘%w’
-          The day of the week as a decimal number (range ‘0’ through
-          ‘6’), Sunday being ‘0’.
-
-     ‘%W’
-          The week number of the current year as a decimal number (range
-          ‘00’ through ‘53’), starting with the first Monday as the
-          first day of the first week.  All days preceding the first
-          Monday in the year are considered to be in week ‘00’.
-
-     ‘%x’
-          The preferred date representation for the current locale.
-
-     ‘%X’
-          The preferred time of day representation for the current
-          locale.
-
-     ‘%y’
-          The year without a century as a decimal number (range ‘00’
-          through ‘99’).  This is equivalent to the year modulo 100.
-
-          If the ‘E’ modifier is specified (‘%Ey’), instead produces the
-          year number according to a locale-specific alternative
-          calendar.  Unlike ‘%y’, the number is _not_ reduced modulo
-          100.  However, by default it is zero-padded to a minimum of
-          two digits (this can be overridden by an explicit field width
-          or by the ‘_’ and ‘-’ flags).
-
-     ‘%Y’
-          The year as a decimal number, using the Gregorian calendar.
-          Years before the year ‘1’ are numbered ‘0’, ‘-1’, and so on.
-
-          If the ‘E’ modifier is specified (‘%EY’), instead produces a
-          complete representation of the year according to the locale’s
-          alternative calendar.  Generally this will be some combination
-          of the information produced by ‘%EC’ and ‘%Ey’.  As a GNU
-          extension, the formatting flags ‘_’ or ‘-’ may be used with
-          this conversion specifier; they affect how the year number is
-          printed.
-
-     ‘%z’
-          RFC 822/ISO 8601:1988 style numeric time zone (e.g., ‘-0600’
-          or ‘+0100’), or nothing if no time zone is determinable.
-
-          This format was first standardized by ISO C99 and by
-          POSIX.1-2001 but was previously available as a GNU extension.
-
-          In the POSIX locale, a full RFC 822 timestamp is generated by
-          the format ‘"%a, %d %b %Y %H:%M:%S %z"’ (or the equivalent
-          ‘"%a, %d %b %Y %T %z"’).
-
-     ‘%Z’
-          The time zone abbreviation (empty if the time zone can’t be
-          determined).
-
-     ‘%%’
-          A literal ‘%’ character.
-
-     The SIZE parameter can be used to specify the maximum number of
-     characters to be stored in the array S, including the terminating
-     null character.  If the formatted time requires more than SIZE
-     characters, ‘strftime’ returns zero and the contents of the array S
-     are undefined.  Otherwise the return value indicates the number of
-     characters placed in the array S, not including the terminating
-     null character.
-
-     _Warning:_ This convention for the return value which is prescribed
-     in ISO C can lead to problems in some situations.  For certain
-     format strings and certain locales the output really can be the
-     empty string and this cannot be discovered by testing the return
-     value only.  E.g., in most locales the AM/PM time format is not
-     supported (most of the world uses the 24 hour time representation).
-     In such locales ‘"%p"’ will return the empty string, i.e., the
-     return value is zero.  To detect situations like this something
-     similar to the following code should be used:
-
-          buf[0] = '\1';
-          len = strftime (buf, bufsize, format, tp);
-          if (len == 0 && buf[0] != '\0')
-            {
-              /* Something went wrong in the strftime call.  */
-              ...
-            }
-
-     If S is a null pointer, ‘strftime’ does not actually write
-     anything, but instead returns the number of characters it would
-     have written.
-
-     Calling ‘strftime’ also sets the current time zone as if ‘tzset’
-     were called; ‘strftime’ uses this information instead of
-     BROKENTIME’s ‘tm_gmtoff’ and ‘tm_zone’ members.  *Note Time Zone
-     Functions::.
-
-     For an example of ‘strftime’, see *note Time Functions Example::.
-
- -- Function: size_t wcsftime (wchar_t *S, size_t SIZE, const wchar_t
-          *TEMPLATE, const struct tm *BROKENTIME)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe corrupt heap lock
-     dlopen | AC-Unsafe corrupt lock mem fd | *Note POSIX Safety
-     Concepts::.
-
-     The ‘wcsftime’ function is equivalent to the ‘strftime’ function
-     with the difference that it operates on wide character strings.
-     The buffer where the result is stored, pointed to by S, must be an
-     array of wide characters.  The parameter SIZE which specifies the
-     size of the output buffer gives the number of wide characters, not
-     the number of bytes.
-
-     Also the format string TEMPLATE is a wide character string.  Since
-     all characters needed to specify the format string are in the basic
-     character set it is portably possible to write format strings in
-     the C source code using the ‘L"..."’ notation.  The parameter
-     BROKENTIME has the same meaning as in the ‘strftime’ call.
-
-     The ‘wcsftime’ function supports the same flags, modifiers, and
-     format specifiers as the ‘strftime’ function.
-
-     The return value of ‘wcsftime’ is the number of wide characters
-     stored in ‘s’.  When more characters would have to be written than
-     can be placed in the buffer S the return value is zero, with the
-     same problems indicated in the ‘strftime’ documentation.
-
-
-File: libc.info,  Node: Parsing Date and Time,  Next: TZ Variable,  Prev: Formatting Calendar Time,  Up: Calendar Time
-
-21.5.5 Convert textual time and date information back
------------------------------------------------------
-
-The ISO C standard does not specify any functions which can convert the
-output of the ‘strftime’ function back into a binary format.  This led
-to a variety of more-or-less successful implementations with different
-interfaces over the years.  Then the Unix standard was extended by the
-addition of two functions: ‘strptime’ and ‘getdate’.  Both have strange
-interfaces but at least they are widely available.
-
-* Menu:
-
-* Low-Level Time String Parsing::  Interpret string according to given format.
-* General Time String Parsing::    User-friendly function to parse data and
-                                    time strings.
-
-
-File: libc.info,  Node: Low-Level Time String Parsing,  Next: General Time String Parsing,  Up: Parsing Date and Time
-
-21.5.5.1 Interpret string according to given format
-...................................................
-
-The first function is rather low-level.  It is nevertheless frequently
-used in software since it is better known.  Its interface and
-implementation are heavily influenced by the ‘getdate’ function, which
-is defined and implemented in terms of calls to ‘strptime’.
-
- -- Function: char * strptime (const char *S, const char *FMT, struct tm
-          *TP)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     The ‘strptime’ function parses the input string S according to the
-     format string FMT and stores its results in the structure TP.
-
-     The input string could be generated by a ‘strftime’ call or
-     obtained any other way.  It does not need to be in a
-     human-recognizable format; e.g.  a date passed as ‘"02:1999:9"’ is
-     acceptable, even though it is ambiguous without context.  As long
-     as the format string FMT matches the input string the function will
-     succeed.
-
-     The user has to make sure, though, that the input can be parsed in
-     a unambiguous way.  The string ‘"1999112"’ can be parsed using the
-     format ‘"%Y%m%d"’ as 1999-1-12, 1999-11-2, or even 19991-1-2.  It
-     is necessary to add appropriate separators to reliably get results.
-
-     The format string consists of the same components as the format
-     string of the ‘strftime’ function.  The only difference is that the
-     flags ‘_’, ‘-’, ‘0’, and ‘^’ are not allowed.  Several of the
-     distinct formats of ‘strftime’ do the same work in ‘strptime’ since
-     differences like case of the input do not matter.  For reasons of
-     symmetry all formats are supported, though.
-
-     The modifiers ‘E’ and ‘O’ are also allowed everywhere the
-     ‘strftime’ function allows them.
-
-     The formats are:
-
-     ‘%a’
-     ‘%A’
-          The weekday name according to the current locale, in
-          abbreviated form or the full name.
-
-     ‘%b’
-     ‘%B’
-     ‘%h’
-          A month name according to the current locale.  All three
-          specifiers will recognize both abbreviated and full month
-          names.  If the locale provides two different grammatical forms
-          of month names, all three specifiers will recognize both
-          forms.
-
-          As a GNU extension, the ‘O’ modifier can be used with these
-          specifiers; it has no effect, as both grammatical forms of
-          month names are recognized.
-
-     ‘%c’
-          The date and time representation for the current locale.
-
-     ‘%Ec’
-          Like ‘%c’ but the locale’s alternative date and time format is
-          used.
-
-     ‘%C’
-          The century of the year.
-
-          It makes sense to use this format only if the format string
-          also contains the ‘%y’ format.
-
-     ‘%EC’
-          The locale’s representation of the period.
-
-          Unlike ‘%C’ it sometimes makes sense to use this format since
-          some cultures represent years relative to the beginning of
-          eras instead of using the Gregorian years.
-
-     ‘%d’
-     ‘%e’
-          The day of the month as a decimal number (range ‘1’ through
-          ‘31’).  Leading zeroes are permitted but not required.
-
-     ‘%Od’
-     ‘%Oe’
-          Same as ‘%d’ but using the locale’s alternative numeric
-          symbols.
-
-          Leading zeroes are permitted but not required.
-
-     ‘%D’
-          Equivalent to ‘%m/%d/%y’.
-
-     ‘%F’
-          Equivalent to ‘%Y-%m-%d’, which is the ISO 8601 date format.
-
-          This is a GNU extension following an ISO C99 extension to
-          ‘strftime’.
-
-     ‘%g’
-          The year corresponding to the ISO week number, but without the
-          century (range ‘00’ through ‘99’).
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-          This format is a GNU extension following a GNU extension of
-          ‘strftime’.
-
-     ‘%G’
-          The year corresponding to the ISO week number.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-          This format is a GNU extension following a GNU extension of
-          ‘strftime’.
-
-     ‘%H’
-     ‘%k’
-          The hour as a decimal number, using a 24-hour clock (range
-          ‘00’ through ‘23’).
-
-          ‘%k’ is a GNU extension following a GNU extension of
-          ‘strftime’.
-
-     ‘%OH’
-          Same as ‘%H’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%I’
-     ‘%l’
-          The hour as a decimal number, using a 12-hour clock (range
-          ‘01’ through ‘12’).
-
-          ‘%l’ is a GNU extension following a GNU extension of
-          ‘strftime’.
-
-     ‘%OI’
-          Same as ‘%I’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%j’
-          The day of the year as a decimal number (range ‘1’ through
-          ‘366’).
-
-          Leading zeroes are permitted but not required.
-
-     ‘%m’
-          The month as a decimal number (range ‘1’ through ‘12’).
-
-          Leading zeroes are permitted but not required.
-
-     ‘%Om’
-          Same as ‘%m’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%M’
-          The minute as a decimal number (range ‘0’ through ‘59’).
-
-          Leading zeroes are permitted but not required.
-
-     ‘%OM’
-          Same as ‘%M’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%n’
-     ‘%t’
-          Matches any white space.
-
-     ‘%p’
-     ‘%P’
-          The locale-dependent equivalent to ‘AM’ or ‘PM’.
-
-          This format is not useful unless ‘%I’ or ‘%l’ is also used.
-          Another complication is that the locale might not define these
-          values at all and therefore the conversion fails.
-
-          ‘%P’ is a GNU extension following a GNU extension to
-          ‘strftime’.
-
-     ‘%r’
-          The complete time using the AM/PM format of the current
-          locale.
-
-          A complication is that the locale might not define this format
-          at all and therefore the conversion fails.
-
-     ‘%R’
-          The hour and minute in decimal numbers using the format
-          ‘%H:%M’.
-
-          ‘%R’ is a GNU extension following a GNU extension to
-          ‘strftime’.
-
-     ‘%s’
-          The number of seconds since the epoch, i.e., since 1970-01-01
-          00:00:00 UTC. Leap seconds are not counted unless leap second
-          support is available.
-
-          ‘%s’ is a GNU extension following a GNU extension to
-          ‘strftime’.
-
-     ‘%S’
-          The seconds as a decimal number (range ‘0’ through ‘60’).
-
-          Leading zeroes are permitted but not required.
-
-          *NB:* The Unix specification says the upper bound on this
-          value is ‘61’, a result of a decision to allow double leap
-          seconds.  You will not see the value ‘61’ because no minute
-          has more than one leap second, but the myth persists.
-
-     ‘%OS’
-          Same as ‘%S’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%T’
-          Equivalent to the use of ‘%H:%M:%S’ in this place.
-
-     ‘%u’
-          The day of the week as a decimal number (range ‘1’ through
-          ‘7’), Monday being ‘1’.
-
-          Leading zeroes are permitted but not required.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-     ‘%U’
-          The week number of the current year as a decimal number (range
-          ‘0’ through ‘53’).
-
-          Leading zeroes are permitted but not required.
-
-     ‘%OU’
-          Same as ‘%U’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%V’
-          The ISO 8601:1988 week number as a decimal number (range ‘1’
-          through ‘53’).
-
-          Leading zeroes are permitted but not required.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-     ‘%w’
-          The day of the week as a decimal number (range ‘0’ through
-          ‘6’), Sunday being ‘0’.
-
-          Leading zeroes are permitted but not required.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-     ‘%Ow’
-          Same as ‘%w’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%W’
-          The week number of the current year as a decimal number (range
-          ‘0’ through ‘53’).
-
-          Leading zeroes are permitted but not required.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-     ‘%OW’
-          Same as ‘%W’ but using the locale’s alternative numeric
-          symbols.
-
-     ‘%x’
-          The date using the locale’s date format.
-
-     ‘%Ex’
-          Like ‘%x’ but the locale’s alternative data representation is
-          used.
-
-     ‘%X’
-          The time using the locale’s time format.
-
-     ‘%EX’
-          Like ‘%X’ but the locale’s alternative time representation is
-          used.
-
-     ‘%y’
-          The year without a century as a decimal number (range ‘0’
-          through ‘99’).
-
-          Leading zeroes are permitted but not required.
-
-          Note that it is questionable to use this format without the
-          ‘%C’ format.  The ‘strptime’ function does regard input values
-          in the range 68 to 99 as the years 1969 to 1999 and the values
-          0 to 68 as the years 2000 to 2068.  But maybe this heuristic
-          fails for some input data.
-
-          Therefore it is best to avoid ‘%y’ completely and use ‘%Y’
-          instead.
-
-     ‘%Ey’
-          The offset from ‘%EC’ in the locale’s alternative
-          representation.
-
-     ‘%Oy’
-          The offset of the year (from ‘%C’) using the locale’s
-          alternative numeric symbols.
-
-     ‘%Y’
-          The year as a decimal number, using the Gregorian calendar.
-
-     ‘%EY’
-          The full alternative year representation.
-
-     ‘%z’
-          The offset from GMT in ISO 8601/RFC822 format.
-
-     ‘%Z’
-          The timezone name.
-
-          _Note:_ Currently, this is not fully implemented.  The format
-          is recognized, input is consumed but no field in TM is set.
-
-     ‘%%’
-          A literal ‘%’ character.
-
-     All other characters in the format string must have a matching
-     character in the input string.  Exceptions are white spaces in the
-     input string which can match zero or more whitespace characters in
-     the format string.
-
-     *Portability Note:* The XPG standard advises applications to use at
-     least one whitespace character (as specified by ‘isspace’) or other
-     non-alphanumeric characters between any two conversion
-     specifications.  The GNU C Library does not have this limitation
-     but other libraries might have trouble parsing formats like
-     ‘"%d%m%Y%H%M%S"’.
-
-     The ‘strptime’ function processes the input string from right to
-     left.  Each of the three possible input elements (white space,
-     literal, or format) are handled one after the other.  If the input
-     cannot be matched to the format string the function stops.  The
-     remainder of the format and input strings are not processed.
-
-     The function returns a pointer to the first character it was unable
-     to process.  If the input string contains more characters than
-     required by the format string the return value points right after
-     the last consumed input character.  If the whole input string is
-     consumed the return value points to the ‘NULL’ byte at the end of
-     the string.  If an error occurs, i.e., ‘strptime’ fails to match
-     all of the format string, the function returns ‘NULL’.
-
-   The specification of the function in the XPG standard is rather
-vague, leaving out a few important pieces of information.  Most
-importantly, it does not specify what happens to those elements of TM
-which are not directly initialized by the different formats.  The
-implementations on different Unix systems vary here.
-
-   The GNU C Library implementation does not touch those fields which
-are not directly initialized.  Exceptions are the ‘tm_wday’ and
-‘tm_yday’ elements, which are recomputed if any of the year, month, or
-date elements changed.  This has two implications:
-
-   • Before calling the ‘strptime’ function for a new input string, you
-     should prepare the TM structure you pass.  Normally this will mean
-     initializing all values to zero.  Alternatively, you can set all
-     fields to values like ‘INT_MAX’, allowing you to determine which
-     elements were set by the function call.  Zero does not work here
-     since it is a valid value for many of the fields.
-
-     Careful initialization is necessary if you want to find out whether
-     a certain field in TM was initialized by the function call.
-
-   • You can construct a ‘struct tm’ value with several consecutive
-     ‘strptime’ calls.  A useful application of this is e.g.  the
-     parsing of two separate strings, one containing date information
-     and the other time information.  By parsing one after the other
-     without clearing the structure in-between, you can construct a
-     complete broken-down time.
-
-   The following example shows a function which parses a string which
-contains the date information in either US style or ISO 8601 form:
-
-     const char *
-     parse_date (const char *input, struct tm *tm)
-     {
-       const char *cp;
-
-       /* First clear the result structure.  */
-       memset (tm, '\0', sizeof (*tm));
-
-       /* Try the ISO format first.  */
-       cp = strptime (input, "%F", tm);
-       if (cp == NULL)
-         {
-           /* Does not match.  Try the US form.  */
-           cp = strptime (input, "%D", tm);
-         }
-
-       return cp;
-     }
-
-
 File: libc.info,  Node: General Time String Parsing,  Prev: Low-Level Time String Parsing,  Up: Parsing Date and Time
 
-21.5.5.2 A More User-friendly Way to Parse Times and Dates
+21.4.6.2 A More User-friendly Way to Parse Times and Dates
 ..........................................................
 
 The Unix standard defines another function for parsing date strings.
@@ -3172,7 +2240,7 @@ environment variable).
 
 File: libc.info,  Node: TZ Variable,  Next: Time Zone Functions,  Prev: Parsing Date and Time,  Up: Calendar Time
 
-21.5.6 Specifying the Time Zone with ‘TZ’
+21.4.7 Specifying the Time Zone with ‘TZ’
 -----------------------------------------
 
 In POSIX systems, a user can specify the time zone by means of the ‘TZ’
@@ -3328,7 +2396,7 @@ maintained by a community of volunteers and put in the public domain.
 
 File: libc.info,  Node: Time Zone Functions,  Next: Time Functions Example,  Prev: TZ Variable,  Up: Calendar Time
 
-21.5.7 Functions and Variables for Time Zones
+21.4.8 Functions and Variables for Time Zones
 ---------------------------------------------
 
  -- Variable: char * tzname [2]
@@ -3392,7 +2460,7 @@ other time conversion functions.
 
 File: libc.info,  Node: Time Functions Example,  Prev: Time Zone Functions,  Up: Calendar Time
 
-21.5.8 Time Functions Example
+21.4.9 Time Functions Example
 -----------------------------
 
 Here is an example program showing the use of some of the calendar time
@@ -3438,7 +2506,7 @@ functions.
 
 File: libc.info,  Node: Setting an Alarm,  Next: Sleeping,  Prev: Calendar Time,  Up: Date and Time
 
-21.6 Setting an Alarm
+21.5 Setting an Alarm
 =====================
 
 The ‘alarm’ and ‘setitimer’ functions provide a mechanism for a process
@@ -3500,7 +2568,8 @@ for setting the real-time timer.
           This is the period between now and the first timer interrupt.
           If zero, the alarm is disabled.
 
-     The ‘struct timeval’ data type is described in *note Time Types::.
+     The ‘struct timeval’ data type is described in *note Elapsed
+     Time::.
 
  -- Function: int setitimer (int WHICH, const struct itimerval *NEW,
           struct itimerval *OLD)
@@ -3596,7 +2665,7 @@ POSIX.1 standard.  ‘setitimer’ is more powerful than ‘alarm’, but
 
 File: libc.info,  Node: Sleeping,  Prev: Setting an Alarm,  Up: Date and Time
 
-21.7 Sleeping
+21.6 Sleeping
 =============
 
 The function ‘sleep’ gives a simple way to make the program wait for a
@@ -3670,7 +2739,7 @@ program, because ‘sleep’ does not work by means of ‘SIGALRM’.
      interval for which you requested to sleep.  If the interval
      completed without getting interrupted by a signal, this is zero.
 
-     ‘struct timespec’ is described in *note Time Types::.
+     ‘struct timespec’ is described in *Note Elapsed Time::.
 
      If the function returns because the interval is over the return
      value is zero.  If the function returns -1 the global variable
@@ -4406,13 +3475,6 @@ policy, if anything, only fine tunes the effect of that priority.
 
    The symbols in this section are declared by including file ‘sched.h’.
 
-   *Portability Note:* In POSIX, the ‘pid_t’ arguments of the functions
-below refer to process IDs.  On Linux, they are actually thread IDs, and
-control how specific threads are scheduled with regards to the entire
-system.  The resulting behavior does not conform to POSIX. This is why
-the following description refers to tasks and tasks IDs, and not
-processes and process IDs.
-
  -- Data Type: struct sched_param
 
      This structure describes an absolute priority.
@@ -4426,12 +3488,12 @@ processes and process IDs.
      Concepts::.
 
      This function sets both the absolute priority and the scheduling
-     policy for a task.
+     policy for a process.
 
      It assigns the absolute priority value given by PARAM and the
-     scheduling policy POLICY to the task with ID PID, or the calling
-     task if PID is zero.  If POLICY is negative, ‘sched_setscheduler’
-     keeps the existing scheduling policy.
+     scheduling policy POLICY to the process with Process ID PID, or the
+     calling process if PID is zero.  If POLICY is negative,
+     ‘sched_setscheduler’ keeps the existing scheduling policy.
 
      The following macros represent the valid values for POLICY:
 
@@ -4447,17 +3509,17 @@ processes and process IDs.
      function are:
 
      ‘EPERM’
-             • The calling task does not have ‘CAP_SYS_NICE’ permission
-               and POLICY is not ‘SCHED_OTHER’ (or it’s negative and the
-               existing policy is not ‘SCHED_OTHER’.
+             • The calling process does not have ‘CAP_SYS_NICE’
+               permission and POLICY is not ‘SCHED_OTHER’ (or it’s
+               negative and the existing policy is not ‘SCHED_OTHER’.
 
-             • The calling task does not have ‘CAP_SYS_NICE’ permission
-               and its owner is not the target task’s owner.  I.e., the
-               effective uid of the calling task is neither the
-               effective nor the real uid of task PID.
+             • The calling process does not have ‘CAP_SYS_NICE’
+               permission and its owner is not the target process’
+               owner.  I.e., the effective uid of the calling process is
+               neither the effective nor the real uid of process PID.
 
      ‘ESRCH’
-          There is no task with pid PID and PID is not zero.
+          There is no process with pid PID and PID is not zero.
 
      ‘EINVAL’
              • POLICY does not identify an existing scheduling policy.
@@ -4476,8 +3538,8 @@ processes and process IDs.
      Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
      Concepts::.
 
-     This function returns the scheduling policy assigned to the task
-     with ID PID, or the calling task if PID is zero.
+     This function returns the scheduling policy assigned to the process
+     with Process ID (pid) PID, or the calling process if PID is zero.
 
      The return value is the scheduling policy.  See
      ‘sched_setscheduler’ for the possible values.
@@ -4488,7 +3550,7 @@ processes and process IDs.
      The ‘errno’ values specific to this function are:
 
      ‘ESRCH’
-          There is no task with pid PID and it is not zero.
+          There is no process with pid PID and it is not zero.
 
      ‘EINVAL’
           PID is negative.
@@ -4505,7 +3567,7 @@ processes and process IDs.
      Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
      Concepts::.
 
-     This function sets a task’s absolute priority.
+     This function sets a process’ absolute priority.
 
      It is functionally identical to ‘sched_setscheduler’ with POLICY =
      ‘-1’.
@@ -4515,20 +3577,20 @@ processes and process IDs.
      Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
      Concepts::.
 
-     This function returns a task’s absolute priority.
+     This function returns a process’ absolute priority.
 
-     PID is the task ID of the task whose absolute priority you want to
-     know.
+     PID is the Process ID (pid) of the process whose absolute priority
+     you want to know.
 
      PARAM is a pointer to a structure in which the function stores the
-     absolute priority of the task.
+     absolute priority of the process.
 
      On success, the return value is ‘0’.  Otherwise, it is ‘-1’ and
      ‘errno’ is set accordingly.  The ‘errno’ values specific to this
      function are:
 
      ‘ESRCH’
-          There is no task with ID PID and it is not zero.
+          There is no process with pid PID and it is not zero.
 
      ‘EINVAL’
           PID is negative.
@@ -4539,7 +3601,7 @@ processes and process IDs.
      Concepts::.
 
      This function returns the lowest absolute priority value that is
-     allowable for a task with scheduling policy POLICY.
+     allowable for a process with scheduling policy POLICY.
 
      On Linux, it is 0 for SCHED_OTHER and 1 for everything else.
 
@@ -4556,7 +3618,7 @@ processes and process IDs.
      Concepts::.
 
      This function returns the highest absolute priority value that is
-     allowable for a task that with scheduling policy POLICY.
+     allowable for a process that with scheduling policy POLICY.
 
      On Linux, it is 0 for SCHED_OTHER and 99 for everything else.
 
@@ -4574,8 +3636,8 @@ processes and process IDs.
      Concepts::.
 
      This function returns the length of the quantum (time slice) used
-     with the Round Robin scheduling policy, if it is used, for the task
-     with task ID PID.
+     with the Round Robin scheduling policy, if it is used, for the
+     process with Process ID PID.
 
      It returns the length of time as INTERVAL.
 
@@ -4592,19 +3654,19 @@ processes and process IDs.
      Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
      Concepts::.
 
-     This function voluntarily gives up the task’s claim on the CPU.
+     This function voluntarily gives up the process’ claim on the CPU.
 
-     Technically, ‘sched_yield’ causes the calling task to be made
+     Technically, ‘sched_yield’ causes the calling process to be made
      immediately ready to run (as opposed to running, which is what it
      was before).  This means that if it has absolute priority higher
-     than 0, it gets pushed onto the tail of the queue of tasks that
+     than 0, it gets pushed onto the tail of the queue of processes that
      share its absolute priority and are ready to run, and it will run
      again when its turn next arrives.  If its absolute priority is 0,
      it is more complicated, but still has the effect of yielding the
-     CPU to other tasks.
+     CPU to other processes.
 
-     If there are no other tasks that share the calling task’s absolute
-     priority, this function doesn’t have any effect.
+     If there are no other processes that share the calling process’
+     absolute priority, this function doesn’t have any effect.
 
      To the extent that the containing program is oblivious to what
      other processes in the system are doing and how fast it executes,
@@ -7491,4 +6553,609 @@ has been a signal since that part last checked.
            }
        }
      }
+
+
+File: libc.info,  Node: Nonreentrancy,  Next: Atomic Data Access,  Prev: Merged Signals,  Up: Defining Handlers
+
+24.4.6 Signal Handling and Nonreentrant Functions
+-------------------------------------------------
+
+Handler functions usually don’t do very much.  The best practice is to
+write a handler that does nothing but set an external variable that the
+program checks regularly, and leave all serious work to the program.
+This is best because the handler can be called asynchronously, at
+unpredictable times—perhaps in the middle of a primitive function, or
+even between the beginning and the end of a C operator that requires
+multiple instructions.  The data structures being manipulated might
+therefore be in an inconsistent state when the handler function is
+invoked.  Even copying one ‘int’ variable into another can take two
+instructions on most machines.
+
+   This means you have to be very careful about what you do in a signal
+handler.
+
+   • If your handler needs to access any global variables from your
+     program, declare those variables ‘volatile’.  This tells the
+     compiler that the value of the variable might change
+     asynchronously, and inhibits certain optimizations that would be
+     invalidated by such modifications.
+
+   • If you call a function in the handler, make sure it is “reentrant”
+     with respect to signals, or else make sure that the signal cannot
+     interrupt a call to a related function.
+
+   A function can be non-reentrant if it uses memory that is not on the
+stack.
+
+   • If a function uses a static variable or a global variable, or a
+     dynamically-allocated object that it finds for itself, then it is
+     non-reentrant and any two calls to the function can interfere.
+
+     For example, suppose that the signal handler uses ‘gethostbyname’.
+     This function returns its value in a static object, reusing the
+     same object each time.  If the signal happens to arrive during a
+     call to ‘gethostbyname’, or even after one (while the program is
+     still using the value), it will clobber the value that the program
+     asked for.
+
+     However, if the program does not use ‘gethostbyname’ or any other
+     function that returns information in the same object, or if it
+     always blocks signals around each use, then you are safe.
+
+     There are a large number of library functions that return values in
+     a fixed object, always reusing the same object in this fashion, and
+     all of them cause the same problem.  Function descriptions in this
+     manual always mention this behavior.
+
+   • If a function uses and modifies an object that you supply, then it
+     is potentially non-reentrant; two calls can interfere if they use
+     the same object.
+
+     This case arises when you do I/O using streams.  Suppose that the
+     signal handler prints a message with ‘fprintf’.  Suppose that the
+     program was in the middle of an ‘fprintf’ call using the same
+     stream when the signal was delivered.  Both the signal handler’s
+     message and the program’s data could be corrupted, because both
+     calls operate on the same data structure—the stream itself.
+
+     However, if you know that the stream that the handler uses cannot
+     possibly be used by the program at a time when signals can arrive,
+     then you are safe.  It is no problem if the program uses some other
+     stream.
+
+   • On most systems, ‘malloc’ and ‘free’ are not reentrant, because
+     they use a static data structure which records what memory blocks
+     are free.  As a result, no library functions that allocate or free
+     memory are reentrant.  This includes functions that allocate space
+     to store a result.
+
+     The best way to avoid the need to allocate memory in a handler is
+     to allocate in advance space for signal handlers to use.
+
+     The best way to avoid freeing memory in a handler is to flag or
+     record the objects to be freed, and have the program check from
+     time to time whether anything is waiting to be freed.  But this
+     must be done with care, because placing an object on a chain is not
+     atomic, and if it is interrupted by another signal handler that
+     does the same thing, you could “lose” one of the objects.
+
+   • Any function that modifies ‘errno’ is non-reentrant, but you can
+     correct for this: in the handler, save the original value of
+     ‘errno’ and restore it before returning normally.  This prevents
+     errors that occur within the signal handler from being confused
+     with errors from system calls at the point the program is
+     interrupted to run the handler.
+
+     This technique is generally applicable; if you want to call in a
+     handler a function that modifies a particular object in memory, you
+     can make this safe by saving and restoring that object.
+
+   • Merely reading from a memory object is safe provided that you can
+     deal with any of the values that might appear in the object at a
+     time when the signal can be delivered.  Keep in mind that
+     assignment to some data types requires more than one instruction,
+     which means that the handler could run “in the middle of” an
+     assignment to the variable if its type is not atomic.  *Note Atomic
+     Data Access::.
+
+   • Merely writing into a memory object is safe as long as a sudden
+     change in the value, at any time when the handler might run, will
+     not disturb anything.
+
+
+File: libc.info,  Node: Atomic Data Access,  Prev: Nonreentrancy,  Up: Defining Handlers
+
+24.4.7 Atomic Data Access and Signal Handling
+---------------------------------------------
+
+Whether the data in your application concerns atoms, or mere text, you
+have to be careful about the fact that access to a single datum is not
+necessarily “atomic”.  This means that it can take more than one
+instruction to read or write a single object.  In such cases, a signal
+handler might be invoked in the middle of reading or writing the object.
+
+   There are three ways you can cope with this problem.  You can use
+data types that are always accessed atomically; you can carefully
+arrange that nothing untoward happens if an access is interrupted, or
+you can block all signals around any access that had better not be
+interrupted (*note Blocking Signals::).
+
+* Menu:
+
+* Non-atomic Example::		A program illustrating interrupted access.
+* Types: Atomic Types.		Data types that guarantee no interruption.
+* Usage: Atomic Usage.		Proving that interruption is harmless.
+
+
+File: libc.info,  Node: Non-atomic Example,  Next: Atomic Types,  Up: Atomic Data Access
+
+24.4.7.1 Problems with Non-Atomic Access
+........................................
+
+Here is an example which shows what can happen if a signal handler runs
+in the middle of modifying a variable.  (Interrupting the reading of a
+variable can also lead to paradoxical results, but here we only show
+writing.)
+
+     #include <signal.h>
+     #include <stdio.h>
+
+     volatile struct two_words { int a, b; } memory;
+
+     void
+     handler(int signum)
+     {
+        printf ("%d,%d\n", memory.a, memory.b);
+        alarm (1);
+     }
+
+     int
+     main (void)
+     {
+        static struct two_words zeros = { 0, 0 }, ones = { 1, 1 };
+        signal (SIGALRM, handler);
+        memory = zeros;
+        alarm (1);
+        while (1)
+          {
+            memory = zeros;
+            memory = ones;
+          }
+     }
+
+   This program fills ‘memory’ with zeros, ones, zeros, ones,
+alternating forever; meanwhile, once per second, the alarm signal
+handler prints the current contents.  (Calling ‘printf’ in the handler
+is safe in this program because it is certainly not being called outside
+the handler when the signal happens.)
+
+   Clearly, this program can print a pair of zeros or a pair of ones.
+But that’s not all it can do!  On most machines, it takes several
+instructions to store a new value in ‘memory’, and the value is stored
+one word at a time.  If the signal is delivered in between these
+instructions, the handler might find that ‘memory.a’ is zero and
+‘memory.b’ is one (or vice versa).
+
+   On some machines it may be possible to store a new value in ‘memory’
+with just one instruction that cannot be interrupted.  On these
+machines, the handler will always print two zeros or two ones.
+
+
+File: libc.info,  Node: Atomic Types,  Next: Atomic Usage,  Prev: Non-atomic Example,  Up: Atomic Data Access
+
+24.4.7.2 Atomic Types
+.....................
+
+To avoid uncertainty about interrupting access to a variable, you can
+use a particular data type for which access is always atomic:
+‘sig_atomic_t’.  Reading and writing this data type is guaranteed to
+happen in a single instruction, so there’s no way for a handler to run
+“in the middle” of an access.
+
+   The type ‘sig_atomic_t’ is always an integer data type, but which one
+it is, and how many bits it contains, may vary from machine to machine.
+
+ -- Data Type: sig_atomic_t
+
+     This is an integer data type.  Objects of this type are always
+     accessed atomically.
+
+   In practice, you can assume that ‘int’ is atomic.  You can also
+assume that pointer types are atomic; that is very convenient.  Both of
+these assumptions are true on all of the machines that the GNU C Library
+supports and on all POSIX systems we know of.
+
+
+File: libc.info,  Node: Atomic Usage,  Prev: Atomic Types,  Up: Atomic Data Access
+
+24.4.7.3 Atomic Usage Patterns
+..............................
+
+Certain patterns of access avoid any problem even if an access is
+interrupted.  For example, a flag which is set by the handler, and
+tested and cleared by the main program from time to time, is always safe
+even if access actually requires two instructions.  To show that this is
+so, we must consider each access that could be interrupted, and show
+that there is no problem if it is interrupted.
+
+   An interrupt in the middle of testing the flag is safe because either
+it’s recognized to be nonzero, in which case the precise value doesn’t
+matter, or it will be seen to be nonzero the next time it’s tested.
+
+   An interrupt in the middle of clearing the flag is no problem because
+either the value ends up zero, which is what happens if a signal comes
+in just before the flag is cleared, or the value ends up nonzero, and
+subsequent events occur as if the signal had come in just after the flag
+was cleared.  As long as the code handles both of these cases properly,
+it can also handle a signal in the middle of clearing the flag.  (This
+is an example of the sort of reasoning you need to do to figure out
+whether non-atomic usage is safe.)
+
+   Sometimes you can ensure uninterrupted access to one object by
+protecting its use with another object, perhaps one whose type
+guarantees atomicity.  *Note Merged Signals::, for an example.
+
+
+File: libc.info,  Node: Interrupted Primitives,  Next: Generating Signals,  Prev: Defining Handlers,  Up: Signal Handling
+
+24.5 Primitives Interrupted by Signals
+======================================
+
+A signal can arrive and be handled while an I/O primitive such as ‘open’
+or ‘read’ is waiting for an I/O device.  If the signal handler returns,
+the system faces the question: what should happen next?
+
+   POSIX specifies one approach: make the primitive fail right away.
+The error code for this kind of failure is ‘EINTR’.  This is flexible,
+but usually inconvenient.  Typically, POSIX applications that use signal
+handlers must check for ‘EINTR’ after each library function that can
+return it, in order to try the call again.  Often programmers forget to
+check, which is a common source of error.
+
+   The GNU C Library provides a convenient way to retry a call after a
+temporary failure, with the macro ‘TEMP_FAILURE_RETRY’:
+
+ -- Macro: TEMP_FAILURE_RETRY (EXPRESSION)
+
+     This macro evaluates EXPRESSION once, and examines its value as
+     type ‘long int’.  If the value equals ‘-1’, that indicates a
+     failure and ‘errno’ should be set to show what kind of failure.  If
+     it fails and reports error code ‘EINTR’, ‘TEMP_FAILURE_RETRY’
+     evaluates it again, and over and over until the result is not a
+     temporary failure.
+
+     The value returned by ‘TEMP_FAILURE_RETRY’ is whatever value
+     EXPRESSION produced.
+
+   BSD avoids ‘EINTR’ entirely and provides a more convenient approach:
+to restart the interrupted primitive, instead of making it fail.  If you
+choose this approach, you need not be concerned with ‘EINTR’.
+
+   You can choose either approach with the GNU C Library.  If you use
+‘sigaction’ to establish a signal handler, you can specify how that
+handler should behave.  If you specify the ‘SA_RESTART’ flag, return
+from that handler will resume a primitive; otherwise, return from that
+handler will cause ‘EINTR’.  *Note Flags for Sigaction::.
+
+   Another way to specify the choice is with the ‘siginterrupt’
+function.  *Note BSD Signal Handling::.
+
+   When you don’t specify with ‘sigaction’ or ‘siginterrupt’ what a
+particular handler should do, it uses a default choice.  The default
+choice in the GNU C Library is to make primitives fail with ‘EINTR’.
+
+   The description of each primitive affected by this issue lists
+‘EINTR’ among the error codes it can return.
+
+   There is one situation where resumption never happens no matter which
+choice you make: when a data-transfer function such as ‘read’ or ‘write’
+is interrupted by a signal after transferring part of the data.  In this
+case, the function returns the number of bytes already transferred,
+indicating partial success.
+
+   This might at first appear to cause unreliable behavior on
+record-oriented devices (including datagram sockets; *note Datagrams::),
+where splitting one ‘read’ or ‘write’ into two would read or write two
+records.  Actually, there is no problem, because interruption after a
+partial transfer cannot happen on such devices; they always transfer an
+entire record in one burst, with no waiting once data transfer has
+started.
+
+
+File: libc.info,  Node: Generating Signals,  Next: Blocking Signals,  Prev: Interrupted Primitives,  Up: Signal Handling
+
+24.6 Generating Signals
+=======================
+
+Besides signals that are generated as a result of a hardware trap or
+interrupt, your program can explicitly send signals to itself or to
+another process.
+
+* Menu:
+
+* Signaling Yourself::          A process can send a signal to itself.
+* Signaling Another Process::   Send a signal to another process.
+* Permission for kill::         Permission for using ‘kill’.
+* Kill Example::                Using ‘kill’ for Communication.
+
+
+File: libc.info,  Node: Signaling Yourself,  Next: Signaling Another Process,  Up: Generating Signals
+
+24.6.1 Signaling Yourself
+-------------------------
+
+A process can send itself a signal with the ‘raise’ function.  This
+function is declared in ‘signal.h’.
+
+ -- Function: int raise (int SIGNUM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘raise’ function sends the signal SIGNUM to the calling
+     process.  It returns zero if successful and a nonzero value if it
+     fails.  About the only reason for failure would be if the value of
+     SIGNUM is invalid.
+
+ -- Function: int gsignal (int SIGNUM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘gsignal’ function does the same thing as ‘raise’; it is
+     provided only for compatibility with SVID.
+
+   One convenient use for ‘raise’ is to reproduce the default behavior
+of a signal that you have trapped.  For instance, suppose a user of your
+program types the SUSP character (usually ‘C-z’; *note Special
+Characters::) to send it an interactive stop signal (‘SIGTSTP’), and you
+want to clean up some internal data buffers before stopping.  You might
+set this up like this:
+
+     #include <signal.h>
+
+     /* When a stop signal arrives, set the action back to the default
+        and then resend the signal after doing cleanup actions. */
+
+     void
+     tstp_handler (int sig)
+     {
+       signal (SIGTSTP, SIG_DFL);
+       /* Do cleanup actions here. */
+       ...
+       raise (SIGTSTP);
+     }
+
+     /* When the process is continued again, restore the signal handler. */
+
+     void
+     cont_handler (int sig)
+     {
+       signal (SIGCONT, cont_handler);
+       signal (SIGTSTP, tstp_handler);
+     }
+
+     /* Enable both handlers during program initialization. */
+
+     int
+     main (void)
+     {
+       signal (SIGCONT, cont_handler);
+       signal (SIGTSTP, tstp_handler);
+       ...
+     }
+
+   *Portability note:* ‘raise’ was invented by the ISO C committee.
+Older systems may not support it, so using ‘kill’ may be more portable.
+*Note Signaling Another Process::.
+
+
+File: libc.info,  Node: Signaling Another Process,  Next: Permission for kill,  Prev: Signaling Yourself,  Up: Generating Signals
+
+24.6.2 Signaling Another Process
+--------------------------------
+
+The ‘kill’ function can be used to send a signal to another process.  In
+spite of its name, it can be used for a lot of things other than causing
+a process to terminate.  Some examples of situations where you might
+want to send signals between processes are:
+
+   • A parent process starts a child to perform a task—perhaps having
+     the child running an infinite loop—and then terminates the child
+     when the task is no longer needed.
+
+   • A process executes as part of a group, and needs to terminate or
+     notify the other processes in the group when an error or other
+     event occurs.
+
+   • Two processes need to synchronize while working together.
+
+   This section assumes that you know a little bit about how processes
+work.  For more information on this subject, see *note Processes::.
+
+   The ‘kill’ function is declared in ‘signal.h’.
+
+ -- Function: int kill (pid_t PID, int SIGNUM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘kill’ function sends the signal SIGNUM to the process or
+     process group specified by PID.  Besides the signals listed in
+     *note Standard Signals::, SIGNUM can also have a value of zero to
+     check the validity of the PID.
+
+     The PID specifies the process or process group to receive the
+     signal:
+
+     ‘PID > 0’
+          The process whose identifier is PID.  (On Linux, the signal is
+          sent to the entire process even if PID is a thread ID distinct
+          from the process ID.)
+
+     ‘PID == 0’
+          All processes in the same process group as the sender.
+
+     ‘PID < -1’
+          The process group whose identifier is −PID.
+
+     ‘PID == -1’
+          If the process is privileged, send the signal to all processes
+          except for some special system processes.  Otherwise, send the
+          signal to all processes with the same effective user ID.
+
+     A process can send a signal to itself with a call like
+     ‘kill (getpid(), SIGNUM)’.  If ‘kill’ is used by a process to send
+     a signal to itself, and the signal is not blocked, then ‘kill’
+     delivers at least one signal (which might be some other pending
+     unblocked signal instead of the signal SIGNUM) to that process
+     before it returns.
+
+     The return value from ‘kill’ is zero if the signal can be sent
+     successfully.  Otherwise, no signal is sent, and a value of ‘-1’ is
+     returned.  If PID specifies sending a signal to several processes,
+     ‘kill’ succeeds if it can send the signal to at least one of them.
+     There’s no way you can tell which of the processes got the signal
+     or whether all of them did.
+
+     The following ‘errno’ error conditions are defined for this
+     function:
+
+     ‘EINVAL’
+          The SIGNUM argument is an invalid or unsupported number.
+
+     ‘EPERM’
+          You do not have the privilege to send a signal to the process
+          or any of the processes in the process group named by PID.
+
+     ‘ESRCH’
+          The PID argument does not refer to an existing process or
+          group.
+
+ -- Function: int killpg (int PGID, int SIGNUM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is similar to ‘kill’, but sends signal SIGNUM to the process
+     group PGID.  This function is provided for compatibility with BSD;
+     using ‘kill’ to do this is more portable.
+
+   As a simple example of ‘kill’, the call ‘kill (getpid (), SIG)’ has
+the same effect as ‘raise (SIG)’.
+
+
+File: libc.info,  Node: Permission for kill,  Next: Kill Example,  Prev: Signaling Another Process,  Up: Generating Signals
+
+24.6.3 Permission for using ‘kill’
+----------------------------------
+
+There are restrictions that prevent you from using ‘kill’ to send
+signals to any random process.  These are intended to prevent antisocial
+behavior such as arbitrarily killing off processes belonging to another
+user.  In typical use, ‘kill’ is used to pass signals between parent,
+child, and sibling processes, and in these situations you normally do
+have permission to send signals.  The only common exception is when you
+run a setuid program in a child process; if the program changes its real
+UID as well as its effective UID, you may not have permission to send a
+signal.  The ‘su’ program does this.
+
+   Whether a process has permission to send a signal to another process
+is determined by the user IDs of the two processes.  This concept is
+discussed in detail in *note Process Persona::.
+
+   Generally, for a process to be able to send a signal to another
+process, either the sending process must belong to a privileged user
+(like ‘root’), or the real or effective user ID of the sending process
+must match the real or effective user ID of the receiving process.  If
+the receiving process has changed its effective user ID from the
+set-user-ID mode bit on its process image file, then the owner of the
+process image file is used in place of its current effective user ID. In
+some implementations, a parent process might be able to send signals to
+a child process even if the user ID’s don’t match, and other
+implementations might enforce other restrictions.
+
+   The ‘SIGCONT’ signal is a special case.  It can be sent if the sender
+is part of the same session as the receiver, regardless of user IDs.
+
+
+File: libc.info,  Node: Kill Example,  Prev: Permission for kill,  Up: Generating Signals
+
+24.6.4 Using ‘kill’ for Communication
+-------------------------------------
+
+Here is a longer example showing how signals can be used for
+interprocess communication.  This is what the ‘SIGUSR1’ and ‘SIGUSR2’
+signals are provided for.  Since these signals are fatal by default, the
+process that is supposed to receive them must trap them through ‘signal’
+or ‘sigaction’.
+
+   In this example, a parent process forks a child process and then
+waits for the child to complete its initialization.  The child process
+tells the parent when it is ready by sending it a ‘SIGUSR1’ signal,
+using the ‘kill’ function.
+
+
+     #include <signal.h>
+     #include <stdio.h>
+     #include <sys/types.h>
+     #include <unistd.h>
+
+     /* When a ‘SIGUSR1’ signal arrives, set this variable. */
+     volatile sig_atomic_t usr_interrupt = 0;
+
+     void
+     synch_signal (int sig)
+     {
+       usr_interrupt = 1;
+     }
+
+     /* The child process executes this function. */
+     void
+     child_function (void)
+     {
+       /* Perform initialization. */
+       printf ("I'm here!!!  My pid is %d.\n", (int) getpid ());
+
+       /* Let parent know you’re done. */
+       kill (getppid (), SIGUSR1);
+
+       /* Continue with execution. */
+       puts ("Bye, now....");
+       exit (0);
+     }
+
+     int
+     main (void)
+     {
+       struct sigaction usr_action;
+       sigset_t block_mask;
+       pid_t child_id;
+
+       /* Establish the signal handler. */
+       sigfillset (&block_mask);
+       usr_action.sa_handler = synch_signal;
+       usr_action.sa_mask = block_mask;
+       usr_action.sa_flags = 0;
+       sigaction (SIGUSR1, &usr_action, NULL);
+
+       /* Create the child process. */
+       child_id = fork ();
+       if (child_id == 0)
+         child_function ();          /* Does not return. */
+
+       /* Busy wait for the child to send a signal. */
+       while (!usr_interrupt)
+         ;
+
+       /* Now continue execution. */
+       puts ("That's all, folks!");
+
+       return 0;
+     }
+
+   This example uses a busy wait, which is bad, because it wastes CPU
+cycles that other programs could otherwise use.  It is better to ask the
+system to wait until the signal arrives.  See the example in *note
+Waiting for a Signal::.
 

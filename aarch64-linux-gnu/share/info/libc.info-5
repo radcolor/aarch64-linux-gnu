@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2092,181 +2073,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Character Input,  Next: Line Input,  Prev: Simple Output,  Up: I/O on Streams
-
-12.8 Character Input
-====================
-
-This section describes functions for performing character-oriented
-input.  These narrow stream functions are declared in the header file
-‘stdio.h’ and the wide character functions are declared in ‘wchar.h’.
-
-   These functions return an ‘int’ or ‘wint_t’ value (for narrow and
-wide stream functions respectively) that is either a character of input,
-or the special value ‘EOF’/‘WEOF’ (usually -1).  For the narrow stream
-functions it is important to store the result of these functions in a
-variable of type ‘int’ instead of ‘char’, even when you plan to use it
-only as a character.  Storing ‘EOF’ in a ‘char’ variable truncates its
-value to the size of a character, so that it is no longer
-distinguishable from the valid character ‘(char) -1’.  So always use an
-‘int’ for the result of ‘getc’ and friends, and check for ‘EOF’ after
-the call; once you’ve verified that the result is not ‘EOF’, you can be
-sure that it will fit in a ‘char’ variable without loss of information.
-
- -- Function: int fgetc (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This function reads the next character as an ‘unsigned char’ from
-     the stream STREAM and returns its value, converted to an ‘int’.  If
-     an end-of-file condition or read error occurs, ‘EOF’ is returned
-     instead.
-
- -- Function: wint_t fgetwc (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This function reads the next wide character from the stream STREAM
-     and returns its value.  If an end-of-file condition or read error
-     occurs, ‘WEOF’ is returned instead.
-
- -- Function: int fgetc_unlocked (FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fgetc_unlocked’ function is equivalent to the ‘fgetc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t fgetwc_unlocked (FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fgetwc_unlocked’ function is equivalent to the ‘fgetwc’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int getc (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fgetc’, except that it is permissible (and
-     typical) for it to be implemented as a macro that evaluates the
-     STREAM argument more than once.  ‘getc’ is often highly optimized,
-     so it is usually the best function to use to read a single
-     character.
-
- -- Function: wint_t getwc (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fgetwc’, except that it is permissible for it to
-     be implemented as a macro that evaluates the STREAM argument more
-     than once.  ‘getwc’ can be highly optimized, so it is usually the
-     best function to use to read a single wide character.
-
- -- Function: int getc_unlocked (FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘getc_unlocked’ function is equivalent to the ‘getc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t getwc_unlocked (FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘getwc_unlocked’ function is equivalent to the ‘getwc’ function
-     except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int getchar (void)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     The ‘getchar’ function is equivalent to ‘getc’ with ‘stdin’ as the
-     value of the STREAM argument.
-
- -- Function: wint_t getwchar (void)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     The ‘getwchar’ function is equivalent to ‘getwc’ with ‘stdin’ as
-     the value of the STREAM argument.
-
- -- Function: int getchar_unlocked (void)
-
-     Preliminary: | MT-Unsafe race:stdin | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘getchar_unlocked’ function is equivalent to the ‘getchar’
-     function except that it does not implicitly lock the stream.
-
- -- Function: wint_t getwchar_unlocked (void)
-
-     Preliminary: | MT-Unsafe race:stdin | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘getwchar_unlocked’ function is equivalent to the ‘getwchar’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
-   Here is an example of a function that does input using ‘fgetc’.  It
-would work just as well using ‘getc’ instead, or using ‘getchar ()’
-instead of ‘fgetc (stdin)’.  The code would also work the same for the
-wide character stream functions.
-
-     int
-     y_or_n_p (const char *question)
-     {
-       fputs (question, stdout);
-       while (1)
-         {
-           int c, answer;
-           /* Write a space to separate answer from question. */
-           fputc (' ', stdout);
-           /* Read the first character of the line.
-     	 This should be the answer character, but might not be. */
-           c = tolower (fgetc (stdin));
-           answer = c;
-           /* Discard rest of input line. */
-           while (c != '\n' && c != EOF)
-     	c = fgetc (stdin);
-           /* Obey the answer if it was valid. */
-           if (answer == 'y')
-     	return 1;
-           if (answer == 'n')
-     	return 0;
-           /* Answer was invalid: ask for valid answer. */
-           fputs ("Please answer y or n:", stdout);
-         }
-     }
-
- -- Function: int getw (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This function reads a word (that is, an ‘int’) from STREAM.  It’s
-     provided for compatibility with SVID. We recommend you use ‘fread’
-     instead (*note Block Input/Output::).  Unlike ‘getc’, any ‘int’
-     value could be a valid result.  ‘getw’ returns ‘EOF’ when it
-     encounters end-of-file or an error, but there is no way to
-     distinguish this from an input word with value -1.
 
 
 File: libc.info,  Node: Line Input,  Next: Unreading,  Prev: Character Input,  Up: I/O on Streams
@@ -3828,7 +3634,7 @@ not valid here).
           length of the string.  */
 
        argtypes = (int *) alloca (strlen (format) / 2 * sizeof (int));
-       nwanted = parse_printf_format (format, nargs, argtypes);
+       nwanted = parse_printf_format (string, nelts, argtypes);
 
        /* Check the number of arguments.  */
        if (nwanted > nargs)
@@ -7236,4 +7042,213 @@ header files: ‘fcntl.h’ and ‘sys/file.h’.
 
 ‘L_XTND’
      An alias for ‘SEEK_END’.
+
+
+File: libc.info,  Node: Descriptors and Streams,  Next: Stream/Descriptor Precautions,  Prev: File Position Primitive,  Up: Low-Level I/O
+
+13.4 Descriptors and Streams
+============================
+
+Given an open file descriptor, you can create a stream for it with the
+‘fdopen’ function.  You can get the underlying file descriptor for an
+existing stream with the ‘fileno’ function.  These functions are
+declared in the header file ‘stdio.h’.
+
+ -- Function: FILE * fdopen (int FILEDES, const char *OPENTYPE)
+
+     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe mem lock |
+     *Note POSIX Safety Concepts::.
+
+     The ‘fdopen’ function returns a new stream for the file descriptor
+     FILEDES.
+
+     The OPENTYPE argument is interpreted in the same way as for the
+     ‘fopen’ function (*note Opening Streams::), except that the ‘b’
+     option is not permitted; this is because GNU systems make no
+     distinction between text and binary files.  Also, ‘"w"’ and ‘"w+"’
+     do not cause truncation of the file; these have an effect only when
+     opening a file, and in this case the file has already been opened.
+     You must make sure that the OPENTYPE argument matches the actual
+     mode of the open file descriptor.
+
+     The return value is the new stream.  If the stream cannot be
+     created (for example, if the modes for the file indicated by the
+     file descriptor do not permit the access specified by the OPENTYPE
+     argument), a null pointer is returned instead.
+
+     In some other systems, ‘fdopen’ may fail to detect that the modes
+     for file descriptors do not permit the access specified by
+     ‘opentype’.  The GNU C Library always checks for this.
+
+   For an example showing the use of the ‘fdopen’ function, see *note
+Creating a Pipe::.
+
+ -- Function: int fileno (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function returns the file descriptor associated with the
+     stream STREAM.  If an error is detected (for example, if the STREAM
+     is not valid) or if STREAM does not do I/O to a file, ‘fileno’
+     returns -1.
+
+ -- Function: int fileno_unlocked (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fileno_unlocked’ function is equivalent to the ‘fileno’
+     function except that it does not implicitly lock the stream if the
+     state is ‘FSETLOCKING_INTERNAL’.
+
+     This function is a GNU extension.
+
+   There are also symbolic constants defined in ‘unistd.h’ for the file
+descriptors belonging to the standard streams ‘stdin’, ‘stdout’, and
+‘stderr’; see *note Standard Streams::.
+
+‘STDIN_FILENO’
+
+     This macro has value ‘0’, which is the file descriptor for standard
+     input.
+
+‘STDOUT_FILENO’
+
+     This macro has value ‘1’, which is the file descriptor for standard
+     output.
+
+‘STDERR_FILENO’
+
+     This macro has value ‘2’, which is the file descriptor for standard
+     error output.
+
+
+File: libc.info,  Node: Stream/Descriptor Precautions,  Next: Scatter-Gather,  Prev: Descriptors and Streams,  Up: Low-Level I/O
+
+13.5 Dangers of Mixing Streams and Descriptors
+==============================================
+
+You can have multiple file descriptors and streams (let’s call both
+streams and descriptors “channels” for short) connected to the same
+file, but you must take care to avoid confusion between channels.  There
+are two cases to consider: “linked” channels that share a single file
+position value, and “independent” channels that have their own file
+positions.
+
+   It’s best to use just one channel in your program for actual data
+transfer to any given file, except when all the access is for input.
+For example, if you open a pipe (something you can only do at the file
+descriptor level), either do all I/O with the descriptor, or construct a
+stream from the descriptor with ‘fdopen’ and then do all I/O with the
+stream.
+
+* Menu:
+
+* Linked Channels::	   Dealing with channels sharing a file position.
+* Independent Channels::   Dealing with separately opened, unlinked channels.
+* Cleaning Streams::	   Cleaning a stream makes it safe to use
+                            another channel.
+
+
+File: libc.info,  Node: Linked Channels,  Next: Independent Channels,  Up: Stream/Descriptor Precautions
+
+13.5.1 Linked Channels
+----------------------
+
+Channels that come from a single opening share the same file position;
+we call them “linked” channels.  Linked channels result when you make a
+stream from a descriptor using ‘fdopen’, when you get a descriptor from
+a stream with ‘fileno’, when you copy a descriptor with ‘dup’ or ‘dup2’,
+and when descriptors are inherited during ‘fork’.  For files that don’t
+support random access, such as terminals and pipes, _all_ channels are
+effectively linked.  On random-access files, all append-type output
+streams are effectively linked to each other.
+
+   If you have been using a stream for I/O (or have just opened the
+stream), and you want to do I/O using another channel (either a stream
+or a descriptor) that is linked to it, you must first “clean up” the
+stream that you have been using.  *Note Cleaning Streams::.
+
+   Terminating a process, or executing a new program in the process,
+destroys all the streams in the process.  If descriptors linked to these
+streams persist in other processes, their file positions become
+undefined as a result.  To prevent this, you must clean up the streams
+before destroying them.
+
+
+File: libc.info,  Node: Independent Channels,  Next: Cleaning Streams,  Prev: Linked Channels,  Up: Stream/Descriptor Precautions
+
+13.5.2 Independent Channels
+---------------------------
+
+When you open channels (streams or descriptors) separately on a seekable
+file, each channel has its own file position.  These are called
+“independent channels”.
+
+   The system handles each channel independently.  Most of the time,
+this is quite predictable and natural (especially for input): each
+channel can read or write sequentially at its own place in the file.
+However, if some of the channels are streams, you must take these
+precautions:
+
+   • You should clean an output stream after use, before doing anything
+     else that might read or write from the same part of the file.
+
+   • You should clean an input stream before reading data that may have
+     been modified using an independent channel.  Otherwise, you might
+     read obsolete data that had been in the stream’s buffer.
+
+   If you do output to one channel at the end of the file, this will
+certainly leave the other independent channels positioned somewhere
+before the new end.  You cannot reliably set their file positions to the
+new end of file before writing, because the file can always be extended
+by another process between when you set the file position and when you
+write the data.  Instead, use an append-type descriptor or stream; they
+always output at the current end of the file.  In order to make the
+end-of-file position accurate, you must clean the output channel you
+were using, if it is a stream.
+
+   It’s impossible for two channels to have separate file pointers for a
+file that doesn’t support random access.  Thus, channels for reading or
+writing such files are always linked, never independent.  Append-type
+channels are also always linked.  For these channels, follow the rules
+for linked channels; see *note Linked Channels::.
+
+
+File: libc.info,  Node: Cleaning Streams,  Prev: Independent Channels,  Up: Stream/Descriptor Precautions
+
+13.5.3 Cleaning Streams
+-----------------------
+
+You can use ‘fflush’ to clean a stream in most cases.
+
+   You can skip the ‘fflush’ if you know the stream is already clean.  A
+stream is clean whenever its buffer is empty.  For example, an
+unbuffered stream is always clean.  An input stream that is at
+end-of-file is clean.  A line-buffered stream is clean when the last
+character output was a newline.  However, a just-opened input stream
+might not be clean, as its input buffer might not be empty.
+
+   There is one case in which cleaning a stream is impossible on most
+systems.  This is when the stream is doing input from a file that is not
+random-access.  Such streams typically read ahead, and when the file is
+not random access, there is no way to give back the excess data already
+read.  When an input stream reads from a random-access file, ‘fflush’
+does clean the stream, but leaves the file pointer at an unpredictable
+place; you must set the file pointer before doing any further I/O.
+
+   Closing an output-only stream also does ‘fflush’, so this is a valid
+way of cleaning an output stream.
+
+   You need not clean a stream before using its descriptor for control
+operations such as setting terminal modes; these operations don’t affect
+the file position and are not affected by it.  You can use any
+descriptor for these operations, and all channels are affected
+simultaneously.  However, text already “output” to a stream but still
+buffered by the stream will be subject to the new terminal modes when
+subsequently flushed.  To make sure “past” output is covered by the
+terminal settings that were in effect at the time, flush the output
+streams for that terminal before setting the modes.  *Note Terminal
+Modes::.
 

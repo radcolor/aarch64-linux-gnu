@@ -1,4 +1,4 @@
-/* Copyright (C) 1995-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1995-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 #ifndef _SYS_IPC_H
 # error "Never use <bits/ipc.h> directly; include <sys/ipc.h> instead."
@@ -37,4 +37,18 @@
 /* Special key values.  */
 #define IPC_PRIVATE	((__key_t) 0)	/* Private key.  */
 
-#include <bits/ipc-perm.h>
+
+/* Data structure used to pass permission information to IPC operations.  */
+struct ipc_perm
+  {
+    __key_t __key;			/* Key.  */
+    __uid_t uid;			/* Owner's user ID.  */
+    __gid_t gid;			/* Owner's group ID.  */
+    __uid_t cuid;			/* Creator's user ID.  */
+    __gid_t cgid;			/* Creator's group ID.  */
+    unsigned int mode;			/* Read/write permission.  */
+    unsigned short int __seq;		/* Sequence number.  */
+    unsigned short int __pad1;
+    __syscall_ulong_t __glibc_reserved1;
+    __syscall_ulong_t __glibc_reserved2;
+  };

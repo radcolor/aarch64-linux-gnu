@@ -1,4 +1,4 @@
-/* Copyright (C) 1996-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1996-2019 Free Software Foundation, Inc.
 
    This file is part of the GNU C Library.
 
@@ -14,7 +14,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 #ifndef _AARCH64_FPU_CONTROL_H
 #define _AARCH64_FPU_CONTROL_H
@@ -75,9 +75,9 @@
 #define _FPU_FPCR_MASK_IOE 0x0100
 
 #define _FPU_FPCR_IEEE                       \
-  (_FPU_DEFAULT  | _FPU_FPCR_MASK_IXE	     \
-   | _FPU_FPCR_MASK_UFE | _FPU_FPCR_MASK_OFE \
-   | _FPU_FPCR_MASK_DZE | _FPU_FPCR_MASK_IOE)
+  (_FPU_DEFAULT  | _FPU_FPCR_MASK_IXE |	     \
+   _FPU_FPCR_MASK_UFE | _FPU_FPCR_MASK_OFE | \
+   _FPU_FPCR_MASK_DZE | _FPU_FPCR_MASK_IOE)
 
 #define _FPU_FPSR_IEEE 0
 

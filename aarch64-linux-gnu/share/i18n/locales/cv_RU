@@ -201,8 +201,7 @@ abmon   "K<U0102>R";/
 	"JUP";/
 	"C<U00DC>K";/
 	"RA<U0160>"
-d_t_fmt   "%a %d %b %Y %T"
-date_fmt  "%a %d %b %Y %T %Z"
+d_t_fmt "%a %d %b %Y %T"
 d_fmt     "%d.%m.%Y"
 t_fmt     "%T"
 am_pm     "";""

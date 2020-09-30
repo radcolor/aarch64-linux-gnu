@@ -1,5 +1,5 @@
 /* Declarations for math functions.
-   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   Copyright (C) 1991-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -14,7 +14,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 /*
  *	ISO C99 Standard: 7.12 Mathematics	<math.h>
@@ -104,7 +104,7 @@ __BEGIN_DECLS
 # endif
 #endif /* __USE_ISOC99 */
 
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 /* Signaling NaN macros, if supported.  */
 # if __GNUC_PREREQ (3, 3)
 #  define SNANF (__builtin_nansf (""))
@@ -200,7 +200,7 @@ typedef _Float128x double_t;
 #  define FP_ILOGBNAN	2147483647
 # endif
 #endif
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 # if __WORDSIZE == 32
 #  define __FP_LONG_MAX 0x7fffffffL
 # else
@@ -232,7 +232,7 @@ typedef _Float128x double_t;
 
 #include <bits/fp-fast.h>
 
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 /* Rounding direction macros for fromfp functions.  */
 enum
   {
@@ -279,17 +279,8 @@ enum
 #define __MATHDECLX(type, function,suffix, args, attrib) \
   __MATHDECL_1(type, function,suffix, args) __attribute__ (attrib); \
   __MATHDECL_1(type, __CONCAT(__,function),suffix, args) __attribute__ (attrib)
-#define __MATHDECL_1_IMPL(type, function, suffix, args) \
+#define __MATHDECL_1(type, function,suffix, args) \
   extern type __MATH_PRECNAME(function,suffix) args __THROW
-#define __MATHDECL_1(type, function, suffix, args) \
-  __MATHDECL_1_IMPL(type, function, suffix, args)
-/* Ignore the alias by default.  The alias is only useful with
-   redirections.  */
-#define __MATHDECL_ALIAS(type, function, suffix, args, alias) \
-  __MATHDECL_1(type, function, suffix, args)
-
-#define __MATHREDIR(type, function, suffix, args, to) \
-  extern type __REDIRECT_NTH (__MATH_PRECNAME (function, suffix), args, to)
 
 #define _Mdouble_		double
 #define __MATH_PRECNAME(name,r)	__CONCAT(name,r)
@@ -340,37 +331,11 @@ extern long double __REDIRECT_NTH (nexttowardl,
 #   endif
 
 #   undef __MATHDECL_1
+#   define __MATHDECL_2(type, function,suffix, args, alias) \
+  extern type __REDIRECT_NTH(__MATH_PRECNAME(function,suffix), \
+			     args, alias)
 #   define __MATHDECL_1(type, function,suffix, args) \
-  __MATHREDIR(type, function, suffix, args, __CONCAT(function,suffix))
-
-#  elif __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
-#   ifdef __REDIRECT_NTH
-#    ifdef __USE_ISOC99
-extern float __REDIRECT_NTH (nexttowardf, (float __x, long double __y),
-			    __nexttowardf_to_ieee128)
-  __attribute__ ((__const__));
-extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
-			     __nexttoward_to_ieee128)
-  __attribute__ ((__const__));
-
-#define __dremieee128 __remainderieee128
-#define __gammaieee128 __lgammaieee128
-
-#    endif
-#   endif
-
-#   undef __MATHDECL_1
-#   undef __MATHDECL_ALIAS
-
-#   define __REDIRTO(function, suffix) \
-  __ ## function ## ieee128 ## suffix
-#   define __REDIRTO_ALT(function, suffix) \
-  __ ## function ## f128 ## suffix
-
-#   define __MATHDECL_1(type, function, suffix, args) \
-  __MATHREDIR (type, function, suffix, args, __REDIRTO (function, suffix))
-#   define __MATHDECL_ALIAS(type, function, suffix, args, alias) \
-  __MATHREDIR (type, function, suffix, args, __REDIRTO_ALT (alias, suffix))
+  __MATHDECL_2(type, function,suffix, args, __CONCAT(function,suffix))
 #  endif
 
 /* Include the file of declarations again, this time using `long double'
@@ -383,23 +348,11 @@ extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
 #  define __MATH_DECLARE_LDOUBLE   1
 #  include <bits/mathcalls-helper-functions.h>
 #  include <bits/mathcalls.h>
-
 #  undef _Mdouble_
 #  undef __MATH_PRECNAME
 #  undef __MATH_DECLARING_DOUBLE
 #  undef __MATH_DECLARING_FLOATN
 
-#  if defined __LDBL_COMPAT \
-      || __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
-#   undef __REDIRTO
-#   undef __REDIRTO_ALT
-#   undef __MATHDECL_1
-#   undef __MATHDECL_ALIAS
-#   define __MATHDECL_1(type, function, suffix, args) \
-  __MATHDECL_1_IMPL(type, function, suffix, args)
-#   define __MATHDECL_ALIAS(type, function, suffix, args, alias) \
-  __MATHDECL_1(type, function, suffix, args)
-#  endif
 # endif /* !(__NO_LONG_DOUBLE_MATH && _LIBC) || __LDBL_COMPAT */
 
 #endif	/* Use ISO C99.  */
@@ -526,9 +479,7 @@ extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
 # undef __MATH_DECLARING_FLOATN
 #endif /* __HAVE_DISTINCT_FLOAT128X || (__HAVE_FLOAT128X && !_LIBC).  */
 
-#undef	__MATHDECL_1_IMPL
 #undef	__MATHDECL_1
-#undef	__MATHDECL_ALIAS
 #undef	__MATHDECL
 #undef	__MATHCALL
 
@@ -544,7 +495,7 @@ extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
 #define __MATHCALL_NARROW(func, redir, nargs)	\
   __MATHCALL_NARROW_NORMAL (func, nargs)
 
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 
 # define _Mret_ float
 # define _Marg_ double
@@ -562,18 +513,12 @@ extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
 #  undef __MATHCALL_NARROW
 #  define __MATHCALL_NARROW(func, redir, nargs) \
   __MATHCALL_NARROW_REDIR (func, redir, nargs)
-# elif __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
-#  define __MATHCALL_REDIR_NAME(name) __ ## f32 ## name ## ieee128
-#  undef __MATHCALL_NARROW
-#  define __MATHCALL_NARROW(func, redir, nargs) \
-  __MATHCALL_NARROW_REDIR (func, redir, nargs)
 # endif
 # include <bits/mathcalls-narrow.h>
 # undef _Mret_
 # undef _Marg_
 # undef __MATHCALL_NAME
-# if defined __LDBL_COMPAT \
-     || __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
+# ifdef __LDBL_COMPAT
 #  undef __MATHCALL_REDIR_NAME
 #  undef __MATHCALL_NARROW
 #  define __MATHCALL_NARROW(func, redir, nargs) \
@@ -588,18 +533,12 @@ extern double __REDIRECT_NTH (nexttoward, (double __x, long double __y),
 #  undef __MATHCALL_NARROW
 #  define __MATHCALL_NARROW(func, redir, nargs) \
   __MATHCALL_NARROW_REDIR (func, redir, nargs)
-# elif __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
-#  define __MATHCALL_REDIR_NAME(name) __ ## f64 ## name ## ieee128
-#  undef __MATHCALL_NARROW
-#  define __MATHCALL_NARROW(func, redir, nargs) \
-  __MATHCALL_NARROW_REDIR (func, redir, nargs)
 # endif
 # include <bits/mathcalls-narrow.h>
 # undef _Mret_
 # undef _Marg_
 # undef __MATHCALL_NAME
-# if defined __LDBL_COMPAT \
-     || __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
+# ifdef __LDBL_COMPAT
 #  undef __MATHCALL_REDIR_NAME
 #  undef __MATHCALL_NARROW
 #  define __MATHCALL_NARROW(func, redir, nargs) \
@@ -935,8 +874,7 @@ enum
    the __SUPPORT_SNAN__ check may be skipped for those versions.  */
 
 /* Return number of classification appropriate for X.  */
-# if ((__GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__)		      \
-      || __glibc_clang_prereq (2,8))					      \
+# if __GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__			      \
      && (!defined __OPTIMIZE_SIZE__ || defined __cplusplus)
      /* The check for __cplusplus allows the use of the builtin, even
 	when optimization for size is on.  This is provided for
@@ -951,7 +889,7 @@ enum
 # endif
 
 /* Return nonzero value if sign of X is negative.  */
-# if __GNUC_PREREQ (6,0) || __glibc_clang_prereq (3,3)
+# if __GNUC_PREREQ (6,0)
 #  define signbit(x) __builtin_signbit (x)
 # elif defined __cplusplus
   /* In C++ mode, __MATH_TG cannot be used, because it relies on
@@ -969,16 +907,14 @@ enum
 # endif
 
 /* Return nonzero value if X is not +-Inf or NaN.  */
-# if (__GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__) \
-     || __glibc_clang_prereq (2,8)
+# if __GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__
 #  define isfinite(x) __builtin_isfinite (x)
 # else
 #  define isfinite(x) __MATH_TG ((x), __finite, (x))
 # endif
 
 /* Return nonzero value if X is neither zero, subnormal, Inf, nor NaN.  */
-# if (__GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__) \
-     || __glibc_clang_prereq (2,8)
+# if __GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__
 #  define isnormal(x) __builtin_isnormal (x)
 # else
 #  define isnormal(x) (fpclassify (x) == FP_NORMAL)
@@ -986,8 +922,7 @@ enum
 
 /* Return nonzero value if X is a NaN.  We could use `fpclassify' but
    we already have this functions `__isnan' and it is faster.  */
-# if (__GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__) \
-     || __glibc_clang_prereq (2,8)
+# if __GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__
 #  define isnan(x) __builtin_isnan (x)
 # else
 #  define isnan(x) __MATH_TG ((x), __isnan, (x))
@@ -1004,8 +939,7 @@ enum
 #  define isinf(x) \
     (__builtin_types_compatible_p (__typeof (x), _Float128) \
      ? __isinff128 (x) : __builtin_isinf_sign (x))
-# elif (__GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__) \
-       || __glibc_clang_prereq (3,7)
+# elif __GNUC_PREREQ (4,4) && !defined __SUPPORT_SNAN__
 #  define isinf(x) __builtin_isinf_sign (x)
 # else
 #  define isinf(x) __MATH_TG ((x), __isinf, (x))
@@ -1030,7 +964,7 @@ enum
 
 #endif /* Use ISO C99.  */
 
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 # include <bits/iscanonical.h>
 
 /* Return nonzero value if X is a signaling NaN.  */
@@ -1257,6 +1191,13 @@ iszero (__T __val)
 # error "M_* values needed for _Float128x"
 #endif
 
+/* When compiling in strict ISO C compatible mode we must not use the
+   inline functions since they, among other things, do not set the
+   `errno' variable correctly.  */
+#if defined __STRICT_ANSI__ && !defined __NO_MATH_INLINES
+# define __NO_MATH_INLINES	1
+#endif
+
 #ifdef __USE_ISOC99
 # if __GNUC_PREREQ (3, 1)
 /* ISO C99 defines some macros to compare number while taking care for
@@ -1294,7 +1235,233 @@ iszero (__T __val)
 # endif
 #endif
 
-#if __GLIBC_USE (IEC_60559_BFP_EXT_C2X)
+/* Get machine-dependent inline versions (if there are any).  */
+#ifdef __USE_EXTERN_INLINES
+# include <bits/mathinline.h>
+#endif
+
+/* Define special entry points to use when the compiler got told to
+   only expect finite results.  */
+#if defined __FINITE_MATH_ONLY__ && __FINITE_MATH_ONLY__ > 0
+
+/* Include bits/math-finite.h for double.  */
+# define _Mdouble_ double
+# define __MATH_DECLARING_DOUBLE 1
+# define __MATH_DECLARING_FLOATN 0
+# define __REDIRFROM_X(function, reentrant) \
+  function ## reentrant
+# define __REDIRTO_X(function, reentrant) \
+   __ ## function ## reentrant ## _finite
+# include <bits/math-finite.h>
+# undef _Mdouble_
+# undef __MATH_DECLARING_DOUBLE
+# undef __MATH_DECLARING_FLOATN
+# undef __REDIRFROM_X
+# undef __REDIRTO_X
+
+/* When __USE_ISOC99 is defined, include math-finite for float and
+   long double, as well.  */
+# ifdef __USE_ISOC99
+
+/* Include bits/math-finite.h for float.  */
+#  define _Mdouble_ float
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 0
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f ## reentrant
+#  define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f ## reentrant ## _finite
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+
+/* Include bits/math-finite.h for long double.  */
+#  ifdef __MATH_DECLARE_LDOUBLE
+#   define _Mdouble_ long double
+#   define __MATH_DECLARING_DOUBLE 0
+#   define __MATH_DECLARING_FLOATN 0
+#   define __REDIRFROM_X(function, reentrant) \
+  function ## l ## reentrant
+#   ifdef __NO_LONG_DOUBLE_MATH
+#    define __REDIRTO_X(function, reentrant) \
+   __ ## function ## reentrant ## _finite
+#   else
+#    define __REDIRTO_X(function, reentrant) \
+   __ ## function ## l ## reentrant ## _finite
+#   endif
+#   include <bits/math-finite.h>
+#   undef _Mdouble_
+#   undef __MATH_DECLARING_DOUBLE
+#   undef __MATH_DECLARING_FLOATN
+#   undef __REDIRFROM_X
+#   undef __REDIRTO_X
+#  endif
+
+# endif /* __USE_ISOC99.  */
+
+/* Include bits/math-finite.h for _FloatN and _FloatNx.  */
+
+# if (__HAVE_DISTINCT_FLOAT16 || (__HAVE_FLOAT16 && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float16
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f16 ## reentrant
+#  if __HAVE_DISTINCT_FLOAT16
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f16 ## reentrant ## _finite
+#  else
+#   error "non-disinct _Float16"
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT32 || (__HAVE_FLOAT32 && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float32
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f32 ## reentrant
+#  if __HAVE_DISTINCT_FLOAT32
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f32 ## reentrant ## _finite
+#  else
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f ## reentrant ## _finite
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT64 || (__HAVE_FLOAT64 && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float64
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f64 ## reentrant
+#  if __HAVE_DISTINCT_FLOAT64
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f64 ## reentrant ## _finite
+#  else
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## reentrant ## _finite
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT128 || (__HAVE_FLOAT128 && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float128
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f128 ## reentrant
+#  if __HAVE_DISTINCT_FLOAT128
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f128 ## reentrant ## _finite
+#  else
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## l ## reentrant ## _finite
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT32X || (__HAVE_FLOAT32X && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float32x
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f32x ## reentrant
+#  if __HAVE_DISTINCT_FLOAT32X
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f32x ## reentrant ## _finite
+#  else
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## reentrant ## _finite
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT64X || (__HAVE_FLOAT64X && !defined _LIBC))	\
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float64x
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f64x ## reentrant
+#  if __HAVE_DISTINCT_FLOAT64X
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f64x ## reentrant ## _finite
+#  elif __HAVE_FLOAT64X_LONG_DOUBLE
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## l ## reentrant ## _finite
+#  else
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f128 ## reentrant ## _finite
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+# if (__HAVE_DISTINCT_FLOAT128X || (__HAVE_FLOAT128X && !defined _LIBC)) \
+      && __GLIBC_USE (IEC_60559_TYPES_EXT)
+#  define _Mdouble_ _Float128x
+#  define __MATH_DECLARING_DOUBLE 0
+#  define __MATH_DECLARING_FLOATN 1
+#  define __REDIRFROM_X(function, reentrant) \
+  function ## f128x ## reentrant
+#  if __HAVE_DISTINCT_FLOAT128X
+#   define __REDIRTO_X(function, reentrant) \
+   __ ## function ## f128x ## reentrant ## _finite
+#  else
+#   error "non-disinct _Float128x"
+#  endif
+#  include <bits/math-finite.h>
+#  undef _Mdouble_
+#  undef __MATH_DECLARING_DOUBLE
+#  undef __MATH_DECLARING_FLOATN
+#  undef __REDIRFROM_X
+#  undef __REDIRTO_X
+# endif
+
+#endif /* __FINITE_MATH_ONLY__ > 0.  */
+
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 /* An expression whose type has the widest of the evaluation formats
    of X and Y (which are of floating-point types).  */
 # if __FLT_EVAL_METHOD__ == 2 || __FLT_EVAL_METHOD__ > 64

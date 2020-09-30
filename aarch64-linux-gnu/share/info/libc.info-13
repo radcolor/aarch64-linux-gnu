@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2092,924 +2073,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Sysconf Definition,  Next: Constants for Sysconf,  Up: Sysconf
-
-32.4.1 Definition of ‘sysconf’
-------------------------------
-
- -- Function: long int sysconf (int PARAMETER)
-
-     Preliminary: | MT-Safe env | AS-Unsafe lock heap | AC-Unsafe lock
-     mem fd | *Note POSIX Safety Concepts::.
-
-     This function is used to inquire about runtime system parameters.
-     The PARAMETER argument should be one of the ‘_SC_’ symbols listed
-     below.
-
-     The normal return value from ‘sysconf’ is the value you requested.
-     A value of ‘-1’ is returned both if the implementation does not
-     impose a limit, and in case of an error.
-
-     The following ‘errno’ error conditions are defined for this
-     function:
-
-     ‘EINVAL’
-          The value of the PARAMETER is invalid.
-
-
-File: libc.info,  Node: Constants for Sysconf,  Next: Examples of Sysconf,  Prev: Sysconf Definition,  Up: Sysconf
-
-32.4.2 Constants for ‘sysconf’ Parameters
------------------------------------------
-
-Here are the symbolic constants for use as the PARAMETER argument to
-‘sysconf’.  The values are all integer constants (more specifically,
-enumeration type values).
-
-‘_SC_ARG_MAX’
-
-     Inquire about the parameter corresponding to ‘ARG_MAX’.
-
-‘_SC_CHILD_MAX’
-
-     Inquire about the parameter corresponding to ‘CHILD_MAX’.
-
-‘_SC_OPEN_MAX’
-
-     Inquire about the parameter corresponding to ‘OPEN_MAX’.
-
-‘_SC_STREAM_MAX’
-
-     Inquire about the parameter corresponding to ‘STREAM_MAX’.
-
-‘_SC_TZNAME_MAX’
-
-     Inquire about the parameter corresponding to ‘TZNAME_MAX’.
-
-‘_SC_NGROUPS_MAX’
-
-     Inquire about the parameter corresponding to ‘NGROUPS_MAX’.
-
-‘_SC_JOB_CONTROL’
-
-     Inquire about the parameter corresponding to ‘_POSIX_JOB_CONTROL’.
-
-‘_SC_SAVED_IDS’
-
-     Inquire about the parameter corresponding to ‘_POSIX_SAVED_IDS’.
-
-‘_SC_VERSION’
-
-     Inquire about the parameter corresponding to ‘_POSIX_VERSION’.
-
-‘_SC_CLK_TCK’
-
-     Inquire about the number of clock ticks per second; *note CPU
-     Time::.  The corresponding parameter ‘CLK_TCK’ is obsolete.
-
-‘_SC_CHARCLASS_NAME_MAX’
-
-     Inquire about the parameter corresponding to maximal length allowed
-     for a character class name in an extended locale specification.
-     These extensions are not yet standardized and so this option is not
-     standardized as well.
-
-‘_SC_REALTIME_SIGNALS’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_REALTIME_SIGNALS’.
-
-‘_SC_PRIORITY_SCHEDULING’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_PRIORITY_SCHEDULING’.
-
-‘_SC_TIMERS’
-
-     Inquire about the parameter corresponding to ‘_POSIX_TIMERS’.
-
-‘_SC_ASYNCHRONOUS_IO’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_ASYNCHRONOUS_IO’.
-
-‘_SC_PRIORITIZED_IO’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_PRIORITIZED_IO’.
-
-‘_SC_SYNCHRONIZED_IO’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_SYNCHRONIZED_IO’.
-
-‘_SC_FSYNC’
-
-     Inquire about the parameter corresponding to ‘_POSIX_FSYNC’.
-
-‘_SC_MAPPED_FILES’
-
-     Inquire about the parameter corresponding to ‘_POSIX_MAPPED_FILES’.
-
-‘_SC_MEMLOCK’
-
-     Inquire about the parameter corresponding to ‘_POSIX_MEMLOCK’.
-
-‘_SC_MEMLOCK_RANGE’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_MEMLOCK_RANGE’.
-
-‘_SC_MEMORY_PROTECTION’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_MEMORY_PROTECTION’.
-
-‘_SC_MESSAGE_PASSING’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_MESSAGE_PASSING’.
-
-‘_SC_SEMAPHORES’
-
-     Inquire about the parameter corresponding to ‘_POSIX_SEMAPHORES’.
-
-‘_SC_SHARED_MEMORY_OBJECTS’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_SHARED_MEMORY_OBJECTS’.
-
-‘_SC_AIO_LISTIO_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_AIO_LISTIO_MAX’.
-
-‘_SC_AIO_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_AIO_MAX’.
-
-‘_SC_AIO_PRIO_DELTA_MAX’
-
-     Inquire about the value by which a process can decrease its
-     asynchronous I/O priority level from its own scheduling priority.
-     This corresponds to the run-time invariant value
-     ‘AIO_PRIO_DELTA_MAX’.
-
-‘_SC_DELAYTIMER_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_DELAYTIMER_MAX’.
-
-‘_SC_MQ_OPEN_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_MQ_OPEN_MAX’.
-
-‘_SC_MQ_PRIO_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_MQ_PRIO_MAX’.
-
-‘_SC_RTSIG_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_RTSIG_MAX’.
-
-‘_SC_SEM_NSEMS_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_SEM_NSEMS_MAX’.
-
-‘_SC_SEM_VALUE_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_SEM_VALUE_MAX’.
-
-‘_SC_SIGQUEUE_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_SIGQUEUE_MAX’.
-
-‘_SC_TIMER_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_TIMER_MAX’.
-
-‘_SC_PII’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII’.
-
-‘_SC_PII_XTI’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_XTI’.
-
-‘_SC_PII_SOCKET’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_SOCKET’.
-
-‘_SC_PII_INTERNET’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_INTERNET’.
-
-‘_SC_PII_OSI’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI’.
-
-‘_SC_SELECT’
-
-     Inquire about the parameter corresponding to ‘_POSIX_SELECT’.
-
-‘_SC_UIO_MAXIOV’
-
-     Inquire about the parameter corresponding to ‘_POSIX_UIO_MAXIOV’.
-
-‘_SC_PII_INTERNET_STREAM’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_PII_INTERNET_STREAM’.
-
-‘_SC_PII_INTERNET_DGRAM’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_PII_INTERNET_DGRAM’.
-
-‘_SC_PII_OSI_COTS’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_COTS’.
-
-‘_SC_PII_OSI_CLTS’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_CLTS’.
-
-‘_SC_PII_OSI_M’
-
-     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_M’.
-
-‘_SC_T_IOV_MAX’
-
-     Inquire about the value associated with the ‘T_IOV_MAX’ variable.
-
-‘_SC_THREADS’
-
-     Inquire about the parameter corresponding to ‘_POSIX_THREADS’.
-
-‘_SC_THREAD_SAFE_FUNCTIONS’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_SAFE_FUNCTIONS’.
-
-‘_SC_GETGR_R_SIZE_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_GETGR_R_SIZE_MAX’.
-
-‘_SC_GETPW_R_SIZE_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_GETPW_R_SIZE_MAX’.
-
-‘_SC_LOGIN_NAME_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_LOGIN_NAME_MAX’.
-
-‘_SC_TTY_NAME_MAX’
-
-     Inquire about the parameter corresponding to ‘_POSIX_TTY_NAME_MAX’.
-
-‘_SC_THREAD_DESTRUCTOR_ITERATIONS’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_DESTRUCTOR_ITERATIONS’.
-
-‘_SC_THREAD_KEYS_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_KEYS_MAX’.
-
-‘_SC_THREAD_STACK_MIN’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_STACK_MIN’.
-
-‘_SC_THREAD_THREADS_MAX’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_THREADS_MAX’.
-
-‘_SC_THREAD_ATTR_STACKADDR’
-
-     Inquire about the parameter corresponding to
-     a ‘_POSIX_THREAD_ATTR_STACKADDR’.
-
-‘_SC_THREAD_ATTR_STACKSIZE’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_ATTR_STACKSIZE’.
-
-‘_SC_THREAD_PRIORITY_SCHEDULING’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_PRIORITY_SCHEDULING’.
-
-‘_SC_THREAD_PRIO_INHERIT’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_PRIO_INHERIT’.
-
-‘_SC_THREAD_PRIO_PROTECT’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_PRIO_PROTECT’.
-
-‘_SC_THREAD_PROCESS_SHARED’
-
-     Inquire about the parameter corresponding to
-     ‘_POSIX_THREAD_PROCESS_SHARED’.
-
-‘_SC_2_C_DEV’
-
-     Inquire about whether the system has the POSIX.2 C compiler
-     command, ‘c89’.
-
-‘_SC_2_FORT_DEV’
-
-     Inquire about whether the system has the POSIX.2 Fortran compiler
-     command, ‘fort77’.
-
-‘_SC_2_FORT_RUN’
-
-     Inquire about whether the system has the POSIX.2 ‘asa’ command to
-     interpret Fortran carriage control.
-
-‘_SC_2_LOCALEDEF’
-
-     Inquire about whether the system has the POSIX.2 ‘localedef’
-     command.
-
-‘_SC_2_SW_DEV’
-
-     Inquire about whether the system has the POSIX.2 commands ‘ar’,
-     ‘make’, and ‘strip’.
-
-‘_SC_BC_BASE_MAX’
-
-     Inquire about the maximum value of ‘obase’ in the ‘bc’ utility.
-
-‘_SC_BC_DIM_MAX’
-
-     Inquire about the maximum size of an array in the ‘bc’ utility.
-
-‘_SC_BC_SCALE_MAX’
-
-     Inquire about the maximum value of ‘scale’ in the ‘bc’ utility.
-
-‘_SC_BC_STRING_MAX’
-
-     Inquire about the maximum size of a string constant in the ‘bc’
-     utility.
-
-‘_SC_COLL_WEIGHTS_MAX’
-
-     Inquire about the maximum number of weights that can necessarily be
-     used in defining the collating sequence for a locale.
-
-‘_SC_EXPR_NEST_MAX’
-
-     Inquire about the maximum number of expressions nested within
-     parentheses when using the ‘expr’ utility.
-
-‘_SC_LINE_MAX’
-
-     Inquire about the maximum size of a text line that the POSIX.2 text
-     utilities can handle.
-
-‘_SC_EQUIV_CLASS_MAX’
-
-     Inquire about the maximum number of weights that can be assigned to
-     an entry of the ‘LC_COLLATE’ category ‘order’ keyword in a locale
-     definition.  The GNU C Library does not presently support locale
-     definitions.
-
-‘_SC_VERSION’
-
-     Inquire about the version number of POSIX.1 that the library and
-     kernel support.
-
-‘_SC_2_VERSION’
-
-     Inquire about the version number of POSIX.2 that the system
-     utilities support.
-
-‘_SC_PAGESIZE’
-
-     Inquire about the virtual memory page size of the machine.
-     ‘getpagesize’ returns the same value (*note Query Memory
-     Parameters::).
-
-‘_SC_NPROCESSORS_CONF’
-
-     Inquire about the number of configured processors.
-
-‘_SC_NPROCESSORS_ONLN’
-
-     Inquire about the number of processors online.
-
-‘_SC_PHYS_PAGES’
-
-     Inquire about the number of physical pages in the system.
-
-‘_SC_AVPHYS_PAGES’
-
-     Inquire about the number of available physical pages in the system.
-
-‘_SC_ATEXIT_MAX’
-
-     Inquire about the number of functions which can be registered as
-     termination functions for ‘atexit’; *note Cleanups on Exit::.
-
-‘_SC_LEVEL1_ICACHE_SIZE’
-
-     Inquire about the size of the Level 1 instruction cache.
-
-‘_SC_LEVEL1_ICACHE_ASSOC’
-
-     Inquire about the associativity of the Level 1 instruction cache.
-
-‘_SC_LEVEL1_ICACHE_LINESIZE’
-
-     Inquire about the line length of the Level 1 instruction cache.
-
-     On aarch64, the cache line size returned is the minimum instruction
-     cache line size observable by userspace.  This is typically the
-     same as the L1 icache size but on some cores it may not be so.
-     However, it is specified in the architecture that operations such
-     as cache line invalidation are consistent with the size reported
-     with this variable.
-
-‘_SC_LEVEL1_DCACHE_SIZE’
-
-     Inquire about the size of the Level 1 data cache.
-
-‘_SC_LEVEL1_DCACHE_ASSOC’
-
-     Inquire about the associativity of the Level 1 data cache.
-
-‘_SC_LEVEL1_DCACHE_LINESIZE’
-
-     Inquire about the line length of the Level 1 data cache.
-
-     On aarch64, the cache line size returned is the minimum data cache
-     line size observable by userspace.  This is typically the same as
-     the L1 dcache size but on some cores it may not be so.  However, it
-     is specified in the architecture that operations such as cache line
-     invalidation are consistent with the size reported with this
-     variable.
-
-‘_SC_LEVEL2_CACHE_SIZE’
-
-     Inquire about the size of the Level 2 cache.
-
-‘_SC_LEVEL2_CACHE_ASSOC’
-
-     Inquire about the associativity of the Level 2 cache.
-
-‘_SC_LEVEL2_CACHE_LINESIZE’
-
-     Inquire about the line length of the Level 2 cache.
-
-‘_SC_LEVEL3_CACHE_SIZE’
-
-     Inquire about the size of the Level 3 cache.
-
-‘_SC_LEVEL3_CACHE_ASSOC’
-
-     Inquire about the associativity of the Level 3 cache.
-
-‘_SC_LEVEL3_CACHE_LINESIZE’
-
-     Inquire about the line length of the Level 3 cache.
-
-‘_SC_LEVEL4_CACHE_SIZE’
-
-     Inquire about the size of the Level 4 cache.
-
-‘_SC_LEVEL4_CACHE_ASSOC’
-
-     Inquire about the associativity of the Level 4 cache.
-
-‘_SC_LEVEL4_CACHE_LINESIZE’
-
-     Inquire about the line length of the Level 4 cache.
-
-‘_SC_XOPEN_VERSION’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_VERSION’.
-
-‘_SC_XOPEN_XCU_VERSION’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_XCU_VERSION’.
-
-‘_SC_XOPEN_UNIX’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_UNIX’.
-
-‘_SC_XOPEN_REALTIME’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_REALTIME’.
-
-‘_SC_XOPEN_REALTIME_THREADS’
-
-     Inquire about the parameter corresponding to
-     ‘_XOPEN_REALTIME_THREADS’.
-
-‘_SC_XOPEN_LEGACY’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_LEGACY’.
-
-‘_SC_XOPEN_CRYPT’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_CRYPT’.  The
-     GNU C Library no longer implements the ‘_XOPEN_CRYPT’ extensions,
-     so ‘sysconf (_SC_XOPEN_CRYPT)’ always returns ‘-1’.
-
-‘_SC_XOPEN_ENH_I18N’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_ENH_I18N’.
-
-‘_SC_XOPEN_SHM’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_SHM’.
-
-‘_SC_XOPEN_XPG2’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_XPG2’.
-
-‘_SC_XOPEN_XPG3’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_XPG3’.
-
-‘_SC_XOPEN_XPG4’
-
-     Inquire about the parameter corresponding to ‘_XOPEN_XPG4’.
-
-‘_SC_CHAR_BIT’
-
-     Inquire about the number of bits in a variable of type ‘char’.
-
-‘_SC_CHAR_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘char’.
-
-‘_SC_CHAR_MIN’
-
-     Inquire about the minimum value which can be stored in a variable
-     of type ‘char’.
-
-‘_SC_INT_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘int’.
-
-‘_SC_INT_MIN’
-
-     Inquire about the minimum value which can be stored in a variable
-     of type ‘int’.
-
-‘_SC_LONG_BIT’
-
-     Inquire about the number of bits in a variable of type ‘long int’.
-
-‘_SC_WORD_BIT’
-
-     Inquire about the number of bits in a variable of a register word.
-
-‘_SC_MB_LEN_MAX’
-
-     Inquire about the maximum length of a multi-byte representation of
-     a wide character value.
-
-‘_SC_NZERO’
-
-     Inquire about the value used to internally represent the zero
-     priority level for the process execution.
-
-‘_SC_SSIZE_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘ssize_t’.
-
-‘_SC_SCHAR_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘signed char’.
-
-‘_SC_SCHAR_MIN’
-
-     Inquire about the minimum value which can be stored in a variable
-     of type ‘signed char’.
-
-‘_SC_SHRT_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘short int’.
-
-‘_SC_SHRT_MIN’
-
-     Inquire about the minimum value which can be stored in a variable
-     of type ‘short int’.
-
-‘_SC_UCHAR_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘unsigned char’.
-
-‘_SC_UINT_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘unsigned int’.
-
-‘_SC_ULONG_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘unsigned long int’.
-
-‘_SC_USHRT_MAX’
-
-     Inquire about the maximum value which can be stored in a variable
-     of type ‘unsigned short int’.
-
-‘_SC_NL_ARGMAX’
-
-     Inquire about the parameter corresponding to ‘NL_ARGMAX’.
-
-‘_SC_NL_LANGMAX’
-
-     Inquire about the parameter corresponding to ‘NL_LANGMAX’.
-
-‘_SC_NL_MSGMAX’
-
-     Inquire about the parameter corresponding to ‘NL_MSGMAX’.
-
-‘_SC_NL_NMAX’
-
-     Inquire about the parameter corresponding to ‘NL_NMAX’.
-
-‘_SC_NL_SETMAX’
-
-     Inquire about the parameter corresponding to ‘NL_SETMAX’.
-
-‘_SC_NL_TEXTMAX’
-
-     Inquire about the parameter corresponding to ‘NL_TEXTMAX’.
-
-
-File: libc.info,  Node: Examples of Sysconf,  Prev: Constants for Sysconf,  Up: Sysconf
-
-32.4.3 Examples of ‘sysconf’
-----------------------------
-
-We recommend that you first test for a macro definition for the
-parameter you are interested in, and call ‘sysconf’ only if the macro is
-not defined.  For example, here is how to test whether job control is
-supported:
-
-     int
-     have_job_control (void)
-     {
-     #ifdef _POSIX_JOB_CONTROL
-       return 1;
-     #else
-       int value = sysconf (_SC_JOB_CONTROL);
-       if (value < 0)
-         /* If the system is that badly wedged,
-            there’s no use trying to go on.  */
-         fatal (strerror (errno));
-       return value;
-     #endif
-     }
-
-   Here is how to get the value of a numeric limit:
-
-     int
-     get_child_max ()
-     {
-     #ifdef CHILD_MAX
-       return CHILD_MAX;
-     #else
-       int value = sysconf (_SC_CHILD_MAX);
-       if (value < 0)
-         fatal (strerror (errno));
-       return value;
-     #endif
-     }
-
-
-File: libc.info,  Node: Minimums,  Next: Limits for Files,  Prev: Sysconf,  Up: System Configuration
-
-32.5 Minimum Values for General Capacity Limits
-===============================================
-
-Here are the names for the POSIX minimum upper bounds for the system
-limit parameters.  The significance of these values is that you can
-safely push to these limits without checking whether the particular
-system you are using can go that far.
-
-‘_POSIX_AIO_LISTIO_MAX’
-
-     The most restrictive limit permitted by POSIX for the maximum
-     number of I/O operations that can be specified in a list I/O call.
-     The value of this constant is ‘2’; thus you can add up to two new
-     entries of the list of outstanding operations.
-
-‘_POSIX_AIO_MAX’
-
-     The most restrictive limit permitted by POSIX for the maximum
-     number of outstanding asynchronous I/O operations.  The value of
-     this constant is ‘1’.  So you cannot expect that you can issue more
-     than one operation and immediately continue with the normal work,
-     receiving the notifications asynchronously.
-
-‘_POSIX_ARG_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum combined length of the ARGV and ENVIRON
-     arguments that can be passed to the ‘exec’ functions.  Its value is
-     ‘4096’.
-
-‘_POSIX_CHILD_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum number of simultaneous processes per real
-     user ID. Its value is ‘6’.
-
-‘_POSIX_NGROUPS_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum number of supplementary group IDs per
-     process.  Its value is ‘0’.
-
-‘_POSIX_OPEN_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum number of files that a single process can
-     have open simultaneously.  Its value is ‘16’.
-
-‘_POSIX_SSIZE_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum value that can be stored in an object of type
-     ‘ssize_t’.  Its value is ‘32767’.
-
-‘_POSIX_STREAM_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum number of streams that a single process can
-     have open simultaneously.  Its value is ‘8’.
-
-‘_POSIX_TZNAME_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the maximum length of a time zone name.  Its value is
-     ‘3’.
-
-‘_POSIX2_RE_DUP_MAX’
-
-     The value of this macro is the most restrictive limit permitted by
-     POSIX for the numbers used in the ‘\{MIN,MAX\}’ construct in a
-     regular expression.  Its value is ‘255’.
-
-
-File: libc.info,  Node: Limits for Files,  Next: Options for Files,  Prev: Minimums,  Up: System Configuration
-
-32.6 Limits on File System Capacity
-===================================
-
-The POSIX.1 standard specifies a number of parameters that describe the
-limitations of the file system.  It’s possible for the system to have a
-fixed, uniform limit for a parameter, but this isn’t the usual case.  On
-most systems, it’s possible for different file systems (and, for some
-parameters, even different files) to have different maximum limits.  For
-example, this is very likely if you use NFS to mount some of the file
-systems from other machines.
-
-   Each of the following macros is defined in ‘limits.h’ only if the
-system has a fixed, uniform limit for the parameter in question.  If the
-system allows different file systems or files to have different limits,
-then the macro is undefined; use ‘pathconf’ or ‘fpathconf’ to find out
-the limit that applies to a particular file.  *Note Pathconf::.
-
-   Each parameter also has another macro, with a name starting with
-‘_POSIX’, which gives the lowest value that the limit is allowed to have
-on _any_ POSIX system.  *Note File Minimums::.
-
- -- Macro: int LINK_MAX
-
-     The uniform system limit (if any) for the number of names for a
-     given file.  *Note Hard Links::.
-
- -- Macro: int MAX_CANON
-
-     The uniform system limit (if any) for the amount of text in a line
-     of input when input editing is enabled.  *Note Canonical or Not::.
-
- -- Macro: int MAX_INPUT
-
-     The uniform system limit (if any) for the total number of
-     characters typed ahead as input.  *Note I/O Queues::.
-
- -- Macro: int NAME_MAX
-
-     The uniform system limit (if any) for the length of a file name
-     component, not including the terminating null character.
-
-     *Portability Note:* On some systems, the GNU C Library defines
-     ‘NAME_MAX’, but does not actually enforce this limit.
-
- -- Macro: int PATH_MAX
-
-     The uniform system limit (if any) for the length of an entire file
-     name (that is, the argument given to system calls such as ‘open’),
-     including the terminating null character.
-
-     *Portability Note:* The GNU C Library does not enforce this limit
-     even if ‘PATH_MAX’ is defined.
-
- -- Macro: int PIPE_BUF
-
-     The uniform system limit (if any) for the number of bytes that can
-     be written atomically to a pipe.  If multiple processes are writing
-     to the same pipe simultaneously, output from different processes
-     might be interleaved in chunks of this size.  *Note Pipes and
-     FIFOs::.
-
-   These are alternative macro names for some of the same information.
-
- -- Macro: int MAXNAMLEN
-
-     This is the BSD name for ‘NAME_MAX’.  It is defined in ‘dirent.h’.
-
- -- Macro: int FILENAME_MAX
-
-     The value of this macro is an integer constant expression that
-     represents the maximum length of a file name string.  It is defined
-     in ‘stdio.h’.
-
-     Unlike ‘PATH_MAX’, this macro is defined even if there is no actual
-     limit imposed.  In such a case, its value is typically a very large
-     number.  *This is always the case on GNU/Hurd systems.*
-
-     *Usage Note:* Don’t use ‘FILENAME_MAX’ as the size of an array in
-     which to store a file name!  You can’t possibly make an array that
-     big!  Use dynamic allocation (*note Memory Allocation::) instead.
-
-
-File: libc.info,  Node: Options for Files,  Next: File Minimums,  Prev: Limits for Files,  Up: System Configuration
-
-32.7 Optional Features in File Support
-======================================
-
-POSIX defines certain system-specific options in the system calls for
-operating on files.  Some systems support these options and others do
-not.  Since these options are provided in the kernel, not in the
-library, simply using the GNU C Library does not guarantee that any of
-these features is supported; it depends on the system you are using.
-They can also vary between file systems on a single machine.
-
-   This section describes the macros you can test to determine whether a
-particular option is supported on your machine.  If a given macro is
-defined in ‘unistd.h’, then its value says whether the corresponding
-feature is supported.  (A value of ‘-1’ indicates no; any other value
-indicates yes.)  If the macro is undefined, it means particular files
-may or may not support the feature.
-
-   Since all the machines that support the GNU C Library also support
-NFS, one can never make a general statement about whether all file
-systems support the ‘_POSIX_CHOWN_RESTRICTED’ and ‘_POSIX_NO_TRUNC’
-features.  So these names are never defined as macros in the GNU C
-Library.
-
- -- Macro: int _POSIX_CHOWN_RESTRICTED
-
-     If this option is in effect, the ‘chown’ function is restricted so
-     that the only changes permitted to nonprivileged processes is to
-     change the group owner of a file to either be the effective group
-     ID of the process, or one of its supplementary group IDs.  *Note
-     File Owner::.
-
- -- Macro: int _POSIX_NO_TRUNC
-
-     If this option is in effect, file name components longer than
-     ‘NAME_MAX’ generate an ‘ENAMETOOLONG’ error.  Otherwise, file name
-     components that are too long are silently truncated.
-
- -- Macro: unsigned char _POSIX_VDISABLE
-
-     This option is only meaningful for files that are terminal devices.
-     If it is enabled, then handling for special control characters can
-     be disabled individually.  *Note Special Characters::.
-
-   If one of these macros is undefined, that means that the option might
-be in effect for some files and not for others.  To inquire about a
-particular file, call ‘pathconf’ or ‘fpathconf’.  *Note Pathconf::.
 
 
 File: libc.info,  Node: File Minimums,  Next: Pathconf,  Prev: Options for Files,  Up: System Configuration
@@ -3814,9 +2877,6 @@ over blocking behavior.
           Instead of blocking, return to the caller immediately if no
           data is available.
 
-     ‘GRND_INSECURE’
-          Write random data that may not be cryptographically secure.
-
      Unlike ‘getentropy’, the ‘getrandom’ function is a cancellation
      point, and if it blocks, it can be interrupted by signals.
 
@@ -3970,18 +3030,17 @@ probably all programs should be covered.
      print_trace (void)
      {
        void *array[10];
+       size_t size;
        char **strings;
-       int size, i;
+       size_t i;
 
        size = backtrace (array, 10);
        strings = backtrace_symbols (array, size);
-       if (strings != NULL)
-       {
 
-         printf ("Obtained %d stack frames.\n", size);
-         for (i = 0; i < size; i++)
-           printf ("%s\n", strings[i]);
-       }
+       printf ("Obtained %zd stack frames.\n", size);
+
+       for (i = 0; i < size; i++)
+          printf ("%s\n", strings[i]);
 
        free (strings);
      }
@@ -4132,7 +3191,7 @@ control the behavior of threads.
      least until the elapsed time pointed to by TIME_POINT has been
      reached.  This function does not take an absolute time, but a
      duration that the thread is required to be blocked.  *Note Time
-     Basics::, and *note Time Types::.
+     Basics::, and *note Elapsed Time::.
 
      The thread may wake early if a signal that is not ignored is
      received.  In such a case, if ‘remaining’ is not NULL, the
@@ -4632,12 +3691,9 @@ not specified in the standard.
 
 * Default Thread Attributes::             Setting default attributes for
 					  threads in a process.
-* Initial Thread Signal Mask::            Setting the initial mask of threads.
-* Waiting with Explicit Clocks::          Functions for waiting with an
-                                          explicit clock specification.
 
 
-File: libc.info,  Node: Default Thread Attributes,  Next: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
+File: libc.info,  Node: Default Thread Attributes,  Up: Non-POSIX Extensions
 
 35.2.2.1 Setting Process-wide defaults for thread attributes
 ............................................................
@@ -4668,158 +3724,6 @@ default attributes used in the creation of threads in a process.
           attribute.
      ‘ENOMEM’
           The system does not have sufficient memory.
-
-
-File: libc.info,  Node: Initial Thread Signal Mask,  Next: Waiting with Explicit Clocks,  Prev: Default Thread Attributes,  Up: Non-POSIX Extensions
-
-35.2.2.2 Controlling the Initial Signal Mask of a New Thread
-............................................................
-
-The GNU C Library provides a way to specify the initial signal mask of a
-thread created using ‘pthread_create’, passing a thread attribute object
-configured for this purpose.
-
- -- Function: int pthread_attr_setsigmask_np (pthread_attr_t *ATTR,
-          const sigset_t *SIGMASK)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     Change the initial signal mask specified by ATTR.  If SIGMASK is
-     not ‘NULL’, the initial signal mask for new threads created with
-     ATTR is set to ‘*SIGMASK’.  If SIGMASK is ‘NULL’, ATTR will no
-     longer specify an explicit signal mask, so that the initial signal
-     mask of the new thread is inherited from the thread that calls
-     ‘pthread_create’.
-
-     This function returns zero on success, and ‘ENOMEM’ on memory
-     allocation failure.
-
- -- Function: int pthread_attr_getsigmask_np (const pthread_attr_t
-          *ATTR, sigset_t *SIGMASK)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     Retrieve the signal mask stored in ATTR and copy it to ‘*SIGMASK’.
-     If the signal mask has not been set, return the special constant
-     ‘PTHREAD_ATTR_NO_SIGMASK_NP’, otherwise return zero.
-
-     Obtaining the signal mask only works if it has been previously
-     stored by ‘pthread_attr_setsigmask_np’.  For example, the
-     ‘pthread_getattr_np’ function does not obtain the current signal
-     mask of the specified thread, and ‘pthread_attr_getsigmask_np’ will
-     subsequently report the signal mask as unset.
-
- -- Macro: int PTHREAD_ATTR_NO_SIGMASK_NP
-     The special value returned by ‘pthread_attr_setsigmask_np’ to
-     indicate that no signal mask has been set for the attribute.
-
-   It is possible to create a new thread with a specific signal mask
-without using these functions.  On the thread that calls
-‘pthread_create’, the required steps for the general case are:
-
-  1. Mask all signals, and save the old signal mask, using
-     ‘pthread_sigmask’.  This ensures that the new thread will be
-     created with all signals masked, so that no signals can be
-     delivered to the thread until the desired signal mask is set.
-
-  2. Call ‘pthread_create’ to create the new thread, passing the desired
-     signal mask to the thread start routine (which could be a wrapper
-     function for the actual thread start routine).  It may be necessary
-     to make a copy of the desired signal mask on the heap, so that the
-     life-time of the copy extends to the point when the start routine
-     needs to access the signal mask.
-
-  3. Restore the thread’s signal mask, to the set that was saved in the
-     first step.
-
-   The start routine for the created thread needs to locate the desired
-signal mask and use ‘pthread_sigmask’ to apply it to the thread.  If the
-signal mask was copied to a heap allocation, the copy should be freed.
-
-
-File: libc.info,  Node: Waiting with Explicit Clocks,  Prev: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
-
-35.2.2.3 Functions for Waiting According to a Specific Clock
-............................................................
-
-The GNU C Library provides several waiting functions that expect an
-explicit ‘clockid_t’ argument.
-
- -- Function: int sem_clockwait (sem_t *SEM, clockid_t CLOCKID,
-     const struct timespec *ABSTIME) Behaves like ‘sem_timedwait’ except
-     the time ABSTIME is measured against the clock specified by CLOCKID
-     rather than ‘CLOCK_REALTIME’.  Currently, CLOCKID must be either
-     ‘CLOCK_MONOTONIC’ or ‘CLOCK_REALTIME’.
-
- -- Function: int pthread_cond_clockwait (pthread_cond_t *COND,
-          pthread_mutex_t *MUTEX,
-     clockid_t CLOCKID, const struct timespec *ABSTIME) Preliminary: |
-     MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note POSIX Safety
-     Concepts::.
-
-     Behaves like ‘pthread_cond_timedwait’ except the time ABSTIME is
-     measured against the clock specified by CLOCKID rather than the
-     clock specified or defaulted when ‘pthread_cond_init’ was called.
-     Currently, CLOCKID must be either ‘CLOCK_MONOTONIC’ or
-     ‘CLOCK_REALTIME’.
-
- -- Function: int pthread_rwlock_clockrdlock (pthread_rwlock_t *RWLOCK,
-     clockid_t CLOCKID, const struct timespec *ABSTIME)
-
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     Behaves like ‘pthread_rwlock_timedrdlock’ except the time ABSTIME
-     is measured against the clock specified by CLOCKID rather than
-     ‘CLOCK_REALTIME’.  Currently, CLOCKID must be either
-     ‘CLOCK_MONOTONIC’ or ‘CLOCK_REALTIME’, otherwise ‘EINVAL’ is
-     returned.
-
- -- Function: int pthread_rwlock_clockwrlock (pthread_rwlock_t *RWLOCK,
-     clockid_t CLOCKID, const struct timespec *ABSTIME)
-
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     Behaves like ‘pthread_rwlock_timedwrlock’ except the time ABSTIME
-     is measured against the clock specified by CLOCKID rather than
-     ‘CLOCK_REALTIME’.  Currently, CLOCKID must be either
-     ‘CLOCK_MONOTONIC’ or ‘CLOCK_REALTIME’, otherwise ‘EINVAL’ is
-     returned.
-
- -- Function: int pthread_tryjoin_np (pthread_t *THREAD,
-     void **THREAD_RETURN)
-
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     Behaves like ‘pthread_join’ except that it will return ‘EBUSY’
-     immediately if the thread specified by THREAD has not yet
-     terminated.
-
- -- Function: int pthread_timedjoin_np (pthread_t *THREAD,
-     void **THREAD_RETURN, const struct timespec *ABSTIME)
-
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     Behaves like ‘pthread_tryjoin_np’ except that it will block until
-     the absolute time ABSTIME measured against ‘CLOCK_REALTIME’ is
-     reached if the thread has not terminated by that time and return
-     ‘EBUSY’.  If ABSTIME is equal to ‘NULL’ then the function will wait
-     forever in the same way as ‘pthread_join’.
-
- -- Function: int pthread_clockjoin_np (pthread_t *THREAD,
-     void **THREAD_RETURN, clockid_t CLOCKID, const struct timespec
-     *ABSTIME)
-
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     Behaves like ‘pthread_timedjoin_np’ except that the absolute time
-     in ABSTIME is measured against the clock specified by CLOCKID.
 
 
 File: libc.info,  Node: Internal Probes,  Next: Tunables,  Prev: Threads,  Up: Top
@@ -5373,8 +4277,8 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Elision Tunables,  Pr
 
  -- Tunable: glibc.malloc.tcache_count
      The maximum number of chunks of each size to cache.  The default is
-     7.  The upper limit is 65535.  If set to zero, the per-thread cache
-     is effectively disabled.
+     7.  There is no upper limit, other than available system memory.
+     If set to zero, the per-thread cache is effectively disabled.
 
      The approximate maximum overhead of the per-thread cache is thus
      equal to the number of bins times the chunk count in each bin times
@@ -5395,18 +4299,6 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Elision Tunables,  Pr
      chunks that are scanned from the unsorted list while searching for
      chunks to pre-fill the per-thread cache with.  The default, or when
      set to zero, is no limit.
-
- -- Tunable: glibc.malloc.mxfast
-     One of the optimizations malloc uses is to maintain a series of
-     “fast bins” that hold chunks up to a specific size.  The default
-     and maximum size which may be held this way is 80 bytes on 32-bit
-     systems or 160 bytes on 64-bit systems.  Applications which value
-     size over speed may choose to reduce the size of requests which are
-     serviced from fast bins with this tunable.  Note that the value
-     specified includes malloc’s internal overhead, which is normally
-     the size of one pointer, so add 4 on 32-bit systems or 8 on 64-bit
-     systems to the size passed to ‘malloc’ for the largest bin size to
-     enable.
 
 
 File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: Memory Allocation Tunables,  Up: Tunables
@@ -5539,7 +4431,7 @@ File: libc.info,  Node: Hardware Capability Tunables,  Prev: POSIX Thread Tunabl
      The ‘glibc.cpu.name=xxx’ tunable allows the user to tell the GNU C
      Library to assume that the CPU is ‘xxx’ where xxx may have one of
      these values: ‘generic’, ‘falkor’, ‘thunderxt88’, ‘thunderx2t99’,
-     ‘thunderx2t99p1’, ‘ares’, ‘emag’, ‘kunpeng’.
+     ‘thunderx2t99p1’, ‘ares’.
 
      This tunable is specific to aarch64.
 
@@ -7010,14 +5902,6 @@ it.
 ‘int CLOCKS_PER_SEC’
 
      ‘time.h’ (ISO): *note CPU Time::.
-
-‘clockid_t CLOCK_MONOTONIC’
-
-     ‘time.h’ (POSIX.1): *note Getting the Time::.
-
-‘clockid_t CLOCK_REALTIME’
-
-     ‘time.h’ (POSIX.1): *note Getting the Time::.
 
 ‘int COLL_WEIGHTS_MAX’
 
@@ -8635,10 +7519,6 @@ it.
 
      ‘fcntl.h’ (POSIX.1): *note Open-time Flags::.
 
-‘int O_DIRECTORY’
-
-     ‘fcntl.h’ (POSIX.1): *note Open-time Flags::.
-
 ‘int O_EXCL’
 
      ‘fcntl.h’ (POSIX.1): *note Open-time Flags::.
@@ -8668,10 +7548,6 @@ it.
      ‘fcntl.h’ (GNU): *note Operating Modes::.
 
 ‘int O_NOCTTY’
-
-     ‘fcntl.h’ (POSIX.1): *note Open-time Flags::.
-
-‘int O_NOFOLLOW’
 
      ‘fcntl.h’ (POSIX.1): *note Open-time Flags::.
 
@@ -9863,10 +8739,6 @@ it.
 
      _no header_ (C11): *note Feature Test Macros::.
 
-‘_ISOC2X_SOURCE’
-
-     _no header_ (C2X): *note Feature Test Macros::.
-
 ‘_ISOC99_SOURCE’
 
      _no header_ (GNU): *note Feature Test Macros::.
@@ -10851,11 +9723,11 @@ it.
 
 ‘int adjtime (const struct timeval *DELTA, struct timeval *OLDDELTA)’
 
-     ‘sys/time.h’ (BSD): *note Setting and Adjusting the Time::.
+     ‘sys/time.h’ (BSD): *note High-Resolution Calendar::.
 
 ‘int adjtimex (struct timex *TIMEX)’
 
-     ‘sys/timex.h’ (GNU): *note Setting and Adjusting the Time::.
+     ‘sys/timex.h’ (GNU): *note High-Resolution Calendar::.
 
 ‘int aio_cancel (int FILDES, struct aiocb *AIOCBP)’
 
@@ -11635,25 +10507,9 @@ it.
 
      ‘time.h’ (ISO): *note CPU Time::.
 
-‘int clock_getres (clockid_t CLOCK, struct timespec *RES)’
-
-     ‘time.h’ (POSIX.1): *note Getting the Time::.
-
-‘int clock_gettime (clockid_t CLOCK, struct timespec *TS)’
-
-     ‘time.h’ (POSIX.1): *note Getting the Time::.
-
-‘int clock_settime (clockid_t CLOCK, const struct timespec *TS)’
-
-     ‘time.h’ (POSIX): *note Setting and Adjusting the Time::.
-
 ‘clock_t’
 
-     ‘time.h’ (ISO): *note Time Types::.
-
-‘clockid_t’
-
-     ‘time.h’ (POSIX.1): *note Getting the Time::.
+     ‘time.h’ (ISO): *note CPU Time::.
 
 ‘complex double clog (complex double Z)’
 
@@ -12073,9 +10929,9 @@ it.
 
      ‘libintl.h’ (GNU): *note Translation with gettext::.
 
-‘double difftime (time_t END, time_t BEGIN)’
+‘double difftime (time_t TIME1, time_t TIME0)’
 
-     ‘time.h’ (ISO): *note Calculating Elapsed Time::.
+     ‘time.h’ (ISO): *note Elapsed Time::.
 
 ‘struct dirent’
 
@@ -12679,10 +11535,6 @@ it.
 
      ‘fenv.h’ (ISO): *note Control Functions::.
 
-‘int fexecve (int FD, char *const ARGV[], char *const ENV[])’
-
-     ‘unistd.h’ (POSIX.1): *note Executing a File::.
-
 ‘int fflush (FILE *STREAM)’
 
      ‘stdio.h’ (ISO): *note Flushing Buffers::.
@@ -13283,10 +12135,6 @@ it.
 
      ‘stdio.h’ (GNU): *note Line Input::.
 
-‘ssize_t getdents64 (int FD, void *BUFFER, size_t LENGTH)’
-
-     ‘dirent.h’ (Linux): *note Low-level Directory Access::.
-
 ‘int getdomainnname (char *NAME, size_t LENGTH)’
 
      ‘unistd.h’ (???): *note Host Identification::.
@@ -13597,13 +12445,9 @@ it.
 
      ‘libintl.h’ (GNU): *note Translation with gettext::.
 
-‘pid_t gettid (void)’
+‘int gettimeofday (struct timeval *TP, struct timezone *TZP)’
 
-     ‘unistd.h’ (Linux): *note Process Identification::.
-
-‘int gettimeofday (struct timeval *TP, void *TZP)’
-
-     ‘sys/time.h’ (BSD): *note Getting the Time::.
+     ‘sys/time.h’ (BSD): *note High-Resolution Calendar::.
 
 ‘uid_t getuid (void)’
 
@@ -15056,11 +13900,11 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
 ‘int ntp_adjtime (struct timex *TPTR)’
 
-     ‘sys/timex.h’ (GNU): *note Setting and Adjusting the Time::.
+     ‘sys/timex.h’ (GNU): *note High Accuracy Clock::.
 
 ‘int ntp_gettime (struct ntptimeval *TPTR)’
 
-     ‘sys/timex.h’ (GNU): *note Setting and Adjusting the Time::.
+     ‘sys/timex.h’ (GNU): *note High Accuracy Clock::.
 
 ‘struct obstack’
 
@@ -15383,14 +14227,6 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 ‘void psignal (int SIGNUM, const char *MESSAGE)’
 
      ‘signal.h’ (BSD): *note Signal Messages::.
-
-‘int pthread_attr_getsigmask_np (const pthread_attr_t *ATTR, sigset_t *SIGMASK)’
-
-     ‘pthread.h’ (GNU): *note Initial Thread Signal Mask::.
-
-‘int pthread_attr_setsigmask_np (pthread_attr_t *ATTR, const sigset_t *SIGMASK)’
-
-     ‘pthread.h’ (GNU): *note Initial Thread Signal Mask::.
 
 ‘int pthread_getattr_default_np (pthread_attr_t *ATTR)’
 
@@ -16102,9 +14938,9 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘stdlib.h’ (GNU): *note BSD Random::.
 
-‘int settimeofday (const struct timeval *TP, const void *TZP)’
+‘int settimeofday (const struct timeval *TP, const struct timezone *TZP)’
 
-     ‘sys/time.h’ (BSD): *note Setting and Adjusting the Time::.
+     ‘sys/time.h’ (BSD): *note High-Resolution Calendar::.
 
 ‘int setuid (uid_t NEWUID)’
 
@@ -16436,9 +15272,9 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
 ‘int stime (const time_t *NEWTIME)’
 
-     ‘time.h’ (SVID): *note Setting and Adjusting the Time::.
+     ‘time.h’ (SVID): *note Simple Calendar Time::.
 
-     ‘time.h’ (XPG): *note Setting and Adjusting the Time::.
+     ‘time.h’ (XPG): *note Simple Calendar Time::.
 
 ‘char * stpcpy (char *restrict TO, const char *restrict FROM)’
 
@@ -16688,6 +15524,10 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘unistd.h’ (POSIX.1): *note Sysconf Definition::.
 
+‘int sysctl (int *NAMES, int NLEN, void *OLDVAL, size_t *OLDLENP, void *NEWVAL, size_t NEWLEN)’
+
+     ‘sys/sysctl.h’ (BSD): *note System Parameters::.
+
 ‘void syslog (int FACILITY_PRIORITY, const char *FORMAT, ...)’
 
      ‘syslog.h’ (BSD): *note syslog; vsyslog::.
@@ -16834,10 +15674,6 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘math.h’ (ISO): *note Special Functions::.
 
-‘int tgkill (pid_t PID, pid_t TID, int SIGNUM)’
-
-     ‘signal.h’ (Linux): *note Signaling Another Process::.
-
 ‘thrd_busy’
 
      ‘threads.h’ (C11): *note ISO C Threads Return Values::.
@@ -16904,11 +15740,11 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
 ‘time_t time (time_t *RESULT)’
 
-     ‘time.h’ (ISO): *note Getting the Time::.
+     ‘time.h’ (ISO): *note Simple Calendar Time::.
 
 ‘time_t’
 
-     ‘time.h’ (ISO): *note Time Types::.
+     ‘time.h’ (ISO): *note Simple Calendar Time::.
 
 ‘time_t timegm (struct tm *BROKENTIME)’
 
@@ -16924,19 +15760,21 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
 ‘struct timespec’
 
-     ‘time.h’ (POSIX.1): *note Time Types::.
+     ‘sys/time.h’ (POSIX.1): *note Elapsed Time::.
 
 ‘struct timeval’
 
-     ‘sys/time.h’ (BSD): *note Time Types::.
+     ‘sys/time.h’ (BSD): *note Elapsed Time::.
 
 ‘long int timezone’
 
      ‘time.h’ (SVID): *note Time Zone Functions::.
 
-‘struct tm’
+‘struct timezone’
 
-     ‘time.h’ (ISO): *note Time Types::.
+     ‘sys/time.h’ (BSD): *note High-Resolution Calendar::.
+
+‘struct tm’
 
      ‘time.h’ (ISO): *note Broken-down Time::.
 
@@ -16970,43 +15808,43 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘ctype.h’ (ISO): *note Case Conversion::.
 
-‘int totalorder (const double *X, const double *Y)’
+‘int totalorder (double X, double Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
-‘int totalorderf (const float *X, const float *Y)’
+‘int totalorderf (float X, float Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
-‘int totalorderfN (const _FloatN *X, const _FloatN *Y)’
+‘int totalorderfN (_FloatN X, _FloatN Y)’
 
      ‘math.h’ (TS 18661-3:2015): *note FP Comparison Functions::.
 
-‘int totalorderfNx (const _FloatNx *X, const _FloatNx *Y)’
+‘int totalorderfNx (_FloatNx X, _FloatNx Y)’
 
      ‘math.h’ (TS 18661-3:2015): *note FP Comparison Functions::.
 
-‘int totalorderl (const long double *X, const long double *Y)’
+‘int totalorderl (long double X, long double Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
-‘int totalordermag (const double *X, const double *Y)’
+‘int totalordermag (double X, double Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
-‘int totalordermagf (const float *X, const float *Y)’
+‘int totalordermagf (float X, float Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
-‘int totalordermagfN (const _FloatN *X, const _FloatN *Y)’
+‘int totalordermagfN (_FloatN X, _FloatN Y)’
 
      ‘math.h’ (TS 18661-3:2015): *note FP Comparison Functions::.
 
-‘int totalordermagfNx (const _FloatNx *X, const _FloatNx *Y)’
+‘int totalordermagfNx (_FloatNx X, _FloatNx Y)’
 
      ‘math.h’ (TS 18661-3:2015): *note FP Comparison Functions::.
 
-‘int totalordermagl (const long double *X, const long double *Y)’
+‘int totalordermagl (long double X, long double Y)’
 
      ‘math.h’ (TS 18661-1:2014): *note FP Comparison Functions::.
 
@@ -17093,10 +15931,6 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 ‘void twalk (const void *ROOT, __action_fn_t ACTION)’
 
      ‘search.h’ (SVID): *note Tree Search Function::.
-
-‘void twalk_r (const void *ROOT, void (*ACTION) (const void *KEY, VISIT WHICH, void *CLOSURE), void *CLOSURE)’
-
-     ‘search.h’ (GNU): *note Tree Search Function::.
 
 ‘char * tzname [2]’
 
@@ -17396,7 +16230,7 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘wchar.h’ (ISO): *note Concatenating Strings::.
 
-‘wchar_t * wcschr (const wchar_t *WSTRING, wchar_t WC)’
+‘wchar_t * wcschr (const wchar_t *WSTRING, int WC)’
 
      ‘wchar.h’ (ISO): *note Search Functions::.
 
@@ -17460,7 +16294,7 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘wchar.h’ (ISO): *note Search Functions::.
 
-‘wchar_t * wcsrchr (const wchar_t *WSTRING, wchar_t WC)’
+‘wchar_t * wcsrchr (const wchar_t *WSTRING, wchar_t C)’
 
      ‘wchar.h’ (ISO): *note Search Functions::.
 

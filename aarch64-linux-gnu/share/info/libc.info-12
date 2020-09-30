@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2094,734 +2075,6 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
-File: libc.info,  Node: Semaphores,  Up: Inter-Process Communication
-
-27.1 Semaphores
-===============
-
-The GNU C Library implements the semaphore APIs as defined in POSIX and
-System V. Semaphores can be used by multiple processes to coordinate
-shared resources.  The following is a complete list of the semaphore
-functions provided by the GNU C Library.
-
-27.1.1 System V Semaphores
---------------------------
-
- -- Function: int semctl (int SEMID, int SEMNUM, int CMD);
-     Preliminary: | MT-Safe | AS-Safe | AC-Unsafe corrupt/linux | *Note
-     POSIX Safety Concepts::.
-
- -- Function: int semget (key_t KEY, int NSEMS, int SEMFLG);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
- -- Function: int semop (int SEMID, struct sembuf *SOPS, size_t NSOPS);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
- -- Function: int semtimedop (int SEMID, struct sembuf *SOPS, size_t
-          NSOPS, const struct timespec *TIMEOUT);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-27.1.2 POSIX Semaphores
------------------------
-
- -- Function: int sem_init (sem_t *SEM, int PSHARED, unsigned int
-          VALUE);
-     Preliminary: | MT-Safe | AS-Safe | AC-Unsafe corrupt | *Note POSIX
-     Safety Concepts::.
-
- -- Function: int sem_destroy (sem_t *SEM);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
- -- Function: sem_t *sem_open (const char *NAME, int OFLAG, ...);
-     Preliminary: | MT-Safe | AS-Unsafe init | AC-Unsafe init | *Note
-     POSIX Safety Concepts::.
-
- -- Function: int sem_close (sem_t *SEM);
-     Preliminary: | MT-Safe | AS-Unsafe lock | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
- -- Function: int sem_unlink (const char *NAME);
-     Preliminary: | MT-Safe | AS-Unsafe init | AC-Unsafe corrupt | *Note
-     POSIX Safety Concepts::.
-
- -- Function: int sem_wait (sem_t *SEM);
-     Preliminary: | MT-Safe | AS-Safe | AC-Unsafe corrupt | *Note POSIX
-     Safety Concepts::.
-
- -- Function: int sem_timedwait (sem_t *SEM, const struct timespec
-          *ABSTIME);
-     Preliminary: | MT-Safe | AS-Safe | AC-Unsafe corrupt | *Note POSIX
-     Safety Concepts::.
-
- -- Function: int sem_trywait (sem_t *SEM);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
- -- Function: int sem_post (sem_t *SEM);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
- -- Function: int sem_getvalue (sem_t *SEM, int *SVAL);
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-
-File: libc.info,  Node: Job Control,  Next: Name Service Switch,  Prev: Inter-Process Communication,  Up: Top
-
-28 Job Control
-**************
-
-“Job control” refers to the protocol for allowing a user to move between
-multiple “process groups” (or “jobs”) within a single “login session”.
-The job control facilities are set up so that appropriate behavior for
-most programs happens automatically and they need not do anything
-special about job control.  So you can probably ignore the material in
-this chapter unless you are writing a shell or login program.
-
-   You need to be familiar with concepts relating to process creation
-(*note Process Creation Concepts::) and signal handling (*note Signal
-Handling::) in order to understand this material presented in this
-chapter.
-
-   Some old systems do not support job control, but GNU systems always
-have, and it is a required feature in the 2001 revision of POSIX.1
-(*note POSIX::).  If you need to be portable to old systems, you can use
-the ‘_POSIX_JOB_CONTROL’ macro to test at compile-time whether the
-system supports job control.  *Note System Options::.
-
-* Menu:
-
-* Concepts of Job Control::     Jobs can be controlled by a shell.
-* Controlling Terminal::        How a process gets its controlling terminal.
-* Access to the Terminal::      How processes share the controlling terminal.
-* Orphaned Process Groups::     Jobs left after the user logs out.
-* Implementing a Shell::        What a shell must do to implement job control.
-* Functions for Job Control::   Functions to control process groups.
-
-
-File: libc.info,  Node: Concepts of Job Control,  Next: Controlling Terminal,  Up: Job Control
-
-28.1 Concepts of Job Control
-============================
-
-The fundamental purpose of an interactive shell is to read commands from
-the user’s terminal and create processes to execute the programs
-specified by those commands.  It can do this using the ‘fork’ (*note
-Creating a Process::) and ‘exec’ (*note Executing a File::) functions.
-
-   A single command may run just one process—but often one command uses
-several processes.  If you use the ‘|’ operator in a shell command, you
-explicitly request several programs in their own processes.  But even if
-you run just one program, it can use multiple processes internally.  For
-example, a single compilation command such as ‘cc -c foo.c’ typically
-uses four processes (though normally only two at any given time).  If
-you run ‘make’, its job is to run other programs in separate processes.
-
-   The processes belonging to a single command are called a “process
-group” or “job”.  This is so that you can operate on all of them at
-once.  For example, typing ‘C-c’ sends the signal ‘SIGINT’ to terminate
-all the processes in the foreground process group.
-
-   A “session” is a larger group of processes.  Normally all the
-processes that stem from a single login belong to the same session.
-
-   Every process belongs to a process group.  When a process is created,
-it becomes a member of the same process group and session as its parent
-process.  You can put it in another process group using the ‘setpgid’
-function, provided the process group belongs to the same session.
-
-   The only way to put a process in a different session is to make it
-the initial process of a new session, or a “session leader”, using the
-‘setsid’ function.  This also puts the session leader into a new process
-group, and you can’t move it out of that process group again.
-
-   Usually, new sessions are created by the system login program, and
-the session leader is the process running the user’s login shell.
-
-   A shell that supports job control must arrange to control which job
-can use the terminal at any time.  Otherwise there might be multiple
-jobs trying to read from the terminal at once, and confusion about which
-process should receive the input typed by the user.  To prevent this,
-the shell must cooperate with the terminal driver using the protocol
-described in this chapter.
-
-   The shell can give unlimited access to the controlling terminal to
-only one process group at a time.  This is called the “foreground job”
-on that controlling terminal.  Other process groups managed by the shell
-that are executing without such access to the terminal are called
-“background jobs”.
-
-   If a background job needs to read from its controlling terminal, it
-is “stopped” by the terminal driver; if the ‘TOSTOP’ mode is set,
-likewise for writing.  The user can stop a foreground job by typing the
-SUSP character (*note Special Characters::) and a program can stop any
-job by sending it a ‘SIGSTOP’ signal.  It’s the responsibility of the
-shell to notice when jobs stop, to notify the user about them, and to
-provide mechanisms for allowing the user to interactively continue
-stopped jobs and switch jobs between foreground and background.
-
-   *Note Access to the Terminal::, for more information about I/O to the
-controlling terminal.
-
-
-File: libc.info,  Node: Controlling Terminal,  Next: Access to the Terminal,  Prev: Concepts of Job Control,  Up: Job Control
-
-28.2 Controlling Terminal of a Process
-======================================
-
-One of the attributes of a process is its controlling terminal.  Child
-processes created with ‘fork’ inherit the controlling terminal from
-their parent process.  In this way, all the processes in a session
-inherit the controlling terminal from the session leader.  A session
-leader that has control of a terminal is called the “controlling
-process” of that terminal.
-
-   You generally do not need to worry about the exact mechanism used to
-allocate a controlling terminal to a session, since it is done for you
-by the system when you log in.
-
-   An individual process disconnects from its controlling terminal when
-it calls ‘setsid’ to become the leader of a new session.  *Note Process
-Group Functions::.
-
-
-File: libc.info,  Node: Access to the Terminal,  Next: Orphaned Process Groups,  Prev: Controlling Terminal,  Up: Job Control
-
-28.3 Access to the Controlling Terminal
-=======================================
-
-Processes in the foreground job of a controlling terminal have
-unrestricted access to that terminal; background processes do not.  This
-section describes in more detail what happens when a process in a
-background job tries to access its controlling terminal.
-
-   When a process in a background job tries to read from its controlling
-terminal, the process group is usually sent a ‘SIGTTIN’ signal.  This
-normally causes all of the processes in that group to stop (unless they
-handle the signal and don’t stop themselves).  However, if the reading
-process is ignoring or blocking this signal, then ‘read’ fails with an
-‘EIO’ error instead.
-
-   Similarly, when a process in a background job tries to write to its
-controlling terminal, the default behavior is to send a ‘SIGTTOU’ signal
-to the process group.  However, the behavior is modified by the ‘TOSTOP’
-bit of the local modes flags (*note Local Modes::).  If this bit is not
-set (which is the default), then writing to the controlling terminal is
-always permitted without sending a signal.  Writing is also permitted if
-the ‘SIGTTOU’ signal is being ignored or blocked by the writing process.
-
-   Most other terminal operations that a program can do are treated as
-reading or as writing.  (The description of each operation should say
-which.)
-
-   For more information about the primitive ‘read’ and ‘write’
-functions, see *note I/O Primitives::.
-
-
-File: libc.info,  Node: Orphaned Process Groups,  Next: Implementing a Shell,  Prev: Access to the Terminal,  Up: Job Control
-
-28.4 Orphaned Process Groups
-============================
-
-When a controlling process terminates, its terminal becomes free and a
-new session can be established on it.  (In fact, another user could log
-in on the terminal.)  This could cause a problem if any processes from
-the old session are still trying to use that terminal.
-
-   To prevent problems, process groups that continue running even after
-the session leader has terminated are marked as “orphaned process
-groups”.
-
-   When a process group becomes an orphan, its processes are sent a
-‘SIGHUP’ signal.  Ordinarily, this causes the processes to terminate.
-However, if a program ignores this signal or establishes a handler for
-it (*note Signal Handling::), it can continue running as in the orphan
-process group even after its controlling process terminates; but it
-still cannot access the terminal any more.
-
-
-File: libc.info,  Node: Implementing a Shell,  Next: Functions for Job Control,  Prev: Orphaned Process Groups,  Up: Job Control
-
-28.5 Implementing a Job Control Shell
-=====================================
-
-This section describes what a shell must do to implement job control, by
-presenting an extensive sample program to illustrate the concepts
-involved.
-
-* Menu:
-
-* Data Structures::             Introduction to the sample shell.
-* Initializing the Shell::      What the shell must do to take
-				 responsibility for job control.
-* Launching Jobs::              Creating jobs to execute commands.
-* Foreground and Background::   Putting a job in foreground of background.
-* Stopped and Terminated Jobs::  Reporting job status.
-* Continuing Stopped Jobs::     How to continue a stopped job in
-				 the foreground or background.
-* Missing Pieces::              Other parts of the shell.
-
-
-File: libc.info,  Node: Data Structures,  Next: Initializing the Shell,  Up: Implementing a Shell
-
-28.5.1 Data Structures for the Shell
-------------------------------------
-
-All of the program examples included in this chapter are part of a
-simple shell program.  This section presents data structures and utility
-functions which are used throughout the example.
-
-   The sample shell deals mainly with two data structures.  The ‘job’
-type contains information about a job, which is a set of subprocesses
-linked together with pipes.  The ‘process’ type holds information about
-a single subprocess.  Here are the relevant data structure declarations:
-
-     /* A process is a single process.  */
-     typedef struct process
-     {
-       struct process *next;       /* next process in pipeline */
-       char **argv;                /* for exec */
-       pid_t pid;                  /* process ID */
-       char completed;             /* true if process has completed */
-       char stopped;               /* true if process has stopped */
-       int status;                 /* reported status value */
-     } process;
-
-     /* A job is a pipeline of processes.  */
-     typedef struct job
-     {
-       struct job *next;           /* next active job */
-       char *command;              /* command line, used for messages */
-       process *first_process;     /* list of processes in this job */
-       pid_t pgid;                 /* process group ID */
-       char notified;              /* true if user told about stopped job */
-       struct termios tmodes;      /* saved terminal modes */
-       int stdin, stdout, stderr;  /* standard i/o channels */
-     } job;
-
-     /* The active jobs are linked into a list.  This is its head.   */
-     job *first_job = NULL;
-
-   Here are some utility functions that are used for operating on ‘job’
-objects.
-
-     /* Find the active job with the indicated PGID.  */
-     job *
-     find_job (pid_t pgid)
-     {
-       job *j;
-
-       for (j = first_job; j; j = j->next)
-         if (j->pgid == pgid)
-           return j;
-       return NULL;
-     }
-
-     /* Return true if all processes in the job have stopped or completed.  */
-     int
-     job_is_stopped (job *j)
-     {
-       process *p;
-
-       for (p = j->first_process; p; p = p->next)
-         if (!p->completed && !p->stopped)
-           return 0;
-       return 1;
-     }
-
-     /* Return true if all processes in the job have completed.  */
-     int
-     job_is_completed (job *j)
-     {
-       process *p;
-
-       for (p = j->first_process; p; p = p->next)
-         if (!p->completed)
-           return 0;
-       return 1;
-     }
-
-
-File: libc.info,  Node: Initializing the Shell,  Next: Launching Jobs,  Prev: Data Structures,  Up: Implementing a Shell
-
-28.5.2 Initializing the Shell
------------------------------
-
-When a shell program that normally performs job control is started, it
-has to be careful in case it has been invoked from another shell that is
-already doing its own job control.
-
-   A subshell that runs interactively has to ensure that it has been
-placed in the foreground by its parent shell before it can enable job
-control itself.  It does this by getting its initial process group ID
-with the ‘getpgrp’ function, and comparing it to the process group ID of
-the current foreground job associated with its controlling terminal
-(which can be retrieved using the ‘tcgetpgrp’ function).
-
-   If the subshell is not running as a foreground job, it must stop
-itself by sending a ‘SIGTTIN’ signal to its own process group.  It may
-not arbitrarily put itself into the foreground; it must wait for the
-user to tell the parent shell to do this.  If the subshell is continued
-again, it should repeat the check and stop itself again if it is still
-not in the foreground.
-
-   Once the subshell has been placed into the foreground by its parent
-shell, it can enable its own job control.  It does this by calling
-‘setpgid’ to put itself into its own process group, and then calling
-‘tcsetpgrp’ to place this process group into the foreground.
-
-   When a shell enables job control, it should set itself to ignore all
-the job control stop signals so that it doesn’t accidentally stop
-itself.  You can do this by setting the action for all the stop signals
-to ‘SIG_IGN’.
-
-   A subshell that runs non-interactively cannot and should not support
-job control.  It must leave all processes it creates in the same process
-group as the shell itself; this allows the non-interactive shell and its
-child processes to be treated as a single job by the parent shell.  This
-is easy to do—just don’t use any of the job control primitives—but you
-must remember to make the shell do it.
-
-   Here is the initialization code for the sample shell that shows how
-to do all of this.
-
-     /* Keep track of attributes of the shell.  */
-
-     #include <sys/types.h>
-     #include <termios.h>
-     #include <unistd.h>
-
-     pid_t shell_pgid;
-     struct termios shell_tmodes;
-     int shell_terminal;
-     int shell_is_interactive;
-
-
-     /* Make sure the shell is running interactively as the foreground job
-        before proceeding. */
-
-     void
-     init_shell ()
-     {
-
-       /* See if we are running interactively.  */
-       shell_terminal = STDIN_FILENO;
-       shell_is_interactive = isatty (shell_terminal);
-
-       if (shell_is_interactive)
-         {
-           /* Loop until we are in the foreground.  */
-           while (tcgetpgrp (shell_terminal) != (shell_pgid = getpgrp ()))
-             kill (- shell_pgid, SIGTTIN);
-
-           /* Ignore interactive and job-control signals.  */
-           signal (SIGINT, SIG_IGN);
-           signal (SIGQUIT, SIG_IGN);
-           signal (SIGTSTP, SIG_IGN);
-           signal (SIGTTIN, SIG_IGN);
-           signal (SIGTTOU, SIG_IGN);
-           signal (SIGCHLD, SIG_IGN);
-
-           /* Put ourselves in our own process group.  */
-           shell_pgid = getpid ();
-           if (setpgid (shell_pgid, shell_pgid) < 0)
-             {
-               perror ("Couldn't put the shell in its own process group");
-               exit (1);
-             }
-
-           /* Grab control of the terminal.  */
-           tcsetpgrp (shell_terminal, shell_pgid);
-
-           /* Save default terminal attributes for shell.  */
-           tcgetattr (shell_terminal, &shell_tmodes);
-         }
-     }
-
-
-File: libc.info,  Node: Launching Jobs,  Next: Foreground and Background,  Prev: Initializing the Shell,  Up: Implementing a Shell
-
-28.5.3 Launching Jobs
----------------------
-
-Once the shell has taken responsibility for performing job control on
-its controlling terminal, it can launch jobs in response to commands
-typed by the user.
-
-   To create the processes in a process group, you use the same ‘fork’
-and ‘exec’ functions described in *note Process Creation Concepts::.
-Since there are multiple child processes involved, though, things are a
-little more complicated and you must be careful to do things in the
-right order.  Otherwise, nasty race conditions can result.
-
-   You have two choices for how to structure the tree of parent-child
-relationships among the processes.  You can either make all the
-processes in the process group be children of the shell process, or you
-can make one process in group be the ancestor of all the other processes
-in that group.  The sample shell program presented in this chapter uses
-the first approach because it makes bookkeeping somewhat simpler.
-
-   As each process is forked, it should put itself in the new process
-group by calling ‘setpgid’; see *note Process Group Functions::.  The
-first process in the new group becomes its “process group leader”, and
-its process ID becomes the “process group ID” for the group.
-
-   The shell should also call ‘setpgid’ to put each of its child
-processes into the new process group.  This is because there is a
-potential timing problem: each child process must be put in the process
-group before it begins executing a new program, and the shell depends on
-having all the child processes in the group before it continues
-executing.  If both the child processes and the shell call ‘setpgid’,
-this ensures that the right things happen no matter which process gets
-to it first.
-
-   If the job is being launched as a foreground job, the new process
-group also needs to be put into the foreground on the controlling
-terminal using ‘tcsetpgrp’.  Again, this should be done by the shell as
-well as by each of its child processes, to avoid race conditions.
-
-   The next thing each child process should do is to reset its signal
-actions.
-
-   During initialization, the shell process set itself to ignore job
-control signals; see *note Initializing the Shell::.  As a result, any
-child processes it creates also ignore these signals by inheritance.
-This is definitely undesirable, so each child process should explicitly
-set the actions for these signals back to ‘SIG_DFL’ just after it is
-forked.
-
-   Since shells follow this convention, applications can assume that
-they inherit the correct handling of these signals from the parent
-process.  But every application has a responsibility not to mess up the
-handling of stop signals.  Applications that disable the normal
-interpretation of the SUSP character should provide some other mechanism
-for the user to stop the job.  When the user invokes this mechanism, the
-program should send a ‘SIGTSTP’ signal to the process group of the
-process, not just to the process itself.  *Note Signaling Another
-Process::.
-
-   Finally, each child process should call ‘exec’ in the normal way.
-This is also the point at which redirection of the standard input and
-output channels should be handled.  *Note Duplicating Descriptors::, for
-an explanation of how to do this.
-
-   Here is the function from the sample shell program that is
-responsible for launching a program.  The function is executed by each
-child process immediately after it has been forked by the shell, and
-never returns.
-
-     void
-     launch_process (process *p, pid_t pgid,
-                     int infile, int outfile, int errfile,
-                     int foreground)
-     {
-       pid_t pid;
-
-       if (shell_is_interactive)
-         {
-           /* Put the process into the process group and give the process group
-              the terminal, if appropriate.
-              This has to be done both by the shell and in the individual
-              child processes because of potential race conditions.  */
-           pid = getpid ();
-           if (pgid == 0) pgid = pid;
-           setpgid (pid, pgid);
-           if (foreground)
-             tcsetpgrp (shell_terminal, pgid);
-
-           /* Set the handling for job control signals back to the default.  */
-           signal (SIGINT, SIG_DFL);
-           signal (SIGQUIT, SIG_DFL);
-           signal (SIGTSTP, SIG_DFL);
-           signal (SIGTTIN, SIG_DFL);
-           signal (SIGTTOU, SIG_DFL);
-           signal (SIGCHLD, SIG_DFL);
-         }
-
-       /* Set the standard input/output channels of the new process.  */
-       if (infile != STDIN_FILENO)
-         {
-           dup2 (infile, STDIN_FILENO);
-           close (infile);
-         }
-       if (outfile != STDOUT_FILENO)
-         {
-           dup2 (outfile, STDOUT_FILENO);
-           close (outfile);
-         }
-       if (errfile != STDERR_FILENO)
-         {
-           dup2 (errfile, STDERR_FILENO);
-           close (errfile);
-         }
-
-       /* Exec the new process.  Make sure we exit.  */
-       execvp (p->argv[0], p->argv);
-       perror ("execvp");
-       exit (1);
-     }
-
-   If the shell is not running interactively, this function does not do
-anything with process groups or signals.  Remember that a shell not
-performing job control must keep all of its subprocesses in the same
-process group as the shell itself.
-
-   Next, here is the function that actually launches a complete job.
-After creating the child processes, this function calls some other
-functions to put the newly created job into the foreground or
-background; these are discussed in *note Foreground and Background::.
-
-     void
-     launch_job (job *j, int foreground)
-     {
-       process *p;
-       pid_t pid;
-       int mypipe[2], infile, outfile;
-
-       infile = j->stdin;
-       for (p = j->first_process; p; p = p->next)
-         {
-           /* Set up pipes, if necessary.  */
-           if (p->next)
-             {
-               if (pipe (mypipe) < 0)
-                 {
-                   perror ("pipe");
-                   exit (1);
-                 }
-               outfile = mypipe[1];
-             }
-           else
-             outfile = j->stdout;
-
-           /* Fork the child processes.  */
-           pid = fork ();
-           if (pid == 0)
-             /* This is the child process.  */
-             launch_process (p, j->pgid, infile,
-                             outfile, j->stderr, foreground);
-           else if (pid < 0)
-             {
-               /* The fork failed.  */
-               perror ("fork");
-               exit (1);
-             }
-           else
-             {
-               /* This is the parent process.  */
-               p->pid = pid;
-               if (shell_is_interactive)
-                 {
-                   if (!j->pgid)
-                     j->pgid = pid;
-                   setpgid (pid, j->pgid);
-                 }
-             }
-
-           /* Clean up after pipes.  */
-           if (infile != j->stdin)
-             close (infile);
-           if (outfile != j->stdout)
-             close (outfile);
-           infile = mypipe[0];
-         }
-
-       format_job_info (j, "launched");
-
-       if (!shell_is_interactive)
-         wait_for_job (j);
-       else if (foreground)
-         put_job_in_foreground (j, 0);
-       else
-         put_job_in_background (j, 0);
-     }
-
-
-File: libc.info,  Node: Foreground and Background,  Next: Stopped and Terminated Jobs,  Prev: Launching Jobs,  Up: Implementing a Shell
-
-28.5.4 Foreground and Background
---------------------------------
-
-Now let’s consider what actions must be taken by the shell when it
-launches a job into the foreground, and how this differs from what must
-be done when a background job is launched.
-
-   When a foreground job is launched, the shell must first give it
-access to the controlling terminal by calling ‘tcsetpgrp’.  Then, the
-shell should wait for processes in that process group to terminate or
-stop.  This is discussed in more detail in *note Stopped and Terminated
-Jobs::.
-
-   When all of the processes in the group have either completed or
-stopped, the shell should regain control of the terminal for its own
-process group by calling ‘tcsetpgrp’ again.  Since stop signals caused
-by I/O from a background process or a SUSP character typed by the user
-are sent to the process group, normally all the processes in the job
-stop together.
-
-   The foreground job may have left the terminal in a strange state, so
-the shell should restore its own saved terminal modes before continuing.
-In case the job is merely stopped, the shell should first save the
-current terminal modes so that it can restore them later if the job is
-continued.  The functions for dealing with terminal modes are
-‘tcgetattr’ and ‘tcsetattr’; these are described in *note Terminal
-Modes::.
-
-   Here is the sample shell’s function for doing all of this.
-
-     /* Put job J in the foreground.  If CONT is nonzero,
-        restore the saved terminal modes and send the process group a
-        ‘SIGCONT’ signal to wake it up before we block.  */
-
-     void
-     put_job_in_foreground (job *j, int cont)
-     {
-       /* Put the job into the foreground.  */
-       tcsetpgrp (shell_terminal, j->pgid);
-
-       /* Send the job a continue signal, if necessary.  */
-       if (cont)
-         {
-           tcsetattr (shell_terminal, TCSADRAIN, &j->tmodes);
-           if (kill (- j->pgid, SIGCONT) < 0)
-             perror ("kill (SIGCONT)");
-         }
-
-       /* Wait for it to report.  */
-       wait_for_job (j);
-
-       /* Put the shell back in the foreground.  */
-       tcsetpgrp (shell_terminal, shell_pgid);
-
-       /* Restore the shell’s terminal modes.  */
-       tcgetattr (shell_terminal, &j->tmodes);
-       tcsetattr (shell_terminal, TCSADRAIN, &shell_tmodes);
-     }
-
-   If the process group is launched as a background job, the shell
-should remain in the foreground itself and continue to read commands
-from the terminal.
-
-   In the sample shell, there is not much that needs to be done to put a
-job into the background.  Here is the function it uses:
-
-     /* Put a job in the background.  If the cont argument is true, send
-        the process group a ‘SIGCONT’ signal to wake it up.  */
-
-     void
-     put_job_in_background (job *j, int cont)
-     {
-       /* Send the job a continue signal, if necessary.  */
-       if (cont)
-         if (kill (-j->pgid, SIGCONT) < 0)
-           perror ("kill (SIGCONT)");
-     }
-
-
 File: libc.info,  Node: Stopped and Terminated Jobs,  Next: Continuing Stopped Jobs,  Prev: Foreground and Background,  Up: Implementing a Shell
 
 28.5.5 Stopped and Terminated Jobs
@@ -2941,6 +2194,7 @@ checking the status of jobs and reporting the information to the user.
      do_job_notification (void)
      {
        job *j, *jlast, *jnext;
+       process *p;
 
        /* Update status information for child processes.  */
        update_status ();
@@ -3398,22 +2652,16 @@ The databases available in the NSS are
      Ethernet numbers,
 ‘group’
      Groups of users, *note Group Database::.
-‘gshadow’
-     Group passphrase hashes and related information.
 ‘hosts’
      Host names and numbers, *note Host Names::.
-‘initgroups’
-     Supplementary group access list.
 ‘netgroup’
      Network wide list of host and users, *note Netgroup Database::.
 ‘networks’
      Network names and numbers, *note Networks Database::.
-‘passwd’
-     User identities, *note User Database::.
 ‘protocols’
      Network protocols, *note Protocols Database::.
-‘publickey’
-     Public keys for Secure RPC.
+‘passwd’
+     User identities, *note User Database::.
 ‘rpc’
      Remote procedure call names and numbers.
 ‘services’
@@ -3421,7 +2669,8 @@ The databases available in the NSS are
 ‘shadow’
      User passphrase hashes and related information.
 
-More databases may be added later.
+There will be some more added later (‘automount’, ‘bootparams’,
+‘netmasks’, and ‘publickey’).
 
 
 File: libc.info,  Node: NSS Configuration File,  Next: NSS Module Internals,  Prev: NSS Basics,  Up: Name Service Switch
@@ -3494,10 +2743,6 @@ currently used version of the interface which will not change
 frequently.  Normally the user should not have to be cognizant of these
 files since they should be placed in a directory where they are found
 automatically.  Only the names of all available services are important.
-
-   Lastly, some system software may make use of the NSS configuration
-file to store their own configuration for similar purposes.  Examples of
-this include the ‘automount’ service which is used by ‘autofs’.
 
 
 File: libc.info,  Node: Actions in the NSS configuration,  Next: Notes on NSS Configuration File,  Prev: Services in the NSS configuration,  Up: NSS Configuration File
@@ -6188,6 +5433,7 @@ can make changes.
 * Platform Type::               Determining operating system and basic
                                   machine type
 * Filesystem Handling::         Controlling/querying mounts
+* System Parameters::           Getting and setting various system parameters
 
    To get information on parameters of the system that are built into
 the system, such as the maximum length of a filename, *note System
@@ -6453,7 +5699,7 @@ described in *note Host Identification::.
      always a possibility.
 
 
-File: libc.info,  Node: Filesystem Handling,  Prev: Platform Type,  Up: System Management
+File: libc.info,  Node: Filesystem Handling,  Next: System Parameters,  Prev: Platform Type,  Up: System Management
 
 31.3 Controlling and Querying Mounts
 ====================================
@@ -7166,6 +6412,128 @@ should maintain and use these separately.  *Note Mount Information::.
      ‘umount2’ is also available.
 
 
+File: libc.info,  Node: System Parameters,  Prev: Filesystem Handling,  Up: System Management
+
+31.4 System Parameters
+======================
+
+This section describes the ‘sysctl’ function, which gets and sets a
+variety of system parameters.
+
+   The symbols used in this section are declared in the file
+‘sys/sysctl.h’.
+
+ -- Function: int sysctl (int *NAMES, int NLEN, void *OLDVAL, size_t
+          *OLDLENP, void *NEWVAL, size_t NEWLEN)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     ‘sysctl’ gets or sets a specified system parameter.  There are so
+     many of these parameters that it is not practical to list them all
+     here, but here are some examples:
+
+        • network domain name
+        • paging parameters
+        • network Address Resolution Protocol timeout time
+        • maximum number of files that may be open
+        • root filesystem device
+        • when kernel was built
+
+     The set of available parameters depends on the kernel configuration
+     and can change while the system is running, particularly when you
+     load and unload loadable kernel modules.
+
+     The system parameters with which ‘sysctl’ is concerned are arranged
+     in a hierarchical structure like a hierarchical filesystem.  To
+     identify a particular parameter, you specify a path through the
+     structure in a way analogous to specifying the pathname of a file.
+     Each component of the path is specified by an integer and each of
+     these integers has a macro defined for it by ‘sys/sysctl.h’.  NAMES
+     is the path, in the form of an array of integers.  Each component
+     of the path is one element of the array, in order.  NLEN is the
+     number of components in the path.
+
+     For example, the first component of the path for all the paging
+     parameters is the value ‘CTL_VM’.  For the free page thresholds,
+     the second component of the path is ‘VM_FREEPG’.  So to get the
+     free page threshold values, make NAMES an array containing the two
+     elements ‘CTL_VM’ and ‘VM_FREEPG’ and make NLEN = 2.
+
+     The format of the value of a parameter depends on the parameter.
+     Sometimes it is an integer; sometimes it is an ASCII string;
+     sometimes it is an elaborate structure.  In the case of the free
+     page thresholds used in the example above, the parameter value is a
+     structure containing several integers.
+
+     In any case, you identify a place to return the parameter’s value
+     with OLDVAL and specify the amount of storage available at that
+     location as *OLDLENP.  *OLDLENP does double duty because it is also
+     the output location that contains the actual length of the returned
+     value.
+
+     If you don’t want the parameter value returned, specify a null
+     pointer for OLDVAL.
+
+     To set the parameter, specify the address and length of the new
+     value as NEWVAL and NEWLEN.  If you don’t want to set the
+     parameter, specify a null pointer as NEWVAL.
+
+     If you get and set a parameter in the same ‘sysctl’ call, the value
+     returned is the value of the parameter before it was set.
+
+     Each system parameter has a set of permissions similar to the
+     permissions for a file (including the permissions on directories in
+     its path) that determine whether you may get or set it.  For the
+     purposes of these permissions, every parameter is considered to be
+     owned by the superuser and Group 0 so processes with that effective
+     uid or gid may have more access to system parameters.  Unlike with
+     files, the superuser does not invariably have full permission to
+     all system parameters, because some of them are designed not to be
+     changed ever.
+
+     ‘sysctl’ returns a zero return value if it succeeds.  Otherwise, it
+     returns ‘-1’ and sets ‘errno’ appropriately.  Besides the failures
+     that apply to all system calls, the following are the ‘errno’ codes
+     for all possible failures:
+
+     ‘EPERM’
+          The process is not permitted to access one of the components
+          of the path of the system parameter or is not permitted to
+          access the system parameter itself in the way (read or write)
+          that it requested.
+     ‘ENOTDIR’
+          There is no system parameter corresponding to NAME.
+     ‘EFAULT’
+          OLDVAL is not null, which means the process wanted to read the
+          parameter, but *OLDLENP is zero, so there is no place to
+          return it.
+     ‘EINVAL’
+             • The process attempted to set a system parameter to a
+               value that is not valid for that parameter.
+             • The space provided for the return of the system parameter
+               is not the right size for that parameter.
+     ‘ENOMEM’
+          This value may be returned instead of the more correct
+          ‘EINVAL’ in some cases where the space provided for the return
+          of the system parameter is too small.
+
+   If you have a Linux kernel with the ‘proc’ filesystem, you can get
+and set most of the same parameters by reading and writing to files in
+the ‘sys’ directory of the ‘proc’ filesystem.  In the ‘sys’ directory,
+the directory structure represents the hierarchical structure of the
+parameters.  E.g.  you can display the free page thresholds with
+     cat /proc/sys/vm/freepages
+
+   Some more traditional and more widely available, though less general,
+GNU C Library functions for getting and setting some of the same system
+parameters are:
+
+   • ‘getdomainname’, ‘setdomainname’
+   • ‘gethostname’, ‘sethostname’ (*Note Host Identification::.)
+   • ‘uname’ (*Note Platform Type::.)
+
+
 File: libc.info,  Node: System Configuration,  Next: Cryptographic Functions,  Prev: System Management,  Up: Top
 
 32 System Configuration Parameters
@@ -7424,4 +6792,922 @@ declared in the header file ‘unistd.h’.
 * Constants for Sysconf::     The list of parameters ‘sysconf’ can read.
 * Examples of Sysconf::       How to use ‘sysconf’ and the parameter
 				 macros properly together.
+
+
+File: libc.info,  Node: Sysconf Definition,  Next: Constants for Sysconf,  Up: Sysconf
+
+32.4.1 Definition of ‘sysconf’
+------------------------------
+
+ -- Function: long int sysconf (int PARAMETER)
+
+     Preliminary: | MT-Safe env | AS-Unsafe lock heap | AC-Unsafe lock
+     mem fd | *Note POSIX Safety Concepts::.
+
+     This function is used to inquire about runtime system parameters.
+     The PARAMETER argument should be one of the ‘_SC_’ symbols listed
+     below.
+
+     The normal return value from ‘sysconf’ is the value you requested.
+     A value of ‘-1’ is returned both if the implementation does not
+     impose a limit, and in case of an error.
+
+     The following ‘errno’ error conditions are defined for this
+     function:
+
+     ‘EINVAL’
+          The value of the PARAMETER is invalid.
+
+
+File: libc.info,  Node: Constants for Sysconf,  Next: Examples of Sysconf,  Prev: Sysconf Definition,  Up: Sysconf
+
+32.4.2 Constants for ‘sysconf’ Parameters
+-----------------------------------------
+
+Here are the symbolic constants for use as the PARAMETER argument to
+‘sysconf’.  The values are all integer constants (more specifically,
+enumeration type values).
+
+‘_SC_ARG_MAX’
+
+     Inquire about the parameter corresponding to ‘ARG_MAX’.
+
+‘_SC_CHILD_MAX’
+
+     Inquire about the parameter corresponding to ‘CHILD_MAX’.
+
+‘_SC_OPEN_MAX’
+
+     Inquire about the parameter corresponding to ‘OPEN_MAX’.
+
+‘_SC_STREAM_MAX’
+
+     Inquire about the parameter corresponding to ‘STREAM_MAX’.
+
+‘_SC_TZNAME_MAX’
+
+     Inquire about the parameter corresponding to ‘TZNAME_MAX’.
+
+‘_SC_NGROUPS_MAX’
+
+     Inquire about the parameter corresponding to ‘NGROUPS_MAX’.
+
+‘_SC_JOB_CONTROL’
+
+     Inquire about the parameter corresponding to ‘_POSIX_JOB_CONTROL’.
+
+‘_SC_SAVED_IDS’
+
+     Inquire about the parameter corresponding to ‘_POSIX_SAVED_IDS’.
+
+‘_SC_VERSION’
+
+     Inquire about the parameter corresponding to ‘_POSIX_VERSION’.
+
+‘_SC_CLK_TCK’
+
+     Inquire about the number of clock ticks per second; *note CPU
+     Time::.  The corresponding parameter ‘CLK_TCK’ is obsolete.
+
+‘_SC_CHARCLASS_NAME_MAX’
+
+     Inquire about the parameter corresponding to maximal length allowed
+     for a character class name in an extended locale specification.
+     These extensions are not yet standardized and so this option is not
+     standardized as well.
+
+‘_SC_REALTIME_SIGNALS’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_REALTIME_SIGNALS’.
+
+‘_SC_PRIORITY_SCHEDULING’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_PRIORITY_SCHEDULING’.
+
+‘_SC_TIMERS’
+
+     Inquire about the parameter corresponding to ‘_POSIX_TIMERS’.
+
+‘_SC_ASYNCHRONOUS_IO’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_ASYNCHRONOUS_IO’.
+
+‘_SC_PRIORITIZED_IO’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_PRIORITIZED_IO’.
+
+‘_SC_SYNCHRONIZED_IO’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_SYNCHRONIZED_IO’.
+
+‘_SC_FSYNC’
+
+     Inquire about the parameter corresponding to ‘_POSIX_FSYNC’.
+
+‘_SC_MAPPED_FILES’
+
+     Inquire about the parameter corresponding to ‘_POSIX_MAPPED_FILES’.
+
+‘_SC_MEMLOCK’
+
+     Inquire about the parameter corresponding to ‘_POSIX_MEMLOCK’.
+
+‘_SC_MEMLOCK_RANGE’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_MEMLOCK_RANGE’.
+
+‘_SC_MEMORY_PROTECTION’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_MEMORY_PROTECTION’.
+
+‘_SC_MESSAGE_PASSING’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_MESSAGE_PASSING’.
+
+‘_SC_SEMAPHORES’
+
+     Inquire about the parameter corresponding to ‘_POSIX_SEMAPHORES’.
+
+‘_SC_SHARED_MEMORY_OBJECTS’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_SHARED_MEMORY_OBJECTS’.
+
+‘_SC_AIO_LISTIO_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_AIO_LISTIO_MAX’.
+
+‘_SC_AIO_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_AIO_MAX’.
+
+‘_SC_AIO_PRIO_DELTA_MAX’
+
+     Inquire about the value by which a process can decrease its
+     asynchronous I/O priority level from its own scheduling priority.
+     This corresponds to the run-time invariant value
+     ‘AIO_PRIO_DELTA_MAX’.
+
+‘_SC_DELAYTIMER_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_DELAYTIMER_MAX’.
+
+‘_SC_MQ_OPEN_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_MQ_OPEN_MAX’.
+
+‘_SC_MQ_PRIO_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_MQ_PRIO_MAX’.
+
+‘_SC_RTSIG_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_RTSIG_MAX’.
+
+‘_SC_SEM_NSEMS_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_SEM_NSEMS_MAX’.
+
+‘_SC_SEM_VALUE_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_SEM_VALUE_MAX’.
+
+‘_SC_SIGQUEUE_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_SIGQUEUE_MAX’.
+
+‘_SC_TIMER_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_TIMER_MAX’.
+
+‘_SC_PII’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII’.
+
+‘_SC_PII_XTI’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_XTI’.
+
+‘_SC_PII_SOCKET’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_SOCKET’.
+
+‘_SC_PII_INTERNET’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_INTERNET’.
+
+‘_SC_PII_OSI’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI’.
+
+‘_SC_SELECT’
+
+     Inquire about the parameter corresponding to ‘_POSIX_SELECT’.
+
+‘_SC_UIO_MAXIOV’
+
+     Inquire about the parameter corresponding to ‘_POSIX_UIO_MAXIOV’.
+
+‘_SC_PII_INTERNET_STREAM’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_PII_INTERNET_STREAM’.
+
+‘_SC_PII_INTERNET_DGRAM’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_PII_INTERNET_DGRAM’.
+
+‘_SC_PII_OSI_COTS’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_COTS’.
+
+‘_SC_PII_OSI_CLTS’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_CLTS’.
+
+‘_SC_PII_OSI_M’
+
+     Inquire about the parameter corresponding to ‘_POSIX_PII_OSI_M’.
+
+‘_SC_T_IOV_MAX’
+
+     Inquire about the value associated with the ‘T_IOV_MAX’ variable.
+
+‘_SC_THREADS’
+
+     Inquire about the parameter corresponding to ‘_POSIX_THREADS’.
+
+‘_SC_THREAD_SAFE_FUNCTIONS’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_SAFE_FUNCTIONS’.
+
+‘_SC_GETGR_R_SIZE_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_GETGR_R_SIZE_MAX’.
+
+‘_SC_GETPW_R_SIZE_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_GETPW_R_SIZE_MAX’.
+
+‘_SC_LOGIN_NAME_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_LOGIN_NAME_MAX’.
+
+‘_SC_TTY_NAME_MAX’
+
+     Inquire about the parameter corresponding to ‘_POSIX_TTY_NAME_MAX’.
+
+‘_SC_THREAD_DESTRUCTOR_ITERATIONS’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_DESTRUCTOR_ITERATIONS’.
+
+‘_SC_THREAD_KEYS_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_KEYS_MAX’.
+
+‘_SC_THREAD_STACK_MIN’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_STACK_MIN’.
+
+‘_SC_THREAD_THREADS_MAX’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_THREADS_MAX’.
+
+‘_SC_THREAD_ATTR_STACKADDR’
+
+     Inquire about the parameter corresponding to
+     a ‘_POSIX_THREAD_ATTR_STACKADDR’.
+
+‘_SC_THREAD_ATTR_STACKSIZE’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_ATTR_STACKSIZE’.
+
+‘_SC_THREAD_PRIORITY_SCHEDULING’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_PRIORITY_SCHEDULING’.
+
+‘_SC_THREAD_PRIO_INHERIT’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_PRIO_INHERIT’.
+
+‘_SC_THREAD_PRIO_PROTECT’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_PRIO_PROTECT’.
+
+‘_SC_THREAD_PROCESS_SHARED’
+
+     Inquire about the parameter corresponding to
+     ‘_POSIX_THREAD_PROCESS_SHARED’.
+
+‘_SC_2_C_DEV’
+
+     Inquire about whether the system has the POSIX.2 C compiler
+     command, ‘c89’.
+
+‘_SC_2_FORT_DEV’
+
+     Inquire about whether the system has the POSIX.2 Fortran compiler
+     command, ‘fort77’.
+
+‘_SC_2_FORT_RUN’
+
+     Inquire about whether the system has the POSIX.2 ‘asa’ command to
+     interpret Fortran carriage control.
+
+‘_SC_2_LOCALEDEF’
+
+     Inquire about whether the system has the POSIX.2 ‘localedef’
+     command.
+
+‘_SC_2_SW_DEV’
+
+     Inquire about whether the system has the POSIX.2 commands ‘ar’,
+     ‘make’, and ‘strip’.
+
+‘_SC_BC_BASE_MAX’
+
+     Inquire about the maximum value of ‘obase’ in the ‘bc’ utility.
+
+‘_SC_BC_DIM_MAX’
+
+     Inquire about the maximum size of an array in the ‘bc’ utility.
+
+‘_SC_BC_SCALE_MAX’
+
+     Inquire about the maximum value of ‘scale’ in the ‘bc’ utility.
+
+‘_SC_BC_STRING_MAX’
+
+     Inquire about the maximum size of a string constant in the ‘bc’
+     utility.
+
+‘_SC_COLL_WEIGHTS_MAX’
+
+     Inquire about the maximum number of weights that can necessarily be
+     used in defining the collating sequence for a locale.
+
+‘_SC_EXPR_NEST_MAX’
+
+     Inquire about the maximum number of expressions nested within
+     parentheses when using the ‘expr’ utility.
+
+‘_SC_LINE_MAX’
+
+     Inquire about the maximum size of a text line that the POSIX.2 text
+     utilities can handle.
+
+‘_SC_EQUIV_CLASS_MAX’
+
+     Inquire about the maximum number of weights that can be assigned to
+     an entry of the ‘LC_COLLATE’ category ‘order’ keyword in a locale
+     definition.  The GNU C Library does not presently support locale
+     definitions.
+
+‘_SC_VERSION’
+
+     Inquire about the version number of POSIX.1 that the library and
+     kernel support.
+
+‘_SC_2_VERSION’
+
+     Inquire about the version number of POSIX.2 that the system
+     utilities support.
+
+‘_SC_PAGESIZE’
+
+     Inquire about the virtual memory page size of the machine.
+     ‘getpagesize’ returns the same value (*note Query Memory
+     Parameters::).
+
+‘_SC_NPROCESSORS_CONF’
+
+     Inquire about the number of configured processors.
+
+‘_SC_NPROCESSORS_ONLN’
+
+     Inquire about the number of processors online.
+
+‘_SC_PHYS_PAGES’
+
+     Inquire about the number of physical pages in the system.
+
+‘_SC_AVPHYS_PAGES’
+
+     Inquire about the number of available physical pages in the system.
+
+‘_SC_ATEXIT_MAX’
+
+     Inquire about the number of functions which can be registered as
+     termination functions for ‘atexit’; *note Cleanups on Exit::.
+
+‘_SC_LEVEL1_ICACHE_SIZE’
+
+     Inquire about the size of the Level 1 instruction cache.
+
+‘_SC_LEVEL1_ICACHE_ASSOC’
+
+     Inquire about the associativity of the Level 1 instruction cache.
+
+‘_SC_LEVEL1_ICACHE_LINESIZE’
+
+     Inquire about the line length of the Level 1 instruction cache.
+
+     On aarch64, the cache line size returned is the minimum instruction
+     cache line size observable by userspace.  This is typically the
+     same as the L1 icache size but on some cores it may not be so.
+     However, it is specified in the architecture that operations such
+     as cache line invalidation are consistent with the size reported
+     with this variable.
+
+‘_SC_LEVEL1_DCACHE_SIZE’
+
+     Inquire about the size of the Level 1 data cache.
+
+‘_SC_LEVEL1_DCACHE_ASSOC’
+
+     Inquire about the associativity of the Level 1 data cache.
+
+‘_SC_LEVEL1_DCACHE_LINESIZE’
+
+     Inquire about the line length of the Level 1 data cache.
+
+     On aarch64, the cache line size returned is the minimum data cache
+     line size observable by userspace.  This is typically the same as
+     the L1 dcache size but on some cores it may not be so.  However, it
+     is specified in the architecture that operations such as cache line
+     invalidation are consistent with the size reported with this
+     variable.
+
+‘_SC_LEVEL2_CACHE_SIZE’
+
+     Inquire about the size of the Level 2 cache.
+
+‘_SC_LEVEL2_CACHE_ASSOC’
+
+     Inquire about the associativity of the Level 2 cache.
+
+‘_SC_LEVEL2_CACHE_LINESIZE’
+
+     Inquire about the line length of the Level 2 cache.
+
+‘_SC_LEVEL3_CACHE_SIZE’
+
+     Inquire about the size of the Level 3 cache.
+
+‘_SC_LEVEL3_CACHE_ASSOC’
+
+     Inquire about the associativity of the Level 3 cache.
+
+‘_SC_LEVEL3_CACHE_LINESIZE’
+
+     Inquire about the line length of the Level 3 cache.
+
+‘_SC_LEVEL4_CACHE_SIZE’
+
+     Inquire about the size of the Level 4 cache.
+
+‘_SC_LEVEL4_CACHE_ASSOC’
+
+     Inquire about the associativity of the Level 4 cache.
+
+‘_SC_LEVEL4_CACHE_LINESIZE’
+
+     Inquire about the line length of the Level 4 cache.
+
+‘_SC_XOPEN_VERSION’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_VERSION’.
+
+‘_SC_XOPEN_XCU_VERSION’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_XCU_VERSION’.
+
+‘_SC_XOPEN_UNIX’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_UNIX’.
+
+‘_SC_XOPEN_REALTIME’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_REALTIME’.
+
+‘_SC_XOPEN_REALTIME_THREADS’
+
+     Inquire about the parameter corresponding to
+     ‘_XOPEN_REALTIME_THREADS’.
+
+‘_SC_XOPEN_LEGACY’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_LEGACY’.
+
+‘_SC_XOPEN_CRYPT’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_CRYPT’.  The
+     GNU C Library no longer implements the ‘_XOPEN_CRYPT’ extensions,
+     so ‘sysconf (_SC_XOPEN_CRYPT)’ always returns ‘-1’.
+
+‘_SC_XOPEN_ENH_I18N’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_ENH_I18N’.
+
+‘_SC_XOPEN_SHM’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_SHM’.
+
+‘_SC_XOPEN_XPG2’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_XPG2’.
+
+‘_SC_XOPEN_XPG3’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_XPG3’.
+
+‘_SC_XOPEN_XPG4’
+
+     Inquire about the parameter corresponding to ‘_XOPEN_XPG4’.
+
+‘_SC_CHAR_BIT’
+
+     Inquire about the number of bits in a variable of type ‘char’.
+
+‘_SC_CHAR_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘char’.
+
+‘_SC_CHAR_MIN’
+
+     Inquire about the minimum value which can be stored in a variable
+     of type ‘char’.
+
+‘_SC_INT_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘int’.
+
+‘_SC_INT_MIN’
+
+     Inquire about the minimum value which can be stored in a variable
+     of type ‘int’.
+
+‘_SC_LONG_BIT’
+
+     Inquire about the number of bits in a variable of type ‘long int’.
+
+‘_SC_WORD_BIT’
+
+     Inquire about the number of bits in a variable of a register word.
+
+‘_SC_MB_LEN_MAX’
+
+     Inquire about the maximum length of a multi-byte representation of
+     a wide character value.
+
+‘_SC_NZERO’
+
+     Inquire about the value used to internally represent the zero
+     priority level for the process execution.
+
+‘_SC_SSIZE_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘ssize_t’.
+
+‘_SC_SCHAR_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘signed char’.
+
+‘_SC_SCHAR_MIN’
+
+     Inquire about the minimum value which can be stored in a variable
+     of type ‘signed char’.
+
+‘_SC_SHRT_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘short int’.
+
+‘_SC_SHRT_MIN’
+
+     Inquire about the minimum value which can be stored in a variable
+     of type ‘short int’.
+
+‘_SC_UCHAR_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘unsigned char’.
+
+‘_SC_UINT_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘unsigned int’.
+
+‘_SC_ULONG_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘unsigned long int’.
+
+‘_SC_USHRT_MAX’
+
+     Inquire about the maximum value which can be stored in a variable
+     of type ‘unsigned short int’.
+
+‘_SC_NL_ARGMAX’
+
+     Inquire about the parameter corresponding to ‘NL_ARGMAX’.
+
+‘_SC_NL_LANGMAX’
+
+     Inquire about the parameter corresponding to ‘NL_LANGMAX’.
+
+‘_SC_NL_MSGMAX’
+
+     Inquire about the parameter corresponding to ‘NL_MSGMAX’.
+
+‘_SC_NL_NMAX’
+
+     Inquire about the parameter corresponding to ‘NL_NMAX’.
+
+‘_SC_NL_SETMAX’
+
+     Inquire about the parameter corresponding to ‘NL_SETMAX’.
+
+‘_SC_NL_TEXTMAX’
+
+     Inquire about the parameter corresponding to ‘NL_TEXTMAX’.
+
+
+File: libc.info,  Node: Examples of Sysconf,  Prev: Constants for Sysconf,  Up: Sysconf
+
+32.4.3 Examples of ‘sysconf’
+----------------------------
+
+We recommend that you first test for a macro definition for the
+parameter you are interested in, and call ‘sysconf’ only if the macro is
+not defined.  For example, here is how to test whether job control is
+supported:
+
+     int
+     have_job_control (void)
+     {
+     #ifdef _POSIX_JOB_CONTROL
+       return 1;
+     #else
+       int value = sysconf (_SC_JOB_CONTROL);
+       if (value < 0)
+         /* If the system is that badly wedged,
+            there’s no use trying to go on.  */
+         fatal (strerror (errno));
+       return value;
+     #endif
+     }
+
+   Here is how to get the value of a numeric limit:
+
+     int
+     get_child_max ()
+     {
+     #ifdef CHILD_MAX
+       return CHILD_MAX;
+     #else
+       int value = sysconf (_SC_CHILD_MAX);
+       if (value < 0)
+         fatal (strerror (errno));
+       return value;
+     #endif
+     }
+
+
+File: libc.info,  Node: Minimums,  Next: Limits for Files,  Prev: Sysconf,  Up: System Configuration
+
+32.5 Minimum Values for General Capacity Limits
+===============================================
+
+Here are the names for the POSIX minimum upper bounds for the system
+limit parameters.  The significance of these values is that you can
+safely push to these limits without checking whether the particular
+system you are using can go that far.
+
+‘_POSIX_AIO_LISTIO_MAX’
+
+     The most restrictive limit permitted by POSIX for the maximum
+     number of I/O operations that can be specified in a list I/O call.
+     The value of this constant is ‘2’; thus you can add up to two new
+     entries of the list of outstanding operations.
+
+‘_POSIX_AIO_MAX’
+
+     The most restrictive limit permitted by POSIX for the maximum
+     number of outstanding asynchronous I/O operations.  The value of
+     this constant is ‘1’.  So you cannot expect that you can issue more
+     than one operation and immediately continue with the normal work,
+     receiving the notifications asynchronously.
+
+‘_POSIX_ARG_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum combined length of the ARGV and ENVIRON
+     arguments that can be passed to the ‘exec’ functions.  Its value is
+     ‘4096’.
+
+‘_POSIX_CHILD_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum number of simultaneous processes per real
+     user ID. Its value is ‘6’.
+
+‘_POSIX_NGROUPS_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum number of supplementary group IDs per
+     process.  Its value is ‘0’.
+
+‘_POSIX_OPEN_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum number of files that a single process can
+     have open simultaneously.  Its value is ‘16’.
+
+‘_POSIX_SSIZE_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum value that can be stored in an object of type
+     ‘ssize_t’.  Its value is ‘32767’.
+
+‘_POSIX_STREAM_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum number of streams that a single process can
+     have open simultaneously.  Its value is ‘8’.
+
+‘_POSIX_TZNAME_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the maximum length of a time zone name.  Its value is
+     ‘3’.
+
+‘_POSIX2_RE_DUP_MAX’
+
+     The value of this macro is the most restrictive limit permitted by
+     POSIX for the numbers used in the ‘\{MIN,MAX\}’ construct in a
+     regular expression.  Its value is ‘255’.
+
+
+File: libc.info,  Node: Limits for Files,  Next: Options for Files,  Prev: Minimums,  Up: System Configuration
+
+32.6 Limits on File System Capacity
+===================================
+
+The POSIX.1 standard specifies a number of parameters that describe the
+limitations of the file system.  It’s possible for the system to have a
+fixed, uniform limit for a parameter, but this isn’t the usual case.  On
+most systems, it’s possible for different file systems (and, for some
+parameters, even different files) to have different maximum limits.  For
+example, this is very likely if you use NFS to mount some of the file
+systems from other machines.
+
+   Each of the following macros is defined in ‘limits.h’ only if the
+system has a fixed, uniform limit for the parameter in question.  If the
+system allows different file systems or files to have different limits,
+then the macro is undefined; use ‘pathconf’ or ‘fpathconf’ to find out
+the limit that applies to a particular file.  *Note Pathconf::.
+
+   Each parameter also has another macro, with a name starting with
+‘_POSIX’, which gives the lowest value that the limit is allowed to have
+on _any_ POSIX system.  *Note File Minimums::.
+
+ -- Macro: int LINK_MAX
+
+     The uniform system limit (if any) for the number of names for a
+     given file.  *Note Hard Links::.
+
+ -- Macro: int MAX_CANON
+
+     The uniform system limit (if any) for the amount of text in a line
+     of input when input editing is enabled.  *Note Canonical or Not::.
+
+ -- Macro: int MAX_INPUT
+
+     The uniform system limit (if any) for the total number of
+     characters typed ahead as input.  *Note I/O Queues::.
+
+ -- Macro: int NAME_MAX
+
+     The uniform system limit (if any) for the length of a file name
+     component, not including the terminating null character.
+
+     *Portability Note:* On some systems, the GNU C Library defines
+     ‘NAME_MAX’, but does not actually enforce this limit.
+
+ -- Macro: int PATH_MAX
+
+     The uniform system limit (if any) for the length of an entire file
+     name (that is, the argument given to system calls such as ‘open’),
+     including the terminating null character.
+
+     *Portability Note:* The GNU C Library does not enforce this limit
+     even if ‘PATH_MAX’ is defined.
+
+ -- Macro: int PIPE_BUF
+
+     The uniform system limit (if any) for the number of bytes that can
+     be written atomically to a pipe.  If multiple processes are writing
+     to the same pipe simultaneously, output from different processes
+     might be interleaved in chunks of this size.  *Note Pipes and
+     FIFOs::.
+
+   These are alternative macro names for some of the same information.
+
+ -- Macro: int MAXNAMLEN
+
+     This is the BSD name for ‘NAME_MAX’.  It is defined in ‘dirent.h’.
+
+ -- Macro: int FILENAME_MAX
+
+     The value of this macro is an integer constant expression that
+     represents the maximum length of a file name string.  It is defined
+     in ‘stdio.h’.
+
+     Unlike ‘PATH_MAX’, this macro is defined even if there is no actual
+     limit imposed.  In such a case, its value is typically a very large
+     number.  *This is always the case on GNU/Hurd systems.*
+
+     *Usage Note:* Don’t use ‘FILENAME_MAX’ as the size of an array in
+     which to store a file name!  You can’t possibly make an array that
+     big!  Use dynamic allocation (*note Memory Allocation::) instead.
+
+
+File: libc.info,  Node: Options for Files,  Next: File Minimums,  Prev: Limits for Files,  Up: System Configuration
+
+32.7 Optional Features in File Support
+======================================
+
+POSIX defines certain system-specific options in the system calls for
+operating on files.  Some systems support these options and others do
+not.  Since these options are provided in the kernel, not in the
+library, simply using the GNU C Library does not guarantee that any of
+these features is supported; it depends on the system you are using.
+They can also vary between file systems on a single machine.
+
+   This section describes the macros you can test to determine whether a
+particular option is supported on your machine.  If a given macro is
+defined in ‘unistd.h’, then its value says whether the corresponding
+feature is supported.  (A value of ‘-1’ indicates no; any other value
+indicates yes.)  If the macro is undefined, it means particular files
+may or may not support the feature.
+
+   Since all the machines that support the GNU C Library also support
+NFS, one can never make a general statement about whether all file
+systems support the ‘_POSIX_CHOWN_RESTRICTED’ and ‘_POSIX_NO_TRUNC’
+features.  So these names are never defined as macros in the GNU C
+Library.
+
+ -- Macro: int _POSIX_CHOWN_RESTRICTED
+
+     If this option is in effect, the ‘chown’ function is restricted so
+     that the only changes permitted to nonprivileged processes is to
+     change the group owner of a file to either be the effective group
+     ID of the process, or one of its supplementary group IDs.  *Note
+     File Owner::.
+
+ -- Macro: int _POSIX_NO_TRUNC
+
+     If this option is in effect, file name components longer than
+     ‘NAME_MAX’ generate an ‘ENAMETOOLONG’ error.  Otherwise, file name
+     components that are too long are silently truncated.
+
+ -- Macro: unsigned char _POSIX_VDISABLE
+
+     This option is only meaningful for files that are terminal devices.
+     If it is enabled, then handling for special control characters can
+     be disabled individually.  *Note Special Characters::.
+
+   If one of these macros is undefined, that means that the option might
+be in effect for some files and not for others.  To inquire about a
+particular file, call ‘pathconf’ or ‘fpathconf’.  *Note Pathconf::.
 

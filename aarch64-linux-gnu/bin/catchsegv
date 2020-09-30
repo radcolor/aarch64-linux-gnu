@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (C) 1998-2020 Free Software Foundation, Inc.
+# Copyright (C) 1998-2019 Free Software Foundation, Inc.
 # This file is part of the GNU C Library.
 # Contributed by Ulrich Drepper <drepper@cygnus.com>, 1998.
 
@@ -15,7 +15,7 @@
 
 # You should have received a copy of the GNU Lesser General Public
 # License along with the GNU C Library; if not, see
-# <https://www.gnu.org/licenses/>.
+# <http://www.gnu.org/licenses/>.
 
 if test $# -eq 0; then
   echo "$0: missing program name" >&2
@@ -34,13 +34,13 @@ if test $# -eq 0; then
       echo '  --version   print version number, then exit'
       echo 'For bug reporting instructions, please see:'
       cat <<\EOF
-<https://www.gnu.org/software/libc/bugs.html>.
+<http://www.gnu.org/software/libc/bugs.html>.
 EOF
       exit 0
       ;;
     --v | --ve | --ver | --vers | --versi | --versio | --version)
-      echo 'catchsegv (GNU libc) 2.31.9000'
-      echo 'Copyright (C) 2020 Free Software Foundation, Inc.
+      echo 'catchsegv (GNU libc) 2.29'
+      echo 'Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 Written by Ulrich Drepper.'
@@ -55,7 +55,7 @@ segv_output=`mktemp ${TMPDIR:-/tmp}/segv_output.XXXXXX` || exit
 
 # Redirect stderr to avoid termination message from shell.
 (exec 3>&2 2>/dev/null
-LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}/home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libSegFault.so \
+LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}/drone/src/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libSegFault.so \
 SEGFAULT_USE_ALTSTACK=1 \
 SEGFAULT_OUTPUT_NAME=$segv_output \
 "$prog" ${1+"$@"} 2>&3 3>&-)

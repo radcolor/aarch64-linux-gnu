@@ -1,4 +1,4 @@
-/* Copyright (C) 2004-2020 Free Software Foundation, Inc.
+/* Copyright (C) 2004-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 #ifndef _BITS_STRING_FORTIFIED_H
 #define _BITS_STRING_FORTIFIED_H 1
@@ -75,7 +75,7 @@ __NTH (memset (void *__dest, int __ch, size_t __len))
 # include <bits/strings_fortified.h>
 
 void __explicit_bzero_chk (void *__dest, size_t __len, size_t __destlen)
-  __THROW __nonnull ((1)) __attr_access ((__write_only__, 1, 2));
+  __THROW __nonnull ((1));
 
 __fortify_function void
 __NTH (explicit_bzero (void *__dest, size_t __len))
@@ -108,8 +108,7 @@ __NTH (strncpy (char *__restrict __dest, const char *__restrict __src,
 
 /* XXX We have no corresponding builtin yet.  */
 extern char *__stpncpy_chk (char *__dest, const char *__src, size_t __n,
-			    size_t __destlen) __THROW
-  __attr_access ((__write_only__, 1, 3)) __attr_access ((__read_only__, 2));
+			    size_t __destlen) __THROW;
 extern char *__REDIRECT_NTH (__stpncpy_alias, (char *__dest, const char *__src,
 					       size_t __n), stpncpy);
 

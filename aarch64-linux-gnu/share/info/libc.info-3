@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2092,159 +2073,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Obfuscating Data,  Next: Encode Binary Data,  Prev: Shuffling Bytes,  Up: String and Array Utilities
-
-5.13 Obfuscating Data
-=====================
-
-The ‘memfrob’ function reversibly obfuscates an array of binary data.
-This is not true encryption; the obfuscated data still bears a clear
-relationship to the original, and no secret key is required to undo the
-obfuscation.  It is analogous to the “Rot13” cipher used on Usenet for
-obscuring offensive jokes, spoilers for works of fiction, and so on, but
-it can be applied to arbitrary binary data.
-
-   Programs that need true encryption—a transformation that completely
-obscures the original and cannot be reversed without knowledge of a
-secret key—should use a dedicated cryptography library, such as
-libgcrypt.
-
-   Programs that need to _destroy_ data should use ‘explicit_bzero’
-(*note Erasing Sensitive Data::), or possibly ‘strfry’ (*note Shuffling
-Bytes::).
-
- -- Function: void * memfrob (void *MEM, size_t LENGTH)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The function ‘memfrob’ obfuscates LENGTH bytes of data beginning at
-     MEM, in place.  Each byte is bitwise xor-ed with the binary pattern
-     00101010 (hexadecimal 0x2A). The return value is always MEM.
-
-     ‘memfrob’ a second time on the same data returns it to its original
-     state.
-
-     *Portability Note:* This function is unique to the GNU C Library.
-     It is declared in ‘string.h’.
-
-
-File: libc.info,  Node: Encode Binary Data,  Next: Argz and Envz Vectors,  Prev: Obfuscating Data,  Up: String and Array Utilities
-
-5.14 Encode Binary Data
-=======================
-
-To store or transfer binary data in environments which only support text
-one has to encode the binary data by mapping the input bytes to bytes in
-the range allowed for storing or transferring.  SVID systems (and
-nowadays XPG compliant systems) provide minimal support for this task.
-
- -- Function: char * l64a (long int N)
-
-     Preliminary: | MT-Unsafe race:l64a | AS-Unsafe | AC-Safe | *Note
-     POSIX Safety Concepts::.
-
-     This function encodes a 32-bit input value using bytes from the
-     basic character set.  It returns a pointer to a 7 byte buffer which
-     contains an encoded version of N.  To encode a series of bytes the
-     user must copy the returned string to a destination buffer.  It
-     returns the empty string if N is zero, which is somewhat bizarre
-     but mandated by the standard.
-     *Warning:* Since a static buffer is used this function should not
-     be used in multi-threaded programs.  There is no thread-safe
-     alternative to this function in the C library.
-     *Compatibility Note:* The XPG standard states that the return value
-     of ‘l64a’ is undefined if N is negative.  In the GNU
-     implementation, ‘l64a’ treats its argument as unsigned, so it will
-     return a sensible encoding for any nonzero N; however, portable
-     programs should not rely on this.
-
-     To encode a large buffer ‘l64a’ must be called in a loop, once for
-     each 32-bit word of the buffer.  For example, one could do
-     something like this:
-
-          char *
-          encode (const void *buf, size_t len)
-          {
-            /* We know in advance how long the buffer has to be. */
-            unsigned char *in = (unsigned char *) buf;
-            char *out = malloc (6 + ((len + 3) / 4) * 6 + 1);
-            char *cp = out, *p;
-
-            /* Encode the length. */
-            /* Using ‘htonl’ is necessary so that the data can be
-               decoded even on machines with different byte order.
-               ‘l64a’ can return a string shorter than 6 bytes, so
-               we pad it with encoding of 0 ('.') at the end by
-               hand. */
-
-            p = stpcpy (cp, l64a (htonl (len)));
-            cp = mempcpy (p, "......", 6 - (p - cp));
-
-            while (len > 3)
-              {
-                unsigned long int n = *in++;
-                n = (n << 8) | *in++;
-                n = (n << 8) | *in++;
-                n = (n << 8) | *in++;
-                len -= 4;
-                p = stpcpy (cp, l64a (htonl (n)));
-                cp = mempcpy (p, "......", 6 - (p - cp));
-              }
-            if (len > 0)
-              {
-                unsigned long int n = *in++;
-                if (--len > 0)
-                  {
-                    n = (n << 8) | *in++;
-                    if (--len > 0)
-                      n = (n << 8) | *in;
-                  }
-                cp = stpcpy (cp, l64a (htonl (n)));
-              }
-            *cp = '\0';
-            return out;
-          }
-
-     It is strange that the library does not provide the complete
-     functionality needed but so be it.
-
-   To decode data produced with ‘l64a’ the following function should be
-used.
-
- -- Function: long int a64l (const char *STRING)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The parameter STRING should contain a string which was produced by
-     a call to ‘l64a’.  The function processes at least 6 bytes of this
-     string, and decodes the bytes it finds according to the table
-     below.  It stops decoding when it finds a byte not in the table,
-     rather like ‘atoi’; if you have a buffer which has been broken into
-     lines, you must be careful to skip over the end-of-line bytes.
-
-     The decoded number is returned as a ‘long int’ value.
-
-   The ‘l64a’ and ‘a64l’ functions use a base 64 encoding, in which each
-byte of an encoded string represents six bits of an input word.  These
-symbols are used for the base 64 digits:
-
-        0     1     2     3     4     5     6     7
-0       ‘.’   ‘/’   ‘0’   ‘1’   ‘2’   ‘3’   ‘4’   ‘5’
-8       ‘6’   ‘7’   ‘8’   ‘9’   ‘A’   ‘B’   ‘C’   ‘D’
-16      ‘E’   ‘F’   ‘G’   ‘H’   ‘I’   ‘J’   ‘K’   ‘L’
-24      ‘M’   ‘N’   ‘O’   ‘P’   ‘Q’   ‘R’   ‘S’   ‘T’
-32      ‘U’   ‘V’   ‘W’   ‘X’   ‘Y’   ‘Z’   ‘a’   ‘b’
-40      ‘c’   ‘d’   ‘e’   ‘f’   ‘g’   ‘h’   ‘i’   ‘j’
-48      ‘k’   ‘l’   ‘m’   ‘n’   ‘o’   ‘p’   ‘q’   ‘r’
-56      ‘s’   ‘t’   ‘u’   ‘v’   ‘w’   ‘x’   ‘y’   ‘z’
-
-   This encoding scheme is not standard.  There are some other encoding
-methods which are much more widely used (UU encoding, MIME encoding).
-Generally, it is better to use one of these encodings.
 
 
 File: libc.info,  Node: Argz and Envz Vectors,  Prev: Encode Binary Data,  Up: String and Array Utilities
@@ -2708,7 +2536,7 @@ type ‘wchar_t’.
           {
             wint_t c;
             ...
-            while ((c = getwc (fp)) != WEOF)
+            while ((c = wgetc (fp)) != WEOF)
               ...
           }
 
@@ -3502,10 +3330,6 @@ that can help in some important situations.
      address of the byte following the last converted multibyte
      character.
 
-     Like ‘mbstowcs’ the DST parameter may be a null pointer and the
-     function can be used to count the number of wide characters that
-     would be required.
-
      ‘mbsrtowcs’ was introduced in Amendment 1 to ISO C90 and is
      declared in ‘wchar.h’.
 
@@ -3582,12 +3406,11 @@ to the function.
 
      Except in the case of an encoding error the return value of the
      ‘wcsrtombs’ function is the number of bytes in all the multibyte
-     character sequences which were or would have been (if DST was not a
-     null) stored in DST.  Before returning, the state in the object
-     pointed to by PS (or the internal object in case PS is a null
-     pointer) is updated to reflect the state after the last conversion.
-     The state is the initial shift state in case the terminating NUL
-     wide character was converted.
+     character sequences stored in DST.  Before returning, the state in
+     the object pointed to by PS (or the internal object in case PS is a
+     null pointer) is updated to reflect the state after the last
+     conversion.  The state is the initial shift state in case the
+     terminating NUL wide character was converted.
 
      The ‘wcsrtombs’ function was introduced in Amendment 1 to ISO C90
      and is declared in ‘wchar.h’.
@@ -3615,10 +3438,6 @@ output array size (the LEN parameter).
      character string ‘*SRC’ need not be NUL-terminated.  But if a NUL
      byte is found within the NMC first bytes of the string, the
      conversion stops there.
-
-     Like ‘mbstowcs’ the DST parameter may be a null pointer and the
-     function can be used to count the number of wide characters that
-     would be required.
 
      This function is a GNU extension.  It is meant to work around the
      problems mentioned above.  Now it is possible to convert a buffer
@@ -3961,13 +3780,6 @@ to ISO C90; see *note Converting Strings::.
             buf = xrealloc (buf, (size + 1) * sizeof (wchar_t));
             return buf;
           }
-
-     If WSTRING is a null pointer then no output is written and the
-     conversion proceeds as above, and the result is returned.  In
-     practice such behaviour is useful for calculating the exact number
-     of wide characters required to convert STRING.  This behaviour of
-     accepting a null pointer for WSTRING is an XPG4.2 extension that is
-     not specified in ISO C and is optional in POSIX.
 
  -- Function: size_t wcstombs (char *STRING, const wchar_t *WSTRING,
           size_t SIZE)
@@ -6981,4 +6793,146 @@ Common Usage::).
      variable ‘errno’ is set.  Errors can occur if the catalog
      descriptor CATALOG_DESC is not valid in which case ‘errno’ is set
      to ‘EBADF’.
+
+
+File: libc.info,  Node: The message catalog files,  Next: The gencat program,  Prev: The catgets Functions,  Up: Message catalogs a la X/Open
+
+8.1.2 Format of the message catalog files
+-----------------------------------------
+
+The only reasonable way to translate all the messages of a function and
+store the result in a message catalog file which can be read by the
+‘catopen’ function is to write all the message text to the translator
+and let her/him translate them all.  I.e., we must have a file with
+entries which associate the set/message tuple with a specific
+translation.  This file format is specified in the X/Open standard and
+is as follows:
+
+   • Lines containing only whitespace characters or empty lines are
+     ignored.
+
+   • Lines which contain as the first non-whitespace character a ‘$’
+     followed by a whitespace character are comment and are also
+     ignored.
+
+   • If a line contains as the first non-whitespace characters the
+     sequence ‘$set’ followed by a whitespace character an additional
+     argument is required to follow.  This argument can either be:
+
+        − a number.  In this case the value of this number determines
+          the set to which the following messages are added.
+
+        − an identifier consisting of alphanumeric characters plus the
+          underscore character.  In this case the set get automatically
+          a number assigned.  This value is one added to the largest set
+          number which so far appeared.
+
+          How to use the symbolic names is explained in section *note
+          Common Usage::.
+
+          It is an error if a symbol name appears more than once.  All
+          following messages are placed in a set with this number.
+
+   • If a line contains as the first non-whitespace characters the
+     sequence ‘$delset’ followed by a whitespace character an additional
+     argument is required to follow.  This argument can either be:
+
+        − a number.  In this case the value of this number determines
+          the set which will be deleted.
+
+        − an identifier consisting of alphanumeric characters plus the
+          underscore character.  This symbolic identifier must match a
+          name for a set which previously was defined.  It is an error
+          if the name is unknown.
+
+     In both cases all messages in the specified set will be removed.
+     They will not appear in the output.  But if this set is later again
+     selected with a ‘$set’ command again messages could be added and
+     these messages will appear in the output.
+
+   • If a line contains after leading whitespaces the sequence ‘$quote’,
+     the quoting character used for this input file is changed to the
+     first non-whitespace character following ‘$quote’.  If no
+     non-whitespace character is present before the line ends quoting is
+     disabled.
+
+     By default no quoting character is used.  In this mode strings are
+     terminated with the first unescaped line break.  If there is a
+     ‘$quote’ sequence present newline need not be escaped.  Instead a
+     string is terminated with the first unescaped appearance of the
+     quote character.
+
+     A common usage of this feature would be to set the quote character
+     to ‘"’.  Then any appearance of the ‘"’ in the strings must be
+     escaped using the backslash (i.e., ‘\"’ must be written).
+
+   • Any other line must start with a number or an alphanumeric
+     identifier (with the underscore character included).  The following
+     characters (starting after the first whitespace character) will
+     form the string which gets associated with the currently selected
+     set and the message number represented by the number and identifier
+     respectively.
+
+     If the start of the line is a number the message number is obvious.
+     It is an error if the same message number already appeared for this
+     set.
+
+     If the leading token was an identifier the message number gets
+     automatically assigned.  The value is the current maximum message
+     number for this set plus one.  It is an error if the identifier was
+     already used for a message in this set.  It is OK to reuse the
+     identifier for a message in another thread.  How to use the
+     symbolic identifiers will be explained below (*note Common
+     Usage::).  There is one limitation with the identifier: it must not
+     be ‘Set’.  The reason will be explained below.
+
+     The text of the messages can contain escape characters.  The usual
+     bunch of characters known from the ISO C language are recognized
+     (‘\n’, ‘\t’, ‘\v’, ‘\b’, ‘\r’, ‘\f’, ‘\\’, and ‘\NNN’, where NNN is
+     the octal coding of a character code).
+
+   *Important:* The handling of identifiers instead of numbers for the
+set and messages is a GNU extension.  Systems strictly following the
+X/Open specification do not have this feature.  An example for a message
+catalog file is this:
+
+     $ This is a leading comment.
+     $quote "
+
+     $set SetOne
+     1 Message with ID 1.
+     two "   Message with ID \"two\", which gets the value 2 assigned"
+
+     $set SetTwo
+     $ Since the last set got the number 1 assigned this set has number 2.
+     4000 "The numbers can be arbitrary, they need not start at one."
+
+   This small example shows various aspects:
+   • Lines 1 and 9 are comments since they start with ‘$’ followed by a
+     whitespace.
+   • The quoting character is set to ‘"’.  Otherwise the quotes in the
+     message definition would have to be omitted and in this case the
+     message with the identifier ‘two’ would lose its leading
+     whitespace.
+   • Mixing numbered messages with messages having symbolic names is no
+     problem and the numbering happens automatically.
+
+   While this file format is pretty easy it is not the best possible for
+use in a running program.  The ‘catopen’ function would have to parse
+the file and handle syntactic errors gracefully.  This is not so easy
+and the whole process is pretty slow.  Therefore the ‘catgets’ functions
+expect the data in another more compact and ready-to-use file format.
+There is a special program ‘gencat’ which is explained in detail in the
+next section.
+
+   Files in this other format are not human readable.  To be easy to use
+by programs it is a binary file.  But the format is byte order
+independent so translation files can be shared by systems of arbitrary
+architecture (as long as they use the GNU C Library).
+
+   Details about the binary file format are not important to know since
+these files are always created by the ‘gencat’ program.  The sources of
+the GNU C Library also provide the sources for the ‘gencat’ program and
+so the interested reader can look through these source files to learn
+about the file format.
 

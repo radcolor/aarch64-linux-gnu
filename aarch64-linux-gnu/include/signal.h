@@ -1,4 +1,4 @@
-/* Copyright (C) 1991-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 /*
  *	ISO C99 Standard: 7.14 Signal handling <signal.h>
@@ -148,8 +148,7 @@ extern void psiginfo (const siginfo_t *__pinfo, const char *__s);
 
 #ifdef __USE_XOPEN_EXTENDED
 # ifdef __GNUC__
-extern int sigpause (int __sig) __asm__ ("__xpg_sigpause")
-  __attribute_deprecated_msg__ ("Use the sigsuspend function instead");
+extern int sigpause (int __sig) __asm__ ("__xpg_sigpause");
 # else
 extern int __sigpause (int __sig_or_mask, int __is_sig);
 /* Remove a signal from the signal mask and suspend the process.  */
@@ -165,9 +164,7 @@ extern int __sigpause (int __sig_or_mask, int __is_sig);
    simply do not work in many situations.  Use `sigprocmask' instead.  */
 
 /* Compute mask for signal SIG.  */
-# define sigmask(sig) \
-  __glibc_macro_warning ("sigmask is deprecated") \
-  ((int)(1u << ((sig) - 1)))
+# define sigmask(sig) ((int)(1u << ((sig) - 1)))
 
 /* Block signals in MASK, returning the old mask.  */
 extern int sigblock (int __mask) __THROW __attribute_deprecated__;
@@ -314,8 +311,7 @@ extern int sigreturn (struct sigcontext *__scp) __THROW;
 /* If INTERRUPT is nonzero, make signal SIG interrupt system calls
    (causing them to fail with EINTR); if INTERRUPT is zero, make system
    calls be restarted after signal SIG.  */
-extern int siginterrupt (int __sig, int __interrupt) __THROW
-  __attribute_deprecated_msg__ ("Use sigaction with SA_RESTART instead");
+extern int siginterrupt (int __sig, int __interrupt) __THROW;
 
 # include <bits/sigstack.h>
 # include <bits/ss_flags.h>
@@ -344,21 +340,16 @@ extern int sigstack (struct sigstack *__ss, struct sigstack *__oss)
 /* Simplified interface for signal management.  */
 
 /* Add SIG to the calling process' signal mask.  */
-extern int sighold (int __sig) __THROW
-  __attribute_deprecated_msg__ ("Use the sigprocmask function instead");
+extern int sighold (int __sig) __THROW;
 
 /* Remove SIG from the calling process' signal mask.  */
-extern int sigrelse (int __sig) __THROW
-  __attribute_deprecated_msg__ ("Use the sigprocmask function instead");
+extern int sigrelse (int __sig) __THROW;
 
 /* Set the disposition of SIG to SIG_IGN.  */
-extern int sigignore (int __sig) __THROW
-  __attribute_deprecated_msg__ ("Use the signal function instead");
+extern int sigignore (int __sig) __THROW;
 
 /* Set the disposition of SIG.  */
-extern __sighandler_t sigset (int __sig, __sighandler_t __disp) __THROW
-  __attribute_deprecated_msg__
-    ("Use the signal and sigprocmask functions instead");
+extern __sighandler_t sigset (int __sig, __sighandler_t __disp) __THROW;
 #endif
 
 #if defined __USE_POSIX199506 || defined __USE_UNIX98
@@ -378,9 +369,6 @@ extern int __libc_current_sigrtmax (void) __THROW;
 
 #define SIGRTMIN        (__libc_current_sigrtmin ())
 #define SIGRTMAX        (__libc_current_sigrtmax ())
-
-/* System-specific extensions.  */
-#include <bits/signal_ext.h>
 
 __END_DECLS
 

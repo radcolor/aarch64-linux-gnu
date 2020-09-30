@@ -161,7 +161,7 @@ day      "Acaada";/
 % Abbreviated month names (%b)
 %
 abmon    "Qun";/
-         "Nah";/
+         "Kud";/
          "Cig";/
          "Agd";/
          "Cax";/
@@ -176,9 +176,9 @@ abmon    "Qun";/
 % Full month names (%B)
 %
 mon      "Qunxa Garablu";/
-         "Naharsi Kudo";/
+         "Kudo";/
          "Ciggilta Kudo";/
-         "Agda Baxis";/
+         "Agda Baxisso";/
          "Caxah Alsa";/
          "Qasa Dirri";/
          "Qado Dirri";/

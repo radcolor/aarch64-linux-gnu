@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2092,215 +2073,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Descriptors and Streams,  Next: Stream/Descriptor Precautions,  Prev: File Position Primitive,  Up: Low-Level I/O
-
-13.4 Descriptors and Streams
-============================
-
-Given an open file descriptor, you can create a stream for it with the
-‘fdopen’ function.  You can get the underlying file descriptor for an
-existing stream with the ‘fileno’ function.  These functions are
-declared in the header file ‘stdio.h’.
-
- -- Function: FILE * fdopen (int FILEDES, const char *OPENTYPE)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe mem lock |
-     *Note POSIX Safety Concepts::.
-
-     The ‘fdopen’ function returns a new stream for the file descriptor
-     FILEDES.
-
-     The OPENTYPE argument is interpreted in the same way as for the
-     ‘fopen’ function (*note Opening Streams::), except that the ‘b’
-     option is not permitted; this is because GNU systems make no
-     distinction between text and binary files.  Also, ‘"w"’ and ‘"w+"’
-     do not cause truncation of the file; these have an effect only when
-     opening a file, and in this case the file has already been opened.
-     You must make sure that the OPENTYPE argument matches the actual
-     mode of the open file descriptor.
-
-     The return value is the new stream.  If the stream cannot be
-     created (for example, if the modes for the file indicated by the
-     file descriptor do not permit the access specified by the OPENTYPE
-     argument), a null pointer is returned instead.
-
-     In some other systems, ‘fdopen’ may fail to detect that the modes
-     for file descriptors do not permit the access specified by
-     ‘opentype’.  The GNU C Library always checks for this.
-
-   For an example showing the use of the ‘fdopen’ function, see *note
-Creating a Pipe::.
-
- -- Function: int fileno (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function returns the file descriptor associated with the
-     stream STREAM.  If an error is detected (for example, if the STREAM
-     is not valid) or if STREAM does not do I/O to a file, ‘fileno’
-     returns -1.
-
- -- Function: int fileno_unlocked (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘fileno_unlocked’ function is equivalent to the ‘fileno’
-     function except that it does not implicitly lock the stream if the
-     state is ‘FSETLOCKING_INTERNAL’.
-
-     This function is a GNU extension.
-
-   There are also symbolic constants defined in ‘unistd.h’ for the file
-descriptors belonging to the standard streams ‘stdin’, ‘stdout’, and
-‘stderr’; see *note Standard Streams::.
-
-‘STDIN_FILENO’
-
-     This macro has value ‘0’, which is the file descriptor for standard
-     input.
-
-‘STDOUT_FILENO’
-
-     This macro has value ‘1’, which is the file descriptor for standard
-     output.
-
-‘STDERR_FILENO’
-
-     This macro has value ‘2’, which is the file descriptor for standard
-     error output.
-
-
-File: libc.info,  Node: Stream/Descriptor Precautions,  Next: Scatter-Gather,  Prev: Descriptors and Streams,  Up: Low-Level I/O
-
-13.5 Dangers of Mixing Streams and Descriptors
-==============================================
-
-You can have multiple file descriptors and streams (let’s call both
-streams and descriptors “channels” for short) connected to the same
-file, but you must take care to avoid confusion between channels.  There
-are two cases to consider: “linked” channels that share a single file
-position value, and “independent” channels that have their own file
-positions.
-
-   It’s best to use just one channel in your program for actual data
-transfer to any given file, except when all the access is for input.
-For example, if you open a pipe (something you can only do at the file
-descriptor level), either do all I/O with the descriptor, or construct a
-stream from the descriptor with ‘fdopen’ and then do all I/O with the
-stream.
-
-* Menu:
-
-* Linked Channels::	   Dealing with channels sharing a file position.
-* Independent Channels::   Dealing with separately opened, unlinked channels.
-* Cleaning Streams::	   Cleaning a stream makes it safe to use
-                            another channel.
-
-
-File: libc.info,  Node: Linked Channels,  Next: Independent Channels,  Up: Stream/Descriptor Precautions
-
-13.5.1 Linked Channels
-----------------------
-
-Channels that come from a single opening share the same file position;
-we call them “linked” channels.  Linked channels result when you make a
-stream from a descriptor using ‘fdopen’, when you get a descriptor from
-a stream with ‘fileno’, when you copy a descriptor with ‘dup’ or ‘dup2’,
-and when descriptors are inherited during ‘fork’.  For files that don’t
-support random access, such as terminals and pipes, _all_ channels are
-effectively linked.  On random-access files, all append-type output
-streams are effectively linked to each other.
-
-   If you have been using a stream for I/O (or have just opened the
-stream), and you want to do I/O using another channel (either a stream
-or a descriptor) that is linked to it, you must first “clean up” the
-stream that you have been using.  *Note Cleaning Streams::.
-
-   Terminating a process, or executing a new program in the process,
-destroys all the streams in the process.  If descriptors linked to these
-streams persist in other processes, their file positions become
-undefined as a result.  To prevent this, you must clean up the streams
-before destroying them.
-
-
-File: libc.info,  Node: Independent Channels,  Next: Cleaning Streams,  Prev: Linked Channels,  Up: Stream/Descriptor Precautions
-
-13.5.2 Independent Channels
----------------------------
-
-When you open channels (streams or descriptors) separately on a seekable
-file, each channel has its own file position.  These are called
-“independent channels”.
-
-   The system handles each channel independently.  Most of the time,
-this is quite predictable and natural (especially for input): each
-channel can read or write sequentially at its own place in the file.
-However, if some of the channels are streams, you must take these
-precautions:
-
-   • You should clean an output stream after use, before doing anything
-     else that might read or write from the same part of the file.
-
-   • You should clean an input stream before reading data that may have
-     been modified using an independent channel.  Otherwise, you might
-     read obsolete data that had been in the stream’s buffer.
-
-   If you do output to one channel at the end of the file, this will
-certainly leave the other independent channels positioned somewhere
-before the new end.  You cannot reliably set their file positions to the
-new end of file before writing, because the file can always be extended
-by another process between when you set the file position and when you
-write the data.  Instead, use an append-type descriptor or stream; they
-always output at the current end of the file.  In order to make the
-end-of-file position accurate, you must clean the output channel you
-were using, if it is a stream.
-
-   It’s impossible for two channels to have separate file pointers for a
-file that doesn’t support random access.  Thus, channels for reading or
-writing such files are always linked, never independent.  Append-type
-channels are also always linked.  For these channels, follow the rules
-for linked channels; see *note Linked Channels::.
-
-
-File: libc.info,  Node: Cleaning Streams,  Prev: Independent Channels,  Up: Stream/Descriptor Precautions
-
-13.5.3 Cleaning Streams
------------------------
-
-You can use ‘fflush’ to clean a stream in most cases.
-
-   You can skip the ‘fflush’ if you know the stream is already clean.  A
-stream is clean whenever its buffer is empty.  For example, an
-unbuffered stream is always clean.  An input stream that is at
-end-of-file is clean.  A line-buffered stream is clean when the last
-character output was a newline.  However, a just-opened input stream
-might not be clean, as its input buffer might not be empty.
-
-   There is one case in which cleaning a stream is impossible on most
-systems.  This is when the stream is doing input from a file that is not
-random-access.  Such streams typically read ahead, and when the file is
-not random access, there is no way to give back the excess data already
-read.  When an input stream reads from a random-access file, ‘fflush’
-does clean the stream, but leaves the file pointer at an unpredictable
-place; you must set the file pointer before doing any further I/O.
-
-   Closing an output-only stream also does ‘fflush’, so this is a valid
-way of cleaning an output stream.
-
-   You need not clean a stream before using its descriptor for control
-operations such as setting terminal modes; these operations don’t affect
-the file position and are not affected by it.  You can use any
-descriptor for these operations, and all channels are affected
-simultaneously.  However, text already “output” to a stream but still
-buffered by the stream will be subject to the new terminal modes when
-subsequently flushed.  To make sure “past” output is covered by the
-terminal settings that were in effect at the time, flush the output
-streams for that terminal before setting the modes.  *Note Terminal
-Modes::.
 
 
 File: libc.info,  Node: Scatter-Gather,  Next: Copying File Data,  Prev: Stream/Descriptor Precautions,  Up: Low-Level I/O
@@ -2603,11 +2375,8 @@ as file permissions or extended attributes.
      file is encountered immediately.
 
      If no bytes can be copied, to report an error, ‘copy_file_range’
-     returns the value -1 and sets ‘errno’.  The table below lists some
-     of the error conditions for this function.
-
-     ‘ENOSYS’
-          The kernel does not implement the required functionality.
+     returns the value -1 and sets ‘errno’.  The following ‘errno’ error
+     conditions are specific to this function:
 
      ‘EISDIR’
           At least one of the descriptors INPUTFD or OUTPUTFD refers to
@@ -2640,6 +2409,9 @@ as file permissions or extended attributes.
 
           The argument OUTPUTFD is not a valid file descriptor open for
           writing, or OUTPUTFD has been opened with ‘O_APPEND’.
+
+     ‘EXDEV’
+          The input and output files reside on different file systems.
 
      In addition, ‘copy_file_range’ can fail with the error codes which
      are used by ‘read’, ‘pread’, ‘write’, and ‘pwrite’.
@@ -3225,10 +2997,10 @@ macros for manipulating these objects.
      The TIMEOUT specifies the maximum time to wait.  If you pass a null
      pointer for this argument, it means to block indefinitely until one
      of the file descriptors is ready.  Otherwise, you should provide
-     the time in ‘struct timeval’ format; see *note Time Types::.
-     Specify zero as the time (a ‘struct timeval’ containing all zeros)
-     if you want to find out which descriptors are ready without waiting
-     if none are ready.
+     the time in ‘struct timeval’ format; see *note High-Resolution
+     Calendar::.  Specify zero as the time (a ‘struct timeval’
+     containing all zeros) if you want to find out which descriptors are
+     ready without waiting if none are ready.
 
      The normal return value from ‘select’ is the total number of ready
      file descriptors in all of the sets.  Each of the argument sets is
@@ -4654,18 +4426,6 @@ saved.  *Note Opening and Closing Files::, for how to call ‘open’.
      The ‘O_EXCL’ flag has a special meaning in combination with
      ‘O_TMPFILE’; see below.
 
- -- Macro: int O_DIRECTORY
-
-     If set, the open operation fails if the given name is not the name
-     of a directory.  The ‘errno’ variable is set to ‘ENOTDIR’ for this
-     error condition.
-
- -- Macro: int O_NOFOLLOW
-
-     If set, the open operation fails if the final component of the file
-     name refers to a symbolic link.  The ‘errno’ variable is set to
-     ‘ELOOP’ for this error condition.
-
  -- Macro: int O_TMPFILE
 
      If this flag is specified, functions in the ‘open’ family create an
@@ -5741,7 +5501,6 @@ files, described in *note I/O on Streams::.
 * Scanning Directory Content::  Get entries for user selected subset of
                                  contents in given directory.
 * Simple Directory Lister Mark II::  Revised version of the program.
-* Low-level Directory Access::  AS-Safe functions for directory access.
 
 
 File: libc.info,  Node: Directory Entries,  Next: Opening a Directory,  Up: Accessing Directories
@@ -5861,10 +5620,6 @@ are declared in the header file ‘dirent.h’.
 data types, since the directory access functions do that for you.
 Instead, you refer to these objects using the pointers returned by the
 following functions.
-
-   Directory streams are a high-level interface.  On Linux, alternative
-interfaces for accessing directories using file descriptors are
-available.  *Note Low-level Directory Access::.
 
  -- Function: DIR * opendir (const char *DIRNAME)
 
@@ -6317,7 +6072,7 @@ comparison functions or vice versa.  There are systems on which this
 works but on others it will fail miserably.
 
 
-File: libc.info,  Node: Simple Directory Lister Mark II,  Next: Low-level Directory Access,  Prev: Scanning Directory Content,  Up: Accessing Directories
+File: libc.info,  Node: Simple Directory Lister Mark II,  Prev: Scanning Directory Content,  Up: Accessing Directories
 
 14.2.7 Simple Program to List a Directory, Mark II
 --------------------------------------------------
@@ -6358,43 +6113,6 @@ the call the returned entries are available for direct use.
 
    Note the simple selector function in this example.  Since we want to
 see all directory entries we always return ‘1’.
-
-
-File: libc.info,  Node: Low-level Directory Access,  Prev: Simple Directory Lister Mark II,  Up: Accessing Directories
-
-14.2.8 Low-level Directory Access
----------------------------------
-
-The stream-based directory functions are not AS-Safe and cannot be used
-after ‘vfork’.  *Note POSIX Safety Concepts::.  The functions below
-provide an alternative that can be used in these contexts.
-
-   Directory data is obtained from a file descriptor, as created by the
-‘open’ function, with or without the ‘O_DIRECTORY’ flag.  *Note Opening
-and Closing Files::.
-
- -- Function: ssize_t getdents64 (int FD, void *BUFFER, size_t LENGTH)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘getdents64’ function reads at most LENGTH bytes of directory
-     entry data from the file descriptor FD and stores it into the byte
-     array starting at BUFFER.
-
-     On success, the function returns the number of bytes written to the
-     buffer.  This number is zero if FD is already at the end of the
-     directory stream.  On error, the function returns ‘-1’ and sets
-     ‘errno’ to the appropriate error code.
-
-     The data is stored as a sequence of ‘struct dirent64’ records,
-     which can be traversed using the ‘d_reclen’ member.  The buffer
-     should be large enough to hold the largest possible directory
-     entry.  Note that some file systems support file names longer than
-     ‘NAME_MAX’ bytes (e.g., because they support up to 255 Unicode
-     characters), so a buffer size of at least 1024 is recommended.
-
-     This function is specific to Linux.
 
 
 File: libc.info,  Node: Working with Directory Trees,  Next: Hard Links,  Prev: Accessing Directories,  Up: File System Interface
@@ -7232,4 +6950,357 @@ modify the attributes of a file.
 * File Times::                  About the time attributes of a file.
 * File Size::			Manually changing the size of a file.
 * Storage Allocation::          Allocate backing storage for files.
+
+
+File: libc.info,  Node: Attribute Meanings,  Next: Reading Attributes,  Up: File Attributes
+
+14.9.1 The meaning of the File Attributes
+-----------------------------------------
+
+When you read the attributes of a file, they come back in a structure
+called ‘struct stat’.  This section describes the names of the
+attributes, their data types, and what they mean.  For the functions to
+read the attributes of a file, see *note Reading Attributes::.
+
+   The header file ‘sys/stat.h’ declares all the symbols defined in this
+section.
+
+ -- Data Type: struct stat
+
+     The ‘stat’ structure type is used to return information about the
+     attributes of a file.  It contains at least the following members:
+
+     ‘mode_t st_mode’
+          Specifies the mode of the file.  This includes file type
+          information (*note Testing File Type::) and the file
+          permission bits (*note Permission Bits::).
+
+     ‘ino_t st_ino’
+          The file serial number, which distinguishes this file from all
+          other files on the same device.
+
+     ‘dev_t st_dev’
+          Identifies the device containing the file.  The ‘st_ino’ and
+          ‘st_dev’, taken together, uniquely identify the file.  The
+          ‘st_dev’ value is not necessarily consistent across reboots or
+          system crashes, however.
+
+     ‘nlink_t st_nlink’
+          The number of hard links to the file.  This count keeps track
+          of how many directories have entries for this file.  If the
+          count is ever decremented to zero, then the file itself is
+          discarded as soon as no process still holds it open.  Symbolic
+          links are not counted in the total.
+
+     ‘uid_t st_uid’
+          The user ID of the file’s owner.  *Note File Owner::.
+
+     ‘gid_t st_gid’
+          The group ID of the file.  *Note File Owner::.
+
+     ‘off_t st_size’
+          This specifies the size of a regular file in bytes.  For files
+          that are really devices this field isn’t usually meaningful.
+          For symbolic links this specifies the length of the file name
+          the link refers to.
+
+     ‘time_t st_atime’
+          This is the last access time for the file.  *Note File
+          Times::.
+
+     ‘unsigned long int st_atime_usec’
+          This is the fractional part of the last access time for the
+          file.  *Note File Times::.
+
+     ‘time_t st_mtime’
+          This is the time of the last modification to the contents of
+          the file.  *Note File Times::.
+
+     ‘unsigned long int st_mtime_usec’
+          This is the fractional part of the time of the last
+          modification to the contents of the file.  *Note File Times::.
+
+     ‘time_t st_ctime’
+          This is the time of the last modification to the attributes of
+          the file.  *Note File Times::.
+
+     ‘unsigned long int st_ctime_usec’
+          This is the fractional part of the time of the last
+          modification to the attributes of the file.  *Note File
+          Times::.
+
+     ‘blkcnt_t st_blocks’
+          This is the amount of disk space that the file occupies,
+          measured in units of 512-byte blocks.
+
+          The number of disk blocks is not strictly proportional to the
+          size of the file, for two reasons: the file system may use
+          some blocks for internal record keeping; and the file may be
+          sparse—it may have “holes” which contain zeros but do not
+          actually take up space on the disk.
+
+          You can tell (approximately) whether a file is sparse by
+          comparing this value with ‘st_size’, like this:
+
+               (st.st_blocks * 512 < st.st_size)
+
+          This test is not perfect because a file that is just slightly
+          sparse might not be detected as sparse at all.  For practical
+          applications, this is not a problem.
+
+     ‘unsigned int st_blksize’
+          The optimal block size for reading or writing this file, in
+          bytes.  You might use this size for allocating the buffer
+          space for reading or writing the file.  (This is unrelated to
+          ‘st_blocks’.)
+
+   The extensions for the Large File Support (LFS) require, even on
+32-bit machines, types which can handle file sizes up to 2^63.
+Therefore a new definition of ‘struct stat’ is necessary.
+
+ -- Data Type: struct stat64
+
+     The members of this type are the same and have the same names as
+     those in ‘struct stat’.  The only difference is that the members
+     ‘st_ino’, ‘st_size’, and ‘st_blocks’ have a different type to
+     support larger values.
+
+     ‘mode_t st_mode’
+          Specifies the mode of the file.  This includes file type
+          information (*note Testing File Type::) and the file
+          permission bits (*note Permission Bits::).
+
+     ‘ino64_t st_ino’
+          The file serial number, which distinguishes this file from all
+          other files on the same device.
+
+     ‘dev_t st_dev’
+          Identifies the device containing the file.  The ‘st_ino’ and
+          ‘st_dev’, taken together, uniquely identify the file.  The
+          ‘st_dev’ value is not necessarily consistent across reboots or
+          system crashes, however.
+
+     ‘nlink_t st_nlink’
+          The number of hard links to the file.  This count keeps track
+          of how many directories have entries for this file.  If the
+          count is ever decremented to zero, then the file itself is
+          discarded as soon as no process still holds it open.  Symbolic
+          links are not counted in the total.
+
+     ‘uid_t st_uid’
+          The user ID of the file’s owner.  *Note File Owner::.
+
+     ‘gid_t st_gid’
+          The group ID of the file.  *Note File Owner::.
+
+     ‘off64_t st_size’
+          This specifies the size of a regular file in bytes.  For files
+          that are really devices this field isn’t usually meaningful.
+          For symbolic links this specifies the length of the file name
+          the link refers to.
+
+     ‘time_t st_atime’
+          This is the last access time for the file.  *Note File
+          Times::.
+
+     ‘unsigned long int st_atime_usec’
+          This is the fractional part of the last access time for the
+          file.  *Note File Times::.
+
+     ‘time_t st_mtime’
+          This is the time of the last modification to the contents of
+          the file.  *Note File Times::.
+
+     ‘unsigned long int st_mtime_usec’
+          This is the fractional part of the time of the last
+          modification to the contents of the file.  *Note File Times::.
+
+     ‘time_t st_ctime’
+          This is the time of the last modification to the attributes of
+          the file.  *Note File Times::.
+
+     ‘unsigned long int st_ctime_usec’
+          This is the fractional part of the time of the last
+          modification to the attributes of the file.  *Note File
+          Times::.
+
+     ‘blkcnt64_t st_blocks’
+          This is the amount of disk space that the file occupies,
+          measured in units of 512-byte blocks.
+
+     ‘unsigned int st_blksize’
+          The optimal block size for reading of writing this file, in
+          bytes.  You might use this size for allocating the buffer
+          space for reading of writing the file.  (This is unrelated to
+          ‘st_blocks’.)
+
+   Some of the file attributes have special data type names which exist
+specifically for those attributes.  (They are all aliases for well-known
+integer types that you know and love.)  These typedef names are defined
+in the header file ‘sys/types.h’ as well as in ‘sys/stat.h’.  Here is a
+list of them.
+
+ -- Data Type: mode_t
+
+     This is an integer data type used to represent file modes.  In the
+     GNU C Library, this is an unsigned type no narrower than ‘unsigned
+     int’.
+
+ -- Data Type: ino_t
+
+     This is an unsigned integer type used to represent file serial
+     numbers.  (In Unix jargon, these are sometimes called “inode
+     numbers”.)  In the GNU C Library, this type is no narrower than
+     ‘unsigned int’.
+
+     If the source is compiled with ‘_FILE_OFFSET_BITS == 64’ this type
+     is transparently replaced by ‘ino64_t’.
+
+ -- Data Type: ino64_t
+
+     This is an unsigned integer type used to represent file serial
+     numbers for the use in LFS. In the GNU C Library, this type is no
+     narrower than ‘unsigned int’.
+
+     When compiling with ‘_FILE_OFFSET_BITS == 64’ this type is
+     available under the name ‘ino_t’.
+
+ -- Data Type: dev_t
+
+     This is an arithmetic data type used to represent file device
+     numbers.  In the GNU C Library, this is an integer type no narrower
+     than ‘int’.
+
+ -- Data Type: nlink_t
+
+     This is an integer type used to represent file link counts.
+
+ -- Data Type: blkcnt_t
+
+     This is a signed integer type used to represent block counts.  In
+     the GNU C Library, this type is no narrower than ‘int’.
+
+     If the source is compiled with ‘_FILE_OFFSET_BITS == 64’ this type
+     is transparently replaced by ‘blkcnt64_t’.
+
+ -- Data Type: blkcnt64_t
+
+     This is a signed integer type used to represent block counts for
+     the use in LFS. In the GNU C Library, this type is no narrower than
+     ‘int’.
+
+     When compiling with ‘_FILE_OFFSET_BITS == 64’ this type is
+     available under the name ‘blkcnt_t’.
+
+
+File: libc.info,  Node: Reading Attributes,  Next: Testing File Type,  Prev: Attribute Meanings,  Up: File Attributes
+
+14.9.2 Reading the Attributes of a File
+---------------------------------------
+
+To examine the attributes of files, use the functions ‘stat’, ‘fstat’
+and ‘lstat’.  They return the attribute information in a ‘struct stat’
+object.  All three functions are declared in the header file
+‘sys/stat.h’.
+
+ -- Function: int stat (const char *FILENAME, struct stat *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘stat’ function returns information about the attributes of the
+     file named by FILENAME in the structure pointed to by BUF.
+
+     If FILENAME is the name of a symbolic link, the attributes you get
+     describe the file that the link points to.  If the link points to a
+     nonexistent file name, then ‘stat’ fails reporting a nonexistent
+     file.
+
+     The return value is ‘0’ if the operation is successful, or ‘-1’ on
+     failure.  In addition to the usual file name errors (*note File
+     Name Errors::, the following ‘errno’ error conditions are defined
+     for this function:
+
+     ‘ENOENT’
+          The file named by FILENAME doesn’t exist.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is in fact ‘stat64’ since the LFS interface transparently
+     replaces the normal implementation.
+
+ -- Function: int stat64 (const char *FILENAME, struct stat64 *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function is similar to ‘stat’ but it is also able to work on
+     files larger than 2^31 bytes on 32-bit systems.  To be able to do
+     this the result is stored in a variable of type ‘struct stat64’ to
+     which BUF must point.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is available under the name ‘stat’ and so transparently
+     replaces the interface for small files on 32-bit machines.
+
+ -- Function: int fstat (int FILEDES, struct stat *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fstat’ function is like ‘stat’, except that it takes an open
+     file descriptor as an argument instead of a file name.  *Note
+     Low-Level I/O::.
+
+     Like ‘stat’, ‘fstat’ returns ‘0’ on success and ‘-1’ on failure.
+     The following ‘errno’ error conditions are defined for ‘fstat’:
+
+     ‘EBADF’
+          The FILEDES argument is not a valid file descriptor.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is in fact ‘fstat64’ since the LFS interface transparently
+     replaces the normal implementation.
+
+ -- Function: int fstat64 (int FILEDES, struct stat64 *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function is similar to ‘fstat’ but is able to work on large
+     files on 32-bit platforms.  For large files the file descriptor
+     FILEDES should be obtained by ‘open64’ or ‘creat64’.  The BUF
+     pointer points to a variable of type ‘struct stat64’ which is able
+     to represent the larger values.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is available under the name ‘fstat’ and so transparently
+     replaces the interface for small files on 32-bit machines.
+
+ -- Function: int lstat (const char *FILENAME, struct stat *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘lstat’ function is like ‘stat’, except that it does not follow
+     symbolic links.  If FILENAME is the name of a symbolic link,
+     ‘lstat’ returns information about the link itself; otherwise
+     ‘lstat’ works like ‘stat’.  *Note Symbolic Links::.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is in fact ‘lstat64’ since the LFS interface transparently
+     replaces the normal implementation.
+
+ -- Function: int lstat64 (const char *FILENAME, struct stat64 *BUF)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function is similar to ‘lstat’ but it is also able to work on
+     files larger than 2^31 bytes on 32-bit systems.  To be able to do
+     this the result is stored in a variable of type ‘struct stat64’ to
+     which BUF must point.
+
+     When the sources are compiled with ‘_FILE_OFFSET_BITS == 64’ this
+     function is available under the name ‘lstat’ and so transparently
+     replaces the interface for small files on 32-bit machines.
 

@@ -1,8 +1,10 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This file documents the GNU C Library.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   This is ‘The GNU C Library Reference Manual’, for version 2.29.
+
+   Copyright © 1993–2019 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -39,8 +41,6 @@ START-INFO-DIR-ENTRY
 * CLK_TCK: (libc)Processor Time.
 * CLOCAL: (libc)Control Modes.
 * CLOCKS_PER_SEC: (libc)CPU Time.
-* CLOCK_MONOTONIC: (libc)Getting the Time.
-* CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
 * CPU_ISSET: (libc)CPU Affinity.
@@ -307,7 +307,6 @@ START-INFO-DIR-ENTRY
 * O_APPEND: (libc)Operating Modes.
 * O_ASYNC: (libc)Operating Modes.
 * O_CREAT: (libc)Open-time Flags.
-* O_DIRECTORY: (libc)Open-time Flags.
 * O_EXCL: (libc)Open-time Flags.
 * O_EXEC: (libc)Access Modes.
 * O_EXLOCK: (libc)Open-time Flags.
@@ -316,7 +315,6 @@ START-INFO-DIR-ENTRY
 * O_NDELAY: (libc)Operating Modes.
 * O_NOATIME: (libc)Operating Modes.
 * O_NOCTTY: (libc)Open-time Flags.
-* O_NOFOLLOW: (libc)Open-time Flags.
 * O_NOLINK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
@@ -342,7 +340,6 @@ START-INFO-DIR-ENTRY
 * PF_LOCAL: (libc)Local Namespace Details.
 * PF_UNIX: (libc)Local Namespace Details.
 * PIPE_BUF: (libc)Limits for Files.
-* PTHREAD_ATTR_NO_SIGMASK_NP: (libc)Initial Thread Signal Mask.
 * P_tmpdir: (libc)Temporary Files.
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
@@ -514,8 +511,8 @@ START-INFO-DIR-ENTRY
 * acosl: (libc)Inverse Trig Functions.
 * addmntent: (libc)mtab.
 * addseverity: (libc)Adding Severity Classes.
-* adjtime: (libc)Setting and Adjusting the Time.
-* adjtimex: (libc)Setting and Adjusting the Time.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
 * aio_cancel64: (libc)Cancel AIO Operations.
 * aio_cancel: (libc)Cancel AIO Operations.
 * aio_error64: (libc)Status of AIO Operations.
@@ -697,9 +694,6 @@ START-INFO-DIR-ENTRY
 * clearerr: (libc)Error Recovery.
 * clearerr_unlocked: (libc)Error Recovery.
 * clock: (libc)CPU Time.
-* clock_getres: (libc)Getting the Time.
-* clock_gettime: (libc)Getting the Time.
-* clock_settime: (libc)Setting and Adjusting the Time.
 * clog10: (libc)Exponents and Logarithms.
 * clog10f: (libc)Exponents and Logarithms.
 * clog10fN: (libc)Exponents and Logarithms.
@@ -795,7 +789,7 @@ START-INFO-DIR-ENTRY
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
-* difftime: (libc)Calculating Elapsed Time.
+* difftime: (libc)Elapsed Time.
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
@@ -936,7 +930,6 @@ START-INFO-DIR-ENTRY
 * fetestexcept: (libc)Status bit operations.
 * fetestexceptflag: (libc)Status bit operations.
 * feupdateenv: (libc)Control Functions.
-* fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
 * fgetc: (libc)Character Input.
@@ -1081,7 +1074,6 @@ START-INFO-DIR-ENTRY
 * getdate: (libc)General Time String Parsing.
 * getdate_r: (libc)General Time String Parsing.
 * getdelim: (libc)Line Input.
-* getdents64: (libc)Low-level Directory Access.
 * getdomainnname: (libc)Host Identification.
 * getegid: (libc)Reading Persona.
 * getentropy: (libc)Unpredictable Bytes.
@@ -1158,8 +1150,7 @@ START-INFO-DIR-ENTRY
 * getsockopt: (libc)Socket Option Functions.
 * getsubopt: (libc)Suboptions.
 * gettext: (libc)Translation with gettext.
-* gettid: (libc)Process Identification.
-* gettimeofday: (libc)Getting the Time.
+* gettimeofday: (libc)High-Resolution Calendar.
 * getuid: (libc)Reading Persona.
 * getumask: (libc)Setting Permissions.
 * getutent: (libc)Manipulating the Database.
@@ -1492,8 +1483,8 @@ START-INFO-DIR-ENTRY
 * nrand48_r: (libc)SVID Random.
 * ntohl: (libc)Byte Order.
 * ntohs: (libc)Byte Order.
-* ntp_adjtime: (libc)Setting and Adjusting the Time.
-* ntp_gettime: (libc)Setting and Adjusting the Time.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
 * obstack_1grow: (libc)Growing Objects.
 * obstack_1grow_fast: (libc)Extra Fast Growing.
 * obstack_alignment_mask: (libc)Obstacks Data Alignment.
@@ -1557,20 +1548,12 @@ START-INFO-DIR-ENTRY
 * printf_size: (libc)Predefined Printf Handlers.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * psignal: (libc)Signal Messages.
-* pthread_attr_getsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_attr_setsigmask_np: (libc)Initial Thread Signal Mask.
-* pthread_clockjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_cond_clockwait: (libc)Waiting with Explicit Clocks.
 * pthread_getattr_default_np: (libc)Default Thread Attributes.
 * pthread_getspecific: (libc)Thread-specific Data.
 * pthread_key_create: (libc)Thread-specific Data.
 * pthread_key_delete: (libc)Thread-specific Data.
-* pthread_rwlock_clockrdlock: (libc)Waiting with Explicit Clocks.
-* pthread_rwlock_clockwrlock: (libc)Waiting with Explicit Clocks.
 * pthread_setattr_default_np: (libc)Default Thread Attributes.
 * pthread_setspecific: (libc)Thread-specific Data.
-* pthread_timedjoin_np: (libc)Waiting with Explicit Clocks.
-* pthread_tryjoin_np: (libc)Waiting with Explicit Clocks.
 * ptsname: (libc)Allocation.
 * ptsname_r: (libc)Allocation.
 * putc: (libc)Simple Output.
@@ -1682,7 +1665,6 @@ START-INFO-DIR-ENTRY
 * seed48_r: (libc)SVID Random.
 * seekdir: (libc)Random Access Directory.
 * select: (libc)Waiting for I/O.
-* sem_clockwait: (libc)Waiting with Explicit Clocks.
 * sem_close: (libc)Semaphores.
 * sem_destroy: (libc)Semaphores.
 * sem_getvalue: (libc)Semaphores.
@@ -1746,7 +1728,7 @@ START-INFO-DIR-ENTRY
 * setsockopt: (libc)Socket Option Functions.
 * setstate: (libc)BSD Random.
 * setstate_r: (libc)BSD Random.
-* settimeofday: (libc)Setting and Adjusting the Time.
+* settimeofday: (libc)High-Resolution Calendar.
 * setuid: (libc)Setting User ID.
 * setutent: (libc)Manipulating the Database.
 * setutxent: (libc)XPG Functions.
@@ -1811,7 +1793,7 @@ START-INFO-DIR-ENTRY
 * ssignal: (libc)Basic Signal Handling.
 * stat64: (libc)Reading Attributes.
 * stat: (libc)Reading Attributes.
-* stime: (libc)Setting and Adjusting the Time.
+* stime: (libc)Simple Calendar Time.
 * stpcpy: (libc)Copying Strings and Arrays.
 * stpncpy: (libc)Truncating Strings.
 * strcasecmp: (libc)String/Array Comparison.
@@ -1875,6 +1857,7 @@ START-INFO-DIR-ENTRY
 * sync: (libc)Synchronizing I/O.
 * syscall: (libc)System Calls.
 * sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
 * syslog: (libc)syslog; vsyslog.
 * system: (libc)Running a Command.
 * sysv_signal: (libc)Basic Signal Handling.
@@ -1908,7 +1891,6 @@ START-INFO-DIR-ENTRY
 * tgammafN: (libc)Special Functions.
 * tgammafNx: (libc)Special Functions.
 * tgammal: (libc)Special Functions.
-* tgkill: (libc)Signaling Another Process.
 * thrd_create: (libc)ISO C Thread Management.
 * thrd_current: (libc)ISO C Thread Management.
 * thrd_detach: (libc)ISO C Thread Management.
@@ -1917,7 +1899,7 @@ START-INFO-DIR-ENTRY
 * thrd_join: (libc)ISO C Thread Management.
 * thrd_sleep: (libc)ISO C Thread Management.
 * thrd_yield: (libc)ISO C Thread Management.
-* time: (libc)Getting the Time.
+* time: (libc)Simple Calendar Time.
 * timegm: (libc)Broken-down Time.
 * timelocal: (libc)Broken-down Time.
 * times: (libc)Processor Time.
@@ -1956,7 +1938,6 @@ START-INFO-DIR-ENTRY
 * ttyname: (libc)Is It a Terminal.
 * ttyname_r: (libc)Is It a Terminal.
 * twalk: (libc)Tree Search Function.
-* twalk_r: (libc)Tree Search Function.
 * tzset: (libc)Time Zone Functions.
 * ufromfp: (libc)Rounding Functions.
 * ufromfpf: (libc)Rounding Functions.
@@ -2092,148 +2073,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: The message catalog files,  Next: The gencat program,  Prev: The catgets Functions,  Up: Message catalogs a la X/Open
-
-8.1.2 Format of the message catalog files
------------------------------------------
-
-The only reasonable way to translate all the messages of a function and
-store the result in a message catalog file which can be read by the
-‘catopen’ function is to write all the message text to the translator
-and let her/him translate them all.  I.e., we must have a file with
-entries which associate the set/message tuple with a specific
-translation.  This file format is specified in the X/Open standard and
-is as follows:
-
-   • Lines containing only whitespace characters or empty lines are
-     ignored.
-
-   • Lines which contain as the first non-whitespace character a ‘$’
-     followed by a whitespace character are comment and are also
-     ignored.
-
-   • If a line contains as the first non-whitespace characters the
-     sequence ‘$set’ followed by a whitespace character an additional
-     argument is required to follow.  This argument can either be:
-
-        − a number.  In this case the value of this number determines
-          the set to which the following messages are added.
-
-        − an identifier consisting of alphanumeric characters plus the
-          underscore character.  In this case the set get automatically
-          a number assigned.  This value is one added to the largest set
-          number which so far appeared.
-
-          How to use the symbolic names is explained in section *note
-          Common Usage::.
-
-          It is an error if a symbol name appears more than once.  All
-          following messages are placed in a set with this number.
-
-   • If a line contains as the first non-whitespace characters the
-     sequence ‘$delset’ followed by a whitespace character an additional
-     argument is required to follow.  This argument can either be:
-
-        − a number.  In this case the value of this number determines
-          the set which will be deleted.
-
-        − an identifier consisting of alphanumeric characters plus the
-          underscore character.  This symbolic identifier must match a
-          name for a set which previously was defined.  It is an error
-          if the name is unknown.
-
-     In both cases all messages in the specified set will be removed.
-     They will not appear in the output.  But if this set is later again
-     selected with a ‘$set’ command again messages could be added and
-     these messages will appear in the output.
-
-   • If a line contains after leading whitespaces the sequence ‘$quote’,
-     the quoting character used for this input file is changed to the
-     first non-whitespace character following ‘$quote’.  If no
-     non-whitespace character is present before the line ends quoting is
-     disabled.
-
-     By default no quoting character is used.  In this mode strings are
-     terminated with the first unescaped line break.  If there is a
-     ‘$quote’ sequence present newline need not be escaped.  Instead a
-     string is terminated with the first unescaped appearance of the
-     quote character.
-
-     A common usage of this feature would be to set the quote character
-     to ‘"’.  Then any appearance of the ‘"’ in the strings must be
-     escaped using the backslash (i.e., ‘\"’ must be written).
-
-   • Any other line must start with a number or an alphanumeric
-     identifier (with the underscore character included).  The following
-     characters (starting after the first whitespace character) will
-     form the string which gets associated with the currently selected
-     set and the message number represented by the number and identifier
-     respectively.
-
-     If the start of the line is a number the message number is obvious.
-     It is an error if the same message number already appeared for this
-     set.
-
-     If the leading token was an identifier the message number gets
-     automatically assigned.  The value is the current maximum message
-     number for this set plus one.  It is an error if the identifier was
-     already used for a message in this set.  It is OK to reuse the
-     identifier for a message in another thread.  How to use the
-     symbolic identifiers will be explained below (*note Common
-     Usage::).  There is one limitation with the identifier: it must not
-     be ‘Set’.  The reason will be explained below.
-
-     The text of the messages can contain escape characters.  The usual
-     bunch of characters known from the ISO C language are recognized
-     (‘\n’, ‘\t’, ‘\v’, ‘\b’, ‘\r’, ‘\f’, ‘\\’, and ‘\NNN’, where NNN is
-     the octal coding of a character code).
-
-   *Important:* The handling of identifiers instead of numbers for the
-set and messages is a GNU extension.  Systems strictly following the
-X/Open specification do not have this feature.  An example for a message
-catalog file is this:
-
-     $ This is a leading comment.
-     $quote "
-
-     $set SetOne
-     1 Message with ID 1.
-     two "   Message with ID \"two\", which gets the value 2 assigned"
-
-     $set SetTwo
-     $ Since the last set got the number 1 assigned this set has number 2.
-     4000 "The numbers can be arbitrary, they need not start at one."
-
-   This small example shows various aspects:
-   • Lines 1 and 9 are comments since they start with ‘$’ followed by a
-     whitespace.
-   • The quoting character is set to ‘"’.  Otherwise the quotes in the
-     message definition would have to be omitted and in this case the
-     message with the identifier ‘two’ would lose its leading
-     whitespace.
-   • Mixing numbered messages with messages having symbolic names is no
-     problem and the numbering happens automatically.
-
-   While this file format is pretty easy it is not the best possible for
-use in a running program.  The ‘catopen’ function would have to parse
-the file and handle syntactic errors gracefully.  This is not so easy
-and the whole process is pretty slow.  Therefore the ‘catgets’ functions
-expect the data in another more compact and ready-to-use file format.
-There is a special program ‘gencat’ which is explained in detail in the
-next section.
-
-   Files in this other format are not human readable.  To be easy to use
-by programs it is a binary file.  But the format is byte order
-independent so translation files can be shared by systems of arbitrary
-architecture (as long as they use the GNU C Library).
-
-   Details about the binary file format are not important to know since
-these files are always created by the ‘gencat’ program.  The sources of
-the GNU C Library also provide the sources for the ‘gencat’ program and
-so the interested reader can look through these source files to learn
-about the file format.
 
 
 File: libc.info,  Node: The gencat program,  Next: Common Usage,  Prev: The message catalog files,  Up: Message catalogs a la X/Open
@@ -4157,69 +3996,7 @@ is an enumeration type.
      not modify the tree data, it is safe to run ‘twalk’ in more than
      one thread at the same time, working on the same tree.  It is also
      safe to call ‘tfind’ in parallel.  Functions which modify the tree
-     must not be used, otherwise the behavior is undefined.  However, it
-     is difficult to pass data external to the tree to the callback
-     function without resorting to global variables (and thread safety
-     issues), so see the ‘twalk_r’ function below.
-
- -- Function: void twalk_r (const void *ROOT, void (*ACTION) (const void
-          *KEY, VISIT WHICH, void *CLOSURE), void *CLOSURE)
-
-     Preliminary: | MT-Safe race:root | AS-Safe | AC-Safe | *Note POSIX
-     Safety Concepts::.
-
-     For each node in the tree with a node pointed to by ROOT, the
-     ‘twalk_r’ function calls the function provided by the parameter
-     ACTION.  For leaf nodes the function is called exactly once with
-     WHICH set to ‘leaf’.  For internal nodes the function is called
-     three times, setting the WHICH parameter of ACTION to the
-     appropriate value.  The CLOSURE parameter is passed down to each
-     call of the ACTION function, unmodified.
-
-     It is possible to implement the ‘twalk’ function on top of the
-     ‘twalk_r’ function, which is why there is no separate level
-     parameter.
-
-
-          #include <search.h>
-
-          struct twalk_with_twalk_r_closure
-          {
-            void (*action) (const void *, VISIT, int);
-            int depth;
-          };
-
-          static void
-          twalk_with_twalk_r_action (const void *nodep, VISIT which, void *closure0)
-          {
-            struct twalk_with_twalk_r_closure *closure = closure0;
-
-            switch (which)
-              {
-              case leaf:
-                closure->action (nodep, which, closure->depth);
-                break;
-              case preorder:
-                closure->action (nodep, which, closure->depth);
-                ++closure->depth;
-                break;
-              case postorder:
-                /* The preorder action incremented the depth. */
-                closure->action (nodep, which, closure->depth - 1);
-                break;
-              case endorder:
-                --closure->depth;
-                closure->action (nodep, which, closure->depth);
-                break;
-              }
-          }
-
-          void
-          twalk (const void *root, void (*action) (const void *, VISIT, int))
-          {
-            struct twalk_with_twalk_r_closure closure = { action, 0 };
-            twalk_r (root, twalk_with_twalk_r_action, &closure);
-          }
+     must not be used, otherwise the behavior is undefined.
 
 
 File: libc.info,  Node: Pattern Matching,  Next: I/O Overview,  Prev: Searching and Sorting,  Up: Top
@@ -6341,9 +6118,7 @@ involve creating a new file.
           This is equivalent to the ‘O_EXCL’ option to the ‘open’
           function (*note Opening and Closing Files::).
 
-          The ‘x’ modifier is part of ISO C11, which says the file is
-          created with exclusive access; in the GNU C Library this means
-          the equivalent of ‘O_EXCL’.
+          The ‘x’ modifier is part of ISO C11.
 
      The character ‘b’ in OPENTYPE has a standard meaning; it requests a
      binary stream rather than a text stream.  But this makes no
@@ -7121,4 +6896,179 @@ line-oriented output.
      This function writes the word W (that is, an ‘int’) to STREAM.  It
      is provided for compatibility with SVID, but we recommend you use
      ‘fwrite’ instead (*note Block Input/Output::).
+
+
+File: libc.info,  Node: Character Input,  Next: Line Input,  Prev: Simple Output,  Up: I/O on Streams
+
+12.8 Character Input
+====================
+
+This section describes functions for performing character-oriented
+input.  These narrow stream functions are declared in the header file
+‘stdio.h’ and the wide character functions are declared in ‘wchar.h’.
+
+   These functions return an ‘int’ or ‘wint_t’ value (for narrow and
+wide stream functions respectively) that is either a character of input,
+or the special value ‘EOF’/‘WEOF’ (usually -1).  For the narrow stream
+functions it is important to store the result of these functions in a
+variable of type ‘int’ instead of ‘char’, even when you plan to use it
+only as a character.  Storing ‘EOF’ in a ‘char’ variable truncates its
+value to the size of a character, so that it is no longer
+distinguishable from the valid character ‘(char) -1’.  So always use an
+‘int’ for the result of ‘getc’ and friends, and check for ‘EOF’ after
+the call; once you’ve verified that the result is not ‘EOF’, you can be
+sure that it will fit in a ‘char’ variable without loss of information.
+
+ -- Function: int fgetc (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     This function reads the next character as an ‘unsigned char’ from
+     the stream STREAM and returns its value, converted to an ‘int’.  If
+     an end-of-file condition or read error occurs, ‘EOF’ is returned
+     instead.
+
+ -- Function: wint_t fgetwc (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     This function reads the next wide character from the stream STREAM
+     and returns its value.  If an end-of-file condition or read error
+     occurs, ‘WEOF’ is returned instead.
+
+ -- Function: int fgetc_unlocked (FILE *STREAM)
+
+     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘fgetc_unlocked’ function is equivalent to the ‘fgetc’ function
+     except that it does not implicitly lock the stream.
+
+ -- Function: wint_t fgetwc_unlocked (FILE *STREAM)
+
+     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘fgetwc_unlocked’ function is equivalent to the ‘fgetwc’
+     function except that it does not implicitly lock the stream.
+
+     This function is a GNU extension.
+
+ -- Function: int getc (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     This is just like ‘fgetc’, except that it is permissible (and
+     typical) for it to be implemented as a macro that evaluates the
+     STREAM argument more than once.  ‘getc’ is often highly optimized,
+     so it is usually the best function to use to read a single
+     character.
+
+ -- Function: wint_t getwc (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     This is just like ‘fgetwc’, except that it is permissible for it to
+     be implemented as a macro that evaluates the STREAM argument more
+     than once.  ‘getwc’ can be highly optimized, so it is usually the
+     best function to use to read a single wide character.
+
+ -- Function: int getc_unlocked (FILE *STREAM)
+
+     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘getc_unlocked’ function is equivalent to the ‘getc’ function
+     except that it does not implicitly lock the stream.
+
+ -- Function: wint_t getwc_unlocked (FILE *STREAM)
+
+     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘getwc_unlocked’ function is equivalent to the ‘getwc’ function
+     except that it does not implicitly lock the stream.
+
+     This function is a GNU extension.
+
+ -- Function: int getchar (void)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     The ‘getchar’ function is equivalent to ‘getc’ with ‘stdin’ as the
+     value of the STREAM argument.
+
+ -- Function: wint_t getwchar (void)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     The ‘getwchar’ function is equivalent to ‘getwc’ with ‘stdin’ as
+     the value of the STREAM argument.
+
+ -- Function: int getchar_unlocked (void)
+
+     Preliminary: | MT-Unsafe race:stdin | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘getchar_unlocked’ function is equivalent to the ‘getchar’
+     function except that it does not implicitly lock the stream.
+
+ -- Function: wint_t getwchar_unlocked (void)
+
+     Preliminary: | MT-Unsafe race:stdin | AS-Unsafe corrupt | AC-Unsafe
+     corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘getwchar_unlocked’ function is equivalent to the ‘getwchar’
+     function except that it does not implicitly lock the stream.
+
+     This function is a GNU extension.
+
+   Here is an example of a function that does input using ‘fgetc’.  It
+would work just as well using ‘getc’ instead, or using ‘getchar ()’
+instead of ‘fgetc (stdin)’.  The code would also work the same for the
+wide character stream functions.
+
+     int
+     y_or_n_p (const char *question)
+     {
+       fputs (question, stdout);
+       while (1)
+         {
+           int c, answer;
+           /* Write a space to separate answer from question. */
+           fputc (' ', stdout);
+           /* Read the first character of the line.
+     	 This should be the answer character, but might not be. */
+           c = tolower (fgetc (stdin));
+           answer = c;
+           /* Discard rest of input line. */
+           while (c != '\n' && c != EOF)
+     	c = fgetc (stdin);
+           /* Obey the answer if it was valid. */
+           if (answer == 'y')
+     	return 1;
+           if (answer == 'n')
+     	return 0;
+           /* Answer was invalid: ask for valid answer. */
+           fputs ("Please answer y or n:", stdout);
+         }
+     }
+
+ -- Function: int getw (FILE *STREAM)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     This function reads a word (that is, an ‘int’) from STREAM.  It’s
+     provided for compatibility with SVID. We recommend you use ‘fread’
+     instead (*note Block Input/Output::).  Unlike ‘getc’, any ‘int’
+     value could be a valid result.  ‘getw’ returns ‘EOF’ when it
+     encounters end-of-file or an error, but there is no way to
+     distinguish this from an input word with value -1.
 

@@ -99,8 +99,7 @@ mon     "januari";/
         "oktober";/
         "november";/
         "december"
-d_t_fmt  "%a %d %b %Y %T"
-date_fmt "%a %d %b %Y %T %Z"
+d_t_fmt "%a %d %b %Y %T %Z"
 d_fmt   "%d-%m-%y"
 t_fmt   "%T"
 am_pm   "";""
@@ -122,7 +121,7 @@ copy "fr_BE"
 END LC_MEASUREMENT
 
 LC_NAME
-copy "nl_NL"
+name_fmt    "%d%t%g%t%m%t%f"
 END LC_NAME
 
 LC_ADDRESS

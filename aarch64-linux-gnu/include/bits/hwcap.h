@@ -1,5 +1,5 @@
 /* Defines for bits in AT_HWCAP.  AArch64 Linux version.
-   Copyright (C) 2016-2020 Free Software Foundation, Inc.
+   Copyright (C) 2016-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -14,7 +14,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 #if !defined (_SYS_AUXV_H)
 # error "Never include <bits/hwcap.h> directly; use <sys/auxv.h> instead."
@@ -51,24 +51,3 @@
 #define HWCAP_ILRCPC		(1 << 26)
 #define HWCAP_FLAGM		(1 << 27)
 #define HWCAP_SSBS		(1 << 28)
-#define HWCAP_SB		(1 << 29)
-#define HWCAP_PACA		(1 << 30)
-#define HWCAP_PACG		(1UL << 31)
-
-#define HWCAP2_DCPODP		(1 << 0)
-#define HWCAP2_SVE2		(1 << 1)
-#define HWCAP2_SVEAES		(1 << 2)
-#define HWCAP2_SVEPMULL		(1 << 3)
-#define HWCAP2_SVEBITPERM	(1 << 4)
-#define HWCAP2_SVESHA3		(1 << 5)
-#define HWCAP2_SVESM4		(1 << 6)
-#define HWCAP2_FLAGM2		(1 << 7)
-#define HWCAP2_FRINT		(1 << 8)
-#define HWCAP2_SVEI8MM		(1 << 9)
-#define HWCAP2_SVEF32MM		(1 << 10)
-#define HWCAP2_SVEF64MM		(1 << 11)
-#define HWCAP2_SVEBF16		(1 << 12)
-#define HWCAP2_I8MM		(1 << 13)
-#define HWCAP2_BF16		(1 << 14)
-#define HWCAP2_DGH		(1 << 15)
-#define HWCAP2_RNG		(1 << 16)

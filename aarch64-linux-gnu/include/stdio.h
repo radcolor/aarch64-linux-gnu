@@ -1,5 +1,5 @@
 /* Define ISO C stdio on top of C++ iostreams.
-   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   Copyright (C) 1991-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -14,7 +14,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 /*
  *	ISO C99 Standard: 7.19 Input/output	<stdio.h>
@@ -400,12 +400,9 @@ extern int sscanf (const char *__restrict __s,
 		   const char *__restrict __format, ...) __THROW;
 
 /* For historical reasons, the C99-compliant versions of the scanf
-   functions are at alternative names.  When __LDBL_COMPAT or
-   __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI are in effect, this is handled in
-   bits/stdio-ldbl.h.  */
-#include <bits/floatn.h>
-#if !__GLIBC_USE (DEPRECATED_SCANF) && !defined __LDBL_COMPAT \
-    && __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 0
+   functions are at alternative names.  When __LDBL_COMPAT is in
+   effect, this is handled in bits/stdio-ldbl.h.  */
+#if !__GLIBC_USE (DEPRECATED_SCANF) && !defined __LDBL_COMPAT
 # ifdef __REDIRECT
 extern int __REDIRECT (fscanf, (FILE *__restrict __stream,
 				const char *__restrict __format, ...),
@@ -450,8 +447,7 @@ extern int vsscanf (const char *__restrict __s,
 
 /* Same redirection as above for the v*scanf family.  */
 # if !__GLIBC_USE (DEPRECATED_SCANF)
-#  if defined __REDIRECT && !defined __LDBL_COMPAT \
-      && __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 0
+#  if defined __REDIRECT && !defined __LDBL_COMPAT
 extern int __REDIRECT (vfscanf,
 		       (FILE *__restrict __s,
 			const char *__restrict __format, __gnuc_va_list __arg),
@@ -566,7 +562,7 @@ extern int putw (int __w, FILE *__stream);
    This function is a possible cancellation point and therefore not
    marked with __THROW.  */
 extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
-     __wur __attr_access ((__write_only__, 1, 2));
+     __wur;
 
 #if __GLIBC_USE (DEPRECATED_GETS)
 /* Get a newline-terminated string from stdin, removing the newline.
@@ -589,8 +585,7 @@ extern char *gets (char *__s) __wur __attribute_deprecated__;
    or due to the implementation it is a cancellation point and
    therefore not marked with __THROW.  */
 extern char *fgets_unlocked (char *__restrict __s, int __n,
-			     FILE *__restrict __stream) __wur
-    __attr_access ((__write_only__, 1, 2));
+			     FILE *__restrict __stream) __wur;
 #endif
 
 
@@ -871,9 +866,7 @@ extern int __overflow (FILE *, int);
 #if __USE_FORTIFY_LEVEL > 0 && defined __fortify_function
 # include <bits/stdio2.h>
 #endif
-
-#include <bits/floatn.h>
-#if defined __LDBL_COMPAT || __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
+#ifdef __LDBL_COMPAT
 # include <bits/stdio-ldbl.h>
 #endif
 

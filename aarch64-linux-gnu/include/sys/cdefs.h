@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2019 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, see
-   <https://www.gnu.org/licenses/>.  */
+   <http://www.gnu.org/licenses/>.  */
 
 #ifndef	_SYS_CDEFS_H
 #define	_SYS_CDEFS_H	1
@@ -256,8 +256,8 @@
 /* Since version 4.5, gcc also allows one to specify the message printed
    when a deprecated function is used.  clang claims to be gcc 4.2, but
    may also support this feature.  */
-#if __GNUC_PREREQ (4,5) \
-    || __glibc_clang_has_extension (__attribute_deprecated_with_message__)
+#if __GNUC_PREREQ (4,5) || \
+    __glibc_clang_has_extension (__attribute_deprecated_with_message__)
 # define __attribute_deprecated_msg__(msg) \
 	 __attribute__ ((__deprecated__ (msg)))
 #else
@@ -452,37 +452,7 @@
 #include <bits/wordsize.h>
 #include <bits/long-double.h>
 
-#if __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 1
-# ifdef __REDIRECT
-
-/* Alias name defined automatically.  */
-#  define __LDBL_REDIR(name, proto) ... unused__ldbl_redir
-#  define __LDBL_REDIR_DECL(name) \
-  extern __typeof (name) name __asm (__ASMNAME ("__" #name "ieee128"));
-
-/* Alias name defined automatically, with leading underscores.  */
-#  define __LDBL_REDIR2_DECL(name) \
-  extern __typeof (__##name) __##name \
-    __asm (__ASMNAME ("__" #name "ieee128"));
-
-/* Alias name defined manually.  */
-#  define __LDBL_REDIR1(name, proto, alias) ... unused__ldbl_redir1
-#  define __LDBL_REDIR1_DECL(name, alias) \
-  extern __typeof (name) name __asm (__ASMNAME (#alias));
-
-#  define __LDBL_REDIR1_NTH(name, proto, alias) \
-  __REDIRECT_NTH (name, proto, alias)
-#  define __REDIRECT_NTH_LDBL(name, proto, alias) \
-  __LDBL_REDIR1_NTH (name, proto, __##alias##ieee128)
-
-/* Unused.  */
-#  define __REDIRECT_LDBL(name, proto, alias) ... unused__redirect_ldbl
-#  define __LDBL_REDIR_NTH(name, proto) ... unused__ldbl_redir_nth
-
-# else
-_Static_assert (0, "IEEE 128-bits long double requires redirection on this platform");
-# endif
-#elif defined __LONG_DOUBLE_MATH_OPTIONAL && defined __NO_LONG_DOUBLE_MATH
+#if defined __LONG_DOUBLE_MATH_OPTIONAL && defined __NO_LONG_DOUBLE_MATH
 # define __LDBL_COMPAT 1
 # ifdef __REDIRECT
 #  define __LDBL_REDIR1(name, proto, alias) __REDIRECT (name, proto, alias)
@@ -491,8 +461,6 @@ _Static_assert (0, "IEEE 128-bits long double requires redirection on this platf
 #  define __LDBL_REDIR1_NTH(name, proto, alias) __REDIRECT_NTH (name, proto, alias)
 #  define __LDBL_REDIR_NTH(name, proto) \
   __LDBL_REDIR1_NTH (name, proto, __nldbl_##name)
-#  define __LDBL_REDIR2_DECL(name) \
-  extern __typeof (__##name) __##name __asm (__ASMNAME ("__nldbl___" #name));
 #  define __LDBL_REDIR1_DECL(name, alias) \
   extern __typeof (name) name __asm (__ASMNAME (#alias));
 #  define __LDBL_REDIR_DECL(name) \
@@ -503,13 +471,11 @@ _Static_assert (0, "IEEE 128-bits long double requires redirection on this platf
   __LDBL_REDIR1_NTH (name, proto, __nldbl_##alias)
 # endif
 #endif
-#if (!defined __LDBL_COMPAT && __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI == 0) \
-    || !defined __REDIRECT
+#if !defined __LDBL_COMPAT || !defined __REDIRECT
 # define __LDBL_REDIR1(name, proto, alias) name proto
 # define __LDBL_REDIR(name, proto) name proto
 # define __LDBL_REDIR1_NTH(name, proto, alias) name proto __THROW
 # define __LDBL_REDIR_NTH(name, proto) name proto __THROW
-# define __LDBL_REDIR2_DECL(name)
 # define __LDBL_REDIR_DECL(name)
 # ifdef __REDIRECT
 #  define __REDIRECT_LDBL(name, proto, alias) __REDIRECT (name, proto, alias)
@@ -546,17 +512,6 @@ _Static_assert (0, "IEEE 128-bits long double requires redirection on this platf
 # define __HAVE_GENERIC_SELECTION 1
 #else
 # define __HAVE_GENERIC_SELECTION 0
-#endif
-
-#if __GNUC_PREREQ (10, 0)
-/* Designates a 1-based positional argument ref-index of pointer type
-   that can be used to access size-index elements of the pointed-to
-   array according to access mode, or at least one element when
-   size-index is not provided:
-     access (access-mode, <ref-index> [, <size-index>])  */
-#define __attr_access(x) __attribute__ ((__access__ x))
-#else
-#  define __attr_access(x)
 #endif
 
 #endif	 /* sys/cdefs.h */

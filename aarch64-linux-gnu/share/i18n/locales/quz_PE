@@ -10,7 +10,7 @@ escape_char /
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Cusco Quechua language locale for Peru
+% Quechua (Cusco-Collao) language locale for Peru
 %
 % Prepared and contributed to glibc by Chris Leonard <cjl@sugarlabs.org>
 % and Amos Batto
@@ -25,14 +25,14 @@ escape_char /
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 LC_IDENTIFICATION
-title        "Cusco Quechua locale for Peru"
+title        "Quechua (Cusco-Collao) locale for Peru"
 source       "Sugar Labs // OLPC"
 address      ""
 contact      "sugarlabs.org"
 email        "libc-alpha@sourceware.org"
 tel          ""
 fax          ""
-language     "Cusco Quechua"
+language     "Quechua (Cusco-Collao)"
 territory    "Peru"
 revision     "1.0"
 date         "2013-08-24"
@@ -103,8 +103,7 @@ abday         "tum";/
        "juy";/
        "wiy";/
        "saw"
-d_t_fmt       "%a %d %b %Y %T"
-date_fmt      "%a %d %b %Y %T %Z"
+d_t_fmt       "%a %d %b %Y %T %Z"
 d_fmt         "%d//%m//%y"
 t_fmt         "%I:%M:%S %p"
 am_pm         "AM";"PM"
@@ -145,7 +144,7 @@ country_ab2   "PE"
 country_ab3   "PER"
 country_num   604
 country_car   "PE"
-lang_name    "Qusqu runasimi"
+lang_name    "Quechua (Cusco)"
 lang_term    "quz"
 lang_lib    "quz"
 END LC_ADDRESS

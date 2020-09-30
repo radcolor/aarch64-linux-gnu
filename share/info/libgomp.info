@@ -1765,6 +1765,12 @@ _Description_
      This function returns what device type will be used when executing
      a parallel or kernels region.
 
+     This function returns 'acc_device_none' if 'acc_get_device_type' is
+     called from 'acc_ev_device_init_start', 'acc_ev_device_init_end'
+     callbacks of the OpenACC Profiling Interface (*note OpenACC
+     Profiling Interface::), that is, if the device is currently being
+     initialized.
+
 _C/C++_:
      _Prototype_:   'acc_device_t acc_get_device_type(void);'
 
@@ -3071,7 +3077,10 @@ calling into a third-party _library_ for every event that has been
 registered.
 
    We're not yet accounting for the fact that 'OpenACC events may occur
-during event processing'.
+during event processing'.  We just handle one case specially, as
+required by CUDA 9.0 'nvprof', that 'acc_get_device_type' (*note
+acc_get_device_type::)) may be called from 'acc_ev_device_init_start',
+'acc_ev_device_init_end' callbacks.
 
    We're not yet implementing initialization via a
 'acc_register_library' function that is either statically linked in, or
@@ -5036,77 +5045,77 @@ Node: OpenACC Runtime Library Routines61140
 Node: acc_get_num_devices65421
 Node: acc_set_device_type66147
 Node: acc_get_device_type66911
-Node: acc_set_device_num67626
-Node: acc_get_device_num68443
-Node: acc_get_property69242
-Node: acc_async_test71465
-Node: acc_async_test_all72453
-Node: acc_wait73353
-Node: acc_wait_all74216
-Node: acc_wait_all_async74977
-Node: acc_wait_async75729
-Node: acc_init76437
-Node: acc_shutdown77082
-Node: acc_on_device77749
-Node: acc_malloc78753
-Node: acc_free79252
-Node: acc_copyin79679
-Node: acc_present_or_copyin81266
-Node: acc_create83044
-Node: acc_present_or_create84676
-Node: acc_copyout86462
-Node: acc_delete88766
-Node: acc_update_device91013
-Node: acc_update_self92587
-Node: acc_map_data94177
-Node: acc_unmap_data94862
-Node: acc_deviceptr95383
-Node: acc_hostptr95953
-Node: acc_is_present96517
-Node: acc_memcpy_to_device98044
-Node: acc_memcpy_from_device98707
-Node: acc_attach99374
-Node: acc_detach100021
-Node: acc_get_current_cuda_device100800
-Node: acc_get_current_cuda_context101385
-Node: acc_get_cuda_stream101985
-Node: acc_set_cuda_stream102576
-Node: acc_prof_register103247
-Node: acc_prof_unregister103806
-Node: acc_prof_lookup104373
-Node: acc_register_library104894
-Node: OpenACC Environment Variables105460
-Node: ACC_DEVICE_TYPE106032
-Node: ACC_DEVICE_NUM106268
-Node: ACC_PROFLIB106522
-Node: GCC_ACC_NOTIFY106853
-Node: CUDA Streams Usage107073
-Ref: CUDA Streams Usage-Footnote-1108974
-Node: OpenACC Library Interoperability109083
-Ref: OpenACC Library Interoperability-Footnote-1115451
-Ref: OpenACC Library Interoperability-Footnote-2115703
-Node: OpenACC Profiling Interface115911
-Node: The libgomp ABI125724
-Node: Implementing MASTER construct126577
-Node: Implementing CRITICAL construct126993
-Node: Implementing ATOMIC construct127734
-Node: Implementing FLUSH construct128217
-Node: Implementing BARRIER construct128490
-Node: Implementing THREADPRIVATE construct128761
-Node: Implementing PRIVATE clause129416
-Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses129999
-Node: Implementing REDUCTION clause131325
-Node: Implementing PARALLEL construct131884
-Node: Implementing FOR construct133143
-Node: Implementing ORDERED construct135143
-Node: Implementing SECTIONS construct135451
-Node: Implementing SINGLE construct136219
-Node: Implementing OpenACC's PARALLEL construct136933
-Node: Reporting Bugs137193
-Node: Copying137556
-Node: GNU Free Documentation License175102
-Node: Funding200225
-Node: Library Index202751
+Node: acc_set_device_num67924
+Node: acc_get_device_num68741
+Node: acc_get_property69540
+Node: acc_async_test71763
+Node: acc_async_test_all72751
+Node: acc_wait73651
+Node: acc_wait_all74514
+Node: acc_wait_all_async75275
+Node: acc_wait_async76027
+Node: acc_init76735
+Node: acc_shutdown77380
+Node: acc_on_device78047
+Node: acc_malloc79051
+Node: acc_free79550
+Node: acc_copyin79977
+Node: acc_present_or_copyin81564
+Node: acc_create83342
+Node: acc_present_or_create84974
+Node: acc_copyout86760
+Node: acc_delete89064
+Node: acc_update_device91311
+Node: acc_update_self92885
+Node: acc_map_data94475
+Node: acc_unmap_data95160
+Node: acc_deviceptr95681
+Node: acc_hostptr96251
+Node: acc_is_present96815
+Node: acc_memcpy_to_device98342
+Node: acc_memcpy_from_device99005
+Node: acc_attach99672
+Node: acc_detach100319
+Node: acc_get_current_cuda_device101098
+Node: acc_get_current_cuda_context101683
+Node: acc_get_cuda_stream102283
+Node: acc_set_cuda_stream102874
+Node: acc_prof_register103545
+Node: acc_prof_unregister104104
+Node: acc_prof_lookup104671
+Node: acc_register_library105192
+Node: OpenACC Environment Variables105758
+Node: ACC_DEVICE_TYPE106330
+Node: ACC_DEVICE_NUM106566
+Node: ACC_PROFLIB106820
+Node: GCC_ACC_NOTIFY107151
+Node: CUDA Streams Usage107371
+Ref: CUDA Streams Usage-Footnote-1109272
+Node: OpenACC Library Interoperability109381
+Ref: OpenACC Library Interoperability-Footnote-1115749
+Ref: OpenACC Library Interoperability-Footnote-2116001
+Node: OpenACC Profiling Interface116209
+Node: The libgomp ABI126233
+Node: Implementing MASTER construct127086
+Node: Implementing CRITICAL construct127502
+Node: Implementing ATOMIC construct128243
+Node: Implementing FLUSH construct128726
+Node: Implementing BARRIER construct128999
+Node: Implementing THREADPRIVATE construct129270
+Node: Implementing PRIVATE clause129925
+Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses130508
+Node: Implementing REDUCTION clause131834
+Node: Implementing PARALLEL construct132393
+Node: Implementing FOR construct133652
+Node: Implementing ORDERED construct135652
+Node: Implementing SECTIONS construct135960
+Node: Implementing SINGLE construct136728
+Node: Implementing OpenACC's PARALLEL construct137442
+Node: Reporting Bugs137702
+Node: Copying138065
+Node: GNU Free Documentation License175611
+Node: Funding200734
+Node: Library Index203260
 
 End Tag Table
 
