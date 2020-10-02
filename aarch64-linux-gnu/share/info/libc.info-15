@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2313,15 +2320,6 @@ if ‘CFLAGS’ is specified it must enable optimization.  For example:
           colon-separated list in a single environment variable
           ‘GLIBC_TUNABLES’.
 
-‘--enable-obsolete-nsl’
-     By default, libnsl is only built as shared library for backward
-     compatibility and the NSS modules libnss_compat, libnss_nis and
-     libnss_nisplus are not built at all.  Use this option to enable
-     libnsl with all depending NSS modules and header files.  For
-     architectures and ABIs that have been added after version 2.28 of
-     the GNU C Library this option is not available, and the libnsl
-     compatibility library is not built.
-
 ‘--disable-crypt’
      Do not install the passphrase-hashing library ‘libcrypt’ or the
      header file ‘crypt.h’.  ‘unistd.h’ will still declare the function
@@ -2571,6 +2569,8 @@ build the GNU C Library:
      see GCC PR94200).  These additional features are required for
      building the GNU C Library with support for IEEE long double.
 
+     For ARC architecture builds, GCC 8.3 or higher is needed.
+
      For multi-arch support it is recommended to use a GCC which has
      been built with support for GNU indirect functions.  This ensures
      that correct debugging information is generated for functions
@@ -2596,6 +2596,9 @@ build the GNU C Library:
      For PowerPC 64-bits little-endian (powerpc64le), ‘objcopy’ is
      required to support ‘--update-section’.  This option requires
      binutils 2.26 or newer.
+
+     ARC architecture needs ‘binutils’ 2.32 or higher for TLS related
+     fixes.
 
    • GNU ‘texinfo’ 4.7 or later
 
@@ -3380,6 +3383,7 @@ The GNU C Library can provide machine-specific functionality.
 
 * PowerPC::           Facilities Specific to the PowerPC Architecture
 * RISC-V::            Facilities Specific to the RISC-V Architecture
+* X86::               Facilities Specific to the X86 Architecture
 
 
 File: libc.info,  Node: PowerPC,  Next: RISC-V,  Up: Platform
@@ -3500,7 +3504,7 @@ priority levels: very low and medium high.
      priority is set to medium.
 
 
-File: libc.info,  Node: RISC-V,  Prev: PowerPC,  Up: Platform
+File: libc.info,  Node: RISC-V,  Next: X86,  Prev: PowerPC,  Up: Platform
 
 E.2 RISC-V-specific Facilities
 ==============================
@@ -3521,6 +3525,372 @@ the Linux ABI are declared in ‘sys/cachectl.h’.
      the ‘SYS_RISCV_FLUSH_ICACHE_LOCAL’ bit allows users to indicate
      that enforcing ordering on only the current thread is necessary.
      All other flag bits are reserved.
+
+
+File: libc.info,  Node: X86,  Prev: RISC-V,  Up: Platform
+
+E.3 X86-specific Facilities
+===========================
+
+Facilities specific to X86 that are not specific to a particular
+operating system are declared in ‘sys/platform/x86.h’.
+
+ -- Function: const struct cpu_features * __x86_get_cpu_features
+          (unsigned int MAX)
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     Return a pointer to x86 CPU feature structure used by query macros
+     for x86 CPU features.  If MAX exceeds ‘COMMON_CPUID_INDEX_MAX’
+     which is the limit of the CPUID leaves supported by The GNU C
+     Library, the function returns ‘NULL’, indicating that the queried
+     processor feature is unsupported by The GNU C Library run-time.
+
+ -- Macro: int HAS_CPU_FEATURE (NAME)
+     This macro returns a nonzero value (true) if the processor has the
+     feature NAME.
+
+ -- Macro: int CPU_FEATURE_USABLE (NAME)
+     This macro returns a nonzero value (true) if the processor has the
+     feature NAME and the feature is supported by the operating system.
+
+   The supported processor features are:
+
+   • ‘ACPI’ – Thermal Monitor and Software Controlled Clock Facilities.
+
+   • ‘ADX’ – ADX instruction extensions.
+
+   • ‘APIC’ – APIC On-Chip.
+
+   • ‘AES’ – The AES instruction extensions.
+
+   • ‘AESKLE’ – AES Key Locker instructions are enabled by OS.
+
+   • ‘AMX_BF16’ – Tile computational operations on bfloat16 numbers.
+
+   • ‘AMX_INT8’ – Tile computational operations on 8-bit numbers.
+
+   • ‘AMX_TILE’ – Tile architecture.
+
+   • ‘ARCH_CAPABILITIES’ – IA32_ARCH_CAPABILITIES MSR.
+
+   • ‘AVX’ – The AVX instruction extensions.
+
+   • ‘AVX2’ – The AVX2 instruction extensions.
+
+   • ‘AVX512_4FMAPS’ – The AVX512_4FMAPS instruction extensions.
+
+   • ‘AVX512_4VNNIW’ – The AVX512_4VNNIW instruction extensions.
+
+   • ‘AVX512_BF16’ – The AVX512_BF16 instruction extensions.
+
+   • ‘AVX512_BITALG’ – The AVX512_BITALG instruction extensions.
+
+   • ‘AVX512_IFMA’ – The AVX512_IFMA instruction extensions.
+
+   • ‘AVX512_VBMI’ – The AVX512_VBMI instruction extensions.
+
+   • ‘AVX512_VBMI2’ – The AVX512_VBMI2 instruction extensions.
+
+   • ‘AVX512_VNNI’ – The AVX512_VNNI instruction extensions.
+
+   • ‘AVX512_VP2INTERSECT’ – The AVX512_VP2INTERSECT instruction
+     extensions.
+
+   • ‘AVX512_VPOPCNTDQ’ – The AVX512_VPOPCNTDQ instruction extensions.
+
+   • ‘AVX512BW’ – The AVX512BW instruction extensions.
+
+   • ‘AVX512CD’ – The AVX512CD instruction extensions.
+
+   • ‘AVX512ER’ – The AVX512ER instruction extensions.
+
+   • ‘AVX512DQ’ – The AVX512DQ instruction extensions.
+
+   • ‘AVX512F’ – The AVX512F instruction extensions.
+
+   • ‘AVX512PF’ – The AVX512PF instruction extensions.
+
+   • ‘AVX512VL’ – The AVX512VL instruction extensions.
+
+   • ‘BMI1’ – BMI1 instructions.
+
+   • ‘BMI2’ – BMI2 instructions.
+
+   • ‘CLDEMOTE’ – CLDEMOTE instruction.
+
+   • ‘CLFLUSHOPT’ – CLFLUSHOPT instruction.
+
+   • ‘CLFSH’ – CLFLUSH instruction.
+
+   • ‘CLWB’ – CLWB instruction.
+
+   • ‘CMOV’ – Conditional Move instructions.
+
+   • ‘CMPXCHG16B’ – CMPXCHG16B instruction.
+
+   • ‘CNXT_ID’ – L1 Context ID.
+
+   • ‘CORE_CAPABILITIES’ – IA32_CORE_CAPABILITIES MSR.
+
+   • ‘CX8’ – CMPXCHG8B instruction.
+
+   • ‘DCA’ – Data prefetch from a memory mapped device.
+
+   • ‘DE’ – Debugging Extensions.
+
+   • ‘DEPR_FPU_CS_DS’ – Deprecates FPU CS and FPU DS values.
+
+   • ‘DS’ – Debug Store.
+
+   • ‘DS_CPL’ – CPL Qualified Debug Store.
+
+   • ‘DTES64’ – 64-bit DS Area.
+
+   • ‘EIST’ – Enhanced Intel SpeedStep technology.
+
+   • ‘ENQCMD’ – Enqueue Stores instructions.
+
+   • ‘ERMS’ – Enhanced REP MOVSB/STOSB.
+
+   • ‘F16C’ – 16-bit floating-point conversion instructions.
+
+   • ‘FMA’ – FMA extensions using YMM state.
+
+   • ‘FMA4’ – FMA4 instruction extensions.
+
+   • ‘FPU’ – X87 Floating Point Unit On-Chip.
+
+   • ‘FSGSBASE’ – RDFSBASE/RDGSBASE/WRFSBASE/WRGSBASE instructions.
+
+   • ‘FSRM’ – Fast Short REP MOV.
+
+   • ‘FXSR’ – FXSAVE and FXRSTOR instructions.
+
+   • ‘GFNI’ – GFNI instruction extensions.
+
+   • ‘HLE’ – HLE instruction extensions.
+
+   • ‘HTT’ – Max APIC IDs reserved field is Valid.
+
+   • ‘HYBRID’ – Hybrid processor.
+
+   • ‘IBRS_IBPB’ – Indirect branch restricted speculation (IBRS) and the
+     indirect branch predictor barrier (IBPB).
+
+   • ‘IBT’ – Intel Indirect Branch Tracking instruction extensions.
+
+   • ‘INVARIANT_TSC’ – Invariant TSC.
+
+   • ‘INVPCID’ – INVPCID instruction.
+
+   • ‘KL’ – AES Key Locker instructions.
+
+   • ‘L1D_FLUSH’ – IA32_FLUSH_CMD MSR.
+
+   • ‘LAHF64_SAHF64’ – LAHF/SAHF available in 64-bit mode.
+
+   • ‘LM’ – Long mode.
+
+   • ‘LWP’ – Lightweight profiling.
+
+   • ‘LZCNT’ – LZCNT instruction.
+
+   • ‘MCA’ – Machine Check Architecture.
+
+   • ‘MCE’ – Machine Check Exception.
+
+   • ‘MD_CLEAR’ – MD_CLEAR.
+
+   • ‘MMX’ – Intel MMX Technology.
+
+   • ‘MONITOR’ – MONITOR/MWAIT instructions.
+
+   • ‘MOVBE’ – MOVBE instruction.
+
+   • ‘MOVDIRI’ – MOVDIRI instruction.
+
+   • ‘MOVDIR64B’ – MOVDIR64B instruction.
+
+   • ‘MPX’ – Intel Memory Protection Extensions.
+
+   • ‘MSR’ – Model Specific Registers RDMSR and WRMSR instructions.
+
+   • ‘MTRR’ – Memory Type Range Registers.
+
+   • ‘NX’ – No-execute page protection.
+
+   • ‘OSPKE’ – OS has set CR4.PKE to enable protection keys.
+
+   • ‘OSXSAVE’ – The OS has set CR4.OSXSAVE[bit 18] to enable
+     XSETBV/XGETBV instructions to access XCR0 and to support processor
+     extended state management using XSAVE/XRSTOR.
+
+   • ‘PAE’ – Physical Address Extension.
+
+   • ‘PAGE1GB’ – 1-GByte page.
+
+   • ‘PAT’ – Page Attribute Table.
+
+   • ‘PBE’ – Pending Break Enable.
+
+   • ‘PCID’ – Process-context identifiers.
+
+   • ‘PCLMULQDQ’ – PCLMULQDQ instruction.
+
+   • ‘PCONFIG’ – PCONFIG instruction.
+
+   • ‘PDCM’ – Perfmon and Debug Capability.
+
+   • ‘PGE’ – Page Global Bit.
+
+   • ‘PKS’ – Protection keys for supervisor-mode pages.
+
+   • ‘PKU’ – Protection keys for user-mode pages.
+
+   • ‘POPCNT’ – POPCNT instruction.
+
+   • ‘PREFETCHW’ – PREFETCHW instruction.
+
+   • ‘PREFETCHWT1’ – PREFETCHWT1 instruction.
+
+   • ‘PSE’ – Page Size Extension.
+
+   • ‘PSE_36’ – 36-Bit Page Size Extension.
+
+   • ‘PSN’ – Processor Serial Number.
+
+   • ‘RDPID’ – RDPID instruction.
+
+   • ‘RDRAND’ – RDRAND instruction.
+
+   • ‘RDSEED’ – RDSEED instruction.
+
+   • ‘RDT_A’ – Intel Resource Director Technology (Intel RDT) Allocation
+     capability.
+
+   • ‘RDT_M’ – Intel Resource Director Technology (Intel RDT) Monitoring
+     capability.
+
+   • ‘RDTSCP’ – RDTSCP instruction.
+
+   • ‘RTM’ – RTM instruction extensions.
+
+   • ‘SDBG’ – IA32_DEBUG_INTERFACE MSR for silicon debug.
+
+   • ‘SEP’ – SYSENTER and SYSEXIT instructions.
+
+   • ‘SERIALIZE’ – SERIALIZE instruction.
+
+   • ‘SGX’ – Intel Software Guard Extensions.
+
+   • ‘SGX_LC’ – SGX Launch Configuration.
+
+   • ‘SHA’ – SHA instruction extensions.
+
+   • ‘SHSTK’ – Intel Shadow Stack instruction extensions.
+
+   • ‘SMAP’ – Supervisor-Mode Access Prevention.
+
+   • ‘SMEP’ – Supervisor-Mode Execution Prevention.
+
+   • ‘SMX’ – Safer Mode Extensions.
+
+   • ‘SS’ – Self Snoop.
+
+   • ‘SSBD’ – Speculative Store Bypass Disable (SSBD).
+
+   • ‘SSE’ – Streaming SIMD Extensions.
+
+   • ‘SSE2’ – Streaming SIMD Extensions 2.
+
+   • ‘SSE3’ – Streaming SIMD Extensions 3.
+
+   • ‘SSE4_1’ – Streaming SIMD Extensions 4.1.
+
+   • ‘SSE4_2’ – Streaming SIMD Extensions 4.2.
+
+   • ‘SSE4A’ – SSE4A instruction extensions.
+
+   • ‘SSSE3’ – Supplemental Streaming SIMD Extensions 3.
+
+   • ‘STIBP’ – Single thread indirect branch predictors (STIBP).
+
+   • ‘SVM’ – Secure Virtual Machine.
+
+   • ‘SYSCALL_SYSRET’ – SYSCALL/SYSRET instructions.
+
+   • ‘TBM’ – Trailing bit manipulation instructions.
+
+   • ‘TM’ – Thermal Monitor.
+
+   • ‘TM2’ – Thermal Monitor 2.
+
+   • ‘TRACE’ – Intel Processor Trace.
+
+   • ‘TSC’ – Time Stamp Counter.  RDTSC instruction.
+
+   • ‘TSC_ADJUST’ – IA32_TSC_ADJUST MSR.
+
+   • ‘TSC_DEADLINE’ – Local APIC timer supports one-shot operation using
+     a TSC deadline value.
+
+   • ‘TSXLDTRK’ – TSXLDTRK instructions.
+
+   • ‘UMIP’ – User-mode instruction prevention.
+
+   • ‘VAES’ – VAES instruction extensions.
+
+   • ‘VME’ – Virtual 8086 Mode Enhancements.
+
+   • ‘VMX’ – Virtual Machine Extensions.
+
+   • ‘VPCLMULQDQ’ – VPCLMULQDQ instruction.
+
+   • ‘WAITPKG’ – WAITPKG instruction extensions.
+
+   • ‘WBNOINVD’ – WBINVD/WBNOINVD instructions.
+
+   • ‘WIDE_KL’ – AES wide Key Locker instructions.
+
+   • ‘X2APIC’ – x2APIC.
+
+   • ‘XFD’ – Extended Feature Disable (XFD).
+
+   • ‘XGETBV_ECX_1’ – XGETBV with ECX = 1.
+
+   • ‘XOP’ – XOP instruction extensions.
+
+   • ‘XSAVE’ – The XSAVE/XRSTOR processor extended states feature, the
+     XSETBV/XGETBV instructions, and XCR0.
+
+   • ‘XSAVEC’ – XSAVEC instruction.
+
+   • ‘XSAVEOPT’ – XSAVEOPT instruction.
+
+   • ‘XSAVES’ – XSAVES/XRSTORS instructions.
+
+   • ‘XTPRUPDCTRL’ – xTPR Update Control.
+
+   You could query if a processor supports ‘AVX’ with:
+
+     #include <sys/platform/x86.h>
+
+     int
+     support_avx (void)
+     {
+       return HAS_CPU_FEATURE (AVX);
+     }
+
+   and if ‘AVX’ is usable with:
+
+     #include <sys/platform/x86.h>
+
+     int
+     usable_avx (void)
+     {
+       return CPU_FEATURE_USABLE (AVX);
+     }
 
 
 File: libc.info,  Node: Contributors,  Next: Free Manuals,  Prev: Platform,  Up: Top
@@ -5495,6 +5865,8 @@ Concept Index
 * DSUSP character:                       Signal Characters.   (line  57)
 * duplicating file descriptors:          Duplicating Descriptors.
                                                               (line   6)
+* dynamic linking tunables:              Dynamic Linking Tunables.
+                                                              (line   6)
 * dynamic memory allocation:             Memory Allocation and C.
                                                               (line  26)
 * dynamic memory allocation <1>:         Memory Allocation and C.
@@ -6015,7 +6387,7 @@ Concept Index
                                                               (line   6)
 * mutual exclusion:                      ISO C Mutexes.       (line   6)
 * Name not unique on network:            Error Codes.         (line 734)
-* name of running program:               Error Messages.      (line  81)
+* name of running program:               Error Messages.      (line 104)
 * name of socket:                        Socket Addresses.    (line   6)
 * Name Service Switch:                   Name Service Switch. (line   6)
 * name space:                            Reserved Names.      (line   6)
@@ -6117,7 +6489,7 @@ Concept Index
 * Optimization:                          FP Function Optimizations.
                                                               (line   6)
 * optimizing NSS:                        Notes on NSS Configuration File.
-                                                              (line  31)
+                                                              (line  25)
 * option parsing with argp:              Argp.                (line   6)
 * optional arguments:                    Variadic Functions.  (line   6)
 * optional POSIX features:               System Options.      (line   6)
@@ -6250,7 +6622,7 @@ Concept Index
                                                               (line   6)
 * program error signals:                 Program Error Signals.
                                                               (line   6)
-* program name:                          Error Messages.      (line  81)
+* program name:                          Error Messages.      (line 104)
 * program startup:                       Program Arguments.   (line   6)
 * program termination:                   Program Termination. (line   6)
 * program termination signals:           Termination Signals. (line   6)
@@ -6355,6 +6727,8 @@ Concept Index
 * RPC program version wrong:             Error Codes.         (line 485)
 * RPC struct is bad:                     Error Codes.         (line 473)
 * RPC version wrong:                     Error Codes.         (line 477)
+* rtld tunables:                         Dynamic Linking Tunables.
+                                                              (line   6)
 * runnable process:                      Absolute Priority.   (line  25)
 * running a command:                     Running a Command.   (line   6)
 * saved set-group-ID:                    How Change Persona.  (line   6)

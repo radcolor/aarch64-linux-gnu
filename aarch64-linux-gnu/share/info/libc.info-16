@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2150,13 +2157,17 @@ Type Index
 * glibc.cpu.x86_data_cache_size:         Hardware Capability Tunables.
                                                               (line  46)
 * glibc.cpu.x86_ibt:                     Hardware Capability Tunables.
-                                                              (line  63)
+                                                              (line  81)
 * glibc.cpu.x86_non_temporal_threshold:  Hardware Capability Tunables.
                                                               (line  57)
+* glibc.cpu.x86_rep_movsb_threshold:     Hardware Capability Tunables.
+                                                              (line  67)
+* glibc.cpu.x86_rep_stosb_threshold:     Hardware Capability Tunables.
+                                                              (line  74)
 * glibc.cpu.x86_shared_cache_size:       Hardware Capability Tunables.
                                                               (line  52)
 * glibc.cpu.x86_shstk:                   Hardware Capability Tunables.
-                                                              (line  75)
+                                                              (line  93)
 * glibc.elision:                         Elision Tunables.    (line   6)
 * glibc.elision.enable:                  Elision Tunables.    (line  13)
 * glibc.elision.skip_lock_after_retries: Elision Tunables.    (line  37)
@@ -2195,6 +2206,12 @@ Type Index
                                                               (line   6)
 * glibc.pthread.mutex_spin_count:        POSIX Thread Tunables.
                                                               (line  12)
+* glibc.rtld:                            Dynamic Linking Tunables.
+                                                              (line   6)
+* glibc.rtld.nns:                        Dynamic Linking Tunables.
+                                                              (line  10)
+* glibc.rtld.optional_static_tls:        Dynamic Linking Tunables.
+                                                              (line  24)
 * glob64_t:                              Calling Glob.        (line 156)
 * glob_t:                                Calling Glob.        (line  11)
 * iconv_t:                               Generic Conversion Interface.
@@ -2357,7 +2374,7 @@ Type Index
                                                               (line  29)
 * struct linger:                         Socket-Level Options.
                                                               (line  55)
-* struct mallinfo:                       Statistics of Malloc.
+* struct mallinfo2:                      Statistics of Malloc.
                                                               (line  11)
 * struct mntent:                         mtab.                (line   8)
 * struct netent:                         Networks Database.   (line  13)
@@ -2479,6 +2496,7 @@ Function and Macro Index
 * __ppc_yield:                           PowerPC.             (line  43)
 * __riscv_flush_icache:                  RISC-V.              (line   9)
 * __va_copy:                             Argument Macros.     (line  57)
+* __x86_get_cpu_features:                X86.                 (line   9)
 * a64l:                                  Encode Binary Data.  (line  84)
 * abort:                                 Aborting a Program.  (line   9)
 * abs:                                   Absolute Value.      (line  16)
@@ -2912,6 +2930,7 @@ Function and Macro Index
 * cprojl:                                Operations on Complex.
                                                               (line  65)
 * CPU_CLR:                               CPU Affinity.        (line  87)
+* CPU_FEATURE_USABLE:                    X86.                 (line  24)
 * CPU_ISSET:                             CPU Affinity.        (line  99)
 * CPU_SET:                               CPU Affinity.        (line  75)
 * CPU_ZERO:                              CPU Affinity.        (line  66)
@@ -3040,10 +3059,10 @@ Function and Macro Index
 * erffN:                                 Special Functions.   (line  12)
 * erffNx:                                Special Functions.   (line  13)
 * erfl:                                  Special Functions.   (line  11)
-* err:                                   Error Messages.      (line 337)
-* error:                                 Error Messages.      (line 162)
-* error_at_line:                         Error Messages.      (line 200)
-* errx:                                  Error Messages.      (line 356)
+* err:                                   Error Messages.      (line 360)
+* error:                                 Error Messages.      (line 185)
+* error_at_line:                         Error Messages.      (line 223)
+* errx:                                  Error Messages.      (line 379)
 * execl:                                 Executing a File.    (line  37)
 * execle:                                Executing a File.    (line  72)
 * execlp:                                Executing a File.    (line  98)
@@ -3473,6 +3492,7 @@ Function and Macro Index
 * gsignal:                               Signaling Yourself.  (line  19)
 * gtty:                                  BSD Terminal Modes.  (line  31)
 * hasmntopt:                             mtab.                (line 205)
+* HAS_CPU_FEATURE:                       X86.                 (line  20)
 * hcreate:                               Hash Search Function.
                                                               (line  12)
 * hcreate_r:                             Hash Search Function.
@@ -3797,7 +3817,7 @@ Function and Macro Index
 * madvise:                               Memory-mapped I/O.   (line 279)
 * main:                                  Program Arguments.   (line   6)
 * makecontext:                           System V contexts.   (line  81)
-* mallinfo:                              Statistics of Malloc.
+* mallinfo2:                             Statistics of Malloc.
                                                               (line  55)
 * malloc:                                Basic Allocation.    (line   9)
 * mallopt:                               Malloc Tunable Parameters.
@@ -4238,16 +4258,16 @@ Function and Macro Index
 * setmntent:                             mtab.                (line 102)
 * setnetent:                             Networks Database.   (line  63)
 * setnetgrent:                           Lookup Netgroup.     (line  12)
-* setpayload:                            FP Bit Twiddling.    (line 177)
-* setpayloadf:                           FP Bit Twiddling.    (line 178)
-* setpayloadfN:                          FP Bit Twiddling.    (line 180)
-* setpayloadfNx:                         FP Bit Twiddling.    (line 181)
-* setpayloadl:                           FP Bit Twiddling.    (line 179)
-* setpayloadsig:                         FP Bit Twiddling.    (line 194)
-* setpayloadsigf:                        FP Bit Twiddling.    (line 195)
-* setpayloadsigfN:                       FP Bit Twiddling.    (line 197)
-* setpayloadsigfNx:                      FP Bit Twiddling.    (line 198)
-* setpayloadsigl:                        FP Bit Twiddling.    (line 196)
+* setpayload:                            FP Bit Twiddling.    (line 178)
+* setpayloadf:                           FP Bit Twiddling.    (line 179)
+* setpayloadfN:                          FP Bit Twiddling.    (line 181)
+* setpayloadfNx:                         FP Bit Twiddling.    (line 182)
+* setpayloadl:                           FP Bit Twiddling.    (line 180)
+* setpayloadsig:                         FP Bit Twiddling.    (line 195)
+* setpayloadsigf:                        FP Bit Twiddling.    (line 196)
+* setpayloadsigfN:                       FP Bit Twiddling.    (line 198)
+* setpayloadsigfNx:                      FP Bit Twiddling.    (line 199)
+* setpayloadsigl:                        FP Bit Twiddling.    (line 197)
 * setpgid:                               Process Group Functions.
                                                               (line  81)
 * setpgrp:                               Process Group Functions.
@@ -4278,12 +4298,14 @@ Function and Macro Index
 * shm_open:                              Memory-mapped I/O.   (line 355)
 * shm_unlink:                            Memory-mapped I/O.   (line 374)
 * shutdown:                              Closing a Socket.    (line  16)
+* sigabbrev_np:                          Signal Messages.     (line  62)
 * sigaction:                             Advanced Signal Handling.
                                                               (line  40)
 * sigaddset:                             Signal Sets.         (line  52)
 * sigaltstack:                           Signal Stack.        (line  70)
 * sigblock:                              BSD Signal Handling. (line  51)
 * sigdelset:                             Signal Sets.         (line  67)
+* sigdescr_np:                           Signal Messages.     (line  49)
 * sigemptyset:                           Signal Sets.         (line  36)
 * sigfillset:                            Signal Sets.         (line  44)
 * siginterrupt:                          BSD Signal Handling. (line  20)
@@ -4380,6 +4402,8 @@ Function and Macro Index
 * strdupa:                               Copying Strings and Arrays.
                                                               (line 301)
 * strerror:                              Error Messages.      (line  14)
+* strerrordesc_np:                       Error Messages.      (line  86)
+* strerrorname_np:                       Error Messages.      (line  75)
 * strerror_r:                            Error Messages.      (line  32)
 * strfmon:                               Formatting Numbers.  (line  15)
 * strfromd:                              Printing of Floats.  (line   8)
@@ -4622,8 +4646,8 @@ Function and Macro Index
 * va_copy:                               Argument Macros.     (line  56)
 * va_end:                                Argument Macros.     (line  36)
 * va_start:                              Argument Macros.     (line  13)
-* verr:                                  Error Messages.      (line 347)
-* verrx:                                 Error Messages.      (line 367)
+* verr:                                  Error Messages.      (line 370)
+* verrx:                                 Error Messages.      (line 390)
 * versionsort:                           Scanning Directory Content.
                                                               (line  57)
 * versionsort64:                         Scanning Directory Content.
@@ -4654,8 +4678,8 @@ Function and Macro Index
                                                               (line  62)
 * vsyslog:                               syslog; vsyslog.     (line 126)
 * vtimes:                                Resource Usage.      (line 111)
-* vwarn:                                 Error Messages.      (line 308)
-* vwarnx:                                Error Messages.      (line 328)
+* vwarn:                                 Error Messages.      (line 331)
+* vwarnx:                                Error Messages.      (line 351)
 * vwprintf:                              Variable Arguments Output.
                                                               (line  63)
 * vwscanf:                               Variable Arguments Input.
@@ -4664,8 +4688,8 @@ Function and Macro Index
 * wait3:                                 BSD Wait Functions.  (line  11)
 * wait4:                                 Process Completion.  (line 128)
 * waitpid:                               Process Completion.  (line  10)
-* warn:                                  Error Messages.      (line 298)
-* warnx:                                 Error Messages.      (line 317)
+* warn:                                  Error Messages.      (line 321)
+* warnx:                                 Error Messages.      (line 340)
 * WCOREDUMP:                             Process Completion Status.
                                                               (line  46)
 * wcpcpy:                                Copying Strings and Arrays.

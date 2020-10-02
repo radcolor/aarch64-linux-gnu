@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2092,6 +2099,344 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Process Completion,  Next: Process Completion Status,  Prev: Executing a File,  Up: Processes
+
+26.6 Process Completion
+=======================
+
+The functions described in this section are used to wait for a child
+process to terminate or stop, and determine its status.  These functions
+are declared in the header file ‘sys/wait.h’.
+
+ -- Function: pid_t waitpid (pid_t PID, int *STATUS-PTR, int OPTIONS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘waitpid’ function is used to request status information from a
+     child process whose process ID is PID.  Normally, the calling
+     process is suspended until the child process makes status
+     information available by terminating.
+
+     Other values for the PID argument have special interpretations.  A
+     value of ‘-1’ or ‘WAIT_ANY’ requests status information for any
+     child process; a value of ‘0’ or ‘WAIT_MYPGRP’ requests information
+     for any child process in the same process group as the calling
+     process; and any other negative value − PGID requests information
+     for any child process whose process group ID is PGID.
+
+     If status information for a child process is available immediately,
+     this function returns immediately without waiting.  If more than
+     one eligible child process has status information available, one of
+     them is chosen randomly, and its status is returned immediately.
+     To get the status from the other eligible child processes, you need
+     to call ‘waitpid’ again.
+
+     The OPTIONS argument is a bit mask.  Its value should be the
+     bitwise OR (that is, the ‘|’ operator) of zero or more of the
+     ‘WNOHANG’ and ‘WUNTRACED’ flags.  You can use the ‘WNOHANG’ flag to
+     indicate that the parent process shouldn’t wait; and the
+     ‘WUNTRACED’ flag to request status information from stopped
+     processes as well as processes that have terminated.
+
+     The status information from the child process is stored in the
+     object that STATUS-PTR points to, unless STATUS-PTR is a null
+     pointer.
+
+     This function is a cancellation point in multi-threaded programs.
+     This is a problem if the thread allocates some resources (like
+     memory, file descriptors, semaphores or whatever) at the time
+     ‘waitpid’ is called.  If the thread gets canceled these resources
+     stay allocated until the program ends.  To avoid this calls to
+     ‘waitpid’ should be protected using cancellation handlers.
+
+     The return value is normally the process ID of the child process
+     whose status is reported.  If there are child processes but none of
+     them is waiting to be noticed, ‘waitpid’ will block until one is.
+     However, if the ‘WNOHANG’ option was specified, ‘waitpid’ will
+     return zero instead of blocking.
+
+     If a specific PID to wait for was given to ‘waitpid’, it will
+     ignore all other children (if any).  Therefore if there are
+     children waiting to be noticed but the child whose PID was
+     specified is not one of them, ‘waitpid’ will block or return zero
+     as described above.
+
+     A value of ‘-1’ is returned in case of error.  The following
+     ‘errno’ error conditions are defined for this function:
+
+     ‘EINTR’
+          The function was interrupted by delivery of a signal to the
+          calling process.  *Note Interrupted Primitives::.
+
+     ‘ECHILD’
+          There are no child processes to wait for, or the specified PID
+          is not a child of the calling process.
+
+     ‘EINVAL’
+          An invalid value was provided for the OPTIONS argument.
+
+   These symbolic constants are defined as values for the PID argument
+to the ‘waitpid’ function.
+
+‘WAIT_ANY’
+
+     This constant macro (whose value is ‘-1’) specifies that ‘waitpid’
+     should return status information about any child process.
+
+‘WAIT_MYPGRP’
+     This constant (with value ‘0’) specifies that ‘waitpid’ should
+     return status information about any child process in the same
+     process group as the calling process.
+
+   These symbolic constants are defined as flags for the OPTIONS
+argument to the ‘waitpid’ function.  You can bitwise-OR the flags
+together to obtain a value to use as the argument.
+
+‘WNOHANG’
+
+     This flag specifies that ‘waitpid’ should return immediately
+     instead of waiting, if there is no child process ready to be
+     noticed.
+
+‘WUNTRACED’
+
+     This flag specifies that ‘waitpid’ should report the status of any
+     child processes that have been stopped as well as those that have
+     terminated.
+
+ -- Function: pid_t wait (int *STATUS-PTR)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is a simplified version of ‘waitpid’, and is used to wait
+     until any one child process terminates.  The call:
+
+          wait (&status)
+
+     is exactly equivalent to:
+
+          waitpid (-1, &status, 0)
+
+     This function is a cancellation point in multi-threaded programs.
+     This is a problem if the thread allocates some resources (like
+     memory, file descriptors, semaphores or whatever) at the time
+     ‘wait’ is called.  If the thread gets canceled these resources stay
+     allocated until the program ends.  To avoid this calls to ‘wait’
+     should be protected using cancellation handlers.
+
+ -- Function: pid_t wait4 (pid_t PID, int *STATUS-PTR, int OPTIONS,
+          struct rusage *USAGE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     If USAGE is a null pointer, ‘wait4’ is equivalent to ‘waitpid (PID,
+     STATUS-PTR, OPTIONS)’.
+
+     If USAGE is not null, ‘wait4’ stores usage figures for the child
+     process in ‘*RUSAGE’ (but only if the child has terminated, not if
+     it has stopped).  *Note Resource Usage::.
+
+     This function is a BSD extension.
+
+   Here’s an example of how to use ‘waitpid’ to get the status from all
+child processes that have terminated, without ever waiting.  This
+function is designed to be a handler for ‘SIGCHLD’, the signal that
+indicates that at least one child process has terminated.
+
+     void
+     sigchld_handler (int signum)
+     {
+       int pid, status, serrno;
+       serrno = errno;
+       while (1)
+         {
+           pid = waitpid (WAIT_ANY, &status, WNOHANG);
+           if (pid < 0)
+             {
+               perror ("waitpid");
+               break;
+             }
+           if (pid == 0)
+             break;
+           notice_termination (pid, status);
+         }
+       errno = serrno;
+     }
+
+
+File: libc.info,  Node: Process Completion Status,  Next: BSD Wait Functions,  Prev: Process Completion,  Up: Processes
+
+26.7 Process Completion Status
+==============================
+
+If the exit status value (*note Program Termination::) of the child
+process is zero, then the status value reported by ‘waitpid’ or ‘wait’
+is also zero.  You can test for other kinds of information encoded in
+the returned status value using the following macros.  These macros are
+defined in the header file ‘sys/wait.h’.
+
+ -- Macro: int WIFEXITED (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This macro returns a nonzero value if the child process terminated
+     normally with ‘exit’ or ‘_exit’.
+
+ -- Macro: int WEXITSTATUS (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     If ‘WIFEXITED’ is true of STATUS, this macro returns the low-order
+     8 bits of the exit status value from the child process.  *Note Exit
+     Status::.
+
+ -- Macro: int WIFSIGNALED (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This macro returns a nonzero value if the child process terminated
+     because it received a signal that was not handled.  *Note Signal
+     Handling::.
+
+ -- Macro: int WTERMSIG (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     If ‘WIFSIGNALED’ is true of STATUS, this macro returns the signal
+     number of the signal that terminated the child process.
+
+ -- Macro: int WCOREDUMP (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This macro returns a nonzero value if the child process terminated
+     and produced a core dump.
+
+ -- Macro: int WIFSTOPPED (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This macro returns a nonzero value if the child process is stopped.
+
+ -- Macro: int WSTOPSIG (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     If ‘WIFSTOPPED’ is true of STATUS, this macro returns the signal
+     number of the signal that caused the child process to stop.
+
+
+File: libc.info,  Node: BSD Wait Functions,  Next: Process Creation Example,  Prev: Process Completion Status,  Up: Processes
+
+26.8 BSD Process Wait Function
+==============================
+
+The GNU C Library also provides the ‘wait3’ function for compatibility
+with BSD. This function is declared in ‘sys/wait.h’.  It is the
+predecessor to ‘wait4’, which is more flexible.  ‘wait3’ is now
+obsolete.
+
+ -- Function: pid_t wait3 (int *STATUS-PTR, int OPTIONS, struct rusage
+          *USAGE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     If USAGE is a null pointer, ‘wait3’ is equivalent to ‘waitpid (-1,
+     STATUS-PTR, OPTIONS)’.
+
+     If USAGE is not null, ‘wait3’ stores usage figures for the child
+     process in ‘*RUSAGE’ (but only if the child has terminated, not if
+     it has stopped).  *Note Resource Usage::.
+
+
+File: libc.info,  Node: Process Creation Example,  Prev: BSD Wait Functions,  Up: Processes
+
+26.9 Process Creation Example
+=============================
+
+Here is an example program showing how you might write a function
+similar to the built-in ‘system’.  It executes its COMMAND argument
+using the equivalent of ‘sh -c COMMAND’.
+
+     #include <stddef.h>
+     #include <stdlib.h>
+     #include <unistd.h>
+     #include <sys/types.h>
+     #include <sys/wait.h>
+
+     /* Execute the command using this shell program.  */
+     #define SHELL "/bin/sh"
+
+     int
+     my_system (const char *command)
+     {
+       int status;
+       pid_t pid;
+
+       pid = fork ();
+       if (pid == 0)
+         {
+           /* This is the child process.  Execute the shell command. */
+           execl (SHELL, SHELL, "-c", command, NULL);
+           _exit (EXIT_FAILURE);
+         }
+       else if (pid < 0)
+         /* The fork failed.  Report failure.  */
+         status = -1;
+       else
+         /* This is the parent process.  Wait for the child to complete.  */
+         if (waitpid (pid, &status, 0) != pid)
+           status = -1;
+       return status;
+     }
+
+   There are a couple of things you should pay attention to in this
+example.
+
+   Remember that the first ‘argv’ argument supplied to the program
+represents the name of the program being executed.  That is why, in the
+call to ‘execl’, ‘SHELL’ is supplied once to name the program to execute
+and a second time to supply a value for ‘argv[0]’.
+
+   The ‘execl’ call in the child process doesn’t return if it is
+successful.  If it fails, you must do something to make the child
+process terminate.  Just returning a bad status code with ‘return’ would
+leave two processes running the original program.  Instead, the right
+behavior is for the child process to report failure to its parent
+process.
+
+   Call ‘_exit’ to accomplish this.  The reason for using ‘_exit’
+instead of ‘exit’ is to avoid flushing fully buffered streams such as
+‘stdout’.  The buffers of these streams probably contain data that was
+copied from the parent process by the ‘fork’, data that will be output
+eventually by the parent process.  Calling ‘exit’ in the child would
+output the data twice.  *Note Termination Internals::.
+
+
+File: libc.info,  Node: Inter-Process Communication,  Next: Job Control,  Prev: Processes,  Up: Top
+
+27 Inter-Process Communication
+******************************
+
+This chapter describes the GNU C Library inter-process communication
+primitives.
+
+* Menu:
+
+* Semaphores::	Support for creating and managing semaphores
 
 
 File: libc.info,  Node: Semaphores,  Up: Inter-Process Communication
@@ -3439,17 +3784,17 @@ work.  The file could look like this:
      # Name Service Switch configuration file.
      #
 
-     passwd:     db files nis
+     passwd:     db files
      shadow:     files
-     group:      db files nis
+     group:      db files
 
-     hosts:      files nisplus nis dns
-     networks:   nisplus [NOTFOUND=return] files
+     hosts:      files dns
+     networks:   files
 
-     ethers:     nisplus [NOTFOUND=return] db files
-     protocols:  nisplus [NOTFOUND=return] db files
-     rpc:        nisplus [NOTFOUND=return] db files
-     services:   nisplus [NOTFOUND=return] db files
+     ethers:     db files
+     protocols:  db files
+     rpc:        db files
+     services:   db files
 
    The first column is the database as you can guess from the table
 above.  The rest of the line specifies how the lookup process works.
@@ -3635,20 +3980,14 @@ get the system running even if the file is corrupted or missing.
 service not to be available but if it is available the answer it returns
 is definitive.
 
-   The ‘passwd’, ‘group’, and ‘shadow’ databases are traditionally
+   The ‘passwd’, ‘group’, and ‘shadow’ databases was traditionally
 handled in a special way.  The appropriate files in the ‘/etc’ directory
-are read but if an entry with a name starting with a ‘+’ character is
-found NIS is used.  This kind of lookup remains possible if the GNU C
-Library was configured with the ‘--enable-obsolete-nsl’ option and the
-special lookup service ‘compat’ is used.  If the GNU C Library was
-configured with the ‘--enable-obsolete-nsl’ option the default value for
-the three databases above is ‘compat [NOTFOUND=return] files’.  If the
-‘--enable-obsolete-nsl’ option was not used the default value for the
-services is ‘files’.
+were read but if an entry with a name starting with a ‘+’ character was
+found NIS was used.  This kind of lookup was removed and now the default
+value for the services is ‘files’.  libnss_compat no longer depends on
+libnsl and can be used without NIS.
 
-   For all other databases the default value is ‘files’ unless the GNU C
-Library was configured with ‘--enable-obsolete-rpc’ option, in which
-case it the default value is ‘nis [NOTFOUND=return] files’.
+   For all other databases the default value is ‘files’.
 
    A second point is that the user should try to optimize the lookup
 process.  The different service have different response times.  A simple
@@ -7164,264 +7503,3 @@ should maintain and use these separately.  *Note Mount Information::.
      It is more widely available than ‘umount2’ but since it lacks the
      possibility to forcefully unmount a filesystem is deprecated when
      ‘umount2’ is also available.
-
-
-File: libc.info,  Node: System Configuration,  Next: Cryptographic Functions,  Prev: System Management,  Up: Top
-
-32 System Configuration Parameters
-**********************************
-
-The functions and macros listed in this chapter give information about
-configuration parameters of the operating system—for example, capacity
-limits, presence of optional POSIX features, and the default path for
-executable files (*note String Parameters::).
-
-* Menu:
-
-* General Limits::           Constants and functions that describe
-				various process-related limits that have
-				one uniform value for any given machine.
-* System Options::           Optional POSIX features.
-* Version Supported::        Version numbers of POSIX.1 and POSIX.2.
-* Sysconf::                  Getting specific configuration values
-                                of general limits and system options.
-* Minimums::                 Minimum values for general limits.
-
-* Limits for Files::         Size limitations that pertain to individual files.
-                                These can vary between file systems
-                                or even from file to file.
-* Options for Files::        Optional features that some files may support.
-* File Minimums::            Minimum values for file limits.
-* Pathconf::                 Getting the limit values for a particular file.
-
-* Utility Limits::           Capacity limits of some POSIX.2 utility programs.
-* Utility Minimums::         Minimum allowable values of those limits.
-
-* String Parameters::        Getting the default search path.
-
-
-File: libc.info,  Node: General Limits,  Next: System Options,  Up: System Configuration
-
-32.1 General Capacity Limits
-============================
-
-The POSIX.1 and POSIX.2 standards specify a number of parameters that
-describe capacity limitations of the system.  These limits can be fixed
-constants for a given operating system, or they can vary from machine to
-machine.  For example, some limit values may be configurable by the
-system administrator, either at run time or by rebuilding the kernel,
-and this should not require recompiling application programs.
-
-   Each of the following limit parameters has a macro that is defined in
-‘limits.h’ only if the system has a fixed, uniform limit for the
-parameter in question.  If the system allows different file systems or
-files to have different limits, then the macro is undefined; use
-‘sysconf’ to find out the limit that applies at a particular time on a
-particular machine.  *Note Sysconf::.
-
-   Each of these parameters also has another macro, with a name starting
-with ‘_POSIX’, which gives the lowest value that the limit is allowed to
-have on _any_ POSIX system.  *Note Minimums::.
-
- -- Macro: int ARG_MAX
-
-     If defined, the unvarying maximum combined length of the ARGV and
-     ENVIRON arguments that can be passed to the ‘exec’ functions.
-
- -- Macro: int CHILD_MAX
-
-     If defined, the unvarying maximum number of processes that can
-     exist with the same real user ID at any one time.  In BSD and GNU,
-     this is controlled by the ‘RLIMIT_NPROC’ resource limit; *note
-     Limits on Resources::.
-
- -- Macro: int OPEN_MAX
-
-     If defined, the unvarying maximum number of files that a single
-     process can have open simultaneously.  In BSD and GNU, this is
-     controlled by the ‘RLIMIT_NOFILE’ resource limit; *note Limits on
-     Resources::.
-
- -- Macro: int STREAM_MAX
-
-     If defined, the unvarying maximum number of streams that a single
-     process can have open simultaneously.  *Note Opening Streams::.
-
- -- Macro: int TZNAME_MAX
-
-     If defined, the unvarying maximum length of a time zone name.
-     *Note Time Zone Functions::.
-
-   These limit macros are always defined in ‘limits.h’.
-
- -- Macro: int NGROUPS_MAX
-
-     The maximum number of supplementary group IDs that one process can
-     have.
-
-     The value of this macro is actually a lower bound for the maximum.
-     That is, you can count on being able to have that many
-     supplementary group IDs, but a particular machine might let you
-     have even more.  You can use ‘sysconf’ to see whether a particular
-     machine will let you have more (*note Sysconf::).
-
- -- Macro: ssize_t SSIZE_MAX
-
-     The largest value that can fit in an object of type ‘ssize_t’.
-     Effectively, this is the limit on the number of bytes that can be
-     read or written in a single operation.
-
-     This macro is defined in all POSIX systems because this limit is
-     never configurable.
-
- -- Macro: int RE_DUP_MAX
-
-     The largest number of repetitions you are guaranteed is allowed in
-     the construct ‘\{MIN,MAX\}’ in a regular expression.
-
-     The value of this macro is actually a lower bound for the maximum.
-     That is, you can count on being able to have that many repetitions,
-     but a particular machine might let you have even more.  You can use
-     ‘sysconf’ to see whether a particular machine will let you have
-     more (*note Sysconf::).  And even the value that ‘sysconf’ tells
-     you is just a lower bound—larger values might work.
-
-     This macro is defined in all POSIX.2 systems, because POSIX.2 says
-     it should always be defined even if there is no specific imposed
-     limit.
-
-
-File: libc.info,  Node: System Options,  Next: Version Supported,  Prev: General Limits,  Up: System Configuration
-
-32.2 Overall System Options
-===========================
-
-POSIX defines certain system-specific options that not all POSIX systems
-support.  Since these options are provided in the kernel, not in the
-library, simply using the GNU C Library does not guarantee any of these
-features are supported; it depends on the system you are using.
-
-   You can test for the availability of a given option using the macros
-in this section, together with the function ‘sysconf’.  The macros are
-defined only if you include ‘unistd.h’.
-
-   For the following macros, if the macro is defined in ‘unistd.h’, then
-the option is supported.  Otherwise, the option may or may not be
-supported; use ‘sysconf’ to find out.  *Note Sysconf::.
-
- -- Macro: int _POSIX_JOB_CONTROL
-
-     If this symbol is defined, it indicates that the system supports
-     job control.  Otherwise, the implementation behaves as if all
-     processes within a session belong to a single process group.  *Note
-     Job Control::.  Systems conforming to the 2001 revision of POSIX,
-     or newer, will always define this symbol.
-
- -- Macro: int _POSIX_SAVED_IDS
-
-     If this symbol is defined, it indicates that the system remembers
-     the effective user and group IDs of a process before it executes an
-     executable file with the set-user-ID or set-group-ID bits set, and
-     that explicitly changing the effective user or group IDs back to
-     these values is permitted.  If this option is not defined, then if
-     a nonprivileged process changes its effective user or group ID to
-     the real user or group ID of the process, it can’t change it back
-     again.  *Note Enable/Disable Setuid::.
-
-   For the following macros, if the macro is defined in ‘unistd.h’, then
-its value indicates whether the option is supported.  A value of ‘-1’
-means no, and any other value means yes.  If the macro is not defined,
-then the option may or may not be supported; use ‘sysconf’ to find out.
-*Note Sysconf::.
-
- -- Macro: int _POSIX2_C_DEV
-
-     If this symbol is defined, it indicates that the system has the
-     POSIX.2 C compiler command, ‘c89’.  The GNU C Library always
-     defines this as ‘1’, on the assumption that you would not have
-     installed it if you didn’t have a C compiler.
-
- -- Macro: int _POSIX2_FORT_DEV
-
-     If this symbol is defined, it indicates that the system has the
-     POSIX.2 Fortran compiler command, ‘fort77’.  The GNU C Library
-     never defines this, because we don’t know what the system has.
-
- -- Macro: int _POSIX2_FORT_RUN
-
-     If this symbol is defined, it indicates that the system has the
-     POSIX.2 ‘asa’ command to interpret Fortran carriage control.  The
-     GNU C Library never defines this, because we don’t know what the
-     system has.
-
- -- Macro: int _POSIX2_LOCALEDEF
-
-     If this symbol is defined, it indicates that the system has the
-     POSIX.2 ‘localedef’ command.  The GNU C Library never defines this,
-     because we don’t know what the system has.
-
- -- Macro: int _POSIX2_SW_DEV
-
-     If this symbol is defined, it indicates that the system has the
-     POSIX.2 commands ‘ar’, ‘make’, and ‘strip’.  The GNU C Library
-     always defines this as ‘1’, on the assumption that you had to have
-     ‘ar’ and ‘make’ to install the library, and it’s unlikely that
-     ‘strip’ would be absent when those are present.
-
-
-File: libc.info,  Node: Version Supported,  Next: Sysconf,  Prev: System Options,  Up: System Configuration
-
-32.3 Which Version of POSIX is Supported
-========================================
-
- -- Macro: long int _POSIX_VERSION
-
-     This constant represents the version of the POSIX.1 standard to
-     which the implementation conforms.  For an implementation
-     conforming to the 1995 POSIX.1 standard, the value is the integer
-     ‘199506L’.
-
-     ‘_POSIX_VERSION’ is always defined (in ‘unistd.h’) in any POSIX
-     system.
-
-     *Usage Note:* Don’t try to test whether the system supports POSIX
-     by including ‘unistd.h’ and then checking whether ‘_POSIX_VERSION’
-     is defined.  On a non-POSIX system, this will probably fail because
-     there is no ‘unistd.h’.  We do not know of _any_ way you can
-     reliably test at compilation time whether your target system
-     supports POSIX or whether ‘unistd.h’ exists.
-
- -- Macro: long int _POSIX2_C_VERSION
-
-     This constant represents the version of the POSIX.2 standard which
-     the library and system kernel support.  We don’t know what value
-     this will be for the first version of the POSIX.2 standard, because
-     the value is based on the year and month in which the standard is
-     officially adopted.
-
-     The value of this symbol says nothing about the utilities installed
-     on the system.
-
-     *Usage Note:* You can use this macro to tell whether a POSIX.1
-     system library supports POSIX.2 as well.  Any POSIX.1 system
-     contains ‘unistd.h’, so include that file and then test ‘defined
-     (_POSIX2_C_VERSION)’.
-
-
-File: libc.info,  Node: Sysconf,  Next: Minimums,  Prev: Version Supported,  Up: System Configuration
-
-32.4 Using ‘sysconf’
-====================
-
-When your system has configurable system limits, you can use the
-‘sysconf’ function to find out the value that applies to any particular
-machine.  The function and the associated PARAMETER constants are
-declared in the header file ‘unistd.h’.
-
-* Menu:
-
-* Sysconf Definition::        Detailed specifications of ‘sysconf’.
-* Constants for Sysconf::     The list of parameters ‘sysconf’ can read.
-* Examples of Sysconf::       How to use ‘sysconf’ and the parameter
-				 macros properly together.
-

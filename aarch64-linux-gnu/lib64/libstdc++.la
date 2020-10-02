@@ -8,7 +8,7 @@
 dlname='libstdc++.so.6'
 
 # Names of this library.
-library_names='libstdc++.so.6.0.28 libstdc++.so.6 libstdc++.so'
+library_names='libstdc++.so.6.0.29 libstdc++.so.6 libstdc++.so'
 
 # The name of the static archive.
 old_library='libstdc++.a'
@@ -25,7 +25,7 @@ weak_library_names=''
 # Version information for libstdc++.
 current=6
 age=0
-revision=28
+revision=29
 
 # Is this an already installed library?
 installed=yes
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/../lib64'
+libdir='/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/lib/../lib64'

@@ -4704,9 +4704,9 @@ in turn take precedence over the configuration of GCC.
 
      The value of 'SOURCE_DATE_EPOCH' must be a UNIX timestamp, defined
      as the number of seconds (excluding leap seconds) since 01 Jan 1970
-     00:00:00 represented in ASCII; identical to the output of ''date
-     +%s'' on GNU/Linux and other systems that support the '%s'
-     extension in the 'date' command.
+     00:00:00 represented in ASCII; identical to the output of 'date
+     +%s' on GNU/Linux and other systems that support the '%s' extension
+     in the 'date' command.
 
      The value should be a known timestamp such as the last modification
      time of the source or package and it should be set by the build
@@ -5550,10 +5550,10 @@ Ref: dashMF170508
 Ref: fdollars-in-identifiers175087
 Ref: Wtrigraphs189213
 Node: Environment Variables191268
-Node: GNU Free Documentation License194961
-Node: Index of Directives220106
-Node: Option Index222259
-Node: Concept Index228288
+Node: GNU Free Documentation License194959
+Node: Index of Directives220104
+Node: Option Index222257
+Node: Concept Index228286
 
 End Tag Table
 

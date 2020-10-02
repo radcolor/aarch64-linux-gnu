@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2108,7 +2115,7 @@ Variable and Constant Macro Index
                                                               (line 582)
 * (*__gconv_init_fct):                   glibc iconv Implementation.
                                                               (line 409)
-* (void):                                Error Messages.      (line 234)
+* (void):                                Error Messages.      (line 257)
 * _ATFILE_SOURCE:                        Feature Test Macros. (line 237)
 * _Complex_I:                            Complex Numbers.     (line  21)
 * _CS_LFS64_CFLAGS:                      String Parameters.   (line  71)
@@ -2487,6 +2494,7 @@ Variable and Constant Macro Index
 * _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
 * _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __free_hook:                           Hooks for Malloc.    (line  37)
+* __libc_single_threaded:                Single-Threaded.     (line  15)
 * __malloc_hook:                         Hooks for Malloc.    (line  13)
 * __memalign_hook:                       Hooks for Malloc.    (line  49)
 * __realloc_hook:                        Hooks for Malloc.    (line  25)
@@ -2893,8 +2901,8 @@ Variable and Constant Macro Index
 * EROFS:                                 Error Codes.         (line 189)
 * ERPCMISMATCH:                          Error Codes.         (line 475)
 * errno:                                 Checking for Errors. (line  14)
-* error_message_count:                   Error Messages.      (line 246)
-* error_one_per_line:                    Error Messages.      (line 252)
+* error_message_count:                   Error Messages.      (line 269)
+* error_one_per_line:                    Error Messages.      (line 275)
 * ESHUTDOWN:                             Error Codes.         (line 392)
 * ESOCKTNOSUPPORT:                       Error Codes.         (line 303)
 * ESPIPE:                                Error Codes.         (line 185)
@@ -3619,8 +3627,8 @@ Variable and Constant Macro Index
                                                               (line  84)
 * PRIO_USER:                             Traditional Scheduling Functions.
                                                               (line  93)
-* program_invocation_name:               Error Messages.      (line  87)
-* program_invocation_short_name:         Error Messages.      (line  96)
+* program_invocation_name:               Error Messages.      (line 110)
+* program_invocation_short_name:         Error Messages.      (line 119)
 * PROT_EXEC:                             Memory Protection.   (line  22)
 * PROT_NONE:                             Memory Protection.   (line  28)
 * PROT_READ:                             Memory Protection.   (line  16)
@@ -3848,7 +3856,6 @@ Variable and Constant Macro Index
                                                               (line  70)
 * STREAM_MAX:                            General Limits.      (line  43)
 * SYMLINK_MAX:                           File Minimums.       (line  51)
-* sys_siglist:                           Signal Messages.     (line  49)
 * S_IEXEC:                               Permission Bits.     (line  32)
 * S_IFBLK:                               Testing File Type.   (line 106)
 * S_IFCHR:                               Testing File Type.   (line 102)
@@ -4192,18 +4199,22 @@ Program and File Index
 * stdlib.h <21>:                         Exit Status.         (line  43)
 * stdlib.h <22>:                         Aborting a Program.  (line   7)
 * stdlib.h <23>:                         Running a Command.   (line  34)
-* string.h:                              String Length.       (line   7)
-* string.h <1>:                          Copying Strings and Arrays.
+* string.h:                              Error Messages.      (line  83)
+* string.h <1>:                          Error Messages.      (line  95)
+* string.h <2>:                          String Length.       (line   7)
+* string.h <3>:                          Copying Strings and Arrays.
                                                               (line   9)
-* string.h <2>:                          Concatenating Strings.
+* string.h <4>:                          Concatenating Strings.
                                                               (line   6)
-* string.h <3>:                          String/Array Comparison.
+* string.h <5>:                          String/Array Comparison.
                                                               (line  22)
-* string.h <4>:                          Collation Functions. (line  18)
-* string.h <5>:                          Search Functions.    (line   8)
-* string.h <6>:                          Finding Tokens in a String.
+* string.h <6>:                          Collation Functions. (line  18)
+* string.h <7>:                          Search Functions.    (line   8)
+* string.h <8>:                          Finding Tokens in a String.
                                                               (line   9)
-* string.h <7>:                          Signal Messages.     (line  26)
+* string.h <9>:                          Signal Messages.     (line  26)
+* string.h <10>:                         Signal Messages.     (line  59)
+* string.h <11>:                         Signal Messages.     (line  70)
 * sys/param.h:                           Host Identification. (line  73)
 * sys/resource.h:                        Resource Usage.      (line   6)
 * sys/resource.h <1>:                    Limits on Resources. (line  26)

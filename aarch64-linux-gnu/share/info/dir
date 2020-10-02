@@ -39,6 +39,7 @@ GNU C library functions and macros
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _Complex_I: (libc)Complex Numbers.
 * _exit: (libc)Termination Internals.
 * _Exit: (libc)Termination Internals.
@@ -138,8 +139,6 @@ GNU C library functions and macros
 * asprintf: (libc)Dynamic Output.
 * assert_perror: (libc)Consistency Checking.
 * assert: (libc)Consistency Checking.
-* atan2fNx: (libc)Inverse Trig Functions.
-* atan2fN: (libc)Inverse Trig Functions.
 * atan2f: (libc)Inverse Trig Functions.
 * atan2: (libc)Inverse Trig Functions.
 * atanfNx: (libc)Inverse Trig Functions.
@@ -152,6 +151,8 @@ GNU C library functions and macros
 * atanh: (libc)Hyperbolic Functions.
 * atanl: (libc)Inverse Trig Functions.
 * atan: (libc)Inverse Trig Functions.
+* atan2fNx: (libc)Inverse Trig Functions.
+* atan2fN: (libc)Inverse Trig Functions.
 * atan2l: (libc)Inverse Trig Functions.
 * atexit: (libc)Cleanups on Exit.
 * atof: (libc)Parsing of Floats.
@@ -338,6 +339,7 @@ GNU C library functions and macros
 * cprojl: (libc)Operations on Complex.
 * cproj: (libc)Operations on Complex.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
@@ -611,16 +613,6 @@ GNU C library functions and macros
 * exit: (libc)Normal Termination.
 * EXIT_FAILURE: (libc)Exit Status.
 * EXIT_SUCCESS: (libc)Exit Status.
-* exp10fNx: (libc)Exponents and Logarithms.
-* exp10fN: (libc)Exponents and Logarithms.
-* exp10f: (libc)Exponents and Logarithms.
-* exp10l: (libc)Exponents and Logarithms.
-* exp10: (libc)Exponents and Logarithms.
-* exp2fNx: (libc)Exponents and Logarithms.
-* exp2fN: (libc)Exponents and Logarithms.
-* exp2f: (libc)Exponents and Logarithms.
-* exp2l: (libc)Exponents and Logarithms.
-* exp2: (libc)Exponents and Logarithms.
 * expfNx: (libc)Exponents and Logarithms.
 * expfN: (libc)Exponents and Logarithms.
 * expf: (libc)Exponents and Logarithms.
@@ -632,6 +624,16 @@ GNU C library functions and macros
 * expm1l: (libc)Exponents and Logarithms.
 * expm1: (libc)Exponents and Logarithms.
 * exp: (libc)Exponents and Logarithms.
+* exp10fNx: (libc)Exponents and Logarithms.
+* exp10fN: (libc)Exponents and Logarithms.
+* exp10f: (libc)Exponents and Logarithms.
+* exp10l: (libc)Exponents and Logarithms.
+* exp10: (libc)Exponents and Logarithms.
+* exp2fNx: (libc)Exponents and Logarithms.
+* exp2fN: (libc)Exponents and Logarithms.
+* exp2f: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
+* exp2: (libc)Exponents and Logarithms.
 * EXPR_NEST_MAX: (libc)Utility Limits.
 * F_DUPFD: (libc)Duplicating Descriptors.
 * F_GETFD: (libc)Descriptor Flags.
@@ -976,6 +978,7 @@ GNU C library functions and macros
 * grantpt: (libc)Allocation.
 * gsignal: (libc)Signaling Yourself.
 * gtty: (libc)BSD Terminal Modes.
+* HAS_CPU_FEATURE: (libc)X86.
 * hasmntopt: (libc)mtab.
 * hcreate_r: (libc)Hash Search Function.
 * hcreate: (libc)Hash Search Function.
@@ -1178,7 +1181,10 @@ GNU C library functions and macros
 * log1pf: (libc)Exponents and Logarithms.
 * log1pl: (libc)Exponents and Logarithms.
 * log1p: (libc)Exponents and Logarithms.
+* log2fNx: (libc)Exponents and Logarithms.
+* log2fN: (libc)Exponents and Logarithms.
 * log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
 * log2: (libc)Exponents and Logarithms.
 * logbfNx: (libc)Exponents and Logarithms.
 * logbfN: (libc)Exponents and Logarithms.
@@ -1194,9 +1200,6 @@ GNU C library functions and macros
 * logout: (libc)Logging In and Out.
 * logwtmp: (libc)Logging In and Out.
 * log: (libc)Exponents and Logarithms.
-* log2fNx: (libc)Exponents and Logarithms.
-* log2fN: (libc)Exponents and Logarithms.
-* log2l: (libc)Exponents and Logarithms.
 * longjmp: (libc)Non-Local Details.
 * lrand48_r: (libc)SVID Random.
 * lrand48: (libc)SVID Random.
@@ -1218,7 +1221,7 @@ GNU C library functions and macros
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * MAX_CANON: (libc)Limits for Files.
@@ -1495,10 +1498,10 @@ GNU C library functions and macros
 * rand: (libc)ISO Random.
 * rawmemchr: (libc)Search Functions.
 * RE_DUP_MAX: (libc)General Limits.
-* readdir64: (libc)Reading/Closing Directory.
 * readdir_r: (libc)Reading/Closing Directory.
 * readdir: (libc)Reading/Closing Directory.
 * readdir64_r: (libc)Reading/Closing Directory.
+* readdir64: (libc)Reading/Closing Directory.
 * readlink: (libc)Symbolic Links.
 * readv: (libc)Scatter-Gather.
 * read: (libc)I/O Primitives.
@@ -1663,6 +1666,7 @@ GNU C library functions and macros
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
 * SIG_ERR: (libc)Basic Signal Handling.
+* sigabbrev_np: (libc)Signal Messages.
 * SIGABRT: (libc)Program Error Signals.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
@@ -1674,6 +1678,7 @@ GNU C library functions and macros
 * SIGCLD: (libc)Job Control Signals.
 * SIGCONT: (libc)Job Control Signals.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * SIGEMT: (libc)Program Error Signals.
 * sigfillset: (libc)Signal Sets.
@@ -1757,11 +1762,11 @@ GNU C library functions and macros
 * sqrtf: (libc)Exponents and Logarithms.
 * sqrtl: (libc)Exponents and Logarithms.
 * sqrt: (libc)Exponents and Logarithms.
+* srand48_r: (libc)SVID Random.
+* srand48: (libc)SVID Random.
 * srandom_r: (libc)BSD Random.
 * srandom: (libc)BSD Random.
 * srand: (libc)ISO Random.
-* srand48_r: (libc)SVID Random.
-* srand48: (libc)SVID Random.
 * sscanf: (libc)Formatted Input Functions.
 * ssignal: (libc)Basic Signal Handling.
 * SSIZE_MAX: (libc)General Limits.
@@ -1783,6 +1788,8 @@ GNU C library functions and macros
 * strdup: (libc)Copying Strings and Arrays.
 * STREAM_MAX: (libc)General Limits.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strerror: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.

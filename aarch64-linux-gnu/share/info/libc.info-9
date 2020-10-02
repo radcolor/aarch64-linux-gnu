@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -4531,9 +4538,10 @@ do these operations, which mostly involve changing single bits.
      operation.  These functions, defined by TS 18661-1:2014 and TS
      18661-3:2015, return the payload of the NaN pointed to by X
      (returned as a positive integer, or positive zero, represented as a
-     floating-point number); if X is not a NaN, they return an
-     unspecified value.  They raise no floating-point exceptions even
-     for signaling NaNs.
+     floating-point number); if X is not a NaN, they return −1.  They
+     raise no floating-point exceptions even for signaling NaNs.  (The
+     return value of −1 for an argument that is not a NaN is specified
+     in C2x; the value was unspecified in TS 18661.)
 
  -- Function: int setpayload (double *X, double PAYLOAD)
  -- Function: int setpayloadf (float *X, float PAYLOAD)
@@ -6512,9 +6520,9 @@ declared in ‘sys/timex.h’.
      current values.
 
      In addition, ‘ntp_adjtime’ updates some settings to match what you
-     pass to it in *TPTR.  Use the ‘modes’ element of *TPTR to select
-     what settings to update.  You can set ‘offset’, ‘freq’, ‘maxerror’,
-     ‘esterror’, ‘status’, ‘constant’, and ‘tick’.
+     pass to it in ‘*TPTR’.  Use the ‘modes’ element of ‘*TPTR’ to
+     select what settings to update.  You can set ‘offset’, ‘freq’,
+     ‘maxerror’, ‘esterror’, ‘status’, ‘constant’, and ‘tick’.
 
      ‘modes’ = zero means set nothing.
 
@@ -6636,213 +6644,4 @@ to use the functions above.
      ‘ENOSYS’
           The operating system does not support setting time zone
           information, and TZP is not a null pointer.
-
-
-File: libc.info,  Node: Broken-down Time,  Next: Formatting Calendar Time,  Prev: Setting and Adjusting the Time,  Up: Calendar Time
-
-21.5.3 Broken-down Time
------------------------
-
-Simple calendar times represent absolute times as elapsed times since an
-epoch.  This is convenient for computation, but has no relation to the
-way people normally think of calendar time.  By contrast, “broken-down
-time” is a binary representation of calendar time separated into year,
-month, day, and so on.  Broken-down time values are not useful for
-calculations, but they are useful for printing human readable time
-information.
-
-   A broken-down time value is always relative to a choice of time zone,
-and it also indicates which time zone that is.
-
-   The symbols in this section are declared in the header file ‘time.h’.
-
- -- Data Type: struct tm
-
-     This is the data type used to represent a broken-down time.  The
-     structure contains at least the following members, which can appear
-     in any order.
-
-     ‘int tm_sec’
-          This is the number of full seconds since the top of the minute
-          (normally in the range ‘0’ through ‘59’, but the actual upper
-          limit is ‘60’, to allow for leap seconds if leap second
-          support is available).
-
-     ‘int tm_min’
-          This is the number of full minutes since the top of the hour
-          (in the range ‘0’ through ‘59’).
-
-     ‘int tm_hour’
-          This is the number of full hours past midnight (in the range
-          ‘0’ through ‘23’).
-
-     ‘int tm_mday’
-          This is the ordinal day of the month (in the range ‘1’ through
-          ‘31’).  Watch out for this one!  As the only ordinal number in
-          the structure, it is inconsistent with the rest of the
-          structure.
-
-     ‘int tm_mon’
-          This is the number of full calendar months since the beginning
-          of the year (in the range ‘0’ through ‘11’).  Watch out for
-          this one!  People usually use ordinal numbers for
-          month-of-year (where January = 1).
-
-     ‘int tm_year’
-          This is the number of full calendar years since 1900.
-
-     ‘int tm_wday’
-          This is the number of full days since Sunday (in the range ‘0’
-          through ‘6’).
-
-     ‘int tm_yday’
-          This is the number of full days since the beginning of the
-          year (in the range ‘0’ through ‘365’).
-
-     ‘int tm_isdst’
-          This is a flag that indicates whether Daylight Saving Time is
-          (or was, or will be) in effect at the time described.  The
-          value is positive if Daylight Saving Time is in effect, zero
-          if it is not, and negative if the information is not
-          available.
-
-     ‘long int tm_gmtoff’
-          This field describes the time zone that was used to compute
-          this broken-down time value, including any adjustment for
-          daylight saving; it is the number of seconds that you must add
-          to UTC to get local time.  You can also think of this as the
-          number of seconds east of UTC. For example, for U.S. Eastern
-          Standard Time, the value is ‘-5*60*60’.  The ‘tm_gmtoff’ field
-          is derived from BSD and is a GNU library extension; it is not
-          visible in a strict ISO C environment.
-
-     ‘const char *tm_zone’
-          This field is the name for the time zone that was used to
-          compute this broken-down time value.  Like ‘tm_gmtoff’, this
-          field is a BSD and GNU extension, and is not visible in a
-          strict ISO C environment.
-
- -- Function: struct tm * localtime (const time_t *TIME)
-
-     Preliminary: | MT-Unsafe race:tmbuf env locale | AS-Unsafe heap
-     lock | AC-Unsafe lock mem fd | *Note POSIX Safety Concepts::.
-
-     The ‘localtime’ function converts the simple time pointed to by
-     TIME to broken-down time representation, expressed relative to the
-     user’s specified time zone.
-
-     The return value is a pointer to a static broken-down time
-     structure, which might be overwritten by subsequent calls to
-     ‘ctime’, ‘gmtime’, or ‘localtime’.  (But no other library function
-     overwrites the contents of this object.)
-
-     The return value is the null pointer if TIME cannot be represented
-     as a broken-down time; typically this is because the year cannot
-     fit into an ‘int’.
-
-     Calling ‘localtime’ also sets the current time zone as if ‘tzset’
-     were called.  *Note Time Zone Functions::.
-
-   Using the ‘localtime’ function is a big problem in multi-threaded
-programs.  The result is returned in a static buffer and this is used in
-all threads.  POSIX.1c introduced a variant of this function.
-
- -- Function: struct tm * localtime_r (const time_t *TIME, struct tm
-          *RESULTP)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     The ‘localtime_r’ function works just like the ‘localtime’
-     function.  It takes a pointer to a variable containing a simple
-     time and converts it to the broken-down time format.
-
-     But the result is not placed in a static buffer.  Instead it is
-     placed in the object of type ‘struct tm’ to which the parameter
-     RESULTP points.
-
-     If the conversion is successful the function returns a pointer to
-     the object the result was written into, i.e., it returns RESULTP.
-
- -- Function: struct tm * gmtime (const time_t *TIME)
-
-     Preliminary: | MT-Unsafe race:tmbuf env locale | AS-Unsafe heap
-     lock | AC-Unsafe lock mem fd | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘localtime’, except that the
-     broken-down time is expressed as Coordinated Universal Time (UTC)
-     (formerly called Greenwich Mean Time (GMT)) rather than relative to
-     a local time zone.
-
-   As for the ‘localtime’ function we have the problem that the result
-is placed in a static variable.  POSIX.1c also provides a replacement
-for ‘gmtime’.
-
- -- Function: struct tm * gmtime_r (const time_t *TIME, struct tm
-          *RESULTP)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘localtime_r’, except that it converts
-     just like ‘gmtime’ the given time as Coordinated Universal Time.
-
-     If the conversion is successful the function returns a pointer to
-     the object the result was written into, i.e., it returns RESULTP.
-
- -- Function: time_t mktime (struct tm *BROKENTIME)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     The ‘mktime’ function converts a broken-down time structure to a
-     simple time representation.  It also normalizes the contents of the
-     broken-down time structure, and fills in some components based on
-     the values of the others.
-
-     The ‘mktime’ function ignores the specified contents of the
-     ‘tm_wday’, ‘tm_yday’, ‘tm_gmtoff’, and ‘tm_zone’ members of the
-     broken-down time structure.  It uses the values of the other
-     components to determine the calendar time; it’s permissible for
-     these components to have unnormalized values outside their normal
-     ranges.  The last thing that ‘mktime’ does is adjust the components
-     of the BROKENTIME structure, including the members that were
-     initially ignored.
-
-     If the specified broken-down time cannot be represented as a simple
-     time, ‘mktime’ returns a value of ‘(time_t)(-1)’ and does not
-     modify the contents of BROKENTIME.
-
-     Calling ‘mktime’ also sets the current time zone as if ‘tzset’ were
-     called; ‘mktime’ uses this information instead of BROKENTIME’s
-     initial ‘tm_gmtoff’ and ‘tm_zone’ members.  *Note Time Zone
-     Functions::.
-
- -- Function: time_t timelocal (struct tm *BROKENTIME)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     ‘timelocal’ is functionally identical to ‘mktime’, but more
-     mnemonically named.  Note that it is the inverse of the ‘localtime’
-     function.
-
-     *Portability note:* ‘mktime’ is essentially universally available.
-     ‘timelocal’ is rather rare.
-
- -- Function: time_t timegm (struct tm *BROKENTIME)
-
-     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
-     lock mem fd | *Note POSIX Safety Concepts::.
-
-     ‘timegm’ is functionally identical to ‘mktime’ except it always
-     takes the input values to be Coordinated Universal Time (UTC)
-     regardless of any local time zone setting.
-
-     Note that ‘timegm’ is the inverse of ‘gmtime’.
-
-     *Portability note:* ‘mktime’ is essentially universally available.
-     ‘timegm’ is rather rare.  For the most portable conversion from a
-     UTC broken-down time to a simple time, set the ‘TZ’ environment
-     variable to UTC, call ‘mktime’, then set ‘TZ’ back.
 

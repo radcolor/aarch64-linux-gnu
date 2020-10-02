@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2250,61 +2257,61 @@ File: libc.info,  Node: Statistics of Malloc,  Next: Summary of Malloc,  Prev: H
 .......................................................
 
 You can get information about dynamic memory allocation by calling the
-‘mallinfo’ function.  This function and its associated data type are
+‘mallinfo2’ function.  This function and its associated data type are
 declared in ‘malloc.h’; they are an extension of the standard SVID/XPG
 version.
 
- -- Data Type: struct mallinfo
+ -- Data Type: struct mallinfo2
 
      This structure type is used to return information about the dynamic
      memory allocator.  It contains the following members:
 
-     ‘int arena’
+     ‘size_t arena’
           This is the total size of memory allocated with ‘sbrk’ by
           ‘malloc’, in bytes.
 
-     ‘int ordblks’
+     ‘size_t ordblks’
           This is the number of chunks not in use.  (The memory
-          allocator internally gets chunks of memory from the operating
-          system, and then carves them up to satisfy individual ‘malloc’
-          requests; *note The GNU Allocator::.)
+          allocator size_ternally gets chunks of memory from the
+          operating system, and then carves them up to satisfy
+          individual ‘malloc’ requests; *note The GNU Allocator::.)
 
-     ‘int smblks’
+     ‘size_t smblks’
           This field is unused.
 
-     ‘int hblks’
+     ‘size_t hblks’
           This is the total number of chunks allocated with ‘mmap’.
 
-     ‘int hblkhd’
+     ‘size_t hblkhd’
           This is the total size of memory allocated with ‘mmap’, in
           bytes.
 
-     ‘int usmblks’
+     ‘size_t usmblks’
           This field is unused and always 0.
 
-     ‘int fsmblks’
+     ‘size_t fsmblks’
           This field is unused.
 
-     ‘int uordblks’
+     ‘size_t uordblks’
           This is the total size of memory occupied by chunks handed out
           by ‘malloc’.
 
-     ‘int fordblks’
+     ‘size_t fordblks’
           This is the total size of memory occupied by free (not in use)
           chunks.
 
-     ‘int keepcost’
+     ‘size_t keepcost’
           This is the size of the top-most releasable chunk that
           normally borders the end of the heap (i.e., the high end of
           the virtual address space’s data segment).
 
- -- Function: struct mallinfo mallinfo (void)
+ -- Function: struct mallinfo2 mallinfo2 (void)
 
      Preliminary: | MT-Unsafe init const:mallopt | AS-Unsafe init lock |
      AC-Unsafe init lock | *Note POSIX Safety Concepts::.
 
      This function returns information about the current dynamic memory
-     usage in a structure of type ‘struct mallinfo’.
+     usage in a structure of type ‘struct mallinfo2’.
 
 
 File: libc.info,  Node: Summary of Malloc,  Prev: Statistics of Malloc,  Up: Unconstrained Allocation
@@ -2372,7 +2379,7 @@ Here is a summary of the functions that work with ‘malloc’:
      A pointer to a function that ‘aligned_alloc’, ‘memalign’,
      ‘posix_memalign’ and ‘valloc’ use whenever they are called.
 
-‘struct mallinfo mallinfo (void)’
+‘struct mallinfo2 mallinfo2 (void)’
      Return information about the current dynamic memory usage.  *Note
      Statistics of Malloc::.
 
@@ -2671,7 +2678,7 @@ too.  Their names are listed in the following table.
    In addition, very old applications may use the obsolete ‘cfree’
 function.
 
-   Further ‘malloc’-related functions such as ‘mallopt’ or ‘mallinfo’
+   Further ‘malloc’-related functions such as ‘mallopt’ or ‘mallinfo2’
 will not have any effect or return incorrect statistics when a
 replacement ‘malloc’ is in use.  However, failure to replace these
 functions typically does not result in crashes or other incorrect
@@ -7414,37 +7421,4 @@ the affected data, whereever they may be.
 
      The GNU C Library declares this function in ‘string.h’, but on
      other systems it may be in ‘strings.h’ instead.
-
-
-File: libc.info,  Node: Shuffling Bytes,  Next: Obfuscating Data,  Prev: Erasing Sensitive Data,  Up: String and Array Utilities
-
-5.12 Shuffling Bytes
-====================
-
-The function below addresses the perennial programming quandary: “How do
-I take good data in string form and painlessly turn it into garbage?”
-This is not a difficult thing to code for oneself, but the authors of
-the GNU C Library wish to make it as convenient as possible.
-
-   To _erase_ data, use ‘explicit_bzero’ (*note Erasing Sensitive
-Data::); to obfuscate it reversibly, use ‘memfrob’ (*note Obfuscating
-Data::).
-
- -- Function: char * strfry (char *STRING)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘strfry’ performs an in-place shuffle on STRING.  Each character is
-     swapped to a position selected at random, within the portion of the
-     string starting with the character’s original position.  (This is
-     the Fisher-Yates algorithm for unbiased shuffling.)
-
-     Calling ‘strfry’ will not disturb any of the random number
-     generators that have global state (*note Pseudo-Random Numbers::).
-
-     The return value of ‘strfry’ is always STRING.
-
-     *Portability Note:* This function is unique to the GNU C Library.
-     It is declared in ‘string.h’.
 

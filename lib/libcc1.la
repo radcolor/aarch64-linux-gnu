@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/theradcolor/whyred/compilers/gnugcc/build-tools-gcc/aarch64-linux-gnu/lib/../lib'
+libdir='/drone/src/builder/aarch64-linux-gnu/lib/../lib'

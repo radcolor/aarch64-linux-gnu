@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2092,6 +2099,420 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Defining Handlers,  Next: Interrupted Primitives,  Prev: Signal Actions,  Up: Signal Handling
+
+24.4 Defining Signal Handlers
+=============================
+
+This section describes how to write a signal handler function that can
+be established with the ‘signal’ or ‘sigaction’ functions.
+
+   A signal handler is just a function that you compile together with
+the rest of the program.  Instead of directly invoking the function, you
+use ‘signal’ or ‘sigaction’ to tell the operating system to call it when
+a signal arrives.  This is known as “establishing” the handler.  *Note
+Signal Actions::.
+
+   There are two basic strategies you can use in signal handler
+functions:
+
+   • You can have the handler function note that the signal arrived by
+     tweaking some global data structures, and then return normally.
+
+   • You can have the handler function terminate the program or transfer
+     control to a point where it can recover from the situation that
+     caused the signal.
+
+   You need to take special care in writing handler functions because
+they can be called asynchronously.  That is, a handler might be called
+at any point in the program, unpredictably.  If two signals arrive
+during a very short interval, one handler can run within another.  This
+section describes what your handler should do, and what you should
+avoid.
+
+* Menu:
+
+* Handler Returns::             Handlers that return normally, and what
+                                 this means.
+* Termination in Handler::      How handler functions terminate a program.
+* Longjmp in Handler::          Nonlocal transfer of control out of a
+                                 signal handler.
+* Signals in Handler::          What happens when signals arrive while
+                                 the handler is already occupied.
+* Merged Signals::		When a second signal arrives before the
+				 first is handled.
+* Nonreentrancy::               Do not call any functions unless you know they
+                                 are reentrant with respect to signals.
+* Atomic Data Access::          A single handler can run in the middle of
+                                 reading or writing a single object.
+
+
+File: libc.info,  Node: Handler Returns,  Next: Termination in Handler,  Up: Defining Handlers
+
+24.4.1 Signal Handlers that Return
+----------------------------------
+
+Handlers which return normally are usually used for signals such as
+‘SIGALRM’ and the I/O and interprocess communication signals.  But a
+handler for ‘SIGINT’ might also return normally after setting a flag
+that tells the program to exit at a convenient time.
+
+   It is not safe to return normally from the handler for a program
+error signal, because the behavior of the program when the handler
+function returns is not defined after a program error.  *Note Program
+Error Signals::.
+
+   Handlers that return normally must modify some global variable in
+order to have any effect.  Typically, the variable is one that is
+examined periodically by the program during normal operation.  Its data
+type should be ‘sig_atomic_t’ for reasons described in *note Atomic Data
+Access::.
+
+   Here is a simple example of such a program.  It executes the body of
+the loop until it has noticed that a ‘SIGALRM’ signal has arrived.  This
+technique is useful because it allows the iteration in progress when the
+signal arrives to complete before the loop exits.
+
+
+     #include <signal.h>
+     #include <stdio.h>
+     #include <stdlib.h>
+
+     /* This flag controls termination of the main loop. */
+     volatile sig_atomic_t keep_going = 1;
+
+     /* The signal handler just clears the flag and re-enables itself. */
+     void
+     catch_alarm (int sig)
+     {
+       keep_going = 0;
+       signal (sig, catch_alarm);
+     }
+
+     void
+     do_stuff (void)
+     {
+       puts ("Doing stuff while waiting for alarm....");
+     }
+
+     int
+     main (void)
+     {
+       /* Establish a handler for SIGALRM signals. */
+       signal (SIGALRM, catch_alarm);
+
+       /* Set an alarm to go off in a little while. */
+       alarm (2);
+
+       /* Check the flag once in a while to see when to quit. */
+       while (keep_going)
+         do_stuff ();
+
+       return EXIT_SUCCESS;
+     }
+
+
+File: libc.info,  Node: Termination in Handler,  Next: Longjmp in Handler,  Prev: Handler Returns,  Up: Defining Handlers
+
+24.4.2 Handlers That Terminate the Process
+------------------------------------------
+
+Handler functions that terminate the program are typically used to cause
+orderly cleanup or recovery from program error signals and interactive
+interrupts.
+
+   The cleanest way for a handler to terminate the process is to raise
+the same signal that ran the handler in the first place.  Here is how to
+do this:
+
+     volatile sig_atomic_t fatal_error_in_progress = 0;
+
+     void
+     fatal_error_signal (int sig)
+     {
+       /* Since this handler is established for more than one kind of signal,
+          it might still get invoked recursively by delivery of some other kind
+          of signal.  Use a static variable to keep track of that. */
+       if (fatal_error_in_progress)
+         raise (sig);
+       fatal_error_in_progress = 1;
+
+       /* Now do the clean up actions:
+          - reset terminal modes
+          - kill child processes
+          - remove lock files */
+       ...
+
+       /* Now reraise the signal.  We reactivate the signal’s
+          default handling, which is to terminate the process.
+          We could just call ‘exit’ or ‘abort’,
+          but reraising the signal sets the return status
+          from the process correctly. */
+       signal (sig, SIG_DFL);
+       raise (sig);
+     }
+
+
+File: libc.info,  Node: Longjmp in Handler,  Next: Signals in Handler,  Prev: Termination in Handler,  Up: Defining Handlers
+
+24.4.3 Nonlocal Control Transfer in Handlers
+--------------------------------------------
+
+You can do a nonlocal transfer of control out of a signal handler using
+the ‘setjmp’ and ‘longjmp’ facilities (*note Non-Local Exits::).
+
+   When the handler does a nonlocal control transfer, the part of the
+program that was running will not continue.  If this part of the program
+was in the middle of updating an important data structure, the data
+structure will remain inconsistent.  Since the program does not
+terminate, the inconsistency is likely to be noticed later on.
+
+   There are two ways to avoid this problem.  One is to block the signal
+for the parts of the program that update important data structures.
+Blocking the signal delays its delivery until it is unblocked, once the
+critical updating is finished.  *Note Blocking Signals::.
+
+   The other way is to re-initialize the crucial data structures in the
+signal handler, or to make their values consistent.
+
+   Here is a rather schematic example showing the reinitialization of
+one global variable.
+
+     #include <signal.h>
+     #include <setjmp.h>
+
+     jmp_buf return_to_top_level;
+
+     volatile sig_atomic_t waiting_for_input;
+
+     void
+     handle_sigint (int signum)
+     {
+       /* We may have been waiting for input when the signal arrived,
+          but we are no longer waiting once we transfer control. */
+       waiting_for_input = 0;
+       longjmp (return_to_top_level, 1);
+     }
+
+     int
+     main (void)
+     {
+       ...
+       signal (SIGINT, sigint_handler);
+       ...
+       while (1) {
+         prepare_for_command ();
+         if (setjmp (return_to_top_level) == 0)
+           read_and_execute_command ();
+       }
+     }
+
+     /* Imagine this is a subroutine used by various commands. */
+     char *
+     read_data ()
+     {
+       if (input_from_terminal) {
+         waiting_for_input = 1;
+         ...
+         waiting_for_input = 0;
+       } else {
+         ...
+       }
+     }
+
+
+File: libc.info,  Node: Signals in Handler,  Next: Merged Signals,  Prev: Longjmp in Handler,  Up: Defining Handlers
+
+24.4.4 Signals Arriving While a Handler Runs
+--------------------------------------------
+
+What happens if another signal arrives while your signal handler
+function is running?
+
+   When the handler for a particular signal is invoked, that signal is
+automatically blocked until the handler returns.  That means that if two
+signals of the same kind arrive close together, the second one will be
+held until the first has been handled.  (The handler can explicitly
+unblock the signal using ‘sigprocmask’, if you want to allow more
+signals of this type to arrive; see *note Process Signal Mask::.)
+
+   However, your handler can still be interrupted by delivery of another
+kind of signal.  To avoid this, you can use the ‘sa_mask’ member of the
+action structure passed to ‘sigaction’ to explicitly specify which
+signals should be blocked while the signal handler runs.  These signals
+are in addition to the signal for which the handler was invoked, and any
+other signals that are normally blocked by the process.  *Note Blocking
+for Handler::.
+
+   When the handler returns, the set of blocked signals is restored to
+the value it had before the handler ran.  So using ‘sigprocmask’ inside
+the handler only affects what signals can arrive during the execution of
+the handler itself, not what signals can arrive once the handler
+returns.
+
+   *Portability Note:* Always use ‘sigaction’ to establish a handler for
+a signal that you expect to receive asynchronously, if you want your
+program to work properly on System V Unix.  On this system, the handling
+of a signal whose handler was established with ‘signal’ automatically
+sets the signal’s action back to ‘SIG_DFL’, and the handler must
+re-establish itself each time it runs.  This practice, while
+inconvenient, does work when signals cannot arrive in succession.
+However, if another signal can arrive right away, it may arrive before
+the handler can re-establish itself.  Then the second signal would
+receive the default handling, which could terminate the process.
+
+
+File: libc.info,  Node: Merged Signals,  Next: Nonreentrancy,  Prev: Signals in Handler,  Up: Defining Handlers
+
+24.4.5 Signals Close Together Merge into One
+--------------------------------------------
+
+If multiple signals of the same type are delivered to your process
+before your signal handler has a chance to be invoked at all, the
+handler may only be invoked once, as if only a single signal had
+arrived.  In effect, the signals merge into one.  This situation can
+arise when the signal is blocked, or in a multiprocessing environment
+where the system is busy running some other processes while the signals
+are delivered.  This means, for example, that you cannot reliably use a
+signal handler to count signals.  The only distinction you can reliably
+make is whether at least one signal has arrived since a given time in
+the past.
+
+   Here is an example of a handler for ‘SIGCHLD’ that compensates for
+the fact that the number of signals received may not equal the number of
+child processes that generate them.  It assumes that the program keeps
+track of all the child processes with a chain of structures as follows:
+
+     struct process
+     {
+       struct process *next;
+       /* The process ID of this child.  */
+       int pid;
+       /* The descriptor of the pipe or pseudo terminal
+          on which output comes from this child.  */
+       int input_descriptor;
+       /* Nonzero if this process has stopped or terminated.  */
+       sig_atomic_t have_status;
+       /* The status of this child; 0 if running,
+          otherwise a status value from ‘waitpid’.  */
+       int status;
+     };
+
+     struct process *process_list;
+
+   This example also uses a flag to indicate whether signals have
+arrived since some time in the past—whenever the program last cleared it
+to zero.
+
+     /* Nonzero means some child’s status has changed
+        so look at ‘process_list’ for the details.  */
+     int process_status_change;
+
+   Here is the handler itself:
+
+     void
+     sigchld_handler (int signo)
+     {
+       int old_errno = errno;
+
+       while (1) {
+         register int pid;
+         int w;
+         struct process *p;
+
+         /* Keep asking for a status until we get a definitive result.  */
+         do
+           {
+             errno = 0;
+             pid = waitpid (WAIT_ANY, &w, WNOHANG | WUNTRACED);
+           }
+         while (pid <= 0 && errno == EINTR);
+
+         if (pid <= 0) {
+           /* A real failure means there are no more
+              stopped or terminated child processes, so return.  */
+           errno = old_errno;
+           return;
+         }
+
+         /* Find the process that signaled us, and record its status.  */
+
+         for (p = process_list; p; p = p->next)
+           if (p->pid == pid) {
+             p->status = w;
+             /* Indicate that the ‘status’ field
+                has data to look at.  We do this only after storing it.  */
+             p->have_status = 1;
+
+             /* If process has terminated, stop waiting for its output.  */
+             if (WIFSIGNALED (w) || WIFEXITED (w))
+               if (p->input_descriptor)
+                 FD_CLR (p->input_descriptor, &input_wait_mask);
+
+             /* The program should check this flag from time to time
+                to see if there is any news in ‘process_list’.  */
+             ++process_status_change;
+           }
+
+         /* Loop around to handle all the processes
+            that have something to tell us.  */
+       }
+     }
+
+   Here is the proper way to check the flag ‘process_status_change’:
+
+     if (process_status_change) {
+       struct process *p;
+       process_status_change = 0;
+       for (p = process_list; p; p = p->next)
+         if (p->have_status) {
+           ... Examine ‘p->status’ ...
+         }
+     }
+
+It is vital to clear the flag before examining the list; otherwise, if a
+signal were delivered just before the clearing of the flag, and after
+the appropriate element of the process list had been checked, the status
+change would go unnoticed until the next signal arrived to set the flag
+again.  You could, of course, avoid this problem by blocking the signal
+while scanning the list, but it is much more elegant to guarantee
+correctness by doing things in the right order.
+
+   The loop which checks process status avoids examining ‘p->status’
+until it sees that status has been validly stored.  This is to make sure
+that the status cannot change in the middle of accessing it.  Once
+‘p->have_status’ is set, it means that the child process is stopped or
+terminated, and in either case, it cannot stop or terminate again until
+the program has taken notice.  *Note Atomic Usage::, for more
+information about coping with interruptions during accesses of a
+variable.
+
+   Here is another way you can test whether the handler has run since
+the last time you checked.  This technique uses a counter which is never
+changed outside the handler.  Instead of clearing the count, the program
+remembers the previous value and sees whether it has changed since the
+previous check.  The advantage of this method is that different parts of
+the program can check independently, each part checking whether there
+has been a signal since that part last checked.
+
+     sig_atomic_t process_status_change;
+
+     sig_atomic_t last_process_status_change;
+
+     ...
+     {
+       sig_atomic_t prev = last_process_status_change;
+       last_process_status_change = process_status_change;
+       if (last_process_status_change != prev) {
+         struct process *p;
+         for (p = process_list; p; p = p->next)
+           if (p->have_status) {
+             ... Examine ‘p->status’ ...
+           }
+       }
+     }
 
 
 File: libc.info,  Node: Nonreentrancy,  Next: Atomic Data Access,  Prev: Merged Signals,  Up: Defining Handlers
@@ -7111,342 +7532,4 @@ the streams in the pre-‘exec’ process image has a descriptor inside it,
 and these descriptors do survive through ‘exec’ (provided that they do
 not have ‘FD_CLOEXEC’ set).  The new process image can reconnect these
 to new streams using ‘fdopen’ (*note Descriptors and Streams::).
-
-
-File: libc.info,  Node: Process Completion,  Next: Process Completion Status,  Prev: Executing a File,  Up: Processes
-
-26.6 Process Completion
-=======================
-
-The functions described in this section are used to wait for a child
-process to terminate or stop, and determine its status.  These functions
-are declared in the header file ‘sys/wait.h’.
-
- -- Function: pid_t waitpid (pid_t PID, int *STATUS-PTR, int OPTIONS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘waitpid’ function is used to request status information from a
-     child process whose process ID is PID.  Normally, the calling
-     process is suspended until the child process makes status
-     information available by terminating.
-
-     Other values for the PID argument have special interpretations.  A
-     value of ‘-1’ or ‘WAIT_ANY’ requests status information for any
-     child process; a value of ‘0’ or ‘WAIT_MYPGRP’ requests information
-     for any child process in the same process group as the calling
-     process; and any other negative value − PGID requests information
-     for any child process whose process group ID is PGID.
-
-     If status information for a child process is available immediately,
-     this function returns immediately without waiting.  If more than
-     one eligible child process has status information available, one of
-     them is chosen randomly, and its status is returned immediately.
-     To get the status from the other eligible child processes, you need
-     to call ‘waitpid’ again.
-
-     The OPTIONS argument is a bit mask.  Its value should be the
-     bitwise OR (that is, the ‘|’ operator) of zero or more of the
-     ‘WNOHANG’ and ‘WUNTRACED’ flags.  You can use the ‘WNOHANG’ flag to
-     indicate that the parent process shouldn’t wait; and the
-     ‘WUNTRACED’ flag to request status information from stopped
-     processes as well as processes that have terminated.
-
-     The status information from the child process is stored in the
-     object that STATUS-PTR points to, unless STATUS-PTR is a null
-     pointer.
-
-     This function is a cancellation point in multi-threaded programs.
-     This is a problem if the thread allocates some resources (like
-     memory, file descriptors, semaphores or whatever) at the time
-     ‘waitpid’ is called.  If the thread gets canceled these resources
-     stay allocated until the program ends.  To avoid this calls to
-     ‘waitpid’ should be protected using cancellation handlers.
-
-     The return value is normally the process ID of the child process
-     whose status is reported.  If there are child processes but none of
-     them is waiting to be noticed, ‘waitpid’ will block until one is.
-     However, if the ‘WNOHANG’ option was specified, ‘waitpid’ will
-     return zero instead of blocking.
-
-     If a specific PID to wait for was given to ‘waitpid’, it will
-     ignore all other children (if any).  Therefore if there are
-     children waiting to be noticed but the child whose PID was
-     specified is not one of them, ‘waitpid’ will block or return zero
-     as described above.
-
-     A value of ‘-1’ is returned in case of error.  The following
-     ‘errno’ error conditions are defined for this function:
-
-     ‘EINTR’
-          The function was interrupted by delivery of a signal to the
-          calling process.  *Note Interrupted Primitives::.
-
-     ‘ECHILD’
-          There are no child processes to wait for, or the specified PID
-          is not a child of the calling process.
-
-     ‘EINVAL’
-          An invalid value was provided for the OPTIONS argument.
-
-   These symbolic constants are defined as values for the PID argument
-to the ‘waitpid’ function.
-
-‘WAIT_ANY’
-
-     This constant macro (whose value is ‘-1’) specifies that ‘waitpid’
-     should return status information about any child process.
-
-‘WAIT_MYPGRP’
-     This constant (with value ‘0’) specifies that ‘waitpid’ should
-     return status information about any child process in the same
-     process group as the calling process.
-
-   These symbolic constants are defined as flags for the OPTIONS
-argument to the ‘waitpid’ function.  You can bitwise-OR the flags
-together to obtain a value to use as the argument.
-
-‘WNOHANG’
-
-     This flag specifies that ‘waitpid’ should return immediately
-     instead of waiting, if there is no child process ready to be
-     noticed.
-
-‘WUNTRACED’
-
-     This flag specifies that ‘waitpid’ should report the status of any
-     child processes that have been stopped as well as those that have
-     terminated.
-
- -- Function: pid_t wait (int *STATUS-PTR)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This is a simplified version of ‘waitpid’, and is used to wait
-     until any one child process terminates.  The call:
-
-          wait (&status)
-
-     is exactly equivalent to:
-
-          waitpid (-1, &status, 0)
-
-     This function is a cancellation point in multi-threaded programs.
-     This is a problem if the thread allocates some resources (like
-     memory, file descriptors, semaphores or whatever) at the time
-     ‘wait’ is called.  If the thread gets canceled these resources stay
-     allocated until the program ends.  To avoid this calls to ‘wait’
-     should be protected using cancellation handlers.
-
- -- Function: pid_t wait4 (pid_t PID, int *STATUS-PTR, int OPTIONS,
-          struct rusage *USAGE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If USAGE is a null pointer, ‘wait4’ is equivalent to ‘waitpid (PID,
-     STATUS-PTR, OPTIONS)’.
-
-     If USAGE is not null, ‘wait4’ stores usage figures for the child
-     process in ‘*RUSAGE’ (but only if the child has terminated, not if
-     it has stopped).  *Note Resource Usage::.
-
-     This function is a BSD extension.
-
-   Here’s an example of how to use ‘waitpid’ to get the status from all
-child processes that have terminated, without ever waiting.  This
-function is designed to be a handler for ‘SIGCHLD’, the signal that
-indicates that at least one child process has terminated.
-
-     void
-     sigchld_handler (int signum)
-     {
-       int pid, status, serrno;
-       serrno = errno;
-       while (1)
-         {
-           pid = waitpid (WAIT_ANY, &status, WNOHANG);
-           if (pid < 0)
-             {
-               perror ("waitpid");
-               break;
-             }
-           if (pid == 0)
-             break;
-           notice_termination (pid, status);
-         }
-       errno = serrno;
-     }
-
-
-File: libc.info,  Node: Process Completion Status,  Next: BSD Wait Functions,  Prev: Process Completion,  Up: Processes
-
-26.7 Process Completion Status
-==============================
-
-If the exit status value (*note Program Termination::) of the child
-process is zero, then the status value reported by ‘waitpid’ or ‘wait’
-is also zero.  You can test for other kinds of information encoded in
-the returned status value using the following macros.  These macros are
-defined in the header file ‘sys/wait.h’.
-
- -- Macro: int WIFEXITED (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This macro returns a nonzero value if the child process terminated
-     normally with ‘exit’ or ‘_exit’.
-
- -- Macro: int WEXITSTATUS (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If ‘WIFEXITED’ is true of STATUS, this macro returns the low-order
-     8 bits of the exit status value from the child process.  *Note Exit
-     Status::.
-
- -- Macro: int WIFSIGNALED (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This macro returns a nonzero value if the child process terminated
-     because it received a signal that was not handled.  *Note Signal
-     Handling::.
-
- -- Macro: int WTERMSIG (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If ‘WIFSIGNALED’ is true of STATUS, this macro returns the signal
-     number of the signal that terminated the child process.
-
- -- Macro: int WCOREDUMP (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This macro returns a nonzero value if the child process terminated
-     and produced a core dump.
-
- -- Macro: int WIFSTOPPED (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This macro returns a nonzero value if the child process is stopped.
-
- -- Macro: int WSTOPSIG (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If ‘WIFSTOPPED’ is true of STATUS, this macro returns the signal
-     number of the signal that caused the child process to stop.
-
-
-File: libc.info,  Node: BSD Wait Functions,  Next: Process Creation Example,  Prev: Process Completion Status,  Up: Processes
-
-26.8 BSD Process Wait Function
-==============================
-
-The GNU C Library also provides the ‘wait3’ function for compatibility
-with BSD. This function is declared in ‘sys/wait.h’.  It is the
-predecessor to ‘wait4’, which is more flexible.  ‘wait3’ is now
-obsolete.
-
- -- Function: pid_t wait3 (int *STATUS-PTR, int OPTIONS, struct rusage
-          *USAGE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If USAGE is a null pointer, ‘wait3’ is equivalent to ‘waitpid (-1,
-     STATUS-PTR, OPTIONS)’.
-
-     If USAGE is not null, ‘wait3’ stores usage figures for the child
-     process in ‘*RUSAGE’ (but only if the child has terminated, not if
-     it has stopped).  *Note Resource Usage::.
-
-
-File: libc.info,  Node: Process Creation Example,  Prev: BSD Wait Functions,  Up: Processes
-
-26.9 Process Creation Example
-=============================
-
-Here is an example program showing how you might write a function
-similar to the built-in ‘system’.  It executes its COMMAND argument
-using the equivalent of ‘sh -c COMMAND’.
-
-     #include <stddef.h>
-     #include <stdlib.h>
-     #include <unistd.h>
-     #include <sys/types.h>
-     #include <sys/wait.h>
-
-     /* Execute the command using this shell program.  */
-     #define SHELL "/bin/sh"
-
-     int
-     my_system (const char *command)
-     {
-       int status;
-       pid_t pid;
-
-       pid = fork ();
-       if (pid == 0)
-         {
-           /* This is the child process.  Execute the shell command. */
-           execl (SHELL, SHELL, "-c", command, NULL);
-           _exit (EXIT_FAILURE);
-         }
-       else if (pid < 0)
-         /* The fork failed.  Report failure.  */
-         status = -1;
-       else
-         /* This is the parent process.  Wait for the child to complete.  */
-         if (waitpid (pid, &status, 0) != pid)
-           status = -1;
-       return status;
-     }
-
-   There are a couple of things you should pay attention to in this
-example.
-
-   Remember that the first ‘argv’ argument supplied to the program
-represents the name of the program being executed.  That is why, in the
-call to ‘execl’, ‘SHELL’ is supplied once to name the program to execute
-and a second time to supply a value for ‘argv[0]’.
-
-   The ‘execl’ call in the child process doesn’t return if it is
-successful.  If it fails, you must do something to make the child
-process terminate.  Just returning a bad status code with ‘return’ would
-leave two processes running the original program.  Instead, the right
-behavior is for the child process to report failure to its parent
-process.
-
-   Call ‘_exit’ to accomplish this.  The reason for using ‘_exit’
-instead of ‘exit’ is to avoid flushing fully buffered streams such as
-‘stdout’.  The buffers of these streams probably contain data that was
-copied from the parent process by the ‘fork’, data that will be output
-eventually by the parent process.  Calling ‘exit’ in the child would
-output the data twice.  *Note Termination Internals::.
-
-
-File: libc.info,  Node: Inter-Process Communication,  Next: Job Control,  Prev: Processes,  Up: Top
-
-27 Inter-Process Communication
-******************************
-
-This chapter describes the GNU C Library inter-process communication
-primitives.
-
-* Menu:
-
-* Semaphores::	Support for creating and managing semaphores
 

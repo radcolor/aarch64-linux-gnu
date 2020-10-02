@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2092,6 +2099,267 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+
+File: libc.info,  Node: System Configuration,  Next: Cryptographic Functions,  Prev: System Management,  Up: Top
+
+32 System Configuration Parameters
+**********************************
+
+The functions and macros listed in this chapter give information about
+configuration parameters of the operating system—for example, capacity
+limits, presence of optional POSIX features, and the default path for
+executable files (*note String Parameters::).
+
+* Menu:
+
+* General Limits::           Constants and functions that describe
+				various process-related limits that have
+				one uniform value for any given machine.
+* System Options::           Optional POSIX features.
+* Version Supported::        Version numbers of POSIX.1 and POSIX.2.
+* Sysconf::                  Getting specific configuration values
+                                of general limits and system options.
+* Minimums::                 Minimum values for general limits.
+
+* Limits for Files::         Size limitations that pertain to individual files.
+                                These can vary between file systems
+                                or even from file to file.
+* Options for Files::        Optional features that some files may support.
+* File Minimums::            Minimum values for file limits.
+* Pathconf::                 Getting the limit values for a particular file.
+
+* Utility Limits::           Capacity limits of some POSIX.2 utility programs.
+* Utility Minimums::         Minimum allowable values of those limits.
+
+* String Parameters::        Getting the default search path.
+
+
+File: libc.info,  Node: General Limits,  Next: System Options,  Up: System Configuration
+
+32.1 General Capacity Limits
+============================
+
+The POSIX.1 and POSIX.2 standards specify a number of parameters that
+describe capacity limitations of the system.  These limits can be fixed
+constants for a given operating system, or they can vary from machine to
+machine.  For example, some limit values may be configurable by the
+system administrator, either at run time or by rebuilding the kernel,
+and this should not require recompiling application programs.
+
+   Each of the following limit parameters has a macro that is defined in
+‘limits.h’ only if the system has a fixed, uniform limit for the
+parameter in question.  If the system allows different file systems or
+files to have different limits, then the macro is undefined; use
+‘sysconf’ to find out the limit that applies at a particular time on a
+particular machine.  *Note Sysconf::.
+
+   Each of these parameters also has another macro, with a name starting
+with ‘_POSIX’, which gives the lowest value that the limit is allowed to
+have on _any_ POSIX system.  *Note Minimums::.
+
+ -- Macro: int ARG_MAX
+
+     If defined, the unvarying maximum combined length of the ARGV and
+     ENVIRON arguments that can be passed to the ‘exec’ functions.
+
+ -- Macro: int CHILD_MAX
+
+     If defined, the unvarying maximum number of processes that can
+     exist with the same real user ID at any one time.  In BSD and GNU,
+     this is controlled by the ‘RLIMIT_NPROC’ resource limit; *note
+     Limits on Resources::.
+
+ -- Macro: int OPEN_MAX
+
+     If defined, the unvarying maximum number of files that a single
+     process can have open simultaneously.  In BSD and GNU, this is
+     controlled by the ‘RLIMIT_NOFILE’ resource limit; *note Limits on
+     Resources::.
+
+ -- Macro: int STREAM_MAX
+
+     If defined, the unvarying maximum number of streams that a single
+     process can have open simultaneously.  *Note Opening Streams::.
+
+ -- Macro: int TZNAME_MAX
+
+     If defined, the unvarying maximum length of a time zone name.
+     *Note Time Zone Functions::.
+
+   These limit macros are always defined in ‘limits.h’.
+
+ -- Macro: int NGROUPS_MAX
+
+     The maximum number of supplementary group IDs that one process can
+     have.
+
+     The value of this macro is actually a lower bound for the maximum.
+     That is, you can count on being able to have that many
+     supplementary group IDs, but a particular machine might let you
+     have even more.  You can use ‘sysconf’ to see whether a particular
+     machine will let you have more (*note Sysconf::).
+
+ -- Macro: ssize_t SSIZE_MAX
+
+     The largest value that can fit in an object of type ‘ssize_t’.
+     Effectively, this is the limit on the number of bytes that can be
+     read or written in a single operation.
+
+     This macro is defined in all POSIX systems because this limit is
+     never configurable.
+
+ -- Macro: int RE_DUP_MAX
+
+     The largest number of repetitions you are guaranteed is allowed in
+     the construct ‘\{MIN,MAX\}’ in a regular expression.
+
+     The value of this macro is actually a lower bound for the maximum.
+     That is, you can count on being able to have that many repetitions,
+     but a particular machine might let you have even more.  You can use
+     ‘sysconf’ to see whether a particular machine will let you have
+     more (*note Sysconf::).  And even the value that ‘sysconf’ tells
+     you is just a lower bound—larger values might work.
+
+     This macro is defined in all POSIX.2 systems, because POSIX.2 says
+     it should always be defined even if there is no specific imposed
+     limit.
+
+
+File: libc.info,  Node: System Options,  Next: Version Supported,  Prev: General Limits,  Up: System Configuration
+
+32.2 Overall System Options
+===========================
+
+POSIX defines certain system-specific options that not all POSIX systems
+support.  Since these options are provided in the kernel, not in the
+library, simply using the GNU C Library does not guarantee any of these
+features are supported; it depends on the system you are using.
+
+   You can test for the availability of a given option using the macros
+in this section, together with the function ‘sysconf’.  The macros are
+defined only if you include ‘unistd.h’.
+
+   For the following macros, if the macro is defined in ‘unistd.h’, then
+the option is supported.  Otherwise, the option may or may not be
+supported; use ‘sysconf’ to find out.  *Note Sysconf::.
+
+ -- Macro: int _POSIX_JOB_CONTROL
+
+     If this symbol is defined, it indicates that the system supports
+     job control.  Otherwise, the implementation behaves as if all
+     processes within a session belong to a single process group.  *Note
+     Job Control::.  Systems conforming to the 2001 revision of POSIX,
+     or newer, will always define this symbol.
+
+ -- Macro: int _POSIX_SAVED_IDS
+
+     If this symbol is defined, it indicates that the system remembers
+     the effective user and group IDs of a process before it executes an
+     executable file with the set-user-ID or set-group-ID bits set, and
+     that explicitly changing the effective user or group IDs back to
+     these values is permitted.  If this option is not defined, then if
+     a nonprivileged process changes its effective user or group ID to
+     the real user or group ID of the process, it can’t change it back
+     again.  *Note Enable/Disable Setuid::.
+
+   For the following macros, if the macro is defined in ‘unistd.h’, then
+its value indicates whether the option is supported.  A value of ‘-1’
+means no, and any other value means yes.  If the macro is not defined,
+then the option may or may not be supported; use ‘sysconf’ to find out.
+*Note Sysconf::.
+
+ -- Macro: int _POSIX2_C_DEV
+
+     If this symbol is defined, it indicates that the system has the
+     POSIX.2 C compiler command, ‘c89’.  The GNU C Library always
+     defines this as ‘1’, on the assumption that you would not have
+     installed it if you didn’t have a C compiler.
+
+ -- Macro: int _POSIX2_FORT_DEV
+
+     If this symbol is defined, it indicates that the system has the
+     POSIX.2 Fortran compiler command, ‘fort77’.  The GNU C Library
+     never defines this, because we don’t know what the system has.
+
+ -- Macro: int _POSIX2_FORT_RUN
+
+     If this symbol is defined, it indicates that the system has the
+     POSIX.2 ‘asa’ command to interpret Fortran carriage control.  The
+     GNU C Library never defines this, because we don’t know what the
+     system has.
+
+ -- Macro: int _POSIX2_LOCALEDEF
+
+     If this symbol is defined, it indicates that the system has the
+     POSIX.2 ‘localedef’ command.  The GNU C Library never defines this,
+     because we don’t know what the system has.
+
+ -- Macro: int _POSIX2_SW_DEV
+
+     If this symbol is defined, it indicates that the system has the
+     POSIX.2 commands ‘ar’, ‘make’, and ‘strip’.  The GNU C Library
+     always defines this as ‘1’, on the assumption that you had to have
+     ‘ar’ and ‘make’ to install the library, and it’s unlikely that
+     ‘strip’ would be absent when those are present.
+
+
+File: libc.info,  Node: Version Supported,  Next: Sysconf,  Prev: System Options,  Up: System Configuration
+
+32.3 Which Version of POSIX is Supported
+========================================
+
+ -- Macro: long int _POSIX_VERSION
+
+     This constant represents the version of the POSIX.1 standard to
+     which the implementation conforms.  For an implementation
+     conforming to the 1995 POSIX.1 standard, the value is the integer
+     ‘199506L’.
+
+     ‘_POSIX_VERSION’ is always defined (in ‘unistd.h’) in any POSIX
+     system.
+
+     *Usage Note:* Don’t try to test whether the system supports POSIX
+     by including ‘unistd.h’ and then checking whether ‘_POSIX_VERSION’
+     is defined.  On a non-POSIX system, this will probably fail because
+     there is no ‘unistd.h’.  We do not know of _any_ way you can
+     reliably test at compilation time whether your target system
+     supports POSIX or whether ‘unistd.h’ exists.
+
+ -- Macro: long int _POSIX2_C_VERSION
+
+     This constant represents the version of the POSIX.2 standard which
+     the library and system kernel support.  We don’t know what value
+     this will be for the first version of the POSIX.2 standard, because
+     the value is based on the year and month in which the standard is
+     officially adopted.
+
+     The value of this symbol says nothing about the utilities installed
+     on the system.
+
+     *Usage Note:* You can use this macro to tell whether a POSIX.1
+     system library supports POSIX.2 as well.  Any POSIX.1 system
+     contains ‘unistd.h’, so include that file and then test ‘defined
+     (_POSIX2_C_VERSION)’.
+
+
+File: libc.info,  Node: Sysconf,  Next: Minimums,  Prev: Version Supported,  Up: System Configuration
+
+32.4 Using ‘sysconf’
+====================
+
+When your system has configurable system limits, you can use the
+‘sysconf’ function to find out the value that applies to any particular
+machine.  The function and the associated PARAMETER constants are
+declared in the header file ‘unistd.h’.
+
+* Menu:
+
+* Sysconf Definition::        Detailed specifications of ‘sysconf’.
+* Constants for Sysconf::     The list of parameters ‘sysconf’ can read.
+* Examples of Sysconf::       How to use ‘sysconf’ and the parameter
+				 macros properly together.
 
 
 File: libc.info,  Node: Sysconf Definition,  Next: Constants for Sysconf,  Up: Sysconf
@@ -4635,6 +4903,7 @@ not specified in the standard.
 * Initial Thread Signal Mask::            Setting the initial mask of threads.
 * Waiting with Explicit Clocks::          Functions for waiting with an
                                           explicit clock specification.
+* Single-Threaded::                       Detecting single-threaded execution.
 
 
 File: libc.info,  Node: Default Thread Attributes,  Next: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
@@ -4739,7 +5008,7 @@ signal mask and use ‘pthread_sigmask’ to apply it to the thread.  If the
 signal mask was copied to a heap allocation, the copy should be freed.
 
 
-File: libc.info,  Node: Waiting with Explicit Clocks,  Prev: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
+File: libc.info,  Node: Waiting with Explicit Clocks,  Next: Single-Threaded,  Prev: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
 
 35.2.2.3 Functions for Waiting According to a Specific Clock
 ............................................................
@@ -4820,6 +5089,105 @@ explicit ‘clockid_t’ argument.
 
      Behaves like ‘pthread_timedjoin_np’ except that the absolute time
      in ABSTIME is measured against the clock specified by CLOCKID.
+
+
+File: libc.info,  Node: Single-Threaded,  Prev: Waiting with Explicit Clocks,  Up: Non-POSIX Extensions
+
+35.2.2.4 Detecting Single-Threaded Execution
+............................................
+
+Multi-threaded programs require synchronization among threads.  This
+synchronization can be costly even if there is just a single thread and
+no data is shared between multiple processors.  The GNU C Library offers
+an interface to detect whether the process is in single-threaded mode.
+Applications can use this information to avoid synchronization, for
+example by using regular instructions to load and store memory instead
+of atomic instructions, or using relaxed memory ordering instead of
+stronger memory ordering.
+
+ -- Variable: char __libc_single_threaded
+
+     This variable is non-zero if the current process is definitely
+     single-threaded.  If it is zero, the process may be multi-threaded,
+     or the GNU C Library cannot determine at this point of the program
+     execution whether the process is single-threaded or not.
+
+     Applications must never write to this variable.
+
+   Most applications should perform the same actions whether or not
+‘__libc_single_threaded’ is true, except with less synchronization.  If
+this rule is followed, a process that subsequently becomes
+multi-threaded is already in a consistent state.  For example, in order
+to increment a reference count, the following code can be used:
+
+     if (__libc_single_threaded)
+       atomic_fetch_add (&reference_count, 1, memory_order_relaxed);
+     else
+       atomic_fetch_add (&reference_count, 1, memory_order_acq_rel);
+
+   This still requires some form of synchronization on the
+single-threaded branch, so it can be beneficial not to declare the
+reference count as ‘_Atomic’, and use the GCC ‘__atomic’ built-ins.
+*Note Built-in Functions for Memory Model Aware Atomic Operations:
+(gcc)__atomic Builtins.  Then the code to increment a reference count
+looks like this:
+
+     if (__libc_single_threaded)
+       ++refeference_count;
+     else
+       __atomic_fetch_add (&reference_count, 1, __ATOMIC_ACQ_REL);
+
+   (Depending on the data associated with the reference count, it may be
+possible to use the weaker ‘__ATOMIC_RELAXED’ memory ordering on the
+multi-threaded branch.)
+
+   Several functions in the GNU C Library can change the value of the
+‘__libc_single_threaded’ variable.  For example, creating new threads
+using the ‘pthread_create’ or ‘thrd_create’ function sets the variable
+to false.  This can also happen indirectly, say via a call to ‘dlopen’.
+Therefore, applications need to make a copy of the value of
+‘__libc_single_threaded’ if after such a function call, behavior must
+match the value as it was before the call, like this:
+
+     bool single_threaded = __libc_single_threaded;
+     if (single_threaded)
+       prepare_single_threaded ();
+     else
+       prepare_multi_thread ();
+
+     void *handle = dlopen (shared_library_name, RTLD_NOW);
+     lookup_symbols (handle);
+
+     if (single_threaded)
+       cleanup_single_threaded ();
+     else
+       cleanup_multi_thread ();
+
+   Since the value of ‘__libc_single_threaded’ can change from true to
+false during the execution of the program, it is not useful for
+selecting optimized function implementations in IFUNC resolvers.
+
+   Atomic operations can also be used on mappings shared among
+single-threaded processes.  This means that a compiler must not use
+‘__libc_single_threaded’ to optimize atomic operations, unless it is
+able to prove that the memory is not shared.
+
+   *Implementation Note:* The ‘__libc_single_threaded’ variable is not
+declared as ‘volatile’ because it is expected that compilers optimize a
+sequence of single-threaded checks into one check, for example if
+several reference counts are updated.  The current implementation in the
+GNU C Library does not set the ‘__libc_single_threaded’ variable to a
+true value if a process turns single-threaded again.  Future versions of
+the GNU C Library may do this, but only as the result of function calls
+which imply an acquire (compiler) barrier.  (Some compilers assume that
+well-known functions such as ‘malloc’ do not write to global variables,
+and setting ‘__libc_single_threaded’ would introduce a data race and
+undefined behavior.)  In any case, an application must not write to
+‘__libc_single_threaded’ even if it has joined the last
+application-created thread because future versions of the GNU C Library
+may create background threads after the first thread has been created,
+and the application has no way of knowning that these threads are
+present.
 
 
 File: libc.info,  Node: Internal Probes,  Next: Tunables,  Prev: Threads,  Up: Top
@@ -5221,6 +5589,7 @@ under their own namespace.
 
 * Tunable names::  The structure of a tunable name
 * Memory Allocation Tunables::  Tunables in the memory allocation subsystem
+* Dynamic Linking Tunables:: Tunables in the dynamic linking subsystem
 * Elision Tunables::  Tunables in elision subsystem
 * POSIX Thread Tunables:: Tunables in the POSIX thread subsystem
 * Hardware Capability Tunables::  Tunables that modify the hardware
@@ -5249,7 +5618,7 @@ identification of tunables by their full name, i.e.  with the top
 namespace, tunable namespace and tunable name, separated by periods.
 
 
-File: libc.info,  Node: Memory Allocation Tunables,  Next: Elision Tunables,  Prev: Tunable names,  Up: Tunables
+File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunables,  Prev: Tunable names,  Up: Tunables
 
 37.2 Memory Allocation Tunables
 ===============================
@@ -5409,9 +5778,50 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Elision Tunables,  Pr
      enable.
 
 
-File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: Memory Allocation Tunables,  Up: Tunables
+File: libc.info,  Node: Dynamic Linking Tunables,  Next: Elision Tunables,  Prev: Memory Allocation Tunables,  Up: Tunables
 
-37.3 Elision Tunables
+37.3 Dynamic Linking Tunables
+=============================
+
+ -- Tunable namespace: glibc.rtld
+     Dynamic linker behavior can be modified by setting the following
+     tunables in the ‘rtld’ namespace:
+
+ -- Tunable: glibc.rtld.nns
+     Sets the number of supported dynamic link namespaces (see
+     ‘dlmopen’).  Currently this limit can be set between 1 and 16
+     inclusive, the default is 4.  Each link namespace consumes some
+     memory in all thread, and thus raising the limit will increase the
+     amount of memory each thread uses.  Raising the limit is useful
+     when your application uses more than 4 dynamic link namespaces as
+     created by ‘dlmopen’ with an lmid argument of ‘LM_ID_NEWLM’.
+     Dynamic linker audit modules are loaded in their own dynamic link
+     namespaces, but they are not accounted for in ‘glibc.rtld.nns’.
+     They implicitly increase the per-thread memory usage as necessary,
+     so this tunable does not need to be changed to allow many audit
+     modules e.g.  via ‘LD_AUDIT’.
+
+ -- Tunable: glibc.rtld.optional_static_tls
+     Sets the amount of surplus static TLS in bytes to allocate at
+     program startup.  Every thread created allocates this amount of
+     specified surplus static TLS. This is a minimum value and
+     additional space may be allocated for internal purposes including
+     alignment.  Optional static TLS is used for optimizing dynamic TLS
+     access for platforms that support such optimizations e.g.  TLS
+     descriptors or optimized TLS access for POWER (‘DT_PPC64_OPT’ and
+     ‘DT_PPC_OPT’).  In order to make the best use of such optimizations
+     the value should be as many bytes as would be required to hold all
+     TLS variables in all dynamic loaded shared libraries.  The value
+     cannot be known by the dynamic loader because it doesn’t know the
+     expected set of shared libraries which will be loaded.  The
+     existing static TLS space cannot be changed once allocated at
+     process startup.  The default allocation of optional static TLS is
+     512 bytes and is allocated in every thread.
+
+
+File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: Dynamic Linking Tunables,  Up: Tunables
+
+37.4 Elision Tunables
 =====================
 
  -- Tunable namespace: glibc.elision
@@ -5476,7 +5886,7 @@ File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: M
 
 File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunables,  Prev: Elision Tunables,  Up: Tunables
 
-37.4 POSIX Thread Tunables
+37.5 POSIX Thread Tunables
 ==========================
 
  -- Tunable namespace: glibc.pthread
@@ -5500,7 +5910,7 @@ File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunabl
 
 File: libc.info,  Node: Hardware Capability Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
 
-37.5 Hardware Capability Tunables
+37.6 Hardware Capability Tunables
 =================================
 
  -- Tunable namespace: glibc.cpu
@@ -5556,7 +5966,25 @@ File: libc.info,  Node: Hardware Capability Tunables,  Prev: POSIX Thread Tunabl
 
  -- Tunable: glibc.cpu.x86_non_temporal_threshold
      The ‘glibc.cpu.x86_non_temporal_threshold’ tunable allows the user
-     to set threshold in bytes for non temporal store.
+     to set threshold in bytes for non temporal store.  Non temporal
+     stores give a hint to the hardware to move data directly to memory
+     without displacing other data from the cache.  This tunable is used
+     by some platforms to determine when to use non temporal stores in
+     operations like memmove and memcpy.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_rep_movsb_threshold
+     The ‘glibc.cpu.x86_rep_movsb_threshold’ tunable allows the user to
+     set threshold in bytes to start using "rep movsb".  The value must
+     be greater than zero, and currently defaults to 2048 bytes.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_rep_stosb_threshold
+     The ‘glibc.cpu.x86_rep_stosb_threshold’ tunable allows the user to
+     set threshold in bytes to start using "rep stosb".  The value must
+     be greater than zero, and currently defaults to 2048 bytes.
 
      This tunable is specific to i386 and x86-64.
 
@@ -10745,6 +11173,10 @@ it.
 
      ‘gconv.h’ (GNU): *note glibc iconv Implementation::.
 
+‘char __libc_single_threaded’
+
+     ‘sys/single_threaded.h’ (GNU): *note Single-Threaded::.
+
 ‘__malloc_hook’
 
      ‘malloc.h’ (GNU): *note Hooks for Malloc::.
@@ -14629,11 +15061,11 @@ it.
 
      ‘ucontext.h’ (SVID): *note System V contexts::.
 
-‘struct mallinfo’
+‘struct mallinfo2’
 
      ‘malloc.h’ (GNU): *note Statistics of Malloc::.
 
-‘struct mallinfo mallinfo (void)’
+‘struct mallinfo2 mallinfo2 (void)’
 
      ‘malloc.h’ (SVID): *note Statistics of Malloc::.
 
@@ -16138,6 +16570,10 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 
      ‘signal.h’ (ISO): *note Atomic Types::.
 
+‘const char * sigabbrev_np (int SIGNUM)’
+
+     ‘string.h’ (GNU): *note Signal Messages::.
+
 ‘int sigaction (int SIGNUM, const struct sigaction *restrict ACTION, struct sigaction *restrict OLD-ACTION)’
 
      ‘signal.h’ (POSIX.1): *note Advanced Signal Handling::.
@@ -16161,6 +16597,10 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 ‘int sigdelset (sigset_t *SET, int SIGNUM)’
 
      ‘signal.h’ (POSIX.1): *note Signal Sets::.
+
+‘const char * sigdescr_np (int SIGNUM)’
+
+     ‘string.h’ (GNU): *note Signal Messages::.
 
 ‘int sigemptyset (sigset_t *SET)’
 
@@ -16497,6 +16937,14 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
      ‘string.h’ (ISO): *note Error Messages::.
 
 ‘char * strerror_r (int ERRNUM, char *BUF, size_t N)’
+
+     ‘string.h’ (GNU): *note Error Messages::.
+
+‘const char * strerrordesc_np (int ERRNUM)’
+
+     ‘string.h’ (GNU): *note Error Messages::.
+
+‘const char * strerrorname_np (int ERRNUM)’
 
      ‘string.h’ (GNU): *note Error Messages::.
 

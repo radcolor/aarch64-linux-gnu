@@ -428,6 +428,13 @@ extern int __xpg_strerror_r (int __errnum, char *__buf, size_t __buflen)
 extern char *strerror_r (int __errnum, char *__buf, size_t __buflen)
      __THROW __nonnull ((2)) __wur  __attr_access ((__write_only__, 2, 3));
 # endif
+
+# ifdef __USE_GNU
+/* Return a string describing the meaning of tthe error in ERR.  */
+extern const char *strerrordesc_np (int __err) __THROW;
+/* Return a string with the error name in ERR.  */
+extern const char *strerrorname_np (int __err) __THROW;
+# endif
 #endif
 
 #ifdef __USE_XOPEN2K8
@@ -453,6 +460,14 @@ extern char *strsep (char **__restrict __stringp,
 #ifdef	__USE_XOPEN2K8
 /* Return a string describing the meaning of the signal number in SIG.  */
 extern char *strsignal (int __sig) __THROW;
+
+# ifdef __USE_GNU
+/* Return an abbreviation string for the signal number SIG.  */
+extern const char *sigabbrev_np (int __sig) __THROW;
+/* Return a string describing the meaning of the signal number in SIG,
+   the result is not translated.  */
+extern const char *sigdescr_np (int __sig) __THROW;
+# endif
 
 /* Copy SRC to DEST, returning the address of the terminating '\0' in DEST.  */
 extern char *__stpcpy (char *__restrict __dest, const char *__restrict __src)

@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2092,6 +2099,215 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Broken-down Time,  Next: Formatting Calendar Time,  Prev: Setting and Adjusting the Time,  Up: Calendar Time
+
+21.5.3 Broken-down Time
+-----------------------
+
+Simple calendar times represent absolute times as elapsed times since an
+epoch.  This is convenient for computation, but has no relation to the
+way people normally think of calendar time.  By contrast, “broken-down
+time” is a binary representation of calendar time separated into year,
+month, day, and so on.  Broken-down time values are not useful for
+calculations, but they are useful for printing human readable time
+information.
+
+   A broken-down time value is always relative to a choice of time zone,
+and it also indicates which time zone that is.
+
+   The symbols in this section are declared in the header file ‘time.h’.
+
+ -- Data Type: struct tm
+
+     This is the data type used to represent a broken-down time.  The
+     structure contains at least the following members, which can appear
+     in any order.
+
+     ‘int tm_sec’
+          This is the number of full seconds since the top of the minute
+          (normally in the range ‘0’ through ‘59’, but the actual upper
+          limit is ‘60’, to allow for leap seconds if leap second
+          support is available).
+
+     ‘int tm_min’
+          This is the number of full minutes since the top of the hour
+          (in the range ‘0’ through ‘59’).
+
+     ‘int tm_hour’
+          This is the number of full hours past midnight (in the range
+          ‘0’ through ‘23’).
+
+     ‘int tm_mday’
+          This is the ordinal day of the month (in the range ‘1’ through
+          ‘31’).  Watch out for this one!  As the only ordinal number in
+          the structure, it is inconsistent with the rest of the
+          structure.
+
+     ‘int tm_mon’
+          This is the number of full calendar months since the beginning
+          of the year (in the range ‘0’ through ‘11’).  Watch out for
+          this one!  People usually use ordinal numbers for
+          month-of-year (where January = 1).
+
+     ‘int tm_year’
+          This is the number of full calendar years since 1900.
+
+     ‘int tm_wday’
+          This is the number of full days since Sunday (in the range ‘0’
+          through ‘6’).
+
+     ‘int tm_yday’
+          This is the number of full days since the beginning of the
+          year (in the range ‘0’ through ‘365’).
+
+     ‘int tm_isdst’
+          This is a flag that indicates whether Daylight Saving Time is
+          (or was, or will be) in effect at the time described.  The
+          value is positive if Daylight Saving Time is in effect, zero
+          if it is not, and negative if the information is not
+          available.
+
+     ‘long int tm_gmtoff’
+          This field describes the time zone that was used to compute
+          this broken-down time value, including any adjustment for
+          daylight saving; it is the number of seconds that you must add
+          to UTC to get local time.  You can also think of this as the
+          number of seconds east of UTC. For example, for U.S. Eastern
+          Standard Time, the value is ‘-5*60*60’.  The ‘tm_gmtoff’ field
+          is derived from BSD and is a GNU library extension; it is not
+          visible in a strict ISO C environment.
+
+     ‘const char *tm_zone’
+          This field is the name for the time zone that was used to
+          compute this broken-down time value.  Like ‘tm_gmtoff’, this
+          field is a BSD and GNU extension, and is not visible in a
+          strict ISO C environment.
+
+ -- Function: struct tm * localtime (const time_t *TIME)
+
+     Preliminary: | MT-Unsafe race:tmbuf env locale | AS-Unsafe heap
+     lock | AC-Unsafe lock mem fd | *Note POSIX Safety Concepts::.
+
+     The ‘localtime’ function converts the simple time pointed to by
+     TIME to broken-down time representation, expressed relative to the
+     user’s specified time zone.
+
+     The return value is a pointer to a static broken-down time
+     structure, which might be overwritten by subsequent calls to
+     ‘ctime’, ‘gmtime’, or ‘localtime’.  (But no other library function
+     overwrites the contents of this object.)
+
+     The return value is the null pointer if TIME cannot be represented
+     as a broken-down time; typically this is because the year cannot
+     fit into an ‘int’.
+
+     Calling ‘localtime’ also sets the current time zone as if ‘tzset’
+     were called.  *Note Time Zone Functions::.
+
+   Using the ‘localtime’ function is a big problem in multi-threaded
+programs.  The result is returned in a static buffer and this is used in
+all threads.  POSIX.1c introduced a variant of this function.
+
+ -- Function: struct tm * localtime_r (const time_t *TIME, struct tm
+          *RESULTP)
+
+     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
+     lock mem fd | *Note POSIX Safety Concepts::.
+
+     The ‘localtime_r’ function works just like the ‘localtime’
+     function.  It takes a pointer to a variable containing a simple
+     time and converts it to the broken-down time format.
+
+     But the result is not placed in a static buffer.  Instead it is
+     placed in the object of type ‘struct tm’ to which the parameter
+     RESULTP points.
+
+     If the conversion is successful the function returns a pointer to
+     the object the result was written into, i.e., it returns RESULTP.
+
+ -- Function: struct tm * gmtime (const time_t *TIME)
+
+     Preliminary: | MT-Unsafe race:tmbuf env locale | AS-Unsafe heap
+     lock | AC-Unsafe lock mem fd | *Note POSIX Safety Concepts::.
+
+     This function is similar to ‘localtime’, except that the
+     broken-down time is expressed as Coordinated Universal Time (UTC)
+     (formerly called Greenwich Mean Time (GMT)) rather than relative to
+     a local time zone.
+
+   As for the ‘localtime’ function we have the problem that the result
+is placed in a static variable.  POSIX.1c also provides a replacement
+for ‘gmtime’.
+
+ -- Function: struct tm * gmtime_r (const time_t *TIME, struct tm
+          *RESULTP)
+
+     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
+     lock mem fd | *Note POSIX Safety Concepts::.
+
+     This function is similar to ‘localtime_r’, except that it converts
+     just like ‘gmtime’ the given time as Coordinated Universal Time.
+
+     If the conversion is successful the function returns a pointer to
+     the object the result was written into, i.e., it returns RESULTP.
+
+ -- Function: time_t mktime (struct tm *BROKENTIME)
+
+     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
+     lock mem fd | *Note POSIX Safety Concepts::.
+
+     The ‘mktime’ function converts a broken-down time structure to a
+     simple time representation.  It also normalizes the contents of the
+     broken-down time structure, and fills in some components based on
+     the values of the others.
+
+     The ‘mktime’ function ignores the specified contents of the
+     ‘tm_wday’, ‘tm_yday’, ‘tm_gmtoff’, and ‘tm_zone’ members of the
+     broken-down time structure.  It uses the values of the other
+     components to determine the calendar time; it’s permissible for
+     these components to have unnormalized values outside their normal
+     ranges.  The last thing that ‘mktime’ does is adjust the components
+     of the BROKENTIME structure, including the members that were
+     initially ignored.
+
+     If the specified broken-down time cannot be represented as a simple
+     time, ‘mktime’ returns a value of ‘(time_t)(-1)’ and does not
+     modify the contents of BROKENTIME.
+
+     Calling ‘mktime’ also sets the current time zone as if ‘tzset’ were
+     called; ‘mktime’ uses this information instead of BROKENTIME’s
+     initial ‘tm_gmtoff’ and ‘tm_zone’ members.  *Note Time Zone
+     Functions::.
+
+ -- Function: time_t timelocal (struct tm *BROKENTIME)
+
+     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
+     lock mem fd | *Note POSIX Safety Concepts::.
+
+     ‘timelocal’ is functionally identical to ‘mktime’, but more
+     mnemonically named.  Note that it is the inverse of the ‘localtime’
+     function.
+
+     *Portability note:* ‘mktime’ is essentially universally available.
+     ‘timelocal’ is rather rare.
+
+ -- Function: time_t timegm (struct tm *BROKENTIME)
+
+     Preliminary: | MT-Safe env locale | AS-Unsafe heap lock | AC-Unsafe
+     lock mem fd | *Note POSIX Safety Concepts::.
+
+     ‘timegm’ is functionally identical to ‘mktime’ except it always
+     takes the input values to be Coordinated Universal Time (UTC)
+     regardless of any local time zone setting.
+
+     Note that ‘timegm’ is the inverse of ‘gmtime’.
+
+     *Portability note:* ‘mktime’ is essentially universally available.
+     ‘timegm’ is rather rare.  For the most portable conversion from a
+     UTC broken-down time to a simple time, set the ‘TZ’ environment
+     variable to UTC, call ‘mktime’, then set ‘TZ’ back.
 
 
 File: libc.info,  Node: Formatting Calendar Time,  Next: Parsing Date and Time,  Prev: Broken-down Time,  Up: Calendar Time
@@ -3663,10 +3879,10 @@ program, because ‘sleep’ does not work by means of ‘SIGALRM’.
      request up to the next integer multiple of the actual resolution
      the system can deliver.
 
-     *‘requested_time’ is the elapsed time of the interval you want to
+     ‘*REQUESTED_TIME’ is the elapsed time of the interval you want to
      sleep.
 
-     The function returns as *‘remaining’ the elapsed time left in the
+     The function returns as ‘*REMAINING’ the elapsed time left in the
      interval for which you requested to sleep.  If the interval
      completed without getting interrupted by a signal, this is zero.
 
@@ -6630,9 +6846,29 @@ handler in the same process.
      This function is a BSD feature, declared in the header file
      ‘signal.h’.
 
-   There is also an array ‘sys_siglist’ which contains the messages for
-the various signal codes.  This array exists on BSD systems, unlike
-‘strsignal’.
+ -- Function: const char * sigdescr_np (int SIGNUM)
+
+     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
+
+     This function returns the message describing the signal SIGNUM or
+     ‘NULL’ for invalid signal number (e.g "Hangup" for ‘SIGHUP’).
+     Different than ‘strsignal’ the returned description is not
+     translated.  The message points to a static storage whose lifetime
+     is the whole lifetime of the program.
+
+     This function is a GNU extension, declared in the header file
+     ‘string.h’.
+
+ -- Function: const char * sigabbrev_np (int SIGNUM)
+
+     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
+
+     This function returns the abbreviation describing the signal SIGNUM
+     or ‘NULL’ for invalid signal number.  The message points to a
+     static storage whose lifetime is the whole lifetime of the program.
+
+     This function is a GNU extension, declared in the header file
+     ‘string.h’.
 
 
 File: libc.info,  Node: Signal Actions,  Next: Defining Handlers,  Prev: Standard Signals,  Up: Signal Handling
@@ -7077,418 +7313,4 @@ not if ‘SIGHUP’ is currently ignored:
          sigemptyset (&temp.sa_mask);
          sigaction (SIGHUP, &temp, NULL);
        }
-
-
-File: libc.info,  Node: Defining Handlers,  Next: Interrupted Primitives,  Prev: Signal Actions,  Up: Signal Handling
-
-24.4 Defining Signal Handlers
-=============================
-
-This section describes how to write a signal handler function that can
-be established with the ‘signal’ or ‘sigaction’ functions.
-
-   A signal handler is just a function that you compile together with
-the rest of the program.  Instead of directly invoking the function, you
-use ‘signal’ or ‘sigaction’ to tell the operating system to call it when
-a signal arrives.  This is known as “establishing” the handler.  *Note
-Signal Actions::.
-
-   There are two basic strategies you can use in signal handler
-functions:
-
-   • You can have the handler function note that the signal arrived by
-     tweaking some global data structures, and then return normally.
-
-   • You can have the handler function terminate the program or transfer
-     control to a point where it can recover from the situation that
-     caused the signal.
-
-   You need to take special care in writing handler functions because
-they can be called asynchronously.  That is, a handler might be called
-at any point in the program, unpredictably.  If two signals arrive
-during a very short interval, one handler can run within another.  This
-section describes what your handler should do, and what you should
-avoid.
-
-* Menu:
-
-* Handler Returns::             Handlers that return normally, and what
-                                 this means.
-* Termination in Handler::      How handler functions terminate a program.
-* Longjmp in Handler::          Nonlocal transfer of control out of a
-                                 signal handler.
-* Signals in Handler::          What happens when signals arrive while
-                                 the handler is already occupied.
-* Merged Signals::		When a second signal arrives before the
-				 first is handled.
-* Nonreentrancy::               Do not call any functions unless you know they
-                                 are reentrant with respect to signals.
-* Atomic Data Access::          A single handler can run in the middle of
-                                 reading or writing a single object.
-
-
-File: libc.info,  Node: Handler Returns,  Next: Termination in Handler,  Up: Defining Handlers
-
-24.4.1 Signal Handlers that Return
-----------------------------------
-
-Handlers which return normally are usually used for signals such as
-‘SIGALRM’ and the I/O and interprocess communication signals.  But a
-handler for ‘SIGINT’ might also return normally after setting a flag
-that tells the program to exit at a convenient time.
-
-   It is not safe to return normally from the handler for a program
-error signal, because the behavior of the program when the handler
-function returns is not defined after a program error.  *Note Program
-Error Signals::.
-
-   Handlers that return normally must modify some global variable in
-order to have any effect.  Typically, the variable is one that is
-examined periodically by the program during normal operation.  Its data
-type should be ‘sig_atomic_t’ for reasons described in *note Atomic Data
-Access::.
-
-   Here is a simple example of such a program.  It executes the body of
-the loop until it has noticed that a ‘SIGALRM’ signal has arrived.  This
-technique is useful because it allows the iteration in progress when the
-signal arrives to complete before the loop exits.
-
-
-     #include <signal.h>
-     #include <stdio.h>
-     #include <stdlib.h>
-
-     /* This flag controls termination of the main loop. */
-     volatile sig_atomic_t keep_going = 1;
-
-     /* The signal handler just clears the flag and re-enables itself. */
-     void
-     catch_alarm (int sig)
-     {
-       keep_going = 0;
-       signal (sig, catch_alarm);
-     }
-
-     void
-     do_stuff (void)
-     {
-       puts ("Doing stuff while waiting for alarm....");
-     }
-
-     int
-     main (void)
-     {
-       /* Establish a handler for SIGALRM signals. */
-       signal (SIGALRM, catch_alarm);
-
-       /* Set an alarm to go off in a little while. */
-       alarm (2);
-
-       /* Check the flag once in a while to see when to quit. */
-       while (keep_going)
-         do_stuff ();
-
-       return EXIT_SUCCESS;
-     }
-
-
-File: libc.info,  Node: Termination in Handler,  Next: Longjmp in Handler,  Prev: Handler Returns,  Up: Defining Handlers
-
-24.4.2 Handlers That Terminate the Process
-------------------------------------------
-
-Handler functions that terminate the program are typically used to cause
-orderly cleanup or recovery from program error signals and interactive
-interrupts.
-
-   The cleanest way for a handler to terminate the process is to raise
-the same signal that ran the handler in the first place.  Here is how to
-do this:
-
-     volatile sig_atomic_t fatal_error_in_progress = 0;
-
-     void
-     fatal_error_signal (int sig)
-     {
-       /* Since this handler is established for more than one kind of signal,
-          it might still get invoked recursively by delivery of some other kind
-          of signal.  Use a static variable to keep track of that. */
-       if (fatal_error_in_progress)
-         raise (sig);
-       fatal_error_in_progress = 1;
-
-       /* Now do the clean up actions:
-          - reset terminal modes
-          - kill child processes
-          - remove lock files */
-       ...
-
-       /* Now reraise the signal.  We reactivate the signal’s
-          default handling, which is to terminate the process.
-          We could just call ‘exit’ or ‘abort’,
-          but reraising the signal sets the return status
-          from the process correctly. */
-       signal (sig, SIG_DFL);
-       raise (sig);
-     }
-
-
-File: libc.info,  Node: Longjmp in Handler,  Next: Signals in Handler,  Prev: Termination in Handler,  Up: Defining Handlers
-
-24.4.3 Nonlocal Control Transfer in Handlers
---------------------------------------------
-
-You can do a nonlocal transfer of control out of a signal handler using
-the ‘setjmp’ and ‘longjmp’ facilities (*note Non-Local Exits::).
-
-   When the handler does a nonlocal control transfer, the part of the
-program that was running will not continue.  If this part of the program
-was in the middle of updating an important data structure, the data
-structure will remain inconsistent.  Since the program does not
-terminate, the inconsistency is likely to be noticed later on.
-
-   There are two ways to avoid this problem.  One is to block the signal
-for the parts of the program that update important data structures.
-Blocking the signal delays its delivery until it is unblocked, once the
-critical updating is finished.  *Note Blocking Signals::.
-
-   The other way is to re-initialize the crucial data structures in the
-signal handler, or to make their values consistent.
-
-   Here is a rather schematic example showing the reinitialization of
-one global variable.
-
-     #include <signal.h>
-     #include <setjmp.h>
-
-     jmp_buf return_to_top_level;
-
-     volatile sig_atomic_t waiting_for_input;
-
-     void
-     handle_sigint (int signum)
-     {
-       /* We may have been waiting for input when the signal arrived,
-          but we are no longer waiting once we transfer control. */
-       waiting_for_input = 0;
-       longjmp (return_to_top_level, 1);
-     }
-
-     int
-     main (void)
-     {
-       ...
-       signal (SIGINT, sigint_handler);
-       ...
-       while (1) {
-         prepare_for_command ();
-         if (setjmp (return_to_top_level) == 0)
-           read_and_execute_command ();
-       }
-     }
-
-     /* Imagine this is a subroutine used by various commands. */
-     char *
-     read_data ()
-     {
-       if (input_from_terminal) {
-         waiting_for_input = 1;
-         ...
-         waiting_for_input = 0;
-       } else {
-         ...
-       }
-     }
-
-
-File: libc.info,  Node: Signals in Handler,  Next: Merged Signals,  Prev: Longjmp in Handler,  Up: Defining Handlers
-
-24.4.4 Signals Arriving While a Handler Runs
---------------------------------------------
-
-What happens if another signal arrives while your signal handler
-function is running?
-
-   When the handler for a particular signal is invoked, that signal is
-automatically blocked until the handler returns.  That means that if two
-signals of the same kind arrive close together, the second one will be
-held until the first has been handled.  (The handler can explicitly
-unblock the signal using ‘sigprocmask’, if you want to allow more
-signals of this type to arrive; see *note Process Signal Mask::.)
-
-   However, your handler can still be interrupted by delivery of another
-kind of signal.  To avoid this, you can use the ‘sa_mask’ member of the
-action structure passed to ‘sigaction’ to explicitly specify which
-signals should be blocked while the signal handler runs.  These signals
-are in addition to the signal for which the handler was invoked, and any
-other signals that are normally blocked by the process.  *Note Blocking
-for Handler::.
-
-   When the handler returns, the set of blocked signals is restored to
-the value it had before the handler ran.  So using ‘sigprocmask’ inside
-the handler only affects what signals can arrive during the execution of
-the handler itself, not what signals can arrive once the handler
-returns.
-
-   *Portability Note:* Always use ‘sigaction’ to establish a handler for
-a signal that you expect to receive asynchronously, if you want your
-program to work properly on System V Unix.  On this system, the handling
-of a signal whose handler was established with ‘signal’ automatically
-sets the signal’s action back to ‘SIG_DFL’, and the handler must
-re-establish itself each time it runs.  This practice, while
-inconvenient, does work when signals cannot arrive in succession.
-However, if another signal can arrive right away, it may arrive before
-the handler can re-establish itself.  Then the second signal would
-receive the default handling, which could terminate the process.
-
-
-File: libc.info,  Node: Merged Signals,  Next: Nonreentrancy,  Prev: Signals in Handler,  Up: Defining Handlers
-
-24.4.5 Signals Close Together Merge into One
---------------------------------------------
-
-If multiple signals of the same type are delivered to your process
-before your signal handler has a chance to be invoked at all, the
-handler may only be invoked once, as if only a single signal had
-arrived.  In effect, the signals merge into one.  This situation can
-arise when the signal is blocked, or in a multiprocessing environment
-where the system is busy running some other processes while the signals
-are delivered.  This means, for example, that you cannot reliably use a
-signal handler to count signals.  The only distinction you can reliably
-make is whether at least one signal has arrived since a given time in
-the past.
-
-   Here is an example of a handler for ‘SIGCHLD’ that compensates for
-the fact that the number of signals received may not equal the number of
-child processes that generate them.  It assumes that the program keeps
-track of all the child processes with a chain of structures as follows:
-
-     struct process
-     {
-       struct process *next;
-       /* The process ID of this child.  */
-       int pid;
-       /* The descriptor of the pipe or pseudo terminal
-          on which output comes from this child.  */
-       int input_descriptor;
-       /* Nonzero if this process has stopped or terminated.  */
-       sig_atomic_t have_status;
-       /* The status of this child; 0 if running,
-          otherwise a status value from ‘waitpid’.  */
-       int status;
-     };
-
-     struct process *process_list;
-
-   This example also uses a flag to indicate whether signals have
-arrived since some time in the past—whenever the program last cleared it
-to zero.
-
-     /* Nonzero means some child’s status has changed
-        so look at ‘process_list’ for the details.  */
-     int process_status_change;
-
-   Here is the handler itself:
-
-     void
-     sigchld_handler (int signo)
-     {
-       int old_errno = errno;
-
-       while (1) {
-         register int pid;
-         int w;
-         struct process *p;
-
-         /* Keep asking for a status until we get a definitive result.  */
-         do
-           {
-             errno = 0;
-             pid = waitpid (WAIT_ANY, &w, WNOHANG | WUNTRACED);
-           }
-         while (pid <= 0 && errno == EINTR);
-
-         if (pid <= 0) {
-           /* A real failure means there are no more
-              stopped or terminated child processes, so return.  */
-           errno = old_errno;
-           return;
-         }
-
-         /* Find the process that signaled us, and record its status.  */
-
-         for (p = process_list; p; p = p->next)
-           if (p->pid == pid) {
-             p->status = w;
-             /* Indicate that the ‘status’ field
-                has data to look at.  We do this only after storing it.  */
-             p->have_status = 1;
-
-             /* If process has terminated, stop waiting for its output.  */
-             if (WIFSIGNALED (w) || WIFEXITED (w))
-               if (p->input_descriptor)
-                 FD_CLR (p->input_descriptor, &input_wait_mask);
-
-             /* The program should check this flag from time to time
-                to see if there is any news in ‘process_list’.  */
-             ++process_status_change;
-           }
-
-         /* Loop around to handle all the processes
-            that have something to tell us.  */
-       }
-     }
-
-   Here is the proper way to check the flag ‘process_status_change’:
-
-     if (process_status_change) {
-       struct process *p;
-       process_status_change = 0;
-       for (p = process_list; p; p = p->next)
-         if (p->have_status) {
-           ... Examine ‘p->status’ ...
-         }
-     }
-
-It is vital to clear the flag before examining the list; otherwise, if a
-signal were delivered just before the clearing of the flag, and after
-the appropriate element of the process list had been checked, the status
-change would go unnoticed until the next signal arrived to set the flag
-again.  You could, of course, avoid this problem by blocking the signal
-while scanning the list, but it is much more elegant to guarantee
-correctness by doing things in the right order.
-
-   The loop which checks process status avoids examining ‘p->status’
-until it sees that status has been validly stored.  This is to make sure
-that the status cannot change in the middle of accessing it.  Once
-‘p->have_status’ is set, it means that the child process is stopped or
-terminated, and in either case, it cannot stop or terminate again until
-the program has taken notice.  *Note Atomic Usage::, for more
-information about coping with interruptions during accesses of a
-variable.
-
-   Here is another way you can test whether the handler has run since
-the last time you checked.  This technique uses a counter which is never
-changed outside the handler.  Instead of clearing the count, the program
-remembers the previous value and sees whether it has changed since the
-previous check.  The advantage of this method is that different parts of
-the program can check independently, each part checking whether there
-has been a signal since that part last checked.
-
-     sig_atomic_t process_status_change;
-
-     sig_atomic_t last_process_status_change;
-
-     ...
-     {
-       sig_atomic_t prev = last_process_status_change;
-       last_process_status_change = process_status_change;
-       if (last_process_status_change != prev) {
-         struct process *p;
-         for (p = process_list; p; p = p->next)
-           if (p->have_status) {
-             ... Examine ‘p->status’ ...
-           }
-       }
-     }
 

@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.31.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
    Copyright © 1993–2020 Free Software Foundation, Inc.
 
@@ -43,6 +43,7 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
+* CPU_FEATURE_USABLE: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -245,6 +246,7 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
+* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -493,6 +495,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
+* __x86_get_cpu_features: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -1395,7 +1398,7 @@ START-INFO-DIR-ENTRY
 * lutimes: (libc)File Times.
 * madvise: (libc)Memory-mapped I/O.
 * makecontext: (libc)System V contexts.
-* mallinfo: (libc)Statistics of Malloc.
+* mallinfo2: (libc)Statistics of Malloc.
 * malloc: (libc)Basic Allocation.
 * mallopt: (libc)Malloc Tunable Parameters.
 * mblen: (libc)Non-reentrant Character Conversion.
@@ -1754,11 +1757,13 @@ START-INFO-DIR-ENTRY
 * shm_open: (libc)Memory-mapped I/O.
 * shm_unlink: (libc)Memory-mapped I/O.
 * shutdown: (libc)Closing a Socket.
+* sigabbrev_np: (libc)Signal Messages.
 * sigaction: (libc)Advanced Signal Handling.
 * sigaddset: (libc)Signal Sets.
 * sigaltstack: (libc)Signal Stack.
 * sigblock: (libc)BSD Signal Handling.
 * sigdelset: (libc)Signal Sets.
+* sigdescr_np: (libc)Signal Messages.
 * sigemptyset: (libc)Signal Sets.
 * sigfillset: (libc)Signal Sets.
 * siginterrupt: (libc)BSD Signal Handling.
@@ -1827,6 +1832,8 @@ START-INFO-DIR-ENTRY
 * strdupa: (libc)Copying Strings and Arrays.
 * strerror: (libc)Error Messages.
 * strerror_r: (libc)Error Messages.
+* strerrordesc_np: (libc)Error Messages.
+* strerrorname_np: (libc)Error Messages.
 * strfmon: (libc)Formatting Numbers.
 * strfromd: (libc)Printing of Floats.
 * strfromf: (libc)Printing of Floats.
@@ -2092,6 +2099,40 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: File Attributes,  Next: Making Special Files,  Prev: Creating Directories,  Up: File System Interface
+
+14.9 File Attributes
+====================
+
+When you issue an ‘ls -l’ shell command on a file, it gives you
+information about the size of the file, who owns it, when it was last
+modified, etc.  These are called the “file attributes”, and are
+associated with the file itself and not a particular one of its names.
+
+   This section contains information about how you can inquire about and
+modify the attributes of a file.
+
+* Menu:
+
+* Attribute Meanings::          The names of the file attributes,
+                                 and what their values mean.
+* Reading Attributes::          How to read the attributes of a file.
+* Testing File Type::           Distinguishing ordinary files,
+                                 directories, links...
+* File Owner::                  How ownership for new files is determined,
+			         and how to change it.
+* Permission Bits::             How information about a file’s access
+                                 mode is stored.
+* Access Permission::           How the system decides who can access a file.
+* Setting Permissions::         How permissions for new files are assigned,
+			         and how to change them.
+* Testing File Access::         How to find out if your process can
+                                 access a file.
+* File Times::                  About the time attributes of a file.
+* File Size::			Manually changing the size of a file.
+* Storage Allocation::          Allocate backing storage for files.
 
 
 File: libc.info,  Node: Attribute Meanings,  Next: Reading Attributes,  Up: File Attributes
@@ -7619,43 +7660,4 @@ associated file name using the ‘ttyname’ function.  See also the
           The FILEDES is associated with a terminal device that is a
           slave pseudo-terminal, but the file name associated with that
           device could not be determined.  This is a GNU extension.
-
-
-File: libc.info,  Node: I/O Queues,  Next: Canonical or Not,  Prev: Is It a Terminal,  Up: Low-Level Terminal Interface
-
-17.2 I/O Queues
-===============
-
-Many of the remaining functions in this section refer to the input and
-output queues of a terminal device.  These queues implement a form of
-buffering _within the kernel_ independent of the buffering implemented
-by I/O streams (*note I/O on Streams::).
-
-   The “terminal input queue” is also sometimes referred to as its
-“typeahead buffer”.  It holds the characters that have been received
-from the terminal but not yet read by any process.
-
-   The size of the input queue is described by the ‘MAX_INPUT’ and
-‘_POSIX_MAX_INPUT’ parameters; see *note Limits for Files::.  You are
-guaranteed a queue size of at least ‘MAX_INPUT’, but the queue might be
-larger, and might even dynamically change size.  If input flow control
-is enabled by setting the ‘IXOFF’ input mode bit (*note Input Modes::),
-the terminal driver transmits STOP and START characters to the terminal
-when necessary to prevent the queue from overflowing.  Otherwise, input
-may be lost if it comes in too fast from the terminal.  In canonical
-mode, all input stays in the queue until a newline character is
-received, so the terminal input queue can fill up when you type a very
-long line.  *Note Canonical or Not::.
-
-   The “terminal output queue” is like the input queue, but for output;
-it contains characters that have been written by processes, but not yet
-transmitted to the terminal.  If output flow control is enabled by
-setting the ‘IXON’ input mode bit (*note Input Modes::), the terminal
-driver obeys START and STOP characters sent by the terminal to stop and
-restart transmission of output.
-
-   “Clearing” the terminal input queue means discarding any characters
-that have been received but not yet read.  Similarly, clearing the
-terminal output queue means discarding any characters that have been
-written but not yet transmitted.
 
