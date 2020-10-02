@@ -28226,7 +28226,7 @@
   nil 0 nil nil )
  
  (!type struct 2103 nil  gc_used "module_hasher"
-  (!srcfileloc  "fortran/trans-decl.c" 5149)
+  (!srcfileloc  "fortran/trans-decl.c" 5161)
   (!fields 0 )
   nil 32 nil nil )
  
@@ -28235,11 +28235,11 @@
    (!type already_seen 2104)
   )
   gc_pointed_to "hash_table<module_hasher>"
-  (!srcfileloc  "fortran/trans-decl.c" 5149)
+  (!srcfileloc  "fortran/trans-decl.c" 5161)
   (!fields 1 
    (!pair  "module_hasher"
     (!type already_seen 2103)
-    (!srcfileloc  "fortran/trans-decl.c" 5149)
+    (!srcfileloc  "fortran/trans-decl.c" 5161)
     nil )
   )
  )
@@ -29027,11 +29027,11 @@
   nil )
  (!pair  "module_hasher"
   (!type already_seen 2103)
-  (!srcfileloc  "fortran/trans-decl.c" 5149)
+  (!srcfileloc  "fortran/trans-decl.c" 5161)
   nil )
  (!pair  "hash_table<module_hasher>"
   (!type already_seen 2104)
-  (!srcfileloc  "fortran/trans-decl.c" 5149)
+  (!srcfileloc  "fortran/trans-decl.c" 5161)
   nil )
  (!pair  "tree_frame_info"
   (!type already_seen 664)
@@ -30067,7 +30067,7 @@
   nil )
  (!pair  "aarch64_cc"
   (!type already_seen 2)
-  (!srcfileloc  "config/aarch64/aarch64.c" 1491)
+  (!srcfileloc  "config/aarch64/aarch64.c" 1517)
   nil )
  (!pair  "omp_declare_variant_alt_hasher"
   (!type already_seen 1565)
@@ -33094,27 +33094,27 @@
   nil )
  (!pair  "module_htab"
   (!type already_seen 2105)
-  (!srcfileloc  "fortran/trans-decl.c" 5149)
+  (!srcfileloc  "fortran/trans-decl.c" 5161)
   nil )
  (!pair  "saved_local_decls"
   (!type already_seen 23)
-  (!srcfileloc  "fortran/trans-decl.c" 68)
+  (!srcfileloc  "fortran/trans-decl.c" 69)
   nil )
  (!pair  "saved_parent_function_decls"
   (!type already_seen 23)
-  (!srcfileloc  "fortran/trans-decl.c" 64)
+  (!srcfileloc  "fortran/trans-decl.c" 65)
   nil )
  (!pair  "saved_function_decls"
   (!type already_seen 23)
-  (!srcfileloc  "fortran/trans-decl.c" 63)
+  (!srcfileloc  "fortran/trans-decl.c" 64)
   nil )
  (!pair  "parent_fake_result_decl"
   (!type already_seen 23)
-  (!srcfileloc  "fortran/trans-decl.c" 58)
+  (!srcfileloc  "fortran/trans-decl.c" 59)
   nil )
  (!pair  "current_fake_result_decl"
   (!type already_seen 23)
-  (!srcfileloc  "fortran/trans-decl.c" 57)
+  (!srcfileloc  "fortran/trans-decl.c" 58)
   nil )
  (!pair  "global_binding_level"
   (!type already_seen 437)
@@ -34275,25 +34275,25 @@
   nil )
  (!pair  "aarch64_sls_shared_thunks_needed"
   (!type already_seen 2)
-  (!srcfileloc  "config/aarch64/aarch64.c" 23271)
+  (!srcfileloc  "config/aarch64/aarch64.c" 23297)
   nil )
  (!pair  "aarch64_sls_shared_thunks"
   (!type array 2230 nil  gc_used "30" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "config/aarch64/aarch64.c" 23270)
+  (!srcfileloc  "config/aarch64/aarch64.c" 23296)
   nil )
  (!pair  "va_list_type"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.c" 16224)
+  (!srcfileloc  "config/aarch64/aarch64.c" 16250)
   nil )
  (!pair  "aarch64_previous_fndecl"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.c" 15210)
+  (!srcfileloc  "config/aarch64/aarch64.c" 15236)
   nil )
  (!pair  "tls_get_addr_libfunc"
   (!type already_seen 100)
-  (!srcfileloc  "config/aarch64/aarch64.c" 2942)
+  (!srcfileloc  "config/aarch64/aarch64.c" 2968)
   nil )
  (!pair  "stack_chk_fail_decl"
   (!type already_seen 23)
