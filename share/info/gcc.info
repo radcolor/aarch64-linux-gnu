@@ -43372,7 +43372,7 @@ emitted.
 'gettext', 'index', 'isascii', 'j0f', 'j0l', 'j0', 'j1f', 'j1l', 'j1',
 'jnf', 'jnl', 'jn', 'lgammaf_r', 'lgammal_r', 'lgamma_r', 'mempcpy',
 'pow10f', 'pow10l', 'pow10', 'printf_unlocked', 'rindex', 'roundeven',
-'roundevenf', 'roudnevenl', 'scalbf', 'scalbl', 'scalb', 'signbit',
+'roundevenf', 'roundevenl', 'scalbf', 'scalbl', 'scalb', 'signbit',
 'signbitf', 'signbitl', 'signbitd32', 'signbitd64', 'signbitd128',
 'significandf', 'significandl', 'significand', 'sincosf', 'sincosl',
 'sincos', 'stpcpy', 'stpncpy', 'strcasecmp', 'strdup', 'strfmon',

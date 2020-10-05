@@ -7894,8 +7894,9 @@ struct GTY(()) cl_target_option
   signed char x_flag_omit_leaf_frame_pointer;
   signed char x_aarch64_flag_outline_atomics;
   signed char x_pcrelative_literal_loads;
-  /* 15 members */
+  /* 14 members */
   unsigned HOST_WIDE_INT explicit_mask[1];
+  /* - */ int explicit_mask_target_flags;
 };
 
 
