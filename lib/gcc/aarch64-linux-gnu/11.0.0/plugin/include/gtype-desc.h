@@ -497,18 +497,26 @@ extern void gt_ggc_mx_typeinfo (void *);
   if (X != NULL) gt_ggc_mx_modref_tree_alias_set_type_ (X);\
   } while (0)
 extern void gt_ggc_mx_modref_tree_alias_set_type_ (void *);
-#define gt_ggc_m_17modref_tree_tree_(X) do { \
-  if (X != NULL) gt_ggc_mx_modref_tree_tree_ (X);\
-  } while (0)
-extern void gt_ggc_mx_modref_tree_tree_ (void *);
 #define gt_ggc_m_14modref_summary(X) do { \
   if (X != NULL) gt_ggc_mx_modref_summary (X);\
   } while (0)
 extern void gt_ggc_mx_modref_summary (void *);
+#define gt_ggc_m_18modref_summary_lto(X) do { \
+  if (X != NULL) gt_ggc_mx_modref_summary_lto (X);\
+  } while (0)
+extern void gt_ggc_mx_modref_summary_lto (void *);
 #define gt_ggc_m_44fast_function_summary_modref_summary__va_gc_(X) do { \
   if (X != NULL) gt_ggc_mx_fast_function_summary_modref_summary__va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_fast_function_summary_modref_summary__va_gc_ (void *);
+#define gt_ggc_m_48fast_function_summary_modref_summary_lto__va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_fast_function_summary_modref_summary_lto__va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_fast_function_summary_modref_summary_lto__va_gc_ (void *);
+#define gt_ggc_m_17modref_tree_tree_(X) do { \
+  if (X != NULL) gt_ggc_mx_modref_tree_tree_ (X);\
+  } while (0)
+extern void gt_ggc_mx_modref_tree_tree_ (void *);
 #define gt_ggc_m_11dw_cfi_node(X) do { \
   if (X != NULL) gt_ggc_mx_dw_cfi_node (X);\
   } while (0)
@@ -1161,10 +1169,6 @@ extern void gt_ggc_mx_named_label_entry (void *);
   if (X != NULL) gt_ggc_mx_hash_table_named_label_hash_ (X);\
   } while (0)
 extern void gt_ggc_mx_hash_table_named_label_hash_ (void *);
-#define gt_ggc_m_35hash_table_cxx_int_tree_map_hasher_(X) do { \
-  if (X != NULL) gt_ggc_mx_hash_table_cxx_int_tree_map_hasher_ (X);\
-  } while (0)
-extern void gt_ggc_mx_hash_table_cxx_int_tree_map_hasher_ (void *);
 #define gt_ggc_m_11tree_pair_s(X) do { \
   if (X != NULL) gt_ggc_mx_tree_pair_s (X);\
   } while (0)
@@ -1878,18 +1882,26 @@ extern void gt_pch_nx_typeinfo (void *);
   if (X != NULL) gt_pch_nx_modref_tree_alias_set_type_ (X);\
   } while (0)
 extern void gt_pch_nx_modref_tree_alias_set_type_ (void *);
-#define gt_pch_n_17modref_tree_tree_(X) do { \
-  if (X != NULL) gt_pch_nx_modref_tree_tree_ (X);\
-  } while (0)
-extern void gt_pch_nx_modref_tree_tree_ (void *);
 #define gt_pch_n_14modref_summary(X) do { \
   if (X != NULL) gt_pch_nx_modref_summary (X);\
   } while (0)
 extern void gt_pch_nx_modref_summary (void *);
+#define gt_pch_n_18modref_summary_lto(X) do { \
+  if (X != NULL) gt_pch_nx_modref_summary_lto (X);\
+  } while (0)
+extern void gt_pch_nx_modref_summary_lto (void *);
 #define gt_pch_n_44fast_function_summary_modref_summary__va_gc_(X) do { \
   if (X != NULL) gt_pch_nx_fast_function_summary_modref_summary__va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_fast_function_summary_modref_summary__va_gc_ (void *);
+#define gt_pch_n_48fast_function_summary_modref_summary_lto__va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_fast_function_summary_modref_summary_lto__va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_fast_function_summary_modref_summary_lto__va_gc_ (void *);
+#define gt_pch_n_17modref_tree_tree_(X) do { \
+  if (X != NULL) gt_pch_nx_modref_tree_tree_ (X);\
+  } while (0)
+extern void gt_pch_nx_modref_tree_tree_ (void *);
 #define gt_pch_n_11dw_cfi_node(X) do { \
   if (X != NULL) gt_pch_nx_dw_cfi_node (X);\
   } while (0)
@@ -2542,10 +2554,6 @@ extern void gt_pch_nx_named_label_entry (void *);
   if (X != NULL) gt_pch_nx_hash_table_named_label_hash_ (X);\
   } while (0)
 extern void gt_pch_nx_hash_table_named_label_hash_ (void *);
-#define gt_pch_n_35hash_table_cxx_int_tree_map_hasher_(X) do { \
-  if (X != NULL) gt_pch_nx_hash_table_cxx_int_tree_map_hasher_ (X);\
-  } while (0)
-extern void gt_pch_nx_hash_table_cxx_int_tree_map_hasher_ (void *);
 #define gt_pch_n_11tree_pair_s(X) do { \
   if (X != NULL) gt_pch_nx_tree_pair_s (X);\
   } while (0)
@@ -3109,11 +3117,15 @@ extern void gt_pch_p_8typeinfo
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_27modref_tree_alias_set_type_
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_17modref_tree_tree_
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_14modref_summary
     (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_18modref_summary_lto
+    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_44fast_function_summary_modref_summary__va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_48fast_function_summary_modref_summary_lto__va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_17modref_tree_tree_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11dw_cfi_node
     (void *, void *, gt_pointer_operator, void *);
@@ -3470,8 +3482,6 @@ extern void gt_pch_p_16cxx_int_tree_map
 extern void gt_pch_p_17named_label_entry
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_28hash_table_named_label_hash_
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_35hash_table_cxx_int_tree_map_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11tree_pair_s
     (void *, void *, gt_pointer_operator, void *);

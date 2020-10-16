@@ -7079,7 +7079,7 @@ defined in ‘malloc.h’.
           The default value of this parameter is ‘0’.
 
           This parameter can also be set for the process at startup by
-          setting the environment variable ‘MALLOC_MMAP_PERTURB_’ to the
+          setting the environment variable ‘MALLOC_PERTURB_’ to the
           desired value.
 
      ‘M_TOP_PAD’

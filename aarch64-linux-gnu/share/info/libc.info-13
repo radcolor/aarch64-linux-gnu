@@ -5133,7 +5133,7 @@ reference count as ‘_Atomic’, and use the GCC ‘__atomic’ built-ins.
 looks like this:
 
      if (__libc_single_threaded)
-       ++refeference_count;
+       ++reference_count;
      else
        __atomic_fetch_add (&reference_count, 1, __ATOMIC_ACQ_REL);
 

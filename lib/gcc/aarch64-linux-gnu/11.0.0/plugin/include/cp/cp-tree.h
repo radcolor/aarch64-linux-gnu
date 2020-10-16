@@ -1926,7 +1926,6 @@ struct GTY(()) language_function {
   /* Tracking possibly infinite loops.  This is a vec<tree> only because
      vec<bool> doesn't work with gtype.  */
   vec<tree, va_gc> *infinite_loops;
-  hash_table<cxx_int_tree_map_hasher> *extern_decl_map;
 };
 
 /* The current C++-specific per-function global variables.  */
@@ -2064,7 +2063,7 @@ enum languages { lang_c, lang_cplusplus };
 #define CLASS_TYPE_P(T) \
   (RECORD_OR_UNION_CODE_P (TREE_CODE (T)) && TYPE_LANG_FLAG_5 (T))
 
-/* Nonzero if T is a class type but not an union.  */
+/* Nonzero if T is a class type but not a union.  */
 #define NON_UNION_CLASS_TYPE_P(T) \
   (TREE_CODE (T) == RECORD_TYPE && TYPE_LANG_FLAG_5 (T))
 
@@ -2697,6 +2696,7 @@ struct GTY(()) lang_decl_min {
      In a lambda-capture proxy VAR_DECL, this is DECL_CAPTURED_VARIABLE.
      In a function-scope TREE_STATIC VAR_DECL or IMPLICIT_TYPEDEF_P TYPE_DECL,
      this is DECL_DISCRIMINATOR.
+     In a DECL_LOCAL_DECL_P decl, this is the namespace decl it aliases.
      Otherwise, in a class-scope DECL, this is DECL_ACCESS.   */
   tree access;
 };
@@ -2736,12 +2736,14 @@ struct GTY(()) lang_decl_fn {
      thunked to function decl.  */
   tree befriending_classes;
 
-  /* For a non-virtual FUNCTION_DECL, this is
-     DECL_FRIEND_CONTEXT.  For a virtual FUNCTION_DECL for which
+  /* For a virtual FUNCTION_DECL for which
      DECL_THIS_THUNK_P does not hold, this is DECL_THUNKS. Both
      this pointer and result pointer adjusting thunks are
      chained here.  This pointer thunks to return pointer thunks
-     will be chained on the return pointer thunk.  */
+     will be chained on the return pointer thunk.
+     For a DECL_CONSTUCTOR_P FUNCTION_DECL, this is the base from
+     whence we inherit.  Otherwise, it is the class in which a
+     (namespace-scope) friend is defined (if any).   */
   tree context;
 
   union lang_decl_u5
@@ -3088,10 +3090,14 @@ struct GTY(()) lang_decl {
   (DECL_LANG_SPECIFIC (VAR_OR_FUNCTION_DECL_CHECK (DECL)) \
    ->u.base.odr_used)
 
-/* Nonzero for DECL means that this decl is just a friend declaration,
-   and should not be added to the list of members for this class.  */
-#define DECL_FRIEND_P(NODE) \
-  (DECL_LANG_SPECIFIC (TYPE_FUNCTION_OR_TEMPLATE_DECL_CHECK (NODE)) \
+/* Nonzero for FUNCTION_DECL means that this is a friend that is
+   either not pushed into a namespace/looked up in a class (because it
+   is a dependent type, in an uninstantiated template), or it has
+   /only/ been subject to hidden friend injection from one or more
+   befriending classes.  Once another decl matches, the flag is
+   cleared.  There are requirements on its default parms.  */
+#define DECL_UNIQUE_FRIEND_P(NODE) \
+  (DECL_LANG_SPECIFIC (FUNCTION_DECL_CHECK (NODE)) \
    ->u.base.friend_or_tls)
 
 /* Nonzero if the thread-local variable was declared with __thread as
@@ -3290,8 +3296,8 @@ struct GTY(()) lang_decl {
 
    the DECL_FRIEND_CONTEXT for `f' will be `S'.  */
 #define DECL_FRIEND_CONTEXT(NODE)				\
-  ((DECL_DECLARES_FUNCTION_P (NODE)				\
-    && DECL_FRIEND_P (NODE) && !DECL_FUNCTION_MEMBER_P (NODE))	\
+  ((DECL_DECLARES_FUNCTION_P (NODE) && !DECL_VIRTUAL_P (NODE)	\
+    && !DECL_CONSTRUCTOR_P (NODE))				\
    ? LANG_DECL_FN_CHECK (NODE)->context				\
    : NULL_TREE)
 
@@ -4023,6 +4029,10 @@ more_aggr_init_expr_args_p (const aggr_init_expr_arg_iterator *iter)
 #define DECL_LOCAL_DECL_P(NODE) \
   DECL_LANG_FLAG_0 (VAR_OR_FUNCTION_DECL_CHECK (NODE))
 
+/* The namespace-scope decl a DECL_LOCAL_DECL_P aliases.  */
+#define DECL_LOCAL_DECL_ALIAS(NODE)			\
+  DECL_ACCESS ((gcc_checking_assert (DECL_LOCAL_DECL_P (NODE)), NODE))
+
 /* Nonzero if NODE is the target for genericization of 'return' stmts
    in constructors/destructors of targetm.cxx.cdtor_returns_this targets.  */
 #define LABEL_DECL_CDTOR(NODE) \
@@ -4035,8 +4045,9 @@ more_aggr_init_expr_args_p (const aggr_init_expr_arg_iterator *iter)
 #define FNDECL_USED_AUTO(NODE) \
   TREE_LANG_FLAG_2 (FUNCTION_DECL_CHECK (NODE))
 
-/* True if NODE is a builtin decl.  */
-#define DECL_BUILTIN_P(NODE) \
+/* True if NODE is an undeclared builtin decl.  As soon as the user
+   declares it, the location will be updated.  */
+#define DECL_UNDECLARED_BUILTIN_P(NODE) \
   (DECL_SOURCE_LOCATION(NODE) == BUILTINS_LOCATION)
 
 /* True for artificial decls added for OpenMP privatized non-static

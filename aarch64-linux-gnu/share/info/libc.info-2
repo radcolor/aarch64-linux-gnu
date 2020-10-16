@@ -6431,9 +6431,9 @@ File: libc.info,  Node: Collation Functions,  Next: Search Functions,  Prev: Str
 In some locales, the conventions for lexicographic ordering differ from
 the strict numeric ordering of character codes.  For example, in Spanish
 most glyphs with diacritical marks such as accents are not considered
-distinct letters for the purposes of collation.  On the other hand, the
-two-character sequence ‘ll’ is treated as a single letter that is
-collated immediately after ‘l’.
+distinct letters for the purposes of collation.  On the other hand, in
+Czech the two-character sequence ‘ch’ is treated as a single letter that
+is collated between ‘h’ and ‘i’.
 
    You can use the functions ‘strcoll’ and ‘strxfrm’ (declared in the
 headers file ‘string.h’) and ‘wcscoll’ and ‘wcsxfrm’ (declared in the
