@@ -2014,7 +2014,6 @@ START-INFO-DIR-ENTRY
 * vswprintf: (libc)Variable Arguments Output.
 * vswscanf: (libc)Variable Arguments Input.
 * vsyslog: (libc)syslog; vsyslog.
-* vtimes: (libc)Resource Usage.
 * vwarn: (libc)Error Messages.
 * vwarnx: (libc)Error Messages.
 * vwprintf: (libc)Variable Arguments Output.
@@ -2423,7 +2422,6 @@ Type Index
                                                               (line  21)
 * struct utmpx:                          XPG Functions.       (line   9)
 * struct utsname:                        Platform Type.       (line  15)
-* struct vtimes:                         Resource Usage.      (line 124)
 * struct __gconv_step:                   glibc iconv Implementation.
                                                               (line 209)
 * struct __gconv_step_data:              glibc iconv Implementation.
@@ -4677,7 +4675,6 @@ Function and Macro Index
 * vswscanf:                              Variable Arguments Input.
                                                               (line  62)
 * vsyslog:                               syslog; vsyslog.     (line 126)
-* vtimes:                                Resource Usage.      (line 111)
 * vwarn:                                 Error Messages.      (line 331)
 * vwarnx:                                Error Messages.      (line 351)
 * vwprintf:                              Variable Arguments Output.

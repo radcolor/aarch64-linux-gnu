@@ -2014,7 +2014,6 @@ START-INFO-DIR-ENTRY
 * vswprintf: (libc)Variable Arguments Output.
 * vswscanf: (libc)Variable Arguments Input.
 * vsyslog: (libc)syslog; vsyslog.
-* vtimes: (libc)Resource Usage.
 * vwarn: (libc)Error Messages.
 * vwarnx: (libc)Error Messages.
 * vwprintf: (libc)Variable Arguments Output.
@@ -4034,65 +4033,6 @@ terminates.  *Note BSD Wait Functions::.
           The number of times an involuntary context switch took place
           (because a time slice expired, or another process of higher
           priority was scheduled).
-
-   ‘vtimes’ is a historical function that does some of what ‘getrusage’
-does.  ‘getrusage’ is a better choice.
-
-   ‘vtimes’ and its ‘vtimes’ data structure are declared in
-‘sys/vtimes.h’.
-
- -- Function: int vtimes (struct vtimes *CURRENT, struct vtimes *CHILD)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘vtimes’ reports resource usage totals for a process.
-
-     If CURRENT is non-null, ‘vtimes’ stores resource usage totals for
-     the invoking process alone in the structure to which it points.  If
-     CHILD is non-null, ‘vtimes’ stores resource usage totals for all
-     past children (which have terminated) of the invoking process in
-     the structure to which it points.
-
-      -- Data Type: struct vtimes
-          This data type contains information about the resource usage
-          of a process.  Each member corresponds to a member of the
-          ‘struct rusage’ data type described above.
-
-          ‘vm_utime’
-               User CPU time.  Analogous to ‘ru_utime’ in ‘struct
-               rusage’
-          ‘vm_stime’
-               System CPU time.  Analogous to ‘ru_stime’ in ‘struct
-               rusage’
-          ‘vm_idsrss’
-               Data and stack memory.  The sum of the values that would
-               be reported as ‘ru_idrss’ and ‘ru_isrss’ in ‘struct
-               rusage’
-          ‘vm_ixrss’
-               Shared memory.  Analogous to ‘ru_ixrss’ in ‘struct
-               rusage’
-          ‘vm_maxrss’
-               Maximent resident set size.  Analogous to ‘ru_maxrss’ in
-               ‘struct rusage’
-          ‘vm_majflt’
-               Major page faults.  Analogous to ‘ru_majflt’ in ‘struct
-               rusage’
-          ‘vm_minflt’
-               Minor page faults.  Analogous to ‘ru_minflt’ in ‘struct
-               rusage’
-          ‘vm_nswap’
-               Swap count.  Analogous to ‘ru_nswap’ in ‘struct rusage’
-          ‘vm_inblk’
-               Disk reads.  Analogous to ‘ru_inblk’ in ‘struct rusage’
-          ‘vm_oublk’
-               Disk writes.  Analogous to ‘ru_oublk’ in ‘struct rusage’
-
-     The return value is zero if the function succeeds; ‘-1’ otherwise.
-
-   An additional historical function for examining resource usage,
-‘vtimes’, is supported but not documented here.  It is declared in
-‘sys/vtimes.h’.
 
 
 File: libc.info,  Node: Limits on Resources,  Next: Priority,  Prev: Resource Usage,  Up: Resource Usage And Limitation
@@ -7313,4 +7253,52 @@ not if ‘SIGHUP’ is currently ignored:
          sigemptyset (&temp.sa_mask);
          sigaction (SIGHUP, &temp, NULL);
        }
+
+
+File: libc.info,  Node: Defining Handlers,  Next: Interrupted Primitives,  Prev: Signal Actions,  Up: Signal Handling
+
+24.4 Defining Signal Handlers
+=============================
+
+This section describes how to write a signal handler function that can
+be established with the ‘signal’ or ‘sigaction’ functions.
+
+   A signal handler is just a function that you compile together with
+the rest of the program.  Instead of directly invoking the function, you
+use ‘signal’ or ‘sigaction’ to tell the operating system to call it when
+a signal arrives.  This is known as “establishing” the handler.  *Note
+Signal Actions::.
+
+   There are two basic strategies you can use in signal handler
+functions:
+
+   • You can have the handler function note that the signal arrived by
+     tweaking some global data structures, and then return normally.
+
+   • You can have the handler function terminate the program or transfer
+     control to a point where it can recover from the situation that
+     caused the signal.
+
+   You need to take special care in writing handler functions because
+they can be called asynchronously.  That is, a handler might be called
+at any point in the program, unpredictably.  If two signals arrive
+during a very short interval, one handler can run within another.  This
+section describes what your handler should do, and what you should
+avoid.
+
+* Menu:
+
+* Handler Returns::             Handlers that return normally, and what
+                                 this means.
+* Termination in Handler::      How handler functions terminate a program.
+* Longjmp in Handler::          Nonlocal transfer of control out of a
+                                 signal handler.
+* Signals in Handler::          What happens when signals arrive while
+                                 the handler is already occupied.
+* Merged Signals::		When a second signal arrives before the
+				 first is handled.
+* Nonreentrancy::               Do not call any functions unless you know they
+                                 are reentrant with respect to signals.
+* Atomic Data Access::          A single handler can run in the middle of
+                                 reading or writing a single object.
 

@@ -3852,6 +3852,10 @@
 #define HAVE_aarch64_bfcvtn_qv8bf (TARGET_BF16_SIMD)
 #define HAVE_aarch64_bfcvtn2v8bf (TARGET_BF16_SIMD)
 #define HAVE_aarch64_bfcvtbf (TARGET_BF16_FP)
+#define HAVE_aarch64_vbfcvtv4bf (TARGET_BF16_SIMD)
+#define HAVE_aarch64_vbfcvtv8bf (TARGET_BF16_SIMD)
+#define HAVE_aarch64_vbfcvt_highv8bf (TARGET_BF16_SIMD)
+#define HAVE_aarch64_bfcvtsf (TARGET_BF16_FP)
 #define HAVE_aarch64_compare_and_swapqi 1
 #define HAVE_aarch64_compare_and_swaphi 1
 #define HAVE_aarch64_compare_and_swapsi 1
@@ -7452,6 +7456,8 @@
 #define HAVE_aarch64_fmlslq_lane_lowv4sf (TARGET_F16FML)
 #define HAVE_aarch64_fmlalq_lane_highv4sf (TARGET_F16FML)
 #define HAVE_aarch64_fmlslq_lane_highv4sf (TARGET_F16FML)
+#define HAVE_aarch64_vget_lo_halfv8bf (TARGET_BF16_SIMD)
+#define HAVE_aarch64_vget_hi_halfv8bf (TARGET_BF16_SIMD)
 #define HAVE_atomic_compare_and_swapqi 1
 #define HAVE_atomic_compare_and_swaphi 1
 #define HAVE_atomic_compare_and_swapsi 1
@@ -11651,6 +11657,10 @@ extern rtx        gen_aarch64_bfcvtnv4bf                             (rtx, rtx);
 extern rtx        gen_aarch64_bfcvtn_qv8bf                           (rtx, rtx);
 extern rtx        gen_aarch64_bfcvtn2v8bf                            (rtx, rtx, rtx);
 extern rtx        gen_aarch64_bfcvtbf                                (rtx, rtx);
+extern rtx        gen_aarch64_vbfcvtv4bf                             (rtx, rtx);
+extern rtx        gen_aarch64_vbfcvtv8bf                             (rtx, rtx);
+extern rtx        gen_aarch64_vbfcvt_highv8bf                        (rtx, rtx);
+extern rtx        gen_aarch64_bfcvtsf                                (rtx, rtx);
 extern rtx        gen_aarch64_compare_and_swapqi                     (rtx, rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_compare_and_swaphi                     (rtx, rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_compare_and_swapsi                     (rtx, rtx, rtx, rtx, rtx, rtx, rtx);
@@ -16652,6 +16662,8 @@ extern rtx        gen_aarch64_fmlalq_lane_lowv4sf                    (rtx, rtx, 
 extern rtx        gen_aarch64_fmlslq_lane_lowv4sf                    (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_fmlalq_lane_highv4sf                   (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_fmlslq_lane_highv4sf                   (rtx, rtx, rtx, rtx, rtx);
+extern rtx        gen_aarch64_vget_lo_halfv8bf                       (rtx, rtx);
+extern rtx        gen_aarch64_vget_hi_halfv8bf                       (rtx, rtx);
 extern rtx        gen_atomic_compare_and_swapqi                      (rtx, rtx, rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_atomic_compare_and_swaphi                      (rtx, rtx, rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_atomic_compare_and_swapsi                      (rtx, rtx, rtx, rtx, rtx, rtx, rtx, rtx);

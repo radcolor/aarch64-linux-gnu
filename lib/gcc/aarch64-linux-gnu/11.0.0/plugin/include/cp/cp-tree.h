@@ -178,6 +178,8 @@ enum cp_tree_index
     CPTI_HEAP_UNINIT_IDENTIFIER,
     CPTI_HEAP_IDENTIFIER,
     CPTI_HEAP_DELETED_IDENTIFIER,
+    CPTI_HEAP_VEC_UNINIT_IDENTIFIER,
+    CPTI_HEAP_VEC_IDENTIFIER,
 
     CPTI_LANG_NAME_C,
     CPTI_LANG_NAME_CPLUSPLUS,
@@ -322,6 +324,8 @@ extern GTY(()) tree cp_global_trees[CPTI_MAX];
 #define heap_uninit_identifier		cp_global_trees[CPTI_HEAP_UNINIT_IDENTIFIER]
 #define heap_identifier			cp_global_trees[CPTI_HEAP_IDENTIFIER]
 #define heap_deleted_identifier		cp_global_trees[CPTI_HEAP_DELETED_IDENTIFIER]
+#define heap_vec_uninit_identifier	cp_global_trees[CPTI_HEAP_VEC_UNINIT_IDENTIFIER]
+#define heap_vec_identifier		cp_global_trees[CPTI_HEAP_VEC_IDENTIFIER]
 #define lang_name_c			cp_global_trees[CPTI_LANG_NAME_C]
 #define lang_name_cplusplus		cp_global_trees[CPTI_LANG_NAME_CPLUSPLUS]
 
@@ -1323,7 +1327,9 @@ enum cp_trait_kind
   CPTK_IS_UNION,
   CPTK_UNDERLYING_TYPE,
   CPTK_IS_ASSIGNABLE,
-  CPTK_IS_CONSTRUCTIBLE
+  CPTK_IS_CONSTRUCTIBLE,
+  CPTK_IS_NOTHROW_ASSIGNABLE,
+  CPTK_IS_NOTHROW_CONSTRUCTIBLE
 };
 
 /* The types that we are processing.  */
@@ -1861,19 +1867,6 @@ public:
 
 #define cp_noexcept_operand scope_chain->noexcept_operand
 
-/* A list of private types mentioned, for deferred access checking.  */
-
-struct GTY((for_user)) cxx_int_tree_map {
-  unsigned int uid;
-  tree to;
-};
-
-struct cxx_int_tree_map_hasher : ggc_ptr_hash<cxx_int_tree_map>
-{
-  static hashval_t hash (cxx_int_tree_map *);
-  static bool equal (cxx_int_tree_map *, cxx_int_tree_map *);
-};
-
 struct named_label_entry; /* Defined in decl.c.  */
 
 struct named_label_hash : ggc_remove <named_label_entry *>
@@ -2217,7 +2210,6 @@ struct GTY(()) lang_type {
   tree vtables;
   tree typeinfo_var;
   vec<tree, va_gc> *vbases;
-  binding_table nested_udts;
   tree as_base;
   vec<tree, va_gc> *pure_virtuals;
   tree friend_classes;
@@ -2369,12 +2361,6 @@ struct GTY(()) lang_type {
    until the destructor is created with lazily_declare_fn.  */
 #define CLASSTYPE_DESTRUCTOR(NODE) \
   (get_class_binding_direct (NODE, dtor_identifier))
-
-/* A dictionary of the nested user-defined-types (class-types, or enums)
-   found within this class.  This table includes nested member class
-   templates.  */
-#define CLASSTYPE_NESTED_UTDS(NODE) \
-   (LANG_TYPE_CLASS_CHECK (NODE)->nested_udts)
 
 /* Nonzero if NODE has a primary base class, i.e., a base class with
    which it shares the virtual function table pointer.  */
@@ -6752,6 +6738,7 @@ extern void use_thunk				(tree, bool);
 extern bool trivial_fn_p			(tree);
 extern tree forward_parm			(tree);
 extern bool is_trivially_xible			(enum tree_code, tree, tree);
+extern bool is_nothrow_xible			(enum tree_code, tree, tree);
 extern bool is_xible				(enum tree_code, tree, tree);
 extern tree get_defaulted_eh_spec		(tree, tsubst_flags_t = tf_warning_or_error);
 extern bool maybe_explain_implicit_delete	(tree);
@@ -7373,6 +7360,7 @@ extern const char *cxx_printable_name_translate	(tree, int);
 extern tree canonical_eh_spec			(tree);
 extern tree build_cp_fntype_variant		(tree, cp_ref_qualifier, tree, bool);
 extern tree build_exception_variant		(tree, tree);
+extern void fixup_deferred_exception_variants   (tree, tree);
 extern tree bind_template_template_parm		(tree, tree);
 extern tree array_type_nelts_total		(tree);
 extern tree array_type_nelts_top		(tree);
@@ -7831,15 +7819,14 @@ extern tree evaluate_concept_check              (tree, tsubst_flags_t);
 extern tree satisfy_constraint_expression	(tree);
 extern bool constraints_satisfied_p		(tree);
 extern bool constraints_satisfied_p		(tree, tree);
-extern void clear_satisfaction_cache		();
 extern bool* lookup_subsumption_result          (tree, tree);
 extern bool save_subsumption_result             (tree, tree, bool);
 extern tree find_template_parameters		(tree, tree);
 extern bool equivalent_constraints              (tree, tree);
 extern bool equivalently_constrained            (tree, tree);
 extern bool subsumes_constraints                (tree, tree);
-extern bool strictly_subsumes			(tree, tree, tree);
-extern bool weakly_subsumes			(tree, tree, tree);
+extern bool strictly_subsumes			(tree, tree);
+extern bool weakly_subsumes			(tree, tree);
 extern int more_constrained                     (tree, tree);
 extern bool at_least_as_constrained             (tree, tree);
 extern bool constraints_equivalent_p            (tree, tree);
@@ -7901,7 +7888,7 @@ extern bool var_in_maybe_constexpr_fn           (tree);
 extern void explain_invalid_constexpr_fn        (tree);
 extern vec<tree> cx_error_context               (void);
 extern tree fold_sizeof_expr			(tree);
-extern void clear_cv_and_fold_caches		(bool = true);
+extern void clear_cv_and_fold_caches		(void);
 extern tree unshare_constructor			(tree CXX_MEM_STAT_INFO);
 
 /* An RAII sentinel used to restrict constexpr evaluation so that it

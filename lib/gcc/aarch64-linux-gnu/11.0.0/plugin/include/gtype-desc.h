@@ -365,18 +365,6 @@ extern void gt_ggc_mx_lto_file_decl_data (void *);
   if (X != NULL) gt_ggc_mx_ipa_replace_map (X);\
   } while (0)
 extern void gt_ggc_mx_ipa_replace_map (void *);
-#define gt_ggc_m_27vec_ipa_replace_map__va_gc_(X) do { \
-  if (X != NULL) gt_ggc_mx_vec_ipa_replace_map__va_gc_ (X);\
-  } while (0)
-extern void gt_ggc_mx_vec_ipa_replace_map__va_gc_ (void *);
-#define gt_ggc_m_21ipa_param_adjustments(X) do { \
-  if (X != NULL) gt_ggc_mx_ipa_param_adjustments (X);\
-  } while (0)
-extern void gt_ggc_mx_ipa_param_adjustments (void *);
-#define gt_ggc_m_36vec_ipa_param_performed_split_va_gc_(X) do { \
-  if (X != NULL) gt_ggc_mx_vec_ipa_param_performed_split_va_gc_ (X);\
-  } while (0)
-extern void gt_ggc_mx_vec_ipa_param_performed_split_va_gc_ (void *);
 #define gt_ggc_m_17cgraph_simd_clone(X) do { \
   if (X != NULL) gt_ggc_mx_cgraph_simd_clone (X);\
   } while (0)
@@ -397,6 +385,22 @@ extern void gt_ggc_mx_cgraph_indirect_call_info (void *);
   if (X != NULL) gt_ggc_mx_asm_node (X);\
   } while (0)
 extern void gt_ggc_mx_asm_node (void *);
+#define gt_ggc_m_10thunk_info(X) do { \
+  if (X != NULL) gt_ggc_mx_thunk_info (X);\
+  } while (0)
+extern void gt_ggc_mx_thunk_info (void *);
+#define gt_ggc_m_29function_summary_thunk_info__(X) do { \
+  if (X != NULL) gt_ggc_mx_function_summary_thunk_info__ (X);\
+  } while (0)
+extern void gt_ggc_mx_function_summary_thunk_info__ (void *);
+#define gt_ggc_m_10clone_info(X) do { \
+  if (X != NULL) gt_ggc_mx_clone_info (X);\
+  } while (0)
+extern void gt_ggc_mx_clone_info (void *);
+#define gt_ggc_m_29function_summary_clone_info__(X) do { \
+  if (X != NULL) gt_ggc_mx_function_summary_clone_info__ (X);\
+  } while (0)
+extern void gt_ggc_mx_function_summary_clone_info__ (void *);
 #define gt_ggc_m_12symbol_table(X) do { \
   if (X != NULL) gt_ggc_mx_symbol_table (X);\
   } while (0)
@@ -417,6 +421,22 @@ extern void gt_ggc_mx_hash_map_symtab_node__symbol_priority_map_ (void *);
   if (X != NULL) gt_ggc_mx_constant_descriptor_tree (X);\
   } while (0)
 extern void gt_ggc_mx_constant_descriptor_tree (void *);
+#define gt_ggc_m_28vec_unprocessed_thunk_va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_vec_unprocessed_thunk_va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_vec_unprocessed_thunk_va_gc_ (void *);
+#define gt_ggc_m_27vec_ipa_replace_map__va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_vec_ipa_replace_map__va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_vec_ipa_replace_map__va_gc_ (void *);
+#define gt_ggc_m_21ipa_param_adjustments(X) do { \
+  if (X != NULL) gt_ggc_mx_ipa_param_adjustments (X);\
+  } while (0)
+extern void gt_ggc_mx_ipa_param_adjustments (void *);
+#define gt_ggc_m_36vec_ipa_param_performed_split_va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_vec_ipa_param_performed_split_va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_vec_ipa_param_performed_split_va_gc_ (void *);
 #define gt_ggc_m_28hash_map_alias_set_hash_int_(X) do { \
   if (X != NULL) gt_ggc_mx_hash_map_alias_set_hash_int_ (X);\
   } while (0)
@@ -1121,14 +1141,6 @@ extern void gt_ggc_mx_c_parser (void *);
   if (X != NULL) gt_ggc_mx_vec_c_token_va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_vec_c_token_va_gc_ (void *);
-#define gt_ggc_m_15binding_table_s(X) do { \
-  if (X != NULL) gt_ggc_mx_binding_table_s (X);\
-  } while (0)
-extern void gt_ggc_mx_binding_table_s (void *);
-#define gt_ggc_m_15binding_entry_s(X) do { \
-  if (X != NULL) gt_ggc_mx_binding_entry_s (X);\
-  } while (0)
-extern void gt_ggc_mx_binding_entry_s (void *);
 #define gt_ggc_m_16cp_binding_level(X) do { \
   if (X != NULL) gt_ggc_mx_cp_binding_level (X);\
   } while (0)
@@ -1157,10 +1169,6 @@ extern void gt_ggc_mx_vec_cxx_saved_binding_va_gc_ (void *);
   if (X != NULL) gt_ggc_mx_saved_scope (X);\
   } while (0)
 extern void gt_ggc_mx_saved_scope (void *);
-#define gt_ggc_m_16cxx_int_tree_map(X) do { \
-  if (X != NULL) gt_ggc_mx_cxx_int_tree_map (X);\
-  } while (0)
-extern void gt_ggc_mx_cxx_int_tree_map (void *);
 #define gt_ggc_m_17named_label_entry(X) do { \
   if (X != NULL) gt_ggc_mx_named_label_entry (X);\
   } while (0)
@@ -1750,18 +1758,6 @@ extern void gt_pch_nx_lto_file_decl_data (void *);
   if (X != NULL) gt_pch_nx_ipa_replace_map (X);\
   } while (0)
 extern void gt_pch_nx_ipa_replace_map (void *);
-#define gt_pch_n_27vec_ipa_replace_map__va_gc_(X) do { \
-  if (X != NULL) gt_pch_nx_vec_ipa_replace_map__va_gc_ (X);\
-  } while (0)
-extern void gt_pch_nx_vec_ipa_replace_map__va_gc_ (void *);
-#define gt_pch_n_21ipa_param_adjustments(X) do { \
-  if (X != NULL) gt_pch_nx_ipa_param_adjustments (X);\
-  } while (0)
-extern void gt_pch_nx_ipa_param_adjustments (void *);
-#define gt_pch_n_36vec_ipa_param_performed_split_va_gc_(X) do { \
-  if (X != NULL) gt_pch_nx_vec_ipa_param_performed_split_va_gc_ (X);\
-  } while (0)
-extern void gt_pch_nx_vec_ipa_param_performed_split_va_gc_ (void *);
 #define gt_pch_n_17cgraph_simd_clone(X) do { \
   if (X != NULL) gt_pch_nx_cgraph_simd_clone (X);\
   } while (0)
@@ -1782,6 +1778,22 @@ extern void gt_pch_nx_cgraph_indirect_call_info (void *);
   if (X != NULL) gt_pch_nx_asm_node (X);\
   } while (0)
 extern void gt_pch_nx_asm_node (void *);
+#define gt_pch_n_10thunk_info(X) do { \
+  if (X != NULL) gt_pch_nx_thunk_info (X);\
+  } while (0)
+extern void gt_pch_nx_thunk_info (void *);
+#define gt_pch_n_29function_summary_thunk_info__(X) do { \
+  if (X != NULL) gt_pch_nx_function_summary_thunk_info__ (X);\
+  } while (0)
+extern void gt_pch_nx_function_summary_thunk_info__ (void *);
+#define gt_pch_n_10clone_info(X) do { \
+  if (X != NULL) gt_pch_nx_clone_info (X);\
+  } while (0)
+extern void gt_pch_nx_clone_info (void *);
+#define gt_pch_n_29function_summary_clone_info__(X) do { \
+  if (X != NULL) gt_pch_nx_function_summary_clone_info__ (X);\
+  } while (0)
+extern void gt_pch_nx_function_summary_clone_info__ (void *);
 #define gt_pch_n_12symbol_table(X) do { \
   if (X != NULL) gt_pch_nx_symbol_table (X);\
   } while (0)
@@ -1802,6 +1814,22 @@ extern void gt_pch_nx_hash_map_symtab_node__symbol_priority_map_ (void *);
   if (X != NULL) gt_pch_nx_constant_descriptor_tree (X);\
   } while (0)
 extern void gt_pch_nx_constant_descriptor_tree (void *);
+#define gt_pch_n_28vec_unprocessed_thunk_va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_vec_unprocessed_thunk_va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_vec_unprocessed_thunk_va_gc_ (void *);
+#define gt_pch_n_27vec_ipa_replace_map__va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_vec_ipa_replace_map__va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_vec_ipa_replace_map__va_gc_ (void *);
+#define gt_pch_n_21ipa_param_adjustments(X) do { \
+  if (X != NULL) gt_pch_nx_ipa_param_adjustments (X);\
+  } while (0)
+extern void gt_pch_nx_ipa_param_adjustments (void *);
+#define gt_pch_n_36vec_ipa_param_performed_split_va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_vec_ipa_param_performed_split_va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_vec_ipa_param_performed_split_va_gc_ (void *);
 #define gt_pch_n_28hash_map_alias_set_hash_int_(X) do { \
   if (X != NULL) gt_pch_nx_hash_map_alias_set_hash_int_ (X);\
   } while (0)
@@ -2506,14 +2534,6 @@ extern void gt_pch_nx_c_parser (void *);
   if (X != NULL) gt_pch_nx_vec_c_token_va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_vec_c_token_va_gc_ (void *);
-#define gt_pch_n_15binding_table_s(X) do { \
-  if (X != NULL) gt_pch_nx_binding_table_s (X);\
-  } while (0)
-extern void gt_pch_nx_binding_table_s (void *);
-#define gt_pch_n_15binding_entry_s(X) do { \
-  if (X != NULL) gt_pch_nx_binding_entry_s (X);\
-  } while (0)
-extern void gt_pch_nx_binding_entry_s (void *);
 #define gt_pch_n_16cp_binding_level(X) do { \
   if (X != NULL) gt_pch_nx_cp_binding_level (X);\
   } while (0)
@@ -2542,10 +2562,6 @@ extern void gt_pch_nx_vec_cxx_saved_binding_va_gc_ (void *);
   if (X != NULL) gt_pch_nx_saved_scope (X);\
   } while (0)
 extern void gt_pch_nx_saved_scope (void *);
-#define gt_pch_n_16cxx_int_tree_map(X) do { \
-  if (X != NULL) gt_pch_nx_cxx_int_tree_map (X);\
-  } while (0)
-extern void gt_pch_nx_cxx_int_tree_map (void *);
 #define gt_pch_n_17named_label_entry(X) do { \
   if (X != NULL) gt_pch_nx_named_label_entry (X);\
   } while (0)
@@ -3051,12 +3067,6 @@ extern void gt_pch_p_18lto_file_decl_data
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_15ipa_replace_map
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_27vec_ipa_replace_map__va_gc_
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_21ipa_param_adjustments
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_36vec_ipa_param_performed_split_va_gc_
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_17cgraph_simd_clone
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_28cgraph_function_version_info
@@ -3067,6 +3077,14 @@ extern void gt_pch_p_25cgraph_indirect_call_info
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_8asm_node
     (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_10thunk_info
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_29function_summary_thunk_info__
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_10clone_info
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_29function_summary_clone_info__
+    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_12symbol_table
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_31hash_table_section_name_hasher_
@@ -3076,6 +3094,14 @@ extern void gt_pch_p_26hash_table_asmname_hasher_
 extern void gt_pch_p_42hash_map_symtab_node__symbol_priority_map_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_24constant_descriptor_tree
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_28vec_unprocessed_thunk_va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_27vec_ipa_replace_map__va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_21ipa_param_adjustments
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_36vec_ipa_param_performed_split_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_28hash_map_alias_set_hash_int_
     (void *, void *, gt_pointer_operator, void *);
@@ -3459,10 +3485,6 @@ extern void gt_pch_p_8c_parser
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18vec_c_token_va_gc_
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_15binding_table_s
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_15binding_entry_s
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_16cp_binding_level
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11cxx_binding
@@ -3476,8 +3498,6 @@ extern void gt_pch_p_32vec_deferred_access_check_va_gc_
 extern void gt_pch_p_28vec_cxx_saved_binding_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11saved_scope
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_16cxx_int_tree_map
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_17named_label_entry
     (void *, void *, gt_pointer_operator, void *);

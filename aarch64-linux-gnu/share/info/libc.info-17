@@ -2014,7 +2014,6 @@ START-INFO-DIR-ENTRY
 * vswprintf: (libc)Variable Arguments Output.
 * vswscanf: (libc)Variable Arguments Input.
 * vsyslog: (libc)syslog; vsyslog.
-* vtimes: (libc)Resource Usage.
 * vwarn: (libc)Error Messages.
 * vwarnx: (libc)Error Messages.
 * vwprintf: (libc)Variable Arguments Output.
@@ -4269,7 +4268,6 @@ Program and File Index
                                                               (line  25)
 * sys/utsname.h:                         Platform Type.       (line   8)
 * sys/vlimit.h:                          Limits on Resources. (line 244)
-* sys/vtimes.h:                          Resource Usage.      (line 109)
 * sys/wait.h:                            Process Completion.  (line   8)
 * sys/wait.h <1>:                        Process Completion Status.
                                                               (line  10)
