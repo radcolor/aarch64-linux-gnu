@@ -98,8 +98,6 @@ mode_size_inline (machine_mode mode)
     case E_V8HFmode: return 16;
     case E_V4SFmode: return 16;
     case E_V2DFmode: return 16;
-    case E_VNx2BFmode: return 4;
-    case E_VNx4BFmode: return 8;
     default: return mode_size[mode];
     }
 }
@@ -195,8 +193,6 @@ mode_nunits_inline (machine_mode mode)
     case E_V8HFmode: return 8;
     case E_V4SFmode: return 4;
     case E_V2DFmode: return 2;
-    case E_VNx2BFmode: return 2;
-    case E_VNx4BFmode: return 4;
     default: return mode_nunits[mode];
     }
 }

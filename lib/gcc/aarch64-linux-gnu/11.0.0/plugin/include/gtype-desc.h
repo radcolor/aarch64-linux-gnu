@@ -349,10 +349,6 @@ extern void gt_ggc_mx_rtl_bb_info (void *);
   if (X != NULL) gt_ggc_mx_vec_edge_va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_vec_edge_va_gc_ (void *);
-#define gt_ggc_m_20vec_ipa_ref_t_va_gc_(X) do { \
-  if (X != NULL) gt_ggc_mx_vec_ipa_ref_t_va_gc_ (X);\
-  } while (0)
-extern void gt_ggc_mx_vec_ipa_ref_t_va_gc_ (void *);
 #define gt_ggc_m_18section_hash_entry(X) do { \
   if (X != NULL) gt_ggc_mx_section_hash_entry (X);\
   } while (0)
@@ -981,10 +977,6 @@ extern void gt_ggc_mx_vec_expr_eval_op_va_gc_ (void *);
   if (X != NULL) gt_ggc_mx_vec_condition_va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_vec_condition_va_gc_ (void *);
-#define gt_ggc_m_26vec_size_time_entry_va_gc_(X) do { \
-  if (X != NULL) gt_ggc_mx_vec_size_time_entry_va_gc_ (X);\
-  } while (0)
-extern void gt_ggc_mx_vec_size_time_entry_va_gc_ (void *);
 #define gt_ggc_m_37vec_ipa_freqcounting_predicate_va_gc_(X) do { \
   if (X != NULL) gt_ggc_mx_vec_ipa_freqcounting_predicate_va_gc_ (X);\
   } while (0)
@@ -1241,6 +1233,10 @@ extern void gt_ggc_mx_constexpr_call (void *);
   if (X != NULL) gt_ggc_mx_hash_table_constexpr_call_hasher_ (X);\
   } while (0)
 extern void gt_ggc_mx_hash_table_constexpr_call_hasher_ (void *);
+#define gt_ggc_m_23hash_table_atom_hasher_(X) do { \
+  if (X != NULL) gt_ggc_mx_hash_table_atom_hasher_ (X);\
+  } while (0)
+extern void gt_ggc_mx_hash_table_atom_hasher_ (void *);
 #define gt_ggc_m_9sat_entry(X) do { \
   if (X != NULL) gt_ggc_mx_sat_entry (X);\
   } while (0)
@@ -1742,10 +1738,6 @@ extern void gt_pch_nx_rtl_bb_info (void *);
   if (X != NULL) gt_pch_nx_vec_edge_va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_vec_edge_va_gc_ (void *);
-#define gt_pch_n_20vec_ipa_ref_t_va_gc_(X) do { \
-  if (X != NULL) gt_pch_nx_vec_ipa_ref_t_va_gc_ (X);\
-  } while (0)
-extern void gt_pch_nx_vec_ipa_ref_t_va_gc_ (void *);
 #define gt_pch_n_18section_hash_entry(X) do { \
   if (X != NULL) gt_pch_nx_section_hash_entry (X);\
   } while (0)
@@ -2374,10 +2366,6 @@ extern void gt_pch_nx_vec_expr_eval_op_va_gc_ (void *);
   if (X != NULL) gt_pch_nx_vec_condition_va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_vec_condition_va_gc_ (void *);
-#define gt_pch_n_26vec_size_time_entry_va_gc_(X) do { \
-  if (X != NULL) gt_pch_nx_vec_size_time_entry_va_gc_ (X);\
-  } while (0)
-extern void gt_pch_nx_vec_size_time_entry_va_gc_ (void *);
 #define gt_pch_n_37vec_ipa_freqcounting_predicate_va_gc_(X) do { \
   if (X != NULL) gt_pch_nx_vec_ipa_freqcounting_predicate_va_gc_ (X);\
   } while (0)
@@ -2634,6 +2622,10 @@ extern void gt_pch_nx_constexpr_call (void *);
   if (X != NULL) gt_pch_nx_hash_table_constexpr_call_hasher_ (X);\
   } while (0)
 extern void gt_pch_nx_hash_table_constexpr_call_hasher_ (void *);
+#define gt_pch_n_23hash_table_atom_hasher_(X) do { \
+  if (X != NULL) gt_pch_nx_hash_table_atom_hasher_ (X);\
+  } while (0)
+extern void gt_pch_nx_hash_table_atom_hasher_ (void *);
 #define gt_pch_n_9sat_entry(X) do { \
   if (X != NULL) gt_pch_nx_sat_entry (X);\
   } while (0)
@@ -3059,8 +3051,6 @@ extern void gt_pch_p_11rtl_bb_info
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_15vec_edge_va_gc_
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_20vec_ipa_ref_t_va_gc_
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18section_hash_entry
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18lto_file_decl_data
@@ -3405,8 +3395,6 @@ extern void gt_pch_p_23vec_expr_eval_op_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_20vec_condition_va_gc_
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_26vec_size_time_entry_va_gc_
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_37vec_ipa_freqcounting_predicate_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_44fast_function_summary_ipa_fn_summary__va_gc_
@@ -3534,6 +3522,8 @@ extern void gt_pch_p_35hash_table_constexpr_fundef_hasher_
 extern void gt_pch_p_14constexpr_call
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_33hash_table_constexpr_call_hasher_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_23hash_table_atom_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_9sat_entry
     (void *, void *, gt_pointer_operator, void *);

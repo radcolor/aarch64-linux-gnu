@@ -307,7 +307,7 @@ enum machine_mode
 #else
 #define DFmode (scalar_float_mode ((scalar_float_mode::from_int) E_DFmode))
 #endif
-  E_TFmode,                /* config/aarch64/aarch64-modes.def:160 */
+  E_TFmode,                /* config/aarch64/aarch64-modes.def:164 */
 #define HAVE_TFmode
 #ifdef USE_ENUM_MODES
 #define TFmode E_TFmode
