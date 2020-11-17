@@ -185,6 +185,16 @@ DEFHOOK
  void, (rtx personality),
  NULL)
 
+/* If necessary, modify personality and LSDA references to handle
+   indirection.  This is used when the assembler supports CFI directives.  */
+DEFHOOK
+(make_eh_symbol_indirect,
+ "If necessary, modify personality and LSDA references to handle indirection.\
+  The original symbol is in @code{origsymbol} and if @code{pubvis} is true\
+  the symbol is visible outside the TU.",
+ rtx, (rtx origsymbol, bool pubvis),
+ NULL)
+
 /* Emit any directives required to unwind this instruction.  */
 DEFHOOK
 (unwind_emit,
@@ -4452,7 +4462,8 @@ DEFHOOK
 (asan_shadow_offset,
  "Return the offset bitwise ored into shifted address to get corresponding\n\
 Address Sanitizer shadow memory address.  NULL if Address Sanitizer is not\n\
-supported by the target.",
+supported by the target.  May return 0 if Address Sanitizer is not supported\n\
+by a subtarget.",
  unsigned HOST_WIDE_INT, (void),
  NULL)
 

@@ -2860,6 +2860,7 @@ directive": '#if', '#ifdef' or '#ifndef'.
 * Elif::
 * __has_attribute::
 * __has_cpp_attribute::
+* __has_c_attribute::
 * __has_builtin::
 * __has_include::
 
@@ -3103,9 +3104,10 @@ File: cpp.info,  Node: __has_attribute,  Next: __has_cpp_attribute,  Prev: Elif,
 The special operator '__has_attribute (OPERAND)' may be used in '#if'
 and '#elif' expressions to test whether the attribute referenced by its
 OPERAND is recognized by GCC. Using the operator in other contexts is
-not valid.  In C code, OPERAND must be a valid identifier.  In C++ code,
-OPERAND may be optionally introduced by the 'ATTRIBUTE-SCOPE::' prefix.
-The ATTRIBUTE-SCOPE prefix identifies the "namespace" within which the
+not valid.  In C code, if compiling for strict conformance to standards
+before C2x, OPERAND must be a valid identifier.  Otherwise, OPERAND may
+be optionally introduced by the 'ATTRIBUTE-SCOPE::' prefix.  The
+ATTRIBUTE-SCOPE prefix identifies the "namespace" within which the
 attribute is recognized.  The scope of GCC attributes is 'gnu' or
 '__gnu__'.  The '__has_attribute' operator by itself, without any
 OPERAND or parentheses, acts as a predefined macro so that support for
@@ -3130,7 +3132,7 @@ operator but not with others that don't.
      #endif
 
 
-File: cpp.info,  Node: __has_cpp_attribute,  Next: __has_builtin,  Prev: __has_attribute,  Up: Conditional Syntax
+File: cpp.info,  Node: __has_cpp_attribute,  Next: __has_c_attribute,  Prev: __has_attribute,  Up: Conditional Syntax
 
 4.2.7 '__has_cpp_attribute'
 ---------------------------
@@ -3147,9 +3149,25 @@ current standard attributes, see
 SD-6: SG10 Feature Test Recommendations (https://isocpp.org/std/standing-documents/sd-6-sg10-feature-test-recommendations/).
 
 
-File: cpp.info,  Node: __has_builtin,  Next: __has_include,  Prev: __has_cpp_attribute,  Up: Conditional Syntax
+File: cpp.info,  Node: __has_c_attribute,  Next: __has_builtin,  Prev: __has_cpp_attribute,  Up: Conditional Syntax
 
-4.2.8 '__has_builtin'
+4.2.8 '__has_c_attribute'
+-------------------------
+
+The special operator '__has_c_attribute (OPERAND)' may be used in '#if'
+and '#elif' expressions in C code to test whether the attribute
+referenced by its OPERAND is recognized by GCC in attributes using the
+'[[]]' syntax.  GNU attributes must be specified with the scope 'gnu' or
+'__gnu__' with '__has_c_attribute'.  When OPERAND designates a supported
+standard attribute it evaluates to an integer constant of the form
+'YYYYMM' indicating the year and month when the attribute was first
+introduced into the C standard, or when the syntax of operands to the
+attribute was extended in the C standard.
+
+
+File: cpp.info,  Node: __has_builtin,  Next: __has_include,  Prev: __has_c_attribute,  Up: Conditional Syntax
+
+4.2.9 '__has_builtin'
 ---------------------
 
 The special operator '__has_builtin (OPERAND)' may be used in constant
@@ -3175,8 +3193,8 @@ portable code.  Thus, the recommended use of the operator is as follows:
 
 File: cpp.info,  Node: __has_include,  Prev: __has_builtin,  Up: Conditional Syntax
 
-4.2.9 '__has_include'
----------------------
+4.2.10 '__has_include'
+----------------------
 
 The special operator '__has_include (OPERAND)' may be used in '#if' and
 '#elif' expressions to test whether the header referenced by its OPERAND
@@ -5339,6 +5357,7 @@ Concept Index
 * __has_attribute:                       __has_attribute.     (line   6)
 * __has_builtin:                         __has_builtin.       (line   6)
 * __has_cpp_attribute:                   __has_cpp_attribute. (line   6)
+* __has_c_attribute:                     __has_c_attribute.   (line   6)
 * __has_include:                         __has_include.       (line   6)
 * alternative tokens:                    Tokenization.        (line 100)
 * arguments:                             Macro Arguments.     (line   6)
@@ -5520,40 +5539,41 @@ Node: Newlines in Arguments112007
 Node: Conditionals112958
 Node: Conditional Uses114654
 Node: Conditional Syntax116012
-Node: Ifdef116412
-Node: If119569
-Node: Defined121873
-Node: Else123266
-Node: Elif123836
-Node: __has_attribute125149
-Node: __has_cpp_attribute126683
-Node: __has_builtin127569
-Node: __has_include128704
-Node: Deleted Code130291
-Node: Diagnostics131538
-Node: Line Control133087
-Node: Pragmas135365
-Node: Other Directives139762
-Node: Preprocessor Output140812
-Node: Traditional Mode143965
-Node: Traditional lexical analysis145102
-Node: Traditional macros147605
-Node: Traditional miscellany151402
-Node: Traditional warnings152398
-Node: Implementation Details154595
-Node: Implementation-defined behavior155158
-Ref: Identifier characters155908
-Node: Implementation limits158956
-Node: Obsolete Features161629
-Node: Invocation164473
-Ref: dashMF170508
-Ref: fdollars-in-identifiers175087
-Ref: Wtrigraphs189213
-Node: Environment Variables191268
-Node: GNU Free Documentation License194959
-Node: Index of Directives220104
-Node: Option Index222257
-Node: Concept Index228286
+Node: Ifdef116434
+Node: If119591
+Node: Defined121895
+Node: Else123288
+Node: Elif123858
+Node: __has_attribute125171
+Node: __has_cpp_attribute126765
+Node: __has_c_attribute127655
+Node: __has_builtin128428
+Node: __has_include129561
+Node: Deleted Code131150
+Node: Diagnostics132397
+Node: Line Control133946
+Node: Pragmas136224
+Node: Other Directives140621
+Node: Preprocessor Output141671
+Node: Traditional Mode144824
+Node: Traditional lexical analysis145961
+Node: Traditional macros148464
+Node: Traditional miscellany152261
+Node: Traditional warnings153257
+Node: Implementation Details155454
+Node: Implementation-defined behavior156017
+Ref: Identifier characters156767
+Node: Implementation limits159815
+Node: Obsolete Features162488
+Node: Invocation165332
+Ref: dashMF171367
+Ref: fdollars-in-identifiers175946
+Ref: Wtrigraphs190072
+Node: Environment Variables192127
+Node: GNU Free Documentation License195818
+Node: Index of Directives220963
+Node: Option Index223116
+Node: Concept Index229145
 
 End Tag Table
 

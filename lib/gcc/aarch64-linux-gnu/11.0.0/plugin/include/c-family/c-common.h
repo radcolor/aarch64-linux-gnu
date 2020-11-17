@@ -87,6 +87,11 @@ enum rid
   RID_ASSIGN, RID_RETAIN, RID_COPY,
   RID_PROPATOMIC, RID_NONATOMIC,
 
+  /* ObjC nullability support keywords that also can appear in the
+     property attribute context.  These values should remain contiguous
+     with the other property attributes.  */
+  RID_NULL_UNSPECIFIED, RID_NULLABLE, RID_NONNULL, RID_NULL_RESETTABLE,
+
   /* C (reserved and imaginary types not implemented, so any use is a
      syntax error) */
   RID_IMAGINARY,
@@ -264,7 +269,7 @@ enum rid
   RID_FIRST_PQ = RID_IN,
   RID_LAST_PQ = RID_ONEWAY,
   RID_FIRST_PATTR = RID_GETTER,
-  RID_LAST_PATTR = RID_NONATOMIC
+  RID_LAST_PATTR = RID_NULL_RESETTABLE
 };
 
 #define OBJC_IS_AT_KEYWORD(rid) \
@@ -1042,7 +1047,7 @@ extern bool c_cpp_diagnostic (cpp_reader *, enum cpp_diagnostic_level,
 			      enum cpp_warning_reason, rich_location *,
 			      const char *, va_list *)
      ATTRIBUTE_GCC_DIAG(5,0);
-extern int c_common_has_attribute (cpp_reader *);
+extern int c_common_has_attribute (cpp_reader *, bool);
 extern int c_common_has_builtin (cpp_reader *);
 
 extern bool parse_optimize_options (tree, bool);
@@ -1224,6 +1229,7 @@ extern enum omp_clause_defaultmap_kind c_omp_predetermined_mapping (tree);
 extern tree c_omp_check_context_selector (location_t, tree);
 extern void c_omp_mark_declare_variant (location_t, tree, tree);
 extern const char *c_omp_map_clause_name (tree, bool);
+extern void c_omp_adjust_map_clauses (tree, bool);
 
 /* Return next tree in the chain for chain_next walking of tree nodes.  */
 static inline tree
@@ -1364,7 +1370,7 @@ extern void warn_tautological_cmp (const op_location_t &, enum tree_code,
 				   tree, tree);
 extern void warn_logical_not_parentheses (location_t, enum tree_code, tree,
 					  tree);
-extern bool warn_if_unused_value (const_tree, location_t);
+extern bool warn_if_unused_value (const_tree, location_t, bool = false);
 extern bool strict_aliasing_warning (location_t, tree, tree);
 extern void sizeof_pointer_memaccess_warning (location_t *, tree,
 					      vec<tree, va_gc> *, tree *,

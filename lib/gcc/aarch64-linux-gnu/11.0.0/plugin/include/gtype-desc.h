@@ -1329,14 +1329,6 @@ extern void gt_ggc_mx_hash_table_cplus_array_hasher_ (void *);
   if (X != NULL) gt_ggc_mx_hash_table_list_hasher_ (X);\
   } while (0)
 extern void gt_ggc_mx_hash_table_list_hasher_ (void *);
-#define gt_ggc_m_21pending_abstract_type(X) do { \
-  if (X != NULL) gt_ggc_mx_pending_abstract_type (X);\
-  } while (0)
-extern void gt_ggc_mx_pending_abstract_type (void *);
-#define gt_ggc_m_32hash_table_abstract_type_hasher_(X) do { \
-  if (X != NULL) gt_ggc_mx_hash_table_abstract_type_hasher_ (X);\
-  } while (0)
-extern void gt_ggc_mx_hash_table_abstract_type_hasher_ (void *);
 #define gt_ggc_m_9Statement(X) do { \
   if (X != NULL) gt_ggc_mx_Statement (X);\
   } while (0)
@@ -2718,14 +2710,6 @@ extern void gt_pch_nx_hash_table_cplus_array_hasher_ (void *);
   if (X != NULL) gt_pch_nx_hash_table_list_hasher_ (X);\
   } while (0)
 extern void gt_pch_nx_hash_table_list_hasher_ (void *);
-#define gt_pch_n_21pending_abstract_type(X) do { \
-  if (X != NULL) gt_pch_nx_pending_abstract_type (X);\
-  } while (0)
-extern void gt_pch_nx_pending_abstract_type (void *);
-#define gt_pch_n_32hash_table_abstract_type_hasher_(X) do { \
-  if (X != NULL) gt_pch_nx_hash_table_abstract_type_hasher_ (X);\
-  } while (0)
-extern void gt_pch_nx_hash_table_abstract_type_hasher_ (void *);
 #define gt_pch_n_9Statement(X) do { \
   if (X != NULL) gt_pch_nx_Statement (X);\
   } while (0)
@@ -3570,10 +3554,6 @@ extern void gt_pch_p_26vec_deferred_access_va_gc_
 extern void gt_pch_p_30hash_table_cplus_array_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_23hash_table_list_hasher_
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_21pending_abstract_type
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_32hash_table_abstract_type_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_9Statement
     (void *, void *, gt_pointer_operator, void *);
