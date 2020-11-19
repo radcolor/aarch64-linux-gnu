@@ -644,6 +644,18 @@
 #endif
 
 
+/* Define if your assembler supports -misa-spec=. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_AS_MISA_SPEC */
+#endif
+
+
+/* Define if your assembler supports -march=rv*_zifencei. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_AS_MARCH_ZIFENCEI */
+#endif
+
+
 /* Define if your assembler supports relocs needed by -fpic. */
 #ifndef USED_FOR_TARGET
 #define HAVE_AS_SMALL_PIC_RELOCS 1

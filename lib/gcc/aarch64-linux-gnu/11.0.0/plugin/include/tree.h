@@ -625,6 +625,9 @@ extern void omp_clause_range_check_failed (const_tree, const char *, int,
 #define FUNC_OR_METHOD_TYPE_P(NODE) \
   (TREE_CODE (NODE) == FUNCTION_TYPE || TREE_CODE (NODE) == METHOD_TYPE)
 
+#define OPAQUE_TYPE_P(NODE) \
+    (TREE_CODE (NODE) == OPAQUE_TYPE)
+
 /* Define many boolean fields that all tree nodes have.  */
 
 /* In VAR_DECL, PARM_DECL and RESULT_DECL nodes, nonzero means address
@@ -5121,7 +5124,7 @@ extern const_tree strip_invariant_refs (const_tree);
 extern tree lhd_gcc_personality (void);
 extern void assign_assembler_name_if_needed (tree);
 extern bool warn_deprecated_use (tree, tree);
-extern void cache_integer_cst (tree);
+extern tree cache_integer_cst (tree, bool might_duplicate = false);
 extern const char *combined_fn_name (combined_fn);
 
 /* Compare and hash for any structure which begins with a canonical
