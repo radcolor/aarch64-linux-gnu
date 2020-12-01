@@ -308,6 +308,15 @@ enum cpp_normalize_level {
   normalized_none
 };
 
+enum cpp_main_search 
+{
+  CMS_none,    /* A regular source file.  */
+  CMS_header,  /* Is a directly-specified header file (eg PCH or
+		  header-unit).  */
+  CMS_user,    /* Search the user INCLUDE path.  */
+  CMS_system,  /* Search the system INCLUDE path.  */
+};
+
 /* This structure is nested inside struct cpp_reader, and
    carries all the options visible to the command line.  */
 struct cpp_options
@@ -566,6 +575,8 @@ struct cpp_options
 
   /* The maximum depth of the nested #include.  */
   unsigned int max_include_depth;
+
+  cpp_main_search main_search : 8;
 };
 
 /* Diagnostic levels.  To get a diagnostic without associating a
@@ -890,7 +901,7 @@ enum cpp_builtin_type
 union GTY(()) _cpp_hashnode_value {
   /* Assert (maybe NULL) */
   cpp_macro * GTY((tag ("NT_VOID"))) answers;
-  /* Macro (never NULL) */
+  /* Macro (maybe NULL) */
   cpp_macro * GTY((tag ("NT_USER_MACRO"))) macro;
   /* Code for a builtin macro.  */
   enum cpp_builtin_type GTY ((tag ("NT_BUILTIN_MACRO"))) builtin;
@@ -908,7 +919,11 @@ struct GTY(()) cpp_hashnode {
   unsigned int flags : 9;		/* CPP flags.  */
   ENUM_BITFIELD(node_type) type : 2;	/* CPP node type.  */
 
-  /* 5 bits spare (plus another 32 on 64-bit hosts).  */
+  /* 5 bits spare.  */
+
+  /* On a 64-bit system there would be 32-bits of padding to the value
+     field.  So placing the deferred index here is not costly.   */
+  unsigned deferred;			/* Deferred index, (unless zero).  */
 
   union _cpp_hashnode_value GTY ((desc ("%1.type"))) value;
 };
@@ -997,6 +1012,10 @@ extern const char *cpp_find_header_unit (cpp_reader *, const char *file,
    too.  If there was an error opening the file, it returns NULL.  */
 extern const char *cpp_read_main_file (cpp_reader *, const char *,
 				       bool injecting = false);
+extern location_t cpp_main_loc (const cpp_reader *);
+
+/* Adjust for the main file to be an include.  */
+extern void cpp_retrofit_as_include (cpp_reader *);
 
 /* Set up built-ins with special behavior.  Use cpp_init_builtins()
    instead unless your know what you are doing.  */
@@ -1046,6 +1065,18 @@ inline bool cpp_macro_p (const cpp_hashnode *node)
 {
   return node->type & NT_MACRO_MASK;
 }
+inline cpp_macro *cpp_set_deferred_macro (cpp_hashnode *node,
+					  cpp_macro *forced = NULL)
+{
+  cpp_macro *old = node->value.macro;
+
+  node->value.macro = forced;
+  node->type = NT_USER_MACRO;
+  node->flags &= ~NODE_USED;
+
+  return old;
+}
+cpp_macro *cpp_get_deferred_macro (cpp_reader *, cpp_hashnode *, location_t);
 
 /* Returns true if NODE is a function-like user macro.  */
 inline bool cpp_fun_like_macro_p (cpp_hashnode *node)
@@ -1053,11 +1084,13 @@ inline bool cpp_fun_like_macro_p (cpp_hashnode *node)
   return cpp_user_macro_p (node) && node->value.macro->fun_like;
 }
 
-extern const unsigned char *cpp_macro_definition (cpp_reader *,
-						  cpp_hashnode *);
+extern const unsigned char *cpp_macro_definition (cpp_reader *, cpp_hashnode *);
+extern const unsigned char *cpp_macro_definition (cpp_reader *, cpp_hashnode *,
+						  const cpp_macro *);
 inline location_t cpp_macro_definition_location (cpp_hashnode *node)
 {
-  return node->value.macro->line;
+  const cpp_macro *macro = node->value.macro;
+  return macro ? macro->line : 0;
 }
 /* Return an idempotent time stamp (possibly from SOURCE_DATE_EPOCH).  */
 enum class CPP_time_kind 
@@ -1251,6 +1284,8 @@ extern int cpp_ideq (const cpp_token *, const char *);
 extern void cpp_output_line (cpp_reader *, FILE *);
 extern unsigned char *cpp_output_line_to_string (cpp_reader *,
 						 const unsigned char *);
+extern const unsigned char *cpp_alloc_token_string
+  (cpp_reader *, const unsigned char *, unsigned);
 extern void cpp_output_token (const cpp_token *, FILE *);
 extern const char *cpp_type2name (enum cpp_ttype, unsigned char flags);
 /* Returns the value of an escape sequence, truncated to the correct
@@ -1306,6 +1341,8 @@ extern void cpp_scan_nooutput (cpp_reader *);
 extern int  cpp_sys_macro_p (cpp_reader *);
 extern unsigned char *cpp_quote_string (unsigned char *, const unsigned char *,
 					unsigned int);
+extern bool cpp_compare_macros (const cpp_macro *macro1,
+				const cpp_macro *macro2);
 
 /* In files.c */
 extern bool cpp_included (cpp_reader *, const char *);

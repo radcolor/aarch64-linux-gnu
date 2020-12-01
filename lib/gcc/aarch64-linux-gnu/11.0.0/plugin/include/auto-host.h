@@ -237,6 +237,10 @@
 /* Define if you want runtime assertions enabled. This is a cheap check. */
 #define ENABLE_RUNTIME_CHECKING 1
 
+/* Define to enable evaluating float expressions with double precision in
+   standards-compatible mode on s390 targets. */
+/* #undef ENABLE_S390_EXCESS_FLOAT_PRECISION */
+
 /* Define if you want all operations on trees (the basic data structure of the
    front ends) to be checked for dynamic type safety at runtime. This is
    moderately expensive. */
@@ -300,6 +304,18 @@
 /* mcontext_t fields start with __ */
 #ifndef USED_FOR_TARGET
 /* #undef HAS_MCONTEXT_T_UNDERSCORES */
+#endif
+
+
+/* Define if AF_INET6 supported. */
+#ifndef USED_FOR_TARGET
+#define HAVE_AF_INET6 1
+#endif
+
+
+/* Define if AF_UNIX supported. */
+#ifndef USED_FOR_TARGET
+#define HAVE_AF_UNIX 1
 #endif
 
 
@@ -565,9 +581,21 @@
 #endif
 
 
+/* Define if the assembler understands -march=rv*_zifencei. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_AS_MARCH_ZIFENCEI */
+#endif
+
+
 /* Define if your assembler supports mfcr field. */
 #ifndef USED_FOR_TARGET
 /* #undef HAVE_AS_MFCRF */
+#endif
+
+
+/* Define if the assembler understands -misa-spec=. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_AS_MISA_SPEC */
 #endif
 
 
@@ -641,18 +669,6 @@
 /* Define if your assembler supports .attribute. */
 #ifndef USED_FOR_TARGET
 /* #undef HAVE_AS_RISCV_ATTRIBUTE */
-#endif
-
-
-/* Define if your assembler supports -misa-spec=. */
-#ifndef USED_FOR_TARGET
-/* #undef HAVE_AS_MISA_SPEC */
-#endif
-
-
-/* Define if your assembler supports -march=rv*_zifencei. */
-#ifndef USED_FOR_TARGET
-/* #undef HAVE_AS_MARCH_ZIFENCEI */
 #endif
 
 
@@ -1266,6 +1282,12 @@
 #endif
 
 
+/* Define to 1 if you have the `fstatat' function. */
+#ifndef USED_FOR_TARGET
+#define HAVE_FSTATAT 1
+#endif
+
+
 /* Define to 1 if you have the <ftw.h> header file. */
 #ifndef USED_FOR_TARGET
 #define HAVE_FTW_H 1
@@ -1771,6 +1793,12 @@
 #endif
 
 
+/* Define to 1 if you have the `posix_fallocate' function. */
+#ifndef USED_FOR_TARGET
+#define HAVE_POSIX_FALLOCATE 1
+#endif
+
+
 /* Define to 1 if you have the `putchar_unlocked' function. */
 #ifndef USED_FOR_TARGET
 #define HAVE_PUTCHAR_UNLOCKED 1
@@ -1792,6 +1820,12 @@
 /* Define to 1 if you have the `setrlimit' function. */
 #ifndef USED_FOR_TARGET
 #define HAVE_SETRLIMIT 1
+#endif
+
+
+/* Define if <sys/signal.h> defines sighandler_t */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_SIGHANDLER_T */
 #endif
 
 
@@ -2031,6 +2065,12 @@
 /* Define if F_SETLKW supported by fcntl. */
 #ifndef USED_FOR_TARGET
 #define HOST_HAS_F_SETLKW 1
+#endif
+
+
+/* Define if O_CLOEXEC supported by fcntl. */
+#ifndef USED_FOR_TARGET
+#define HOST_HAS_O_CLOEXEC 1
 #endif
 
 

@@ -3,6 +3,8 @@
 
 *link_libasan: -lrt -ldl -lrt -lpthread -lm
 
+*link_libhwasan: -ldl -lrt -lpthread -lm
+
 *link_libtsan: -lrt -ldl -lrt -lpthread -lm
 
 *link_libubsan: -ldl -lrt -lpthread -lm

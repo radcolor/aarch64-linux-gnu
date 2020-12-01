@@ -1984,11 +1984,10 @@ option.
      '-fcf-protection' and, if needed, other target specific options to
      a set of building options.
 
-     The option is disabled by default.  When '--enable-cet=auto' is
-     used, it is enabled on Linux/x86 if target binutils supports 'Intel
-     CET' instructions and disabled otherwise.  In this case the target
-     libraries are configured to get additional '-fcf-protection'
-     option.
+     '--enable-cet=auto' is default.  CET is enabled on Linux/x86 if
+     target binutils supports 'Intel CET' instructions and disabled
+     otherwise.  In this case, the target libraries are configured to
+     get additional '-fcf-protection' option.
 
 '--with-riscv-attribute='yes', 'no' or 'default''
      Generate RISC-V attribute by default, in order to record extra
@@ -1996,6 +1995,16 @@ option.
 
      The option is disabled by default.  It is enabled on RISC-V/ELF
      (bare-metal) target if target binutils supported.
+
+'--enable-s390-excess-float-precision'
+'--disable-s390-excess-float-precision'
+     On s390(x) targets, enable treatment of float expressions with
+     double precision when in standards-compliant mode (e.g., when
+     '--std=c99' or '-fexcess-precision=standard' are given).
+
+     For a native build, the option's default is derived from glibc's
+     behavior.  When glibc clamps float_t to double, gcc follows and
+     enables the option.  In all other cases, it defaults to off.
 
 Cross-Compiler-Specific Options
 -------------------------------
@@ -2484,6 +2493,16 @@ configurations are:
      Arranges for the run time of each program started by the GCC
      driver, built in any stage, to be logged to 'time.log', in the top
      level of the build tree.
+
+'bootstrap-asan'
+     Compiles GCC itself using Address Sanitization in order to catch
+     invalid memory accesses within the GCC code.
+
+'bootstrap-hwasan'
+     Compiles GCC itself using HWAddress Sanitization in order to catch
+     invalid memory accesses within the GCC code.  This option is only
+     available on AArch64 systems that are running Linux kernel version
+     5.4 or later.
 
 5.2 Building a cross compiler
 =============================
@@ -4848,7 +4867,7 @@ Concept Index
 * Menu:
 
 * Binaries:                              Binaries.           (line    6)
-* build_configargs:                      Configuration.      (line 1730)
+* build_configargs:                      Configuration.      (line 1739)
 * Configuration:                         Configuration.      (line    6)
 * configurations supported by GCC:       Configurations.     (line    6)
 * Downloading GCC:                       Downloading the source.
@@ -4858,7 +4877,7 @@ Concept Index
 * FDL, GNU Free Documentation License:   GNU Free Documentation License.
                                                              (line    6)
 * Host specific installation:            Specific.           (line    6)
-* host_configargs:                       Configuration.      (line 1734)
+* host_configargs:                       Configuration.      (line 1743)
 * Installing GCC: Binaries:              Binaries.           (line    6)
 * Installing GCC: Building:              Building.           (line    6)
 * Installing GCC: Configuration:         Configuration.      (line    6)
@@ -4868,7 +4887,7 @@ Concept Index
 * Specific installation notes:           Specific.           (line    6)
 * Target specific installation:          Specific.           (line    6)
 * Target specific installation notes:    Specific.           (line    6)
-* target_configargs:                     Configuration.      (line 1738)
+* target_configargs:                     Configuration.      (line 1747)
 * Testing:                               Testing.            (line    6)
 * Testsuite:                             Testing.            (line    6)
 
@@ -4886,97 +4905,97 @@ Ref: with-as34220
 Ref: with-gnu-ld35629
 Ref: WithAixSoname59796
 Ref: AixLdCommand60457
-Node: Building101707
-Node: Testing117438
-Node: Final install125325
-Node: Binaries130625
-Node: Specific131732
-Ref: aarch64-x-x132239
-Ref: alpha-x-x134259
-Ref: amd64-x-solaris2134473
-Ref: amdgcn-x-amdhsa134555
-Ref: arc-x-elf32135081
-Ref: arc-linux-uclibc135257
-Ref: arm-x-eabi135398
-Ref: avr135651
-Ref: bfin136232
-Ref: cr16136495
-Ref: cris136911
-Ref: dos137609
-Ref: epiphany-x-elf137932
-Ref: x-x-freebsd138037
-Ref: ft32-x-elf139837
-Ref: h8300-hms139935
-Ref: hppa-hp-hpux140287
-Ref: hppa-hp-hpux10142659
-Ref: hppa-hp-hpux11143072
-Ref: x-x-linux-gnu148474
-Ref: ix86-x-linux148667
-Ref: ix86-x-solaris2148980
-Ref: ia64-x-linux150056
-Ref: ia64-x-hpux150826
-Ref: x-ibm-aix151381
-Ref: TransferAixShobj155043
-Ref: iq2000-x-elf158853
-Ref: lm32-x-elf158993
-Ref: lm32-x-uclinux159097
-Ref: m32c-x-elf159225
-Ref: m32r-x-elf159327
-Ref: m68k-x-x159429
-Ref: m68k-x-uclinux160467
-Ref: microblaze-x-elf160712
-Ref: mips-x-x160831
-Ref: moxie-x-elf162741
-Ref: msp430-x-elf162788
-Ref: nds32le-x-elf163345
-Ref: nds32be-x-elf163417
-Ref: nvptx-x-none163486
-Ref: or1k-x-elf164049
-Ref: or1k-x-linux164180
-Ref: powerpc-x-x164261
-Ref: powerpc-x-darwin164452
-Ref: powerpc-x-elf164946
-Ref: powerpc-x-linux-gnu165031
-Ref: powerpc-x-netbsd165126
-Ref: powerpc-x-eabisim165214
-Ref: powerpc-x-eabi165340
-Ref: powerpcle-x-elf165416
-Ref: powerpcle-x-eabisim165508
-Ref: powerpcle-x-eabi165641
-Ref: rl78-x-elf165724
-Ref: riscv32-x-elf165830
-Ref: riscv32-x-linux166019
-Ref: riscv64-x-elf166176
-Ref: riscv64-x-linux166365
-Ref: rx-x-elf166522
-Ref: s390-x-linux166568
-Ref: s390x-x-linux166640
-Ref: s390x-ibm-tpf166727
-Ref: x-x-solaris2166858
-Ref: sparc-x-x169965
-Ref: sparc-sun-solaris2170467
-Ref: sparc-x-linux171610
-Ref: sparc64-x-solaris2171641
-Ref: sparcv9-x-solaris2172359
-Ref: c6x-x-x172446
-Ref: tilegx-*-linux172538
-Ref: tilegxbe-*-linux172680
-Ref: tilepro-*-linux172823
-Ref: visium-x-elf172944
-Ref: x-x-vxworks173052
-Ref: x86-64-x-x174575
-Ref: x86-64-x-solaris2174903
-Ref: xtensa-x-elf175553
-Ref: xtensa-x-linux176224
-Ref: windows176565
-Ref: x-x-cygwin178406
-Ref: x-x-mingw32178959
-Ref: older179185
-Ref: elf181302
-Node: Old181560
-Node: Configurations184693
-Node: GNU Free Documentation License188231
-Node: Concept Index213359
+Node: Building102150
+Node: Testing118273
+Node: Final install126160
+Node: Binaries131460
+Node: Specific132567
+Ref: aarch64-x-x133074
+Ref: alpha-x-x135094
+Ref: amd64-x-solaris2135308
+Ref: amdgcn-x-amdhsa135390
+Ref: arc-x-elf32135916
+Ref: arc-linux-uclibc136092
+Ref: arm-x-eabi136233
+Ref: avr136486
+Ref: bfin137067
+Ref: cr16137330
+Ref: cris137746
+Ref: dos138444
+Ref: epiphany-x-elf138767
+Ref: x-x-freebsd138872
+Ref: ft32-x-elf140672
+Ref: h8300-hms140770
+Ref: hppa-hp-hpux141122
+Ref: hppa-hp-hpux10143494
+Ref: hppa-hp-hpux11143907
+Ref: x-x-linux-gnu149309
+Ref: ix86-x-linux149502
+Ref: ix86-x-solaris2149815
+Ref: ia64-x-linux150891
+Ref: ia64-x-hpux151661
+Ref: x-ibm-aix152216
+Ref: TransferAixShobj155878
+Ref: iq2000-x-elf159688
+Ref: lm32-x-elf159828
+Ref: lm32-x-uclinux159932
+Ref: m32c-x-elf160060
+Ref: m32r-x-elf160162
+Ref: m68k-x-x160264
+Ref: m68k-x-uclinux161302
+Ref: microblaze-x-elf161547
+Ref: mips-x-x161666
+Ref: moxie-x-elf163576
+Ref: msp430-x-elf163623
+Ref: nds32le-x-elf164180
+Ref: nds32be-x-elf164252
+Ref: nvptx-x-none164321
+Ref: or1k-x-elf164884
+Ref: or1k-x-linux165015
+Ref: powerpc-x-x165096
+Ref: powerpc-x-darwin165287
+Ref: powerpc-x-elf165781
+Ref: powerpc-x-linux-gnu165866
+Ref: powerpc-x-netbsd165961
+Ref: powerpc-x-eabisim166049
+Ref: powerpc-x-eabi166175
+Ref: powerpcle-x-elf166251
+Ref: powerpcle-x-eabisim166343
+Ref: powerpcle-x-eabi166476
+Ref: rl78-x-elf166559
+Ref: riscv32-x-elf166665
+Ref: riscv32-x-linux166854
+Ref: riscv64-x-elf167011
+Ref: riscv64-x-linux167200
+Ref: rx-x-elf167357
+Ref: s390-x-linux167403
+Ref: s390x-x-linux167475
+Ref: s390x-ibm-tpf167562
+Ref: x-x-solaris2167693
+Ref: sparc-x-x170800
+Ref: sparc-sun-solaris2171302
+Ref: sparc-x-linux172445
+Ref: sparc64-x-solaris2172476
+Ref: sparcv9-x-solaris2173194
+Ref: c6x-x-x173281
+Ref: tilegx-*-linux173373
+Ref: tilegxbe-*-linux173515
+Ref: tilepro-*-linux173658
+Ref: visium-x-elf173779
+Ref: x-x-vxworks173887
+Ref: x86-64-x-x175410
+Ref: x86-64-x-solaris2175738
+Ref: xtensa-x-elf176388
+Ref: xtensa-x-linux177059
+Ref: windows177400
+Ref: x-x-cygwin179241
+Ref: x-x-mingw32179794
+Ref: older180020
+Ref: elf182137
+Node: Old182395
+Node: Configurations185528
+Node: GNU Free Documentation License189066
+Node: Concept Index214194
 
 End Tag Table
 

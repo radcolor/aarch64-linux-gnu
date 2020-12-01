@@ -176,6 +176,16 @@ SECTIONS
   }
   .data1          : { *(.data1) }
   _edata = .; PROVIDE (edata = .);
+  /* This section contains data that is initialized during load,
+     but not during the application's initialization sequence.  */
+  .persistent :
+  {
+    . = ALIGN(32 / 8);
+    PROVIDE (__persistent_start = .);
+    *(.persistent .persistent.* .gnu.linkonce.p.*)
+    . = ALIGN(32 / 8);
+    PROVIDE (__persistent_end = .);
+  }
   . = .;
   __bss_start = .;
   __bss_start__ = .;
@@ -192,6 +202,16 @@ SECTIONS
    . = ALIGN(. != 0 ? 32 / 8 : 1);
   }
   _bss_end__ = .; __bss_end__ = .;
+  /* This section contains data that is not initialized during load,
+     or during the application's initialization sequence.  */
+  .noinit (NOLOAD) :
+  {
+    . = ALIGN(32 / 8);
+    PROVIDE (__noinit_start = .);
+    *(.noinit .noinit.* .gnu.linkonce.n.*)
+    . = ALIGN(32 / 8);
+    PROVIDE (__noinit_end = .);
+  }
   . = ALIGN(32 / 8);
   . = SEGMENT_START("ldata-segment", .);
   . = ALIGN(32 / 8);
@@ -243,16 +263,6 @@ SECTIONS
   .debug_macro    0 : { *(.debug_macro) }
   .debug_addr     0 : { *(.debug_addr) }
   .ARM.attributes 0 : { KEEP (*(.ARM.attributes)) KEEP (*(.gnu.attributes)) }
-.note.gnu.arm.ident 0 : { KEEP (*(.note.gnu.arm.ident)) }
-/* This section contains data that is not initialised during load
-   *or* application reset.  */
- .noinit (NOLOAD) :
- {
-   . = ALIGN(2);
-   PROVIDE (__noinit_start = .);
-   *(.noinit)
-   . = ALIGN(2);
-   PROVIDE (__noinit_end = .);
- }
+  .note.gnu.arm.ident 0 : { KEEP (*(.note.gnu.arm.ident)) }
   /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) *(.gnu.lto_*) }
 }

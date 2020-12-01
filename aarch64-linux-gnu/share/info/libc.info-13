@@ -5053,6 +5053,8 @@ explicit ‘clockid_t’ argument.
 
      Behaves like ‘pthread_timedjoin_np’ except that the absolute time
      in ABSTIME is measured against the clock specified by CLOCKID.
+     Currently, CLOCKID must be either ‘CLOCK_MONOTONIC’ or
+     ‘CLOCK_REALTIME’.
 
 
 File: libc.info,  Node: Single-Threaded,  Prev: Waiting with Explicit Clocks,  Up: Non-POSIX Extensions
