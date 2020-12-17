@@ -323,6 +323,7 @@ START-INFO-DIR-ENTRY
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
 * O_NOTRANS: (libc)Open-time Flags.
+* O_PATH: (libc)Access Modes.
 * O_RDONLY: (libc)Access Modes.
 * O_RDWR: (libc)Access Modes.
 * O_READ: (libc)Access Modes.
@@ -7334,38 +7335,3 @@ should maintain and use these separately.  *Note Mount Information::.
      It is more widely available than ‘umount2’ but since it lacks the
      possibility to forcefully unmount a filesystem is deprecated when
      ‘umount2’ is also available.
-
-
-File: libc.info,  Node: System Configuration,  Next: Cryptographic Functions,  Prev: System Management,  Up: Top
-
-32 System Configuration Parameters
-**********************************
-
-The functions and macros listed in this chapter give information about
-configuration parameters of the operating system—for example, capacity
-limits, presence of optional POSIX features, and the default path for
-executable files (*note String Parameters::).
-
-* Menu:
-
-* General Limits::           Constants and functions that describe
-				various process-related limits that have
-				one uniform value for any given machine.
-* System Options::           Optional POSIX features.
-* Version Supported::        Version numbers of POSIX.1 and POSIX.2.
-* Sysconf::                  Getting specific configuration values
-                                of general limits and system options.
-* Minimums::                 Minimum values for general limits.
-
-* Limits for Files::         Size limitations that pertain to individual files.
-                                These can vary between file systems
-                                or even from file to file.
-* Options for Files::        Optional features that some files may support.
-* File Minimums::            Minimum values for file limits.
-* Pathconf::                 Getting the limit values for a particular file.
-
-* Utility Limits::           Capacity limits of some POSIX.2 utility programs.
-* Utility Minimums::         Minimum allowable values of those limits.
-
-* String Parameters::        Getting the default search path.
-

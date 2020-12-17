@@ -64,6 +64,7 @@ C_TREE_H=c/c-tree.h c-family/c-common.h c-family/c-common.def tree.h tree-core.h
 SYSTEM_H=system.h hwint.h libiberty.h safe-ctype.h filenames.h
 PREDICT_H=predict.h predict.def
 CPPLIB_H=line-map.h cpplib.h
+CODYLIB_H=cody.hh
 INPUT_H=line-map.h input.h
 OPTS_H=line-map.h input.h vec.h statistics.h ggc.h gtype-desc.h statistics.h opts.h obstack.h
 SYMTAB_H=symtab.h obstack.h

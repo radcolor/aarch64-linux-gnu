@@ -323,6 +323,7 @@ START-INFO-DIR-ENTRY
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
 * O_NOTRANS: (libc)Open-time Flags.
+* O_PATH: (libc)Access Modes.
 * O_RDONLY: (libc)Access Modes.
 * O_RDWR: (libc)Access Modes.
 * O_READ: (libc)Access Modes.
@@ -3523,13 +3524,13 @@ Variable and Constant Macro Index
 * OPTION_NO_USAGE:                       Argp Option Flags.   (line  41)
 * optopt:                                Using Getopt.        (line  18)
 * OXTABS:                                Output Modes.        (line  31)
-* O_ACCMODE:                             Access Modes.        (line  56)
+* O_ACCMODE:                             Access Modes.        (line  42)
 * O_APPEND:                              Operating Modes.     (line  10)
 * O_ASYNC:                               Operating Modes.     (line  44)
 * O_CREAT:                               Open-time Flags.     (line  21)
 * O_DIRECTORY:                           Open-time Flags.     (line  34)
 * O_EXCL:                                Open-time Flags.     (line  25)
-* O_EXEC:                                Access Modes.        (line  45)
+* O_EXEC:                                Access Modes.        (line  72)
 * O_EXLOCK:                              Open-time Flags.     (line 151)
 * O_FSYNC:                               Operating Modes.     (line  52)
 * O_IGNORE_CTTY:                         Open-time Flags.     (line 102)
@@ -3541,15 +3542,16 @@ Variable and Constant Macro Index
 * O_NONBLOCK:                            Open-time Flags.     (line  70)
 * O_NONBLOCK <1>:                        Operating Modes.     (line  23)
 * O_NOTRANS:                             Open-time Flags.     (line 115)
-* O_RDONLY:                              Access Modes.        (line  11)
-* O_RDWR:                                Access Modes.        (line  19)
-* O_READ:                                Access Modes.        (line  35)
+* O_PATH:                                Access Modes.        (line  22)
+* O_RDONLY:                              Access Modes.        (line  10)
+* O_RDWR:                                Access Modes.        (line  18)
+* O_READ:                                Access Modes.        (line  62)
 * O_SHLOCK:                              Open-time Flags.     (line 142)
 * O_SYNC:                                Operating Modes.     (line  60)
 * O_TMPFILE:                             Open-time Flags.     (line  46)
 * O_TRUNC:                               Open-time Flags.     (line 125)
-* O_WRITE:                               Access Modes.        (line  40)
-* O_WRONLY:                              Access Modes.        (line  15)
+* O_WRITE:                               Access Modes.        (line  67)
+* O_WRONLY:                              Access Modes.        (line  14)
 * PARENB:                                Control Modes.       (line  52)
 * PARMRK:                                Input Modes.         (line  39)
 * PARODD:                                Control Modes.       (line  62)

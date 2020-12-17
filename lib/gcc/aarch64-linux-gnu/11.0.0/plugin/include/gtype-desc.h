@@ -1189,6 +1189,10 @@ extern void gt_ggc_mx_spec_entry (void *);
   if (X != NULL) gt_ggc_mx_tinst_level (X);\
   } while (0)
 extern void gt_ggc_mx_tinst_level (void *);
+#define gt_ggc_m_12module_state(X) do { \
+  if (X != NULL) gt_ggc_mx_module_state (X);\
+  } while (0)
+extern void gt_ggc_mx_module_state (void *);
 #define gt_ggc_m_16constexpr_fundef(X) do { \
   if (X != NULL) gt_ggc_mx_constexpr_fundef (X);\
   } while (0)
@@ -1301,6 +1305,22 @@ extern void gt_ggc_mx_subsumption_entry (void *);
   if (X != NULL) gt_ggc_mx_hash_table_subsumption_hasher_ (X);\
   } while (0)
 extern void gt_ggc_mx_hash_table_subsumption_hasher_ (void *);
+#define gt_ggc_m_8slurping(X) do { \
+  if (X != NULL) gt_ggc_mx_slurping (X);\
+  } while (0)
+extern void gt_ggc_mx_slurping (void *);
+#define gt_ggc_m_24vec_module_state__va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_vec_module_state__va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_vec_module_state__va_gc_ (void *);
+#define gt_ggc_m_29hash_table_module_state_hash_(X) do { \
+  if (X != NULL) gt_ggc_mx_hash_table_module_state_hash_ (X);\
+  } while (0)
+extern void gt_ggc_mx_hash_table_module_state_hash_ (void *);
+#define gt_ggc_m_33hash_table_note_def_cache_hasher_(X) do { \
+  if (X != NULL) gt_ggc_mx_hash_table_note_def_cache_hasher_ (X);\
+  } while (0)
+extern void gt_ggc_mx_hash_table_note_def_cache_hasher_ (void *);
 #define gt_ggc_m_16pending_template(X) do { \
   if (X != NULL) gt_ggc_mx_pending_template (X);\
   } while (0)
@@ -2570,6 +2590,10 @@ extern void gt_pch_nx_spec_entry (void *);
   if (X != NULL) gt_pch_nx_tinst_level (X);\
   } while (0)
 extern void gt_pch_nx_tinst_level (void *);
+#define gt_pch_n_12module_state(X) do { \
+  if (X != NULL) gt_pch_nx_module_state (X);\
+  } while (0)
+extern void gt_pch_nx_module_state (void *);
 #define gt_pch_n_16constexpr_fundef(X) do { \
   if (X != NULL) gt_pch_nx_constexpr_fundef (X);\
   } while (0)
@@ -2682,6 +2706,22 @@ extern void gt_pch_nx_subsumption_entry (void *);
   if (X != NULL) gt_pch_nx_hash_table_subsumption_hasher_ (X);\
   } while (0)
 extern void gt_pch_nx_hash_table_subsumption_hasher_ (void *);
+#define gt_pch_n_8slurping(X) do { \
+  if (X != NULL) gt_pch_nx_slurping (X);\
+  } while (0)
+extern void gt_pch_nx_slurping (void *);
+#define gt_pch_n_24vec_module_state__va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_vec_module_state__va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_vec_module_state__va_gc_ (void *);
+#define gt_pch_n_29hash_table_module_state_hash_(X) do { \
+  if (X != NULL) gt_pch_nx_hash_table_module_state_hash_ (X);\
+  } while (0)
+extern void gt_pch_nx_hash_table_module_state_hash_ (void *);
+#define gt_pch_n_33hash_table_note_def_cache_hasher_(X) do { \
+  if (X != NULL) gt_pch_nx_hash_table_note_def_cache_hasher_ (X);\
+  } while (0)
+extern void gt_pch_nx_hash_table_note_def_cache_hasher_ (void *);
 #define gt_pch_n_16pending_template(X) do { \
   if (X != NULL) gt_pch_nx_pending_template (X);\
   } while (0)
@@ -3485,6 +3525,8 @@ extern void gt_pch_p_10spec_entry
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11tinst_level
     (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_12module_state
+    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_16constexpr_fundef
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_10tree_check
@@ -3540,6 +3582,14 @@ extern void gt_pch_p_28hash_table_conv_type_hasher_
 extern void gt_pch_p_17subsumption_entry
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_30hash_table_subsumption_hasher_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_8slurping
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_24vec_module_state__va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_29hash_table_module_state_hash_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_33hash_table_note_def_cache_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_16pending_template
     (void *, void *, gt_pointer_operator, void *);

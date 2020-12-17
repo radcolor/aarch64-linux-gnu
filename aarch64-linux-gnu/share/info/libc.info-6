@@ -323,6 +323,7 @@ START-INFO-DIR-ENTRY
 * O_NONBLOCK: (libc)Open-time Flags.
 * O_NONBLOCK: (libc)Operating Modes.
 * O_NOTRANS: (libc)Open-time Flags.
+* O_PATH: (libc)Access Modes.
 * O_RDONLY: (libc)Access Modes.
 * O_RDWR: (libc)Access Modes.
 * O_READ: (libc)Access Modes.
@@ -4568,10 +4569,9 @@ File: libc.info,  Node: Access Modes,  Next: Open-time Flags,  Up: File Status F
 13.15.1 File Access Modes
 -------------------------
 
-The file access modes allow a file descriptor to be used for reading,
-writing, or both.  (On GNU/Hurd systems, they can also allow none of
-these, and allow execution of the file as a program.)  The access modes
-are chosen when the file is opened, and never change.
+The file access mode allows a file descriptor to be used for reading,
+writing, both, or neither.  The access mode is determined when the file
+is opened, and never change.
 
  -- Macro: int O_RDONLY
 
@@ -4585,46 +4585,59 @@ are chosen when the file is opened, and never change.
 
      Open the file for both reading and writing.
 
-   On GNU/Hurd systems (and not on other systems), ‘O_RDONLY’ and
+ -- Macro: int O_PATH
+
+     Obtain a file descriptor for the file, but do not open the file for
+     reading or writing.  Permission checks for the file itself are
+     skipped when the file is opened (but permission to access the
+     directory that contains it is still needed), and permissions are
+     checked when the descriptor is used later on.
+
+     For example, such descriptors can be used with the ‘fexecve’
+     function (*note Executing a File::).
+
+     This access mode is specific to Linux.  On GNU/Hurd systems, it is
+     possible to use ‘O_EXEC’ explicitly, or specify no access modes at
+     all (see below).
+
+   The portable file access modes ‘O_RDONLY’, ‘O_WRONLY’, and ‘O_RDWR’
+may not correspond to individual bits.  To determine the file access
+mode with ‘fcntl’, you must extract the access mode bits from the
+retrieved file status flags, using the ‘O_ACCMODE’ mask.
+
+ -- Macro: int O_ACCMODE
+
+     This macro is a mask that can be bitwise-ANDed with the file status
+     flag value to recover the file access mode, assuming that a
+     standard file access mode is in use.
+
+   If a non-standard file access mode is used (such as ‘O_PATH’ or
+‘O_EXEC’), masking with ‘O_ACCMODE’ may give incorrect results.  These
+non-standard access modes are identified by individual bits and have to
+be checked directly (without masking with ‘O_ACCMODE’ first).
+
+   On GNU/Hurd systems (but not on other systems), ‘O_RDONLY’ and
 ‘O_WRONLY’ are independent bits that can be bitwise-ORed together, and
 it is valid for either bit to be set or clear.  This means that ‘O_RDWR’
 is the same as ‘O_RDONLY|O_WRONLY’.  A file access mode of zero is
 permissible; it allows no operations that do input or output to the
 file, but does allow other operations such as ‘fchmod’.  On GNU/Hurd
 systems, since “read-only” or “write-only” is a misnomer, ‘fcntl.h’
-defines additional names for the file access modes.  These names are
-preferred when writing GNU-specific code.  But most programs will want
-to be portable to other POSIX.1 systems and should use the POSIX.1 names
-above instead.
+defines additional names for the file access modes.
 
  -- Macro: int O_READ
 
      Open the file for reading.  Same as ‘O_RDONLY’; only defined on
-     GNU.
+     GNU/Hurd.
 
  -- Macro: int O_WRITE
 
      Open the file for writing.  Same as ‘O_WRONLY’; only defined on
-     GNU.
+     GNU/Hurd.
 
  -- Macro: int O_EXEC
 
-     Open the file for executing.  Only defined on GNU.
-
-   To determine the file access mode with ‘fcntl’, you must extract the
-access mode bits from the retrieved file status flags.  On GNU/Hurd
-systems, you can just test the ‘O_READ’ and ‘O_WRITE’ bits in the flags
-word.  But in other POSIX.1 systems, reading and writing access modes
-are not stored as distinct bit flags.  The portable way to extract the
-file access mode bits is with ‘O_ACCMODE’.
-
- -- Macro: int O_ACCMODE
-
-     This macro stands for a mask that can be bitwise-ANDed with the
-     file status flag value to produce a value representing the file
-     access mode.  The mode will be ‘O_RDONLY’, ‘O_WRONLY’, or ‘O_RDWR’.
-     (On GNU/Hurd systems it could also be zero, and it never includes
-     the ‘O_EXEC’ bit.)
+     Open the file for executing.  Only defined on GNU/Hurd.
 
 
 File: libc.info,  Node: Open-time Flags,  Next: Operating Modes,  Prev: Access Modes,  Up: File Status Flags

@@ -1,11 +1,11 @@
 /* Generated at libc build time from syscall list.  */
-/* The system call list corresponds to kernel 5.9.  */
+/* The system call list corresponds to kernel 5.10.  */
 
 #ifndef _SYSCALL_H
 # error "Never use <bits/syscall.h> directly; include <sys/syscall.h> instead."
 #endif
 
-#define __GLIBC_LINUX_VERSION_CODE 329984
+#define __GLIBC_LINUX_VERSION_CODE 330240
 
 #ifdef __NR_FAST_atomic_update
 # define SYS_FAST_atomic_update __NR_FAST_atomic_update
@@ -1641,6 +1641,10 @@
 
 #ifdef __NR_prlimit64
 # define SYS_prlimit64 __NR_prlimit64
+#endif
+
+#ifdef __NR_process_madvise
+# define SYS_process_madvise __NR_process_madvise
 #endif
 
 #ifdef __NR_process_vm_readv

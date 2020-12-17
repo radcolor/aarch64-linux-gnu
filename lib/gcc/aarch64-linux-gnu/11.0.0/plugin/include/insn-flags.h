@@ -6764,6 +6764,16 @@
 #define HAVE_xorsignv2sf3 (TARGET_SIMD)
 #define HAVE_xorsignv4sf3 (TARGET_SIMD)
 #define HAVE_xorsignv2df3 (TARGET_SIMD)
+#define HAVE_cadd90v4hf3 ((TARGET_COMPLEX && !BYTES_BIG_ENDIAN) && (TARGET_SIMD_F16INST))
+#define HAVE_cadd270v4hf3 ((TARGET_COMPLEX && !BYTES_BIG_ENDIAN) && (TARGET_SIMD_F16INST))
+#define HAVE_cadd90v8hf3 ((TARGET_COMPLEX && !BYTES_BIG_ENDIAN) && (TARGET_SIMD_F16INST))
+#define HAVE_cadd270v8hf3 ((TARGET_COMPLEX && !BYTES_BIG_ENDIAN) && (TARGET_SIMD_F16INST))
+#define HAVE_cadd90v2sf3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
+#define HAVE_cadd270v2sf3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
+#define HAVE_cadd90v4sf3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
+#define HAVE_cadd270v4sf3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
+#define HAVE_cadd90v2df3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
+#define HAVE_cadd270v2df3 (TARGET_COMPLEX && !BYTES_BIG_ENDIAN)
 #define HAVE_sdot_prodv8qi (TARGET_DOTPROD)
 #define HAVE_udot_prodv8qi (TARGET_DOTPROD)
 #define HAVE_sdot_prodv16qi (TARGET_DOTPROD)
@@ -8495,6 +8505,12 @@
 #define HAVE_cond_cadd270vnx4sf (TARGET_SVE)
 #define HAVE_cond_cadd90vnx2df (TARGET_SVE)
 #define HAVE_cond_cadd270vnx2df (TARGET_SVE)
+#define HAVE_cadd90vnx8hf3 (TARGET_SVE)
+#define HAVE_cadd270vnx8hf3 (TARGET_SVE)
+#define HAVE_cadd90vnx4sf3 (TARGET_SVE)
+#define HAVE_cadd270vnx4sf3 (TARGET_SVE)
+#define HAVE_cadd90vnx2df3 (TARGET_SVE)
+#define HAVE_cadd270vnx2df3 (TARGET_SVE)
 #define HAVE_aarch64_pred_abdvnx8hf (TARGET_SVE)
 #define HAVE_aarch64_pred_abdvnx4sf (TARGET_SVE)
 #define HAVE_aarch64_pred_abdvnx2df (TARGET_SVE)
@@ -9100,6 +9116,14 @@
 #define HAVE_cond_uadalpvnx4si (TARGET_SVE2)
 #define HAVE_cond_sadalpvnx2di (TARGET_SVE2)
 #define HAVE_cond_uadalpvnx2di (TARGET_SVE2)
+#define HAVE_cadd90vnx16qi3 (TARGET_SVE2)
+#define HAVE_cadd270vnx16qi3 (TARGET_SVE2)
+#define HAVE_cadd90vnx8hi3 (TARGET_SVE2)
+#define HAVE_cadd270vnx8hi3 (TARGET_SVE2)
+#define HAVE_cadd90vnx4si3 (TARGET_SVE2)
+#define HAVE_cadd270vnx4si3 (TARGET_SVE2)
+#define HAVE_cadd90vnx2di3 (TARGET_SVE2)
+#define HAVE_cadd270vnx2di3 (TARGET_SVE2)
 #define HAVE_cond_fcvtltvnx4sf (TARGET_SVE2)
 #define HAVE_cond_fcvtltvnx2df (TARGET_SVE2)
 #define HAVE_cond_fcvtxvnx4sf (TARGET_SVE2)
@@ -16613,6 +16637,16 @@ extern rtx        gen_xorsignv8hf3                                   (rtx, rtx, 
 extern rtx        gen_xorsignv2sf3                                   (rtx, rtx, rtx);
 extern rtx        gen_xorsignv4sf3                                   (rtx, rtx, rtx);
 extern rtx        gen_xorsignv2df3                                   (rtx, rtx, rtx);
+extern rtx        gen_cadd90v4hf3                                    (rtx, rtx, rtx);
+extern rtx        gen_cadd270v4hf3                                   (rtx, rtx, rtx);
+extern rtx        gen_cadd90v8hf3                                    (rtx, rtx, rtx);
+extern rtx        gen_cadd270v8hf3                                   (rtx, rtx, rtx);
+extern rtx        gen_cadd90v2sf3                                    (rtx, rtx, rtx);
+extern rtx        gen_cadd270v2sf3                                   (rtx, rtx, rtx);
+extern rtx        gen_cadd90v4sf3                                    (rtx, rtx, rtx);
+extern rtx        gen_cadd270v4sf3                                   (rtx, rtx, rtx);
+extern rtx        gen_cadd90v2df3                                    (rtx, rtx, rtx);
+extern rtx        gen_cadd270v2df3                                   (rtx, rtx, rtx);
 extern rtx        gen_sdot_prodv8qi                                  (rtx, rtx, rtx, rtx);
 extern rtx        gen_udot_prodv8qi                                  (rtx, rtx, rtx, rtx);
 extern rtx        gen_sdot_prodv16qi                                 (rtx, rtx, rtx, rtx);
@@ -18656,6 +18690,12 @@ extern rtx        gen_cond_cadd90vnx4sf                              (rtx, rtx, 
 extern rtx        gen_cond_cadd270vnx4sf                             (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_cadd90vnx2df                              (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_cadd270vnx2df                             (rtx, rtx, rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx8hf3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx8hf3                                 (rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx4sf3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx4sf3                                 (rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx2df3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx2df3                                 (rtx, rtx, rtx);
 extern rtx        gen_aarch64_pred_abdvnx8hf                         (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_pred_abdvnx4sf                         (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_aarch64_pred_abdvnx2df                         (rtx, rtx, rtx, rtx, rtx);
@@ -20917,6 +20957,14 @@ extern rtx        gen_cond_sadalpvnx4si                              (rtx, rtx, 
 extern rtx        gen_cond_uadalpvnx4si                              (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_sadalpvnx2di                              (rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_uadalpvnx2di                              (rtx, rtx, rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx16qi3                                 (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx16qi3                                (rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx8hi3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx8hi3                                 (rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx4si3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx4si3                                 (rtx, rtx, rtx);
+extern rtx        gen_cadd90vnx2di3                                  (rtx, rtx, rtx);
+extern rtx        gen_cadd270vnx2di3                                 (rtx, rtx, rtx);
 extern rtx        gen_cond_fcvtltvnx4sf                              (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_fcvtltvnx2df                              (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_fcvtxvnx4sf                               (rtx, rtx, rtx, rtx);

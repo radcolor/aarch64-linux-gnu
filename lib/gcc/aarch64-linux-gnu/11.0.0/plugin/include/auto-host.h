@@ -1387,6 +1387,19 @@
 #endif
 
 
+/* Define 0/1 if your assembler supports 'o' flag in .section directive. */
+#ifndef USED_FOR_TARGET
+#define HAVE_GAS_SECTION_LINK_ORDER 1
+#endif
+
+
+/* Define 0/1 if your assembler supports marking sections with SHF_GNU_RETAIN
+   flag. */
+#ifndef USED_FOR_TARGET
+#define HAVE_GAS_SHF_GNU_RETAIN 1
+#endif
+
+
 /* Define 0/1 if your assembler supports marking sections with SHF_MERGE flag.
    */
 #ifndef USED_FOR_TARGET

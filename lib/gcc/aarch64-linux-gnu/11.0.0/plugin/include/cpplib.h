@@ -826,7 +826,10 @@ struct GTY(()) cpp_macro {
      tokens.  */
   unsigned int extra_tokens : 1;
 
-  /* 1 bits spare (32-bit). 33 on 64-bit target.  */
+  /* Imported C++20 macro (from a header unit).  */
+  unsigned int imported_p : 1;
+
+  /* 0 bits spare (32-bit). 32 on 64-bit target.  */
 
   union cpp_exp_u
   {
@@ -921,9 +924,11 @@ struct GTY(()) cpp_hashnode {
 
   /* 5 bits spare.  */
 
-  /* On a 64-bit system there would be 32-bits of padding to the value
+  /* The deferred cookie is applicable to NT_USER_MACRO or NT_VOID.
+     The latter for when a macro had a prevailing undef.
+     On a 64-bit system there would be 32-bits of padding to the value
      field.  So placing the deferred index here is not costly.   */
-  unsigned deferred;			/* Deferred index, (unless zero).  */
+  unsigned deferred;			/* Deferred cookie  */
 
   union _cpp_hashnode_value GTY ((desc ("%1.type"))) value;
 };
@@ -1004,6 +1009,11 @@ extern class mkdeps *cpp_get_deps (cpp_reader *) ATTRIBUTE_PURE;
 
 extern const char *cpp_find_header_unit (cpp_reader *, const char *file,
 					 bool angle_p,  location_t);
+
+/* Call these to get name data about the various compile-time
+   charsets.  */
+extern const char *cpp_get_narrow_charset_name (cpp_reader *) ATTRIBUTE_PURE;
+extern const char *cpp_get_wide_charset_name (cpp_reader *) ATTRIBUTE_PURE;
 
 /* This function reads the file, but does not start preprocessing.  It
    returns the name of the original file; this is the same as the

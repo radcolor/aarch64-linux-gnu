@@ -104,8 +104,6 @@ struct cl_option
   BOOL_BITFIELD cl_host_wide_int : 1;
   /* Argument should be converted to lowercase.  */
   BOOL_BITFIELD cl_tolower : 1;
-  /* Report argument with -fverbose-asm  */
-  BOOL_BITFIELD cl_report : 1;
   /* Argument is an unsigned integer with an optional byte suffix.  */
   BOOL_BITFIELD cl_byte_size: 1;
   /* Offset of field for this option in struct gcc_options, or
@@ -481,6 +479,12 @@ extern void parse_options_from_collect_gcc_options (const char *, obstack *,
 						    int *);
 
 extern void prepend_xassembler_to_collect_as_options (const char *, obstack *);
+
+extern char *gen_command_line_string (cl_decoded_option *options,
+				      unsigned int options_count);
+extern char *gen_producer_string (const char *language_string,
+				  cl_decoded_option *options,
+				  unsigned int options_count);
 
 /* Set OPTION in OPTS to VALUE if the option is not set in OPTS_SET.  */
 
