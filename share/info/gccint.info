@@ -38591,10 +38591,13 @@ ordinarily expect.
      can hide a pipeline bubble.
 
  -- Target Hook: HOST_WIDE_INT TARGET_ESTIMATED_POLY_VALUE (poly_int64
-          VAL)
+          VAL, poly_value_estimate_kind KIND)
      Return an estimate of the runtime value of VAL, for use in things
-     like cost calculations or profiling frequencies.  The default
-     implementation returns the lowest possible value of VAL.
+     like cost calculations or profiling frequencies.  KIND is used to
+     ask for the minimum, maximum, and likely estimates of the value
+     through the 'POLY_VALUE_MIN', 'POLY_VALUE_MAX' and
+     'POLY_VALUE_LIKELY' values.  The default implementation returns the
+     lowest possible value of VAL.
 
 
 File: gccint.info,  Node: Scheduling,  Next: Sections,  Prev: Costs,  Up: Target Macros
@@ -57940,91 +57943,91 @@ Node: Condition Code1623104
 Node: CC0 Condition Codes1625431
 Node: MODE_CC Condition Codes1628677
 Node: Costs1635503
-Node: Scheduling1657259
-Node: Sections1681181
-Node: PIC1697546
-Node: Assembler Format1699605
-Node: File Framework1700743
-Ref: TARGET_HAVE_SWITCHABLE_BSS_SECTIONS1708342
-Node: Data Output1710017
-Node: Uninitialized Data1718305
-Node: Label Output1723319
-Node: Initialization1747930
-Node: Macros for Initialization1753891
-Node: Instruction Output1760610
-Node: Dispatch Tables1771239
-Node: Exception Region Output1776358
-Node: Alignment Output1783440
-Node: Debugging Info1787127
-Node: All Debuggers1787781
-Node: DBX Options1790553
-Node: DBX Hooks1795991
-Node: File Names and DBX1797300
-Node: DWARF1799404
-Node: VMS Debug1805219
-Node: Floating Point1805798
-Node: Mode Switching1808553
-Node: Target Attributes1812990
-Node: Emulated TLS1822466
-Node: MIPS Coprocessors1825856
-Node: PCH Target1827015
-Node: C++ ABI1828857
-Node: D Language and ABI1833649
-Node: Named Address Spaces1835228
-Node: Misc1841155
-Ref: TARGET_SHIFT_TRUNCATION_MASK1849026
-Node: Host Config1907953
-Node: Host Common1909022
-Node: Filesystem1911396
-Node: Host Misc1915511
-Node: Fragments1917960
-Node: Target Fragment1919155
-Node: Host Fragment1929967
-Node: Collect21930207
-Node: Header Dirs1932843
-Node: Type Information1934266
-Node: GTY Options1937542
-Node: Inheritance and GTY1948801
-Ref: Inheritance and GTY-Footnote-11950366
-Node: User GC1950636
-Node: GGC Roots1954375
-Node: Files1955088
-Node: Invoking the garbage collector1957795
-Node: Troubleshooting1959300
-Node: Plugins1960375
-Node: Plugins loading1961504
-Node: Plugin API1962603
-Node: Plugins pass1970470
-Node: Plugins GC1972441
-Node: Plugins description1974158
-Node: Plugins attr1974694
-Node: Plugins recording1976974
-Node: Plugins gate1977824
-Node: Plugins tracking1978415
-Node: Plugins building1979003
-Node: LTO1982504
-Node: LTO Overview1983376
-Node: LTO object file layout1989203
-Node: IPA1993833
-Node: WHOPR2002883
-Node: Internal flags2007443
-Node: Match and Simplify2008854
-Node: GIMPLE API2009816
-Node: The Language2012611
-Node: Static Analyzer2025110
-Node: Analyzer Internals2025375
-Node: Debugging the Analyzer2039355
-Node: User Experience Guidelines2041792
-Node: Guidelines for Diagnostics2042728
-Ref: input_location_example2049789
-Node: Guidelines for Options2059472
-Node: Funding2059649
-Node: GNU Project2062156
-Node: Copying2062805
-Node: GNU Free Documentation License2100316
-Node: Contributors2125437
-Node: Option Index2166413
-Node: Concept Index2167290
+Node: Scheduling1657465
+Node: Sections1681387
+Node: PIC1697752
+Node: Assembler Format1699811
+Node: File Framework1700949
+Ref: TARGET_HAVE_SWITCHABLE_BSS_SECTIONS1708548
+Node: Data Output1710223
+Node: Uninitialized Data1718511
+Node: Label Output1723525
+Node: Initialization1748136
+Node: Macros for Initialization1754097
+Node: Instruction Output1760816
+Node: Dispatch Tables1771445
+Node: Exception Region Output1776564
+Node: Alignment Output1783646
+Node: Debugging Info1787333
+Node: All Debuggers1787987
+Node: DBX Options1790759
+Node: DBX Hooks1796197
+Node: File Names and DBX1797506
+Node: DWARF1799610
+Node: VMS Debug1805425
+Node: Floating Point1806004
+Node: Mode Switching1808759
+Node: Target Attributes1813196
+Node: Emulated TLS1822672
+Node: MIPS Coprocessors1826062
+Node: PCH Target1827221
+Node: C++ ABI1829063
+Node: D Language and ABI1833855
+Node: Named Address Spaces1835434
+Node: Misc1841361
+Ref: TARGET_SHIFT_TRUNCATION_MASK1849232
+Node: Host Config1908159
+Node: Host Common1909228
+Node: Filesystem1911602
+Node: Host Misc1915717
+Node: Fragments1918166
+Node: Target Fragment1919361
+Node: Host Fragment1930173
+Node: Collect21930413
+Node: Header Dirs1933049
+Node: Type Information1934472
+Node: GTY Options1937748
+Node: Inheritance and GTY1949007
+Ref: Inheritance and GTY-Footnote-11950572
+Node: User GC1950842
+Node: GGC Roots1954581
+Node: Files1955294
+Node: Invoking the garbage collector1958001
+Node: Troubleshooting1959506
+Node: Plugins1960581
+Node: Plugins loading1961710
+Node: Plugin API1962809
+Node: Plugins pass1970676
+Node: Plugins GC1972647
+Node: Plugins description1974364
+Node: Plugins attr1974900
+Node: Plugins recording1977180
+Node: Plugins gate1978030
+Node: Plugins tracking1978621
+Node: Plugins building1979209
+Node: LTO1982710
+Node: LTO Overview1983582
+Node: LTO object file layout1989409
+Node: IPA1994039
+Node: WHOPR2003089
+Node: Internal flags2007649
+Node: Match and Simplify2009060
+Node: GIMPLE API2010022
+Node: The Language2012817
+Node: Static Analyzer2025316
+Node: Analyzer Internals2025581
+Node: Debugging the Analyzer2039561
+Node: User Experience Guidelines2041998
+Node: Guidelines for Diagnostics2042934
+Ref: input_location_example2049995
+Node: Guidelines for Options2059678
+Node: Funding2059855
+Node: GNU Project2062362
+Node: Copying2063011
+Node: GNU Free Documentation License2100522
+Node: Contributors2125643
+Node: Option Index2166619
+Node: Concept Index2167496
 
 End Tag Table
 
