@@ -241,6 +241,12 @@
    standards-compatible mode on s390 targets. */
 /* #undef ENABLE_S390_EXCESS_FLOAT_PRECISION */
 
+/* Define if the -stdlib= option should be enabled. */
+#ifndef USED_FOR_TARGET
+#define ENABLE_STDLIB_OPTION 0
+#endif
+
+
 /* Define if you want all operations on trees (the basic data structure of the
    front ends) to be checked for dynamic type safety at runtime. This is
    moderately expensive. */

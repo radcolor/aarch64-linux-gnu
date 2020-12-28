@@ -2202,6 +2202,10 @@ Type Index
                                                               (line  30)
 * glibc.malloc.trim_threshold:           Memory Allocation Tunables.
                                                               (line  71)
+* glibc.mem:                             Memory Related Tunables.
+                                                              (line   6)
+* glibc.mem.tagging:                     Memory Related Tunables.
+                                                              (line  10)
 * glibc.pthread:                         POSIX Thread Tunables.
                                                               (line   6)
 * glibc.pthread.mutex_spin_count:        POSIX Thread Tunables.
@@ -3483,7 +3487,7 @@ Function and Macro Index
 * gmtime_r:                              Broken-down Time.    (line 143)
 * grantpt:                               Allocation.          (line  26)
 * grantpt <1>:                           Configuring and compiling.
-                                                              (line 178)
+                                                              (line 192)
 * gsignal:                               Signaling Yourself.  (line  19)
 * gtty:                                  BSD Terminal Modes.  (line  31)
 * hasmntopt:                             mtab.                (line 205)

@@ -3413,6 +3413,8 @@ Tunables
 * POSIX Thread Tunables:: Tunables in the POSIX thread subsystem
 * Hardware Capability Tunables::  Tunables that modify the hardware
 				  capabilities seen by the GNU C Library
+* Memory Related Tunables::  Tunables that control the use of memory by
+			     the GNU C Library.
 
 Language Features
 

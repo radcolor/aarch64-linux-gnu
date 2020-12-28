@@ -5584,6 +5584,8 @@ under their own namespace.
 * POSIX Thread Tunables:: Tunables in the POSIX thread subsystem
 * Hardware Capability Tunables::  Tunables that modify the hardware
 				  capabilities seen by the GNU C Library
+* Memory Related Tunables::  Tunables that control the use of memory by
+			     the GNU C Library.
 
 
 File: libc.info,  Node: Tunable names,  Next: Memory Allocation Tunables,  Up: Tunables
@@ -5898,7 +5900,7 @@ File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunabl
      The default value of this tunable is ‘100’.
 
 
-File: libc.info,  Node: Hardware Capability Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
+File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
 
 37.6 Hardware Capability Tunables
 =================================
@@ -6003,6 +6005,41 @@ File: libc.info,  Node: Hardware Capability Tunables,  Prev: POSIX Thread Tunabl
      ‘permissive’, it turns off SHSTK instead.
 
      This tunable is specific to i386 and x86-64.
+
+
+File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tunables,  Up: Tunables
+
+37.7 Memory Related Tunables
+============================
+
+ -- Tunable namespace: glibc.mem
+     This tunable namespace supports operations that affect the way the
+     GNU C Library and the process manage memory.
+
+ -- Tunable: glibc.mem.tagging
+     If the hardware supports memory tagging, this tunable can be used
+     to control the way the GNU C Library uses this feature.  At present
+     this is only supported on AArch64 systems with the MTE extention;
+     it is ignored for all other systems.
+
+     This tunable takes a value between 0 and 255 and acts as a bitmask
+     that enables various capabilities.
+
+     Bit 0 (the least significant bit) causes the malloc subsystem to
+     allocate tagged memory, with each allocation being assigned a
+     random tag.
+
+     Bit 1 enables precise faulting mode for tag violations on systems
+     that support deferred tag violation reporting.  This may cause
+     programs to run more slowly.
+
+     Other bits are currently reserved.
+
+     The GNU C Library startup code will automatically enable memory
+     tagging support in the kernel if this tunable has any non-zero
+     value.
+
+     The default value is ‘0’, which disables all memory tagging.
 
 
 File: libc.info,  Node: Language Features,  Next: Library Summary,  Prev: Tunables,  Up: Top

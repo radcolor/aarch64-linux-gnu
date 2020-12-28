@@ -4733,7 +4733,7 @@ options must be given.
 '--enable-x86-feature=FEATURE'
      Set the FEATURE bit in program property in EXEC or DYN ELF files
      with machine types of I386 or X86-64.  The supported features are,
-     IBT and SHSTK.
+     IBT, SHSTK, LAM_U48 and LAM_U57.
 
 '--disable-x86-feature=FEATURE'
      Clear the FEATURE bit in program property in EXEC or DYN ELF files
@@ -5819,16 +5819,16 @@ Node: dlltool154254
 Node: def file format167251
 Node: readelf169781
 Node: elfedit184767
-Node: Common Options187723
-Node: Selecting the Target System188757
-Node: Target Selection189685
-Node: Architecture Selection191666
-Node: debuginfod192494
-Node: Reporting Bugs193253
-Node: Bug Criteria194015
-Node: Bug Reporting194568
-Node: GNU Free Documentation License201438
-Node: Binutils Index226598
+Node: Common Options187741
+Node: Selecting the Target System188775
+Node: Target Selection189703
+Node: Architecture Selection191684
+Node: debuginfod192512
+Node: Reporting Bugs193271
+Node: Bug Criteria194033
+Node: Bug Reporting194586
+Node: GNU Free Documentation License201456
+Node: Binutils Index226616
 
 End Tag Table
 
