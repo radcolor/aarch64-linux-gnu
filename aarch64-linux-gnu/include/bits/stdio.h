@@ -1,5 +1,5 @@
 /* Optimizing macros and inline functions for stdio functions.
-   Copyright (C) 1998-2020 Free Software Foundation, Inc.
+   Copyright (C) 1998-2021 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@
 
 
 #ifdef __USE_EXTERN_INLINES
-/* For -D_FORTIFY_SOURCE{,=2} bits/stdio2.h will define a different
+/* For -D_FORTIFY_SOURCE{,=2,=3} bits/stdio2.h will define a different
    inline.  */
 # if !(__USE_FORTIFY_LEVEL > 0 && defined __fortify_function)
 /* Write formatted output to stdout from argument list ARG.  */

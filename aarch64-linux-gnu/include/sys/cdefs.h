@@ -1,4 +1,4 @@
-/* Copyright (C) 1992-2020 Free Software Foundation, Inc.
+/* Copyright (C) 1992-2021 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -126,6 +126,15 @@
 /* Fortify support.  */
 #define __bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)
 #define __bos0(ptr) __builtin_object_size (ptr, 0)
+
+/* Use __builtin_dynamic_object_size at _FORTIFY_SOURCE=3 when available.  */
+#if __USE_FORTIFY_LEVEL == 3 && __glibc_clang_prereq (9, 0)
+# define __glibc_objsize0(__o) __builtin_dynamic_object_size (__o, 0)
+# define __glibc_objsize(__o) __builtin_dynamic_object_size (__o, 1)
+#else
+# define __glibc_objsize0(__o) __bos0 (__o)
+# define __glibc_objsize(__o) __bos (__o)
+#endif
 
 #if __GNUC_PREREQ (4,3)
 # define __warnattr(msg) __attribute__((__warning__ (msg)))

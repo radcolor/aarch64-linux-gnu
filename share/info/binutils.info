@@ -1,7 +1,7 @@
 This is binutils.info, produced by makeinfo version 6.7 from
 binutils.texi.
 
-Copyright (C) 1991-2020 Free Software Foundation, Inc.
+Copyright (C) 1991-2021 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -2161,7 +2161,7 @@ given.
      decimal representation, while the long immediate values are printed
      as hexadecimal.
 
-     'cpu=...' allows to enforce a particular ISA when disassembling
+     'cpu=...' allows one to enforce a particular ISA when disassembling
      instructions, overriding the '-m' value or whatever is in the ELF
      file.  This might be useful to select ARC EM or HS ISA, because
      architecture is same for those and disassembler relies on private
@@ -5806,29 +5806,29 @@ Node: ar scripts20010
 Node: nm25696
 Node: objcopy39403
 Node: objdump80016
-Node: ranlib113042
-Node: size114641
-Node: strings118610
-Node: strip122982
-Node: c++filt132591
-Ref: c++filt-Footnote-1138452
-Node: addr2line138558
-Node: windmc144236
-Node: windres147895
-Node: dlltool154254
-Node: def file format167251
-Node: readelf169781
-Node: elfedit184767
-Node: Common Options187741
-Node: Selecting the Target System188775
-Node: Target Selection189703
-Node: Architecture Selection191684
-Node: debuginfod192512
-Node: Reporting Bugs193271
-Node: Bug Criteria194033
-Node: Bug Reporting194586
-Node: GNU Free Documentation License201456
-Node: Binutils Index226616
+Node: ranlib113046
+Node: size114645
+Node: strings118614
+Node: strip122986
+Node: c++filt132595
+Ref: c++filt-Footnote-1138456
+Node: addr2line138562
+Node: windmc144240
+Node: windres147899
+Node: dlltool154258
+Node: def file format167255
+Node: readelf169785
+Node: elfedit184771
+Node: Common Options187745
+Node: Selecting the Target System188779
+Node: Target Selection189707
+Node: Architecture Selection191688
+Node: debuginfod192516
+Node: Reporting Bugs193275
+Node: Bug Criteria194037
+Node: Bug Reporting194590
+Node: GNU Free Documentation License201460
+Node: Binutils Index226620
 
 End Tag Table
 

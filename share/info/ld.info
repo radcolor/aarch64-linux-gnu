@@ -2,7 +2,7 @@ This is ld.info, produced by makeinfo version 6.7 from ld.texi.
 
 This file documents the GNU linker LD (GNU Binutils) version 2.35.50.
 
-   Copyright (C) 1991-2020 Free Software Foundation, Inc.
+   Copyright (C) 1991-2021 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -648,7 +648,7 @@ GNU linker:
      newest one.
 
 '--push-state'
-     The '--push-state' allows to preserve the current state of the
+     The '--push-state' allows one to preserve the current state of the
      flags which govern the input file handling so that they can all be
      restored with one corresponding '--pop-state' option.
 
@@ -9207,90 +9207,90 @@ Node: Top706
 Node: Overview1537
 Node: Invocation2653
 Node: Options3061
-Node: Environment130336
-Node: Scripts132097
-Node: Basic Script Concepts133821
-Node: Script Format136529
-Node: Simple Example137392
-Node: Simple Commands140486
-Node: Entry Point140991
-Node: File Commands141920
-Node: Format Commands146229
-Node: REGION_ALIAS148185
-Node: Miscellaneous Commands153012
-Node: Assignments158843
-Node: Simple Assignments159354
-Node: HIDDEN161085
-Node: PROVIDE161712
-Node: PROVIDE_HIDDEN163233
-Node: Source Code Reference163477
-Node: SECTIONS167394
-Node: Output Section Description169282
-Node: Output Section Name170523
-Node: Output Section Address171400
-Node: Input Section173633
-Node: Input Section Basics174434
-Node: Input Section Wildcards179452
-Node: Input Section Common184747
-Node: Input Section Keep186229
-Node: Input Section Example186719
-Node: Output Section Data188130
-Node: Output Section Keywords190909
-Node: Output Section Discarding194476
-Node: Output Section Attributes196366
-Node: Output Section Type197485
-Node: Output Section LMA198555
-Node: Forced Output Alignment201626
-Node: Forced Input Alignment202055
-Node: Output Section Constraint202443
-Node: Output Section Region202871
-Node: Output Section Phdr203304
-Node: Output Section Fill203968
-Node: Overlay Description205110
-Node: MEMORY209555
-Node: PHDRS214161
-Node: VERSION219487
-Node: Expressions227578
-Node: Constants228507
-Node: Symbolic Constants229381
-Node: Symbols229932
-Node: Orphan Sections230679
-Node: Location Counter232264
-Node: Operators236698
-Node: Evaluation237620
-Node: Expression Section238984
-Node: Builtin Functions242954
-Node: Implicit Linker Scripts251305
-Node: Plugins252080
-Node: libdep Plugin252540
-Node: Machine Dependent254337
-Node: H8/300255425
-Node: M68HC11/68HC12257498
-Node: ARM258945
-Node: HPPA ELF32271192
-Node: M68K272815
-Node: MIPS273724
-Node: MMIX274840
-Node: MSP430276005
-Node: NDS32277918
-Node: Nios II278882
-Node: PowerPC ELF32280198
-Node: PowerPC64 ELF64283029
-Node: S/390 ELF292787
-Node: SPU ELF293134
-Node: TI COFF295762
-Node: WIN32296288
-Node: Xtensa316435
-Node: BFD319878
-Node: BFD outline321336
-Node: BFD information loss322624
-Node: Canonical format325150
-Node: Reporting Bugs329478
-Node: Bug Criteria330172
-Node: Bug Reporting330871
-Node: MRI337909
-Node: GNU Free Documentation License342380
-Node: LD Index367517
+Node: Environment130340
+Node: Scripts132101
+Node: Basic Script Concepts133825
+Node: Script Format136533
+Node: Simple Example137396
+Node: Simple Commands140490
+Node: Entry Point140995
+Node: File Commands141924
+Node: Format Commands146233
+Node: REGION_ALIAS148189
+Node: Miscellaneous Commands153016
+Node: Assignments158847
+Node: Simple Assignments159358
+Node: HIDDEN161089
+Node: PROVIDE161716
+Node: PROVIDE_HIDDEN163237
+Node: Source Code Reference163481
+Node: SECTIONS167398
+Node: Output Section Description169286
+Node: Output Section Name170527
+Node: Output Section Address171404
+Node: Input Section173637
+Node: Input Section Basics174438
+Node: Input Section Wildcards179456
+Node: Input Section Common184751
+Node: Input Section Keep186233
+Node: Input Section Example186723
+Node: Output Section Data188134
+Node: Output Section Keywords190913
+Node: Output Section Discarding194480
+Node: Output Section Attributes196370
+Node: Output Section Type197489
+Node: Output Section LMA198559
+Node: Forced Output Alignment201630
+Node: Forced Input Alignment202059
+Node: Output Section Constraint202447
+Node: Output Section Region202875
+Node: Output Section Phdr203308
+Node: Output Section Fill203972
+Node: Overlay Description205114
+Node: MEMORY209559
+Node: PHDRS214165
+Node: VERSION219491
+Node: Expressions227582
+Node: Constants228511
+Node: Symbolic Constants229385
+Node: Symbols229936
+Node: Orphan Sections230683
+Node: Location Counter232268
+Node: Operators236702
+Node: Evaluation237624
+Node: Expression Section238988
+Node: Builtin Functions242958
+Node: Implicit Linker Scripts251309
+Node: Plugins252084
+Node: libdep Plugin252544
+Node: Machine Dependent254341
+Node: H8/300255429
+Node: M68HC11/68HC12257502
+Node: ARM258949
+Node: HPPA ELF32271196
+Node: M68K272819
+Node: MIPS273728
+Node: MMIX274844
+Node: MSP430276009
+Node: NDS32277922
+Node: Nios II278886
+Node: PowerPC ELF32280202
+Node: PowerPC64 ELF64283033
+Node: S/390 ELF292791
+Node: SPU ELF293138
+Node: TI COFF295766
+Node: WIN32296292
+Node: Xtensa316439
+Node: BFD319882
+Node: BFD outline321340
+Node: BFD information loss322628
+Node: Canonical format325154
+Node: Reporting Bugs329482
+Node: Bug Criteria330176
+Node: Bug Reporting330875
+Node: MRI337913
+Node: GNU Free Documentation License342384
+Node: LD Index367521
 
 End Tag Table
 

@@ -2,7 +2,7 @@ This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
 
-   Copyright © 1993–2020 Free Software Foundation, Inc.
+   Copyright © 1993–2021 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3 or
@@ -2206,7 +2206,7 @@ Variable and Constant Macro Index
 * _POSIX_VDISABLE:                       Special Characters.  (line  22)
 * _POSIX_VDISABLE <1>:                   Options for Files.   (line  40)
 * _POSIX_VERSION:                        Version Supported.   (line   6)
-* _REENTRANT:                            Feature Test Macros. (line 247)
+* _REENTRANT:                            Feature Test Macros. (line 248)
 * _SC_2_C_DEV:                           Constants for Sysconf.
                                                               (line 306)
 * _SC_2_FORT_DEV:                        Constants for Sysconf.
@@ -2490,7 +2490,7 @@ Variable and Constant Macro Index
                                                               (line 524)
 * _SC_XOPEN_XPG4:                        Constants for Sysconf.
                                                               (line 528)
-* _THREAD_SAFE:                          Feature Test Macros. (line 248)
+* _THREAD_SAFE:                          Feature Test Macros. (line 249)
 * _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
 * _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __free_hook:                           Hooks for Malloc.    (line  37)
