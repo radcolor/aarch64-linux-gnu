@@ -8120,6 +8120,30 @@
 #define HAVE_cond_popcountvnx16qi (TARGET_SVE)
 #define HAVE_cond_qabsvnx16qi ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_qnegvnx16qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx8qi (TARGET_SVE)
+#define HAVE_cond_negvnx8qi (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx8qi (TARGET_SVE)
+#define HAVE_cond_clrsbvnx8qi (TARGET_SVE)
+#define HAVE_cond_clzvnx8qi (TARGET_SVE)
+#define HAVE_cond_popcountvnx8qi (TARGET_SVE)
+#define HAVE_cond_qabsvnx8qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx8qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx4qi (TARGET_SVE)
+#define HAVE_cond_negvnx4qi (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx4qi (TARGET_SVE)
+#define HAVE_cond_clrsbvnx4qi (TARGET_SVE)
+#define HAVE_cond_clzvnx4qi (TARGET_SVE)
+#define HAVE_cond_popcountvnx4qi (TARGET_SVE)
+#define HAVE_cond_qabsvnx4qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx4qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx2qi (TARGET_SVE)
+#define HAVE_cond_negvnx2qi (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx2qi (TARGET_SVE)
+#define HAVE_cond_clrsbvnx2qi (TARGET_SVE)
+#define HAVE_cond_clzvnx2qi (TARGET_SVE)
+#define HAVE_cond_popcountvnx2qi (TARGET_SVE)
+#define HAVE_cond_qabsvnx2qi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx2qi ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_absvnx8hi (TARGET_SVE)
 #define HAVE_cond_negvnx8hi (TARGET_SVE)
 #define HAVE_cond_one_cmplvnx8hi (TARGET_SVE)
@@ -8128,6 +8152,22 @@
 #define HAVE_cond_popcountvnx8hi (TARGET_SVE)
 #define HAVE_cond_qabsvnx8hi ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_qnegvnx8hi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx4hi (TARGET_SVE)
+#define HAVE_cond_negvnx4hi (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx4hi (TARGET_SVE)
+#define HAVE_cond_clrsbvnx4hi (TARGET_SVE)
+#define HAVE_cond_clzvnx4hi (TARGET_SVE)
+#define HAVE_cond_popcountvnx4hi (TARGET_SVE)
+#define HAVE_cond_qabsvnx4hi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx4hi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx2hi (TARGET_SVE)
+#define HAVE_cond_negvnx2hi (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx2hi (TARGET_SVE)
+#define HAVE_cond_clrsbvnx2hi (TARGET_SVE)
+#define HAVE_cond_clzvnx2hi (TARGET_SVE)
+#define HAVE_cond_popcountvnx2hi (TARGET_SVE)
+#define HAVE_cond_qabsvnx2hi ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx2hi ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_absvnx4si (TARGET_SVE)
 #define HAVE_cond_negvnx4si (TARGET_SVE)
 #define HAVE_cond_one_cmplvnx4si (TARGET_SVE)
@@ -8136,6 +8176,14 @@
 #define HAVE_cond_popcountvnx4si (TARGET_SVE)
 #define HAVE_cond_qabsvnx4si ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_qnegvnx4si ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_absvnx2si (TARGET_SVE)
+#define HAVE_cond_negvnx2si (TARGET_SVE)
+#define HAVE_cond_one_cmplvnx2si (TARGET_SVE)
+#define HAVE_cond_clrsbvnx2si (TARGET_SVE)
+#define HAVE_cond_clzvnx2si (TARGET_SVE)
+#define HAVE_cond_popcountvnx2si (TARGET_SVE)
+#define HAVE_cond_qabsvnx2si ((TARGET_SVE) && (TARGET_SVE2))
+#define HAVE_cond_qnegvnx2si ((TARGET_SVE) && (TARGET_SVE2))
 #define HAVE_cond_absvnx2di (TARGET_SVE)
 #define HAVE_cond_negvnx2di (TARGET_SVE)
 #define HAVE_cond_one_cmplvnx2di (TARGET_SVE)
@@ -17993,6 +18041,30 @@ extern rtx        gen_cond_clzvnx16qi                                (rtx, rtx, 
 extern rtx        gen_cond_popcountvnx16qi                           (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qabsvnx16qi                               (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qnegvnx16qi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx8qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx8qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx8qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx8qi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx8qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx8qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx8qi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx8qi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx4qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx4qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx4qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx4qi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx4qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx4qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx4qi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx4qi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx2qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx2qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx2qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx2qi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx2qi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx2qi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx2qi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx2qi                                (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_absvnx8hi                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_negvnx8hi                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_one_cmplvnx8hi                            (rtx, rtx, rtx, rtx);
@@ -18001,6 +18073,22 @@ extern rtx        gen_cond_clzvnx8hi                                 (rtx, rtx, 
 extern rtx        gen_cond_popcountvnx8hi                            (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qabsvnx8hi                                (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qnegvnx8hi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx4hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx4hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx4hi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx4hi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx4hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx4hi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx4hi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx4hi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx2hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx2hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx2hi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx2hi                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx2hi                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx2hi                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx2hi                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx2hi                                (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_absvnx4si                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_negvnx4si                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_one_cmplvnx4si                            (rtx, rtx, rtx, rtx);
@@ -18009,6 +18097,14 @@ extern rtx        gen_cond_clzvnx4si                                 (rtx, rtx, 
 extern rtx        gen_cond_popcountvnx4si                            (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qabsvnx4si                                (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_qnegvnx4si                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_absvnx2si                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_negvnx2si                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_one_cmplvnx2si                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clrsbvnx2si                               (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_clzvnx2si                                 (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_popcountvnx2si                            (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qabsvnx2si                                (rtx, rtx, rtx, rtx);
+extern rtx        gen_cond_qnegvnx2si                                (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_absvnx2di                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_negvnx2di                                 (rtx, rtx, rtx, rtx);
 extern rtx        gen_cond_one_cmplvnx2di                            (rtx, rtx, rtx, rtx);
