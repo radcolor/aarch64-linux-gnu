@@ -5852,7 +5852,7 @@ cosh          2               3               1               1               1
 coshl         1               -               -               -               1
 coshf128      -               -               -               -               -
 cpowf         5 + i 2         8 + i 6         5 + i 2         5 + i 2         5 + i 2
-cpow          2 + i 0         9 + i 3         2 + i 0         2 + i 0         2 + i 0
+cpow          2 + i 0         9 + i 8         2 + i 0         2 + i 0         2 + i 0
 cpowl         4 + i 1         -               -               -               4 + i 1
 cpowf128      -               -               -               -               -
 csinf         1 + i 0         3 + i 3         1 + i 0         1 + i 0         1 + i 0
