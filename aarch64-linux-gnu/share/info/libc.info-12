@@ -496,7 +496,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
-* __x86_get_cpu_features: (libc)X86.
+* __x86_get_cpuid_feature_leaf: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -7216,9 +7216,9 @@ should maintain and use these separately.  *Note Mount Information::.
 
           #include <sys/mount.h>
 
-          mount("/dev/hdb", "/cdrom", MS_MGC_VAL | MS_RDONLY | MS_NOSUID, "");
+          mount("/dev/hdb", "/cdrom", "iso9660", MS_MGC_VAL | MS_RDONLY | MS_NOSUID, "");
 
-          mount("/dev/hda2", "/mnt", MS_MGC_VAL | MS_REMOUNT, "");
+          mount("/dev/hda2", "/mnt", "", MS_MGC_VAL | MS_REMOUNT, "");
 
 
      Appropriate arguments for ‘mount’ are conventionally recorded in

@@ -496,7 +496,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
-* __x86_get_cpu_features: (libc)X86.
+* __x86_get_cpuid_feature_leaf: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.

@@ -9730,7 +9730,7 @@ enum opt_code
   OPT_fprofile_prefix_path_ = 1353,          /* -fprofile-prefix-path= */
   OPT_fprofile_reorder_functions = 1354,     /* -fprofile-reorder-functions */
   OPT_fprofile_report = 1355,                /* -fprofile-report */
-  OPT_fprofile_reproducible = 1356,          /* -fprofile-reproducible */
+  OPT_fprofile_reproducible_ = 1356,         /* -fprofile-reproducible= */
   OPT_fprofile_update_ = 1357,               /* -fprofile-update= */
   OPT_fprofile_use = 1358,                   /* -fprofile-use */
   OPT_fprofile_use_ = 1359,                  /* -fprofile-use= */

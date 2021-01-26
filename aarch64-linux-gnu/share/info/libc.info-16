@@ -496,7 +496,7 @@ START-INFO-DIR-ENTRY
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
-* __x86_get_cpu_features: (libc)X86.
+* __x86_get_cpuid_feature_leaf: (libc)X86.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2495,7 +2495,7 @@ Function and Macro Index
 * __ppc_yield:                           PowerPC.             (line  43)
 * __riscv_flush_icache:                  RISC-V.              (line   9)
 * __va_copy:                             Argument Macros.     (line  57)
-* __x86_get_cpu_features:                X86.                 (line   9)
+* __x86_get_cpuid_feature_leaf:          X86.                 (line   9)
 * a64l:                                  Encode Binary Data.  (line  84)
 * abort:                                 Aborting a Program.  (line   9)
 * abs:                                   Absolute Value.      (line  16)
@@ -2929,7 +2929,7 @@ Function and Macro Index
 * cprojl:                                Operations on Complex.
                                                               (line  65)
 * CPU_CLR:                               CPU Affinity.        (line  87)
-* CPU_FEATURE_USABLE:                    X86.                 (line  24)
+* CPU_FEATURE_USABLE:                    X86.                 (line  21)
 * CPU_ISSET:                             CPU Affinity.        (line  99)
 * CPU_SET:                               CPU Affinity.        (line  75)
 * CPU_ZERO:                              CPU Affinity.        (line  66)
@@ -3491,7 +3491,7 @@ Function and Macro Index
 * gsignal:                               Signaling Yourself.  (line  19)
 * gtty:                                  BSD Terminal Modes.  (line  31)
 * hasmntopt:                             mtab.                (line 205)
-* HAS_CPU_FEATURE:                       X86.                 (line  20)
+* HAS_CPU_FEATURE:                       X86.                 (line  17)
 * hcreate:                               Hash Search Function.
                                                               (line  12)
 * hcreate_r:                             Hash Search Function.

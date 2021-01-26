@@ -39,7 +39,7 @@ GNU C library functions and macros
 * __ppc_yield: (libc)PowerPC.
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
-* __x86_get_cpu_features: (libc)X86.
+* __x86_get_cpuid_feature_leaf: (libc)X86.
 * _Complex_I: (libc)Complex Numbers.
 * _exit: (libc)Termination Internals.
 * _Exit: (libc)Termination Internals.
