@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -3028,6 +3028,27 @@ enumeration type values).
 ‘_SC_NL_TEXTMAX’
 
      Inquire about the parameter corresponding to ‘NL_TEXTMAX’.
+
+‘_SC_MINSIGSTKSZ’
+
+     Inquire about the minimum number of bytes of free stack space
+     required in order to guarantee successful, non-nested handling of a
+     single signal whose handler is an empty function.
+
+‘_SC_SIGSTKSZ’
+
+     Inquire about the suggested minimum number of bytes of stack space
+     required for a signal stack.
+
+     This is not guaranteed to be enough for any specific purpose other
+     than the invocation of a single, non-nested, empty handler, but
+     nonetheless should be enough for basic scenarios involving simple
+     signal handlers and very low levels of signal nesting (say, 2 or 3
+     levels at the very most).
+
+     This value is provided for developer convenience and to ease
+     migration from the legacy ‘SIGSTKSZ’ constant.  Programs requiring
+     stronger guarantees should avoid using it if at all possible.
 
 
 File: libc.info,  Node: Examples of Sysconf,  Prev: Constants for Sysconf,  Up: Sysconf
@@ -10826,6 +10847,10 @@ it.
 
      ‘unistd.h’ (POSIX.1): *note Constants for Sysconf::.
 
+‘_SC_MINSIGSTKSZ’
+
+     ‘unistd.h’ (GNU): *note Constants for Sysconf::.
+
 ‘_SC_MQ_OPEN_MAX’
 
      ‘unistd.h’ (POSIX.1): *note Constants for Sysconf::.
@@ -10985,6 +11010,14 @@ it.
 ‘_SC_SIGQUEUE_MAX’
 
      ‘unistd.h’ (POSIX.1): *note Constants for Sysconf::.
+
+‘_SC_SIGSTKSZ’
+
+     ‘unistd.h’ (GNU): *note Constants for Sysconf::.
+
+‘_SC_SIGSTKSZ_SOURCE’
+
+     _no header_ (GNU): *note Feature Test Macros::.
 
 ‘_SC_SSIZE_MAX’
 

@@ -173,7 +173,8 @@ enum c_lang {CLK_GNUC89 = 0, CLK_GNUC99, CLK_GNUC11, CLK_GNUC17, CLK_GNUC2X,
 	     CLK_STDC2X,
 	     CLK_GNUCXX, CLK_CXX98, CLK_GNUCXX11, CLK_CXX11,
 	     CLK_GNUCXX14, CLK_CXX14, CLK_GNUCXX17, CLK_CXX17,
-	     CLK_GNUCXX20, CLK_CXX20, CLK_ASM};
+	     CLK_GNUCXX20, CLK_CXX20, CLK_GNUCXX23, CLK_CXX23,
+	     CLK_ASM};
 
 /* Payload of a NUMBER, STRING, CHAR or COMMENT token.  */
 struct GTY(()) cpp_string {
@@ -499,6 +500,9 @@ struct cpp_options
   /* Nonzero means tokenize C++20 module directives.  */
   unsigned char module_directives;
 
+  /* Nonzero for C++23 size_t literals.  */
+  unsigned char size_t_literals;
+
   /* Holds the name of the target (execution) character set.  */
   const char *narrow_charset;
 
@@ -625,6 +629,7 @@ enum cpp_warning_reason {
   CPP_W_INVALID_PCH,
   CPP_W_WARNING_DIRECTIVE,
   CPP_W_LITERAL_SUFFIX,
+  CPP_W_SIZE_T_LITERALS,
   CPP_W_DATE_TIME,
   CPP_W_PEDANTIC,
   CPP_W_C90_C99_COMPAT,
@@ -1210,7 +1215,9 @@ struct cpp_num
 #define CPP_N_FLOATN	0x400000 /* _FloatN types.  */
 #define CPP_N_FLOATNX	0x800000 /* _FloatNx types.  */
 
-#define CPP_N_USERDEF	0x1000000 /* C++0x user-defined literal.  */
+#define CPP_N_USERDEF	0x1000000 /* C++11 user-defined literal.  */
+
+#define CPP_N_SIZE_T	0x2000000 /* C++23 size_t literal.  */
 
 #define CPP_N_WIDTH_FLOATN_NX	0xF0000000 /* _FloatN / _FloatNx value
 					      of N, divided by 16.  */

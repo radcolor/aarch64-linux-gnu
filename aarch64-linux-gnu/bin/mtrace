@@ -20,7 +20,7 @@ eval "exec /usr/sbin/perl -S $0 $@"
 # License along with the GNU C Library; if not, see
 # <https://www.gnu.org/licenses/>.
 
-$VERSION = "2.32.9000";
+$VERSION = "2.33.9000";
 $PKGVERSION = "(GNU libc) ";
 $REPORT_BUGS_TO = '<https://www.gnu.org/software/libc/bugs.html>';
 $progname = $0;

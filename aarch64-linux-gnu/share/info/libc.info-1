@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -2106,7 +2106,7 @@ File: libc.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
 Main Menu
 *********
 
-This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -4836,6 +4836,11 @@ on semantics undefined within the standard.
      various library functions.  If defined to 2, even stricter checks
      are applied.  If defined to 3, the GNU C Library may also use
      checks that may have an additional performance overhead.
+
+ -- Macro: _SC_SIGSTKSZ_SOURCE
+
+     If this macro is defined, correct (but non compile-time constant)
+     MINSIGSTKSZ and SIGSTKSZ are defined.
 
  -- Macro: _REENTRANT
  -- Macro: _THREAD_SAFE

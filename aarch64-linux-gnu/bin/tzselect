@@ -3,7 +3,7 @@
 # Interact with the user via stderr and stdin.
 
 PKGVERSION="(GNU libc) "
-TZVERSION="2.32.9000"
+TZVERSION="2.33.9000"
 REPORT_BUGS_TO="<https://www.gnu.org/software/libc/bugs.html>"
 
 # Contributed by Paul Eggert.  This file is in the public domain.

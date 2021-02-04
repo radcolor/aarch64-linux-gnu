@@ -48,6 +48,8 @@
    _LARGEFILE64_SOURCE	Additional functionality from LFS for large files.
    _FILE_OFFSET_BITS=N	Select default filesystem interface.
    _ATFILE_SOURCE	Additional *at interfaces.
+   _SC_SIGSTKSZ_SOURCE	Select correct (but non compile-time constant)
+			MINSIGSTKSZ and SIGSTKSZ.
    _GNU_SOURCE		All of the above, plus GNU extensions.
    _DEFAULT_SOURCE	The default set of features (taking precedence over
 			__STRICT_ANSI__).
@@ -94,6 +96,8 @@
    __USE_FILE_OFFSET64	Define 64bit interface as default.
    __USE_MISC		Define things from 4.3BSD or System V Unix.
    __USE_ATFILE		Define *at interfaces and AT_* constants for them.
+   __USE_SC_SIGSTKSZ	Define correct (but non compile-time constant)
+			MINSIGSTKSZ and SIGSTKSZ.
    __USE_GNU		Define GNU extensions.
    __USE_FORTIFY_LEVEL	Additional security measures used, according to level.
 
@@ -137,6 +141,7 @@
 #undef	__USE_FILE_OFFSET64
 #undef	__USE_MISC
 #undef	__USE_ATFILE
+#undef	__USE_SC_SIGSTKSZ
 #undef	__USE_GNU
 #undef	__USE_FORTIFY_LEVEL
 #undef	__KERNEL_STRICT_NAMES
@@ -213,6 +218,8 @@
 # define _DEFAULT_SOURCE	1
 # undef  _ATFILE_SOURCE
 # define _ATFILE_SOURCE	1
+# undef  _SC_SIGSTKSZ_SOURCE
+# define _SC_SIGSTKSZ_SOURCE 1
 #endif
 
 /* If nothing (other than _GNU_SOURCE and _DEFAULT_SOURCE) is defined,
@@ -388,6 +395,10 @@
 # define __USE_ATFILE	1
 #endif
 
+#ifdef	_SC_SIGSTKSZ_SOURCE
+# define __USE_SC_SIGSTKSZ	1
+#endif
+
 #ifdef	_GNU_SOURCE
 # define __USE_GNU	1
 #endif
@@ -462,7 +473,7 @@
 /* Major and minor version number of the GNU C library package.  Use
    these macros to test for features in specific releases.  */
 #define	__GLIBC__	2
-#define	__GLIBC_MINOR__	32
+#define	__GLIBC_MINOR__	33
 
 #define __GLIBC_PREREQ(maj, min) \
 	((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))

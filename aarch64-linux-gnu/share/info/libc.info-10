@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -7254,52 +7254,4 @@ not if ‘SIGHUP’ is currently ignored:
          sigemptyset (&temp.sa_mask);
          sigaction (SIGHUP, &temp, NULL);
        }
-
-
-File: libc.info,  Node: Defining Handlers,  Next: Interrupted Primitives,  Prev: Signal Actions,  Up: Signal Handling
-
-24.4 Defining Signal Handlers
-=============================
-
-This section describes how to write a signal handler function that can
-be established with the ‘signal’ or ‘sigaction’ functions.
-
-   A signal handler is just a function that you compile together with
-the rest of the program.  Instead of directly invoking the function, you
-use ‘signal’ or ‘sigaction’ to tell the operating system to call it when
-a signal arrives.  This is known as “establishing” the handler.  *Note
-Signal Actions::.
-
-   There are two basic strategies you can use in signal handler
-functions:
-
-   • You can have the handler function note that the signal arrived by
-     tweaking some global data structures, and then return normally.
-
-   • You can have the handler function terminate the program or transfer
-     control to a point where it can recover from the situation that
-     caused the signal.
-
-   You need to take special care in writing handler functions because
-they can be called asynchronously.  That is, a handler might be called
-at any point in the program, unpredictably.  If two signals arrive
-during a very short interval, one handler can run within another.  This
-section describes what your handler should do, and what you should
-avoid.
-
-* Menu:
-
-* Handler Returns::             Handlers that return normally, and what
-                                 this means.
-* Termination in Handler::      How handler functions terminate a program.
-* Longjmp in Handler::          Nonlocal transfer of control out of a
-                                 signal handler.
-* Signals in Handler::          What happens when signals arrive while
-                                 the handler is already occupied.
-* Merged Signals::		When a second signal arrives before the
-				 first is handled.
-* Nonreentrancy::               Do not call any functions unless you know they
-                                 are reentrant with respect to signals.
-* Atomic Data Access::          A single handler can run in the middle of
-                                 reading or writing a single object.
 

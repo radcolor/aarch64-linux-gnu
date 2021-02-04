@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.32.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -2206,7 +2206,7 @@ Variable and Constant Macro Index
 * _POSIX_VDISABLE:                       Special Characters.  (line  22)
 * _POSIX_VDISABLE <1>:                   Options for Files.   (line  40)
 * _POSIX_VERSION:                        Version Supported.   (line   6)
-* _REENTRANT:                            Feature Test Macros. (line 248)
+* _REENTRANT:                            Feature Test Macros. (line 253)
 * _SC_2_C_DEV:                           Constants for Sysconf.
                                                               (line 306)
 * _SC_2_FORT_DEV:                        Constants for Sysconf.
@@ -2323,6 +2323,8 @@ Variable and Constant Macro Index
                                                               (line 104)
 * _SC_MESSAGE_PASSING:                   Constants for Sysconf.
                                                               (line 109)
+* _SC_MINSIGSTKSZ:                       Constants for Sysconf.
+                                                              (line 643)
 * _SC_MQ_OPEN_MAX:                       Constants for Sysconf.
                                                               (line 144)
 * _SC_MQ_PRIO_MAX:                       Constants for Sysconf.
@@ -2410,6 +2412,9 @@ Variable and Constant Macro Index
                                                               (line 594)
 * _SC_SIGQUEUE_MAX:                      Constants for Sysconf.
                                                               (line 166)
+* _SC_SIGSTKSZ:                          Constants for Sysconf.
+                                                              (line 649)
+* _SC_SIGSTKSZ_SOURCE:                   Feature Test Macros. (line 248)
 * _SC_SSIZE_MAX:                         Constants for Sysconf.
                                                               (line 574)
 * _SC_STREAM_MAX:                        Constants for Sysconf.
@@ -2490,7 +2495,7 @@ Variable and Constant Macro Index
                                                               (line 524)
 * _SC_XOPEN_XPG4:                        Constants for Sysconf.
                                                               (line 528)
-* _THREAD_SAFE:                          Feature Test Macros. (line 249)
+* _THREAD_SAFE:                          Feature Test Macros. (line 254)
 * _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
 * _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __free_hook:                           Hooks for Malloc.    (line  37)
