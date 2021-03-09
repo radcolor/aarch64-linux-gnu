@@ -3904,21 +3904,23 @@ The following functions are declared in the header file ‘search.h’.
    Entries of the hashing table and keys for the search are defined
 using this type:
 
- -- Data type: struct ENTRY
-     Both elements of this structure are pointers to zero-terminated
-     strings.  This is a limiting restriction of the functionality of
-     the ‘hsearch’ functions.  They can only be used for data sets which
-     use the NUL character always and solely to terminate the records.
-     It is not possible to handle general binary data.
-
+ -- Data type: ENTRY
      ‘char *key’
           Pointer to a zero-terminated string of characters describing
           the key for the search or the element in the hashing table.
-     ‘char *data’
-          Pointer to a zero-terminated string of characters describing
-          the data.  If the functions will be called only for searching
-          an existing entry this element might stay undefined since it
-          is not used.
+
+          This is a limiting restriction of the functionality of the
+          ‘hsearch’ functions: They can only be used for data sets which
+          use the NUL character always and solely to terminate keys.  It
+          is not possible to handle general binary data for keys.
+
+     ‘void *data’
+          Generic pointer for use by the application.  The hashing table
+          implementation preserves this pointer in entries, but does not
+          use it in any way otherwise.
+
+ -- Data type: struct entry
+     The underlying type of ‘ENTRY’.
 
  -- Function: ENTRY * hsearch (ENTRY ITEM, ACTION ACTION)
 

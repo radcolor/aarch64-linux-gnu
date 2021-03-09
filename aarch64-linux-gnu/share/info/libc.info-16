@@ -2135,6 +2135,8 @@ Type Index
 * dev_t:                                 Attribute Meanings.  (line 214)
 * DIR:                                   Opening a Directory. (line   9)
 * div_t:                                 Integer Division.    (line  19)
+* ENTRY:                                 Hash Search Function.
+                                                              (line  69)
 * enum mcheck_status:                    Heap Consistency Checking.
                                                               (line  66)
 * fd_set:                                Waiting for I/O.     (line  34)
@@ -2352,8 +2354,8 @@ Type Index
 * struct argp_state:                     Argp Parsing State.  (line  10)
 * struct crypt_data:                     Passphrase Storage.  (line 123)
 * struct dirent:                         Directory Entries.   (line  10)
-* struct ENTRY:                          Hash Search Function.
-                                                              (line  69)
+* struct entry:                          Hash Search Function.
+                                                              (line  84)
 * struct exit_status:                    Manipulating the Database.
                                                               (line   9)
 * struct flock:                          File Locks.          (line  41)
@@ -3495,15 +3497,15 @@ Function and Macro Index
 * hcreate:                               Hash Search Function.
                                                               (line  12)
 * hcreate_r:                             Hash Search Function.
-                                                              (line 116)
+                                                              (line 118)
 * hdestroy:                              Hash Search Function.
                                                               (line  42)
 * hdestroy_r:                            Hash Search Function.
-                                                              (line 135)
+                                                              (line 137)
 * hsearch:                               Hash Search Function.
-                                                              (line  85)
+                                                              (line  87)
 * hsearch_r:                             Hash Search Function.
-                                                              (line 145)
+                                                              (line 147)
 * htonl:                                 Byte Order.          (line  50)
 * htons:                                 Byte Order.          (line  34)
 * hypot:                                 Exponents and Logarithms.
