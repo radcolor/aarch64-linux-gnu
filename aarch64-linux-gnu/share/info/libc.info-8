@@ -6790,7 +6790,7 @@ asinh         2               2               2               1               1
 asinhl        4               -               4               3               3
 asinhf128     -               -               -               4               4
 atanf         1               1               1               -               -
-atan          -               -               -               1               1
+atan          1               -               -               1               1
 atanl         1               -               1               1               1
 atanf128      -               -               -               1               1
 atan2f        1               1               2               -               -
@@ -6850,7 +6850,7 @@ cexp          2 + i 1         2 + i 1         2 + i 1         2 + i 1         2 
 cexpl         1 + i 1         -               1 + i 1         1 + i 1         1 + i 1
 cexpf128      -               -               -               1 + i 1         1 + i 1
 clogf         3 + i 1         3 + i 1         3 + i 1         3 + i 0         3 + i 0
-clog          3 + i 0         3 + i 0         3 + i 0         2 + i 1         2 + i 1
+clog          3 + i 1         3 + i 0         3 + i 0         2 + i 1         2 + i 1
 clogl         2 + i 1         -               4 + i 1         3 + i 1         3 + i 1
 clogf128      -               -               -               2 + i 1         2 + i 1
 clog10f       4 + i 2         4 + i 2         4 + i 2         4 + i 1         4 + i 1
@@ -7043,7 +7043,7 @@ asinh         2
 asinhl        3
 asinhf128     4
 atanf         1
-atan          -
+atan          1
 atanl         1
 atanf128      1
 atan2f        2
@@ -7103,7 +7103,7 @@ cexp          2 + i 1
 cexpl         1 + i 1
 cexpf128      1 + i 1
 clogf         3 + i 1
-clog          3 + i 0
+clog          3 + i 1
 clogl         3 + i 1
 clogf128      2 + i 1
 clog10f       4 + i 2

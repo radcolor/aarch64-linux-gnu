@@ -3401,7 +3401,6 @@ Non-POSIX Extensions
 Internal Probes
 
 * Memory Allocation Probes::  Probes in the memory allocation subsystem
-* Mathematical Function Probes::  Probes in mathematical functions
 * Non-local Goto Probes::  Probes in setjmp and longjmp
 
 Tunables

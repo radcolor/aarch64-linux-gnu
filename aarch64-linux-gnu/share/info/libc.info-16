@@ -2323,24 +2323,6 @@ Type Index
 * sig_atomic_t:                          Atomic Types.        (line  15)
 * size_t:                                Important Data Types.
                                                               (line  23)
-* slowatan:                              Mathematical Function Probes.
-                                                              (line  36)
-* slowatan2:                             Mathematical Function Probes.
-                                                              (line  19)
-* slowatan2_inexact:                     Mathematical Function Probes.
-                                                              (line  27)
-* slowatan_inexact:                      Mathematical Function Probes.
-                                                              (line  43)
-* slowcos:                               Mathematical Function Probes.
-                                                              (line  63)
-* slowcos_dx:                            Mathematical Function Probes.
-                                                              (line  75)
-* slowsin:                               Mathematical Function Probes.
-                                                              (line  57)
-* slowsin_dx:                            Mathematical Function Probes.
-                                                              (line  69)
-* slowtan:                               Mathematical Function Probes.
-                                                              (line  51)
 * speed_t:                               Line Speed.          (line  76)
 * ssize_t:                               I/O Primitives.      (line  10)
 * stack_t:                               Signal Stack.        (line  26)

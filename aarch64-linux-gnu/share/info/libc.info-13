@@ -5232,11 +5232,10 @@ arguments.
 * Menu:
 
 * Memory Allocation Probes::  Probes in the memory allocation subsystem
-* Mathematical Function Probes::  Probes in mathematical functions
 * Non-local Goto Probes::  Probes in setjmp and longjmp
 
 
-File: libc.info,  Node: Memory Allocation Probes,  Next: Mathematical Function Probes,  Up: Internal Probes
+File: libc.info,  Node: Memory Allocation Probes,  Next: Non-local Goto Probes,  Up: Internal Probes
 
 36.1 Memory Allocation Probes
 =============================
@@ -5449,90 +5448,9 @@ the virtual memory subsystem of the GNU C Library.
      $ARG2 is the tcache bin it resides in.
 
 
-File: libc.info,  Node: Mathematical Function Probes,  Next: Non-local Goto Probes,  Prev: Memory Allocation Probes,  Up: Internal Probes
+File: libc.info,  Node: Non-local Goto Probes,  Prev: Memory Allocation Probes,  Up: Internal Probes
 
-36.2 Mathematical Function Probes
-=================================
-
-Some mathematical functions fall back to multiple precision arithmetic
-for some inputs to get last bit precision for their return values.  This
-multiple precision fallback is much slower than the default algorithms
-and may have a significant impact on application performance.  The
-systemtap probe markers described in this section may help you determine
-if your application calls mathematical functions with inputs that may
-result in multiple-precision arithmetic.
-
-   Unless explicitly mentioned otherwise, a precision of 1 implies 24
-bits of precision in the mantissa of the multiple precision number.
-Hence, a precision level of 32 implies 768 bits of precision in the
-mantissa.
-
- -- Probe: slowatan2 (int $ARG1, double $ARG2, double $ARG3, double
-          $ARG4)
-     This probe is triggered when the ‘atan2’ function is called with an
-     input that results in multiple precision computation.  Argument
-     $ARG1 is the precision with which computation succeeded.  Arguments
-     $ARG2 and $ARG3 are inputs to the ‘atan2’ function and $ARG4 is the
-     computed result.
-
- -- Probe: slowatan2_inexact (int $ARG1, double $ARG2, double $ARG3,
-          double $ARG4)
-     This probe is triggered when the ‘atan’ function is called with an
-     input that results in multiple precision computation and none of
-     the multiple precision computations result in an accurate result.
-     Argument $ARG1 is the maximum precision with which computations
-     were performed.  Arguments $ARG2 and $ARG3 are inputs to the
-     ‘atan2’ function and $ARG4 is the computed result.
-
- -- Probe: slowatan (int $ARG1, double $ARG2, double $ARG3)
-     This probe is triggered when the ‘atan’ function is called with an
-     input that results in multiple precision computation.  Argument
-     $ARG1 is the precision with which computation succeeded.  Argument
-     $ARG2 is the input to the ‘atan’ function and $ARG3 is the computed
-     result.
-
- -- Probe: slowatan_inexact (int $ARG1, double $ARG2, double $ARG3)
-     This probe is triggered when the ‘atan’ function is called with an
-     input that results in multiple precision computation and none of
-     the multiple precision computations result in an accurate result.
-     Argument $ARG1 is the maximum precision with which computations
-     were performed.  Argument $ARG2 is the input to the ‘atan’ function
-     and $ARG3 is the computed result.
-
- -- Probe: slowtan (double $ARG1, double $ARG2)
-     This probe is triggered when the ‘tan’ function is called with an
-     input that results in multiple precision computation with precision
-     32.  Argument $ARG1 is the input to the function and $ARG2 is the
-     computed result.
-
- -- Probe: slowsin (double $ARG1, double $ARG2)
-     This probe is triggered when the ‘sin’ function is called with an
-     input that results in multiple precision computation with precision
-     32.  Argument $ARG1 is the input to the function and $ARG2 is the
-     computed result.
-
- -- Probe: slowcos (double $ARG1, double $ARG2)
-     This probe is triggered when the ‘cos’ function is called with an
-     input that results in multiple precision computation with precision
-     32.  Argument $ARG1 is the input to the function and $ARG2 is the
-     computed result.
-
- -- Probe: slowsin_dx (double $ARG1, double $ARG2, double $ARG3)
-     This probe is triggered when the ‘sin’ function is called with an
-     input that results in multiple precision computation with precision
-     32.  Argument $ARG1 is the input to the function, $ARG2 is the
-     error bound of $ARG1 and $ARG3 is the computed result.
-
- -- Probe: slowcos_dx (double $ARG1, double $ARG2, double $ARG3)
-     This probe is triggered when the ‘cos’ function is called with an
-     input that results in multiple precision computation with precision
-     32.  Argument $ARG1 is the input to the function, $ARG2 is the
-     error bound of $ARG1 and $ARG3 is the computed result.
-
-
-File: libc.info,  Node: Non-local Goto Probes,  Prev: Mathematical Function Probes,  Up: Internal Probes
-
-36.3 Non-local Goto Probes
+36.2 Non-local Goto Probes
 ==========================
 
 These probes are used to signal calls to ‘setjmp’, ‘sigsetjmp’,
