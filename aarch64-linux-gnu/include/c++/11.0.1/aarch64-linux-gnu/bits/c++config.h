@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 11
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20210322
+#define __GLIBCXX__ 20210330
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -425,9 +425,12 @@ _GLIBCXX_END_NAMESPACE_VERSION
 // GLIBCXX_ABI Deprecated
 // Define if compatibility should be provided for -mlong-double-64.
 #undef _GLIBCXX_LONG_DOUBLE_COMPAT
+
 // Define if compatibility should be provided for alternative 128-bit long
-// double formats.
+// double formats. Not possible for Clang until __ibm128 is supported.
+#ifndef __clang__
 #undef _GLIBCXX_LONG_DOUBLE_ALT128_COMPAT
+#endif
 
 // Inline namespaces for long double 128 modes.
 #if defined _GLIBCXX_LONG_DOUBLE_ALT128_COMPAT \
