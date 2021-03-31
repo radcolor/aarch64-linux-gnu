@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "11.0.1 20210330 (experimental)")
+(!version  "11.0.1 20210331 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 225
@@ -28064,19 +28064,19 @@
   nil 0 nil nil )
  
  (!type struct 2044 nil  gc_pointed_to "source_location_table_entry"
-  (!srcfileloc  "cp/cp-gimplify.c" 2858)
+  (!srcfileloc  "cp/cp-gimplify.c" 2866)
   (!fields 3 
    (!pair  "loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 2855)
+    (!srcfileloc  "cp/cp-gimplify.c" 2863)
     nil )
    (!pair  "uid"
     (!type already_seen 2)
-    (!srcfileloc  "cp/cp-gimplify.c" 2856)
+    (!srcfileloc  "cp/cp-gimplify.c" 2864)
     nil )
    (!pair  "var"
     (!type already_seen 23)
-    (!srcfileloc  "cp/cp-gimplify.c" 2857)
+    (!srcfileloc  "cp/cp-gimplify.c" 2865)
     nil )
   )
   (!options 
@@ -28085,7 +28085,7 @@
   1032 nil nil )
  
  (!type struct 2045 nil  gc_used "source_location_table_entry_hash"
-  (!srcfileloc  "cp/cp-gimplify.c" 2934)
+  (!srcfileloc  "cp/cp-gimplify.c" 2942)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -28094,11 +28094,11 @@
    (!type already_seen 2046)
   )
   gc_pointed_to "hash_table<source_location_table_entry_hash>"
-  (!srcfileloc  "cp/cp-gimplify.c" 2934)
+  (!srcfileloc  "cp/cp-gimplify.c" 2942)
   (!fields 1 
    (!pair  "source_location_table_entry_hash"
     (!type already_seen 2045)
-    (!srcfileloc  "cp/cp-gimplify.c" 2934)
+    (!srcfileloc  "cp/cp-gimplify.c" 2942)
     nil )
   )
  )
@@ -28713,15 +28713,15 @@
   nil 0 nil nil )
  
  (!type struct 2126 nil  gc_used "macro_export"
-  (!srcfileloc  "cp/module.cc" 16509)
+  (!srcfileloc  "cp/module.cc" 16515)
   (!fields 2 
    (!pair  "def"
     (!type already_seen 19)
-    (!srcfileloc  "cp/module.cc" 16502)
+    (!srcfileloc  "cp/module.cc" 16508)
     nil )
    (!pair  "undef_loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/module.cc" 16503)
+    (!srcfileloc  "cp/module.cc" 16509)
     nil )
   )
   nil 1032 nil nil )
@@ -28735,15 +28735,15 @@
    (!type already_seen 2128)
   )
   gc_pointed_to "vec<macro_export,va_gc>"
-  (!srcfileloc  "cp/module.cc" 16666)
+  (!srcfileloc  "cp/module.cc" 16672)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "cp/module.cc" 16666)
+    (!srcfileloc  "cp/module.cc" 16672)
     nil )
    (!pair  "macro_export"
     (!type already_seen 2126)
-    (!srcfileloc  "cp/module.cc" 16666)
+    (!srcfileloc  "cp/module.cc" 16672)
     nil )
   )
  )
@@ -28893,15 +28893,15 @@
    (!type already_seen 2160)
   )
   gc_pointed_to "hash_map<tree,tree_pair_p>"
-  (!srcfileloc  "cp/pt.c" 29144)
+  (!srcfileloc  "cp/pt.c" 29149)
   (!fields 2 
    (!pair  "tree_pair_p"
     (!type already_seen 532)
-    (!srcfileloc  "cp/pt.c" 29144)
+    (!srcfileloc  "cp/pt.c" 29149)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/pt.c" 29144)
+    (!srcfileloc  "cp/pt.c" 29149)
     nil )
   )
  )
@@ -30034,7 +30034,7 @@
   nil )
  (!pair  "hash_map<tree,tree_pair_p>"
   (!type already_seen 2160)
-  (!srcfileloc  "cp/pt.c" 29144)
+  (!srcfileloc  "cp/pt.c" 29149)
   nil )
  (!pair  "pending_template"
   (!type already_seen 2147)
@@ -30084,11 +30084,11 @@
   nil )
  (!pair  "vec<macro_export,va_gc>"
   (!type already_seen 2128)
-  (!srcfileloc  "cp/module.cc" 16666)
+  (!srcfileloc  "cp/module.cc" 16672)
   nil )
  (!pair  "macro_export"
   (!type already_seen 2126)
-  (!srcfileloc  "cp/module.cc" 16505)
+  (!srcfileloc  "cp/module.cc" 16511)
   nil )
  (!pair  "note_defs_table_t"
   (!type already_seen 2122)
@@ -30330,11 +30330,11 @@
   nil )
  (!pair  "source_location_table_entry_hash"
   (!type already_seen 2045)
-  (!srcfileloc  "cp/cp-gimplify.c" 2934)
+  (!srcfileloc  "cp/cp-gimplify.c" 2942)
   nil )
  (!pair  "hash_table<source_location_table_entry_hash>"
   (!type already_seen 2046)
-  (!srcfileloc  "cp/cp-gimplify.c" 2934)
+  (!srcfileloc  "cp/cp-gimplify.c" 2942)
   nil )
  (!pair  "coroutine_info_hasher"
   (!type already_seen 2026)
@@ -34391,7 +34391,7 @@
   nil )
  (!pair  "dguide_cache"
   (!type already_seen 2161)
-  (!srcfileloc  "cp/pt.c" 29144)
+  (!srcfileloc  "cp/pt.c" 29149)
   (!options 
    (!option deletable string  "")
   )
@@ -34520,11 +34520,11 @@
  )
  (!pair  "headers"
   (!type already_seen 385)
-  (!srcfileloc  "cp/module.cc" 16670)
+  (!srcfileloc  "cp/module.cc" 16676)
   nil )
  (!pair  "macro_exports"
   (!type already_seen 2129)
-  (!srcfileloc  "cp/module.cc" 16666)
+  (!srcfileloc  "cp/module.cc" 16672)
   nil )
  (!pair  "note_defs"
   (!type already_seen 2123)
@@ -34701,15 +34701,15 @@
   nil )
  (!pair  "source_location_id"
   (!type already_seen 2)
-  (!srcfileloc  "cp/cp-gimplify.c" 2936)
+  (!srcfileloc  "cp/cp-gimplify.c" 2944)
   nil )
  (!pair  "source_location_table"
   (!type already_seen 2047)
-  (!srcfileloc  "cp/cp-gimplify.c" 2935)
+  (!srcfileloc  "cp/cp-gimplify.c" 2943)
   nil )
  (!pair  "fold_cache"
   (!type already_seen 392)
-  (!srcfileloc  "cp/cp-gimplify.c" 2176)
+  (!srcfileloc  "cp/cp-gimplify.c" 2184)
   (!options 
    (!option deletable string  "")
   )
@@ -35454,21 +35454,21 @@
   nil )
  (!pair  "aarch64_sls_shared_thunks_needed"
   (!type already_seen 2)
-  (!srcfileloc  "config/aarch64/aarch64.c" 25266)
+  (!srcfileloc  "config/aarch64/aarch64.c" 25268)
   nil )
  (!pair  "aarch64_sls_shared_thunks"
   (!type array 2327 nil  gc_used "30" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "config/aarch64/aarch64.c" 25265)
+  (!srcfileloc  "config/aarch64/aarch64.c" 25267)
   nil )
  (!pair  "va_list_type"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.c" 17993)
+  (!srcfileloc  "config/aarch64/aarch64.c" 17995)
   nil )
  (!pair  "aarch64_previous_fndecl"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.c" 16979)
+  (!srcfileloc  "config/aarch64/aarch64.c" 16981)
   nil )
  (!pair  "tls_get_addr_libfunc"
   (!type already_seen 100)

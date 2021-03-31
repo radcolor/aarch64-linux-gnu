@@ -4578,10 +4578,10 @@ for the BASE argument.
    The ‘%X’ conversion is identical to the ‘%x’ conversion.  They both
 permit either uppercase or lowercase letters to be used as digits.
 
-   The default type of the corresponding argument for the ‘%d’ and ‘%i’
-conversions is ‘int *’, and ‘unsigned int *’ for the other integer
-conversions.  You can use the following type modifiers to specify other
-sizes of integer:
+   The default type of the corresponding argument for the ‘%d’, ‘%i’,
+and ‘%n’ conversions is ‘int *’, and ‘unsigned int *’ for the other
+integer conversions.  You can use the following type modifiers to
+specify other sizes of integer:
 
 ‘hh’
      Specifies that the argument is a ‘signed char *’ or ‘unsigned char
@@ -4830,7 +4830,8 @@ not originally written during the same program execution that reads it
 in.
 
    The ‘%n’ conversion produces the number of characters read so far by
-this call.  The corresponding argument should be of type ‘int *’.  This
+this call.  The corresponding argument should be of type ‘int *’, unless
+a type modifier is in effect (*note Numeric Input Conversions::).  This
 conversion works in the same way as the ‘%n’ conversion for ‘printf’;
 see *note Other Output Conversions::, for an example.
 
