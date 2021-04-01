@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "11.0.1 20210331 (experimental)")
+(!version  "11.0.1 20210401 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 11 ada brig c cp d fortran go jit lto objc objcp)
 (!fileslist 225
@@ -9280,41 +9280,41 @@
                                                  (!type struct 479 
                                                   (!type already_seen 478)
                                                   gc_pointed_to "addr_table_entry"
-                                                  (!srcfileloc  "dwarf2out.c" 1317)
+                                                  (!srcfileloc  "dwarf2out.c" 1318)
                                                   (!fields 4 
                                                    (!pair  "kind"
                                                     (!type already_seen 2)
-                                                    (!srcfileloc  "dwarf2out.c" 1298)
+                                                    (!srcfileloc  "dwarf2out.c" 1299)
                                                     nil )
                                                    (!pair  "refcount"
                                                     (!type already_seen 2)
-                                                    (!srcfileloc  "dwarf2out.c" 1299)
+                                                    (!srcfileloc  "dwarf2out.c" 1300)
                                                     nil )
                                                    (!pair  "index"
                                                     (!type already_seen 2)
-                                                    (!srcfileloc  "dwarf2out.c" 1300)
+                                                    (!srcfileloc  "dwarf2out.c" 1301)
                                                     nil )
                                                    (!pair  "addr"
                                                     (!type union 480 nil  gc_used "addr_table_entry_struct_union"
-                                                     (!srcfileloc  "dwarf2out.c" 1305)
+                                                     (!srcfileloc  "dwarf2out.c" 1306)
                                                      (!fields 2 
                                                       (!pair  "rtl"
                                                        (!type already_seen 100)
-                                                       (!srcfileloc  "dwarf2out.c" 1303)
+                                                       (!srcfileloc  "dwarf2out.c" 1304)
                                                        (!options 
                                                         (!option tag string  "0")
                                                        )
                                                       )
                                                       (!pair  "label"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1304)
+                                                       (!srcfileloc  "dwarf2out.c" 1305)
                                                        (!options 
                                                         (!option tag string  "1")
                                                        )
                                                       )
                                                      )
                                                      nil 2047 nil )
-                                                    (!srcfileloc  "dwarf2out.c" 1306)
+                                                    (!srcfileloc  "dwarf2out.c" 1307)
                                                     (!options 
                                                      (!option desc string  "%1.kind")
                                                     )
@@ -9350,83 +9350,83 @@
                                                     (!type struct 483 
                                                      (!type already_seen 482)
                                                      gc_pointed_to "dw_loc_list_struct"
-                                                     (!srcfileloc  "dwarf2out.c" 1344)
+                                                     (!srcfileloc  "dwarf2out.c" 1345)
                                                      (!fields 19 
                                                       (!pair  "dw_loc_next"
                                                        (!type already_seen 482)
-                                                       (!srcfileloc  "dwarf2out.c" 1315)
+                                                       (!srcfileloc  "dwarf2out.c" 1316)
                                                        nil )
                                                       (!pair  "begin"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1316)
+                                                       (!srcfileloc  "dwarf2out.c" 1317)
                                                        nil )
                                                       (!pair  "begin_entry"
                                                        (!type already_seen 478)
-                                                       (!srcfileloc  "dwarf2out.c" 1317)
+                                                       (!srcfileloc  "dwarf2out.c" 1318)
                                                        nil )
                                                       (!pair  "end"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1318)
+                                                       (!srcfileloc  "dwarf2out.c" 1319)
                                                        nil )
                                                       (!pair  "end_entry"
                                                        (!type already_seen 478)
-                                                       (!srcfileloc  "dwarf2out.c" 1319)
+                                                       (!srcfileloc  "dwarf2out.c" 1320)
                                                        nil )
                                                       (!pair  "ll_symbol"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1320)
+                                                       (!srcfileloc  "dwarf2out.c" 1321)
                                                        nil )
                                                       (!pair  "vl_symbol"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1322)
+                                                       (!srcfileloc  "dwarf2out.c" 1323)
                                                        nil )
                                                       (!pair  "section"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1323)
+                                                       (!srcfileloc  "dwarf2out.c" 1324)
                                                        nil )
                                                       (!pair  "expr"
                                                        (!type already_seen 474)
-                                                       (!srcfileloc  "dwarf2out.c" 1324)
+                                                       (!srcfileloc  "dwarf2out.c" 1325)
                                                        nil )
                                                       (!pair  "vbegin"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1325)
+                                                       (!srcfileloc  "dwarf2out.c" 1326)
                                                        nil )
                                                       (!pair  "vend"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1325)
+                                                       (!srcfileloc  "dwarf2out.c" 1326)
                                                        nil )
                                                       (!pair  "hash"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1326)
+                                                       (!srcfileloc  "dwarf2out.c" 1327)
                                                        nil )
                                                       (!pair  "resolved_addr"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1329)
+                                                       (!srcfileloc  "dwarf2out.c" 1330)
                                                        nil )
                                                       (!pair  "replaced"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1331)
+                                                       (!srcfileloc  "dwarf2out.c" 1332)
                                                        nil )
                                                       (!pair  "emitted"
                                                        (!type already_seen 8)
-                                                       (!srcfileloc  "dwarf2out.c" 1334)
+                                                       (!srcfileloc  "dwarf2out.c" 1335)
                                                        nil )
                                                       (!pair  "num_assigned"
                                                        (!type already_seen 8)
-                                                       (!srcfileloc  "dwarf2out.c" 1336)
+                                                       (!srcfileloc  "dwarf2out.c" 1337)
                                                        nil )
                                                       (!pair  "offset_emitted"
                                                        (!type already_seen 8)
-                                                       (!srcfileloc  "dwarf2out.c" 1338)
+                                                       (!srcfileloc  "dwarf2out.c" 1339)
                                                        nil )
                                                       (!pair  "noted_variable_value"
                                                        (!type already_seen 8)
-                                                       (!srcfileloc  "dwarf2out.c" 1340)
+                                                       (!srcfileloc  "dwarf2out.c" 1341)
                                                        nil )
                                                       (!pair  "force"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1343)
+                                                       (!srcfileloc  "dwarf2out.c" 1344)
                                                        nil )
                                                      )
                                                      nil 2047 nil nil )
@@ -9441,15 +9441,15 @@
                                                     (!type struct 485 
                                                      (!type already_seen 484)
                                                      gc_pointed_to "die_struct"
-                                                     (!srcfileloc  "dwarf2out.c" 3114)
+                                                     (!srcfileloc  "dwarf2out.c" 3115)
                                                      (!fields 15 
                                                       (!pair  "die_id"
                                                        (!type union 486 nil  gc_used "die_symbol_or_type_node"
-                                                        (!srcfileloc  "dwarf2out.c" 3091)
+                                                        (!srcfileloc  "dwarf2out.c" 3092)
                                                         (!fields 2 
                                                          (!pair  "die_symbol"
                                                           (!type already_seen 11)
-                                                          (!srcfileloc  "dwarf2out.c" 3089)
+                                                          (!srcfileloc  "dwarf2out.c" 3090)
                                                           (!options 
                                                            (!option tag string  "0")
                                                           )
@@ -9459,41 +9459,41 @@
                                                            (!type struct 488 
                                                             (!type already_seen 487)
                                                             gc_pointed_to "comdat_type_node"
-                                                            (!srcfileloc  "dwarf2out.c" 3184)
+                                                            (!srcfileloc  "dwarf2out.c" 3191)
                                                             (!fields 5 
                                                              (!pair  "root_die"
                                                               (!type already_seen 484)
-                                                              (!srcfileloc  "dwarf2out.c" 3179)
+                                                              (!srcfileloc  "dwarf2out.c" 3186)
                                                               nil )
                                                              (!pair  "type_die"
                                                               (!type already_seen 484)
-                                                              (!srcfileloc  "dwarf2out.c" 3180)
+                                                              (!srcfileloc  "dwarf2out.c" 3187)
                                                               nil )
                                                              (!pair  "skeleton_die"
                                                               (!type already_seen 484)
-                                                              (!srcfileloc  "dwarf2out.c" 3181)
+                                                              (!srcfileloc  "dwarf2out.c" 3188)
                                                               nil )
                                                              (!pair  "signature"
                                                               (!type array 489 nil  gc_used "DWARF_TYPE_SIGNATURE_SIZE" 
                                                                (!type already_seen 8)
                                                               )
-                                                              (!srcfileloc  "dwarf2out.c" 3182)
+                                                              (!srcfileloc  "dwarf2out.c" 3189)
                                                               nil )
                                                              (!pair  "next"
                                                               (!type already_seen 487)
-                                                              (!srcfileloc  "dwarf2out.c" 3183)
+                                                              (!srcfileloc  "dwarf2out.c" 3190)
                                                               nil )
                                                             )
                                                             nil 2047 nil nil )
                                                           )
-                                                          (!srcfileloc  "dwarf2out.c" 3090)
+                                                          (!srcfileloc  "dwarf2out.c" 3091)
                                                           (!options 
                                                            (!option tag string  "1")
                                                           )
                                                          )
                                                         )
                                                         nil 2047 nil )
-                                                       (!srcfileloc  "dwarf2out.c" 3092)
+                                                       (!srcfileloc  "dwarf2out.c" 3093)
                                                        (!options 
                                                         (!option desc string  "%0.comdat_type_p")
                                                        )
@@ -9503,84 +9503,84 @@
                                                         (!type user_struct 491 
                                                          (!type already_seen 490)
                                                          gc_pointed_to "vec<dw_attr_node,va_gc>"
-                                                         (!srcfileloc  "dwarf2out.c" 3093)
+                                                         (!srcfileloc  "dwarf2out.c" 3094)
                                                          (!fields 2 
                                                           (!pair  "va_gc"
                                                            (!type already_seen 79)
-                                                           (!srcfileloc  "dwarf2out.c" 3093)
+                                                           (!srcfileloc  "dwarf2out.c" 3094)
                                                            nil )
                                                           (!pair  "dw_attr_node"
                                                            (!type struct 492 nil  gc_used "dw_attr_struct"
-                                                            (!srcfileloc  "dwarf2out.c" 3078)
+                                                            (!srcfileloc  "dwarf2out.c" 3079)
                                                             (!fields 2 
                                                              (!pair  "dw_attr"
                                                               (!type already_seen 2)
-                                                              (!srcfileloc  "dwarf2out.c" 3076)
+                                                              (!srcfileloc  "dwarf2out.c" 3077)
                                                               nil )
                                                              (!pair  "dw_attr_val"
                                                               (!type already_seen 476)
-                                                              (!srcfileloc  "dwarf2out.c" 3077)
+                                                              (!srcfileloc  "dwarf2out.c" 3078)
                                                               nil )
                                                             )
                                                             nil 2047 nil nil )
-                                                           (!srcfileloc  "dwarf2out.c" 3093)
+                                                           (!srcfileloc  "dwarf2out.c" 3094)
                                                            nil )
                                                          )
                                                         )
                                                        )
-                                                       (!srcfileloc  "dwarf2out.c" 3093)
+                                                       (!srcfileloc  "dwarf2out.c" 3094)
                                                        nil )
                                                       (!pair  "die_parent"
                                                        (!type already_seen 484)
-                                                       (!srcfileloc  "dwarf2out.c" 3094)
+                                                       (!srcfileloc  "dwarf2out.c" 3095)
                                                        nil )
                                                       (!pair  "die_child"
                                                        (!type already_seen 484)
-                                                       (!srcfileloc  "dwarf2out.c" 3095)
+                                                       (!srcfileloc  "dwarf2out.c" 3096)
                                                        nil )
                                                       (!pair  "die_sib"
                                                        (!type already_seen 484)
-                                                       (!srcfileloc  "dwarf2out.c" 3096)
+                                                       (!srcfileloc  "dwarf2out.c" 3097)
                                                        nil )
                                                       (!pair  "die_definition"
                                                        (!type already_seen 484)
-                                                       (!srcfileloc  "dwarf2out.c" 3097)
+                                                       (!srcfileloc  "dwarf2out.c" 3098)
                                                        nil )
                                                       (!pair  "die_offset"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3098)
+                                                       (!srcfileloc  "dwarf2out.c" 3099)
                                                        nil )
                                                       (!pair  "die_abbrev"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3099)
+                                                       (!srcfileloc  "dwarf2out.c" 3100)
                                                        nil )
                                                       (!pair  "die_mark"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3100)
+                                                       (!srcfileloc  "dwarf2out.c" 3101)
                                                        nil )
                                                       (!pair  "decl_id"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3101)
+                                                       (!srcfileloc  "dwarf2out.c" 3102)
                                                        nil )
                                                       (!pair  "die_tag"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3102)
+                                                       (!srcfileloc  "dwarf2out.c" 3103)
                                                        nil )
                                                       (!pair  "die_perennial_p"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3104)
+                                                       (!srcfileloc  "dwarf2out.c" 3105)
                                                        nil )
                                                       (!pair  "comdat_type_p"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3105)
+                                                       (!srcfileloc  "dwarf2out.c" 3106)
                                                        nil )
                                                       (!pair  "with_offset"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3108)
+                                                       (!srcfileloc  "dwarf2out.c" 3109)
                                                        nil )
                                                       (!pair  "removed"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 3112)
+                                                       (!srcfileloc  "dwarf2out.c" 3113)
                                                        nil )
                                                      )
                                                      (!options 
@@ -9716,27 +9716,27 @@
                                                     (!type struct 500 
                                                      (!type already_seen 499)
                                                      gc_pointed_to "indirect_string_node"
-                                                     (!srcfileloc  "dwarf2out.c" 221)
+                                                     (!srcfileloc  "dwarf2out.c" 222)
                                                      (!fields 5 
                                                       (!pair  "str"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 216)
+                                                       (!srcfileloc  "dwarf2out.c" 217)
                                                        nil )
                                                       (!pair  "refcount"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 217)
+                                                       (!srcfileloc  "dwarf2out.c" 218)
                                                        nil )
                                                       (!pair  "form"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 218)
+                                                       (!srcfileloc  "dwarf2out.c" 219)
                                                        nil )
                                                       (!pair  "label"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 219)
+                                                       (!srcfileloc  "dwarf2out.c" 220)
                                                        nil )
                                                       (!pair  "index"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 220)
+                                                       (!srcfileloc  "dwarf2out.c" 221)
                                                        nil )
                                                      )
                                                      (!options 
@@ -9768,15 +9768,15 @@
                                                     (!type struct 502 
                                                      (!type already_seen 501)
                                                      gc_pointed_to "dwarf_file_data"
-                                                     (!srcfileloc  "dwarf2out.c" 1287)
+                                                     (!srcfileloc  "dwarf2out.c" 1288)
                                                      (!fields 2 
                                                       (!pair  "filename"
                                                        (!type already_seen 11)
-                                                       (!srcfileloc  "dwarf2out.c" 1285)
+                                                       (!srcfileloc  "dwarf2out.c" 1286)
                                                        nil )
                                                       (!pair  "emitted_number"
                                                        (!type already_seen 2)
-                                                       (!srcfileloc  "dwarf2out.c" 1286)
+                                                       (!srcfileloc  "dwarf2out.c" 1287)
                                                        nil )
                                                      )
                                                      (!options 
@@ -21684,21 +21684,21 @@
    (!type already_seen 1263)
   )
   gc_pointed_to "vec<dw_fde_ref,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 213)
+  (!srcfileloc  "dwarf2out.c" 214)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 213)
+    (!srcfileloc  "dwarf2out.c" 214)
     nil )
    (!pair  "dw_fde_ref"
     (!type already_seen 467)
-    (!srcfileloc  "dwarf2out.c" 213)
+    (!srcfileloc  "dwarf2out.c" 214)
     nil )
   )
  )
  
  (!type struct 1265 nil  gc_used "indirect_string_hasher"
-  (!srcfileloc  "dwarf2out.c" 231)
+  (!srcfileloc  "dwarf2out.c" 232)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -21707,11 +21707,11 @@
    (!type already_seen 1266)
   )
   gc_pointed_to "hash_table<indirect_string_hasher>"
-  (!srcfileloc  "dwarf2out.c" 231)
+  (!srcfileloc  "dwarf2out.c" 232)
   (!fields 1 
    (!pair  "indirect_string_hasher"
     (!type already_seen 1265)
-    (!srcfileloc  "dwarf2out.c" 231)
+    (!srcfileloc  "dwarf2out.c" 232)
     nil )
   )
  )
@@ -21721,15 +21721,15 @@
  (!type already_seen 488)
  
  (!type struct 1268 nil  gc_used "dw_line_info_struct"
-  (!srcfileloc  "dwarf2out.c" 2987)
+  (!srcfileloc  "dwarf2out.c" 2988)
   (!fields 2 
    (!pair  "opcode"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2985)
+    (!srcfileloc  "dwarf2out.c" 2986)
     nil )
    (!pair  "val"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2986)
+    (!srcfileloc  "dwarf2out.c" 2987)
     nil )
   )
   nil 2047 nil nil )
@@ -21739,15 +21739,15 @@
    (!type already_seen 1269)
   )
   gc_pointed_to "vec<dw_line_info_entry,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3029)
+  (!srcfileloc  "dwarf2out.c" 3030)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3029)
+    (!srcfileloc  "dwarf2out.c" 3030)
     nil )
    (!pair  "dw_line_info_entry"
     (!type already_seen 1268)
-    (!srcfileloc  "dwarf2out.c" 3029)
+    (!srcfileloc  "dwarf2out.c" 3030)
     nil )
   )
  )
@@ -21757,47 +21757,47 @@
    (!type already_seen 1271)
   )
   gc_pointed_to "dw_line_info_table"
-  (!srcfileloc  "dwarf2out.c" 3565)
+  (!srcfileloc  "dwarf2out.c" 3572)
   (!fields 10 
    (!pair  "end_label"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 2992)
+    (!srcfileloc  "dwarf2out.c" 2993)
     nil )
    (!pair  "file_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2996)
+    (!srcfileloc  "dwarf2out.c" 2997)
     nil )
    (!pair  "line_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2997)
+    (!srcfileloc  "dwarf2out.c" 2998)
     nil )
    (!pair  "column_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2998)
+    (!srcfileloc  "dwarf2out.c" 2999)
     nil )
    (!pair  "discrim_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 2999)
+    (!srcfileloc  "dwarf2out.c" 3000)
     nil )
    (!pair  "is_stmt"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3000)
+    (!srcfileloc  "dwarf2out.c" 3001)
     nil )
    (!pair  "in_use"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3001)
+    (!srcfileloc  "dwarf2out.c" 3002)
     nil )
    (!pair  "view"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3017)
+    (!srcfileloc  "dwarf2out.c" 3018)
     nil )
    (!pair  "symviews_since_reset"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3022)
+    (!srcfileloc  "dwarf2out.c" 3023)
     nil )
    (!pair  "entries"
     (!type already_seen 1270)
-    (!srcfileloc  "dwarf2out.c" 3029)
+    (!srcfileloc  "dwarf2out.c" 3030)
     nil )
   )
   nil 2047 nil nil )
@@ -21813,69 +21813,77 @@
   nil 0 nil nil )
  
  (!type struct 1274 nil  gc_used "pubname_struct"
-  (!srcfileloc  "dwarf2out.c" 3145)
+  (!srcfileloc  "dwarf2out.c" 3146)
   (!fields 2 
    (!pair  "die"
     (!type already_seen 484)
-    (!srcfileloc  "dwarf2out.c" 3143)
+    (!srcfileloc  "dwarf2out.c" 3144)
     nil )
    (!pair  "name"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3144)
+    (!srcfileloc  "dwarf2out.c" 3145)
     nil )
   )
   nil 2047 nil nil )
  
  (!type struct 1275 nil  gc_used "dw_ranges"
-  (!srcfileloc  "dwarf2out.c" 3598)
-  (!fields 4 
+  (!srcfileloc  "dwarf2out.c" 3605)
+  (!fields 6 
    (!pair  "label"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3150)
+    (!srcfileloc  "dwarf2out.c" 3151)
     nil )
    (!pair  "num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3153)
+    (!srcfileloc  "dwarf2out.c" 3154)
     nil )
    (!pair  "idx"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3155)
+    (!srcfileloc  "dwarf2out.c" 3160)
     nil )
    (!pair  "maybe_new_sec"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3158)
+    (!srcfileloc  "dwarf2out.c" 3163)
+    nil )
+   (!pair  "begin_entry"
+    (!type already_seen 478)
+    (!srcfileloc  "dwarf2out.c" 3164)
+    nil )
+   (!pair  "end_entry"
+    (!type already_seen 478)
+    (!srcfileloc  "dwarf2out.c" 3165)
     nil )
   )
   nil 2047 nil nil )
  
  (!type struct 1276 nil  gc_used "macinfo_struct"
-  (!srcfileloc  "dwarf2out.c" 3167)
+  (!srcfileloc  "dwarf2out.c" 3174)
   (!fields 3 
    (!pair  "code"
     (!type already_seen 8)
-    (!srcfileloc  "dwarf2out.c" 3164)
+    (!srcfileloc  "dwarf2out.c" 3171)
     nil )
    (!pair  "lineno"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3165)
+    (!srcfileloc  "dwarf2out.c" 3172)
     nil )
    (!pair  "info"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3166)
+    (!srcfileloc  "dwarf2out.c" 3173)
     nil )
   )
   nil 2047 nil nil )
  
  (!type struct 1277 nil  gc_used "dw_ranges_by_label"
-  (!srcfileloc  "dwarf2out.c" 3601)
+  (!srcfileloc  "dwarf2out.c" 3608)
   (!fields 2 
    (!pair  "begin"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3172)
+    (!srcfileloc  "dwarf2out.c" 3179)
     nil )
    (!pair  "end"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3173)
+    (!srcfileloc  "dwarf2out.c" 3180)
     nil )
   )
   nil 2047 nil nil )
@@ -21885,19 +21893,19 @@
    (!type already_seen 1278)
   )
   gc_pointed_to "limbo_die_struct"
-  (!srcfileloc  "dwarf2out.c" 3195)
+  (!srcfileloc  "dwarf2out.c" 3202)
   (!fields 3 
    (!pair  "die"
     (!type already_seen 484)
-    (!srcfileloc  "dwarf2out.c" 3190)
+    (!srcfileloc  "dwarf2out.c" 3197)
     nil )
    (!pair  "created_for"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 3193)
+    (!srcfileloc  "dwarf2out.c" 3200)
     nil )
    (!pair  "next"
     (!type already_seen 1279)
-    (!srcfileloc  "dwarf2out.c" 3194)
+    (!srcfileloc  "dwarf2out.c" 3201)
     nil )
   )
   nil 2047 nil nil )
@@ -21907,7 +21915,7 @@
   nil 0 nil nil )
  
  (!type struct 1281 nil  gc_used "dwarf_file_hasher"
-  (!srcfileloc  "dwarf2out.c" 3412)
+  (!srcfileloc  "dwarf2out.c" 3419)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -21916,17 +21924,17 @@
    (!type already_seen 1282)
   )
   gc_pointed_to "hash_table<dwarf_file_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3412)
+  (!srcfileloc  "dwarf2out.c" 3419)
   (!fields 1 
    (!pair  "dwarf_file_hasher"
     (!type already_seen 1281)
-    (!srcfileloc  "dwarf2out.c" 3412)
+    (!srcfileloc  "dwarf2out.c" 3419)
     nil )
   )
  )
  
  (!type struct 1284 nil  gc_used "decl_die_hasher"
-  (!srcfileloc  "dwarf2out.c" 3423)
+  (!srcfileloc  "dwarf2out.c" 3430)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -21935,11 +21943,11 @@
    (!type already_seen 1285)
   )
   gc_pointed_to "hash_table<decl_die_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3423)
+  (!srcfileloc  "dwarf2out.c" 3430)
   (!fields 1 
    (!pair  "decl_die_hasher"
     (!type already_seen 1284)
-    (!srcfileloc  "dwarf2out.c" 3423)
+    (!srcfileloc  "dwarf2out.c" 3430)
     nil )
   )
  )
@@ -21949,29 +21957,29 @@
    (!type already_seen 1287)
   )
   gc_pointed_to "vec<dw_die_ref,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3427)
+  (!srcfileloc  "dwarf2out.c" 3434)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3427)
+    (!srcfileloc  "dwarf2out.c" 3434)
     nil )
    (!pair  "dw_die_ref"
     (!type already_seen 484)
-    (!srcfileloc  "dwarf2out.c" 3427)
+    (!srcfileloc  "dwarf2out.c" 3434)
     nil )
   )
  )
  
  (!type struct 1289 nil  gc_pointed_to "variable_value_struct"
-  (!srcfileloc  "dwarf2out.c" 3428)
+  (!srcfileloc  "dwarf2out.c" 3435)
   (!fields 2 
    (!pair  "decl_id"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3426)
+    (!srcfileloc  "dwarf2out.c" 3433)
     nil )
    (!pair  "dies"
     (!type already_seen 1288)
-    (!srcfileloc  "dwarf2out.c" 3427)
+    (!srcfileloc  "dwarf2out.c" 3434)
     nil )
   )
   (!options 
@@ -21980,7 +21988,7 @@
   2047 nil nil )
  
  (!type struct 1290 nil  gc_used "variable_value_hasher"
-  (!srcfileloc  "dwarf2out.c" 3440)
+  (!srcfileloc  "dwarf2out.c" 3447)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -21989,17 +21997,17 @@
    (!type already_seen 1291)
   )
   gc_pointed_to "hash_table<variable_value_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3440)
+  (!srcfileloc  "dwarf2out.c" 3447)
   (!fields 1 
    (!pair  "variable_value_hasher"
     (!type already_seen 1290)
-    (!srcfileloc  "dwarf2out.c" 3440)
+    (!srcfileloc  "dwarf2out.c" 3447)
     nil )
   )
  )
  
  (!type struct 1293 nil  gc_used "block_die_hasher"
-  (!srcfileloc  "dwarf2out.c" 3450)
+  (!srcfileloc  "dwarf2out.c" 3457)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22008,25 +22016,25 @@
    (!type already_seen 1294)
   )
   gc_pointed_to "hash_table<block_die_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3450)
+  (!srcfileloc  "dwarf2out.c" 3457)
   (!fields 1 
    (!pair  "block_die_hasher"
     (!type already_seen 1293)
-    (!srcfileloc  "dwarf2out.c" 3450)
+    (!srcfileloc  "dwarf2out.c" 3457)
     nil )
   )
  )
  
  (!type struct 1296 nil  gc_used "die_arg_entry_struct"
-  (!srcfileloc  "dwarf2out.c" 3455)
+  (!srcfileloc  "dwarf2out.c" 3462)
   (!fields 2 
    (!pair  "die"
     (!type already_seen 484)
-    (!srcfileloc  "dwarf2out.c" 3453)
+    (!srcfileloc  "dwarf2out.c" 3460)
     nil )
    (!pair  "arg"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 3454)
+    (!srcfileloc  "dwarf2out.c" 3461)
     nil )
   )
   nil 2047 nil nil )
@@ -22036,23 +22044,23 @@
    (!type already_seen 1297)
   )
   gc_pointed_to "var_loc_node"
-  (!srcfileloc  "dwarf2out.c" 3472)
+  (!srcfileloc  "dwarf2out.c" 3479)
   (!fields 4 
    (!pair  "loc"
     (!type already_seen 100)
-    (!srcfileloc  "dwarf2out.c" 3468)
+    (!srcfileloc  "dwarf2out.c" 3475)
     nil )
    (!pair  "label"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3469)
+    (!srcfileloc  "dwarf2out.c" 3476)
     nil )
    (!pair  "next"
     (!type already_seen 1298)
-    (!srcfileloc  "dwarf2out.c" 3470)
+    (!srcfileloc  "dwarf2out.c" 3477)
     nil )
    (!pair  "view"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3471)
+    (!srcfileloc  "dwarf2out.c" 3478)
     nil )
   )
   (!options 
@@ -22061,29 +22069,29 @@
   2047 nil nil )
  
  (!type struct 1299 nil  gc_pointed_to "var_loc_list_def"
-  (!srcfileloc  "dwarf2out.c" 3493)
+  (!srcfileloc  "dwarf2out.c" 3500)
   (!fields 4 
    (!pair  "first"
     (!type already_seen 1298)
-    (!srcfileloc  "dwarf2out.c" 3476)
+    (!srcfileloc  "dwarf2out.c" 3483)
     nil )
    (!pair  "last"
     (!type already_seen 1298)
-    (!srcfileloc  "dwarf2out.c" 3484)
+    (!srcfileloc  "dwarf2out.c" 3491)
     (!options 
      (!option skip string  "%h")
     )
    )
    (!pair  "last_before_switch"
     (!type already_seen 1298)
-    (!srcfileloc  "dwarf2out.c" 3489)
+    (!srcfileloc  "dwarf2out.c" 3496)
     (!options 
      (!option skip string  "%h")
     )
    )
    (!pair  "decl_id"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3492)
+    (!srcfileloc  "dwarf2out.c" 3499)
     nil )
   )
   (!options 
@@ -22096,31 +22104,31 @@
    (!type already_seen 1300)
   )
   gc_pointed_to "call_arg_loc_node"
-  (!srcfileloc  "dwarf2out.c" 3504)
+  (!srcfileloc  "dwarf2out.c" 3511)
   (!fields 6 
    (!pair  "call_arg_loc_note"
     (!type already_seen 100)
-    (!srcfileloc  "dwarf2out.c" 3498)
+    (!srcfileloc  "dwarf2out.c" 3505)
     nil )
    (!pair  "label"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 3499)
+    (!srcfileloc  "dwarf2out.c" 3506)
     nil )
    (!pair  "block"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 3500)
+    (!srcfileloc  "dwarf2out.c" 3507)
     nil )
    (!pair  "tail_call_p"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3501)
+    (!srcfileloc  "dwarf2out.c" 3508)
     nil )
    (!pair  "symbol_ref"
     (!type already_seen 100)
-    (!srcfileloc  "dwarf2out.c" 3502)
+    (!srcfileloc  "dwarf2out.c" 3509)
     nil )
    (!pair  "next"
     (!type already_seen 1301)
-    (!srcfileloc  "dwarf2out.c" 3503)
+    (!srcfileloc  "dwarf2out.c" 3510)
     nil )
   )
   (!options 
@@ -22129,7 +22137,7 @@
   2047 nil nil )
  
  (!type struct 1302 nil  gc_used "decl_loc_hasher"
-  (!srcfileloc  "dwarf2out.c" 3516)
+  (!srcfileloc  "dwarf2out.c" 3523)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22138,25 +22146,25 @@
    (!type already_seen 1303)
   )
   gc_pointed_to "hash_table<decl_loc_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3516)
+  (!srcfileloc  "dwarf2out.c" 3523)
   (!fields 1 
    (!pair  "decl_loc_hasher"
     (!type already_seen 1302)
-    (!srcfileloc  "dwarf2out.c" 3516)
+    (!srcfileloc  "dwarf2out.c" 3523)
     nil )
   )
  )
  
  (!type struct 1305 nil  gc_pointed_to "cached_dw_loc_list_def"
-  (!srcfileloc  "dwarf2out.c" 3534)
+  (!srcfileloc  "dwarf2out.c" 3541)
   (!fields 2 
    (!pair  "decl_id"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 3530)
+    (!srcfileloc  "dwarf2out.c" 3537)
     nil )
    (!pair  "loc_list"
     (!type already_seen 482)
-    (!srcfileloc  "dwarf2out.c" 3533)
+    (!srcfileloc  "dwarf2out.c" 3540)
     nil )
   )
   (!options 
@@ -22165,7 +22173,7 @@
   2047 nil nil )
  
  (!type struct 1306 nil  gc_used "dw_loc_list_hasher"
-  (!srcfileloc  "dwarf2out.c" 3547)
+  (!srcfileloc  "dwarf2out.c" 3554)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22174,11 +22182,11 @@
    (!type already_seen 1307)
   )
   gc_pointed_to "hash_table<dw_loc_list_hasher>"
-  (!srcfileloc  "dwarf2out.c" 3547)
+  (!srcfileloc  "dwarf2out.c" 3554)
   (!fields 1 
    (!pair  "dw_loc_list_hasher"
     (!type already_seen 1306)
-    (!srcfileloc  "dwarf2out.c" 3547)
+    (!srcfileloc  "dwarf2out.c" 3554)
     nil )
   )
  )
@@ -22188,15 +22196,15 @@
    (!type already_seen 1309)
   )
   gc_pointed_to "vec<dw_line_info_table*,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3572)
+  (!srcfileloc  "dwarf2out.c" 3579)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3572)
+    (!srcfileloc  "dwarf2out.c" 3579)
     nil )
    (!pair  "dw_line_info_table"
     (!type already_seen 1272)
-    (!srcfileloc  "dwarf2out.c" 3572)
+    (!srcfileloc  "dwarf2out.c" 3579)
     nil )
   )
  )
@@ -22206,15 +22214,15 @@
    (!type already_seen 1311)
   )
   gc_pointed_to "vec<pubname_entry,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3580)
+  (!srcfileloc  "dwarf2out.c" 3587)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3580)
+    (!srcfileloc  "dwarf2out.c" 3587)
     nil )
    (!pair  "pubname_entry"
     (!type already_seen 1274)
-    (!srcfileloc  "dwarf2out.c" 3580)
+    (!srcfileloc  "dwarf2out.c" 3587)
     nil )
   )
  )
@@ -22224,15 +22232,15 @@
    (!type already_seen 1313)
   )
   gc_pointed_to "vec<macinfo_entry,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3588)
+  (!srcfileloc  "dwarf2out.c" 3595)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3588)
+    (!srcfileloc  "dwarf2out.c" 3595)
     nil )
    (!pair  "macinfo_entry"
     (!type already_seen 1276)
-    (!srcfileloc  "dwarf2out.c" 3588)
+    (!srcfileloc  "dwarf2out.c" 3595)
     nil )
   )
  )
@@ -22242,15 +22250,15 @@
    (!type already_seen 1315)
   )
   gc_pointed_to "vec<dw_ranges,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3598)
+  (!srcfileloc  "dwarf2out.c" 3605)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3598)
+    (!srcfileloc  "dwarf2out.c" 3605)
     nil )
    (!pair  "dw_ranges"
     (!type already_seen 1275)
-    (!srcfileloc  "dwarf2out.c" 3598)
+    (!srcfileloc  "dwarf2out.c" 3605)
     nil )
   )
  )
@@ -22260,15 +22268,15 @@
    (!type already_seen 1317)
   )
   gc_pointed_to "vec<dw_ranges_by_label,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3601)
+  (!srcfileloc  "dwarf2out.c" 3608)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3601)
+    (!srcfileloc  "dwarf2out.c" 3608)
     nil )
    (!pair  "dw_ranges_by_label"
     (!type already_seen 1277)
-    (!srcfileloc  "dwarf2out.c" 3601)
+    (!srcfileloc  "dwarf2out.c" 3608)
     nil )
   )
  )
@@ -22278,15 +22286,15 @@
    (!type already_seen 1319)
   )
   gc_pointed_to "vec<die_arg_entry,va_gc>"
-  (!srcfileloc  "dwarf2out.c" 3618)
+  (!srcfileloc  "dwarf2out.c" 3625)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "dwarf2out.c" 3618)
+    (!srcfileloc  "dwarf2out.c" 3625)
     nil )
    (!pair  "die_arg_entry"
     (!type already_seen 1296)
-    (!srcfileloc  "dwarf2out.c" 3618)
+    (!srcfileloc  "dwarf2out.c" 3625)
     nil )
   )
  )
@@ -22308,7 +22316,7 @@
   nil 0 nil nil )
  
  (!type struct 1325 nil  gc_used "addr_hasher"
-  (!srcfileloc  "dwarf2out.c" 4996)
+  (!srcfileloc  "dwarf2out.c" 5006)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22317,28 +22325,28 @@
    (!type already_seen 1326)
   )
   gc_pointed_to "hash_table<addr_hasher>"
-  (!srcfileloc  "dwarf2out.c" 4996)
+  (!srcfileloc  "dwarf2out.c" 5006)
   (!fields 1 
    (!pair  "addr_hasher"
     (!type already_seen 1325)
-    (!srcfileloc  "dwarf2out.c" 4996)
+    (!srcfileloc  "dwarf2out.c" 5006)
     nil )
   )
  )
  
  (!type struct 1328 nil  gc_used "sym_off_pair"
-  (!srcfileloc  "dwarf2out.c" 5836)
+  (!srcfileloc  "dwarf2out.c" 5846)
   (!fields 2 
    (!pair  "sym"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 5833)
+    (!srcfileloc  "dwarf2out.c" 5843)
     (!options 
      (!option skip string  "")
     )
    )
    (!pair  "off"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 5834)
+    (!srcfileloc  "dwarf2out.c" 5844)
     nil )
   )
   nil 2047 nil nil )
@@ -22348,15 +22356,15 @@
    (!type already_seen 1329)
   )
   gc_pointed_to "hash_map<tree,sym_off_pair>"
-  (!srcfileloc  "dwarf2out.c" 5836)
+  (!srcfileloc  "dwarf2out.c" 5846)
   (!fields 2 
    (!pair  "sym_off_pair"
     (!type already_seen 1328)
-    (!srcfileloc  "dwarf2out.c" 5836)
+    (!srcfileloc  "dwarf2out.c" 5846)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 5836)
+    (!srcfileloc  "dwarf2out.c" 5846)
     nil )
   )
  )
@@ -22366,16 +22374,16 @@
   nil 0 nil nil )
  
  (!type struct 1332 nil  gc_unused "decl_table_entry_hasher"
-  (!srcfileloc  "dwarf2out.c" 8224)
+  (!srcfileloc  "dwarf2out.c" 8234)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1333 nil  gc_unused "hash_table<decl_table_entry_hasher>"
-  (!srcfileloc  "dwarf2out.c" 8224)
+  (!srcfileloc  "dwarf2out.c" 8234)
   (!fields 1 
    (!pair  "decl_table_entry_hasher"
     (!type already_seen 1332)
-    (!srcfileloc  "dwarf2out.c" 8224)
+    (!srcfileloc  "dwarf2out.c" 8234)
     nil )
   )
  )
@@ -22385,16 +22393,16 @@
   nil 0 nil nil )
  
  (!type struct 1335 nil  gc_unused "external_ref_hasher"
-  (!srcfileloc  "dwarf2out.c" 8982)
+  (!srcfileloc  "dwarf2out.c" 8992)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1336 nil  gc_unused "hash_table<external_ref_hasher>"
-  (!srcfileloc  "dwarf2out.c" 8982)
+  (!srcfileloc  "dwarf2out.c" 8992)
   (!fields 1 
    (!pair  "external_ref_hasher"
     (!type already_seen 1335)
-    (!srcfileloc  "dwarf2out.c" 8982)
+    (!srcfileloc  "dwarf2out.c" 8992)
     nil )
   )
  )
@@ -22420,23 +22428,23 @@
   nil 0 nil nil )
  
  (!type struct 1342 nil  gc_pointed_to "inline_entry_data"
-  (!srcfileloc  "dwarf2out.c" 23721)
+  (!srcfileloc  "dwarf2out.c" 23871)
   (!fields 4 
    (!pair  "block"
     (!type already_seen 23)
-    (!srcfileloc  "dwarf2out.c" 23713)
+    (!srcfileloc  "dwarf2out.c" 23863)
     nil )
    (!pair  "label_pfx"
     (!type already_seen 11)
-    (!srcfileloc  "dwarf2out.c" 23716)
+    (!srcfileloc  "dwarf2out.c" 23866)
     nil )
    (!pair  "label_num"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 23717)
+    (!srcfileloc  "dwarf2out.c" 23867)
     nil )
    (!pair  "view"
     (!type already_seen 2)
-    (!srcfileloc  "dwarf2out.c" 23720)
+    (!srcfileloc  "dwarf2out.c" 23870)
     nil )
   )
   (!options 
@@ -22445,7 +22453,7 @@
   2047 nil nil )
  
  (!type struct 1343 nil  gc_used "inline_entry_data_hasher"
-  (!srcfileloc  "dwarf2out.c" 23747)
+  (!srcfileloc  "dwarf2out.c" 23897)
   (!fields 0 )
   nil 2047 nil nil )
  
@@ -22454,26 +22462,26 @@
    (!type already_seen 1344)
   )
   gc_pointed_to "hash_table<inline_entry_data_hasher>"
-  (!srcfileloc  "dwarf2out.c" 23747)
+  (!srcfileloc  "dwarf2out.c" 23897)
   (!fields 1 
    (!pair  "inline_entry_data_hasher"
     (!type already_seen 1343)
-    (!srcfileloc  "dwarf2out.c" 23747)
+    (!srcfileloc  "dwarf2out.c" 23897)
     nil )
   )
  )
  
  (!type struct 1346 nil  gc_unused "macinfo_entry_hasher"
-  (!srcfileloc  "dwarf2out.c" 28265)
+  (!srcfileloc  "dwarf2out.c" 28415)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1347 nil  gc_unused "hash_table<macinfo_entry_hasher>"
-  (!srcfileloc  "dwarf2out.c" 28265)
+  (!srcfileloc  "dwarf2out.c" 28415)
   (!fields 1 
    (!pair  "macinfo_entry_hasher"
     (!type already_seen 1346)
-    (!srcfileloc  "dwarf2out.c" 28265)
+    (!srcfileloc  "dwarf2out.c" 28415)
     nil )
   )
  )
@@ -22483,16 +22491,16 @@
   nil 0 nil nil )
  
  (!type struct 1349 nil  gc_unused "loc_list_hasher"
-  (!srcfileloc  "dwarf2out.c" 31247)
+  (!srcfileloc  "dwarf2out.c" 31401)
   (!fields 0 )
   nil 2047 nil nil )
  
  (!type user_struct 1350 nil  gc_unused "hash_table<loc_list_hasher>"
-  (!srcfileloc  "dwarf2out.c" 31247)
+  (!srcfileloc  "dwarf2out.c" 31401)
   (!fields 1 
    (!pair  "loc_list_hasher"
     (!type already_seen 1349)
-    (!srcfileloc  "dwarf2out.c" 31247)
+    (!srcfileloc  "dwarf2out.c" 31401)
     nil )
   )
  )
@@ -27009,7 +27017,7 @@
    (!type already_seen 1944)
   )
   gc_pointed_to "module_state"
-  (!srcfileloc  "cp/module.cc" 3631)
+  (!srcfileloc  "cp/module.cc" 3632)
   (!fields 28 
    (!pair  "imports"
     (!type already_seen 385)
@@ -28586,7 +28594,7 @@
  (!type already_seen 1947)
  
  (!type struct 2109 nil  gc_unused "location_map_info"
-  (!srcfileloc  "cp/module.cc" 3592)
+  (!srcfileloc  "cp/module.cc" 3593)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -28595,7 +28603,7 @@
   nil 0 nil nil )
  
  (!type struct 2111 nil  gc_used "module_state_hash"
-  (!srcfileloc  "cp/module.cc" 3807)
+  (!srcfileloc  "cp/module.cc" 3808)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -28604,15 +28612,15 @@
    (!type already_seen 2112)
   )
   gc_pointed_to "vec<module_state*,va_gc>"
-  (!srcfileloc  "cp/module.cc" 3804)
+  (!srcfileloc  "cp/module.cc" 3805)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "cp/module.cc" 3804)
+    (!srcfileloc  "cp/module.cc" 3805)
     nil )
    (!pair  "module_state"
     (!type already_seen 1945)
-    (!srcfileloc  "cp/module.cc" 3804)
+    (!srcfileloc  "cp/module.cc" 3805)
     nil )
   )
  )
@@ -28622,55 +28630,55 @@
    (!type already_seen 2114)
   )
   gc_pointed_to "hash_table<module_state_hash>"
-  (!srcfileloc  "cp/module.cc" 3807)
+  (!srcfileloc  "cp/module.cc" 3808)
   (!fields 1 
    (!pair  "module_state_hash"
     (!type already_seen 2111)
-    (!srcfileloc  "cp/module.cc" 3807)
+    (!srcfileloc  "cp/module.cc" 3808)
     nil )
   )
  )
  
  (!type user_struct 2116 nil  gc_unused "hash_map<unsigned,unsigned,simple_hashmap_traits<int_hash<unsigned,0>,unsigned>>"
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   (!fields 5 
    (!pair  "unsigned"
     (!type already_seen 1642)
-    (!srcfileloc  "cp/module.cc" 3813)
+    (!srcfileloc  "cp/module.cc" 3814)
     nil )
    (!pair  "0"
     (!type undefined 2117 nil  gc_unused "0"
-     (!srcfileloc  "cp/module.cc" 3813)
+     (!srcfileloc  "cp/module.cc" 3814)
     )
-    (!srcfileloc  "cp/module.cc" 3813)
+    (!srcfileloc  "cp/module.cc" 3814)
     nil )
    (!pair  "simple_hashmap_traits<int_hash<unsigned"
     (!type user_struct 2118 nil  gc_unused "simple_hashmap_traits<int_hash<unsigned"
-     (!srcfileloc  "cp/module.cc" 3813)
+     (!srcfileloc  "cp/module.cc" 3814)
      (!fields 1 
       (!pair  "int_hash<unsigned"
        (!type user_struct 2119 nil  gc_unused "int_hash<unsigned"
-        (!srcfileloc  "cp/module.cc" 3813)
+        (!srcfileloc  "cp/module.cc" 3814)
         (!fields 1 
          (!pair  "unsigned"
           (!type already_seen 1642)
-          (!srcfileloc  "cp/module.cc" 3813)
+          (!srcfileloc  "cp/module.cc" 3814)
           nil )
         )
        )
-       (!srcfileloc  "cp/module.cc" 3813)
+       (!srcfileloc  "cp/module.cc" 3814)
        nil )
      )
     )
-    (!srcfileloc  "cp/module.cc" 3813)
+    (!srcfileloc  "cp/module.cc" 3814)
     nil )
    (!pair  "unsigned"
     (!type already_seen 1642)
-    (!srcfileloc  "cp/module.cc" 3813)
+    (!srcfileloc  "cp/module.cc" 3814)
     nil )
    (!pair  "unsigned"
     (!type already_seen 1642)
-    (!srcfileloc  "cp/module.cc" 3813)
+    (!srcfileloc  "cp/module.cc" 3814)
     nil )
   )
  )
@@ -28686,7 +28694,7 @@
   nil 0 nil nil )
  
  (!type struct 2121 nil  gc_used "note_def_cache_hasher"
-  (!srcfileloc  "cp/module.cc" 4470)
+  (!srcfileloc  "cp/module.cc" 4471)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -28695,11 +28703,11 @@
    (!type already_seen 2122)
   )
   gc_pointed_to "hash_table<note_def_cache_hasher>"
-  (!srcfileloc  "cp/module.cc" 4470)
+  (!srcfileloc  "cp/module.cc" 4471)
   (!fields 1 
    (!pair  "note_def_cache_hasher"
     (!type already_seen 2121)
-    (!srcfileloc  "cp/module.cc" 4470)
+    (!srcfileloc  "cp/module.cc" 4471)
     nil )
   )
  )
@@ -28713,15 +28721,15 @@
   nil 0 nil nil )
  
  (!type struct 2126 nil  gc_used "macro_export"
-  (!srcfileloc  "cp/module.cc" 16515)
+  (!srcfileloc  "cp/module.cc" 16526)
   (!fields 2 
    (!pair  "def"
     (!type already_seen 19)
-    (!srcfileloc  "cp/module.cc" 16508)
+    (!srcfileloc  "cp/module.cc" 16519)
     nil )
    (!pair  "undef_loc"
     (!type already_seen 2)
-    (!srcfileloc  "cp/module.cc" 16509)
+    (!srcfileloc  "cp/module.cc" 16520)
     nil )
   )
   nil 1032 nil nil )
@@ -28735,15 +28743,15 @@
    (!type already_seen 2128)
   )
   gc_pointed_to "vec<macro_export,va_gc>"
-  (!srcfileloc  "cp/module.cc" 16672)
+  (!srcfileloc  "cp/module.cc" 16683)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "cp/module.cc" 16672)
+    (!srcfileloc  "cp/module.cc" 16683)
     nil )
    (!pair  "macro_export"
     (!type already_seen 2126)
-    (!srcfileloc  "cp/module.cc" 16672)
+    (!srcfileloc  "cp/module.cc" 16683)
     nil )
   )
  )
@@ -29006,7 +29014,7 @@
   nil 0 nil nil )
  
  (!type struct 2174 nil  gc_used "list_hasher"
-  (!srcfileloc  "cp/tree.c" 2084)
+  (!srcfileloc  "cp/tree.c" 2093)
   (!fields 0 )
   nil 1032 nil nil )
  
@@ -29015,11 +29023,11 @@
    (!type already_seen 2175)
   )
   gc_pointed_to "hash_table<list_hasher>"
-  (!srcfileloc  "cp/tree.c" 2084)
+  (!srcfileloc  "cp/tree.c" 2093)
   (!fields 1 
    (!pair  "list_hasher"
     (!type already_seen 2174)
-    (!srcfileloc  "cp/tree.c" 2084)
+    (!srcfileloc  "cp/tree.c" 2093)
     nil )
   )
  )
@@ -30002,11 +30010,11 @@
   nil )
  (!pair  "list_hasher"
   (!type already_seen 2174)
-  (!srcfileloc  "cp/tree.c" 2084)
+  (!srcfileloc  "cp/tree.c" 2093)
   nil )
  (!pair  "hash_table<list_hasher>"
   (!type already_seen 2175)
-  (!srcfileloc  "cp/tree.c" 2084)
+  (!srcfileloc  "cp/tree.c" 2093)
   nil )
  (!pair  "cplus_array_hasher"
   (!type already_seen 2170)
@@ -30084,59 +30092,59 @@
   nil )
  (!pair  "vec<macro_export,va_gc>"
   (!type already_seen 2128)
-  (!srcfileloc  "cp/module.cc" 16672)
+  (!srcfileloc  "cp/module.cc" 16683)
   nil )
  (!pair  "macro_export"
   (!type already_seen 2126)
-  (!srcfileloc  "cp/module.cc" 16511)
+  (!srcfileloc  "cp/module.cc" 16522)
   nil )
  (!pair  "note_defs_table_t"
   (!type already_seen 2122)
-  (!srcfileloc  "cp/module.cc" 4470)
+  (!srcfileloc  "cp/module.cc" 4471)
   nil )
  (!pair  "note_def_cache_hasher"
   (!type already_seen 2121)
-  (!srcfileloc  "cp/module.cc" 4470)
+  (!srcfileloc  "cp/module.cc" 4471)
   nil )
  (!pair  "hash_table<note_def_cache_hasher>"
   (!type already_seen 2122)
-  (!srcfileloc  "cp/module.cc" 4470)
+  (!srcfileloc  "cp/module.cc" 4471)
   nil )
  (!pair  "entity_map_t"
   (!type already_seen 2116)
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   nil )
  (!pair  "0"
   (!type already_seen 2117)
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   nil )
  (!pair  "int_hash<unsigned"
   (!type already_seen 2119)
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   nil )
  (!pair  "simple_hashmap_traits<int_hash<unsigned"
   (!type already_seen 2118)
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   nil )
  (!pair  "hash_map<unsigned,unsigned,simple_hashmap_traits<int_hash<unsigned,0>,unsigned>>"
   (!type already_seen 2116)
-  (!srcfileloc  "cp/module.cc" 3813)
+  (!srcfileloc  "cp/module.cc" 3814)
   nil )
  (!pair  "module_state_hash"
   (!type already_seen 2111)
-  (!srcfileloc  "cp/module.cc" 3807)
+  (!srcfileloc  "cp/module.cc" 3808)
   nil )
  (!pair  "hash_table<module_state_hash>"
   (!type already_seen 2114)
-  (!srcfileloc  "cp/module.cc" 3807)
+  (!srcfileloc  "cp/module.cc" 3808)
   nil )
  (!pair  "vec<module_state*,va_gc>"
   (!type already_seen 2112)
-  (!srcfileloc  "cp/module.cc" 3804)
+  (!srcfileloc  "cp/module.cc" 3805)
   nil )
  (!pair  "location_map_info"
   (!type already_seen 2109)
-  (!srcfileloc  "cp/module.cc" 3592)
+  (!srcfileloc  "cp/module.cc" 3593)
   nil )
  (!pair  "module_state"
   (!type already_seen 1944)
@@ -31600,243 +31608,243 @@
   nil )
  (!pair  "loc_list_hash_type"
   (!type already_seen 1350)
-  (!srcfileloc  "dwarf2out.c" 31247)
+  (!srcfileloc  "dwarf2out.c" 31401)
   nil )
  (!pair  "loc_list_hasher"
   (!type already_seen 1349)
-  (!srcfileloc  "dwarf2out.c" 31247)
+  (!srcfileloc  "dwarf2out.c" 31401)
   nil )
  (!pair  "hash_table<loc_list_hasher>"
   (!type already_seen 1350)
-  (!srcfileloc  "dwarf2out.c" 31247)
+  (!srcfileloc  "dwarf2out.c" 31401)
   nil )
  (!pair  "macinfo_hash_type"
   (!type already_seen 1347)
-  (!srcfileloc  "dwarf2out.c" 28265)
+  (!srcfileloc  "dwarf2out.c" 28415)
   nil )
  (!pair  "macinfo_entry_hasher"
   (!type already_seen 1346)
-  (!srcfileloc  "dwarf2out.c" 28265)
+  (!srcfileloc  "dwarf2out.c" 28415)
   nil )
  (!pair  "hash_table<macinfo_entry_hasher>"
   (!type already_seen 1347)
-  (!srcfileloc  "dwarf2out.c" 28265)
+  (!srcfileloc  "dwarf2out.c" 28415)
   nil )
  (!pair  "inline_entry_data_hasher"
   (!type already_seen 1343)
-  (!srcfileloc  "dwarf2out.c" 23747)
+  (!srcfileloc  "dwarf2out.c" 23897)
   nil )
  (!pair  "hash_table<inline_entry_data_hasher>"
   (!type already_seen 1344)
-  (!srcfileloc  "dwarf2out.c" 23747)
+  (!srcfileloc  "dwarf2out.c" 23897)
   nil )
  (!pair  "external_ref_hash_type"
   (!type already_seen 1336)
-  (!srcfileloc  "dwarf2out.c" 8982)
+  (!srcfileloc  "dwarf2out.c" 8992)
   nil )
  (!pair  "external_ref_hasher"
   (!type already_seen 1335)
-  (!srcfileloc  "dwarf2out.c" 8982)
+  (!srcfileloc  "dwarf2out.c" 8992)
   nil )
  (!pair  "hash_table<external_ref_hasher>"
   (!type already_seen 1336)
-  (!srcfileloc  "dwarf2out.c" 8982)
+  (!srcfileloc  "dwarf2out.c" 8992)
   nil )
  (!pair  "decl_hash_type"
   (!type already_seen 1333)
-  (!srcfileloc  "dwarf2out.c" 8224)
+  (!srcfileloc  "dwarf2out.c" 8234)
   nil )
  (!pair  "decl_table_entry_hasher"
   (!type already_seen 1332)
-  (!srcfileloc  "dwarf2out.c" 8224)
+  (!srcfileloc  "dwarf2out.c" 8234)
   nil )
  (!pair  "hash_table<decl_table_entry_hasher>"
   (!type already_seen 1333)
-  (!srcfileloc  "dwarf2out.c" 8224)
+  (!srcfileloc  "dwarf2out.c" 8234)
   nil )
  (!pair  "sym_off_pair"
   (!type already_seen 1328)
-  (!srcfileloc  "dwarf2out.c" 5836)
+  (!srcfileloc  "dwarf2out.c" 5846)
   nil )
  (!pair  "hash_map<tree,sym_off_pair>"
   (!type already_seen 1329)
-  (!srcfileloc  "dwarf2out.c" 5836)
+  (!srcfileloc  "dwarf2out.c" 5846)
   nil )
  (!pair  "addr_hasher"
   (!type already_seen 1325)
-  (!srcfileloc  "dwarf2out.c" 4996)
+  (!srcfileloc  "dwarf2out.c" 5006)
   nil )
  (!pair  "hash_table<addr_hasher>"
   (!type already_seen 1326)
-  (!srcfileloc  "dwarf2out.c" 4996)
+  (!srcfileloc  "dwarf2out.c" 5006)
   nil )
  (!pair  "vec<die_arg_entry,va_gc>"
   (!type already_seen 1319)
-  (!srcfileloc  "dwarf2out.c" 3618)
+  (!srcfileloc  "dwarf2out.c" 3625)
   nil )
  (!pair  "dw_ranges_by_label"
   (!type already_seen 1277)
-  (!srcfileloc  "dwarf2out.c" 3601)
+  (!srcfileloc  "dwarf2out.c" 3608)
   nil )
  (!pair  "vec<dw_ranges_by_label,va_gc>"
   (!type already_seen 1317)
-  (!srcfileloc  "dwarf2out.c" 3601)
+  (!srcfileloc  "dwarf2out.c" 3608)
   nil )
  (!pair  "dw_ranges"
   (!type already_seen 1275)
-  (!srcfileloc  "dwarf2out.c" 3598)
+  (!srcfileloc  "dwarf2out.c" 3605)
   nil )
  (!pair  "vec<dw_ranges,va_gc>"
   (!type already_seen 1315)
-  (!srcfileloc  "dwarf2out.c" 3598)
+  (!srcfileloc  "dwarf2out.c" 3605)
   nil )
  (!pair  "vec<macinfo_entry,va_gc>"
   (!type already_seen 1313)
-  (!srcfileloc  "dwarf2out.c" 3588)
+  (!srcfileloc  "dwarf2out.c" 3595)
   nil )
  (!pair  "vec<pubname_entry,va_gc>"
   (!type already_seen 1311)
-  (!srcfileloc  "dwarf2out.c" 3580)
+  (!srcfileloc  "dwarf2out.c" 3587)
   nil )
  (!pair  "vec<dw_line_info_table*,va_gc>"
   (!type already_seen 1309)
-  (!srcfileloc  "dwarf2out.c" 3572)
+  (!srcfileloc  "dwarf2out.c" 3579)
   nil )
  (!pair  "dw_line_info_table"
   (!type already_seen 1271)
-  (!srcfileloc  "dwarf2out.c" 3565)
+  (!srcfileloc  "dwarf2out.c" 3572)
   nil )
  (!pair  "dw_loc_list_hasher"
   (!type already_seen 1306)
-  (!srcfileloc  "dwarf2out.c" 3547)
+  (!srcfileloc  "dwarf2out.c" 3554)
   nil )
  (!pair  "hash_table<dw_loc_list_hasher>"
   (!type already_seen 1307)
-  (!srcfileloc  "dwarf2out.c" 3547)
+  (!srcfileloc  "dwarf2out.c" 3554)
   nil )
  (!pair  "cached_dw_loc_list"
   (!type already_seen 1305)
-  (!srcfileloc  "dwarf2out.c" 3535)
+  (!srcfileloc  "dwarf2out.c" 3542)
   nil )
  (!pair  "decl_loc_hasher"
   (!type already_seen 1302)
-  (!srcfileloc  "dwarf2out.c" 3516)
+  (!srcfileloc  "dwarf2out.c" 3523)
   nil )
  (!pair  "hash_table<decl_loc_hasher>"
   (!type already_seen 1303)
-  (!srcfileloc  "dwarf2out.c" 3516)
+  (!srcfileloc  "dwarf2out.c" 3523)
   nil )
  (!pair  "var_loc_list"
   (!type already_seen 1299)
-  (!srcfileloc  "dwarf2out.c" 3494)
+  (!srcfileloc  "dwarf2out.c" 3501)
   nil )
  (!pair  "die_arg_entry"
   (!type already_seen 1296)
-  (!srcfileloc  "dwarf2out.c" 3455)
+  (!srcfileloc  "dwarf2out.c" 3462)
   nil )
  (!pair  "block_die_hasher"
   (!type already_seen 1293)
-  (!srcfileloc  "dwarf2out.c" 3450)
+  (!srcfileloc  "dwarf2out.c" 3457)
   nil )
  (!pair  "hash_table<block_die_hasher>"
   (!type already_seen 1294)
-  (!srcfileloc  "dwarf2out.c" 3450)
+  (!srcfileloc  "dwarf2out.c" 3457)
   nil )
  (!pair  "variable_value_hasher"
   (!type already_seen 1290)
-  (!srcfileloc  "dwarf2out.c" 3440)
+  (!srcfileloc  "dwarf2out.c" 3447)
   nil )
  (!pair  "hash_table<variable_value_hasher>"
   (!type already_seen 1291)
-  (!srcfileloc  "dwarf2out.c" 3440)
+  (!srcfileloc  "dwarf2out.c" 3447)
   nil )
  (!pair  "vec<dw_die_ref,va_gc>"
   (!type already_seen 1287)
-  (!srcfileloc  "dwarf2out.c" 3427)
+  (!srcfileloc  "dwarf2out.c" 3434)
   nil )
  (!pair  "decl_die_hasher"
   (!type already_seen 1284)
-  (!srcfileloc  "dwarf2out.c" 3423)
+  (!srcfileloc  "dwarf2out.c" 3430)
   nil )
  (!pair  "hash_table<decl_die_hasher>"
   (!type already_seen 1285)
-  (!srcfileloc  "dwarf2out.c" 3423)
+  (!srcfileloc  "dwarf2out.c" 3430)
   nil )
  (!pair  "dwarf_file_hasher"
   (!type already_seen 1281)
-  (!srcfileloc  "dwarf2out.c" 3412)
+  (!srcfileloc  "dwarf2out.c" 3419)
   nil )
  (!pair  "hash_table<dwarf_file_hasher>"
   (!type already_seen 1282)
-  (!srcfileloc  "dwarf2out.c" 3412)
+  (!srcfileloc  "dwarf2out.c" 3419)
   nil )
  (!pair  "skeleton_chain_node"
   (!type already_seen 1280)
-  (!srcfileloc  "dwarf2out.c" 3204)
+  (!srcfileloc  "dwarf2out.c" 3211)
   nil )
  (!pair  "limbo_die_node"
   (!type already_seen 1278)
-  (!srcfileloc  "dwarf2out.c" 3196)
+  (!srcfileloc  "dwarf2out.c" 3203)
   nil )
  (!pair  "macinfo_entry"
   (!type already_seen 1276)
-  (!srcfileloc  "dwarf2out.c" 3168)
+  (!srcfileloc  "dwarf2out.c" 3175)
   nil )
  (!pair  "pubname_entry"
   (!type already_seen 1274)
-  (!srcfileloc  "dwarf2out.c" 3146)
+  (!srcfileloc  "dwarf2out.c" 3147)
   nil )
  (!pair  "die_node"
   (!type already_seen 485)
-  (!srcfileloc  "dwarf2out.c" 3115)
+  (!srcfileloc  "dwarf2out.c" 3116)
   nil )
  (!pair  "vec<dw_attr_node,va_gc>"
   (!type already_seen 491)
-  (!srcfileloc  "dwarf2out.c" 3093)
+  (!srcfileloc  "dwarf2out.c" 3094)
   nil )
  (!pair  "comdat_type_node"
   (!type already_seen 488)
-  (!srcfileloc  "dwarf2out.c" 3090)
+  (!srcfileloc  "dwarf2out.c" 3091)
   nil )
  (!pair  "dw_attr_node"
   (!type already_seen 492)
-  (!srcfileloc  "dwarf2out.c" 3079)
+  (!srcfileloc  "dwarf2out.c" 3080)
   nil )
  (!pair  "vec<dw_line_info_entry,va_gc>"
   (!type already_seen 1269)
-  (!srcfileloc  "dwarf2out.c" 3029)
+  (!srcfileloc  "dwarf2out.c" 3030)
   nil )
  (!pair  "dw_line_info_entry"
   (!type already_seen 1268)
-  (!srcfileloc  "dwarf2out.c" 2987)
+  (!srcfileloc  "dwarf2out.c" 2988)
   nil )
  (!pair  "dw_offset"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 2941)
+  (!srcfileloc  "dwarf2out.c" 2942)
   nil )
  (!pair  "dw_loc_list_node"
   (!type already_seen 483)
-  (!srcfileloc  "dwarf2out.c" 1344)
+  (!srcfileloc  "dwarf2out.c" 1345)
   nil )
  (!pair  "addr_table_entry"
   (!type already_seen 479)
-  (!srcfileloc  "dwarf2out.c" 1317)
+  (!srcfileloc  "dwarf2out.c" 1318)
   nil )
  (!pair  "var_loc_view"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 1309)
+  (!srcfileloc  "dwarf2out.c" 1310)
   nil )
  (!pair  "indirect_string_hasher"
   (!type already_seen 1265)
-  (!srcfileloc  "dwarf2out.c" 231)
+  (!srcfileloc  "dwarf2out.c" 232)
   nil )
  (!pair  "hash_table<indirect_string_hasher>"
   (!type already_seen 1266)
-  (!srcfileloc  "dwarf2out.c" 231)
+  (!srcfileloc  "dwarf2out.c" 232)
   nil )
  (!pair  "vec<dw_fde_ref,va_gc>"
   (!type already_seen 1263)
-  (!srcfileloc  "dwarf2out.c" 213)
+  (!srcfileloc  "dwarf2out.c" 214)
   nil )
  (!pair  "reg_saved_in_data"
   (!type already_seen 1256)
@@ -33341,7 +33349,7 @@
   (!srcfileloc  "gengtype.c" 5194)
   nil )
 )
-(!variables 736
+(!variables 737
  (!pair  "objc_eh_personality_decl"
   (!type already_seen 23)
   (!srcfileloc  "objc/objc-next-runtime-abi-02.c" 3844)
@@ -34367,11 +34375,11 @@
   nil )
  (!pair  "deleted_copy_types"
   (!type already_seen 465)
-  (!srcfileloc  "cp/tree.c" 4270)
+  (!srcfileloc  "cp/tree.c" 4279)
   nil )
  (!pair  "list_hash_table"
   (!type already_seen 2176)
-  (!srcfileloc  "cp/tree.c" 2084)
+  (!srcfileloc  "cp/tree.c" 2093)
   nil )
  (!pair  "cplus_array_htab"
   (!type already_seen 2172)
@@ -34520,38 +34528,38 @@
  )
  (!pair  "headers"
   (!type already_seen 385)
-  (!srcfileloc  "cp/module.cc" 16676)
+  (!srcfileloc  "cp/module.cc" 16687)
   nil )
  (!pair  "macro_exports"
   (!type already_seen 2129)
-  (!srcfileloc  "cp/module.cc" 16672)
+  (!srcfileloc  "cp/module.cc" 16683)
   nil )
  (!pair  "note_defs"
   (!type already_seen 2123)
-  (!srcfileloc  "cp/module.cc" 4471)
+  (!srcfileloc  "cp/module.cc" 4472)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "partial_specializations"
   (!type already_seen 84)
-  (!srcfileloc  "cp/module.cc" 3837)
+  (!srcfileloc  "cp/module.cc" 3838)
   nil )
  (!pair  "class_members"
   (!type already_seen 84)
-  (!srcfileloc  "cp/module.cc" 3828)
+  (!srcfileloc  "cp/module.cc" 3829)
   nil )
  (!pair  "modules_hash"
   (!type already_seen 2115)
-  (!srcfileloc  "cp/module.cc" 3807)
+  (!srcfileloc  "cp/module.cc" 3808)
   nil )
  (!pair  "modules"
   (!type already_seen 2113)
-  (!srcfileloc  "cp/module.cc" 3804)
+  (!srcfileloc  "cp/module.cc" 3805)
   nil )
  (!pair  "fixed_trees"
   (!type already_seen 84)
-  (!srcfileloc  "cp/module.cc" 3785)
+  (!srcfileloc  "cp/module.cc" 3786)
   nil )
  (!pair  "comp_cat_cache"
   (!type array 2300 nil  gc_used "cc_last" 
@@ -35454,17 +35462,17 @@
   nil )
  (!pair  "aarch64_sls_shared_thunks_needed"
   (!type already_seen 2)
-  (!srcfileloc  "config/aarch64/aarch64.c" 25268)
+  (!srcfileloc  "config/aarch64/aarch64.c" 25273)
   nil )
  (!pair  "aarch64_sls_shared_thunks"
   (!type array 2327 nil  gc_used "30" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "config/aarch64/aarch64.c" 25267)
+  (!srcfileloc  "config/aarch64/aarch64.c" 25272)
   nil )
  (!pair  "va_list_type"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.c" 17995)
+  (!srcfileloc  "config/aarch64/aarch64.c" 17999)
   nil )
  (!pair  "aarch64_previous_fndecl"
   (!type already_seen 23)
@@ -35886,7 +35894,7 @@
     (!type already_seen 100)
    )
   )
-  (!srcfileloc  "emit-rtl.c" 6494)
+  (!srcfileloc  "emit-rtl.c" 6495)
   (!options 
    (!option deletable string  "")
   )
@@ -35978,189 +35986,193 @@
   nil )
  (!pair  "inline_entry_data_table"
   (!type already_seen 1345)
-  (!srcfileloc  "dwarf2out.c" 23747)
+  (!srcfileloc  "dwarf2out.c" 23897)
   nil )
  (!pair  "external_die_map"
   (!type already_seen 1330)
-  (!srcfileloc  "dwarf2out.c" 5836)
+  (!srcfileloc  "dwarf2out.c" 5846)
   nil )
  (!pair  "addr_index_table"
   (!type already_seen 1327)
-  (!srcfileloc  "dwarf2out.c" 4996)
+  (!srcfileloc  "dwarf2out.c" 5006)
   nil )
  (!pair  "generic_type_instances"
   (!type already_seen 84)
-  (!srcfileloc  "dwarf2out.c" 3624)
+  (!srcfileloc  "dwarf2out.c" 3631)
   nil )
  (!pair  "tmpl_value_parm_die_table"
   (!type already_seen 1320)
-  (!srcfileloc  "dwarf2out.c" 3618)
+  (!srcfileloc  "dwarf2out.c" 3625)
   nil )
  (!pair  "label_num"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 3616)
+  (!srcfileloc  "dwarf2out.c" 3623)
   nil )
  (!pair  "last_emitted_file"
   (!type already_seen 501)
-  (!srcfileloc  "dwarf2out.c" 3613)
+  (!srcfileloc  "dwarf2out.c" 3620)
   nil )
  (!pair  "poc_label_num"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 3610)
+  (!srcfileloc  "dwarf2out.c" 3617)
   nil )
  (!pair  "loclabel_num"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 3607)
+  (!srcfileloc  "dwarf2out.c" 3614)
   nil )
  (!pair  "have_location_lists"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 3604)
+  (!srcfileloc  "dwarf2out.c" 3611)
   nil )
  (!pair  "ranges_by_label"
   (!type already_seen 1318)
-  (!srcfileloc  "dwarf2out.c" 3601)
+  (!srcfileloc  "dwarf2out.c" 3608)
   nil )
  (!pair  "ranges_table"
   (!type already_seen 1316)
-  (!srcfileloc  "dwarf2out.c" 3598)
+  (!srcfileloc  "dwarf2out.c" 3605)
   nil )
  (!pair  "macinfo_table"
   (!type already_seen 1314)
-  (!srcfileloc  "dwarf2out.c" 3588)
+  (!srcfileloc  "dwarf2out.c" 3595)
   nil )
  (!pair  "pubtype_table"
   (!type already_seen 1312)
-  (!srcfileloc  "dwarf2out.c" 3584)
+  (!srcfileloc  "dwarf2out.c" 3591)
   nil )
  (!pair  "pubname_table"
   (!type already_seen 1312)
-  (!srcfileloc  "dwarf2out.c" 3580)
+  (!srcfileloc  "dwarf2out.c" 3587)
   nil )
  (!pair  "separate_line_info"
   (!type already_seen 1310)
-  (!srcfileloc  "dwarf2out.c" 3572)
+  (!srcfileloc  "dwarf2out.c" 3579)
   nil )
  (!pair  "cold_text_section_line_info"
   (!type already_seen 1272)
-  (!srcfileloc  "dwarf2out.c" 3569)
+  (!srcfileloc  "dwarf2out.c" 3576)
   nil )
  (!pair  "text_section_line_info"
   (!type already_seen 1272)
-  (!srcfileloc  "dwarf2out.c" 3568)
+  (!srcfileloc  "dwarf2out.c" 3575)
   nil )
  (!pair  "cur_line_info_table"
   (!type already_seen 1272)
-  (!srcfileloc  "dwarf2out.c" 3565)
+  (!srcfileloc  "dwarf2out.c" 3572)
   nil )
  (!pair  "abbrev_die_table"
   (!type already_seen 1288)
-  (!srcfileloc  "dwarf2out.c" 3551)
+  (!srcfileloc  "dwarf2out.c" 3558)
   nil )
  (!pair  "cached_dw_loc_list_table"
   (!type already_seen 1308)
-  (!srcfileloc  "dwarf2out.c" 3547)
+  (!srcfileloc  "dwarf2out.c" 3554)
   nil )
  (!pair  "call_arg_locations"
   (!type already_seen 1301)
-  (!srcfileloc  "dwarf2out.c" 3519)
+  (!srcfileloc  "dwarf2out.c" 3526)
   nil )
  (!pair  "decl_loc_table"
   (!type already_seen 1304)
-  (!srcfileloc  "dwarf2out.c" 3516)
+  (!srcfileloc  "dwarf2out.c" 3523)
   nil )
  (!pair  "common_block_die_table"
   (!type already_seen 1295)
-  (!srcfileloc  "dwarf2out.c" 3450)
+  (!srcfileloc  "dwarf2out.c" 3457)
   nil )
  (!pair  "variable_value_hash"
   (!type already_seen 1292)
-  (!srcfileloc  "dwarf2out.c" 3440)
+  (!srcfileloc  "dwarf2out.c" 3447)
   nil )
  (!pair  "decl_die_table"
   (!type already_seen 1286)
-  (!srcfileloc  "dwarf2out.c" 3423)
+  (!srcfileloc  "dwarf2out.c" 3430)
   nil )
  (!pair  "file_table"
   (!type already_seen 1283)
-  (!srcfileloc  "dwarf2out.c" 3412)
+  (!srcfileloc  "dwarf2out.c" 3419)
   nil )
  (!pair  "deferred_asm_name"
   (!type already_seen 1279)
-  (!srcfileloc  "dwarf2out.c" 3401)
+  (!srcfileloc  "dwarf2out.c" 3408)
   nil )
  (!pair  "limbo_die_list"
   (!type already_seen 1279)
-  (!srcfileloc  "dwarf2out.c" 3397)
+  (!srcfileloc  "dwarf2out.c" 3404)
   nil )
  (!pair  "cu_die_list"
   (!type already_seen 1279)
-  (!srcfileloc  "dwarf2out.c" 3394)
+  (!srcfileloc  "dwarf2out.c" 3401)
   nil )
  (!pair  "comdat_type_list"
   (!type already_seen 487)
-  (!srcfileloc  "dwarf2out.c" 3391)
+  (!srcfileloc  "dwarf2out.c" 3398)
   nil )
  (!pair  "single_comp_unit_die"
   (!type already_seen 484)
-  (!srcfileloc  "dwarf2out.c" 3388)
+  (!srcfileloc  "dwarf2out.c" 3395)
   nil )
  (!pair  "zero_view_p"
   (!type already_seen 385)
-  (!srcfileloc  "dwarf2out.c" 3311)
+  (!srcfileloc  "dwarf2out.c" 3318)
   nil )
  (!pair  "do_eh_frame"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 284)
+  (!srcfileloc  "dwarf2out.c" 285)
   nil )
  (!pair  "current_unit_personality"
   (!type already_seen 100)
-  (!srcfileloc  "dwarf2out.c" 281)
+  (!srcfileloc  "dwarf2out.c" 282)
   nil )
  (!pair  "decltype_auto_die"
   (!type already_seen 484)
-  (!srcfileloc  "dwarf2out.c" 272)
+  (!srcfileloc  "dwarf2out.c" 273)
   nil )
  (!pair  "auto_die"
   (!type already_seen 484)
-  (!srcfileloc  "dwarf2out.c" 269)
+  (!srcfileloc  "dwarf2out.c" 270)
   nil )
  (!pair  "cold_text_section"
   (!type already_seen 213)
-  (!srcfileloc  "dwarf2out.c" 266)
+  (!srcfileloc  "dwarf2out.c" 267)
   nil )
  (!pair  "cold_text_section_used"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 263)
+  (!srcfileloc  "dwarf2out.c" 264)
   nil )
  (!pair  "text_section_used"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 262)
+  (!srcfileloc  "dwarf2out.c" 263)
   nil )
  (!pair  "have_multiple_function_sections"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 259)
+  (!srcfileloc  "dwarf2out.c" 260)
   nil )
  (!pair  "dw2_string_counter"
   (!type already_seen 2)
-  (!srcfileloc  "dwarf2out.c" 256)
+  (!srcfileloc  "dwarf2out.c" 257)
   nil )
  (!pair  "skeleton_debug_str_hash"
   (!type already_seen 1267)
-  (!srcfileloc  "dwarf2out.c" 254)
+  (!srcfileloc  "dwarf2out.c" 255)
   nil )
  (!pair  "debug_line_str_hash"
   (!type already_seen 1267)
-  (!srcfileloc  "dwarf2out.c" 233)
+  (!srcfileloc  "dwarf2out.c" 234)
   nil )
  (!pair  "debug_str_hash"
   (!type already_seen 1267)
-  (!srcfileloc  "dwarf2out.c" 231)
+  (!srcfileloc  "dwarf2out.c" 232)
   nil )
  (!pair  "fde_vec"
   (!type already_seen 1264)
-  (!srcfileloc  "dwarf2out.c" 213)
+  (!srcfileloc  "dwarf2out.c" 214)
   nil )
  (!pair  "debug_frame_section"
+  (!type already_seen 213)
+  (!srcfileloc  "dwarf2out.c" 175)
+  nil )
+ (!pair  "debug_ranges_dwo_section"
   (!type already_seen 213)
   (!srcfileloc  "dwarf2out.c" 174)
   nil )
