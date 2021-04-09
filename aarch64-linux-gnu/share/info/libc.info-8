@@ -5919,12 +5919,12 @@ hypotf        -               1               -               -               -
 hypot         1               2               1               1               1
 hypotl        1               -               -               -               1
 hypotf128     -               -               -               -               -
-j0f           8               6               8               8               8
-j0            2               4               2               2               2
+j0f           9               6               8               9               8
+j0            3               4               2               2               2
 j0l           2               -               -               -               2
 j0f128        -               -               -               -               -
-j1f           8               9               9               9               9
-j1            2               5               2               2               2
+j1f           9               9               9               9               9
+j1            4               5               2               4               2
 j1l           4               -               -               -               4
 j1f128        -               -               -               -               -
 jnf           4               8               4               4               4
@@ -5995,13 +5995,13 @@ tgammaf       8               9               8               8               8
 tgamma        9               9               9               9               9
 tgammal       4               -               -               -               4
 tgammaf128    -               -               -               -               -
-y0f           6               6               8               8               8
+y0f           8               6               8               9               8
 y0            2               3               3               3               3
 y0l           3               -               -               -               3
 y0f128        -               -               -               -               -
-y1f           2               6               2               2               2
+y1f           9               6               2               9               2
 y1            3               7               3               3               3
-y1l           2               -               -               -               2
+y1l           5               -               -               -               2
 y1f128        -               -               -               -               -
 ynf           3               9               3               3               3
 yn            3               9               3               3               3
@@ -6030,7 +6030,7 @@ asinh         2               2               -               -               2
 asinhl        -               -               -               -               -
 asinhf128     -               -               -               -               -
 atanf         1               1               -               -               1
-atan          -               -               -               -               -
+atan          -               -               -               -               1
 atanl         -               -               -               -               -
 atanf128      -               -               -               -               -
 atan2f        1               1               1               -               2
@@ -6090,7 +6090,7 @@ cexp          2 + i 1         2 + i 1         -               -               2 
 cexpl         -               -               -               -               -
 cexpf128      -               -               -               -               -
 clogf         3 + i 1         3 + i 1         1 + i 0         -               3 + i 1
-clog          3 + i 0         3 + i 0         -               -               3 + i 0
+clog          3 + i 0         3 + i 0         -               -               3 + i 1
 clogl         -               -               -               -               -
 clogf128      -               -               -               -               -
 clog10f       4 + i 2         4 + i 2         1 + i 1         -               4 + i 2
@@ -6173,12 +6173,12 @@ hypotf        -               -               1               -               1
 hypot         1               1               -               -               1
 hypotl        -               -               -               -               -
 hypotf128     -               -               -               -               -
-j0f           8               8               2               -               8
+j0f           8               8               2               -               9
 j0            2               2               2               -               2
 j0l           -               -               -               -               2
 j0f128        -               -               -               -               -
 j1f           9               9               2               -               9
-j1            2               2               1               -               2
+j1            2               2               1               -               4
 j1l           -               -               -               -               1
 j1f128        -               -               -               -               -
 jnf           4               4               4               -               5
@@ -6249,11 +6249,11 @@ tgammaf       8               8               1               -               8
 tgamma        9               9               1               -               9
 tgammal       -               -               -               -               1
 tgammaf128    -               -               -               -               -
-y0f           8               8               1               -               8
+y0f           8               8               1               -               9
 y0            3               3               2               -               3
 y0l           -               -               -               -               2
 y0f128        -               -               -               -               -
-y1f           2               2               2               -               2
+y1f           2               2               2               -               9
 y1            3               3               3               -               3
 y1l           -               -               -               -               3
 y1f128        -               -               -               -               -
@@ -6269,7 +6269,7 @@ acosf128      1               -               -               -               -
 acoshf        -               1               2               2               2
 acosh         1               1               2               2               2
 acoshl        1               1               -               2               -
-acoshf128     2               -               -               -               -
+acoshf128     4               -               -               -               -
 add_ldoublef  -               -               -               -               -
 add_ldouble   -               -               -               -               -
 add_ldoublel  -               -               -               -               -
@@ -6281,7 +6281,7 @@ asinf128      1               -               -               -               -
 asinhf        -               1               2               2               1
 asinh         1               1               2               2               1
 asinhl        -               1               -               3               -
-asinhf128     3               -               -               -               -
+asinhf128     4               -               -               -               -
 atanf         -               -               1               1               1
 atan          -               -               -               -               -
 atanl         -               -               -               1               -
@@ -6289,11 +6289,11 @@ atanf128      1               -               -               -               -
 atan2f        -               1               1               1               1
 atan2         -               -               -               -               -
 atan2l        -               1               -               1               -
-atan2f128     1               -               -               -               -
+atan2f128     2               -               -               -               -
 atanhf        -               -               2               2               2
 atanh         -               -               2               2               2
 atanhl        -               -               -               3               -
-atanhf128     3               -               -               -               -
+atanhf128     4               -               -               -               -
 cabsf         -               -               -               -               -
 cabs          -               1               1               1               1
 cabsl         -               1               -               1               -
@@ -6353,11 +6353,11 @@ clog10f128    2 + i 2         -               -               -               -
 cosf          1               -               1               1               1
 cos           1               1               1               1               -
 cosl          -               -               -               1               -
-cosf128       1               -               -               -               -
+cosf128       2               -               -               -               -
 coshf         -               -               2               2               1
 cosh          -               -               2               2               1
 coshl         -               -               -               1               -
-coshf128      1               -               -               -               -
+coshf128      2               -               -               -               -
 cpowf         5 + i 2         3 + i 5         5 + i 2         5 + i 2         4 + i 2
 cpow          2 + i 0         1 + i 0         2 + i 0         2 + i 0         2 + i 0
 cpowl         3 + i 4         3 + i 1         -               4 + i 1         -
@@ -6393,7 +6393,7 @@ erff128       1               -               -               -               -
 erfcf         -               1               3               3               2
 erfc          -               -               5               5               3
 erfcl         -               2               -               2               -
-erfcf128      2               -               -               -               -
+erfcf128      4               -               -               -               -
 expf          1               -               1               1               1
 exp           -               -               1               1               -
 expl          -               -               -               1               -
@@ -6409,7 +6409,7 @@ exp2f128      1               -               -               -               -
 expm1f        -               -               1               1               1
 expm1         1               -               1               1               1
 expm1l        1               -               -               1               -
-expm1f128     1               -               -               -               -
+expm1f128     2               -               -               -               -
 fmaf          -               -               -               -               -
 fma           -               -               -               -               -
 fmal          -               -               -               -               -
@@ -6426,13 +6426,13 @@ hypotf        -               -               -               -               -
 hypot         -               1               1               1               1
 hypotl        -               1               -               1               -
 hypotf128     1               -               -               -               -
-j0f           8               2               8               8               2
-j0            2               1               2               2               2
-j0l           2               2               -               2               -
+j0f           9               2               8               8               2
+j0            3               1               2               2               2
+j0l           8               2               -               2               -
 j0f128        2               -               -               -               -
-j1f           8               2               9               9               2
-j1            2               -               2               2               1
-j1l           5               1               -               4               -
+j1f           9               2               9               9               2
+j1            4               -               2               2               1
+j1l           6               1               -               4               -
 j1f128        4               -               -               -               -
 jnf           4               2               4               4               4
 jn            4               2               4               4               4
@@ -6449,15 +6449,15 @@ logf128       1               -               -               -               -
 log10f        -               -               2               2               2
 log10         -               -               2               2               2
 log10l        -               -               -               1               -
-log10f128     1               -               -               -               -
+log10f128     2               -               -               -               -
 log1pf        -               -               1               1               1
 log1p         -               -               1               1               1
 log1pl        -               -               -               2               -
-log1pf128     2               -               -               -               -
+log1pf128     3               -               -               -               -
 log2f         -               -               1               1               1
 log2          -               -               2               2               2
 log2l         -               -               -               2               -
-log2f128      2               -               -               -               -
+log2f128      3               -               -               -               -
 mul_ldoublef  -               -               -               -               -
 mul_ldouble   -               -               -               -               -
 mul_ldoublel  -               -               -               -               -
@@ -6473,7 +6473,7 @@ pow10f128     -               -               -               -               -
 sinf          -               -               1               1               1
 sin           1               1               1               1               -
 sinl          -               -               -               1               -
-sinf128       1               -               -               -               -
+sinf128       2               -               -               -               -
 sincosf       -               -               1               1               1
 sincos        1               -               1               1               -
 sincosl       -               -               -               1               -
@@ -6502,14 +6502,14 @@ tgammaf       -               4               8               8               4
 tgamma        -               1               9               9               5
 tgammal       1               9               -               4               -
 tgammaf128    4               -               -               -               -
-y0f           6               1               8               8               1
+y0f           8               1               8               8               1
 y0            2               1               3               3               2
 y0l           1               1               -               3               -
 y0f128        3               -               -               -               -
-y1f           2               3               2               2               2
+y1f           9               3               2               2               2
 y1            3               1               3               3               3
-y1l           2               2               -               2               -
-y1f128        2               -               -               -               -
+y1l           5               2               -               2               -
+y1f128        5               -               -               -               -
 ynf           3               3               3               3               2
 yn            3               2               3               3               3
 ynl           3               4               -               5               -
@@ -6680,13 +6680,13 @@ hypotf        -               -               -               -               -
 hypot         1               1               1               1               1
 hypotl        -               1               1               1               1
 hypotf128     -               1               -               -               -
-j0f           8               8               8               8               2
-j0            2               2               2               2               2
-j0l           -               2               2               2               2
+j0f           8               9               8               8               2
+j0            2               3               2               2               2
+j0l           -               5               2               2               2
 j0f128        -               2               -               -               -
-j1f           9               8               9               8               2
-j1            2               2               2               2               1
-j1l           -               3               3               4               4
+j1f           9               9               9               8               2
+j1            2               4               2               2               1
+j1l           -               6               3               4               4
 j1f128        -               4               -               -               -
 jnf           4               4               4               4               4
 jn            4               4               4               4               4
@@ -6756,11 +6756,11 @@ tgammaf       8               8               8               8               4
 tgamma        9               9               9               5               5
 tgammal       -               5               4               4               4
 tgammaf128    -               4               -               -               -
-y0f           8               6               8               6               1
+y0f           8               8               8               6               1
 y0            3               2               3               2               2
-y0l           -               1               2               3               3
+y0l           -               10              2               3               3
 y0f128        -               3               -               -               -
-y1f           2               2               2               2               2
+y1f           2               9               2               2               2
 y1            3               3               3               3               3
 y1l           -               2               2               2               2
 y1f128        -               2               -               -               -
@@ -6933,13 +6933,13 @@ hypotf        -               -               -               -               -
 hypot         1               1               1               1               1
 hypotl        1               -               1               1               1
 hypotf128     -               -               -               1               1
-j0f           8               8               8               5               8
-j0            2               2               2               2               2
-j0l           2               -               2               2               2
+j0f           9               8               9               5               8
+j0            3               2               2               5               5
+j0l           2               -               2               8               8
 j0f128        -               -               -               2               2
-j1f           8               8               9               5               9
-j1            2               2               2               2               2
-j1l           4               -               4               5               5
+j1f           9               8               9               5               9
+j1            4               2               4               2               2
+j1l           4               -               4               9               9
 j1f128        -               -               -               4               4
 jnf           4               4               4               4               4
 jn            4               4               4               4               4
@@ -7009,14 +7009,14 @@ tgammaf       8               8               8               4               8
 tgamma        9               9               9               6               9
 tgammal       4               -               4               5               5
 tgammaf128    -               -               -               4               4
-y0f           6               6               8               1               8
+y0f           8               6               9               1               8
 y0            2               3               3               2               3
-y0l           3               -               3               1               1
+y0l           3               -               3               2               2
 y0f128        -               -               -               3               3
-y1f           2               2               2               2               2
+y1f           9               2               9               3               3
 y1            3               3               3               3               3
-y1l           2               -               2               3               2
-y1f128        -               -               -               5               2
+y1l           5               -               5               3               3
+y1f128        -               -               -               5               5
 ynf           3               3               3               3               3
 yn            3               3               3               3               3
 ynl           5               -               5               4               4
@@ -7186,13 +7186,13 @@ hypotf        -
 hypot         1
 hypotl        1
 hypotf128     1
-j0f           8
+j0f           9
 j0            2
-j0l           2
+j0l           8
 j0f128        2
 j1f           9
-j1            2
-j1l           5
+j1            4
+j1l           9
 j1f128        4
 jnf           4
 jn            4
@@ -7262,9 +7262,9 @@ tgammaf       8
 tgamma        9
 tgammal       5
 tgammaf128    4
-y0f           8
+y0f           9
 y0            3
-y0l           1
+y0l           2
 y0f128        3
 y1f           9
 y1            6
