@@ -203,7 +203,7 @@
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
 #ifndef USED_FOR_TARGET
-#define ENABLE_NLS 1
+/* #undef ENABLE_NLS */
 #endif
 
 
