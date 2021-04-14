@@ -2101,6 +2101,119 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: Heap Consistency Checking,  Next: Hooks for Malloc,  Prev: Malloc Tunable Parameters,  Up: Unconstrained Allocation
+
+3.2.3.8 Heap Consistency Checking
+.................................
+
+You can ask ‘malloc’ to check the consistency of dynamic memory by using
+the ‘mcheck’ function.  This function is a GNU extension, declared in
+‘mcheck.h’.
+
+ -- Function: int mcheck (void (*ABORTFN) (enum mcheck_status STATUS))
+
+     Preliminary: | MT-Unsafe race:mcheck const:malloc_hooks | AS-Unsafe
+     corrupt | AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
+
+     Calling ‘mcheck’ tells ‘malloc’ to perform occasional consistency
+     checks.  These will catch things such as writing past the end of a
+     block that was allocated with ‘malloc’.
+
+     The ABORTFN argument is the function to call when an inconsistency
+     is found.  If you supply a null pointer, then ‘mcheck’ uses a
+     default function which prints a message and calls ‘abort’ (*note
+     Aborting a Program::).  The function you supply is called with one
+     argument, which says what sort of inconsistency was detected; its
+     type is described below.
+
+     It is too late to begin allocation checking once you have allocated
+     anything with ‘malloc’.  So ‘mcheck’ does nothing in that case.
+     The function returns ‘-1’ if you call it too late, and ‘0’
+     otherwise (when it is successful).
+
+     The easiest way to arrange to call ‘mcheck’ early enough is to use
+     the option ‘-lmcheck’ when you link your program; then you don’t
+     need to modify your program source at all.  Alternatively you might
+     use a debugger to insert a call to ‘mcheck’ whenever the program is
+     started, for example these gdb commands will automatically call
+     ‘mcheck’ whenever the program starts:
+
+          (gdb) break main
+          Breakpoint 1, main (argc=2, argv=0xbffff964) at whatever.c:10
+          (gdb) command 1
+          Type commands for when breakpoint 1 is hit, one per line.
+          End with a line saying just "end".
+          >call mcheck(0)
+          >continue
+          >end
+          (gdb) ...
+
+     This will however only work if no initialization function of any
+     object involved calls any of the ‘malloc’ functions since ‘mcheck’
+     must be called before the first such function.
+
+ -- Function: enum mcheck_status mprobe (void *POINTER)
+     Preliminary: | MT-Unsafe race:mcheck const:malloc_hooks | AS-Unsafe
+     corrupt | AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
+
+     The ‘mprobe’ function lets you explicitly check for inconsistencies
+     in a particular allocated block.  You must have already called
+     ‘mcheck’ at the beginning of the program, to do its occasional
+     checks; calling ‘mprobe’ requests an additional consistency check
+     to be done at the time of the call.
+
+     The argument POINTER must be a pointer returned by ‘malloc’ or
+     ‘realloc’.  ‘mprobe’ returns a value that says what inconsistency,
+     if any, was found.  The values are described below.
+
+ -- Data Type: enum mcheck_status
+     This enumerated type describes what kind of inconsistency was
+     detected in an allocated block, if any.  Here are the possible
+     values:
+
+     ‘MCHECK_DISABLED’
+          ‘mcheck’ was not called before the first allocation.  No
+          consistency checking can be done.
+     ‘MCHECK_OK’
+          No inconsistency detected.
+     ‘MCHECK_HEAD’
+          The data immediately before the block was modified.  This
+          commonly happens when an array index or pointer is decremented
+          too far.
+     ‘MCHECK_TAIL’
+          The data immediately after the block was modified.  This
+          commonly happens when an array index or pointer is incremented
+          too far.
+     ‘MCHECK_FREE’
+          The block was already freed.
+
+   Another possibility to check for and guard against bugs in the use of
+‘malloc’, ‘realloc’ and ‘free’ is to set the environment variable
+‘MALLOC_CHECK_’.  When ‘MALLOC_CHECK_’ is set to a non-zero value, a
+special (less efficient) implementation is used which is designed to be
+tolerant against simple errors, such as double calls of ‘free’ with the
+same argument, or overruns of a single byte (off-by-one bugs).  Not all
+such errors can be protected against, however, and memory leaks can
+result.
+
+   Any detected heap corruption results in immediate termination of the
+process.
+
+   There is one problem with ‘MALLOC_CHECK_’: in SUID or SGID binaries
+it could possibly be exploited since diverging from the normal programs
+behavior it now writes something to the standard error descriptor.
+Therefore the use of ‘MALLOC_CHECK_’ is disabled by default for SUID and
+SGID binaries.  It can be enabled again by the system administrator by
+adding a file ‘/etc/suid-debug’ (the content is not important it could
+be empty).
+
+   So, what’s the difference between using ‘MALLOC_CHECK_’ and linking
+with ‘-lmcheck’?  ‘MALLOC_CHECK_’ is orthogonal with respect to
+‘-lmcheck’.  ‘-lmcheck’ has been added for backward compatibility.  Both
+‘MALLOC_CHECK_’ and ‘-lmcheck’ should uncover the same bugs - but using
+‘MALLOC_CHECK_’ you don’t need to recompile your application.
+
+
 File: libc.info,  Node: Hooks for Malloc,  Next: Statistics of Malloc,  Prev: Heap Consistency Checking,  Up: Unconstrained Allocation
 
 3.2.3.9 Memory Allocation Hooks
@@ -2171,15 +2284,15 @@ recursively, one should make sure to restore all the hooks to their
 previous value.  When coming back from the recursive call, all the hooks
 should be resaved since a hook might modify itself.
 
-   An issue to look out for is the time at which the malloc hook
-functions can be safely installed.  If the hook functions call the
-malloc-related functions recursively, it is necessary that malloc has
-already properly initialized itself at the time when ‘__malloc_hook’
-etc.  is assigned to.  On the other hand, if the hook functions provide
-a complete malloc implementation of their own, it is vital that the
+   An issue to look out for is the time at which the hook functions can
+be safely installed.  If the hook functions call the ‘malloc’-related
+functions recursively, it is necessary that ‘malloc’ has already
+properly initialized itself at the time when ‘__malloc_hook’ etc.  is
+assigned to.  On the other hand, if the hook functions provide a
+complete ‘malloc’ implementation of their own, it is vital that the
 hooks are assigned to _before_ the very first ‘malloc’ call has
 completed, because otherwise a chunk obtained from the ordinary,
-un-hooked malloc may later be handed to ‘__free_hook’, for example.
+un-hooked ‘malloc’ may later be handed to ‘__free_hook’, for example.
 
    Here is an example showing how to use ‘__malloc_hook’ and
 ‘__free_hook’ properly.  It installs a function that prints out
@@ -3530,7 +3643,7 @@ Here is how you would get the same results with ‘malloc’ and ‘free’:
      int
      open2 (char *str1, char *str2, int flags, int mode)
      {
-       char *name = (char *) malloc (strlen (str1) + strlen (str2) + 1);
+       char *name = malloc (strlen (str1) + strlen (str2) + 1);
        int desc;
        if (name == 0)
          fatal ("virtual memory exceeded");
@@ -5772,19 +5885,17 @@ common example:
      {
        va_list ap, ap2;
        size_t total = 1;
-       const char *s;
-       char *result;
 
        va_start (ap, str);
        va_copy (ap2, ap);
 
        /* Determine how much space we need.  */
-       for (s = str; s != NULL; s = va_arg (ap, const char *))
+       for (const char *s = str; s != NULL; s = va_arg (ap, const char *))
          total += strlen (s);
 
        va_end (ap);
 
-       result = (char *) malloc (total);
+       char *result = malloc (total);
        if (result != NULL)
          {
            result[0] = '\0';
@@ -5812,45 +5923,44 @@ efficiently:
      char *
      concat (const char *str, ...)
      {
-       va_list ap;
        size_t allocated = 100;
-       char *result = (char *) malloc (allocated);
+       char *result = malloc (allocated);
 
        if (result != NULL)
          {
+           va_list ap;
+           size_t resultlen = 0;
            char *newp;
-           char *wp;
-           const char *s;
 
            va_start (ap, str);
 
-           wp = result;
-           for (s = str; s != NULL; s = va_arg (ap, const char *))
+           for (const char *s = str; s != NULL; s = va_arg (ap, const char *))
              {
                size_t len = strlen (s);
 
                /* Resize the allocated memory if necessary.  */
-               if (wp + len + 1 > result + allocated)
+               if (resultlen + len + 1 > allocated)
                  {
-                   allocated = (allocated + len) * 2;
-                   newp = (char *) realloc (result, allocated);
+                   allocated += len;
+                   newp = reallocarray (result, allocated, 2);
+                   allocated *= 2;
                    if (newp == NULL)
                      {
                        free (result);
                        return NULL;
                      }
-                   wp = newp + (wp - result);
                    result = newp;
                  }
 
-               wp = mempcpy (wp, s, len);
+               memcpy (result + resultlen, s, len);
+               resultlen += len;
              }
 
            /* Terminate the result string.  */
-           *wp++ = '\0';
+           result[resultlen++] = '\0';
 
            /* Resize memory to the optimal size.  */
-           newp = realloc (result, wp - result);
+           newp = realloc (result, resultlen);
            if (newp != NULL)
              result = newp;
 
@@ -6628,8 +6738,8 @@ when there are many strings.
              {
                /* Allocate the needed space. +1 for terminating
                   ‘'\0'’ byte.  */
-               transformed = (char *) xrealloc (transformed,
-                                                transformed_length + 1);
+               transformed = xrealloc (transformed,
+                                       transformed_length + 1);
 
                /* The return value is not interesting because we know
                   how long the transformed string is.  */
@@ -6670,9 +6780,9 @@ would look like this:
              {
                /* Allocate the needed space. +1 for terminating
                   ‘L'\0'’ wide character.  */
-               transformed = (wchar_t *) xrealloc (transformed,
-                                                   (transformed_length + 1)
-                                                   * sizeof (wchar_t));
+               transformed = xreallocarray (transformed,
+                                            transformed_length + 1,
+                                            sizeof *transformed);
 
                /* The return value is not interesting because we know
                   how long the transformed string is.  */

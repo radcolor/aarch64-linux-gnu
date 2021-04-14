@@ -7234,6 +7234,8 @@ Concept Index
 * writing to a stream, by characters:    Simple Output.       (line   6)
 * writing to a stream, formatted:        Formatted Output.    (line   6)
 * Wrong medium type:                     Error Codes.         (line 794)
+* xmalloc function:                      Malloc Examples.     (line  10)
+* xrealloc and xreallocarray functions:  Changing Block Size. (line  64)
 * You really blew it this time:          Error Codes.         (line 567)
 * YP:                                    Host Identification. (line  37)
 * YP domain name:                        Host Identification. (line  37)

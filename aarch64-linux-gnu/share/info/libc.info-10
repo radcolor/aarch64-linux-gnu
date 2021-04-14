@@ -7219,39 +7219,3 @@ Primitives::, to see what this is about.
      is clear, returning from a handler makes the function fail.  *Note
      Interrupted Primitives::.
 
-
-File: libc.info,  Node: Initial Signal Actions,  Prev: Flags for Sigaction,  Up: Signal Actions
-
-24.3.6 Initial Signal Actions
------------------------------
-
-When a new process is created (*note Creating a Process::), it inherits
-handling of signals from its parent process.  However, when you load a
-new process image using the ‘exec’ function (*note Executing a File::),
-any signals that you’ve defined your own handlers for revert to their
-‘SIG_DFL’ handling.  (If you think about it a little, this makes sense;
-the handler functions from the old program are specific to that program,
-and aren’t even present in the address space of the new program image.)
-Of course, the new program can establish its own handlers.
-
-   When a program is run by a shell, the shell normally sets the initial
-actions for the child process to ‘SIG_DFL’ or ‘SIG_IGN’, as appropriate.
-It’s a good idea to check to make sure that the shell has not set up an
-initial action of ‘SIG_IGN’ before you establish your own signal
-handlers.
-
-   Here is an example of how to establish a handler for ‘SIGHUP’, but
-not if ‘SIGHUP’ is currently ignored:
-
-     ...
-     struct sigaction temp;
-
-     sigaction (SIGHUP, NULL, &temp);
-
-     if (temp.sa_handler != SIG_IGN)
-       {
-         temp.sa_handler = handle_sighup;
-         sigemptyset (&temp.sa_mask);
-         sigaction (SIGHUP, &temp, NULL);
-       }
-

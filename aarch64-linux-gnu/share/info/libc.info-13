@@ -5497,8 +5497,8 @@ behavior to match their workload.  These are implemented as a set of
 switches that may be modified in different ways.  The current default
 method to do this is via the ‘GLIBC_TUNABLES’ environment variable by
 setting it to a string of colon-separated NAME=VALUE pairs.  For
-example, the following example enables malloc checking and sets the
-malloc trim threshold to 128 bytes:
+example, the following example enables ‘malloc’ checking and sets the
+‘malloc’ trim threshold to 128 bytes:
 
      GLIBC_TUNABLES=glibc.malloc.trim_threshold=128:glibc.malloc.check=3
      export GLIBC_TUNABLES
@@ -5599,12 +5599,13 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
      and is identical in features.
 
      Setting this tunable to a non-zero value enables a special (less
-     efficient) memory allocator for the malloc family of functions that
-     is designed to be tolerant against simple errors such as double
-     calls of free with the same argument, or overruns of a single byte
-     (off-by-one bugs).  Not all such errors can be protected against,
-     however, and memory leaks can result.  Any detected heap corruption
-     results in immediate termination of the process.
+     efficient) memory allocator for the ‘malloc’ family of functions
+     that is designed to be tolerant against simple errors such as
+     double calls of free with the same argument, or overruns of a
+     single byte (off-by-one bugs).  Not all such errors can be
+     protected against, however, and memory leaks can result.  Any
+     detected heap corruption results in immediate termination of the
+     process.
 
      Like ‘MALLOC_CHECK_’, ‘glibc.malloc.check’ has a problem in that it
      diverges from normal program behavior by writing to ‘stderr’, which
@@ -5632,7 +5633,7 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
 
      If set to a non-zero value, memory blocks are initialized with
      values depending on some low order bits of this tunable when they
-     are allocated (except when allocated by calloc) and freed.  This
+     are allocated (except when allocated by ‘calloc’) and freed.  This
      can be used to debug the use of uninitialized or freed heap memory.
      Note that this option does not guarantee that the freed block will
      have any specific values.  It only guarantees that the content the
@@ -5733,13 +5734,13 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
      set to zero, is no limit.
 
  -- Tunable: glibc.malloc.mxfast
-     One of the optimizations malloc uses is to maintain a series of
+     One of the optimizations ‘malloc’ uses is to maintain a series of
      “fast bins” that hold chunks up to a specific size.  The default
      and maximum size which may be held this way is 80 bytes on 32-bit
      systems or 160 bytes on 64-bit systems.  Applications which value
      size over speed may choose to reduce the size of requests which are
      serviced from fast bins with this tunable.  Note that the value
-     specified includes malloc’s internal overhead, which is normally
+     specified includes ‘malloc’’s internal overhead, which is normally
      the size of one pointer, so add 4 on 32-bit systems or 8 on 64-bit
      systems to the size passed to ‘malloc’ for the largest bin size to
      enable.
@@ -6000,7 +6001,7 @@ File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tuna
      This tunable takes a value between 0 and 255 and acts as a bitmask
      that enables various capabilities.
 
-     Bit 0 (the least significant bit) causes the malloc subsystem to
+     Bit 0 (the least significant bit) causes the ‘malloc’ subsystem to
      allocate tagged memory, with each allocation being assigned a
      random tag.
 

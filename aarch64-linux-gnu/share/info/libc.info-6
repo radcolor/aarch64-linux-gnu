@@ -6251,8 +6251,8 @@ the result.
 
      The return value of the function is the number of entries placed in
      *NAMELIST.  If it is ‘-1’ an error occurred (either the directory
-     could not be opened for reading or the malloc call failed) and the
-     global variable ‘errno’ contains more information on the error.
+     could not be opened for reading or memory allocation failed) and
+     the global variable ‘errno’ contains more information on the error.
 
    As described above, the fourth argument to the ‘scandir’ function
 must be a pointer to a sorting function.  For the convenience of the
@@ -6884,13 +6884,14 @@ limit if it exists is published in the ‘sys/param.h’ header file.
           char *
           readlink_malloc (const char *filename)
           {
-            int size = 100;
+            size_t size = 50;
             char *buffer = NULL;
 
             while (1)
               {
-                buffer = (char *) xrealloc (buffer, size);
-                int nchars = readlink (filename, buffer, size);
+                buffer = xreallocarray (buffer, size, 2);
+                size *= 2;
+                ssize_t nchars = readlink (filename, buffer, size);
                 if (nchars < 0)
                   {
                     free (buffer);
@@ -6898,7 +6899,6 @@ limit if it exists is published in the ‘sys/param.h’ header file.
                   }
                 if (nchars < size)
                   return buffer;
-                size *= 2;
               }
           }
 

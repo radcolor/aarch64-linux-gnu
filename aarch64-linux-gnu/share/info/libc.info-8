@@ -2100,6 +2100,39 @@ START-INFO-DIR-ENTRY
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
 
+
+
+File: libc.info,  Node: Low-Level Terminal Interface,  Next: Syslog,  Prev: Sockets,  Up: Top
+
+17 Low-Level Terminal Interface
+*******************************
+
+This chapter describes functions that are specific to terminal devices.
+You can use these functions to do things like turn off input echoing;
+set serial line characteristics such as line speed and flow control; and
+change which characters are used for end-of-file, command-line editing,
+sending signals, and similar control functions.
+
+   Most of the functions in this chapter operate on file descriptors.
+*Note Low-Level I/O::, for more information about what a file descriptor
+is and how to open a file descriptor for a terminal device.
+
+* Menu:
+
+* Is It a Terminal::            How to determine if a file is a terminal
+			         device, and what its name is.
+* I/O Queues::                  About flow control and typeahead.
+* Canonical or Not::            Two basic styles of input processing.
+* Terminal Modes::              How to examine and modify flags controlling
+			         details of terminal I/O: echoing,
+                                 signals, editing.  Posix.
+* BSD Terminal Modes::          BSD compatible terminal mode setting
+* Line Control::                Sending break sequences, clearing
+                                 terminal buffers ...
+* Noncanon Example::            How to read single characters without echo.
+* getpass::                     Prompting the user for a passphrase.
+* Pseudo-Terminals::            How to open a pseudo-terminal.
+
 
 File: libc.info,  Node: Is It a Terminal,  Next: I/O Queues,  Up: Low-Level Terminal Interface
 

@@ -2101,6 +2101,42 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: Initial Signal Actions,  Prev: Flags for Sigaction,  Up: Signal Actions
+
+24.3.6 Initial Signal Actions
+-----------------------------
+
+When a new process is created (*note Creating a Process::), it inherits
+handling of signals from its parent process.  However, when you load a
+new process image using the ‘exec’ function (*note Executing a File::),
+any signals that you’ve defined your own handlers for revert to their
+‘SIG_DFL’ handling.  (If you think about it a little, this makes sense;
+the handler functions from the old program are specific to that program,
+and aren’t even present in the address space of the new program image.)
+Of course, the new program can establish its own handlers.
+
+   When a program is run by a shell, the shell normally sets the initial
+actions for the child process to ‘SIG_DFL’ or ‘SIG_IGN’, as appropriate.
+It’s a good idea to check to make sure that the shell has not set up an
+initial action of ‘SIG_IGN’ before you establish your own signal
+handlers.
+
+   Here is an example of how to establish a handler for ‘SIGHUP’, but
+not if ‘SIGHUP’ is currently ignored:
+
+     ...
+     struct sigaction temp;
+
+     sigaction (SIGHUP, NULL, &temp);
+
+     if (temp.sa_handler != SIG_IGN)
+       {
+         temp.sa_handler = handle_sighup;
+         sigemptyset (&temp.sa_mask);
+         sigaction (SIGHUP, &temp, NULL);
+       }
+
+
 File: libc.info,  Node: Defining Handlers,  Next: Interrupted Primitives,  Prev: Signal Actions,  Up: Signal Handling
 
 24.4 Defining Signal Handlers
@@ -7532,172 +7568,4 @@ the streams in the pre-‘exec’ process image has a descriptor inside it,
 and these descriptors do survive through ‘exec’ (provided that they do
 not have ‘FD_CLOEXEC’ set).  The new process image can reconnect these
 to new streams using ‘fdopen’ (*note Descriptors and Streams::).
-
-
-File: libc.info,  Node: Process Completion,  Next: Process Completion Status,  Prev: Executing a File,  Up: Processes
-
-26.6 Process Completion
-=======================
-
-The functions described in this section are used to wait for a child
-process to terminate or stop, and determine its status.  These functions
-are declared in the header file ‘sys/wait.h’.
-
- -- Function: pid_t waitpid (pid_t PID, int *STATUS-PTR, int OPTIONS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘waitpid’ function is used to request status information from a
-     child process whose process ID is PID.  Normally, the calling
-     process is suspended until the child process makes status
-     information available by terminating.
-
-     Other values for the PID argument have special interpretations.  A
-     value of ‘-1’ or ‘WAIT_ANY’ requests status information for any
-     child process; a value of ‘0’ or ‘WAIT_MYPGRP’ requests information
-     for any child process in the same process group as the calling
-     process; and any other negative value − PGID requests information
-     for any child process whose process group ID is PGID.
-
-     If status information for a child process is available immediately,
-     this function returns immediately without waiting.  If more than
-     one eligible child process has status information available, one of
-     them is chosen randomly, and its status is returned immediately.
-     To get the status from the other eligible child processes, you need
-     to call ‘waitpid’ again.
-
-     The OPTIONS argument is a bit mask.  Its value should be the
-     bitwise OR (that is, the ‘|’ operator) of zero or more of the
-     ‘WNOHANG’ and ‘WUNTRACED’ flags.  You can use the ‘WNOHANG’ flag to
-     indicate that the parent process shouldn’t wait; and the
-     ‘WUNTRACED’ flag to request status information from stopped
-     processes as well as processes that have terminated.
-
-     The status information from the child process is stored in the
-     object that STATUS-PTR points to, unless STATUS-PTR is a null
-     pointer.
-
-     This function is a cancellation point in multi-threaded programs.
-     This is a problem if the thread allocates some resources (like
-     memory, file descriptors, semaphores or whatever) at the time
-     ‘waitpid’ is called.  If the thread gets canceled these resources
-     stay allocated until the program ends.  To avoid this calls to
-     ‘waitpid’ should be protected using cancellation handlers.
-
-     The return value is normally the process ID of the child process
-     whose status is reported.  If there are child processes but none of
-     them is waiting to be noticed, ‘waitpid’ will block until one is.
-     However, if the ‘WNOHANG’ option was specified, ‘waitpid’ will
-     return zero instead of blocking.
-
-     If a specific PID to wait for was given to ‘waitpid’, it will
-     ignore all other children (if any).  Therefore if there are
-     children waiting to be noticed but the child whose PID was
-     specified is not one of them, ‘waitpid’ will block or return zero
-     as described above.
-
-     A value of ‘-1’ is returned in case of error.  The following
-     ‘errno’ error conditions are defined for this function:
-
-     ‘EINTR’
-          The function was interrupted by delivery of a signal to the
-          calling process.  *Note Interrupted Primitives::.
-
-     ‘ECHILD’
-          There are no child processes to wait for, or the specified PID
-          is not a child of the calling process.
-
-     ‘EINVAL’
-          An invalid value was provided for the OPTIONS argument.
-
-   These symbolic constants are defined as values for the PID argument
-to the ‘waitpid’ function.
-
-‘WAIT_ANY’
-
-     This constant macro (whose value is ‘-1’) specifies that ‘waitpid’
-     should return status information about any child process.
-
-‘WAIT_MYPGRP’
-     This constant (with value ‘0’) specifies that ‘waitpid’ should
-     return status information about any child process in the same
-     process group as the calling process.
-
-   These symbolic constants are defined as flags for the OPTIONS
-argument to the ‘waitpid’ function.  You can bitwise-OR the flags
-together to obtain a value to use as the argument.
-
-‘WNOHANG’
-
-     This flag specifies that ‘waitpid’ should return immediately
-     instead of waiting, if there is no child process ready to be
-     noticed.
-
-‘WUNTRACED’
-
-     This flag specifies that ‘waitpid’ should report the status of any
-     child processes that have been stopped as well as those that have
-     terminated.
-
- -- Function: pid_t wait (int *STATUS-PTR)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This is a simplified version of ‘waitpid’, and is used to wait
-     until any one child process terminates.  The call:
-
-          wait (&status)
-
-     is exactly equivalent to:
-
-          waitpid (-1, &status, 0)
-
-     This function is a cancellation point in multi-threaded programs.
-     This is a problem if the thread allocates some resources (like
-     memory, file descriptors, semaphores or whatever) at the time
-     ‘wait’ is called.  If the thread gets canceled these resources stay
-     allocated until the program ends.  To avoid this calls to ‘wait’
-     should be protected using cancellation handlers.
-
- -- Function: pid_t wait4 (pid_t PID, int *STATUS-PTR, int OPTIONS,
-          struct rusage *USAGE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     If USAGE is a null pointer, ‘wait4’ is equivalent to ‘waitpid (PID,
-     STATUS-PTR, OPTIONS)’.
-
-     If USAGE is not null, ‘wait4’ stores usage figures for the child
-     process in ‘*RUSAGE’ (but only if the child has terminated, not if
-     it has stopped).  *Note Resource Usage::.
-
-     This function is a BSD extension.
-
-   Here’s an example of how to use ‘waitpid’ to get the status from all
-child processes that have terminated, without ever waiting.  This
-function is designed to be a handler for ‘SIGCHLD’, the signal that
-indicates that at least one child process has terminated.
-
-     void
-     sigchld_handler (int signum)
-     {
-       int pid, status, serrno;
-       serrno = errno;
-       while (1)
-         {
-           pid = waitpid (WAIT_ANY, &status, WNOHANG);
-           if (pid < 0)
-             {
-               perror ("waitpid");
-               break;
-             }
-           if (pid == 0)
-             break;
-           notice_termination (pid, status);
-         }
-       errno = serrno;
-     }
 
