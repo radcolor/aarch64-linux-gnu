@@ -1502,7 +1502,7 @@
 /* Define 0/1 if .init_array/.fini_array sections are available and working.
    */
 #ifndef USED_FOR_TARGET
-#define HAVE_INITFINI_ARRAY_SUPPORT 0
+#define HAVE_INITFINI_ARRAY_SUPPORT 1
 #endif
 
 

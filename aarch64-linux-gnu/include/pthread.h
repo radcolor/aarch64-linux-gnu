@@ -809,8 +809,14 @@ extern int pthread_mutex_setprioceiling (pthread_mutex_t *__restrict __mutex,
 extern int pthread_mutex_consistent (pthread_mutex_t *__mutex)
      __THROW __nonnull ((1));
 # ifdef __USE_GNU
-extern int pthread_mutex_consistent_np (pthread_mutex_t *__mutex)
-     __THROW __nonnull ((1));
+#  ifdef __REDIRECT_NTH
+extern int __REDIRECT_NTH (pthread_mutex_consistent_np, (pthread_mutex_t *),
+			   pthread_mutex_consistent) __nonnull ((1))
+  __attribute_deprecated_msg__ ("\
+pthread_mutex_consistent_np is deprecated, use pthread_mutex_consistent");
+#  else
+#   define pthread_mutex_consistent_np pthread_mutex_consistent
+#  endif
 # endif
 #endif
 
@@ -879,9 +885,15 @@ extern int pthread_mutexattr_getrobust (const pthread_mutexattr_t *__attr,
 					int *__robustness)
      __THROW __nonnull ((1, 2));
 # ifdef __USE_GNU
-extern int pthread_mutexattr_getrobust_np (const pthread_mutexattr_t *__attr,
-					   int *__robustness)
-     __THROW __nonnull ((1, 2));
+#  ifdef __REDIRECT_NTH
+extern int __REDIRECT_NTH (pthread_mutexattr_getrobust_np,
+			   (pthread_mutex_t *, int *),
+			   pthread_mutexattr_getrobust) __nonnull ((1))
+  __attribute_deprecated_msg__ ("\
+pthread_mutexattr_getrobust_np is deprecated, use pthread_mutexattr_getrobust");
+#  else
+#   define pthread_mutexattr_getrobust_np pthread_mutexattr_getrobust
+#  endif
 # endif
 
 /* Set the robustness flag of the mutex attribute ATTR.  */
@@ -889,12 +901,17 @@ extern int pthread_mutexattr_setrobust (pthread_mutexattr_t *__attr,
 					int __robustness)
      __THROW __nonnull ((1));
 # ifdef __USE_GNU
-extern int pthread_mutexattr_setrobust_np (pthread_mutexattr_t *__attr,
-					   int __robustness)
-     __THROW __nonnull ((1));
+#  ifdef __REDIRECT_NTH
+extern int __REDIRECT_NTH (pthread_mutexattr_setrobust_np,
+			   (pthread_mutex_t *, int),
+			   pthread_mutexattr_setrobust) __nonnull ((1))
+  __attribute_deprecated_msg__ ("\
+pthread_mutexattr_setrobust_np is deprecated, use pthread_mutexattr_setrobust");
+#  else
+#   define pthread_mutexattr_setrobust_np pthread_mutexattr_setrobust
+#  endif
 # endif
 #endif
-
 
 #if defined __USE_UNIX98 || defined __USE_XOPEN2K
 /* Functions for handling read-write locks.  */

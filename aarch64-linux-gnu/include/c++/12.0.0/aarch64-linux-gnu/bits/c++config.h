@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20210420
+#define __GLIBCXX__ 20210424
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -1077,6 +1077,10 @@ namespace std
 /* Define to 1 if you have the `posix_memalign' function. */
 #define _GLIBCXX_HAVE_POSIX_MEMALIGN 1
 
+/* Define to 1 if POSIX Semaphores with sem_timedwait are available in
+   <semaphore.h>. */
+/* #undef _GLIBCXX_HAVE_POSIX_SEMAPHORE */
+
 /* Define to 1 if you have the `powf' function. */
 #define _GLIBCXX_HAVE_POWF 1
 
@@ -1603,10 +1607,6 @@ namespace std
 
 /* Define if gthreads library is available. */
 #define _GLIBCXX_HAS_GTHREADS 1
-
-/* Define to 1 if POSIX Semaphores with sem_timedwait are available in
-   <semaphore.h>. */
-/* #undef _GLIBCXX__GLIBCXX_HAVE_POSIX_SEMAPHORE */
 
 /* Define to 1 if a full hosted library is built, or 0 if freestanding. */
 #define _GLIBCXX_HOSTED 1
