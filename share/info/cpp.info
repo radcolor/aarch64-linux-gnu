@@ -1794,6 +1794,13 @@ double underscores.
      of a C string constant.  This is the source file that was specified
      on the command line of the preprocessor or C compiler.
 
+'__FILE_NAME__'
+     This macro expands to the basename of the current input file, in
+     the form of a C string constant.  This is the last path component
+     by which the preprocessor opened the file.  For example, processing
+     '"/usr/local/include/myheader.h"' would set this macro to
+     '"myheader.h"'.
+
 '__INCLUDE_LEVEL__'
      This macro expands to a decimal integer constant that represents
      the depth of nesting in include files.  The value of this macro is
@@ -2094,11 +2101,13 @@ double underscores.
      mechanism based on 'setjmp' and 'longjmp' for exception handling.
 
 '__GXX_EXPERIMENTAL_CXX0X__'
-     This macro is defined when compiling a C++ source file with the
-     option '-std=c++0x' or '-std=gnu++0x'.  It indicates that some
-     features likely to be included in C++0x are available.  Note that
-     these features are experimental, and may change or be removed in
-     future versions of GCC.
+     This macro is defined when compiling a C++ source file with C++11
+     features enabled, i.e., for all C++ language dialects except
+     '-std=c++98' and '-std=gnu++98'.  This macro is obsolete, but can
+     be used to detect experimental C++0x features in very old versions
+     of GCC. Since GCC 4.7.0 the '__cplusplus' macro is defined
+     correctly, so most code should test '__cplusplus >= 201103L'
+     instead of using this macro.
 
 '__GXX_WEAK__'
      This macro is defined when compiling a C++ source file.  It has the
@@ -5538,56 +5547,56 @@ Node: Variadic Macros59129
 Node: Predefined Macros64081
 Node: Standard Predefined Macros64669
 Node: Common Predefined Macros71043
-Node: System-specific Predefined Macros92603
-Node: C++ Named Operators94626
-Node: Undefining and Redefining Macros95590
-Node: Directives Within Macro Arguments97688
-Node: Macro Pitfalls98629
-Node: Misnesting99162
-Node: Operator Precedence Problems100274
-Node: Swallowing the Semicolon102140
-Node: Duplication of Side Effects104163
-Node: Self-Referential Macros106346
-Node: Argument Prescan108755
-Node: Newlines in Arguments112506
-Node: Conditionals113457
-Node: Conditional Uses115153
-Node: Conditional Syntax116511
-Node: Ifdef116933
-Node: If120090
-Node: Defined122394
-Node: Else123787
-Node: Elif124357
-Node: __has_attribute125670
-Node: __has_cpp_attribute127264
-Node: __has_c_attribute128154
-Node: __has_builtin128927
-Node: __has_include130060
-Node: Deleted Code131649
-Node: Diagnostics132896
-Node: Line Control134445
-Node: Pragmas136723
-Node: Other Directives141120
-Node: Preprocessor Output142170
-Node: Traditional Mode145323
-Node: Traditional lexical analysis146460
-Node: Traditional macros148963
-Node: Traditional miscellany152760
-Node: Traditional warnings153756
-Node: Implementation Details155953
-Node: Implementation-defined behavior156516
-Ref: Identifier characters157266
-Node: Implementation limits160314
-Node: Obsolete Features162987
-Node: Invocation165831
-Ref: dashMF171866
-Ref: fdollars-in-identifiers176528
-Ref: Wtrigraphs190654
-Node: Environment Variables192709
-Node: GNU Free Documentation License196400
-Node: Index of Directives221545
-Node: Option Index223698
-Node: Concept Index229800
+Node: System-specific Predefined Macros93055
+Node: C++ Named Operators95078
+Node: Undefining and Redefining Macros96042
+Node: Directives Within Macro Arguments98140
+Node: Macro Pitfalls99081
+Node: Misnesting99614
+Node: Operator Precedence Problems100726
+Node: Swallowing the Semicolon102592
+Node: Duplication of Side Effects104615
+Node: Self-Referential Macros106798
+Node: Argument Prescan109207
+Node: Newlines in Arguments112958
+Node: Conditionals113909
+Node: Conditional Uses115605
+Node: Conditional Syntax116963
+Node: Ifdef117385
+Node: If120542
+Node: Defined122846
+Node: Else124239
+Node: Elif124809
+Node: __has_attribute126122
+Node: __has_cpp_attribute127716
+Node: __has_c_attribute128606
+Node: __has_builtin129379
+Node: __has_include130512
+Node: Deleted Code132101
+Node: Diagnostics133348
+Node: Line Control134897
+Node: Pragmas137175
+Node: Other Directives141572
+Node: Preprocessor Output142622
+Node: Traditional Mode145775
+Node: Traditional lexical analysis146912
+Node: Traditional macros149415
+Node: Traditional miscellany153212
+Node: Traditional warnings154208
+Node: Implementation Details156405
+Node: Implementation-defined behavior156968
+Ref: Identifier characters157718
+Node: Implementation limits160766
+Node: Obsolete Features163439
+Node: Invocation166283
+Ref: dashMF172318
+Ref: fdollars-in-identifiers176980
+Ref: Wtrigraphs191106
+Node: Environment Variables193161
+Node: GNU Free Documentation License196852
+Node: Index of Directives221997
+Node: Option Index224150
+Node: Concept Index230252
 
 End Tag Table
 

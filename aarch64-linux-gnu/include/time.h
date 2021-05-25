@@ -141,7 +141,7 @@ extern char *asctime (const struct tm *__tp) __THROW;
 /* Equivalent to `asctime (localtime (timer))'.  */
 extern char *ctime (const time_t *__timer) __THROW;
 
-#if defined __USE_POSIX || __GLIBC_USE (ISOC2X)
+#ifdef __USE_POSIX
 /* Reentrant versions of the above functions.  */
 
 /* Return in BUF a string of the form "Day Mon dd hh:mm:ss yyyy\n"
@@ -152,7 +152,7 @@ extern char *asctime_r (const struct tm *__restrict __tp,
 /* Equivalent to `asctime_r (localtime_r (timer, *TMP*), buf)'.  */
 extern char *ctime_r (const time_t *__restrict __timer,
 		      char *__restrict __buf) __THROW;
-#endif	/* POSIX || C2X */
+#endif	/* POSIX */
 
 
 /* Defined in localtime.c.  */
@@ -256,6 +256,13 @@ extern int timer_getoverrun (timer_t __timerid) __THROW;
 /* Set TS to calendar time based in time base BASE.  */
 extern int timespec_get (struct timespec *__ts, int __base)
      __THROW __nonnull ((1));
+#endif
+
+
+#if __GLIBC_USE (ISOC2X)
+/* Set TS to resolution of time base BASE.  */
+extern int timespec_getres (struct timespec *__ts, int __base)
+     __THROW;
 #endif
 
 
