@@ -5917,7 +5917,7 @@ File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tuna
      The ‘glibc.cpu.name=xxx’ tunable allows the user to tell the GNU C
      Library to assume that the CPU is ‘xxx’ where xxx may have one of
      these values: ‘generic’, ‘falkor’, ‘thunderxt88’, ‘thunderx2t99’,
-     ‘thunderx2t99p1’, ‘ares’, ‘emag’, ‘kunpeng’.
+     ‘thunderx2t99p1’, ‘ares’, ‘emag’, ‘kunpeng’, ‘a64fx’.
 
      This tunable is specific to aarch64.
 
