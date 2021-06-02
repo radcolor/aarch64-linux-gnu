@@ -11112,6 +11112,10 @@ it.
 
      _no header_ (ISO): *note Feature Test Macros::.
 
+‘__STDC_WANT_IEC_60559_EXT__’
+
+     _no header_ (ISO): *note Feature Test Macros::.
+
 ‘__STDC_WANT_IEC_60559_FUNCS_EXT__’
 
      _no header_ (ISO): *note Feature Test Macros::.

@@ -2116,7 +2116,7 @@ Variable and Constant Macro Index
 * (*__gconv_init_fct):                   glibc iconv Implementation.
                                                               (line 409)
 * (void):                                Error Messages.      (line 257)
-* _ATFILE_SOURCE:                        Feature Test Macros. (line 237)
+* _ATFILE_SOURCE:                        Feature Test Macros. (line 243)
 * _Complex_I:                            Complex Numbers.     (line  21)
 * _CS_LFS64_CFLAGS:                      String Parameters.   (line  71)
 * _CS_LFS64_LDFLAGS:                     String Parameters.   (line  78)
@@ -2127,10 +2127,10 @@ Variable and Constant Macro Index
 * _CS_LFS_LIBS:                          String Parameters.   (line  57)
 * _CS_LFS_LINTFLAGS:                     String Parameters.   (line  64)
 * _CS_PATH:                              String Parameters.   (line  38)
-* _DEFAULT_SOURCE:                       Feature Test Macros. (line 221)
+* _DEFAULT_SOURCE:                       Feature Test Macros. (line 227)
 * _FILE_OFFSET_BITS:                     Feature Test Macros. (line 143)
-* _FORTIFY_SOURCE:                       Feature Test Macros. (line 241)
-* _GNU_SOURCE:                           Feature Test Macros. (line 214)
+* _FORTIFY_SOURCE:                       Feature Test Macros. (line 247)
+* _GNU_SOURCE:                           Feature Test Macros. (line 220)
 * _IOFBF:                                Controlling Buffering.
                                                               (line  45)
 * _IOLBF:                                Controlling Buffering.
@@ -2206,7 +2206,7 @@ Variable and Constant Macro Index
 * _POSIX_VDISABLE:                       Special Characters.  (line  22)
 * _POSIX_VDISABLE <1>:                   Options for Files.   (line  40)
 * _POSIX_VERSION:                        Version Supported.   (line   6)
-* _REENTRANT:                            Feature Test Macros. (line 253)
+* _REENTRANT:                            Feature Test Macros. (line 259)
 * _SC_2_C_DEV:                           Constants for Sysconf.
                                                               (line 306)
 * _SC_2_FORT_DEV:                        Constants for Sysconf.
@@ -2414,7 +2414,7 @@ Variable and Constant Macro Index
                                                               (line 166)
 * _SC_SIGSTKSZ:                          Constants for Sysconf.
                                                               (line 649)
-* _SC_SIGSTKSZ_SOURCE:                   Feature Test Macros. (line 248)
+* _SC_SIGSTKSZ_SOURCE:                   Feature Test Macros. (line 254)
 * _SC_SSIZE_MAX:                         Constants for Sysconf.
                                                               (line 574)
 * _SC_STREAM_MAX:                        Constants for Sysconf.
@@ -2495,7 +2495,7 @@ Variable and Constant Macro Index
                                                               (line 524)
 * _SC_XOPEN_XPG4:                        Constants for Sysconf.
                                                               (line 528)
-* _THREAD_SAFE:                          Feature Test Macros. (line 254)
+* _THREAD_SAFE:                          Feature Test Macros. (line 260)
 * _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
 * _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __free_hook:                           Hooks for Malloc.    (line  37)
@@ -2504,6 +2504,7 @@ Variable and Constant Macro Index
 * __memalign_hook:                       Hooks for Malloc.    (line  49)
 * __realloc_hook:                        Hooks for Malloc.    (line  25)
 * __STDC_WANT_IEC_60559_BFP_EXT__:       Feature Test Macros. (line 193)
+* __STDC_WANT_IEC_60559_EXT__:           Feature Test Macros. (line 214)
 * __STDC_WANT_IEC_60559_FUNCS_EXT__:     Feature Test Macros. (line 200)
 * __STDC_WANT_IEC_60559_TYPES_EXT__:     Feature Test Macros. (line 207)
 * __STDC_WANT_LIB_EXT2__:                Feature Test Macros. (line 187)

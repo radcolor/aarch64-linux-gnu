@@ -4802,6 +4802,12 @@ on semantics undefined within the standard.
      are enabled.  Only some of the features from this TS are supported
      by the GNU C Library.
 
+ -- Macro: __STDC_WANT_IEC_60559_EXT__
+
+     If you define this macro, ISO C2X features defined in Annex F of
+     that standard are enabled.  This affects declarations of the
+     ‘totalorder’ functions and functions related to NaN payloads.
+
  -- Macro: _GNU_SOURCE
 
      If you define this macro, everything is included: ISO C89, ISO C99,
