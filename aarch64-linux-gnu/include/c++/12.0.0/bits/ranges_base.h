@@ -89,6 +89,7 @@ namespace ranges
   namespace __cust_access
   {
     using std::ranges::__detail::__maybe_borrowed_range;
+    using std::__detail::__range_iter_t;
 
     struct _Begin
     {
@@ -127,8 +128,7 @@ namespace ranges
     template<typename _Tp>
       concept __member_end = requires(_Tp& __t)
 	{
-	  { __decay_copy(__t.end()) }
-	    -> sentinel_for<decltype(_Begin{}(std::forward<_Tp>(__t)))>;
+	  { __decay_copy(__t.end()) } -> sentinel_for<__range_iter_t<_Tp>>;
 	};
 
     // Poison pills so that unqualified lookup doesn't find std::end.
@@ -139,8 +139,7 @@ namespace ranges
       concept __adl_end = __class_or_enum<remove_reference_t<_Tp>>
 	&& requires(_Tp& __t)
 	{
-	  { __decay_copy(end(__t)) }
-	    -> sentinel_for<decltype(_Begin{}(std::forward<_Tp>(__t)))>;
+	  { __decay_copy(end(__t)) } -> sentinel_for<__range_iter_t<_Tp>>;
 	};
 
     struct _End
@@ -202,7 +201,7 @@ namespace ranges
 	}
     };
 
-    struct _CEnd
+    struct _CEnd final
     {
       template<typename _Tp>
 	constexpr auto
@@ -281,7 +280,7 @@ namespace ranges
       concept __member_rend = requires(_Tp& __t)
 	{
 	  { __decay_copy(__t.rend()) }
-	    -> sentinel_for<decltype(_RBegin{}(__t))>;
+	    -> sentinel_for<decltype(_RBegin{}(std::forward<_Tp>(__t)))>;
 	};
 
     void rend(auto&) = delete;
@@ -476,7 +475,7 @@ namespace ranges
 	_S_noexcept()
 	{
 	  if constexpr (__member_empty<_Tp>)
-	    return noexcept(std::declval<_Tp&>().empty());
+	    return noexcept(bool(std::declval<_Tp&>().empty()));
 	  else if constexpr (__size0_empty<_Tp>)
 	    return noexcept(_Size{}(std::declval<_Tp&>()) == 0);
 	  else
@@ -507,12 +506,11 @@ namespace ranges
     template<typename _Tp>
       concept __member_data = requires(_Tp& __t)
 	{
-	  { __cust_access::__decay_copy(__t.data()) } -> __pointer_to_object;
+	  { __decay_copy(__t.data()) } -> __pointer_to_object;
 	};
 
     template<typename _Tp>
-      concept __begin_data = requires(_Tp& __t)
-	{ { _Begin{}(__t) } -> contiguous_iterator; };
+      concept __begin_data = contiguous_iterator<__range_iter_t<_Tp>>;
 
     struct _Data
     {
@@ -671,7 +669,7 @@ namespace ranges
 
   // [range.iter.ops] range iterator operations
 
-  struct __advance_fn
+  struct __advance_fn final
   {
     template<input_or_output_iterator _It>
       constexpr void
@@ -776,11 +774,13 @@ namespace ranges
 	    return __n;
 	  }
       }
+
+    void operator&() const = delete;
   };
 
   inline constexpr __advance_fn advance{};
 
-  struct __distance_fn
+  struct __distance_fn final
   {
     template<input_or_output_iterator _It, sentinel_for<_It> _Sent>
       constexpr iter_difference_t<_It>
@@ -809,11 +809,13 @@ namespace ranges
 	else
 	  return (*this)(ranges::begin(__r), ranges::end(__r));
       }
+
+    void operator&() const = delete;
   };
 
   inline constexpr __distance_fn distance{};
 
-  struct __next_fn
+  struct __next_fn final
   {
     template<input_or_output_iterator _It>
       constexpr _It
@@ -846,11 +848,13 @@ namespace ranges
 	ranges::advance(__x, __n, __bound);
 	return __x;
       }
+
+    void operator&() const = delete;
   };
 
   inline constexpr __next_fn next{};
 
-  struct __prev_fn
+  struct __prev_fn final
   {
     template<bidirectional_iterator _It>
       constexpr _It
@@ -875,6 +879,8 @@ namespace ranges
 	ranges::advance(__x, -__n, __bound);
 	return __x;
       }
+
+    void operator&() const = delete;
   };
 
   inline constexpr __prev_fn prev{};

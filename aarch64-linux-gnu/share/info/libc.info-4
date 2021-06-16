@@ -2101,6 +2101,205 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: The catgets Functions,  Next: The message catalog files,  Up: Message catalogs a la X/Open
+
+8.1.1 The ‘catgets’ function family
+-----------------------------------
+
+ -- Function: nl_catd catopen (const char *CAT_NAME, int FLAG)
+
+     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     The ‘catopen’ function tries to locate the message data file named
+     CAT_NAME and loads it when found.  The return value is of an opaque
+     type and can be used in calls to the other functions to refer to
+     this loaded catalog.
+
+     The return value is ‘(nl_catd) -1’ in case the function failed and
+     no catalog was loaded.  The global variable ‘errno’ contains a code
+     for the error causing the failure.  But even if the function call
+     succeeded this does not mean that all messages can be translated.
+
+     Locating the catalog file must happen in a way which lets the user
+     of the program influence the decision.  It is up to the user to
+     decide about the language to use and sometimes it is useful to use
+     alternate catalog files.  All this can be specified by the user by
+     setting some environment variables.
+
+     The first problem is to find out where all the message catalogs are
+     stored.  Every program could have its own place to keep all the
+     different files but usually the catalog files are grouped by
+     languages and the catalogs for all programs are kept in the same
+     place.
+
+     To tell the ‘catopen’ function where the catalog for the program
+     can be found the user can set the environment variable ‘NLSPATH’ to
+     a value which describes her/his choice.  Since this value must be
+     usable for different languages and locales it cannot be a simple
+     string.  Instead it is a format string (similar to ‘printf’’s).  An
+     example is
+
+          /usr/share/locale/%L/%N:/usr/share/locale/%L/LC_MESSAGES/%N
+
+     First one can see that more than one directory can be specified
+     (with the usual syntax of separating them by colons).  The next
+     things to observe are the format string, ‘%L’ and ‘%N’ in this
+     case.  The ‘catopen’ function knows about several of them and the
+     replacement for all of them is of course different.
+
+     ‘%N’
+          This format element is substituted with the name of the
+          catalog file.  This is the value of the CAT_NAME argument
+          given to ‘catgets’.
+
+     ‘%L’
+          This format element is substituted with the name of the
+          currently selected locale for translating messages.  How this
+          is determined is explained below.
+
+     ‘%l’
+          (This is the lowercase ell.)  This format element is
+          substituted with the language element of the locale name.  The
+          string describing the selected locale is expected to have the
+          form ‘LANG[_TERR[.CODESET]]’ and this format uses the first
+          part LANG.
+
+     ‘%t’
+          This format element is substituted by the territory part TERR
+          of the name of the currently selected locale.  See the
+          explanation of the format above.
+
+     ‘%c’
+          This format element is substituted by the codeset part CODESET
+          of the name of the currently selected locale.  See the
+          explanation of the format above.
+
+     ‘%%’
+          Since ‘%’ is used as a meta character there must be a way to
+          express the ‘%’ character in the result itself.  Using ‘%%’
+          does this just like it works for ‘printf’.
+
+     Using ‘NLSPATH’ allows arbitrary directories to be searched for
+     message catalogs while still allowing different languages to be
+     used.  If the ‘NLSPATH’ environment variable is not set, the
+     default value is
+
+          PREFIX/share/locale/%L/%N:PREFIX/share/locale/%L/LC_MESSAGES/%N
+
+     where PREFIX is given to ‘configure’ while installing the GNU C
+     Library (this value is in many cases ‘/usr’ or the empty string).
+
+     The remaining problem is to decide which must be used.  The value
+     decides about the substitution of the format elements mentioned
+     above.  First of all the user can specify a path in the message
+     catalog name (i.e., the name contains a slash character).  In this
+     situation the ‘NLSPATH’ environment variable is not used.  The
+     catalog must exist as specified in the program, perhaps relative to
+     the current working directory.  This situation in not desirable and
+     catalogs names never should be written this way.  Beside this, this
+     behavior is not portable to all other platforms providing the
+     ‘catgets’ interface.
+
+     Otherwise the values of environment variables from the standard
+     environment are examined (*note Standard Environment::).  Which
+     variables are examined is decided by the FLAG parameter of
+     ‘catopen’.  If the value is ‘NL_CAT_LOCALE’ (which is defined in
+     ‘nl_types.h’) then the ‘catopen’ function uses the name of the
+     locale currently selected for the ‘LC_MESSAGES’ category.
+
+     If FLAG is zero the ‘LANG’ environment variable is examined.  This
+     is a left-over from the early days when the concept of locales had
+     not even reached the level of POSIX locales.
+
+     The environment variable and the locale name should have a value of
+     the form ‘LANG[_TERR[.CODESET]]’ as explained above.  If no
+     environment variable is set the ‘"C"’ locale is used which prevents
+     any translation.
+
+     The return value of the function is in any case a valid string.
+     Either it is a translation from a message catalog or it is the same
+     as the STRING parameter.  So a piece of code to decide whether a
+     translation actually happened must look like this:
+
+          {
+            char *trans = catgets (desc, set, msg, input_string);
+            if (trans == input_string)
+              {
+                /* Something went wrong.  */
+              }
+          }
+
+     When an error occurs the global variable ‘errno’ is set to
+
+     EBADF
+          The catalog does not exist.
+     ENOMSG
+          The set/message tuple does not name an existing element in the
+          message catalog.
+
+     While it sometimes can be useful to test for errors programs
+     normally will avoid any test.  If the translation is not available
+     it is no big problem if the original, untranslated message is
+     printed.  Either the user understands this as well or s/he will
+     look for the reason why the messages are not translated.
+
+   Please note that the currently selected locale does not depend on a
+call to the ‘setlocale’ function.  It is not necessary that the locale
+data files for this locale exist and calling ‘setlocale’ succeeds.  The
+‘catopen’ function directly reads the values of the environment
+variables.
+
+ -- Function: char * catgets (nl_catd CATALOG_DESC, int SET, int
+          MESSAGE, const char *STRING)
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘catgets’ has to be used to access the message catalog
+     previously opened using the ‘catopen’ function.  The CATALOG_DESC
+     parameter must be a value previously returned by ‘catopen’.
+
+     The next two parameters, SET and MESSAGE, reflect the internal
+     organization of the message catalog files.  This will be explained
+     in detail below.  For now it is interesting to know that a catalog
+     can consist of several sets and the messages in each thread are
+     individually numbered using numbers.  Neither the set number nor
+     the message number must be consecutive.  They can be arbitrarily
+     chosen.  But each message (unless equal to another one) must have
+     its own unique pair of set and message numbers.
+
+     Since it is not guaranteed that the message catalog for the
+     language selected by the user exists the last parameter STRING
+     helps to handle this case gracefully.  If no matching string can be
+     found STRING is returned.  This means for the programmer that
+
+        • the STRING parameters should contain reasonable text (this
+          also helps to understand the program seems otherwise there
+          would be no hint on the string which is expected to be
+          returned.
+        • all STRING arguments should be written in the same language.
+
+   It is somewhat uncomfortable to write a program using the ‘catgets’
+functions if no supporting functionality is available.  Since each
+set/message number tuple must be unique the programmer must keep lists
+of the messages at the same time the code is written.  And the work
+between several people working on the same project must be coordinated.
+We will see how some of these problems can be relaxed a bit (*note
+Common Usage::).
+
+ -- Function: int catclose (nl_catd CATALOG_DESC)
+     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe corrupt mem |
+     *Note POSIX Safety Concepts::.
+
+     The ‘catclose’ function can be used to free the resources
+     associated with a message catalog which previously was opened by a
+     call to ‘catopen’.  If the resources can be successfully freed the
+     function returns ‘0’.  Otherwise it returns ‘−1’ and the global
+     variable ‘errno’ is set.  Errors can occur if the catalog
+     descriptor CATALOG_DESC is not valid in which case ‘errno’ is set
+     to ‘EBADF’.
+
+
 File: libc.info,  Node: The message catalog files,  Next: The gencat program,  Prev: The catgets Functions,  Up: Message catalogs a la X/Open
 
 8.1.2 Format of the message catalog files
@@ -6928,206 +7127,4 @@ stream is oriented.  If the locales are changed at the runtime this
 might produce surprising results unless one pays attention.  This is
 just another good reason to orient the stream explicitly as soon as
 possible, perhaps with a call to ‘fwide’.
-
-
-File: libc.info,  Node: Simple Output,  Next: Character Input,  Prev: Streams and I18N,  Up: I/O on Streams
-
-12.7 Simple Output by Characters or Lines
-=========================================
-
-This section describes functions for performing character- and
-line-oriented output.
-
-   These narrow stream functions are declared in the header file
-‘stdio.h’ and the wide stream functions in ‘wchar.h’.
-
- -- Function: int fputc (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘fputc’ function converts the character C to type ‘unsigned
-     char’, and writes it to the stream STREAM.  ‘EOF’ is returned if a
-     write error occurs; otherwise the character C is returned.
-
- -- Function: wint_t fputwc (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘fputwc’ function writes the wide character WC to the stream
-     STREAM.  ‘WEOF’ is returned if a write error occurs; otherwise the
-     character WC is returned.
-
- -- Function: int fputc_unlocked (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputc_unlocked’ function is equivalent to the ‘fputc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t fputwc_unlocked (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputwc_unlocked’ function is equivalent to the ‘fputwc’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int putc (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fputc’, except that most systems implement it as
-     a macro, making it faster.  One consequence is that it may evaluate
-     the STREAM argument more than once, which is an exception to the
-     general rule for macros.  ‘putc’ is usually the best function to
-     use for writing a single character.
-
- -- Function: wint_t putwc (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fputwc’, except that it can be implement as a
-     macro, making it faster.  One consequence is that it may evaluate
-     the STREAM argument more than once, which is an exception to the
-     general rule for macros.  ‘putwc’ is usually the best function to
-     use for writing a single wide character.
-
- -- Function: int putc_unlocked (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putc_unlocked’ function is equivalent to the ‘putc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t putwc_unlocked (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putwc_unlocked’ function is equivalent to the ‘putwc’ function
-     except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int putchar (int C)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘putchar’ function is equivalent to ‘putc’ with ‘stdout’ as the
-     value of the STREAM argument.
-
- -- Function: wint_t putwchar (wchar_t WC)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘putwchar’ function is equivalent to ‘putwc’ with ‘stdout’ as
-     the value of the STREAM argument.
-
- -- Function: int putchar_unlocked (int C)
-
-     Preliminary: | MT-Unsafe race:stdout | AS-Unsafe corrupt |
-     AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putchar_unlocked’ function is equivalent to the ‘putchar’
-     function except that it does not implicitly lock the stream.
-
- -- Function: wint_t putwchar_unlocked (wchar_t WC)
-
-     Preliminary: | MT-Unsafe race:stdout | AS-Unsafe corrupt |
-     AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putwchar_unlocked’ function is equivalent to the ‘putwchar’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int fputs (const char *S, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The function ‘fputs’ writes the string S to the stream STREAM.  The
-     terminating null character is not written.  This function does
-     _not_ add a newline character, either.  It outputs only the
-     characters in the string.
-
-     This function returns ‘EOF’ if a write error occurs, and otherwise
-     a non-negative value.
-
-     For example:
-
-          fputs ("Are ", stdout);
-          fputs ("you ", stdout);
-          fputs ("hungry?\n", stdout);
-
-     outputs the text ‘Are you hungry?’ followed by a newline.
-
- -- Function: int fputws (const wchar_t *WS, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The function ‘fputws’ writes the wide character string WS to the
-     stream STREAM.  The terminating null character is not written.
-     This function does _not_ add a newline character, either.  It
-     outputs only the characters in the string.
-
-     This function returns ‘WEOF’ if a write error occurs, and otherwise
-     a non-negative value.
-
- -- Function: int fputs_unlocked (const char *S, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputs_unlocked’ function is equivalent to the ‘fputs’ function
-     except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int fputws_unlocked (const wchar_t *WS, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputws_unlocked’ function is equivalent to the ‘fputws’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int puts (const char *S)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     The ‘puts’ function writes the string S to the stream ‘stdout’
-     followed by a newline.  The terminating null character of the
-     string is not written.  (Note that ‘fputs’ does _not_ write a
-     newline as this function does.)
-
-     ‘puts’ is the most convenient function for printing simple
-     messages.  For example:
-
-          puts ("This is a message.");
-
-     outputs the text ‘This is a message.’ followed by a newline.
-
- -- Function: int putw (int W, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This function writes the word W (that is, an ‘int’) to STREAM.  It
-     is provided for compatibility with SVID, but we recommend you use
-     ‘fwrite’ instead (*note Block Input/Output::).
 

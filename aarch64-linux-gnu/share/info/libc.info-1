@@ -4758,6 +4758,40 @@ on semantics undefined within the standard.
      This macro was introduced as part of the Large File Support
      extension (LFS).
 
+ -- Macro: _TIME_BITS
+     This macro determines the bit size of ‘time_t’ (and therefore the
+     bit size of all ‘time_t’ derived types and the prototypes of all
+     related functions).  If ‘_TIME_BITS’ is undefined, the bit size of
+     ‘time_t’ is architecture dependent.
+
+     Possible values of ‘_TIME_BITS’:
+       1. ‘_TIME_BITS=64’ and port from the outset uses 64-bit ‘time_t’
+          and word size equals to 64 bits (e.g.  x86_64) - no action
+
+       2. ‘_TIME_BITS=32’ and port from the outset uses 32-bit ‘time_t’
+          and word size equals to 64 bits (e.g.  ARM) - no action
+
+       3. ‘_TIME_BITS=64’ and port from the outset uses 64-bit ‘time_t’
+          and word size equals to 32 bits (e.g.  ARC, RV32) - no action
+
+       4. ‘_TIME_BITS=64’ and port from the outset uses 32-bit ‘time_t’
+          and word size equals to 32 bits (e.g.  ARM) - the ‘time_t’ is
+          modified to be able to hold 64-bit time.
+
+       5. For any other use case the compile-time error is emitted.
+
+     The ‘_TIME_BITS’ can be only used when ‘_FILE_OFFSET_BITS=64’ is
+     also defined.
+
+     For the point 4 above, calls to proper syscalls depend on the Linux
+     kernel version on which the system is running.  For Linux kernel
+     version above 5.1 syscalls supporting 64-bit time are used.
+     Otherwise, a fallback code is used with legacy (i.e.  32-bit)
+     syscalls.
+
+     By using this macro certain ports gain support for 64-bit time and
+     as a result become immune to Y2038 problem.
+
  -- Macro: _ISOC99_SOURCE
 
      If this macro is defined, features from ISO C99 are included.
