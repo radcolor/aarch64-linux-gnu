@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "12.0.0 20210616 (experimental)")
+(!version  "12.0.0 20210620 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 10 ada c cp d fortran go jit lto objc objcp)
 (!fileslist 223
@@ -17262,7 +17262,7 @@
   nil 0 nil nil )
  
  (!type undefined 841 nil  gc_unused "TARGET_UNIT"
-  (!srcfileloc  "defaults.h" 1484)
+  (!srcfileloc  "defaults.h" 1475)
  )
  
  (!type struct 842 
@@ -19318,7 +19318,7 @@
  
  (!type already_seen 808)
  
- (!type user_struct 1026 nil  gc_unused "vec<cgraph_edge*>"
+ (!type user_struct 1026 nil  gc_unused "auto_vec<cgraph_edge*>"
   (!srcfileloc  "cgraph.h" 1142)
   (!fields 1 
    (!pair  "cgraph_edge"
@@ -28128,7 +28128,7 @@
   nil 0 nil nil )
  
  (!type struct 2051 nil  gc_used "typename_hasher"
-  (!srcfileloc  "cp/decl.c" 3972)
+  (!srcfileloc  "cp/decl.c" 3971)
   (!fields 0 )
   nil 516 nil nil )
  
@@ -28137,11 +28137,11 @@
    (!type already_seen 2052)
   )
   gc_pointed_to "hash_table<typename_hasher>"
-  (!srcfileloc  "cp/decl.c" 3972)
+  (!srcfileloc  "cp/decl.c" 3971)
   (!fields 1 
    (!pair  "typename_hasher"
     (!type already_seen 2051)
-    (!srcfileloc  "cp/decl.c" 3972)
+    (!srcfileloc  "cp/decl.c" 3971)
     nil )
   )
  )
@@ -28875,15 +28875,15 @@
    (!type already_seen 2158)
   )
   gc_pointed_to "hash_map<tree,tree_pair_p>"
-  (!srcfileloc  "cp/pt.c" 29174)
+  (!srcfileloc  "cp/pt.c" 29185)
   (!fields 2 
    (!pair  "tree_pair_p"
     (!type already_seen 531)
-    (!srcfileloc  "cp/pt.c" 29174)
+    (!srcfileloc  "cp/pt.c" 29185)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/pt.c" 29174)
+    (!srcfileloc  "cp/pt.c" 29185)
     nil )
   )
  )
@@ -30016,7 +30016,7 @@
   nil )
  (!pair  "hash_map<tree,tree_pair_p>"
   (!type already_seen 2158)
-  (!srcfileloc  "cp/pt.c" 29174)
+  (!srcfileloc  "cp/pt.c" 29185)
   nil )
  (!pair  "pending_template"
   (!type already_seen 2145)
@@ -30288,11 +30288,11 @@
   nil )
  (!pair  "typename_hasher"
   (!type already_seen 2051)
-  (!srcfileloc  "cp/decl.c" 3972)
+  (!srcfileloc  "cp/decl.c" 3971)
   nil )
  (!pair  "hash_table<typename_hasher>"
   (!type already_seen 2052)
-  (!srcfileloc  "cp/decl.c" 3972)
+  (!srcfileloc  "cp/decl.c" 3971)
   nil )
  (!pair  "incomplete_var"
   (!type already_seen 2046)
@@ -32224,7 +32224,7 @@
   (!type already_seen 807)
   (!srcfileloc  "cgraph.h" 1382)
   nil )
- (!pair  "vec<cgraph_edge*>"
+ (!pair  "auto_vec<cgraph_edge*>"
   (!type already_seen 1026)
   (!srcfileloc  "cgraph.h" 1142)
   nil )
@@ -32928,11 +32928,11 @@
   nil )
  (!pair  "target_unit"
   (!type already_seen 841)
-  (!srcfileloc  "defaults.h" 1484)
+  (!srcfileloc  "defaults.h" 1475)
   nil )
  (!pair  "TARGET_UNIT"
   (!type already_seen 841)
-  (!srcfileloc  "defaults.h" 1484)
+  (!srcfileloc  "defaults.h" 1475)
   nil )
  (!pair  "machine_function"
   (!type already_seen 418)
@@ -34389,7 +34389,7 @@
   nil )
  (!pair  "dguide_cache"
   (!type already_seen 2159)
-  (!srcfileloc  "cp/pt.c" 29174)
+  (!srcfileloc  "cp/pt.c" 29185)
   (!options 
    (!option deletable string  "")
   )
@@ -34662,18 +34662,18 @@
   nil )
  (!pair  "start_cleanup_cnt"
   (!type already_seen 2)
-  (!srcfileloc  "cp/decl.c" 9042)
+  (!srcfileloc  "cp/decl.c" 9041)
   nil )
  (!pair  "decomp_type_table"
   (!type already_seen 921)
-  (!srcfileloc  "cp/decl.c" 8495)
+  (!srcfileloc  "cp/decl.c" 8494)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "typename_htab"
   (!type already_seen 2053)
-  (!srcfileloc  "cp/decl.c" 3972)
+  (!srcfileloc  "cp/decl.c" 3971)
   nil )
  (!pair  "local_entities"
   (!type already_seen 84)
@@ -35430,11 +35430,11 @@
   nil )
  (!pair  "stack_chk_fail_decl"
   (!type already_seen 23)
-  (!srcfileloc  "targhooks.c" 890)
+  (!srcfileloc  "targhooks.c" 902)
   nil )
  (!pair  "stack_chk_guard_decl"
   (!type already_seen 23)
-  (!srcfileloc  "targhooks.c" 857)
+  (!srcfileloc  "targhooks.c" 869)
   nil )
  (!pair  "critical_name_mutexes"
   (!type already_seen 390)
