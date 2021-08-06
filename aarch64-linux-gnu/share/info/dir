@@ -44,6 +44,7 @@ GNU C library functions and macros
 * _exit: (libc)Termination Internals.
 * _Exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
+* _Fork: (libc)Creating a Process.
 * _Imaginary_I: (libc)Complex Numbers.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
@@ -295,7 +296,9 @@ GNU C library functions and macros
 * clogl: (libc)Exponents and Logarithms.
 * clog: (libc)Exponents and Logarithms.
 * clog10l: (libc)Exponents and Logarithms.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * close: (libc)Opening and Closing Files.
 * cnd_broadcast: (libc)ISO C Condition Variables.
@@ -339,7 +342,8 @@ GNU C library functions and macros
 * cprojl: (libc)Operations on Complex.
 * cproj: (libc)Operations on Complex.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
@@ -618,10 +622,8 @@ GNU C library functions and macros
 * exp10f: (libc)Exponents and Logarithms.
 * exp10l: (libc)Exponents and Logarithms.
 * exp10: (libc)Exponents and Logarithms.
-* exp2fNx: (libc)Exponents and Logarithms.
 * exp2fN: (libc)Exponents and Logarithms.
 * exp2f: (libc)Exponents and Logarithms.
-* exp2l: (libc)Exponents and Logarithms.
 * exp2: (libc)Exponents and Logarithms.
 * expfNx: (libc)Exponents and Logarithms.
 * expfN: (libc)Exponents and Logarithms.
@@ -634,6 +636,8 @@ GNU C library functions and macros
 * expm1l: (libc)Exponents and Logarithms.
 * expm1: (libc)Exponents and Logarithms.
 * exp: (libc)Exponents and Logarithms.
+* exp2fNx: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
 * EXPR_NEST_MAX: (libc)Utility Limits.
 * F_DUPFD: (libc)Duplicating Descriptors.
 * F_GETFD: (libc)Descriptor Flags.
@@ -784,10 +788,10 @@ GNU C library functions and macros
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fnmatch: (libc)Wildcard Matching.
-* fopen64: (libc)Opening Streams.
 * FOPEN_MAX: (libc)Opening Streams.
 * fopencookie: (libc)Streams and Cookies.
 * fopen: (libc)Opening Streams.
+* fopen64: (libc)Opening Streams.
 * forkpty: (libc)Pseudo-Terminal Pairs.
 * fork: (libc)Creating a Process.
 * FP_ILOGB0: (libc)Exponents and Logarithms.
@@ -891,10 +895,10 @@ GNU C library functions and macros
 * getgroups: (libc)Reading Persona.
 * gethostbyaddr_r: (libc)Host Names.
 * gethostbyaddr: (libc)Host Names.
-* gethostbyname2_r: (libc)Host Names.
-* gethostbyname2: (libc)Host Names.
 * gethostbyname_r: (libc)Host Names.
 * gethostbyname: (libc)Host Names.
+* gethostbyname2_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
 * gethostent: (libc)Host Names.
 * gethostid: (libc)Host Identification.
 * gethostname: (libc)Host Identification.
@@ -969,16 +973,15 @@ GNU C library functions and macros
 * getwc: (libc)Character Input.
 * getwd: (libc)Working Directory.
 * getw: (libc)Character Input.
-* glob64: (libc)Calling Glob.
 * globfree: (libc)More Flags for Globbing.
 * globfree64: (libc)More Flags for Globbing.
 * glob: (libc)Calling Glob.
+* glob64: (libc)Calling Glob.
 * gmtime_r: (libc)Broken-down Time.
 * gmtime: (libc)Broken-down Time.
 * grantpt: (libc)Allocation.
 * gsignal: (libc)Signaling Yourself.
 * gtty: (libc)BSD Terminal Modes.
-* HAS_CPU_FEATURE: (libc)X86.
 * hasmntopt: (libc)mtab.
 * hcreate_r: (libc)Hash Search Function.
 * hcreate: (libc)Hash Search Function.
@@ -1181,7 +1184,10 @@ GNU C library functions and macros
 * log1pf: (libc)Exponents and Logarithms.
 * log1pl: (libc)Exponents and Logarithms.
 * log1p: (libc)Exponents and Logarithms.
+* log2fNx: (libc)Exponents and Logarithms.
+* log2fN: (libc)Exponents and Logarithms.
 * log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
 * log2: (libc)Exponents and Logarithms.
 * logbfNx: (libc)Exponents and Logarithms.
 * logbfN: (libc)Exponents and Logarithms.
@@ -1197,9 +1203,6 @@ GNU C library functions and macros
 * logout: (libc)Logging In and Out.
 * logwtmp: (libc)Logging In and Out.
 * log: (libc)Exponents and Logarithms.
-* log2fNx: (libc)Exponents and Logarithms.
-* log2fN: (libc)Exponents and Logarithms.
-* log2l: (libc)Exponents and Logarithms.
 * longjmp: (libc)Non-Local Details.
 * lrand48_r: (libc)SVID Random.
 * lrand48: (libc)SVID Random.
@@ -1259,9 +1262,9 @@ GNU C library functions and macros
 * mkstemp: (libc)Temporary Files.
 * mktemp: (libc)Temporary Files.
 * mktime: (libc)Broken-down Time.
+* mlock2: (libc)Page Lock Functions.
 * mlockall: (libc)Page Lock Functions.
 * mlock: (libc)Page Lock Functions.
-* mlock2: (libc)Page Lock Functions.
 * mmap: (libc)Memory-mapped I/O.
 * mmap64: (libc)Memory-mapped I/O.
 * modffNx: (libc)Rounding Functions.

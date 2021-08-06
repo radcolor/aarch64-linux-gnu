@@ -1516,11 +1516,11 @@ void gimple_init (gimple *g, enum gimple_code code, unsigned num_ops);
 gimple *gimple_alloc (enum gimple_code, unsigned CXX_MEM_STAT_INFO);
 greturn *gimple_build_return (tree);
 void gimple_call_reset_alias_info (gcall *);
-gcall *gimple_build_call_vec (tree, vec<tree> );
+gcall *gimple_build_call_vec (tree, const vec<tree> &);
 gcall *gimple_build_call (tree, unsigned, ...);
 gcall *gimple_build_call_valist (tree, unsigned, va_list);
 gcall *gimple_build_call_internal (enum internal_fn, unsigned, ...);
-gcall *gimple_build_call_internal_vec (enum internal_fn, vec<tree> );
+gcall *gimple_build_call_internal_vec (enum internal_fn, const vec<tree> &);
 gcall *gimple_build_call_from_tree (tree, tree);
 gassign *gimple_build_assign (tree, tree CXX_MEM_STAT_INFO);
 gassign *gimple_build_assign (tree, enum tree_code,
@@ -1547,7 +1547,7 @@ gtry *gimple_build_try (gimple_seq, gimple_seq,
 gimple *gimple_build_wce (gimple_seq);
 gresx *gimple_build_resx (int);
 gswitch *gimple_build_switch_nlabels (unsigned, tree, tree);
-gswitch *gimple_build_switch (tree, tree, vec<tree> );
+gswitch *gimple_build_switch (tree, tree, const vec<tree> &);
 geh_dispatch *gimple_build_eh_dispatch (int);
 gdebug *gimple_build_debug_bind (tree, tree, gimple * CXX_MEM_STAT_INFO);
 gdebug *gimple_build_debug_source_bind (tree, tree, gimple * CXX_MEM_STAT_INFO);
@@ -1601,8 +1601,8 @@ void gimple_set_lhs (gimple *, tree);
 gimple *gimple_copy (gimple *);
 void gimple_move_vops (gimple *, gimple *);
 bool gimple_has_side_effects (const gimple *);
-bool gimple_could_trap_p_1 (gimple *, bool, bool);
-bool gimple_could_trap_p (gimple *);
+bool gimple_could_trap_p_1 (const gimple *, bool, bool);
+bool gimple_could_trap_p (const gimple *);
 bool gimple_assign_rhs_could_trap_p (gimple *);
 extern void dump_gimple_statistics (void);
 unsigned get_gimple_rhs_num_ops (enum tree_code);
@@ -1626,8 +1626,8 @@ extern bool nonbarrier_call_p (gimple *);
 extern bool infer_nonnull_range (gimple *, tree);
 extern bool infer_nonnull_range_by_dereference (gimple *, tree);
 extern bool infer_nonnull_range_by_attribute (gimple *, tree);
-extern void sort_case_labels (vec<tree>);
-extern void preprocess_case_label_vec_for_gimple (vec<tree>, tree, tree *);
+extern void sort_case_labels (vec<tree> &);
+extern void preprocess_case_label_vec_for_gimple (vec<tree> &, tree, tree *);
 extern void gimple_seq_set_location (gimple_seq, location_t);
 extern void gimple_seq_discard (gimple_seq);
 extern void maybe_remove_unused_call_args (struct function *, gimple *);
@@ -1635,6 +1635,24 @@ extern bool gimple_inexpensive_call_p (gcall *);
 extern bool stmt_can_terminate_bb_p (gimple *);
 extern location_t gimple_or_expr_nonartificial_location (gimple *, tree);
 
+/* Return the disposition for a warning (or all warnings by default)
+   for a statement.  */
+extern bool warning_suppressed_p (const gimple *, opt_code = all_warnings)
+  ATTRIBUTE_NONNULL (1);
+/* Set the disposition for a warning (or all warnings by default)
+   at a location to enabled by default.  */
+extern void suppress_warning (gimple *, opt_code = all_warnings,
+			      bool = true) ATTRIBUTE_NONNULL (1);
+
+/* Copy the warning disposition mapping from one statement to another.  */
+extern void copy_warning (gimple *, const gimple *)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
+/* Copy the warning disposition mapping from an expression to a statement.  */
+extern void copy_warning (gimple *, const_tree)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
+/* Copy the warning disposition mapping from a statement to an expression.  */
+extern void copy_warning (tree, const gimple *)
+  ATTRIBUTE_NONNULL (1) ATTRIBUTE_NONNULL (2);
 
 /* Formal (expression) temporary table handling: multiple occurrences of
    the same scalar expression are evaluated into the same temporary.  */
@@ -1855,15 +1873,16 @@ gimple_block (const gimple *g)
   return LOCATION_BLOCK (g->location);
 }
 
+/* Forward declare.  */
+static inline void gimple_set_location (gimple *, location_t);
 
 /* Set BLOCK to be the lexical scope block holding statement G.  */
 
 static inline void
 gimple_set_block (gimple *g, tree block)
 {
-  g->location = set_block (g->location, block);
+  gimple_set_location (g, set_block (g->location, block));
 }
-
 
 /* Return location information for statement G.  */
 
@@ -1887,6 +1906,8 @@ gimple_location_safe (const gimple *g)
 static inline void
 gimple_set_location (gimple *g, location_t location)
 {
+  /* Copy the no-warning data to the statement location.  */
+  copy_warning (location, g->location);
   g->location = location;
 }
 
@@ -6587,48 +6608,6 @@ is_gimple_resx (const gimple *gs)
   return gimple_code (gs) == GIMPLE_RESX;
 }
 
-/* Return the type of the main expression computed by STMT.  Return
-   void_type_node if the statement computes nothing.  */
-
-static inline tree
-gimple_expr_type (const gimple *stmt)
-{
-  enum gimple_code code = gimple_code (stmt);
-  /* In general we want to pass out a type that can be substituted
-     for both the RHS and the LHS types if there is a possibly
-     useless conversion involved.  That means returning the
-     original RHS type as far as we can reconstruct it.  */
-  if (code == GIMPLE_CALL)
-    {
-      const gcall *call_stmt = as_a <const gcall *> (stmt);
-      if (gimple_call_internal_p (call_stmt))
-	switch (gimple_call_internal_fn (call_stmt))
-	  {
-	  case IFN_MASK_STORE:
-	  case IFN_SCATTER_STORE:
-	    return TREE_TYPE (gimple_call_arg (call_stmt, 3));
-	  case IFN_MASK_SCATTER_STORE:
-	    return TREE_TYPE (gimple_call_arg (call_stmt, 4));
-	  default:
-	    break;
-	  }
-      return gimple_call_return_type (call_stmt);
-    }
-  else if (code == GIMPLE_ASSIGN)
-    {
-      if (gimple_assign_rhs_code (stmt) == POINTER_PLUS_EXPR)
-        return TREE_TYPE (gimple_assign_rhs1 (stmt));
-      else
-        /* As fallback use the type of the LHS.  */
-        return TREE_TYPE (gimple_get_lhs (stmt));
-    }
-  else if (code == GIMPLE_COND)
-    return boolean_type_node;
-  else if (code == GIMPLE_PHI)
-    return TREE_TYPE (gimple_phi_result (stmt));
-  else
-    return void_type_node;
-}
 
 /* Enum and arrays used for allocation stats.  Keep in sync with
    gimple.c:gimple_alloc_kind_names.  */

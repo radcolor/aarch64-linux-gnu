@@ -1,11 +1,11 @@
 /* Generated at libc build time from syscall list.  */
-/* The system call list corresponds to kernel 5.12.  */
+/* The system call list corresponds to kernel 5.13.  */
 
 #ifndef _SYSCALL_H
 # error "Never use <bits/syscall.h> directly; include <sys/syscall.h> instead."
 #endif
 
-#define __GLIBC_LINUX_VERSION_CODE 330752
+#define __GLIBC_LINUX_VERSION_CODE 331008
 
 #ifdef __NR_FAST_atomic_update
 # define SYS_FAST_atomic_update __NR_FAST_atomic_update
@@ -805,6 +805,18 @@
 
 #ifdef __NR_kill
 # define SYS_kill __NR_kill
+#endif
+
+#ifdef __NR_landlock_add_rule
+# define SYS_landlock_add_rule __NR_landlock_add_rule
+#endif
+
+#ifdef __NR_landlock_create_ruleset
+# define SYS_landlock_create_ruleset __NR_landlock_create_ruleset
+#endif
+
+#ifdef __NR_landlock_restrict_self
+# define SYS_landlock_restrict_self __NR_landlock_restrict_self
 #endif
 
 #ifdef __NR_lchown

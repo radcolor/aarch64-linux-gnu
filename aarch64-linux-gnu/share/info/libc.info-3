@@ -1,6 +1,6 @@
-This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -43,7 +43,8 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -246,7 +247,6 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
-* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -715,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -2099,97 +2102,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Erasing Sensitive Data,  Next: Shuffling Bytes,  Prev: Finding Tokens in a String,  Up: String and Array Utilities
-
-5.11 Erasing Sensitive Data
-===========================
-
-Sensitive data, such as cryptographic keys, should be erased from memory
-after use, to reduce the risk that a bug will expose it to the outside
-world.  However, compiler optimizations may determine that an erasure
-operation is “unnecessary,” and remove it from the generated code,
-because no _correct_ program could access the variable or heap object
-containing the sensitive data after it’s deallocated.  Since erasure is
-a precaution against bugs, this optimization is inappropriate.
-
-   The function ‘explicit_bzero’ erases a block of memory, and
-guarantees that the compiler will not remove the erasure as
-“unnecessary.”
-
-     #include <string.h>
-
-     extern void encrypt (const char *key, const char *in,
-                          char *out, size_t n);
-     extern void genkey (const char *phrase, char *key);
-
-     void encrypt_with_phrase (const char *phrase, const char *in,
-                               char *out, size_t n)
-     {
-       char key[16];
-       genkey (phrase, key);
-       encrypt (key, in, out, n);
-       explicit_bzero (key, 16);
-     }
-
-In this example, if ‘memset’, ‘bzero’, or a hand-written loop had been
-used, the compiler might remove them as “unnecessary.”
-
-   *Warning:* ‘explicit_bzero’ does not guarantee that sensitive data is
-_completely_ erased from the computer’s memory.  There may be copies in
-temporary storage areas, such as registers and “scratch” stack space;
-since these are invisible to the source code, a library function cannot
-erase them.
-
-   Also, ‘explicit_bzero’ only operates on RAM. If a sensitive data
-object never needs to have its address taken other than to call
-‘explicit_bzero’, it might be stored entirely in CPU registers _until_
-the call to ‘explicit_bzero’.  Then it will be copied into RAM, the copy
-will be erased, and the original will remain intact.  Data in RAM is
-more likely to be exposed by a bug than data in registers, so this
-creates a brief window where the data is at greater risk of exposure
-than it would have been if the program didn’t try to erase it at all.
-
-   Declaring sensitive variables as ‘volatile’ will make both the above
-problems _worse_; a ‘volatile’ variable will be stored in memory for its
-entire lifetime, and the compiler will make _more_ copies of it than it
-would otherwise have.  Attempting to erase a normal variable “by hand”
-through a ‘volatile’-qualified pointer doesn’t work at all—because the
-variable itself is not ‘volatile’, some compilers will ignore the
-qualification on the pointer and remove the erasure anyway.
-
-   Having said all that, in most situations, using ‘explicit_bzero’ is
-better than not using it.  At present, the only way to do a more
-thorough job is to write the entire sensitive operation in assembly
-language.  We anticipate that future compilers will recognize calls to
-‘explicit_bzero’ and take appropriate steps to erase all the copies of
-the affected data, whereever they may be.
-
- -- Function: void explicit_bzero (void *BLOCK, size_t LEN)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘explicit_bzero’ writes zero into LEN bytes of memory beginning at
-     BLOCK, just as ‘bzero’ would.  The zeroes are always written, even
-     if the compiler could determine that this is “unnecessary” because
-     no correct program could read them back.
-
-     *Note:* The _only_ optimization that ‘explicit_bzero’ disables is
-     removal of “unnecessary” writes to memory.  The compiler can
-     perform all the other optimizations that it could for a call to
-     ‘memset’.  For instance, it may replace the function call with
-     inline memory writes, and it may assume that BLOCK cannot be a null
-     pointer.
-
-     *Portability Note:* This function first appeared in OpenBSD 5.5 and
-     has not been standardized.  Other systems may provide the same
-     functionality under a different name, such as ‘explicit_memset’,
-     ‘memset_s’, or ‘SecureZeroMemory’.
-
-     The GNU C Library declares this function in ‘string.h’, but on
-     other systems it may be in ‘strings.h’ instead.
 
 
 File: libc.info,  Node: Shuffling Bytes,  Next: Obfuscating Data,  Prev: Erasing Sensitive Data,  Up: String and Array Utilities
@@ -6913,4 +6825,203 @@ are defined/declared in the ‘nl_types.h’ header file.
 * The gencat program::         How to generate message catalogs files which
                                 can be used by the functions.
 * Common Usage::               How to use the ‘catgets’ interface.
+
+
+File: libc.info,  Node: The catgets Functions,  Next: The message catalog files,  Up: Message catalogs a la X/Open
+
+8.1.1 The ‘catgets’ function family
+-----------------------------------
+
+ -- Function: nl_catd catopen (const char *CAT_NAME, int FLAG)
+
+     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     The ‘catopen’ function tries to locate the message data file named
+     CAT_NAME and loads it when found.  The return value is of an opaque
+     type and can be used in calls to the other functions to refer to
+     this loaded catalog.
+
+     The return value is ‘(nl_catd) -1’ in case the function failed and
+     no catalog was loaded.  The global variable ‘errno’ contains a code
+     for the error causing the failure.  But even if the function call
+     succeeded this does not mean that all messages can be translated.
+
+     Locating the catalog file must happen in a way which lets the user
+     of the program influence the decision.  It is up to the user to
+     decide about the language to use and sometimes it is useful to use
+     alternate catalog files.  All this can be specified by the user by
+     setting some environment variables.
+
+     The first problem is to find out where all the message catalogs are
+     stored.  Every program could have its own place to keep all the
+     different files but usually the catalog files are grouped by
+     languages and the catalogs for all programs are kept in the same
+     place.
+
+     To tell the ‘catopen’ function where the catalog for the program
+     can be found the user can set the environment variable ‘NLSPATH’ to
+     a value which describes her/his choice.  Since this value must be
+     usable for different languages and locales it cannot be a simple
+     string.  Instead it is a format string (similar to ‘printf’’s).  An
+     example is
+
+          /usr/share/locale/%L/%N:/usr/share/locale/%L/LC_MESSAGES/%N
+
+     First one can see that more than one directory can be specified
+     (with the usual syntax of separating them by colons).  The next
+     things to observe are the format string, ‘%L’ and ‘%N’ in this
+     case.  The ‘catopen’ function knows about several of them and the
+     replacement for all of them is of course different.
+
+     ‘%N’
+          This format element is substituted with the name of the
+          catalog file.  This is the value of the CAT_NAME argument
+          given to ‘catgets’.
+
+     ‘%L’
+          This format element is substituted with the name of the
+          currently selected locale for translating messages.  How this
+          is determined is explained below.
+
+     ‘%l’
+          (This is the lowercase ell.)  This format element is
+          substituted with the language element of the locale name.  The
+          string describing the selected locale is expected to have the
+          form ‘LANG[_TERR[.CODESET]]’ and this format uses the first
+          part LANG.
+
+     ‘%t’
+          This format element is substituted by the territory part TERR
+          of the name of the currently selected locale.  See the
+          explanation of the format above.
+
+     ‘%c’
+          This format element is substituted by the codeset part CODESET
+          of the name of the currently selected locale.  See the
+          explanation of the format above.
+
+     ‘%%’
+          Since ‘%’ is used as a meta character there must be a way to
+          express the ‘%’ character in the result itself.  Using ‘%%’
+          does this just like it works for ‘printf’.
+
+     Using ‘NLSPATH’ allows arbitrary directories to be searched for
+     message catalogs while still allowing different languages to be
+     used.  If the ‘NLSPATH’ environment variable is not set, the
+     default value is
+
+          PREFIX/share/locale/%L/%N:PREFIX/share/locale/%L/LC_MESSAGES/%N
+
+     where PREFIX is given to ‘configure’ while installing the GNU C
+     Library (this value is in many cases ‘/usr’ or the empty string).
+
+     The remaining problem is to decide which must be used.  The value
+     decides about the substitution of the format elements mentioned
+     above.  First of all the user can specify a path in the message
+     catalog name (i.e., the name contains a slash character).  In this
+     situation the ‘NLSPATH’ environment variable is not used.  The
+     catalog must exist as specified in the program, perhaps relative to
+     the current working directory.  This situation in not desirable and
+     catalogs names never should be written this way.  Beside this, this
+     behavior is not portable to all other platforms providing the
+     ‘catgets’ interface.
+
+     Otherwise the values of environment variables from the standard
+     environment are examined (*note Standard Environment::).  Which
+     variables are examined is decided by the FLAG parameter of
+     ‘catopen’.  If the value is ‘NL_CAT_LOCALE’ (which is defined in
+     ‘nl_types.h’) then the ‘catopen’ function uses the name of the
+     locale currently selected for the ‘LC_MESSAGES’ category.
+
+     If FLAG is zero the ‘LANG’ environment variable is examined.  This
+     is a left-over from the early days when the concept of locales had
+     not even reached the level of POSIX locales.
+
+     The environment variable and the locale name should have a value of
+     the form ‘LANG[_TERR[.CODESET]]’ as explained above.  If no
+     environment variable is set the ‘"C"’ locale is used which prevents
+     any translation.
+
+     The return value of the function is in any case a valid string.
+     Either it is a translation from a message catalog or it is the same
+     as the STRING parameter.  So a piece of code to decide whether a
+     translation actually happened must look like this:
+
+          {
+            char *trans = catgets (desc, set, msg, input_string);
+            if (trans == input_string)
+              {
+                /* Something went wrong.  */
+              }
+          }
+
+     When an error occurs the global variable ‘errno’ is set to
+
+     EBADF
+          The catalog does not exist.
+     ENOMSG
+          The set/message tuple does not name an existing element in the
+          message catalog.
+
+     While it sometimes can be useful to test for errors programs
+     normally will avoid any test.  If the translation is not available
+     it is no big problem if the original, untranslated message is
+     printed.  Either the user understands this as well or s/he will
+     look for the reason why the messages are not translated.
+
+   Please note that the currently selected locale does not depend on a
+call to the ‘setlocale’ function.  It is not necessary that the locale
+data files for this locale exist and calling ‘setlocale’ succeeds.  The
+‘catopen’ function directly reads the values of the environment
+variables.
+
+ -- Function: char * catgets (nl_catd CATALOG_DESC, int SET, int
+          MESSAGE, const char *STRING)
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘catgets’ has to be used to access the message catalog
+     previously opened using the ‘catopen’ function.  The CATALOG_DESC
+     parameter must be a value previously returned by ‘catopen’.
+
+     The next two parameters, SET and MESSAGE, reflect the internal
+     organization of the message catalog files.  This will be explained
+     in detail below.  For now it is interesting to know that a catalog
+     can consist of several sets and the messages in each thread are
+     individually numbered using numbers.  Neither the set number nor
+     the message number must be consecutive.  They can be arbitrarily
+     chosen.  But each message (unless equal to another one) must have
+     its own unique pair of set and message numbers.
+
+     Since it is not guaranteed that the message catalog for the
+     language selected by the user exists the last parameter STRING
+     helps to handle this case gracefully.  If no matching string can be
+     found STRING is returned.  This means for the programmer that
+
+        • the STRING parameters should contain reasonable text (this
+          also helps to understand the program seems otherwise there
+          would be no hint on the string which is expected to be
+          returned.
+        • all STRING arguments should be written in the same language.
+
+   It is somewhat uncomfortable to write a program using the ‘catgets’
+functions if no supporting functionality is available.  Since each
+set/message number tuple must be unique the programmer must keep lists
+of the messages at the same time the code is written.  And the work
+between several people working on the same project must be coordinated.
+We will see how some of these problems can be relaxed a bit (*note
+Common Usage::).
+
+ -- Function: int catclose (nl_catd CATALOG_DESC)
+     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe corrupt mem |
+     *Note POSIX Safety Concepts::.
+
+     The ‘catclose’ function can be used to free the resources
+     associated with a message catalog which previously was opened by a
+     call to ‘catopen’.  If the resources can be successfully freed the
+     function returns ‘0’.  Otherwise it returns ‘−1’ and the global
+     variable ‘errno’ is set.  Errors can occur if the catalog
+     descriptor CATALOG_DESC is not valid in which case ‘errno’ is set
+     to ‘EBADF’.
 

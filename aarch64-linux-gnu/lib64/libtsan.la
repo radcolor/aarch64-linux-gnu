@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libtsan.so.0'
+dlname='libtsan.so.1'
 
 # Names of this library.
-library_names='libtsan.so.0.0.0 libtsan.so.0 libtsan.so'
+library_names='libtsan.so.1.0.0 libtsan.so.1 libtsan.so'
 
 # The name of the static archive.
 old_library='libtsan.a'
@@ -23,7 +23,7 @@ dependency_libs=' -ldl -lrt -lpthread '/drone/src/builder/aarch64-linux-gnu/aarc
 weak_library_names=''
 
 # Version information for libtsan.
-current=0
+current=1
 age=0
 revision=0
 

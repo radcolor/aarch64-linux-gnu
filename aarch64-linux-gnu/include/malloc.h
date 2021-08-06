@@ -76,14 +76,6 @@ extern void *valloc (size_t __size) __THROW __attribute_malloc__
 extern void *pvalloc (size_t __size) __THROW __attribute_malloc__
   __wur __attr_dealloc_free;
 
-/* Underlying allocation function; successive calls should return
-   contiguous pieces of memory.  */
-extern void *(*__morecore) (ptrdiff_t __size) __MALLOC_DEPRECATED;
-
-/* Default value of `__morecore'.  */
-extern void *__default_morecore (ptrdiff_t __size)
-__THROW __attribute_malloc__  __MALLOC_DEPRECATED;
-
 /* SVID2/XPG mallinfo structure */
 
 struct mallinfo
@@ -163,25 +155,6 @@ extern void malloc_stats (void) __THROW;
 
 /* Output information about state of allocator to stream FP.  */
 extern int malloc_info (int __options, FILE *__fp) __THROW;
-
-/* Hooks for debugging and user-defined versions. */
-extern void (*__MALLOC_HOOK_VOLATILE __free_hook) (void *__ptr,
-                                                   const void *)
-__MALLOC_DEPRECATED;
-extern void *(*__MALLOC_HOOK_VOLATILE __malloc_hook)(size_t __size,
-                                                     const void *)
-__MALLOC_DEPRECATED;
-extern void *(*__MALLOC_HOOK_VOLATILE __realloc_hook)(void *__ptr,
-                                                      size_t __size,
-                                                      const void *)
-__MALLOC_DEPRECATED;
-extern void *(*__MALLOC_HOOK_VOLATILE __memalign_hook)(size_t __alignment,
-                                                       size_t __size,
-                                                       const void *)
-__MALLOC_DEPRECATED;
-extern void (*__MALLOC_HOOK_VOLATILE __after_morecore_hook) (void)
-  __MALLOC_DEPRECATED;
-
 
 __END_DECLS
 #endif /* malloc.h */

@@ -357,6 +357,12 @@ extern __off64_t lseek64 (int __fd, __off64_t __offset, int __whence)
    __THROW.  */
 extern int close (int __fd);
 
+#ifdef __USE_MISC
+/* Close all open file descriptors greater than or equal to LOWFD.
+   Negative LOWFD is clamped to 0.  */
+extern void closefrom (int __lowfd) __THROW;
+#endif
+
 /* Read NBYTES into BUF from FD.  Return the
    number read, -1 for errors or 0 for EOF.
 
@@ -780,6 +786,13 @@ extern __pid_t fork (void) __THROWNL;
    and the process ID of the new process to the old process.  */
 extern __pid_t vfork (void) __THROW;
 #endif /* Use misc or XPG < 7. */
+
+#ifdef __USE_GNU
+/* This is similar to fork, however it does not run the atfork handlers
+   neither reinitialize any internal locks in multithread case.
+   Different than fork, _Fork is async-signal-safe.  */
+extern __pid_t _Fork (void) __THROW;
+#endif
 
 
 /* Return the pathname of the terminal FD is open on, or NULL on errors.

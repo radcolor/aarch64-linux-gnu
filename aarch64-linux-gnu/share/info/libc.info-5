@@ -1,6 +1,6 @@
-This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -43,7 +43,8 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -246,7 +247,6 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
-* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -715,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -2099,208 +2102,6 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
-
-
-File: libc.info,  Node: Simple Output,  Next: Character Input,  Prev: Streams and I18N,  Up: I/O on Streams
-
-12.7 Simple Output by Characters or Lines
-=========================================
-
-This section describes functions for performing character- and
-line-oriented output.
-
-   These narrow stream functions are declared in the header file
-‘stdio.h’ and the wide stream functions in ‘wchar.h’.
-
- -- Function: int fputc (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘fputc’ function converts the character C to type ‘unsigned
-     char’, and writes it to the stream STREAM.  ‘EOF’ is returned if a
-     write error occurs; otherwise the character C is returned.
-
- -- Function: wint_t fputwc (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘fputwc’ function writes the wide character WC to the stream
-     STREAM.  ‘WEOF’ is returned if a write error occurs; otherwise the
-     character WC is returned.
-
- -- Function: int fputc_unlocked (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputc_unlocked’ function is equivalent to the ‘fputc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t fputwc_unlocked (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputwc_unlocked’ function is equivalent to the ‘fputwc’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int putc (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fputc’, except that most systems implement it as
-     a macro, making it faster.  One consequence is that it may evaluate
-     the STREAM argument more than once, which is an exception to the
-     general rule for macros.  ‘putc’ is usually the best function to
-     use for writing a single character.
-
- -- Function: wint_t putwc (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     This is just like ‘fputwc’, except that it can be implement as a
-     macro, making it faster.  One consequence is that it may evaluate
-     the STREAM argument more than once, which is an exception to the
-     general rule for macros.  ‘putwc’ is usually the best function to
-     use for writing a single wide character.
-
- -- Function: int putc_unlocked (int C, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putc_unlocked’ function is equivalent to the ‘putc’ function
-     except that it does not implicitly lock the stream.
-
- -- Function: wint_t putwc_unlocked (wchar_t WC, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putwc_unlocked’ function is equivalent to the ‘putwc’ function
-     except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int putchar (int C)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘putchar’ function is equivalent to ‘putc’ with ‘stdout’ as the
-     value of the STREAM argument.
-
- -- Function: wint_t putwchar (wchar_t WC)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The ‘putwchar’ function is equivalent to ‘putwc’ with ‘stdout’ as
-     the value of the STREAM argument.
-
- -- Function: int putchar_unlocked (int C)
-
-     Preliminary: | MT-Unsafe race:stdout | AS-Unsafe corrupt |
-     AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putchar_unlocked’ function is equivalent to the ‘putchar’
-     function except that it does not implicitly lock the stream.
-
- -- Function: wint_t putwchar_unlocked (wchar_t WC)
-
-     Preliminary: | MT-Unsafe race:stdout | AS-Unsafe corrupt |
-     AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘putwchar_unlocked’ function is equivalent to the ‘putwchar’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int fputs (const char *S, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The function ‘fputs’ writes the string S to the stream STREAM.  The
-     terminating null character is not written.  This function does
-     _not_ add a newline character, either.  It outputs only the
-     characters in the string.
-
-     This function returns ‘EOF’ if a write error occurs, and otherwise
-     a non-negative value.
-
-     For example:
-
-          fputs ("Are ", stdout);
-          fputs ("you ", stdout);
-          fputs ("hungry?\n", stdout);
-
-     outputs the text ‘Are you hungry?’ followed by a newline.
-
- -- Function: int fputws (const wchar_t *WS, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     The function ‘fputws’ writes the wide character string WS to the
-     stream STREAM.  The terminating null character is not written.
-     This function does _not_ add a newline character, either.  It
-     outputs only the characters in the string.
-
-     This function returns ‘WEOF’ if a write error occurs, and otherwise
-     a non-negative value.
-
- -- Function: int fputs_unlocked (const char *S, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputs_unlocked’ function is equivalent to the ‘fputs’ function
-     except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int fputws_unlocked (const wchar_t *WS, FILE *STREAM)
-
-     Preliminary: | MT-Safe race:stream | AS-Unsafe corrupt | AC-Unsafe
-     corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘fputws_unlocked’ function is equivalent to the ‘fputws’
-     function except that it does not implicitly lock the stream.
-
-     This function is a GNU extension.
-
- -- Function: int puts (const char *S)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     The ‘puts’ function writes the string S to the stream ‘stdout’
-     followed by a newline.  The terminating null character of the
-     string is not written.  (Note that ‘fputs’ does _not_ write a
-     newline as this function does.)
-
-     ‘puts’ is the most convenient function for printing simple
-     messages.  For example:
-
-          puts ("This is a message.");
-
-     outputs the text ‘This is a message.’ followed by a newline.
-
- -- Function: int putw (int W, FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     This function writes the word W (that is, an ‘int’) to STREAM.  It
-     is provided for compatibility with SVID, but we recommend you use
-     ‘fwrite’ instead (*note Block Input/Output::).
 
 
 File: libc.info,  Node: Character Input,  Next: Line Input,  Prev: Simple Output,  Up: I/O on Streams
@@ -6922,6 +6723,64 @@ in the header file ‘fcntl.h’, while ‘close’ is declared in ‘unistd.h�
 trying to close its underlying file descriptor with ‘close’.  This
 flushes any buffered output and updates the stream object to indicate
 that it is closed.
+
+ -- Function: int close_range (unsigned int LOWFD, unsigned int MAXFD,
+          int FLAGS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe fd | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘close_range’ closes the file descriptor from LOWFD to
+     MAXFD (inclusive).  This function is similar to call ‘close’ in
+     specified file descriptor range depending on the FLAGS.
+
+     This is function is only supported on recent Linux versions and the
+     GNU C Library does not provide any fallback (the application will
+     need to handle possible ‘ENOSYS’).
+
+     The FLAGS add options on how the files are closes.  Linux currently
+     supports:
+
+     ‘CLOSE_RANGE_UNSHARE’
+          Unshare the file descriptor table before closing file
+          descriptors.
+
+     ‘CLOSE_RANGE_CLOEXEC’
+          Set the ‘FD_CLOEXEC’ bit instead of closing the file
+          descriptor.
+
+     The normal return value from ‘close_range’ is 0; a value of -1 is
+     returned in case of failure.  The following ‘errno’ error
+     conditions are defined for this function:
+
+     ‘EINVAL’
+          The LOWFD value is larger than MAXFD or an unsupported FLAGS
+          is used.
+
+     ‘ENOMEM’
+          Either there is not enough memory for the operation, or the
+          process is out of address space.  It can only happnes when
+          ‘CLOSE_RANGE_UNSHARED’ flag is used.
+
+     ‘EMFILE’
+          The process has too many files open and it can only happens
+          when ‘CLOSE_RANGE_UNSHARED’ flag is used.  The maximum number
+          of file descriptors is controlled by the ‘RLIMIT_NOFILE’
+          resource limit; *note Limits on Resources::.
+
+     ‘ENOSYS’
+          The kernel does not implement the required functionality.
+
+ -- Function: void closefrom (int LOWFD)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe fd | *Note POSIX Safety
+     Concepts::.
+
+     The function ‘closefrom’ closes all file descriptors larger than or
+     equal to LOWFD then LOWFD.  This function is similar to calling
+     ‘close’ for all open file descriptors not less than LOWFD.
+
+     Already closed file descriptors are ignored.
 
 
 File: libc.info,  Node: I/O Primitives,  Next: File Position Primitive,  Prev: Opening and Closing Files,  Up: Low-Level I/O

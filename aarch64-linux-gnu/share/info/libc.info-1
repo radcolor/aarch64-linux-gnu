@@ -1,6 +1,6 @@
-This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -43,7 +43,8 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -246,7 +247,6 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
-* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -715,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -2106,7 +2109,7 @@ File: libc.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
 Main Menu
 *********
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -2288,8 +2291,6 @@ Unconstrained Allocation
 * Malloc Tunable Parameters::   Use ‘mallopt’ to adjust allocation
                                  parameters.
 * Heap Consistency Checking::   Automatic checking for errors.
-* Hooks for Malloc::            You can use these hooks for debugging
-				 programs that use ‘malloc’.
 * Statistics of Malloc::        Getting information about how much
 				 memory your program is using.
 * Summary of Malloc::           Summary of ‘malloc’ and related functions.
@@ -4739,9 +4740,9 @@ on semantics undefined within the standard.
      ‘_FILE_OFFSET_BITS’ allows the 64 bit interface to replace the old
      interface.
 
-     If ‘_FILE_OFFSET_BITS’ is undefined, or if it is defined to the
-     value ‘32’, nothing changes.  The 32 bit interface is used and
-     types like ‘off_t’ have a size of 32 bits on 32 bit systems.
+     If ‘_FILE_OFFSET_BITS’ is defined to the value ‘32’, the 32 bit
+     interface is used and types like ‘off_t’ have a size of 32 bits on
+     32 bit systems.
 
      If the macro is defined to the value ‘64’, the large file interface
      replaces the old interface.  I.e., the functions are not made
@@ -4749,6 +4750,10 @@ on semantics undefined within the standard.
      ‘_LARGEFILE64_SOURCE’).  Instead the old function names now
      reference the new functions, e.g., a call to ‘fseeko’ now indeed
      calls ‘fseeko64’.
+
+     If the macro is not defined it currently defaults to ‘32’, but this
+     default is planned to change due to a need to update ‘time_t’ for
+     Y2038 safety, and applications should not rely on the default.
 
      This macro should only be selected if the system provides
      mechanisms for handling large files.  On 64 bit systems this macro
@@ -4759,38 +4764,36 @@ on semantics undefined within the standard.
      extension (LFS).
 
  -- Macro: _TIME_BITS
-     This macro determines the bit size of ‘time_t’ (and therefore the
-     bit size of all ‘time_t’ derived types and the prototypes of all
-     related functions).  If ‘_TIME_BITS’ is undefined, the bit size of
-     ‘time_t’ is architecture dependent.
+     This macro determines the bit size of ‘time_t’, and therefore the
+     bit size of all ‘time_t’-derived types and the prototypes of all
+     related functions.
 
-     Possible values of ‘_TIME_BITS’:
-       1. ‘_TIME_BITS=64’ and port from the outset uses 64-bit ‘time_t’
-          and word size equals to 64 bits (e.g.  x86_64) - no action
+       1. If ‘_TIME_BITS’ is undefined, the bit size of ‘time_t’ is
+          architecture dependent.  Currently it defaults to 64 bits on
+          most architectures.  Although it defaults to 32 bits on some
+          traditional architectures (i686, ARM), this is planned to
+          change and applications should not rely on this.
 
-       2. ‘_TIME_BITS=32’ and port from the outset uses 32-bit ‘time_t’
-          and word size equals to 64 bits (e.g.  ARM) - no action
+       2. If ‘_TIME_BITS’ is defined to be 64, ‘time_t’ is defined to be
+          a 64-bit integer.  On platforms where ‘time_t’ was
+          traditionally 32 bits, calls to proper syscalls depend on the
+          Linux kernel version on which the system is running.  For
+          Linux kernel version above 5.1 syscalls supporting 64-bit time
+          are used.  Otherwise, a fallback code is used with legacy
+          (i.e.  32-bit) syscalls.
 
-       3. ‘_TIME_BITS=64’ and port from the outset uses 64-bit ‘time_t’
-          and word size equals to 32 bits (e.g.  ARC, RV32) - no action
+       3. If ‘_TIME_BITS’ is defined to be 32, ‘time_t’ is defined to be
+          a 32-bit integer where that is supported.  This is not
+          recommended, as 32-bit ‘time_t’ stops working in the year
+          2038.
 
-       4. ‘_TIME_BITS=64’ and port from the outset uses 32-bit ‘time_t’
-          and word size equals to 32 bits (e.g.  ARM) - the ‘time_t’ is
-          modified to be able to hold 64-bit time.
+       4. For any other use case a compile-time error is emitted.
 
-       5. For any other use case the compile-time error is emitted.
-
-     The ‘_TIME_BITS’ can be only used when ‘_FILE_OFFSET_BITS=64’ is
+     ‘_TIME_BITS=64’ can be defined only when ‘_FILE_OFFSET_BITS=64’ is
      also defined.
 
-     For the point 4 above, calls to proper syscalls depend on the Linux
-     kernel version on which the system is running.  For Linux kernel
-     version above 5.1 syscalls supporting 64-bit time are used.
-     Otherwise, a fallback code is used with legacy (i.e.  32-bit)
-     syscalls.
-
      By using this macro certain ports gain support for 64-bit time and
-     as a result become immune to Y2038 problem.
+     as a result become immune to the Y2038 problem.
 
  -- Macro: _ISOC99_SOURCE
 
@@ -4876,10 +4879,10 @@ on semantics undefined within the standard.
      are applied.  If defined to 3, the GNU C Library may also use
      checks that may have an additional performance overhead.
 
- -- Macro: _SC_SIGSTKSZ_SOURCE
+ -- Macro: _DYNAMIC_STACK_SIZE_SOURCE
 
      If this macro is defined, correct (but non compile-time constant)
-     MINSIGSTKSZ and SIGSTKSZ are defined.
+     MINSIGSTKSZ, SIGSTKSZ and PTHREAD_STACK_MIN are defined.
 
  -- Macro: _REENTRANT
  -- Macro: _THREAD_SAFE
@@ -6689,8 +6692,6 @@ never).
 * Malloc Tunable Parameters::   Use ‘mallopt’ to adjust allocation
                                  parameters.
 * Heap Consistency Checking::   Automatic checking for errors.
-* Hooks for Malloc::            You can use these hooks for debugging
-				 programs that use ‘malloc’.
 * Statistics of Malloc::        Getting information about how much
 				 memory your program is using.
 * Summary of Malloc::           Summary of ‘malloc’ and related functions.

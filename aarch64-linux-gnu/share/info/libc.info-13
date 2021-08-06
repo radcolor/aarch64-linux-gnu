@@ -1,6 +1,6 @@
-This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -43,7 +43,8 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -246,7 +247,6 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
-* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -715,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -5596,13 +5599,15 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
 
  -- Tunable: glibc.malloc.check
      This tunable supersedes the ‘MALLOC_CHECK_’ environment variable
-     and is identical in features.
+     and is identical in features.  This tunable has no effect by
+     default and needs the debug library ‘libc_malloc_debug’ to be
+     preloaded using the ‘LD_PRELOAD’ environment variable.
 
-     Setting this tunable to a non-zero value enables a special (less
-     efficient) memory allocator for the ‘malloc’ family of functions
-     that is designed to be tolerant against simple errors such as
-     double calls of free with the same argument, or overruns of a
-     single byte (off-by-one bugs).  Not all such errors can be
+     Setting this tunable to a non-zero value less than 4 enables a
+     special (less efficient) memory allocator for the ‘malloc’ family
+     of functions that is designed to be tolerant against simple errors
+     such as double calls of free with the same argument, or overruns of
+     a single byte (off-by-one bugs).  Not all such errors can be
      protected against, however, and memory leaks can result.  Any
      detected heap corruption results in immediate termination of the
      process.
@@ -5874,6 +5879,14 @@ File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunabl
      the lock is acquired.
 
      The default value of this tunable is ‘100’.
+
+ -- Tunable: glibc.pthread.stack_cache_size
+     This tunable configures the maximum size of the stack cache.  Once
+     the stack cache exceeds this size, unused thread stacks are
+     returned to the kernel, to bring the cache size below this limit.
+
+     The value is measured in bytes.  The default is ‘41943040’ (fourty
+     mibibytes).
 
 
 File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
@@ -10266,6 +10279,10 @@ it.
 
      _no header_ (GNU): *note Feature Test Macros::.
 
+‘_DYNAMIC_STACK_SIZE_SOURCE’
+
+     _no header_ (GNU): *note Feature Test Macros::.
+
 ‘void _Exit (int STATUS)’
 
      ‘stdlib.h’ (ISO): *note Termination Internals::.
@@ -10277,6 +10294,10 @@ it.
 ‘_FORTIFY_SOURCE’
 
      _no header_ (GNU): *note Feature Test Macros::.
+
+‘pid_t _Fork (void)’
+
+     ‘unistd.h’ (GNU): *note Creating a Process::.
 
 ‘_GNU_SOURCE’
 
@@ -10934,10 +10955,6 @@ it.
 
      ‘unistd.h’ (GNU): *note Constants for Sysconf::.
 
-‘_SC_SIGSTKSZ_SOURCE’
-
-     _no header_ (GNU): *note Feature Test Macros::.
-
 ‘_SC_SSIZE_MAX’
 
      ‘unistd.h’ (X/Open): *note Constants for Sysconf::.
@@ -11152,10 +11169,6 @@ it.
 
      ‘stdio_ext.h’ (GNU): *note Opening Streams::.
 
-‘__free_hook’
-
-     ‘malloc.h’ (GNU): *note Hooks for Malloc::.
-
 ‘int __fsetlocking (FILE *STREAM, int TYPE)’
 
      ‘stdio_ext.h’ (GNU): *note Streams and Threads::.
@@ -11200,14 +11213,6 @@ it.
 
      ‘sys/single_threaded.h’ (GNU): *note Single-Threaded::.
 
-‘__malloc_hook’
-
-     ‘malloc.h’ (GNU): *note Hooks for Malloc::.
-
-‘__memalign_hook’
-
-     ‘malloc.h’ (GNU): *note Hooks for Malloc::.
-
 ‘__nftw64_func_t’
 
      ‘ftw.h’ (GNU): *note Working with Directory Trees::.
@@ -11215,10 +11220,6 @@ it.
 ‘__nftw_func_t’
 
      ‘ftw.h’ (GNU): *note Working with Directory Trees::.
-
-‘__realloc_hook’
-
-     ‘malloc.h’ (GNU): *note Hooks for Malloc::.
 
 ‘void __va_copy (va_list DEST, va_list SRC)’
 
@@ -12154,9 +12155,17 @@ it.
 
      ‘unistd.h’ (POSIX.1): *note Opening and Closing Files::.
 
+‘int close_range (unsigned int LOWFD, unsigned int MAXFD, int FLAGS)’
+
+     ‘unistd.h’ (Linux): *note Opening and Closing Files::.
+
 ‘int closedir (DIR *DIRSTREAM)’
 
      ‘dirent.h’ (POSIX.1): *note Reading/Closing Directory::.
+
+‘void closefrom (int LOWFD)’
+
+     ‘unistd.h’ (GNU): *note Opening and Closing Files::.
 
 ‘void closelog (void)’
 

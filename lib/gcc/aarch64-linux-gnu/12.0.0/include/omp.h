@@ -243,6 +243,7 @@ extern void omp_get_partition_place_nums (int *) __GOMP_NOTHROW;
 extern void omp_set_default_device (int) __GOMP_NOTHROW;
 extern int omp_get_default_device (void) __GOMP_NOTHROW;
 extern int omp_get_num_devices (void) __GOMP_NOTHROW;
+extern int omp_get_device_num (void) __GOMP_NOTHROW;
 extern int omp_get_num_teams (void) __GOMP_NOTHROW;
 extern int omp_get_team_num (void) __GOMP_NOTHROW;
 
@@ -292,6 +293,8 @@ extern void *omp_alloc (__SIZE_TYPE__,
 extern void omp_free (void *,
 		      omp_allocator_handle_t __GOMP_DEFAULT_NULL_ALLOCATOR)
   __GOMP_NOTHROW;
+
+extern void omp_display_env (int) __GOMP_NOTHROW;
 
 #ifdef __cplusplus
 }

@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libasan.so.6'
+dlname='libasan.so.7'
 
 # Names of this library.
-library_names='libasan.so.6.0.0 libasan.so.6 libasan.so'
+library_names='libasan.so.7.0.0 libasan.so.7 libasan.so'
 
 # The name of the static archive.
 old_library='libasan.a'
@@ -23,7 +23,7 @@ dependency_libs=' -ldl -lrt -lpthread '/drone/src/builder/aarch64-linux-gnu/aarc
 weak_library_names=''
 
 # Version information for libasan.
-current=6
+current=7
 age=0
 revision=0
 

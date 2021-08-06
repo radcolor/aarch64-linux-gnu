@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20210620
+#define __GLIBCXX__ 20210806
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -80,6 +80,8 @@
 //   _GLIBCXX_DEPRECATED_SUGGEST( string-literal )
 //   _GLIBCXX11_DEPRECATED
 //   _GLIBCXX11_DEPRECATED_SUGGEST( string-literal )
+//   _GLIBCXX14_DEPRECATED
+//   _GLIBCXX14_DEPRECATED_SUGGEST( string-literal )
 //   _GLIBCXX17_DEPRECATED
 //   _GLIBCXX17_DEPRECATED_SUGGEST( string-literal )
 //   _GLIBCXX20_DEPRECATED( string-literal )
@@ -103,6 +105,14 @@
 #else
 # define _GLIBCXX11_DEPRECATED
 # define _GLIBCXX11_DEPRECATED_SUGGEST(ALT)
+#endif
+
+#if defined(__DEPRECATED) && (__cplusplus >= 201403L)
+# define _GLIBCXX14_DEPRECATED _GLIBCXX_DEPRECATED
+# define _GLIBCXX14_DEPRECATED_SUGGEST(ALT) _GLIBCXX_DEPRECATED_SUGGEST(ALT)
+#else
+# define _GLIBCXX14_DEPRECATED
+# define _GLIBCXX14_DEPRECATED_SUGGEST(ALT)
 #endif
 
 #if defined(__DEPRECATED) && (__cplusplus >= 201703L)
@@ -500,6 +510,7 @@ namespace std
 // Assert.
 #if defined(_GLIBCXX_ASSERTIONS) \
   || defined(_GLIBCXX_PARALLEL) || defined(_GLIBCXX_PARALLEL_ASSERTIONS)
+# if _GLIBCXX_HOSTED && _GLIBCXX_VERBOSE
 namespace std
 {
   // Avoid the use of assert, because we're trying to keep the <cassert>
@@ -508,6 +519,7 @@ namespace std
   inline void
   __replacement_assert(const char* __file, int __line,
 		       const char* __function, const char* __condition)
+  _GLIBCXX_NOEXCEPT
   {
     __builtin_printf("%s:%d: %s: Assertion '%s' failed.\n", __file, __line,
 		     __function, __condition);
@@ -517,10 +529,18 @@ namespace std
 #define __glibcxx_assert_impl(_Condition)			       \
   if (__builtin_expect(!bool(_Condition), false))		       \
   {								       \
-    __glibcxx_constexpr_assert(_Condition);			       \
+    __glibcxx_constexpr_assert(false);				       \
     std::__replacement_assert(__FILE__, __LINE__, __PRETTY_FUNCTION__, \
 			      #_Condition);			       \
   }
+# else // ! VERBOSE
+# define __glibcxx_assert_impl(_Condition)		\
+  if (__builtin_expect(!bool(_Condition), false))	\
+  {							\
+    __glibcxx_constexpr_assert(false);			\
+    __builtin_abort();					\
+  }
+#endif
 #endif
 
 #if defined(_GLIBCXX_ASSERTIONS)
@@ -1082,6 +1102,9 @@ namespace std
 
 /* Define if readlink is available in <unistd.h>. */
 #define _GLIBCXX_HAVE_READLINK 1
+
+/* Define to 1 if you have the `secure_getenv' function. */
+/* #undef _GLIBCXX_HAVE_SECURE_GETENV */
 
 /* Define to 1 if you have the `setenv' function. */
 /* #undef _GLIBCXX_HAVE_SETENV */

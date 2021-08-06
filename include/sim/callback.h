@@ -91,6 +91,8 @@ struct host_callback_struct
   int (*to_lstat) (host_callback *, const char *, struct stat *);
   int (*ftruncate) (host_callback *, int, int64_t);
   int (*truncate) (host_callback *, const char *, int64_t);
+  int (*getpid) (host_callback *);
+  int (*kill) (host_callback *, int, int);
   int (*pipe) (host_callback *, int *);
 
   /* Called by the framework when a read call has emptied a pipe buffer.  */
@@ -111,18 +113,22 @@ struct host_callback_struct
   int (*init)     (host_callback *);
 
   /* depreciated, use vprintf_filtered - Talk to the user on a console.  */
-  void (*printf_filtered) (host_callback *, const char *, ...);
+  void (*printf_filtered) (host_callback *, const char *, ...)
+    ATTRIBUTE_PRINTF_2;
 
   /* Talk to the user on a console.  */
-  void (*vprintf_filtered) (host_callback *, const char *, va_list);
+  void (*vprintf_filtered) (host_callback *, const char *, va_list)
+    ATTRIBUTE_PRINTF (2, 0);
 
   /* Same as vprintf_filtered but to stderr.  */
-  void (*evprintf_filtered) (host_callback *, const char *, va_list);
+  void (*evprintf_filtered) (host_callback *, const char *, va_list)
+    ATTRIBUTE_PRINTF (2, 0);
 
   /* Print an error message and "exit".
      In the case of gdb "exiting" means doing a longjmp back to the main
      command loop.  */
-  void (*error) (host_callback *, const char *, ...) ATTRIBUTE_NORETURN;
+  void (*error) (host_callback *, const char *, ...)
+    ATTRIBUTE_NORETURN ATTRIBUTE_PRINTF_2;
 
   int last_errno;		/* host format */
 
@@ -239,7 +245,7 @@ typedef struct cb_syscall {
   /* The target's value of what system call to perform.  */
   int func;
   /* The arguments to the syscall.  */
-  long arg1, arg2, arg3, arg4;
+  long arg1, arg2, arg3, arg4, arg5, arg6, arg7;
 
   /* The result.  */
   long result;

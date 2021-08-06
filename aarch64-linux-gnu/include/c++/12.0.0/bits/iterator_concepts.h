@@ -120,6 +120,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 	  using __type = typename __result<_Tp>::type;
 
 	template<std::__detail::__dereferenceable _Tp>
+	  [[nodiscard]]
 	  constexpr __type<_Tp>
 	  operator()(_Tp&& __e) const
 	  noexcept(_S_noexcept<_Tp>())
@@ -553,6 +554,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
     class __max_diff_type;
     class __max_size_type;
 
+    __extension__
     template<typename _Tp>
       concept __is_signed_int128
 #if __SIZEOF_INT128__
@@ -561,6 +563,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 	= false;
 #endif
 
+    __extension__
     template<typename _Tp>
       concept __is_unsigned_int128
 #if __SIZEOF_INT128__

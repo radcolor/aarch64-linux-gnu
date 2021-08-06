@@ -1,4 +1,4 @@
-This is libgomp.info, produced by makeinfo version 6.7 from
+This is libgomp.info, produced by makeinfo version 6.8 from
 libgomp.texi.
 
 Copyright (C) 2006-2021 Free Software Foundation, Inc.
@@ -140,6 +140,7 @@ linkage, and do not throw exceptions.
 * omp_get_ancestor_thread_num:: Ancestor thread ID
 * omp_get_cancellation::        Whether cancellation support is enabled
 * omp_get_default_device::      Get the default device for target regions
+* omp_get_device_num::          Get device that current thread is running on
 * omp_get_dynamic::             Dynamic teams setting
 * omp_get_initial_device::      Device number of host device
 * omp_get_level::               Number of parallel regions
@@ -312,7 +313,7 @@ _Reference_:
      OpenMP specification v4.5 (https://www.openmp.org), Section 3.2.8.
 
 
-File: libgomp.info,  Node: omp_get_initial_device,  Next: omp_get_level,  Prev: omp_get_dynamic,  Up: Runtime Library Routines
+File: libgomp.info,  Node: omp_get_initial_device,  Next: omp_get_device_num,  Prev: omp_get_dynamic,  Up: Runtime Library Routines
 
 2.6 'omp_get_initial_device' - Return device number of initial device
 =====================================================================
@@ -335,9 +336,33 @@ _Reference_:
      OpenMP specification v4.5 (https://www.openmp.org), Section 3.2.35.
 
 
-File: libgomp.info,  Node: omp_get_level,  Next: omp_get_max_active_levels,  Prev: omp_get_initial_device,  Up: Runtime Library Routines
+File: libgomp.info,  Node: omp_get_device_num,  Next: omp_get_level,  Prev: omp_get_initial_device,  Up: Runtime Library Routines
 
-2.7 'omp_get_level' - Obtain the current nesting level
+2.7 'omp_get_device_num' - Return device number of current device
+=================================================================
+
+_Description_:
+     This function returns a device number that represents the device
+     that the current thread is executing on.  For OpenMP 5.0, this must
+     be equal to the value returned by the 'omp_get_initial_device'
+     function when called from the host.
+
+_C/C++_
+     _Prototype_:   'int omp_get_device_num(void);'
+
+_Fortran_:
+     _Interface_:   'integer function omp_get_device_num()'
+
+_See also_:
+     *note omp_get_initial_device::
+
+_Reference_:
+     OpenMP specification v5.0 (https://www.openmp.org), Section 3.2.37.
+
+
+File: libgomp.info,  Node: omp_get_level,  Next: omp_get_max_active_levels,  Prev: omp_get_device_num,  Up: Runtime Library Routines
+
+2.8 'omp_get_level' - Obtain the current nesting level
 ======================================================
 
 _Description_:
@@ -359,7 +384,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_max_active_levels,  Next: omp_get_max_task_priority,  Prev: omp_get_level,  Up: Runtime Library Routines
 
-2.8 'omp_get_max_active_levels' - Current maximum number of active regions
+2.9 'omp_get_max_active_levels' - Current maximum number of active regions
 ==========================================================================
 
 _Description_:
@@ -381,8 +406,8 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_max_task_priority,  Next: omp_get_max_threads,  Prev: omp_get_max_active_levels,  Up: Runtime Library Routines
 
-2.9 'omp_get_max_task_priority' - Maximum priority value
-========================================================
+2.10 'omp_get_max_task_priority' - Maximum priority value
+=========================================================
 
 that can be set for tasks.
 _Description_:
@@ -401,7 +426,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_max_threads,  Next: omp_get_nested,  Prev: omp_get_max_task_priority,  Up: Runtime Library Routines
 
-2.10 'omp_get_max_threads' - Maximum number of threads of parallel region
+2.11 'omp_get_max_threads' - Maximum number of threads of parallel region
 =========================================================================
 
 _Description_:
@@ -424,7 +449,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_nested,  Next: omp_get_num_devices,  Prev: omp_get_max_threads,  Up: Runtime Library Routines
 
-2.11 'omp_get_nested' - Nested parallel regions
+2.12 'omp_get_nested' - Nested parallel regions
 ===============================================
 
 _Description_:
@@ -463,7 +488,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_num_devices,  Next: omp_get_num_procs,  Prev: omp_get_nested,  Up: Runtime Library Routines
 
-2.12 'omp_get_num_devices' - Number of target devices
+2.13 'omp_get_num_devices' - Number of target devices
 =====================================================
 
 _Description_:
@@ -481,7 +506,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_num_procs,  Next: omp_get_num_teams,  Prev: omp_get_num_devices,  Up: Runtime Library Routines
 
-2.13 'omp_get_num_procs' - Number of processors online
+2.14 'omp_get_num_procs' - Number of processors online
 ======================================================
 
 _Description_:
@@ -499,7 +524,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_num_teams,  Next: omp_get_num_threads,  Prev: omp_get_num_procs,  Up: Runtime Library Routines
 
-2.14 'omp_get_num_teams' - Number of teams
+2.15 'omp_get_num_teams' - Number of teams
 ==========================================
 
 _Description_:
@@ -517,7 +542,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_num_threads,  Next: omp_get_proc_bind,  Prev: omp_get_num_teams,  Up: Runtime Library Routines
 
-2.15 'omp_get_num_threads' - Size of the active team
+2.16 'omp_get_num_threads' - Size of the active team
 ====================================================
 
 _Description_:
@@ -547,7 +572,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_proc_bind,  Next: omp_get_schedule,  Prev: omp_get_num_threads,  Up: Runtime Library Routines
 
-2.16 'omp_get_proc_bind' - Whether theads may be moved between CPUs
+2.17 'omp_get_proc_bind' - Whether theads may be moved between CPUs
 ===================================================================
 
 _Description_:
@@ -574,7 +599,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_schedule,  Next: omp_get_supported_active_levels,  Prev: omp_get_proc_bind,  Up: Runtime Library Routines
 
-2.17 'omp_get_schedule' - Obtain the runtime scheduling method
+2.18 'omp_get_schedule' - Obtain the runtime scheduling method
 ==============================================================
 
 _Description_:
@@ -601,7 +626,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_supported_active_levels,  Next: omp_get_team_num,  Prev: omp_get_schedule,  Up: Runtime Library Routines
 
-2.18 'omp_get_supported_active_levels' - Maximum number of active regions supported
+2.19 'omp_get_supported_active_levels' - Maximum number of active regions supported
 ===================================================================================
 
 _Description_:
@@ -624,7 +649,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_team_num,  Next: omp_get_team_size,  Prev: omp_get_supported_active_levels,  Up: Runtime Library Routines
 
-2.19 'omp_get_team_num' - Get team number
+2.20 'omp_get_team_num' - Get team number
 =========================================
 
 _Description_:
@@ -642,7 +667,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_team_size,  Next: omp_get_thread_limit,  Prev: omp_get_team_num,  Up: Runtime Library Routines
 
-2.20 'omp_get_team_size' - Number of threads in a team
+2.21 'omp_get_team_size' - Number of threads in a team
 ======================================================
 
 _Description_:
@@ -669,7 +694,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_thread_limit,  Next: omp_get_thread_num,  Prev: omp_get_team_size,  Up: Runtime Library Routines
 
-2.21 'omp_get_thread_limit' - Maximum number of threads
+2.22 'omp_get_thread_limit' - Maximum number of threads
 =======================================================
 
 _Description_:
@@ -690,7 +715,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_thread_num,  Next: omp_in_parallel,  Prev: omp_get_thread_limit,  Up: Runtime Library Routines
 
-2.22 'omp_get_thread_num' - Current thread ID
+2.23 'omp_get_thread_num' - Current thread ID
 =============================================
 
 _Description_:
@@ -715,7 +740,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_in_parallel,  Next: omp_in_final,  Prev: omp_get_thread_num,  Up: Runtime Library Routines
 
-2.23 'omp_in_parallel' - Whether a parallel region is active
+2.24 'omp_in_parallel' - Whether a parallel region is active
 ============================================================
 
 _Description_:
@@ -735,7 +760,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_in_final,  Next: omp_is_initial_device,  Prev: omp_in_parallel,  Up: Runtime Library Routines
 
-2.24 'omp_in_final' - Whether in final or included task region
+2.25 'omp_in_final' - Whether in final or included task region
 ==============================================================
 
 _Description_:
@@ -755,7 +780,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_is_initial_device,  Next: omp_set_default_device,  Prev: omp_in_final,  Up: Runtime Library Routines
 
-2.25 'omp_is_initial_device' - Whether executing on the host device
+2.26 'omp_is_initial_device' - Whether executing on the host device
 ===================================================================
 
 _Description_:
@@ -775,7 +800,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_default_device,  Next: omp_set_dynamic,  Prev: omp_is_initial_device,  Up: Runtime Library Routines
 
-2.26 'omp_set_default_device' - Set the default device for target regions
+2.27 'omp_set_default_device' - Set the default device for target regions
 =========================================================================
 
 _Description_:
@@ -798,7 +823,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_dynamic,  Next: omp_set_max_active_levels,  Prev: omp_set_default_device,  Up: Runtime Library Routines
 
-2.27 'omp_set_dynamic' - Enable/disable dynamic teams
+2.28 'omp_set_dynamic' - Enable/disable dynamic teams
 =====================================================
 
 _Description_:
@@ -823,7 +848,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_max_active_levels,  Next: omp_set_nested,  Prev: omp_set_dynamic,  Up: Runtime Library Routines
 
-2.28 'omp_set_max_active_levels' - Limits the number of active parallel regions
+2.29 'omp_set_max_active_levels' - Limits the number of active parallel regions
 ===============================================================================
 
 _Description_:
@@ -848,7 +873,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_nested,  Next: omp_set_num_threads,  Prev: omp_set_max_active_levels,  Up: Runtime Library Routines
 
-2.29 'omp_set_nested' - Enable/disable nested parallel regions
+2.30 'omp_set_nested' - Enable/disable nested parallel regions
 ==============================================================
 
 _Description_:
@@ -879,7 +904,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_num_threads,  Next: omp_set_schedule,  Prev: omp_set_nested,  Up: Runtime Library Routines
 
-2.30 'omp_set_num_threads' - Set upper team size limit
+2.31 'omp_set_num_threads' - Set upper team size limit
 ======================================================
 
 _Description_:
@@ -904,7 +929,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_schedule,  Next: omp_init_lock,  Prev: omp_set_num_threads,  Up: Runtime Library Routines
 
-2.31 'omp_set_schedule' - Set the runtime scheduling method
+2.32 'omp_set_schedule' - Set the runtime scheduling method
 ===========================================================
 
 _Description_:
@@ -933,7 +958,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_init_lock,  Next: omp_set_lock,  Prev: omp_set_schedule,  Up: Runtime Library Routines
 
-2.32 'omp_init_lock' - Initialize simple lock
+2.33 'omp_init_lock' - Initialize simple lock
 =============================================
 
 _Description_:
@@ -956,7 +981,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_lock,  Next: omp_test_lock,  Prev: omp_init_lock,  Up: Runtime Library Routines
 
-2.33 'omp_set_lock' - Wait for and set simple lock
+2.34 'omp_set_lock' - Wait for and set simple lock
 ==================================================
 
 _Description_:
@@ -982,7 +1007,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_test_lock,  Next: omp_unset_lock,  Prev: omp_set_lock,  Up: Runtime Library Routines
 
-2.34 'omp_test_lock' - Test and set simple lock if available
+2.35 'omp_test_lock' - Test and set simple lock if available
 ============================================================
 
 _Description_:
@@ -1008,7 +1033,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_unset_lock,  Next: omp_destroy_lock,  Prev: omp_test_lock,  Up: Runtime Library Routines
 
-2.35 'omp_unset_lock' - Unset simple lock
+2.36 'omp_unset_lock' - Unset simple lock
 =========================================
 
 _Description_:
@@ -1035,7 +1060,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_destroy_lock,  Next: omp_init_nest_lock,  Prev: omp_unset_lock,  Up: Runtime Library Routines
 
-2.36 'omp_destroy_lock' - Destroy simple lock
+2.37 'omp_destroy_lock' - Destroy simple lock
 =============================================
 
 _Description_:
@@ -1058,7 +1083,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_init_nest_lock,  Next: omp_set_nest_lock,  Prev: omp_destroy_lock,  Up: Runtime Library Routines
 
-2.37 'omp_init_nest_lock' - Initialize nested lock
+2.38 'omp_init_nest_lock' - Initialize nested lock
 ==================================================
 
 _Description_:
@@ -1081,7 +1106,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_set_nest_lock,  Next: omp_test_nest_lock,  Prev: omp_init_nest_lock,  Up: Runtime Library Routines
 
-2.38 'omp_set_nest_lock' - Wait for and set nested lock
+2.39 'omp_set_nest_lock' - Wait for and set nested lock
 =======================================================
 
 _Description_:
@@ -1106,7 +1131,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_test_nest_lock,  Next: omp_unset_nest_lock,  Prev: omp_set_nest_lock,  Up: Runtime Library Routines
 
-2.39 'omp_test_nest_lock' - Test and set nested lock if available
+2.40 'omp_test_nest_lock' - Test and set nested lock if available
 =================================================================
 
 _Description_:
@@ -1132,7 +1157,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_unset_nest_lock,  Next: omp_destroy_nest_lock,  Prev: omp_test_nest_lock,  Up: Runtime Library Routines
 
-2.40 'omp_unset_nest_lock' - Unset nested lock
+2.41 'omp_unset_nest_lock' - Unset nested lock
 ==============================================
 
 _Description_:
@@ -1160,7 +1185,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_destroy_nest_lock,  Next: omp_get_wtick,  Prev: omp_unset_nest_lock,  Up: Runtime Library Routines
 
-2.41 'omp_destroy_nest_lock' - Destroy nested lock
+2.42 'omp_destroy_nest_lock' - Destroy nested lock
 ==================================================
 
 _Description_:
@@ -1184,7 +1209,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_wtick,  Next: omp_get_wtime,  Prev: omp_destroy_nest_lock,  Up: Runtime Library Routines
 
-2.42 'omp_get_wtick' - Get timer precision
+2.43 'omp_get_wtick' - Get timer precision
 ==========================================
 
 _Description_:
@@ -1206,7 +1231,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_get_wtime,  Next: omp_fulfill_event,  Prev: omp_get_wtick,  Up: Runtime Library Routines
 
-2.43 'omp_get_wtime' - Elapsed wall clock time
+2.44 'omp_get_wtime' - Elapsed wall clock time
 ==============================================
 
 _Description_:
@@ -1231,7 +1256,7 @@ _Reference_:
 
 File: libgomp.info,  Node: omp_fulfill_event,  Prev: omp_get_wtime,  Up: Runtime Library Routines
 
-2.44 'omp_fulfill_event' - Fulfill and destroy an OpenMP event
+2.45 'omp_fulfill_event' - Fulfill and destroy an OpenMP event
 ==============================================================
 
 _Description_:
@@ -5116,147 +5141,148 @@ Tag Table:
 Node: Top2083
 Node: Enabling OpenMP4645
 Node: Runtime Library Routines5421
-Node: omp_get_active_level8741
-Node: omp_get_ancestor_thread_num9441
-Node: omp_get_cancellation10371
-Node: omp_get_default_device11185
-Node: omp_get_dynamic11861
-Node: omp_get_initial_device12745
-Node: omp_get_level13489
-Node: omp_get_max_active_levels14116
-Node: omp_get_max_task_priority14837
-Node: omp_get_max_threads15457
-Node: omp_get_nested16216
-Node: omp_get_num_devices17824
-Node: omp_get_num_procs18345
-Node: omp_get_num_teams18884
-Node: omp_get_num_threads19400
-Node: omp_get_proc_bind20489
-Node: omp_get_schedule21410
-Node: omp_get_supported_active_levels22379
-Node: omp_get_team_num23165
-Node: omp_get_team_size23679
-Node: omp_get_thread_limit24639
-Node: omp_get_thread_num25258
-Node: omp_in_parallel26129
-Node: omp_in_final26778
-Node: omp_is_initial_device27452
-Node: omp_set_default_device28145
-Node: omp_set_dynamic28936
-Node: omp_set_max_active_levels29822
-Node: omp_set_nested30744
-Node: omp_set_num_threads31941
-Node: omp_set_schedule32809
-Node: omp_init_lock33890
-Node: omp_set_lock34543
-Node: omp_test_lock35398
-Node: omp_unset_lock36374
-Node: omp_destroy_lock37305
-Node: omp_init_nest_lock37982
-Node: omp_set_nest_lock38717
-Node: omp_test_nest_lock39632
-Node: omp_unset_nest_lock40659
-Node: omp_destroy_nest_lock41674
-Node: omp_get_wtick42425
-Node: omp_get_wtime43017
-Node: omp_fulfill_event43819
-Node: Environment Variables44840
-Node: OMP_CANCELLATION46467
-Node: OMP_DISPLAY_ENV47000
-Node: OMP_DEFAULT_DEVICE47703
-Node: OMP_DYNAMIC48483
-Node: OMP_MAX_ACTIVE_LEVELS49079
-Node: OMP_MAX_TASK_PRIORITY50006
-Node: OMP_NESTED50664
-Node: OMP_NUM_THREADS51693
-Node: OMP_PROC_BIND52495
-Node: OMP_PLACES53806
-Node: OMP_STACKSIZE55983
-Node: OMP_SCHEDULE56807
-Node: OMP_TARGET_OFFLOAD57507
-Node: OMP_THREAD_LIMIT58463
-Node: OMP_WAIT_POLICY59069
-Node: GOMP_CPU_AFFINITY59761
-Node: GOMP_DEBUG61491
-Node: GOMP_STACKSIZE61998
-Node: GOMP_SPINCOUNT62829
-Node: GOMP_RTEMS_THREAD_POOLS64033
-Node: Enabling OpenACC66211
-Node: OpenACC Runtime Library Routines67112
-Node: acc_get_num_devices71393
-Node: acc_set_device_type72119
-Node: acc_get_device_type72883
-Node: acc_set_device_num73896
-Node: acc_get_device_num74713
-Node: acc_get_property75512
-Node: acc_async_test77735
-Node: acc_async_test_all78723
-Node: acc_wait79623
-Node: acc_wait_all80486
-Node: acc_wait_all_async81247
-Node: acc_wait_async81999
-Node: acc_init82707
-Node: acc_shutdown83352
-Node: acc_on_device84019
-Node: acc_malloc85023
-Node: acc_free85522
-Node: acc_copyin85949
-Node: acc_present_or_copyin87536
-Node: acc_create89314
-Node: acc_present_or_create90946
-Node: acc_copyout92732
-Node: acc_delete95036
-Node: acc_update_device97283
-Node: acc_update_self98857
-Node: acc_map_data100447
-Node: acc_unmap_data101132
-Node: acc_deviceptr101653
-Node: acc_hostptr102223
-Node: acc_is_present102787
-Node: acc_memcpy_to_device104314
-Node: acc_memcpy_from_device104977
-Node: acc_attach105644
-Node: acc_detach106291
-Node: acc_get_current_cuda_device107070
-Node: acc_get_current_cuda_context107655
-Node: acc_get_cuda_stream108255
-Node: acc_set_cuda_stream108846
-Node: acc_prof_register109517
-Node: acc_prof_unregister110076
-Node: acc_prof_lookup110643
-Node: acc_register_library111164
-Node: OpenACC Environment Variables111730
-Node: ACC_DEVICE_TYPE112302
-Node: ACC_DEVICE_NUM112538
-Node: ACC_PROFLIB112792
-Node: GCC_ACC_NOTIFY113123
-Node: CUDA Streams Usage113343
-Ref: CUDA Streams Usage-Footnote-1115244
-Node: OpenACC Library Interoperability115353
-Ref: OpenACC Library Interoperability-Footnote-1121721
-Ref: OpenACC Library Interoperability-Footnote-2121973
-Node: OpenACC Profiling Interface122181
-Node: The libgomp ABI132205
-Node: Implementing MASTER construct133058
-Node: Implementing CRITICAL construct133474
-Node: Implementing ATOMIC construct134215
-Node: Implementing FLUSH construct134698
-Node: Implementing BARRIER construct134971
-Node: Implementing THREADPRIVATE construct135242
-Node: Implementing PRIVATE clause135897
-Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses136480
-Node: Implementing REDUCTION clause137806
-Node: Implementing PARALLEL construct138365
-Node: Implementing FOR construct139624
-Node: Implementing ORDERED construct141624
-Node: Implementing SECTIONS construct141932
-Node: Implementing SINGLE construct142700
-Node: Implementing OpenACC's PARALLEL construct143414
-Node: Reporting Bugs143674
-Node: Copying144037
-Node: GNU Free Documentation License181583
-Node: Funding206706
-Node: Library Index209232
+Node: omp_get_active_level8818
+Node: omp_get_ancestor_thread_num9518
+Node: omp_get_cancellation10448
+Node: omp_get_default_device11262
+Node: omp_get_dynamic11938
+Node: omp_get_initial_device12822
+Node: omp_get_device_num13571
+Node: omp_get_level14374
+Node: omp_get_max_active_levels14997
+Node: omp_get_max_task_priority15718
+Node: omp_get_max_threads16340
+Node: omp_get_nested17099
+Node: omp_get_num_devices18707
+Node: omp_get_num_procs19228
+Node: omp_get_num_teams19767
+Node: omp_get_num_threads20283
+Node: omp_get_proc_bind21372
+Node: omp_get_schedule22293
+Node: omp_get_supported_active_levels23262
+Node: omp_get_team_num24048
+Node: omp_get_team_size24562
+Node: omp_get_thread_limit25522
+Node: omp_get_thread_num26141
+Node: omp_in_parallel27012
+Node: omp_in_final27661
+Node: omp_is_initial_device28335
+Node: omp_set_default_device29028
+Node: omp_set_dynamic29819
+Node: omp_set_max_active_levels30705
+Node: omp_set_nested31627
+Node: omp_set_num_threads32824
+Node: omp_set_schedule33692
+Node: omp_init_lock34773
+Node: omp_set_lock35426
+Node: omp_test_lock36281
+Node: omp_unset_lock37257
+Node: omp_destroy_lock38188
+Node: omp_init_nest_lock38865
+Node: omp_set_nest_lock39600
+Node: omp_test_nest_lock40515
+Node: omp_unset_nest_lock41542
+Node: omp_destroy_nest_lock42557
+Node: omp_get_wtick43308
+Node: omp_get_wtime43900
+Node: omp_fulfill_event44702
+Node: Environment Variables45723
+Node: OMP_CANCELLATION47350
+Node: OMP_DISPLAY_ENV47883
+Node: OMP_DEFAULT_DEVICE48586
+Node: OMP_DYNAMIC49366
+Node: OMP_MAX_ACTIVE_LEVELS49962
+Node: OMP_MAX_TASK_PRIORITY50889
+Node: OMP_NESTED51547
+Node: OMP_NUM_THREADS52576
+Node: OMP_PROC_BIND53378
+Node: OMP_PLACES54689
+Node: OMP_STACKSIZE56866
+Node: OMP_SCHEDULE57690
+Node: OMP_TARGET_OFFLOAD58390
+Node: OMP_THREAD_LIMIT59346
+Node: OMP_WAIT_POLICY59952
+Node: GOMP_CPU_AFFINITY60644
+Node: GOMP_DEBUG62374
+Node: GOMP_STACKSIZE62881
+Node: GOMP_SPINCOUNT63712
+Node: GOMP_RTEMS_THREAD_POOLS64916
+Node: Enabling OpenACC67094
+Node: OpenACC Runtime Library Routines67995
+Node: acc_get_num_devices72276
+Node: acc_set_device_type73002
+Node: acc_get_device_type73766
+Node: acc_set_device_num74779
+Node: acc_get_device_num75596
+Node: acc_get_property76395
+Node: acc_async_test78618
+Node: acc_async_test_all79606
+Node: acc_wait80506
+Node: acc_wait_all81369
+Node: acc_wait_all_async82130
+Node: acc_wait_async82882
+Node: acc_init83590
+Node: acc_shutdown84235
+Node: acc_on_device84902
+Node: acc_malloc85906
+Node: acc_free86405
+Node: acc_copyin86832
+Node: acc_present_or_copyin88419
+Node: acc_create90197
+Node: acc_present_or_create91829
+Node: acc_copyout93615
+Node: acc_delete95919
+Node: acc_update_device98166
+Node: acc_update_self99740
+Node: acc_map_data101330
+Node: acc_unmap_data102015
+Node: acc_deviceptr102536
+Node: acc_hostptr103106
+Node: acc_is_present103670
+Node: acc_memcpy_to_device105197
+Node: acc_memcpy_from_device105860
+Node: acc_attach106527
+Node: acc_detach107174
+Node: acc_get_current_cuda_device107953
+Node: acc_get_current_cuda_context108538
+Node: acc_get_cuda_stream109138
+Node: acc_set_cuda_stream109729
+Node: acc_prof_register110400
+Node: acc_prof_unregister110959
+Node: acc_prof_lookup111526
+Node: acc_register_library112047
+Node: OpenACC Environment Variables112613
+Node: ACC_DEVICE_TYPE113185
+Node: ACC_DEVICE_NUM113421
+Node: ACC_PROFLIB113675
+Node: GCC_ACC_NOTIFY114006
+Node: CUDA Streams Usage114226
+Ref: CUDA Streams Usage-Footnote-1116127
+Node: OpenACC Library Interoperability116236
+Ref: OpenACC Library Interoperability-Footnote-1122604
+Ref: OpenACC Library Interoperability-Footnote-2122856
+Node: OpenACC Profiling Interface123064
+Node: The libgomp ABI133088
+Node: Implementing MASTER construct133941
+Node: Implementing CRITICAL construct134357
+Node: Implementing ATOMIC construct135098
+Node: Implementing FLUSH construct135581
+Node: Implementing BARRIER construct135854
+Node: Implementing THREADPRIVATE construct136125
+Node: Implementing PRIVATE clause136780
+Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses137363
+Node: Implementing REDUCTION clause138689
+Node: Implementing PARALLEL construct139248
+Node: Implementing FOR construct140507
+Node: Implementing ORDERED construct142507
+Node: Implementing SECTIONS construct142815
+Node: Implementing SINGLE construct143583
+Node: Implementing OpenACC's PARALLEL construct144297
+Node: Reporting Bugs144557
+Node: Copying144920
+Node: GNU Free Documentation License182466
+Node: Funding207589
+Node: Library Index210115
 
 End Tag Table
 

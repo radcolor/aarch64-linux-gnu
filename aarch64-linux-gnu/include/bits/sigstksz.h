@@ -20,7 +20,7 @@
 # error "Never include <bits/sigstksz.h> directly; use <signal.h> instead."
 #endif
 
-#if defined __USE_SC_SIGSTKSZ && __USE_SC_SIGSTKSZ
+#if defined __USE_DYNAMIC_STACK_SIZE && __USE_DYNAMIC_STACK_SIZE
 # include <unistd.h>
 
 /* Default stack size for a signal handler: sysconf (SC_SIGSTKSZ).  */

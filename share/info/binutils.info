@@ -1,4 +1,4 @@
-This is binutils.info, produced by makeinfo version 6.7 from
+This is binutils.info, produced by makeinfo version 6.8 from
 binutils.texi.
 
 Copyright (C) 1991-2021 Free Software Foundation, Inc.
@@ -42,7 +42,7 @@ Introduction
 ************
 
 This brief manual contains documentation for the GNU binary utilities
-(GNU Binutils) version 2.36.50:
+(GNU Binutils) version 2.37.50:
 
    This document is distributed under the terms of the GNU Free
 Documentation License version 1.3.  A copy of the license is included in

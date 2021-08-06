@@ -1,6 +1,6 @@
-This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.33.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
    Copyright © 1993–2021 Free Software Foundation, Inc.
 
@@ -43,7 +43,8 @@ START-INFO-DIR-ENTRY
 * CLOCK_REALTIME: (libc)Getting the Time.
 * COLL_WEIGHTS_MAX: (libc)Utility Limits.
 * CPU_CLR: (libc)CPU Affinity.
-* CPU_FEATURE_USABLE: (libc)X86.
+* CPU_FEATURE_ACTIVE: (libc)X86.
+* CPU_FEATURE_PRESENT: (libc)X86.
 * CPU_ISSET: (libc)CPU Affinity.
 * CPU_SET: (libc)CPU Affinity.
 * CPU_SETSIZE: (libc)CPU Affinity.
@@ -246,7 +247,6 @@ START-INFO-DIR-ENTRY
 * F_SETLK: (libc)File Locks.
 * F_SETLKW: (libc)File Locks.
 * F_SETOWN: (libc)Interrupt Input.
-* HAS_CPU_FEATURE: (libc)X86.
 * HUGE_VAL: (libc)Math Error Reporting.
 * HUGE_VALF: (libc)Math Error Reporting.
 * HUGE_VALL: (libc)Math Error Reporting.
@@ -454,6 +454,7 @@ START-INFO-DIR-ENTRY
 * X_OK: (libc)Testing File Access.
 * _Complex_I: (libc)Complex Numbers.
 * _Exit: (libc)Termination Internals.
+* _Fork: (libc)Creating a Process.
 * _IOFBF: (libc)Controlling Buffering.
 * _IOLBF: (libc)Controlling Buffering.
 * _IONBF: (libc)Controlling Buffering.
@@ -715,7 +716,9 @@ START-INFO-DIR-ENTRY
 * clogfNx: (libc)Exponents and Logarithms.
 * clogl: (libc)Exponents and Logarithms.
 * close: (libc)Opening and Closing Files.
+* close_range: (libc)Opening and Closing Files.
 * closedir: (libc)Reading/Closing Directory.
+* closefrom: (libc)Opening and Closing Files.
 * closelog: (libc)closelog.
 * cnd_broadcast: (libc)ISO C Condition Variables.
 * cnd_destroy: (libc)ISO C Condition Variables.
@@ -4704,21 +4707,6 @@ the libraries.
 
    The header file ‘<argp.h>’ should be included to use argp.
 
-* Menu:
-
-* Argp Global Variables::
-* Argp Parsers::
-* Argp Option Vectors::
-* Argp Parser Functions::
-* Argp Children::
-* Argp Flags::
-* Argp Help Filtering::
-* Argp Help::
-* Argp Help Flags::
-* Argp Examples::
-* Argp User Customization::
-* Suboptions Example::
-
 25.3.1 The ‘argp_parse’ Function
 --------------------------------
 
@@ -6219,10 +6207,6 @@ variable to a comma-separated list of tokens.  Whitespace is ignored:
      This will word wrap help output at or before column N.  The default
      is 79.
 
-* Menu:
-
-* Suboptions::
-
 
 File: libc.info,  Node: Suboptions,  Next: Suboptions Example,  Prev: Argp,  Up: Parsing Program Arguments
 
@@ -7185,12 +7169,12 @@ This section gives an overview of processes and of the steps involved in
 creating a process and making it run another program.
 
    A new processes is created when one of the functions ‘posix_spawn’,
-‘fork’, or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also create new
-processes internally.)  Due to the name of the ‘fork’ function, the act
-of creating a new process is sometimes called “forking” a process.  Each
-new process (the “child process” or “subprocess”) is allocated a process
-ID, distinct from the process ID of the parent process.  *Note Process
-Identification::.
+‘fork’, ‘_Fork’ or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also
+create new processes internally.)  Due to the name of the ‘fork’
+function, the act of creating a new process is sometimes called
+“forking” a process.  Each new process (the “child process” or
+“subprocess”) is allocated a process ID, distinct from the process ID of
+the parent process.  *Note Process Identification::.
 
    After forking a child process, both the parent and child processes
 continue to execute normally.  If you want your program to wait for a
@@ -7201,9 +7185,9 @@ information about why the child terminated—for example, its exit status
 code.
 
    A newly forked child process continues to execute the same program as
-its parent process, at the point where the ‘fork’ call returns.  You can
-use the return value from ‘fork’ to tell whether the program is running
-in the parent process or the child.
+its parent process, at the point where the ‘fork’ or ‘_Fork’ call
+returns.  You can use the return value from ‘fork’ or ‘_Fork’ to tell
+whether the program is running in the parent process or the child.
 
    Having several processes run the same program is only occasionally
 useful.  But the child can execute another program using one of the
@@ -7344,6 +7328,20 @@ parent process are:
    • The set of pending signals (*note Delivery of Signal::) for the
      child process is cleared.  (The child process inherits its mask of
      blocked signals and signal actions from the parent process.)
+
+ -- Function: pid_t _Fork (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘_Fork’ function is similar to ‘fork’, but it does not invoke
+     any callbacks registered with ‘pthread_atfork’, nor does it reset
+     any internal state or locks (such as the ‘malloc’ locks).  In the
+     new subprocess, only async-signal-safe functions may be called,
+     such as ‘dup2’ or ‘execve’.
+
+     The ‘_Fork’ function is an async-signal-safe replacement of ‘fork’.
+     It is a GNU extension.
 
  -- Function: pid_t vfork (void)
 
