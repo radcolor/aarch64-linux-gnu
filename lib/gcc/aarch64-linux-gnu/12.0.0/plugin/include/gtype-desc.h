@@ -1197,6 +1197,10 @@ extern void gt_ggc_mx_vec_deferred_access_check_va_gc_ (void *);
   if (X != NULL) gt_ggc_mx_vec_cxx_saved_binding_va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_vec_cxx_saved_binding_va_gc_ (void *);
+#define gt_ggc_m_34vec_omp_declare_target_attr_va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_vec_omp_declare_target_attr_va_gc_ (X);\
+  } while (0)
+extern void gt_ggc_mx_vec_omp_declare_target_attr_va_gc_ (void *);
 #define gt_ggc_m_11saved_scope(X) do { \
   if (X != NULL) gt_ggc_mx_saved_scope (X);\
   } while (0)
@@ -2642,6 +2646,10 @@ extern void gt_pch_nx_vec_deferred_access_check_va_gc_ (void *);
   if (X != NULL) gt_pch_nx_vec_cxx_saved_binding_va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_vec_cxx_saved_binding_va_gc_ (void *);
+#define gt_pch_n_34vec_omp_declare_target_attr_va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_vec_omp_declare_target_attr_va_gc_ (X);\
+  } while (0)
+extern void gt_pch_nx_vec_omp_declare_target_attr_va_gc_ (void *);
 #define gt_pch_n_11saved_scope(X) do { \
   if (X != NULL) gt_pch_nx_saved_scope (X);\
   } while (0)
@@ -3616,6 +3624,8 @@ extern void gt_pch_p_14cp_token_cache
 extern void gt_pch_p_32vec_deferred_access_check_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_28vec_cxx_saved_binding_va_gc_
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_34vec_omp_declare_target_attr_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11saved_scope
     (void *, void *, gt_pointer_operator, void *);

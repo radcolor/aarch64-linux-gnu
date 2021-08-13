@@ -7263,6 +7263,7 @@
 #define HAVE_vashrv8hi3 (TARGET_SIMD)
 #define HAVE_vashrv2si3 (TARGET_SIMD)
 #define HAVE_vashrv4si3 (TARGET_SIMD)
+#define HAVE_vashrv2di3 (TARGET_SIMD)
 #define HAVE_aarch64_ashr_simddi (TARGET_SIMD)
 #define HAVE_vlshrv8qi3 (TARGET_SIMD)
 #define HAVE_vlshrv16qi3 (TARGET_SIMD)
@@ -7270,6 +7271,7 @@
 #define HAVE_vlshrv8hi3 (TARGET_SIMD)
 #define HAVE_vlshrv2si3 (TARGET_SIMD)
 #define HAVE_vlshrv4si3 (TARGET_SIMD)
+#define HAVE_vlshrv2di3 (TARGET_SIMD)
 #define HAVE_aarch64_lshr_simddi (TARGET_SIMD)
 #define HAVE_vec_setv8qi (TARGET_SIMD)
 #define HAVE_vec_setv16qi (TARGET_SIMD)
@@ -18396,6 +18398,7 @@ extern rtx        gen_vashrv4hi3                                     (rtx, rtx, 
 extern rtx        gen_vashrv8hi3                                     (rtx, rtx, rtx);
 extern rtx        gen_vashrv2si3                                     (rtx, rtx, rtx);
 extern rtx        gen_vashrv4si3                                     (rtx, rtx, rtx);
+extern rtx        gen_vashrv2di3                                     (rtx, rtx, rtx);
 extern rtx        gen_aarch64_ashr_simddi                            (rtx, rtx, rtx);
 extern rtx        gen_vlshrv8qi3                                     (rtx, rtx, rtx);
 extern rtx        gen_vlshrv16qi3                                    (rtx, rtx, rtx);
@@ -18403,6 +18406,7 @@ extern rtx        gen_vlshrv4hi3                                     (rtx, rtx, 
 extern rtx        gen_vlshrv8hi3                                     (rtx, rtx, rtx);
 extern rtx        gen_vlshrv2si3                                     (rtx, rtx, rtx);
 extern rtx        gen_vlshrv4si3                                     (rtx, rtx, rtx);
+extern rtx        gen_vlshrv2di3                                     (rtx, rtx, rtx);
 extern rtx        gen_aarch64_lshr_simddi                            (rtx, rtx, rtx);
 extern rtx        gen_vec_setv8qi                                    (rtx, rtx, rtx);
 extern rtx        gen_vec_setv16qi                                   (rtx, rtx, rtx);

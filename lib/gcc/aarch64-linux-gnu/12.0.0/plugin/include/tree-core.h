@@ -476,6 +476,9 @@ enum omp_clause_code {
   /* OpenMP clause: bind (binding).  */
   OMP_CLAUSE_BIND,
 
+  /* OpenMP clause: filter (integer-expression).  */
+  OMP_CLAUSE_FILTER,
+
   /* Internally used only clause, holding SIMD uid.  */
   OMP_CLAUSE__SIMDUID_,
 
@@ -1498,6 +1501,7 @@ enum omp_clause_proc_bind_kind
   /* Numbers should match omp_proc_bind_t enum in omp.h.  */
   OMP_CLAUSE_PROC_BIND_FALSE = 0,
   OMP_CLAUSE_PROC_BIND_TRUE = 1,
+  OMP_CLAUSE_PROC_BIND_PRIMARY = 2,
   OMP_CLAUSE_PROC_BIND_MASTER = 2,
   OMP_CLAUSE_PROC_BIND_CLOSE = 3,
   OMP_CLAUSE_PROC_BIND_SPREAD = 4,
