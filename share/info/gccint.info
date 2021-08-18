@@ -43956,6 +43956,17 @@ Here are several miscellaneous parameters.
      Store the result in TARGET if convenient.  The default clears the
      top byte of the original pointer.
 
+ -- Target Hook: HOST_WIDE_INT TARGET_GCOV_TYPE_SIZE (void)
+     Returns the gcov type size in bits.  This type is used for example
+     for counters incremented by profiling and code-coverage events.
+     The default value is 64, if the type size of long long is greater
+     than 32, otherwise the default value is 32.  A 64-bit type is
+     recommended to avoid overflows of the counters.  If the
+     '-fprofile-update=atomic' is used, then the counters are
+     incremented using atomic operations.  Targets not supporting 64-bit
+     atomic operations may override the default value and request a
+     32-bit type.
+
 
 File: gccint.info,  Node: Host Config,  Next: Fragments,  Prev: Target Macros,  Up: Top
 
@@ -45107,10 +45118,12 @@ The GCC garbage collector GGC is only invoked explicitly.  In contrast
 with many other garbage collectors, it is not implicitly invoked by
 allocation routines when a lot of memory has been consumed.  So the only
 way to have GGC reclaim storage is to call the 'ggc_collect' function
-explicitly.  This call is an expensive operation, as it may have to scan
-the entire heap.  Beware that local variables (on the GCC call stack)
-are not followed by such an invocation (as many other garbage collectors
-do): you should reference all your data from static or external 'GTY'-ed
+explicitly.  When the FORCE_COLLECT parameter is set or otherwise an
+internal heuristic decides whether to actually collect, this call is
+potentially an expensive operation, as it may have to scan the entire
+heap.  Beware that local variables (on the GCC call stack) are not
+followed by such an invocation (as many other garbage collectors do):
+you should reference all your data from static or external 'GTY'-ed
 variables, and it is advised to call 'ggc_collect' with a shallow call
 stack.  The GGC is an exact mark and sweep garbage collector (so it does
 not scan the call stack for pointers).  In practice GCC passes don't
@@ -57051,6 +57064,7 @@ Concept Index
 * TARGET_FUNCTION_OK_FOR_SIBCALL:        Tail Calls.         (line    6)
 * TARGET_FUNCTION_VALUE:                 Scalar Return.      (line    9)
 * TARGET_FUNCTION_VALUE_REGNO_P:         Scalar Return.      (line   96)
+* TARGET_GCOV_TYPE_SIZE:                 Misc.               (line 1325)
 * TARGET_GENERATE_VERSION_DISPATCHER_BODY: Misc.             (line  722)
 * TARGET_GEN_CCMP_FIRST:                 Misc.               (line  905)
 * TARGET_GEN_CCMP_NEXT:                  Misc.               (line  916)
@@ -58341,58 +58355,58 @@ Node: D Language and ABI1840468
 Node: Named Address Spaces1843411
 Node: Misc1849338
 Ref: TARGET_SHIFT_TRUNCATION_MASK1857209
-Node: Host Config1917123
-Node: Host Common1918192
-Node: Filesystem1920566
-Node: Host Misc1924681
-Node: Fragments1927130
-Node: Target Fragment1928325
-Node: Host Fragment1939137
-Node: Collect21939377
-Node: Header Dirs1942013
-Node: Type Information1943436
-Node: GTY Options1946712
-Node: Inheritance and GTY1957971
-Ref: Inheritance and GTY-Footnote-11959536
-Node: User GC1959806
-Node: GGC Roots1963545
-Node: Files1964258
-Node: Invoking the garbage collector1966886
-Node: Troubleshooting1968391
-Node: Plugins1969466
-Node: Plugins loading1970595
-Node: Plugin API1971694
-Node: Plugins pass1979561
-Node: Plugins GC1981532
-Node: Plugins description1983249
-Node: Plugins attr1983785
-Node: Plugins recording1986065
-Node: Plugins gate1986915
-Node: Plugins tracking1987506
-Node: Plugins building1988094
-Node: LTO1991595
-Node: LTO Overview1992467
-Node: LTO object file layout1998219
-Node: IPA2002849
-Node: WHOPR2011899
-Node: Internal flags2016459
-Node: Match and Simplify2017870
-Node: GIMPLE API2018832
-Node: The Language2021627
-Node: Static Analyzer2034126
-Node: Analyzer Internals2034391
-Node: Debugging the Analyzer2050278
-Node: User Experience Guidelines2053198
-Node: Guidelines for Diagnostics2054134
-Ref: input_location_example2062309
-Node: Guidelines for Options2071994
-Node: Funding2072171
-Node: GNU Project2074678
-Node: Copying2075327
-Node: GNU Free Documentation License2112838
-Node: Contributors2137959
-Node: Option Index2178935
-Node: Concept Index2179812
+Node: Host Config1917745
+Node: Host Common1918814
+Node: Filesystem1921188
+Node: Host Misc1925303
+Node: Fragments1927752
+Node: Target Fragment1928947
+Node: Host Fragment1939759
+Node: Collect21939999
+Node: Header Dirs1942635
+Node: Type Information1944058
+Node: GTY Options1947334
+Node: Inheritance and GTY1958593
+Ref: Inheritance and GTY-Footnote-11960158
+Node: User GC1960428
+Node: GGC Roots1964167
+Node: Files1964880
+Node: Invoking the garbage collector1967508
+Node: Troubleshooting1969137
+Node: Plugins1970212
+Node: Plugins loading1971341
+Node: Plugin API1972440
+Node: Plugins pass1980307
+Node: Plugins GC1982278
+Node: Plugins description1983995
+Node: Plugins attr1984531
+Node: Plugins recording1986811
+Node: Plugins gate1987661
+Node: Plugins tracking1988252
+Node: Plugins building1988840
+Node: LTO1992341
+Node: LTO Overview1993213
+Node: LTO object file layout1998965
+Node: IPA2003595
+Node: WHOPR2012645
+Node: Internal flags2017205
+Node: Match and Simplify2018616
+Node: GIMPLE API2019578
+Node: The Language2022373
+Node: Static Analyzer2034872
+Node: Analyzer Internals2035137
+Node: Debugging the Analyzer2051024
+Node: User Experience Guidelines2053944
+Node: Guidelines for Diagnostics2054880
+Ref: input_location_example2063055
+Node: Guidelines for Options2072740
+Node: Funding2072917
+Node: GNU Project2075424
+Node: Copying2076073
+Node: GNU Free Documentation License2113584
+Node: Contributors2138705
+Node: Option Index2179681
+Node: Concept Index2180558
 
 End Tag Table
 
