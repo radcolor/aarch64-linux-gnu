@@ -45118,12 +45118,12 @@ The GCC garbage collector GGC is only invoked explicitly.  In contrast
 with many other garbage collectors, it is not implicitly invoked by
 allocation routines when a lot of memory has been consumed.  So the only
 way to have GGC reclaim storage is to call the 'ggc_collect' function
-explicitly.  When the FORCE_COLLECT parameter is set or otherwise an
-internal heuristic decides whether to actually collect, this call is
-potentially an expensive operation, as it may have to scan the entire
-heap.  Beware that local variables (on the GCC call stack) are not
-followed by such an invocation (as many other garbage collectors do):
-you should reference all your data from static or external 'GTY'-ed
+explicitly.  With MODE 'GGC_COLLECT_FORCE' or otherwise (default
+'GGC_COLLECT_HEURISTIC') when the internal heuristic decides to collect,
+this call is potentially an expensive operation, as it may have to scan
+the entire heap.  Beware that local variables (on the GCC call stack)
+are not followed by such an invocation (as many other garbage collectors
+do): you should reference all your data from static or external 'GTY'-ed
 variables, and it is advised to call 'ggc_collect' with a shallow call
 stack.  The GGC is an exact mark and sweep garbage collector (so it does
 not scan the call stack for pointers).  In practice GCC passes don't
@@ -58372,41 +58372,41 @@ Node: User GC1960428
 Node: GGC Roots1964167
 Node: Files1964880
 Node: Invoking the garbage collector1967508
-Node: Troubleshooting1969137
-Node: Plugins1970212
-Node: Plugins loading1971341
-Node: Plugin API1972440
-Node: Plugins pass1980307
-Node: Plugins GC1982278
-Node: Plugins description1983995
-Node: Plugins attr1984531
-Node: Plugins recording1986811
-Node: Plugins gate1987661
-Node: Plugins tracking1988252
-Node: Plugins building1988840
-Node: LTO1992341
-Node: LTO Overview1993213
-Node: LTO object file layout1998965
-Node: IPA2003595
-Node: WHOPR2012645
-Node: Internal flags2017205
-Node: Match and Simplify2018616
-Node: GIMPLE API2019578
-Node: The Language2022373
-Node: Static Analyzer2034872
-Node: Analyzer Internals2035137
-Node: Debugging the Analyzer2051024
-Node: User Experience Guidelines2053944
-Node: Guidelines for Diagnostics2054880
-Ref: input_location_example2063055
-Node: Guidelines for Options2072740
-Node: Funding2072917
-Node: GNU Project2075424
-Node: Copying2076073
-Node: GNU Free Documentation License2113584
-Node: Contributors2138705
-Node: Option Index2179681
-Node: Concept Index2180558
+Node: Troubleshooting1969150
+Node: Plugins1970225
+Node: Plugins loading1971354
+Node: Plugin API1972453
+Node: Plugins pass1980320
+Node: Plugins GC1982291
+Node: Plugins description1984008
+Node: Plugins attr1984544
+Node: Plugins recording1986824
+Node: Plugins gate1987674
+Node: Plugins tracking1988265
+Node: Plugins building1988853
+Node: LTO1992354
+Node: LTO Overview1993226
+Node: LTO object file layout1998978
+Node: IPA2003608
+Node: WHOPR2012658
+Node: Internal flags2017218
+Node: Match and Simplify2018629
+Node: GIMPLE API2019591
+Node: The Language2022386
+Node: Static Analyzer2034885
+Node: Analyzer Internals2035150
+Node: Debugging the Analyzer2051037
+Node: User Experience Guidelines2053957
+Node: Guidelines for Diagnostics2054893
+Ref: input_location_example2063068
+Node: Guidelines for Options2072753
+Node: Funding2072930
+Node: GNU Project2075437
+Node: Copying2076086
+Node: GNU Free Documentation License2113597
+Node: Contributors2138718
+Node: Option Index2179694
+Node: Concept Index2180571
 
 End Tag Table
 
