@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
+/* SPDX-License-Identifier: LGPL-2.1 WITH Linux-syscall-note */
 /* Copyright(c) 2019 Intel Corporation. All rights rsvd. */
 #ifndef _USR_IDXD_H_
 #define _USR_IDXD_H_
@@ -243,8 +243,8 @@ struct dsa_completion_record {
 			uint32_t	rsvd2:8;
 		};
 
-		uint16_t	delta_rec_size;
-		uint16_t	crc_val;
+		uint32_t	delta_rec_size;
+		uint32_t	crc_val;
 
 		/* DIF check & strip */
 		struct {

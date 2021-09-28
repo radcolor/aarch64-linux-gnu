@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -2113,13 +2127,13 @@ Variable and Constant Macro Index
 * Menu:
 
 * (*__gconv_end_fct):                    glibc iconv Implementation.
-                                                              (line 557)
+                                                              (line 563)
 * (*__gconv_fct):                        glibc iconv Implementation.
-                                                              (line 576)
+                                                              (line 582)
 * (*__gconv_init_fct):                   glibc iconv Implementation.
-                                                              (line 403)
-* (void):                                Error Messages.      (line 255)
-* _ATFILE_SOURCE:                        Feature Test Macros. (line 274)
+                                                              (line 409)
+* (void):                                Error Messages.      (line 257)
+* _ATFILE_SOURCE:                        Feature Test Macros. (line 280)
 * _Complex_I:                            Complex Numbers.     (line  21)
 * _CS_LFS64_CFLAGS:                      String Parameters.   (line  71)
 * _CS_LFS64_LDFLAGS:                     String Parameters.   (line  78)
@@ -2130,22 +2144,22 @@ Variable and Constant Macro Index
 * _CS_LFS_LIBS:                          String Parameters.   (line  57)
 * _CS_LFS_LINTFLAGS:                     String Parameters.   (line  64)
 * _CS_PATH:                              String Parameters.   (line  38)
-* _DEFAULT_SOURCE:                       Feature Test Macros. (line 258)
-* _DYNAMIC_STACK_SIZE_SOURCE:            Feature Test Macros. (line 285)
-* _FILE_OFFSET_BITS:                     Feature Test Macros. (line 138)
-* _FORTIFY_SOURCE:                       Feature Test Macros. (line 278)
-* _GNU_SOURCE:                           Feature Test Macros. (line 251)
+* _DEFAULT_SOURCE:                       Feature Test Macros. (line 264)
+* _DYNAMIC_STACK_SIZE_SOURCE:            Feature Test Macros. (line 291)
+* _FILE_OFFSET_BITS:                     Feature Test Macros. (line 143)
+* _FORTIFY_SOURCE:                       Feature Test Macros. (line 284)
+* _GNU_SOURCE:                           Feature Test Macros. (line 257)
 * _IOFBF:                                Controlling Buffering.
                                                               (line  45)
 * _IOLBF:                                Controlling Buffering.
                                                               (line  51)
 * _IONBF:                                Controlling Buffering.
                                                               (line  57)
-* _ISOC11_SOURCE:                        Feature Test Macros. (line 207)
-* _ISOC2X_SOURCE:                        Feature Test Macros. (line 212)
-* _ISOC99_SOURCE:                        Feature Test Macros. (line 201)
-* _LARGEFILE64_SOURCE:                   Feature Test Macros. (line 120)
-* _LARGEFILE_SOURCE:                     Feature Test Macros. (line 108)
+* _ISOC11_SOURCE:                        Feature Test Macros. (line 213)
+* _ISOC2X_SOURCE:                        Feature Test Macros. (line 218)
+* _ISOC99_SOURCE:                        Feature Test Macros. (line 207)
+* _LARGEFILE64_SOURCE:                   Feature Test Macros. (line 124)
+* _LARGEFILE_SOURCE:                     Feature Test Macros. (line 112)
 * _PATH_FSTAB:                           Mount Information.   (line  29)
 * _PATH_MNTTAB:                          Mount Information.   (line  29)
 * _PATH_MOUNTED:                         Mount Information.   (line  29)
@@ -2190,7 +2204,7 @@ Variable and Constant Macro Index
 * _POSIX_ARG_MAX:                        Minimums.            (line  26)
 * _POSIX_CHILD_MAX:                      Minimums.            (line  33)
 * _POSIX_CHOWN_RESTRICTED:               Options for Files.   (line  26)
-* _POSIX_C_SOURCE:                       Feature Test Macros. (line  46)
+* _POSIX_C_SOURCE:                       Feature Test Macros. (line  49)
 * _POSIX_JOB_CONTROL:                    Job Control.         (line  18)
 * _POSIX_JOB_CONTROL <1>:                System Options.      (line  19)
 * _POSIX_LINK_MAX:                       File Minimums.       (line  13)
@@ -2203,14 +2217,14 @@ Variable and Constant Macro Index
 * _POSIX_PATH_MAX:                       File Minimums.       (line  39)
 * _POSIX_PIPE_BUF:                       File Minimums.       (line  45)
 * _POSIX_SAVED_IDS:                      System Options.      (line  27)
-* _POSIX_SOURCE:                         Feature Test Macros. (line  37)
+* _POSIX_SOURCE:                         Feature Test Macros. (line  38)
 * _POSIX_SSIZE_MAX:                      Minimums.            (line  51)
 * _POSIX_STREAM_MAX:                     Minimums.            (line  57)
 * _POSIX_TZNAME_MAX:                     Minimums.            (line  63)
 * _POSIX_VDISABLE:                       Special Characters.  (line  22)
 * _POSIX_VDISABLE <1>:                   Options for Files.   (line  40)
 * _POSIX_VERSION:                        Version Supported.   (line   6)
-* _REENTRANT:                            Feature Test Macros. (line 290)
+* _REENTRANT:                            Feature Test Macros. (line 296)
 * _SC_2_C_DEV:                           Constants for Sysconf.
                                                               (line 306)
 * _SC_2_FORT_DEV:                        Constants for Sysconf.
@@ -2498,16 +2512,16 @@ Variable and Constant Macro Index
                                                               (line 524)
 * _SC_XOPEN_XPG4:                        Constants for Sysconf.
                                                               (line 528)
-* _THREAD_SAFE:                          Feature Test Macros. (line 291)
-* _TIME_BITS:                            Feature Test Macros. (line 169)
-* _XOPEN_SOURCE:                         Feature Test Macros. (line  87)
-* _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  88)
+* _THREAD_SAFE:                          Feature Test Macros. (line 297)
+* _TIME_BITS:                            Feature Test Macros. (line 175)
+* _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
+* _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __libc_single_threaded:                Single-Threaded.     (line  15)
-* __STDC_WANT_IEC_60559_BFP_EXT__:       Feature Test Macros. (line 224)
-* __STDC_WANT_IEC_60559_EXT__:           Feature Test Macros. (line 245)
-* __STDC_WANT_IEC_60559_FUNCS_EXT__:     Feature Test Macros. (line 231)
-* __STDC_WANT_IEC_60559_TYPES_EXT__:     Feature Test Macros. (line 238)
-* __STDC_WANT_LIB_EXT2__:                Feature Test Macros. (line 218)
+* __STDC_WANT_IEC_60559_BFP_EXT__:       Feature Test Macros. (line 230)
+* __STDC_WANT_IEC_60559_EXT__:           Feature Test Macros. (line 251)
+* __STDC_WANT_IEC_60559_FUNCS_EXT__:     Feature Test Macros. (line 237)
+* __STDC_WANT_IEC_60559_TYPES_EXT__:     Feature Test Macros. (line 244)
+* __STDC_WANT_LIB_EXT2__:                Feature Test Macros. (line 224)
 * ABDAY_1:                               The Elegant and Fast Way.
                                                               (line  35)
 * ABDAY_2:                               The Elegant and Fast Way.
@@ -2668,16 +2682,16 @@ Variable and Constant Macro Index
                                                               (line  63)
 * CCTS_OFLOW:                            Control Modes.       (line  94)
 * CHAR_BIT:                              Width of Type.       (line  52)
-* CHAR_MAX:                              Range of Type.       (line  39)
-* CHAR_MIN:                              Range of Type.       (line  34)
+* CHAR_MAX:                              Range of Type.       (line  40)
+* CHAR_MIN:                              Range of Type.       (line  35)
 * CHAR_WIDTH:                            Width of Type.       (line  11)
 * CHILD_MAX:                             General Limits.      (line  29)
 * CIGNORE:                               Control Modes.       (line 108)
-* CLK_TCK:                               Processor Time.      (line  43)
+* CLK_TCK:                               Processor Time.      (line  44)
 * CLOCAL:                                Control Modes.       (line  18)
 * CLOCKS_PER_SEC:                        CPU Time.            (line  33)
-* CLOCK_MONOTONIC:                       Getting the Time.    (line  59)
-* CLOCK_REALTIME:                        Getting the Time.    (line  47)
+* CLOCK_MONOTONIC:                       Getting the Time.    (line  61)
+* CLOCK_REALTIME:                        Getting the Time.    (line  49)
 * CLOSE_RANGE_CLOEXEC:                   Opening and Closing Files.
                                                               (line 226)
 * CLOSE_RANGE_UNSHARE:                   Opening and Closing Files.
@@ -2716,23 +2730,23 @@ Variable and Constant Macro Index
 * DAY_7:                                 The Elegant and Fast Way.
                                                               (line  50)
 * DBL_DIG:                               Floating Point Parameters.
-                                                              (line 100)
+                                                              (line 101)
 * DBL_EPSILON:                           Floating Point Parameters.
-                                                              (line 191)
+                                                              (line 192)
 * DBL_MANT_DIG:                          Floating Point Parameters.
                                                               (line  80)
 * DBL_MAX:                               Floating Point Parameters.
-                                                              (line 165)
+                                                              (line 166)
 * DBL_MAX_10_EXP:                        Floating Point Parameters.
-                                                              (line 151)
+                                                              (line 152)
 * DBL_MAX_EXP:                           Floating Point Parameters.
-                                                              (line 139)
+                                                              (line 140)
 * DBL_MIN:                               Floating Point Parameters.
-                                                              (line 178)
+                                                              (line 179)
 * DBL_MIN_10_EXP:                        Floating Point Parameters.
-                                                              (line 126)
+                                                              (line 127)
 * DBL_MIN_EXP:                           Floating Point Parameters.
-                                                              (line 114)
+                                                              (line 115)
 * DEAD_PROCESS:                          Manipulating the Database.
                                                               (line 109)
 * DEAD_PROCESS <1>:                      XPG Functions.       (line  78)
@@ -2911,8 +2925,8 @@ Variable and Constant Macro Index
 * EROFS:                                 Error Codes.         (line 189)
 * ERPCMISMATCH:                          Error Codes.         (line 475)
 * errno:                                 Checking for Errors. (line  14)
-* error_message_count:                   Error Messages.      (line 267)
-* error_one_per_line:                    Error Messages.      (line 273)
+* error_message_count:                   Error Messages.      (line 269)
+* error_one_per_line:                    Error Messages.      (line 275)
 * ESHUTDOWN:                             Error Codes.         (line 392)
 * ESOCKTNOSUPPORT:                       Error Codes.         (line 303)
 * ESPIPE:                                Error Codes.         (line 185)
@@ -2941,7 +2955,7 @@ Variable and Constant Macro Index
 * FE_DFL_MODE:                           Control Functions.   (line 101)
 * FE_DIVBYZERO:                          Status bit operations.
                                                               (line  20)
-* FE_DOWNWARD:                           Rounding.            (line  47)
+* FE_DOWNWARD:                           Rounding.            (line  48)
 * FE_INEXACT:                            Status bit operations.
                                                               (line  17)
 * FE_INVALID:                            Status bit operations.
@@ -2950,30 +2964,30 @@ Variable and Constant Macro Index
 * FE_OVERFLOW:                           Status bit operations.
                                                               (line  26)
 * FE_SNANS_ALWAYS_SIGNAL:                Infinity and NaN.    (line  72)
-* FE_TONEAREST:                          Rounding.            (line  39)
-* FE_TOWARDZERO:                         Rounding.            (line  51)
+* FE_TONEAREST:                          Rounding.            (line  40)
+* FE_TOWARDZERO:                         Rounding.            (line  52)
 * FE_UNDERFLOW:                          Status bit operations.
                                                               (line  23)
-* FE_UPWARD:                             Rounding.            (line  43)
+* FE_UPWARD:                             Rounding.            (line  44)
 * FILENAME_MAX:                          Limits for Files.    (line  70)
 * FLT_DIG:                               Floating Point Parameters.
                                                               (line  87)
 * FLT_EPSILON:                           Floating Point Parameters.
-                                                              (line 185)
+                                                              (line 186)
 * FLT_MANT_DIG:                          Floating Point Parameters.
                                                               (line  67)
 * FLT_MAX:                               Floating Point Parameters.
-                                                              (line 157)
+                                                              (line 158)
 * FLT_MAX_10_EXP:                        Floating Point Parameters.
-                                                              (line 145)
+                                                              (line 146)
 * FLT_MAX_EXP:                           Floating Point Parameters.
-                                                              (line 132)
+                                                              (line 133)
 * FLT_MIN:                               Floating Point Parameters.
-                                                              (line 172)
+                                                              (line 173)
 * FLT_MIN_10_EXP:                        Floating Point Parameters.
-                                                              (line 120)
+                                                              (line 121)
 * FLT_MIN_EXP:                           Floating Point Parameters.
-                                                              (line 107)
+                                                              (line 108)
 * FLT_RADIX:                             Floating Point Parameters.
                                                               (line  60)
 * FLT_ROUNDS:                            Floating Point Parameters.
@@ -3020,9 +3034,9 @@ Variable and Constant Macro Index
 * FP_NAN:                                Floating Point Classes.
                                                               (line  17)
 * FP_NORMAL:                             Floating Point Classes.
-                                                              (line  38)
+                                                              (line  39)
 * FP_SUBNORMAL:                          Floating Point Classes.
-                                                              (line  30)
+                                                              (line  31)
 * FP_ZERO:                               Floating Point Classes.
                                                               (line  25)
 * FRAC_DIGITS:                           The Elegant and Fast Way.
@@ -3037,29 +3051,29 @@ Variable and Constant Macro Index
 * FSTAB_SW:                              fstab.               (line  59)
 * FSTAB_XX:                              fstab.               (line  61)
 * FTW_ACTIONRETVAL:                      Working with Directory Trees.
-                                                              (line 230)
+                                                              (line 231)
 * FTW_CHDIR:                             Working with Directory Trees.
-                                                              (line 219)
+                                                              (line 220)
 * FTW_D:                                 Working with Directory Trees.
-                                                              (line  36)
+                                                              (line  37)
 * FTW_DEPTH:                             Working with Directory Trees.
-                                                              (line 224)
+                                                              (line 225)
 * FTW_DNR:                               Working with Directory Trees.
-                                                              (line  41)
+                                                              (line  42)
 * FTW_DP:                                Working with Directory Trees.
-                                                              (line  76)
+                                                              (line  77)
 * FTW_F:                                 Working with Directory Trees.
-                                                              (line  32)
+                                                              (line  33)
 * FTW_MOUNT:                             Working with Directory Trees.
-                                                              (line 215)
+                                                              (line 216)
 * FTW_NS:                                Working with Directory Trees.
-                                                              (line  38)
+                                                              (line  39)
 * FTW_PHYS:                              Working with Directory Trees.
-                                                              (line 209)
+                                                              (line 210)
 * FTW_SL:                                Working with Directory Trees.
-                                                              (line  43)
+                                                              (line  44)
 * FTW_SLN:                               Working with Directory Trees.
-                                                              (line  81)
+                                                              (line  82)
 * F_DUPFD:                               Control Operations.  (line  30)
 * F_DUPFD <1>:                           Duplicating Descriptors.
                                                               (line  53)
@@ -3077,29 +3091,29 @@ Variable and Constant Macro Index
                                                               (line  56)
 * F_OFD_SETLK:                           Control Operations.  (line  64)
 * F_OFD_SETLK <1>:                       Open File Description Locks.
-                                                              (line  96)
+                                                              (line  97)
 * F_OFD_SETLKW:                          Control Operations.  (line  68)
 * F_OFD_SETLKW <1>:                      Open File Description Locks.
-                                                              (line 142)
+                                                              (line 144)
 * F_OK:                                  Testing File Access. (line  91)
-* F_RDLCK:                               File Locks.          (line 190)
+* F_RDLCK:                               File Locks.          (line 192)
 * F_SETFD:                               Control Operations.  (line  39)
 * F_SETFD <1>:                           Descriptor Flags.    (line  34)
 * F_SETFL:                               Control Operations.  (line  47)
 * F_SETFL <1>:                           Getting File Status Flags.
                                                               (line  25)
 * F_SETLK:                               Control Operations.  (line  54)
-* F_SETLK <1>:                           File Locks.          (line 112)
+* F_SETLK <1>:                           File Locks.          (line 113)
 * F_SETLKW:                              Control Operations.  (line  57)
-* F_SETLKW <1>:                          File Locks.          (line 162)
+* F_SETLKW <1>:                          File Locks.          (line 164)
 * F_SETOWN:                              Control Operations.  (line  76)
 * F_SETOWN <1>:                          Interrupt Input.     (line  38)
-* F_UNLCK:                               File Locks.          (line 198)
-* F_WRLCK:                               File Locks.          (line 194)
+* F_UNLCK:                               File Locks.          (line 200)
+* F_WRLCK:                               File Locks.          (line 196)
 * getdate_err:                           General Time String Parsing.
                                                               (line  13)
 * GETFSIZE:                              Limits on Resources. (line 222)
-* GLOB_ABORTED:                          Calling Glob.        (line 267)
+* GLOB_ABORTED:                          Calling Glob.        (line 271)
 * GLOB_ALTDIRFUNC:                       More Flags for Globbing.
                                                               (line  23)
 * GLOB_APPEND:                           Flags for Globbing.  (line  13)
@@ -3114,9 +3128,9 @@ Variable and Constant Macro Index
 * GLOB_NOESCAPE:                         Flags for Globbing.  (line  73)
 * GLOB_NOMAGIC:                          More Flags for Globbing.
                                                               (line  62)
-* GLOB_NOMATCH:                          Calling Glob.        (line 274)
+* GLOB_NOMATCH:                          Calling Glob.        (line 278)
 * GLOB_NOSORT:                           Flags for Globbing.  (line  87)
-* GLOB_NOSPACE:                          Calling Glob.        (line 281)
+* GLOB_NOSPACE:                          Calling Glob.        (line 285)
 * GLOB_ONLYDIR:                          More Flags for Globbing.
                                                               (line 111)
 * GLOB_PERIOD:                           More Flags for Globbing.
@@ -3129,15 +3143,15 @@ Variable and Constant Macro Index
                                                               (line 253)
 * HOST_NOT_FOUND:                        Host Names.          (line 110)
 * HUGE_VAL:                              Math Error Reporting.
-                                                              (line  48)
-* HUGE_VALF:                             Math Error Reporting.
                                                               (line  49)
-* HUGE_VALL:                             Math Error Reporting.
+* HUGE_VALF:                             Math Error Reporting.
                                                               (line  50)
-* HUGE_VAL_FN:                           Math Error Reporting.
+* HUGE_VALL:                             Math Error Reporting.
                                                               (line  51)
-* HUGE_VAL_FNx:                          Math Error Reporting.
+* HUGE_VAL_FN:                           Math Error Reporting.
                                                               (line  52)
+* HUGE_VAL_FNx:                          Math Error Reporting.
+                                                              (line  53)
 * HUPCL:                                 Control Modes.       (line  36)
 * h_errno:                               Host Names.          (line 103)
 * I:                                     Complex Numbers.     (line  36)
@@ -3172,8 +3186,8 @@ Variable and Constant Macro Index
                                                               (line 172)
 * INT_FRAC_DIGITS:                       The Elegant and Fast Way.
                                                               (line 196)
-* INT_MAX:                               Range of Type.       (line  63)
-* INT_MIN:                               Range of Type.       (line  57)
+* INT_MAX:                               Range of Type.       (line  64)
+* INT_MIN:                               Range of Type.       (line  58)
 * INT_N_CS_PRECEDES:                     The Elegant and Fast Way.
                                                               (line 227)
 * INT_N_SEP_BY_SPACE:                    The Elegant and Fast Way.
@@ -3207,23 +3221,23 @@ Variable and Constant Macro Index
 * LC_NUMERIC:                            Locale Categories.   (line  32)
 * LC_TIME:                               Locale Categories.   (line  37)
 * LDBL_DIG:                              Floating Point Parameters.
-                                                              (line 101)
+                                                              (line 102)
 * LDBL_EPSILON:                          Floating Point Parameters.
-                                                              (line 192)
+                                                              (line 193)
 * LDBL_MANT_DIG:                         Floating Point Parameters.
                                                               (line  81)
 * LDBL_MAX:                              Floating Point Parameters.
-                                                              (line 166)
+                                                              (line 167)
 * LDBL_MAX_10_EXP:                       Floating Point Parameters.
-                                                              (line 152)
+                                                              (line 153)
 * LDBL_MAX_EXP:                          Floating Point Parameters.
-                                                              (line 140)
+                                                              (line 141)
 * LDBL_MIN:                              Floating Point Parameters.
-                                                              (line 179)
+                                                              (line 180)
 * LDBL_MIN_10_EXP:                       Floating Point Parameters.
-                                                              (line 127)
+                                                              (line 128)
 * LDBL_MIN_EXP:                          Floating Point Parameters.
-                                                              (line 115)
+                                                              (line 116)
 * leaf:                                  Tree Search Function.
                                                               (line 135)
 * LIM_CORE:                              Limits on Resources. (line 263)
@@ -3237,8 +3251,8 @@ Variable and Constant Macro Index
 * LIO_NOP:                               Asynchronous I/O.    (line  94)
 * LIO_READ:                              Asynchronous I/O.    (line  84)
 * LIO_WRITE:                             Asynchronous I/O.    (line  89)
-* LLONG_MAX:                             Range of Type.       (line  87)
-* LLONG_MIN:                             Range of Type.       (line  81)
+* LLONG_MAX:                             Range of Type.       (line  89)
+* LLONG_MIN:                             Range of Type.       (line  82)
 * LLONG_WIDTH:                           Width of Type.       (line  20)
 * LOCPATH:                               Locale Names.        (line  57)
 * LOGIN_PROCESS:                         Manipulating the Database.
@@ -3276,10 +3290,10 @@ Variable and Constant Macro Index
 * LOG_USER:                              syslog; vsyslog.     (line  28)
 * LOG_UUCP:                              syslog; vsyslog.     (line  42)
 * LOG_WARNING:                           syslog; vsyslog.     (line  89)
-* LONG_LONG_MAX:                         Range of Type.       (line  94)
-* LONG_LONG_MIN:                         Range of Type.       (line  93)
-* LONG_MAX:                              Range of Type.       (line  75)
-* LONG_MIN:                              Range of Type.       (line  69)
+* LONG_LONG_MAX:                         Range of Type.       (line  96)
+* LONG_LONG_MIN:                         Range of Type.       (line  95)
+* LONG_MAX:                              Range of Type.       (line  76)
+* LONG_MIN:                              Range of Type.       (line  70)
 * LONG_WIDTH:                            Width of Type.       (line  18)
 * L_ctermid:                             Identifying the Terminal.
                                                               (line  31)
@@ -3638,8 +3652,8 @@ Variable and Constant Macro Index
                                                               (line  84)
 * PRIO_USER:                             Traditional Scheduling Functions.
                                                               (line  93)
-* program_invocation_name:               Error Messages.      (line 109)
-* program_invocation_short_name:         Error Messages.      (line 118)
+* program_invocation_name:               Error Messages.      (line 110)
+* program_invocation_short_name:         Error Messages.      (line 119)
 * PROT_EXEC:                             Memory Protection.   (line  22)
 * PROT_NONE:                             Memory Protection.   (line  28)
 * PROT_READ:                             Memory Protection.   (line  16)
@@ -3657,7 +3671,7 @@ Variable and Constant Macro Index
 * P_tmpdir:                              Temporary Files.     (line 148)
 * RADIXCHAR:                             The Elegant and Fast Way.
                                                               (line 241)
-* RAND_MAX:                              ISO Random.          (line  12)
+* RAND_MAX:                              ISO Random.          (line  13)
 * REG_BADBR:                             POSIX Regexp Compilation.
                                                               (line  70)
 * REG_BADPAT:                            POSIX Regexp Compilation.
@@ -3726,7 +3740,7 @@ Variable and Constant Macro Index
 * SA_NOCLDSTOP:                          Flags for Sigaction. (line  25)
 * SA_ONSTACK:                            Flags for Sigaction. (line  34)
 * SA_RESTART:                            Flags for Sigaction. (line  41)
-* SCHAR_MAX:                             Range of Type.       (line  28)
+* SCHAR_MAX:                             Range of Type.       (line  29)
 * SCHAR_MIN:                             Range of Type.       (line  23)
 * SCHAR_WIDTH:                           Width of Type.       (line  12)
 * SCHED_FIFO:                            Basic Scheduling Functions.
@@ -3745,8 +3759,8 @@ Variable and Constant Macro Index
 * SEEK_SET <1>:                          File Position Primitive.
                                                               (line  27)
 * SETFSIZE:                              Limits on Resources. (line 226)
-* SHRT_MAX:                              Range of Type.       (line  51)
-* SHRT_MIN:                              Range of Type.       (line  45)
+* SHRT_MAX:                              Range of Type.       (line  52)
+* SHRT_MIN:                              Range of Type.       (line  46)
 * SHRT_WIDTH:                            Width of Type.       (line  14)
 * SIGABRT:                               Program Error Signals.
                                                               (line 139)
@@ -3934,20 +3948,20 @@ Variable and Constant Macro Index
                                                               (line 124)
 * T_FMT_AMPM:                            The Elegant and Fast Way.
                                                               (line 127)
-* UCHAR_MAX:                             Range of Type.       (line  29)
+* UCHAR_MAX:                             Range of Type.       (line  30)
 * UCHAR_WIDTH:                           Width of Type.       (line  13)
 * UINTPTR_WIDTH:                         Width of Type.       (line  32)
-* UINT_MAX:                              Range of Type.       (line  64)
+* UINT_MAX:                              Range of Type.       (line  65)
 * UINT_WIDTH:                            Width of Type.       (line  17)
-* ULLONG_MAX:                            Range of Type.       (line  88)
+* ULLONG_MAX:                            Range of Type.       (line  90)
 * ULLONG_WIDTH:                          Width of Type.       (line  21)
-* ULONG_LONG_MAX:                        Range of Type.       (line  95)
-* ULONG_MAX:                             Range of Type.       (line  76)
+* ULONG_LONG_MAX:                        Range of Type.       (line  97)
+* ULONG_MAX:                             Range of Type.       (line  77)
 * ULONG_WIDTH:                           Width of Type.       (line  19)
 * USER_PROCESS:                          Manipulating the Database.
                                                               (line 105)
 * USER_PROCESS <1>:                      XPG Functions.       (line  74)
-* USHRT_MAX:                             Range of Type.       (line  52)
+* USHRT_MAX:                             Range of Type.       (line  53)
 * USHRT_WIDTH:                           Width of Type.       (line  15)
 * VDISCARD:                              Other Special.       (line  24)
 * VDSUSP:                                Signal Characters.   (line  55)
@@ -3958,7 +3972,7 @@ Variable and Constant Macro Index
 * VINTR:                                 Signal Characters.   (line  10)
 * VKILL:                                 Editing Characters.  (line  89)
 * VLNEXT:                                Other Special.       (line   6)
-* VMIN:                                  Noncanonical Input.  (line  24)
+* VMIN:                                  Noncanonical Input.  (line  25)
 * VQUIT:                                 Signal Characters.   (line  22)
 * VREPRINT:                              Editing Characters.  (line 101)
 * VSTART:                                Start/Stop Characters.
@@ -3967,15 +3981,15 @@ Variable and Constant Macro Index
 * VSTOP:                                 Start/Stop Characters.
                                                               (line  28)
 * VSUSP:                                 Signal Characters.   (line  34)
-* VTIME:                                 Noncanonical Input.  (line  33)
+* VTIME:                                 Noncanonical Input.  (line  34)
 * VWERASE:                               Editing Characters.  (line  64)
 * WAIT_ANY:                              Process Completion.  (line  81)
 * WAIT_MYPGRP:                           Process Completion.  (line  86)
-* WCHAR_MAX:                             Extended Char Intro. (line 112)
-* WCHAR_MAX <1>:                         Range of Type.       (line 102)
-* WCHAR_MIN:                             Extended Char Intro. (line 105)
+* WCHAR_MAX:                             Extended Char Intro. (line 119)
+* WCHAR_MAX <1>:                         Range of Type.       (line 104)
+* WCHAR_MIN:                             Extended Char Intro. (line 112)
 * WCHAR_WIDTH:                           Width of Type.       (line  36)
-* WEOF:                                  Extended Char Intro. (line 121)
+* WEOF:                                  Extended Char Intro. (line 128)
 * WEOF <1>:                              EOF and Errors.      (line  24)
 * WINT_WIDTH:                            Width of Type.       (line  37)
 * WNOHANG:                               Process Completion.  (line  95)
@@ -4032,7 +4046,7 @@ Program and File Index
 * ctype.h <1>:                           Classification of Characters.
                                                               (line  25)
 * ctype.h <2>:                           Case Conversion.     (line  21)
-* dirent.h:                              Reserved Names.      (line  80)
+* dirent.h:                              Reserved Names.      (line  81)
 * dirent.h <1>:                          Directory Entries.   (line   6)
 * dirent.h <2>:                          Opening a Directory. (line   6)
 * dirent.h <3>:                          Reading/Closing Directory.
@@ -4042,10 +4056,10 @@ Program and File Index
 * envz.h:                                Envz Functions.      (line  26)
 * errno.h:                               Error Reporting.     (line  13)
 * errno.h <1>:                           Checking for Errors. (line  12)
-* errno.h <2>:                           Checking for Errors. (line  54)
+* errno.h <2>:                           Checking for Errors. (line  55)
 * errno.h <3>:                           Error Codes.         (line   6)
 * execinfo.h:                            Backtraces.          (line  13)
-* fcntl.h:                               Reserved Names.      (line  83)
+* fcntl.h:                               Reserved Names.      (line  84)
 * fcntl.h <1>:                           Opening and Closing Files.
                                                               (line   8)
 * fcntl.h <2>:                           Control Operations.  (line  15)
@@ -4060,10 +4074,10 @@ Program and File Index
 * float.h:                               Floating Point Parameters.
                                                               (line   6)
 * fnmatch.h:                             Wildcard Matching.   (line   6)
-* gcc:                                   ISO C.               (line  15)
+* gcc:                                   ISO C.               (line  16)
 * gconv.h:                               glibc iconv Implementation.
-                                                              (line 201)
-* grp.h:                                 Reserved Names.      (line  85)
+                                                              (line 207)
+* grp.h:                                 Reserved Names.      (line  86)
 * grp.h <1>:                             Setting Groups.      (line  79)
 * grp.h <2>:                             Setting Groups.      (line 115)
 * grp.h <3>:                             Group Data Structure.
@@ -4073,21 +4087,21 @@ Program and File Index
 * iconv.h:                               Generic Conversion Interface.
                                                               (line  79)
 * iconv.h <1>:                           Generic Conversion Interface.
-                                                              (line 106)
+                                                              (line 107)
 * iconv.h <2>:                           Generic Conversion Interface.
-                                                              (line 200)
+                                                              (line 201)
 * kill:                                  Termination Signals. (line  28)
 * ksh:                                   Wildcard Matching.   (line  79)
 * langinfo.h:                            The Elegant and Fast Way.
                                                               (line  27)
-* limits.h:                              Reserved Names.      (line  87)
+* limits.h:                              Reserved Names.      (line  88)
 * limits.h <1>:                          Selecting the Conversion.
                                                               (line  23)
 * limits.h <2>:                          General Limits.      (line  13)
 * limits.h <3>:                          Limits for Files.    (line  14)
 * limits.h <4>:                          Width of Type.       (line   6)
 * locale:                                Locale Names.        (line   8)
-* locale.h:                              Setting the Locale.  (line  21)
+* locale.h:                              Setting the Locale.  (line  23)
 * locale.h <1>:                          The Lame Way to Locale Data.
                                                               (line  13)
 * localtime:                             TZ Variable.         (line 135)
@@ -4124,13 +4138,13 @@ Program and File Index
                                                               (line  13)
 * pt_chown:                              Configuring and compiling.
                                                               (line 192)
-* pwd.h:                                 Reserved Names.      (line  89)
+* pwd.h:                                 Reserved Names.      (line  90)
 * pwd.h <1>:                             User Data Structure. (line   7)
 * setjmp.h:                              Non-Local Details.   (line   8)
 * setjmp.h <1>:                          Non-Local Exits and Signals.
                                                               (line  18)
 * sh:                                    Running a Command.   (line  13)
-* signal.h:                              Reserved Names.      (line  92)
+* signal.h:                              Reserved Names.      (line  93)
 * signal.h <1>:                          Standard Signals.    (line   6)
 * signal.h <2>:                          Basic Signal Handling.
                                                               (line   8)
@@ -4164,7 +4178,7 @@ Program and File Index
                                                               (line   8)
 * stdio.h <9>:                           File Positioning.    (line  19)
 * stdio.h <10>:                          Portable Positioning.
-                                                              (line  50)
+                                                              (line  51)
 * stdio.h <11>:                          Flushing Buffers.    (line  23)
 * stdio.h <12>:                          Controlling Buffering.
                                                               (line  11)
@@ -4197,7 +4211,7 @@ Program and File Index
 * stdlib.h <9>:                          Array Sort Function. (line   7)
 * stdlib.h <10>:                         Temporary Files.     (line 165)
 * stdlib.h <11>:                         Allocation.          (line   6)
-* stdlib.h <12>:                         ISO Random.          (line  10)
+* stdlib.h <12>:                         ISO Random.          (line  11)
 * stdlib.h <13>:                         BSD Random.          (line  10)
 * stdlib.h <14>:                         SVID Random.         (line  31)
 * stdlib.h <15>:                         Integer Division.    (line  16)
@@ -4209,8 +4223,8 @@ Program and File Index
 * stdlib.h <21>:                         Exit Status.         (line  43)
 * stdlib.h <22>:                         Aborting a Program.  (line   7)
 * stdlib.h <23>:                         Running a Command.   (line  34)
-* string.h:                              Error Messages.      (line  82)
-* string.h <1>:                          Error Messages.      (line  94)
+* string.h:                              Error Messages.      (line  83)
+* string.h <1>:                          Error Messages.      (line  95)
 * string.h <2>:                          String Length.       (line   7)
 * string.h <3>:                          Copying Strings and Arrays.
                                                               (line   9)
@@ -4249,7 +4263,7 @@ Program and File Index
                                                               (line   6)
 * sys/socket.h <14>:                     Socket-Level Options.
                                                               (line  12)
-* sys/stat.h:                            Reserved Names.      (line  95)
+* sys/stat.h:                            Reserved Names.      (line  96)
 * sys/stat.h <1>:                        Creating Directories.
                                                               (line  51)
 * sys/stat.h <2>:                        Attribute Meanings.  (line  12)
@@ -4262,7 +4276,7 @@ Program and File Index
 * sys/time.h:                            File Times.          (line  97)
 * sys/time.h <1>:                        Setting an Alarm.    (line  51)
 * sys/times.h:                           Reserved Names.      (line  98)
-* sys/times.h <1>:                       Processor Time.      (line   9)
+* sys/times.h <1>:                       Processor Time.      (line  10)
 * sys/timex.h:                           Setting and Adjusting the Time.
                                                               (line  60)
 * sys/types.h:                           Waiting for I/O.     (line  23)
@@ -4283,7 +4297,7 @@ Program and File Index
 * sys/wait.h <1>:                        Process Completion Status.
                                                               (line  10)
 * sys/wait.h <2>:                        BSD Wait Functions.  (line   9)
-* termios.h:                             Reserved Names.      (line 101)
+* termios.h:                             Reserved Names.      (line 102)
 * termios.h <1>:                         Terminal Modes.      (line   6)
 * threads.h:                             ISO C Threads.       (line   6)
 * time.h:                                File Times.          (line  14)
@@ -4340,10 +4354,10 @@ Program and File Index
 * wchar.h <1>:                           Concatenating Strings.
                                                               (line   6)
 * wchar.h <2>:                           Collation Functions. (line  18)
-* wchar.h <3>:                           Extended Char Intro. (line  98)
-* wchar.h <4>:                           Extended Char Intro. (line 147)
+* wchar.h <3>:                           Extended Char Intro. (line 104)
+* wchar.h <4>:                           Extended Char Intro. (line 154)
 * wchar.h <5>:                           Keeping the state.   (line  20)
-* wchar.h <6>:                           Keeping the state.   (line  57)
+* wchar.h <6>:                           Keeping the state.   (line  58)
 * wchar.h <7>:                           Converting a Character.
                                                               (line  33)
 * wchar.h <8>:                           Converting a Character.
@@ -4354,39 +4368,39 @@ Program and File Index
                                                               (line 238)
 * wchar.h <11>:                          Converting a Character.
                                                               (line 335)
-* wchar.h <12>:                          Converting Strings.  (line  54)
-* wchar.h <13>:                          Converting Strings.  (line 137)
+* wchar.h <12>:                          Converting Strings.  (line  55)
+* wchar.h <13>:                          Converting Strings.  (line 138)
 * wchar.h <14>:                          Simple Output.       (line  10)
 * wchar.h <15>:                          Character Input.     (line   8)
 * wchar.h <16>:                          Parsing of Integers. (line   6)
 * wctype.h:                              Classification of Wide Characters.
-                                                              (line  35)
+                                                              (line  36)
 * wctype.h <1>:                          Classification of Wide Characters.
-                                                              (line  54)
+                                                              (line  55)
 * wctype.h <2>:                          Classification of Wide Characters.
-                                                              (line  68)
+                                                              (line  69)
 * wctype.h <3>:                          Classification of Wide Characters.
-                                                              (line  90)
+                                                              (line  91)
 * wctype.h <4>:                          Classification of Wide Characters.
-                                                              (line 110)
+                                                              (line 111)
 * wctype.h <5>:                          Classification of Wide Characters.
-                                                              (line 124)
+                                                              (line 125)
 * wctype.h <6>:                          Classification of Wide Characters.
-                                                              (line 148)
+                                                              (line 149)
 * wctype.h <7>:                          Classification of Wide Characters.
-                                                              (line 163)
+                                                              (line 164)
 * wctype.h <8>:                          Classification of Wide Characters.
-                                                              (line 177)
+                                                              (line 178)
 * wctype.h <9>:                          Classification of Wide Characters.
-                                                              (line 191)
+                                                              (line 192)
 * wctype.h <10>:                         Classification of Wide Characters.
-                                                              (line 205)
+                                                              (line 206)
 * wctype.h <11>:                         Classification of Wide Characters.
-                                                              (line 238)
+                                                              (line 239)
 * wctype.h <12>:                         Classification of Wide Characters.
-                                                              (line 252)
+                                                              (line 253)
 * wctype.h <13>:                         Classification of Wide Characters.
-                                                              (line 267)
+                                                              (line 268)
 * wctype.h <14>:                         Wide Character Case Conversion.
                                                               (line  18)
 * wctype.h <15>:                         Wide Character Case Conversion.

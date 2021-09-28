@@ -1,4 +1,4 @@
-This is gccinstall.info, produced by makeinfo version 6.8 from
+This is gccinstall.info, produced by makeinfo version 6.7 from
 install.texi.
 
 Copyright (C) 1988-2021 Free Software Foundation, Inc.
@@ -207,6 +207,9 @@ GNU binutils
      Necessary in some circumstances, optional in others.  See the
      host/target specific instructions for your platform for the exact
      requirements.
+
+     Note binutils 2.35 or newer is required for LTO to work correctly
+     with GNU libtool that includes doing a bootstrap with LTO enabled.
 
 gzip version 1.2.4 (or later) or
 bzip2 version 1.0.2 (or later)
@@ -887,11 +890,6 @@ option.
 '--with-dsymutil=PATHNAME'
      Same as '--with-as' but for the debug linker (only used on Darwin
      platforms so far).
-
-'--with-stabs'
-     Specify that stabs debugging information should be used instead of
-     whatever format the host normally uses.  Normally GCC uses the same
-     debug format as the host system.
 
 '--with-tls=DIALECT'
      Specify the default TLS dialect, for systems were there is a
@@ -4250,6 +4248,10 @@ GCC will build with and support only MinGW runtime 3.12 and later.
 Earlier versions of headers are incompatible with the new default
 semantics of 'extern inline' in '-std=c99' and '-std=gnu99' modes.
 
+   To support emitting DWARF debugging info you need to use GNU binutils
+version 2.16 or above containing support for the '.secrel32' assembler
+pseudo-op.
+
 Older systems
 =============
 
@@ -4791,7 +4793,7 @@ Concept Index
 * Menu:
 
 * Binaries:                              Binaries.           (line    6)
-* build_configargs:                      Configuration.      (line 1810)
+* build_configargs:                      Configuration.      (line 1806)
 * Configuration:                         Configuration.      (line    6)
 * Downloading GCC:                       Downloading the source.
                                                              (line    6)
@@ -4800,7 +4802,7 @@ Concept Index
 * FDL, GNU Free Documentation License:   GNU Free Documentation License.
                                                              (line    6)
 * Host specific installation:            Specific.           (line    6)
-* host_configargs:                       Configuration.      (line 1814)
+* host_configargs:                       Configuration.      (line 1810)
 * Installing GCC: Binaries:              Binaries.           (line    6)
 * Installing GCC: Building:              Building.           (line    6)
 * Installing GCC: Configuration:         Configuration.      (line    6)
@@ -4810,7 +4812,7 @@ Concept Index
 * Specific installation notes:           Specific.           (line    6)
 * Target specific installation:          Specific.           (line    6)
 * Target specific installation notes:    Specific.           (line    6)
-* target_configargs:                     Configuration.      (line 1818)
+* target_configargs:                     Configuration.      (line 1814)
 * Testing:                               Testing.            (line    6)
 * Testsuite:                             Testing.            (line    6)
 
@@ -4821,102 +4823,102 @@ Node: Top1696
 Node: Installing GCC2201
 Node: Prerequisites3835
 Ref: GNAT-prerequisite5901
-Node: Downloading the source15513
-Node: Configuration17184
-Ref: with-gnu-as35471
-Ref: with-as36366
-Ref: with-gnu-ld37775
-Ref: WithAixSoname62681
-Ref: AixLdCommand63342
-Node: Building105507
-Node: Testing121630
-Node: Final install129459
-Node: Binaries134759
-Node: Specific135866
-Ref: aarch64-x-x136400
-Ref: alpha-x-x138420
-Ref: amd64-x-solaris2138634
-Ref: amdgcn-x-amdhsa138716
-Ref: arc-x-elf32139242
-Ref: arc-linux-uclibc139418
-Ref: arm-x-eabi139559
-Ref: avr139812
-Ref: bfin140393
-Ref: cr16140656
-Ref: cris141072
-Ref: dos141770
-Ref: epiphany-x-elf142093
-Ref: x-x-freebsd142198
-Ref: ft32-x-elf143998
-Ref: h8300-hms144096
-Ref: hppa-hp-hpux144448
-Ref: hppa-hp-hpux10146820
-Ref: hppa-hp-hpux11147233
-Ref: x-x-linux-gnu152635
-Ref: ix86-x-linux152958
-Ref: ix86-x-solaris2153271
-Ref: ia64-x-linux154347
-Ref: ia64-x-hpux155117
-Ref: x-ibm-aix155672
-Ref: TransferAixShobj159334
-Ref: iq2000-x-elf163144
-Ref: lm32-x-elf163284
-Ref: lm32-x-uclinux163388
-Ref: m32c-x-elf163516
-Ref: m32r-x-elf163618
-Ref: m68k-x-x163720
-Ref: m68k-x-uclinux164758
-Ref: microblaze-x-elf165003
-Ref: mips-x-x165122
-Ref: moxie-x-elf167032
-Ref: msp430-x-elf167079
-Ref: nds32le-x-elf167636
-Ref: nds32be-x-elf167708
-Ref: nvptx-x-none167777
-Ref: or1k-x-elf168340
-Ref: or1k-x-linux168471
-Ref: powerpc-x-x168552
-Ref: powerpc-x-darwin168743
-Ref: powerpc-x-elf169237
-Ref: powerpc-x-linux-gnu169322
-Ref: powerpc-x-netbsd169417
-Ref: powerpc-x-eabisim169505
-Ref: powerpc-x-eabi169631
-Ref: powerpcle-x-elf169707
-Ref: powerpcle-x-eabisim169799
-Ref: powerpcle-x-eabi169932
-Ref: rl78-x-elf170015
-Ref: riscv32-x-elf170121
-Ref: riscv32-x-linux170310
-Ref: riscv64-x-elf170467
-Ref: riscv64-x-linux170656
-Ref: rx-x-elf170813
-Ref: s390-x-linux170859
-Ref: s390x-x-linux170931
-Ref: s390x-ibm-tpf171018
-Ref: x-x-solaris2171149
-Ref: sparc-x-x174256
-Ref: sparc-sun-solaris2174758
-Ref: sparc-x-linux175901
-Ref: sparc64-x-solaris2175932
-Ref: sparcv9-x-solaris2176650
-Ref: c6x-x-x176737
-Ref: tilegx-*-linux176829
-Ref: tilegxbe-*-linux176971
-Ref: tilepro-*-linux177114
-Ref: visium-x-elf177235
-Ref: x-x-vxworks177343
-Ref: x86-64-x-x178866
-Ref: x86-64-x-solaris2179194
-Ref: xtensa-x-elf179844
-Ref: xtensa-x-linux180515
-Ref: windows180856
-Ref: x-x-cygwin182697
-Ref: x-x-mingw32183250
-Ref: older183476
-Ref: elf185593
-Node: GNU Free Documentation License185851
-Node: Concept Index210984
+Node: Downloading the source15657
+Node: Configuration17328
+Ref: with-gnu-as35615
+Ref: with-as36510
+Ref: with-gnu-ld37919
+Ref: WithAixSoname62626
+Ref: AixLdCommand63287
+Node: Building105452
+Node: Testing121575
+Node: Final install129404
+Node: Binaries134704
+Node: Specific135811
+Ref: aarch64-x-x136345
+Ref: alpha-x-x138365
+Ref: amd64-x-solaris2138579
+Ref: amdgcn-x-amdhsa138661
+Ref: arc-x-elf32139187
+Ref: arc-linux-uclibc139363
+Ref: arm-x-eabi139504
+Ref: avr139757
+Ref: bfin140338
+Ref: cr16140601
+Ref: cris141017
+Ref: dos141715
+Ref: epiphany-x-elf142038
+Ref: x-x-freebsd142143
+Ref: ft32-x-elf143943
+Ref: h8300-hms144041
+Ref: hppa-hp-hpux144393
+Ref: hppa-hp-hpux10146765
+Ref: hppa-hp-hpux11147178
+Ref: x-x-linux-gnu152580
+Ref: ix86-x-linux152903
+Ref: ix86-x-solaris2153216
+Ref: ia64-x-linux154292
+Ref: ia64-x-hpux155062
+Ref: x-ibm-aix155617
+Ref: TransferAixShobj159279
+Ref: iq2000-x-elf163089
+Ref: lm32-x-elf163229
+Ref: lm32-x-uclinux163333
+Ref: m32c-x-elf163461
+Ref: m32r-x-elf163563
+Ref: m68k-x-x163665
+Ref: m68k-x-uclinux164703
+Ref: microblaze-x-elf164948
+Ref: mips-x-x165067
+Ref: moxie-x-elf166977
+Ref: msp430-x-elf167024
+Ref: nds32le-x-elf167581
+Ref: nds32be-x-elf167653
+Ref: nvptx-x-none167722
+Ref: or1k-x-elf168285
+Ref: or1k-x-linux168416
+Ref: powerpc-x-x168497
+Ref: powerpc-x-darwin168688
+Ref: powerpc-x-elf169182
+Ref: powerpc-x-linux-gnu169267
+Ref: powerpc-x-netbsd169362
+Ref: powerpc-x-eabisim169450
+Ref: powerpc-x-eabi169576
+Ref: powerpcle-x-elf169652
+Ref: powerpcle-x-eabisim169744
+Ref: powerpcle-x-eabi169877
+Ref: rl78-x-elf169960
+Ref: riscv32-x-elf170066
+Ref: riscv32-x-linux170255
+Ref: riscv64-x-elf170412
+Ref: riscv64-x-linux170601
+Ref: rx-x-elf170758
+Ref: s390-x-linux170804
+Ref: s390x-x-linux170876
+Ref: s390x-ibm-tpf170963
+Ref: x-x-solaris2171094
+Ref: sparc-x-x174201
+Ref: sparc-sun-solaris2174703
+Ref: sparc-x-linux175846
+Ref: sparc64-x-solaris2175877
+Ref: sparcv9-x-solaris2176595
+Ref: c6x-x-x176682
+Ref: tilegx-*-linux176774
+Ref: tilegxbe-*-linux176916
+Ref: tilepro-*-linux177059
+Ref: visium-x-elf177180
+Ref: x-x-vxworks177288
+Ref: x86-64-x-x178811
+Ref: x86-64-x-solaris2179139
+Ref: xtensa-x-elf179789
+Ref: xtensa-x-linux180460
+Ref: windows180801
+Ref: x-x-cygwin182642
+Ref: x-x-mingw32183195
+Ref: older183577
+Ref: elf185694
+Node: GNU Free Documentation License185952
+Node: Concept Index211085
 
 End Tag Table
 

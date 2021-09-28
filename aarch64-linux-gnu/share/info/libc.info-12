@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -2102,6 +2116,201 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Executing a File,  Next: Process Completion,  Prev: Creating a Process,  Up: Processes
+
+26.5 Executing a File
+=====================
+
+This section describes the ‘exec’ family of functions, for executing a
+file as a process image.  You can use these functions to make a child
+process execute a new program after it has been forked.
+
+   To see the effects of ‘exec’ from the point of view of the called
+program, see *note Program Basics::.
+
+   The functions in this family differ in how you specify the arguments,
+but otherwise they all do the same thing.  They are declared in the
+header file ‘unistd.h’.
+
+ -- Function: int execv (const char *FILENAME, char *const ARGV[])
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘execv’ function executes the file named by FILENAME as a new
+     process image.
+
+     The ARGV argument is an array of null-terminated strings that is
+     used to provide a value for the ‘argv’ argument to the ‘main’
+     function of the program to be executed.  The last element of this
+     array must be a null pointer.  By convention, the first element of
+     this array is the file name of the program sans directory names.
+     *Note Program Arguments::, for full details on how programs can
+     access these arguments.
+
+     The environment for the new process image is taken from the
+     ‘environ’ variable of the current process image; see *note
+     Environment Variables::, for information about environments.
+
+ -- Function: int execl (const char *FILENAME, const char *ARG0, ...)
+
+     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     This is similar to ‘execv’, but the ARGV strings are specified
+     individually instead of as an array.  A null pointer must be passed
+     as the last such argument.
+
+ -- Function: int execve (const char *FILENAME, char *const ARGV[], char
+          *const ENV[])
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is similar to ‘execv’, but permits you to specify the
+     environment for the new program explicitly as the ENV argument.
+     This should be an array of strings in the same format as for the
+     ‘environ’ variable; see *note Environment Access::.
+
+ -- Function: int fexecve (int FD, char *const ARGV[], char *const
+          ENV[])
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is similar to ‘execve’, but instead of identifying the program
+     executable by its pathname, the file descriptor FD is used.  The
+     descriptor must have been opened with the ‘O_RDONLY’ flag or (on
+     Linux) the ‘O_PATH’ flag.
+
+     On Linux, ‘fexecve’ can fail with an error of ‘ENOSYS’ if ‘/proc’
+     has not been mounted and the kernel lacks support for the
+     underlying ‘execveat’ system call.
+
+ -- Function: int execle (const char *FILENAME, const char *ARG0, ...,
+          char *const ENV[])
+
+     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     This is similar to ‘execl’, but permits you to specify the
+     environment for the new program explicitly.  The environment
+     argument is passed following the null pointer that marks the last
+     ARGV argument, and should be an array of strings in the same format
+     as for the ‘environ’ variable.
+
+ -- Function: int execvp (const char *FILENAME, char *const ARGV[])
+
+     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     The ‘execvp’ function is similar to ‘execv’, except that it
+     searches the directories listed in the ‘PATH’ environment variable
+     (*note Standard Environment::) to find the full file name of a file
+     from FILENAME if FILENAME does not contain a slash.
+
+     This function is useful for executing system utility programs,
+     because it looks for them in the places that the user has chosen.
+     Shells use it to run the commands that users type.
+
+ -- Function: int execlp (const char *FILENAME, const char *ARG0, ...)
+
+     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
+     POSIX Safety Concepts::.
+
+     This function is like ‘execl’, except that it performs the same
+     file name searching as the ‘execvp’ function.
+
+   The size of the argument list and environment list taken together
+must not be greater than ‘ARG_MAX’ bytes.  *Note General Limits::.  On
+GNU/Hurd systems, the size (which compares against ‘ARG_MAX’) includes,
+for each string, the number of characters in the string, plus the size
+of a ‘char *’, plus one, rounded up to a multiple of the size of a ‘char
+*’.  Other systems may have somewhat different rules for counting.
+
+   These functions normally don’t return, since execution of a new
+program causes the currently executing program to go away completely.  A
+value of ‘-1’ is returned in the event of a failure.  In addition to the
+usual file name errors (*note File Name Errors::), the following ‘errno’
+error conditions are defined for these functions:
+
+‘E2BIG’
+     The combined size of the new program’s argument list and
+     environment list is larger than ‘ARG_MAX’ bytes.  GNU/Hurd systems
+     have no specific limit on the argument list size, so this error
+     code cannot result, but you may get ‘ENOMEM’ instead if the
+     arguments are too big for available memory.
+
+‘ENOEXEC’
+     The specified file can’t be executed because it isn’t in the right
+     format.
+
+‘ENOMEM’
+     Executing the specified file requires more storage than is
+     available.
+
+   If execution of the new file succeeds, it updates the access time
+field of the file as if the file had been read.  *Note File Times::, for
+more details about access times of files.
+
+   The point at which the file is closed again is not specified, but is
+at some point before the process exits or before another process image
+is executed.
+
+   Executing a new process image completely changes the contents of
+memory, copying only the argument and environment strings to new
+locations.  But many other attributes of the process are unchanged:
+
+   • The process ID and the parent process ID. *Note Process Creation
+     Concepts::.
+
+   • Session and process group membership.  *Note Concepts of Job
+     Control::.
+
+   • Real user ID and group ID, and supplementary group IDs.  *Note
+     Process Persona::.
+
+   • Pending alarms.  *Note Setting an Alarm::.
+
+   • Current working directory and root directory.  *Note Working
+     Directory::.  On GNU/Hurd systems, the root directory is not copied
+     when executing a setuid program; instead the system default root
+     directory is used for the new program.
+
+   • File mode creation mask.  *Note Setting Permissions::.
+
+   • Process signal mask; see *note Process Signal Mask::.
+
+   • Pending signals; see *note Blocking Signals::.
+
+   • Elapsed processor time associated with the process; see *note
+     Processor Time::.
+
+   If the set-user-ID and set-group-ID mode bits of the process image
+file are set, this affects the effective user ID and effective group ID
+(respectively) of the process.  These concepts are discussed in detail
+in *note Process Persona::.
+
+   Signals that are set to be ignored in the existing process image are
+also set to be ignored in the new process image.  All other signals are
+set to the default action in the new process image.  For more
+information about signals, see *note Signal Handling::.
+
+   File descriptors open in the existing process image remain open in
+the new process image, unless they have the ‘FD_CLOEXEC’ (close-on-exec)
+flag set.  The files that remain open inherit all attributes of the open
+file descriptors from the existing process image, including file locks.
+File descriptors are discussed in *note Low-Level I/O::.
+
+   Streams, by contrast, cannot survive through ‘exec’ functions,
+because they are located in the memory of the process itself.  The new
+process image has no streams except those it creates afresh.  Each of
+the streams in the pre-‘exec’ process image has a descriptor inside it,
+and these descriptors do survive through ‘exec’ (provided that they do
+not have ‘FD_CLOEXEC’ set).  The new process image can reconnect these
+to new streams using ‘fdopen’ (*note Descriptors and Streams::).
 
 
 File: libc.info,  Node: Process Completion,  Next: Process Completion Status,  Prev: Executing a File,  Up: Processes
@@ -7249,260 +7458,3 @@ contains functions to alter the file and test for specific options.
      with using the ‘getsubopt’ function to iterate over all options in
      the string.
 
-
-File: libc.info,  Node: Other Mount Information,  Prev: mtab,  Up: Mount Information
-
-31.3.1.3 Other (Non-libc) Sources of Mount Information
-......................................................
-
-On a system with a Linux kernel and the ‘proc’ filesystem, you can get
-information on currently mounted filesystems from the file ‘mounts’ in
-the ‘proc’ filesystem.  Its format is similar to that of the ‘mtab’
-file, but represents what is truly mounted without relying on facilities
-outside the kernel to keep ‘mtab’ up to date.
-
-
-File: libc.info,  Node: Mount-Unmount-Remount,  Prev: Mount Information,  Up: Filesystem Handling
-
-31.3.2 Mount, Unmount, Remount
-------------------------------
-
-This section describes the functions for mounting, unmounting, and
-remounting filesystems.
-
-   Only the superuser can mount, unmount, or remount a filesystem.
-
-   These functions do not access the ‘fstab’ and ‘mtab’ files.  You
-should maintain and use these separately.  *Note Mount Information::.
-
-   The symbols in this section are declared in ‘sys/mount.h’.
-
- -- Function: int mount (const char *SPECIAL_FILE, const char *DIR,
-          const char *FSTYPE, unsigned long int OPTIONS, const void
-          *DATA)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘mount’ mounts or remounts a filesystem.  The two operations are
-     quite different and are merged rather unnaturally into this one
-     function.  The ‘MS_REMOUNT’ option, explained below, determines
-     whether ‘mount’ mounts or remounts.
-
-     For a mount, the filesystem on the block device represented by the
-     device special file named SPECIAL_FILE gets mounted over the mount
-     point DIR.  This means that the directory DIR (along with any files
-     in it) is no longer visible; in its place (and still with the name
-     DIR) is the root directory of the filesystem on the device.
-
-     As an exception, if the filesystem type (see below) is one which is
-     not based on a device (e.g.  “proc”), ‘mount’ instantiates a
-     filesystem and mounts it over DIR and ignores SPECIAL_FILE.
-
-     For a remount, DIR specifies the mount point where the filesystem
-     to be remounted is (and remains) mounted and SPECIAL_FILE is
-     ignored.  Remounting a filesystem means changing the options that
-     control operations on the filesystem while it is mounted.  It does
-     not mean unmounting and mounting again.
-
-     For a mount, you must identify the type of the filesystem with
-     FSTYPE.  This type tells the kernel how to access the filesystem
-     and can be thought of as the name of a filesystem driver.  The
-     acceptable values are system dependent.  On a system with a Linux
-     kernel and the ‘proc’ filesystem, the list of possible values is in
-     the file ‘filesystems’ in the ‘proc’ filesystem (e.g.  type ‘cat
-     /proc/filesystems’ to see the list).  With a Linux kernel, the
-     types of filesystems that ‘mount’ can mount, and their type names,
-     depends on what filesystem drivers are configured into the kernel
-     or loaded as loadable kernel modules.  An example of a common value
-     for FSTYPE is ‘ext2’.
-
-     For a remount, ‘mount’ ignores FSTYPE.
-
-     OPTIONS specifies a variety of options that apply until the
-     filesystem is unmounted or remounted.  The precise meaning of an
-     option depends on the filesystem and with some filesystems, an
-     option may have no effect at all.  Furthermore, for some
-     filesystems, some of these options (but never ‘MS_RDONLY’) can be
-     overridden for individual file accesses via ‘ioctl’.
-
-     OPTIONS is a bit string with bit fields defined using the following
-     mask and masked value macros:
-
-     ‘MS_MGC_MASK’
-          This multibit field contains a magic number.  If it does not
-          have the value ‘MS_MGC_VAL’, ‘mount’ assumes all the following
-          bits are zero and the DATA argument is a null string,
-          regardless of their actual values.
-
-     ‘MS_REMOUNT’
-          This bit on means to remount the filesystem.  Off means to
-          mount it.
-
-     ‘MS_RDONLY’
-          This bit on specifies that no writing to the filesystem shall
-          be allowed while it is mounted.  This cannot be overridden by
-          ‘ioctl’.  This option is available on nearly all filesystems.
-
-     ‘MS_NOSUID’
-          This bit on specifies that Setuid and Setgid permissions on
-          files in the filesystem shall be ignored while it is mounted.
-
-     ‘MS_NOEXEC’
-          This bit on specifies that no files in the filesystem shall be
-          executed while the filesystem is mounted.
-
-     ‘MS_NODEV’
-          This bit on specifies that no device special files in the
-          filesystem shall be accessible while the filesystem is
-          mounted.
-
-     ‘MS_SYNCHRONOUS’
-          This bit on specifies that all writes to the filesystem while
-          it is mounted shall be synchronous; i.e., data shall be synced
-          before each write completes rather than held in the buffer
-          cache.
-
-     ‘MS_MANDLOCK’
-          This bit on specifies that mandatory locks on files shall be
-          permitted while the filesystem is mounted.
-
-     ‘MS_NOATIME’
-          This bit on specifies that access times of files shall not be
-          updated when the files are accessed while the filesystem is
-          mounted.
-
-     ‘MS_NODIRATIME’
-          This bit on specifies that access times of directories shall
-          not be updated when the directories are accessed while the
-          filesystem in mounted.
-
-     Any bits not covered by the above masks should be set off;
-     otherwise, results are undefined.
-
-     The meaning of DATA depends on the filesystem type and is
-     controlled entirely by the filesystem driver in the kernel.
-
-     Example:
-
-          #include <sys/mount.h>
-
-          mount("/dev/hdb", "/cdrom", "iso9660", MS_MGC_VAL | MS_RDONLY | MS_NOSUID, "");
-
-          mount("/dev/hda2", "/mnt", "", MS_MGC_VAL | MS_REMOUNT, "");
-
-
-     Appropriate arguments for ‘mount’ are conventionally recorded in
-     the ‘fstab’ table.  *Note Mount Information::.
-
-     The return value is zero if the mount or remount is successful.
-     Otherwise, it is ‘-1’ and ‘errno’ is set appropriately.  The values
-     of ‘errno’ are filesystem dependent, but here is a general list:
-
-     ‘EPERM’
-          The process is not superuser.
-     ‘ENODEV’
-          The file system type FSTYPE is not known to the kernel.
-     ‘ENOTBLK’
-          The file DEV is not a block device special file.
-     ‘EBUSY’
-
-             • The device is already mounted.
-
-             • The mount point is busy.  (E.g.  it is some process’
-               working directory or has a filesystem mounted on it
-               already).
-
-             • The request is to remount read-only, but there are files
-               open for writing.
-
-     ‘EINVAL’
-
-             • A remount was attempted, but there is no filesystem
-               mounted over the specified mount point.
-
-             • The supposed filesystem has an invalid superblock.
-
-     ‘EACCES’
-
-             • The filesystem is inherently read-only (possibly due to a
-               switch on the device) and the process attempted to mount
-               it read/write (by setting the ‘MS_RDONLY’ bit off).
-
-             • SPECIAL_FILE or DIR is not accessible due to file
-               permissions.
-
-             • SPECIAL_FILE is not accessible because it is in a
-               filesystem that is mounted with the ‘MS_NODEV’ option.
-
-     ‘EM_FILE’
-          The table of dummy devices is full.  ‘mount’ needs to create a
-          dummy device (aka “unnamed” device) if the filesystem being
-          mounted is not one that uses a device.
-
- -- Function: int umount2 (const char *FILE, int FLAGS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘umount2’ unmounts a filesystem.
-
-     You can identify the filesystem to unmount either by the device
-     special file that contains the filesystem or by the mount point.
-     The effect is the same.  Specify either as the string FILE.
-
-     FLAGS contains the one-bit field identified by the following mask
-     macro:
-
-     ‘MNT_FORCE’
-          This bit on means to force the unmounting even if the
-          filesystem is busy, by making it unbusy first.  If the bit is
-          off and the filesystem is busy, ‘umount2’ fails with ‘errno’ =
-          ‘EBUSY’.  Depending on the filesystem, this may override all,
-          some, or no busy conditions.
-
-     All other bits in FLAGS should be set to zero; otherwise, the
-     result is undefined.
-
-     Example:
-
-          #include <sys/mount.h>
-
-          umount2("/mnt", MNT_FORCE);
-
-          umount2("/dev/hdd1", 0);
-
-
-     After the filesystem is unmounted, the directory that was the mount
-     point is visible, as are any files in it.
-
-     As part of unmounting, ‘umount2’ syncs the filesystem.
-
-     If the unmounting is successful, the return value is zero.
-     Otherwise, it is ‘-1’ and ‘errno’ is set accordingly:
-
-     ‘EPERM’
-          The process is not superuser.
-     ‘EBUSY’
-          The filesystem cannot be unmounted because it is busy.  E.g.
-          it contains a directory that is some process’s working
-          directory or a file that some process has open.  With some
-          filesystems in some cases, you can avoid this failure with the
-          ‘MNT_FORCE’ option.
-
-     ‘EINVAL’
-          FILE validly refers to a file, but that file is neither a
-          mount point nor a device special file of a currently mounted
-          filesystem.
-
-     This function is not available on all systems.
-
- -- Function: int umount (const char *FILE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘umount’ does the same thing as ‘umount2’ with FLAGS set to zeroes.
-     It is more widely available than ‘umount2’ but since it lacks the
-     possibility to forcefully unmount a filesystem is deprecated when
-     ‘umount2’ is also available.

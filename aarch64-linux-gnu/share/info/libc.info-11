@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -2102,6 +2116,233 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Advanced Signal Handling,  Next: Signal and Sigaction,  Prev: Basic Signal Handling,  Up: Signal Actions
+
+24.3.2 Advanced Signal Handling
+-------------------------------
+
+The ‘sigaction’ function has the same basic effect as ‘signal’: to
+specify how a signal should be handled by the process.  However,
+‘sigaction’ offers more control, at the expense of more complexity.  In
+particular, ‘sigaction’ allows you to specify additional flags to
+control when the signal is generated and how the handler is invoked.
+
+   The ‘sigaction’ function is declared in ‘signal.h’.
+
+ -- Data Type: struct sigaction
+
+     Structures of type ‘struct sigaction’ are used in the ‘sigaction’
+     function to specify all the information about how to handle a
+     particular signal.  This structure contains at least the following
+     members:
+
+     ‘sighandler_t sa_handler’
+          This is used in the same way as the ACTION argument to the
+          ‘signal’ function.  The value can be ‘SIG_DFL’, ‘SIG_IGN’, or
+          a function pointer.  *Note Basic Signal Handling::.
+
+     ‘sigset_t sa_mask’
+          This specifies a set of signals to be blocked while the
+          handler runs.  Blocking is explained in *note Blocking for
+          Handler::.  Note that the signal that was delivered is
+          automatically blocked by default before its handler is
+          started; this is true regardless of the value in ‘sa_mask’.
+          If you want that signal not to be blocked within its handler,
+          you must write code in the handler to unblock it.
+
+     ‘int sa_flags’
+          This specifies various flags which can affect the behavior of
+          the signal.  These are described in more detail in *note Flags
+          for Sigaction::.
+
+ -- Function: int sigaction (int SIGNUM, const struct sigaction
+          *restrict ACTION, struct sigaction *restrict OLD-ACTION)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ACTION argument is used to set up a new action for the signal
+     SIGNUM, while the OLD-ACTION argument is used to return information
+     about the action previously associated with this signal.  (In other
+     words, OLD-ACTION has the same purpose as the ‘signal’ function’s
+     return value—you can check to see what the old action in effect for
+     the signal was, and restore it later if you want.)
+
+     Either ACTION or OLD-ACTION can be a null pointer.  If OLD-ACTION
+     is a null pointer, this simply suppresses the return of information
+     about the old action.  If ACTION is a null pointer, the action
+     associated with the signal SIGNUM is unchanged; this allows you to
+     inquire about how a signal is being handled without changing that
+     handling.
+
+     The return value from ‘sigaction’ is zero if it succeeds, and ‘-1’
+     on failure.  The following ‘errno’ error conditions are defined for
+     this function:
+
+     ‘EINVAL’
+          The SIGNUM argument is not valid, or you are trying to trap or
+          ignore ‘SIGKILL’ or ‘SIGSTOP’.
+
+
+File: libc.info,  Node: Signal and Sigaction,  Next: Sigaction Function Example,  Prev: Advanced Signal Handling,  Up: Signal Actions
+
+24.3.3 Interaction of ‘signal’ and ‘sigaction’
+----------------------------------------------
+
+It’s possible to use both the ‘signal’ and ‘sigaction’ functions within
+a single program, but you have to be careful because they can interact
+in slightly strange ways.
+
+   The ‘sigaction’ function specifies more information than the ‘signal’
+function, so the return value from ‘signal’ cannot express the full
+range of ‘sigaction’ possibilities.  Therefore, if you use ‘signal’ to
+save and later reestablish an action, it may not be able to reestablish
+properly a handler that was established with ‘sigaction’.
+
+   To avoid having problems as a result, always use ‘sigaction’ to save
+and restore a handler if your program uses ‘sigaction’ at all.  Since
+‘sigaction’ is more general, it can properly save and reestablish any
+action, regardless of whether it was established originally with
+‘signal’ or ‘sigaction’.
+
+   On some systems if you establish an action with ‘signal’ and then
+examine it with ‘sigaction’, the handler address that you get may not be
+the same as what you specified with ‘signal’.  It may not even be
+suitable for use as an action argument with ‘signal’.  But you can rely
+on using it as an argument to ‘sigaction’.  This problem never happens
+on GNU systems.
+
+   So, you’re better off using one or the other of the mechanisms
+consistently within a single program.
+
+   *Portability Note:* The basic ‘signal’ function is a feature of
+ISO C, while ‘sigaction’ is part of the POSIX.1 standard.  If you are
+concerned about portability to non-POSIX systems, then you should use
+the ‘signal’ function instead.
+
+
+File: libc.info,  Node: Sigaction Function Example,  Next: Flags for Sigaction,  Prev: Signal and Sigaction,  Up: Signal Actions
+
+24.3.4 ‘sigaction’ Function Example
+-----------------------------------
+
+In *note Basic Signal Handling::, we gave an example of establishing a
+simple handler for termination signals using ‘signal’.  Here is an
+equivalent example using ‘sigaction’:
+
+     #include <signal.h>
+
+     void
+     termination_handler (int signum)
+     {
+       struct temp_file *p;
+
+       for (p = temp_file_list; p; p = p->next)
+         unlink (p->name);
+     }
+
+     int
+     main (void)
+     {
+       ...
+       struct sigaction new_action, old_action;
+
+       /* Set up the structure to specify the new action. */
+       new_action.sa_handler = termination_handler;
+       sigemptyset (&new_action.sa_mask);
+       new_action.sa_flags = 0;
+
+       sigaction (SIGINT, NULL, &old_action);
+       if (old_action.sa_handler != SIG_IGN)
+         sigaction (SIGINT, &new_action, NULL);
+       sigaction (SIGHUP, NULL, &old_action);
+       if (old_action.sa_handler != SIG_IGN)
+         sigaction (SIGHUP, &new_action, NULL);
+       sigaction (SIGTERM, NULL, &old_action);
+       if (old_action.sa_handler != SIG_IGN)
+         sigaction (SIGTERM, &new_action, NULL);
+       ...
+     }
+
+   The program just loads the ‘new_action’ structure with the desired
+parameters and passes it in the ‘sigaction’ call.  The usage of
+‘sigemptyset’ is described later; see *note Blocking Signals::.
+
+   As in the example using ‘signal’, we avoid handling signals
+previously set to be ignored.  Here we can avoid altering the signal
+handler even momentarily, by using the feature of ‘sigaction’ that lets
+us examine the current action without specifying a new one.
+
+   Here is another example.  It retrieves information about the current
+action for ‘SIGINT’ without changing that action.
+
+     struct sigaction query_action;
+
+     if (sigaction (SIGINT, NULL, &query_action) < 0)
+       /* ‘sigaction’ returns -1 in case of error. */
+     else if (query_action.sa_handler == SIG_DFL)
+       /* ‘SIGINT’ is handled in the default, fatal manner. */
+     else if (query_action.sa_handler == SIG_IGN)
+       /* ‘SIGINT’ is ignored. */
+     else
+       /* A programmer-defined signal handler is in effect. */
+
+
+File: libc.info,  Node: Flags for Sigaction,  Next: Initial Signal Actions,  Prev: Sigaction Function Example,  Up: Signal Actions
+
+24.3.5 Flags for ‘sigaction’
+----------------------------
+
+The ‘sa_flags’ member of the ‘sigaction’ structure is a catch-all for
+special features.  Most of the time, ‘SA_RESTART’ is a good value to use
+for this field.
+
+   The value of ‘sa_flags’ is interpreted as a bit mask.  Thus, you
+should choose the flags you want to set, OR those flags together, and
+store the result in the ‘sa_flags’ member of your ‘sigaction’ structure.
+
+   Each signal number has its own set of flags.  Each call to
+‘sigaction’ affects one particular signal number, and the flags that you
+specify apply only to that particular signal.
+
+   In the GNU C Library, establishing a handler with ‘signal’ sets all
+the flags to zero except for ‘SA_RESTART’, whose value depends on the
+settings you have made with ‘siginterrupt’.  *Note Interrupted
+Primitives::, to see what this is about.
+
+   These macros are defined in the header file ‘signal.h’.
+
+ -- Macro: int SA_NOCLDSTOP
+
+     This flag is meaningful only for the ‘SIGCHLD’ signal.  When the
+     flag is set, the system delivers the signal for a terminated child
+     process but not for one that is stopped.  By default, ‘SIGCHLD’ is
+     delivered for both terminated children and stopped children.
+
+     Setting this flag for a signal other than ‘SIGCHLD’ has no effect.
+
+ -- Macro: int SA_ONSTACK
+
+     If this flag is set for a particular signal number, the system uses
+     the signal stack when delivering that kind of signal.  *Note Signal
+     Stack::.  If a signal with this flag arrives and you have not set a
+     signal stack, the system terminates the program with ‘SIGILL’.
+
+ -- Macro: int SA_RESTART
+
+     This flag controls what happens when a signal is delivered during
+     certain primitives (such as ‘open’, ‘read’ or ‘write’), and the
+     signal handler returns normally.  There are two alternatives: the
+     library function can resume, or it can return failure with error
+     code ‘EINTR’.
+
+     The choice is controlled by the ‘SA_RESTART’ flag for the
+     particular kind of signal that was delivered.  If the flag is set,
+     returning from a handler resumes the library function.  If the flag
+     is clear, returning from a handler makes the function fail.  *Note
+     Interrupted Primitives::.
 
 
 File: libc.info,  Node: Initial Signal Actions,  Prev: Flags for Sigaction,  Up: Signal Actions
@@ -4707,6 +4948,21 @@ the libraries.
 
    The header file ‘<argp.h>’ should be included to use argp.
 
+* Menu:
+
+* Argp Global Variables::
+* Argp Parsers::
+* Argp Option Vectors::
+* Argp Parser Functions::
+* Argp Children::
+* Argp Flags::
+* Argp Help Filtering::
+* Argp Help::
+* Argp Help Flags::
+* Argp Examples::
+* Argp User Customization::
+* Suboptions Example::
+
 25.3.1 The ‘argp_parse’ Function
 --------------------------------
 
@@ -6207,6 +6463,10 @@ variable to a comma-separated list of tokens.  Whitespace is ignored:
      This will word wrap help output at or before column N.  The default
      is 79.
 
+* Menu:
+
+* Suboptions::
+
 
 File: libc.info,  Node: Suboptions,  Next: Suboptions Example,  Prev: Argp,  Up: Parsing Program Arguments
 
@@ -7371,199 +7631,4 @@ parent process are:
      executes ‘fork’ if ‘vfork’ isn’t available.  If you follow the
      proper precautions for using ‘vfork’, your program will still work
      even if the system uses ‘fork’ instead.
-
-
-File: libc.info,  Node: Executing a File,  Next: Process Completion,  Prev: Creating a Process,  Up: Processes
-
-26.5 Executing a File
-=====================
-
-This section describes the ‘exec’ family of functions, for executing a
-file as a process image.  You can use these functions to make a child
-process execute a new program after it has been forked.
-
-   To see the effects of ‘exec’ from the point of view of the called
-program, see *note Program Basics::.
-
-   The functions in this family differ in how you specify the arguments,
-but otherwise they all do the same thing.  They are declared in the
-header file ‘unistd.h’.
-
- -- Function: int execv (const char *FILENAME, char *const ARGV[])
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘execv’ function executes the file named by FILENAME as a new
-     process image.
-
-     The ARGV argument is an array of null-terminated strings that is
-     used to provide a value for the ‘argv’ argument to the ‘main’
-     function of the program to be executed.  The last element of this
-     array must be a null pointer.  By convention, the first element of
-     this array is the file name of the program sans directory names.
-     *Note Program Arguments::, for full details on how programs can
-     access these arguments.
-
-     The environment for the new process image is taken from the
-     ‘environ’ variable of the current process image; see *note
-     Environment Variables::, for information about environments.
-
- -- Function: int execl (const char *FILENAME, const char *ARG0, ...)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     This is similar to ‘execv’, but the ARGV strings are specified
-     individually instead of as an array.  A null pointer must be passed
-     as the last such argument.
-
- -- Function: int execve (const char *FILENAME, char *const ARGV[], char
-          *const ENV[])
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This is similar to ‘execv’, but permits you to specify the
-     environment for the new program explicitly as the ENV argument.
-     This should be an array of strings in the same format as for the
-     ‘environ’ variable; see *note Environment Access::.
-
- -- Function: int fexecve (int FD, char *const ARGV[], char *const
-          ENV[])
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This is similar to ‘execve’, but instead of identifying the program
-     executable by its pathname, the file descriptor FD is used.  The
-     descriptor must have been opened with the ‘O_RDONLY’ flag or (on
-     Linux) the ‘O_PATH’ flag.
-
-     On Linux, ‘fexecve’ can fail with an error of ‘ENOSYS’ if ‘/proc’
-     has not been mounted and the kernel lacks support for the
-     underlying ‘execveat’ system call.
-
- -- Function: int execle (const char *FILENAME, const char *ARG0, ...,
-          char *const ENV[])
-
-     Preliminary: | MT-Safe | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     This is similar to ‘execl’, but permits you to specify the
-     environment for the new program explicitly.  The environment
-     argument is passed following the null pointer that marks the last
-     ARGV argument, and should be an array of strings in the same format
-     as for the ‘environ’ variable.
-
- -- Function: int execvp (const char *FILENAME, char *const ARGV[])
-
-     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     The ‘execvp’ function is similar to ‘execv’, except that it
-     searches the directories listed in the ‘PATH’ environment variable
-     (*note Standard Environment::) to find the full file name of a file
-     from FILENAME if FILENAME does not contain a slash.
-
-     This function is useful for executing system utility programs,
-     because it looks for them in the places that the user has chosen.
-     Shells use it to run the commands that users type.
-
- -- Function: int execlp (const char *FILENAME, const char *ARG0, ...)
-
-     Preliminary: | MT-Safe env | AS-Unsafe heap | AC-Unsafe mem | *Note
-     POSIX Safety Concepts::.
-
-     This function is like ‘execl’, except that it performs the same
-     file name searching as the ‘execvp’ function.
-
-   The size of the argument list and environment list taken together
-must not be greater than ‘ARG_MAX’ bytes.  *Note General Limits::.  On
-GNU/Hurd systems, the size (which compares against ‘ARG_MAX’) includes,
-for each string, the number of characters in the string, plus the size
-of a ‘char *’, plus one, rounded up to a multiple of the size of a ‘char
-*’.  Other systems may have somewhat different rules for counting.
-
-   These functions normally don’t return, since execution of a new
-program causes the currently executing program to go away completely.  A
-value of ‘-1’ is returned in the event of a failure.  In addition to the
-usual file name errors (*note File Name Errors::), the following ‘errno’
-error conditions are defined for these functions:
-
-‘E2BIG’
-     The combined size of the new program’s argument list and
-     environment list is larger than ‘ARG_MAX’ bytes.  GNU/Hurd systems
-     have no specific limit on the argument list size, so this error
-     code cannot result, but you may get ‘ENOMEM’ instead if the
-     arguments are too big for available memory.
-
-‘ENOEXEC’
-     The specified file can’t be executed because it isn’t in the right
-     format.
-
-‘ENOMEM’
-     Executing the specified file requires more storage than is
-     available.
-
-   If execution of the new file succeeds, it updates the access time
-field of the file as if the file had been read.  *Note File Times::, for
-more details about access times of files.
-
-   The point at which the file is closed again is not specified, but is
-at some point before the process exits or before another process image
-is executed.
-
-   Executing a new process image completely changes the contents of
-memory, copying only the argument and environment strings to new
-locations.  But many other attributes of the process are unchanged:
-
-   • The process ID and the parent process ID. *Note Process Creation
-     Concepts::.
-
-   • Session and process group membership.  *Note Concepts of Job
-     Control::.
-
-   • Real user ID and group ID, and supplementary group IDs.  *Note
-     Process Persona::.
-
-   • Pending alarms.  *Note Setting an Alarm::.
-
-   • Current working directory and root directory.  *Note Working
-     Directory::.  On GNU/Hurd systems, the root directory is not copied
-     when executing a setuid program; instead the system default root
-     directory is used for the new program.
-
-   • File mode creation mask.  *Note Setting Permissions::.
-
-   • Process signal mask; see *note Process Signal Mask::.
-
-   • Pending signals; see *note Blocking Signals::.
-
-   • Elapsed processor time associated with the process; see *note
-     Processor Time::.
-
-   If the set-user-ID and set-group-ID mode bits of the process image
-file are set, this affects the effective user ID and effective group ID
-(respectively) of the process.  These concepts are discussed in detail
-in *note Process Persona::.
-
-   Signals that are set to be ignored in the existing process image are
-also set to be ignored in the new process image.  All other signals are
-set to the default action in the new process image.  For more
-information about signals, see *note Signal Handling::.
-
-   File descriptors open in the existing process image remain open in
-the new process image, unless they have the ‘FD_CLOEXEC’ (close-on-exec)
-flag set.  The files that remain open inherit all attributes of the open
-file descriptors from the existing process image, including file locks.
-File descriptors are discussed in *note Low-Level I/O::.
-
-   Streams, by contrast, cannot survive through ‘exec’ functions,
-because they are located in the memory of the process itself.  The new
-process image has no streams except those it creates afresh.  Each of
-the streams in the pre-‘exec’ process image has a descriptor inside it,
-and these descriptors do survive through ‘exec’ (provided that they do
-not have ‘FD_CLOEXEC’ set).  The new process image can reconnect these
-to new streams using ‘fdopen’ (*note Descriptors and Streams::).
 

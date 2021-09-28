@@ -1,7 +1,6 @@
 #!/bin/sh
 # Copyright (C) 1998-2021 Free Software Foundation, Inc.
 # This file is part of the GNU C Library.
-# Contributed by Ulrich Drepper <drepper@cygnus.com>, 1998.
 
 # The GNU C Library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -55,7 +54,7 @@ segv_output=`mktemp ${TMPDIR:-/tmp}/segv_output.XXXXXX` || exit
 
 # Redirect stderr to avoid termination message from shell.
 (exec 3>&2 2>/dev/null
-LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libSegFault.so \
+LD_PRELOAD=${LD_PRELOAD:+${LD_PRELOAD}:}/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libSegFault.so \
 SEGFAULT_USE_ALTSTACK=1 \
 SEGFAULT_OUTPUT_NAME=$segv_output \
 "$prog" ${1+"$@"} 2>&3 3>&-)

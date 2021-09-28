@@ -18,7 +18,7 @@
 
 # We should be able to find the translation right at the beginning.
 TEXTDOMAIN=libc
-TEXTDOMAINDIR=/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/share/locale
+TEXTDOMAINDIR=/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/share/locale
 
 unset SOTRUSS_FROMLIST
 unset SOTRUSS_TOLIST
@@ -26,7 +26,7 @@ unset SOTRUSS_OUTNAME
 unset SOTRUSS_EXIT
 unset SOTRUSS_NOINDENT
 SOTRUSS_WHICH=$$
-lib='/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/$LIB/audit/sotruss-lib.so'
+lib='/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/$LIB/audit/sotruss-lib.so'
 
 do_help() {
   echo $"Usage: sotruss [OPTION...] [--] EXECUTABLE [EXECUTABLE-OPTION...]

@@ -7,7 +7,7 @@ OUTPUT_FORMAT("elf32-bigarm", "elf32-bigarm",
 	      "elf32-littlearm")
 OUTPUT_ARCH(arm)
 ENTRY(_start)
-SEARCH_DIR("=/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/lib");
+SEARCH_DIR("=/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */

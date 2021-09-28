@@ -140,6 +140,9 @@
 #define __cpp_lib_filesystem 201703
 #define __cpp_lib_gcd 201606
 #define __cpp_lib_gcd_lcm 201606
+#ifdef __GCC_DESTRUCTIVE_SIZE
+# define __cpp_lib_hardware_interference_size 201703L
+#endif
 #define __cpp_lib_hypot 201603
 #define __cpp_lib_invoke 201411L
 #define __cpp_lib_lcm 201606
@@ -236,6 +239,10 @@
 #ifdef _GLIBCXX_HAS_GTHREADS
 # define __cpp_lib_jthread 201911L
 #endif
+#if __has_builtin(__is_layout_compatible) \
+  && __has_builtin(__builtin_is_corresponding_member)
+# define __cpp_lib_is_layout_compatible 201907L
+#endif
 #if __has_builtin(__is_pointer_interconvertible_base_of) \
  && __has_builtin(__builtin_is_pointer_interconvertible_with_class)
 # define __cpp_lib_is_pointer_interconvertible 201907L
@@ -274,6 +281,7 @@
 
 #if __cplusplus > 202002L
 // c++2b
+#define __cpp_lib_invoke_r 202106L
 #define __cpp_lib_is_scoped_enum 202011L
 #define __cpp_lib_string_contains 202011L
 #define __cpp_lib_to_underlying 202102L

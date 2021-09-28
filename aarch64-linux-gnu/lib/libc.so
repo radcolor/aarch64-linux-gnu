@@ -2,4 +2,4 @@
    Use the shared library, but some functions are only in
    the static library, so try that secondarily.  */
 OUTPUT_FORMAT(elf64-littleaarch64)
-GROUP ( /drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc.so.6 /drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc_nonshared.a  AS_NEEDED ( /drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1 ) )
+GROUP ( /home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc.so.6 /home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc_nonshared.a  AS_NEEDED ( /home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1 ) )

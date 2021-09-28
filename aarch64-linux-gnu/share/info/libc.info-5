@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -6776,9 +6790,9 @@ that it is closed.
      Preliminary: | MT-Safe | AS-Safe | AC-Safe fd | *Note POSIX Safety
      Concepts::.
 
-     The function ‘closefrom’ closes all file descriptors larger than or
-     equal to LOWFD then LOWFD.  This function is similar to calling
-     ‘close’ for all open file descriptors not less than LOWFD.
+     The function ‘closefrom’ closes all file descriptors greater than
+     or equal to LOWFD.  This function is similar to calling ‘close’ for
+     all open file descriptors not less than LOWFD.
 
      Already closed file descriptors are ignored.
 

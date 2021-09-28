@@ -1060,7 +1060,7 @@
 /* Define to 1 if we found a declaration for 'mallinfo2', otherwise define to
    0. */
 #ifndef USED_FOR_TARGET
-#define HAVE_DECL_MALLINFO2 1
+#define HAVE_DECL_MALLINFO2 0
 #endif
 
 
@@ -1329,6 +1329,13 @@
    allocated using the GAS .comm command. */
 #ifndef USED_FOR_TARGET
 /* #undef HAVE_GAS_ALIGNED_COMM */
+#endif
+
+
+/* Define if your Arm assembler permits context-specific feature extensions.
+   */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_GAS_ARM_EXTENDED_ARCH */
 #endif
 
 
@@ -1802,7 +1809,7 @@
 
 /* Define to 1 if you have the `mallinfo2' function. */
 #ifndef USED_FOR_TARGET
-#define HAVE_MALLINFO2 1
+/* #undef HAVE_MALLINFO2 */
 #endif
 
 
@@ -2138,7 +2145,7 @@
 
 /* Define if you have a working <zstd.h> header file. */
 #ifndef USED_FOR_TARGET
-#define HAVE_ZSTD_H 1
+/* #undef HAVE_ZSTD_H */
 #endif
 
 

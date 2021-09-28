@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -2102,6 +2116,355 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Setting and Adjusting the Time,  Next: Broken-down Time,  Prev: Getting the Time,  Up: Calendar Time
+
+21.5.2 Setting and Adjusting the Time
+-------------------------------------
+
+The clock hardware inside a modern computer is quite reliable, but it
+can still be wrong.  The functions in this section allow one to set the
+system’s idea of the current calendar time, and to adjust the rate at
+which the system counts seconds, so that the calendar time will both be
+accurate, and remain accurate.
+
+   The functions in this section require special privileges to use.
+*Note Users and Groups::.
+
+ -- Function: int clock_settime (clockid_t CLOCK, const struct timespec
+          *TS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     Change the current calendar time, according to the clock identified
+     by CLOCK, to be the simple calendar time in ‘*TS’.
+
+     Not all of the system’s clocks can be changed.  For instance, the
+     ‘CLOCK_REALTIME’ clock can be changed (with the appropriate
+     privileges), but the ‘CLOCK_MONOTONIC’ clock cannot.
+
+     Because simple calendar times are independent of time zone, this
+     function should not be used when the time zone changes (e.g. if the
+     computer is physically moved from one zone to another).  Instead,
+     use the facilities described in *note Time Zone Functions::.
+
+     ‘clock_settime’ causes the clock to jump forwards or backwards,
+     which can cause a variety of problems.  Changing the
+     ‘CLOCK_REALTIME’ clock with ‘clock_settime’ does not affect when
+     timers expire (*note Setting an Alarm::) or when sleeping processes
+     wake up (*note Sleeping::), which avoids some of the problems.
+     Still, for small changes made while the system is running, it is
+     better to use ‘ntp_adjtime’ (below) to make a smooth transition
+     from one time to another.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error conditions are defined for this function:
+
+     ‘EINVAL’
+          The clock identified by CLOCK is not supported or cannot be
+          set at all, or the simple calendar time in ‘*TS’ is invalid
+          (for instance, ‘ts->tv_nsec’ is negative or greater than
+          999,999,999).
+
+     ‘EPERM’
+          This process does not have the privileges required to set the
+          clock identified by CLOCK.
+
+     *Portability Note*: On some systems, including systems that use
+     older versions of the GNU C Library, programs that use
+     ‘clock_settime’ must be linked with the ‘-lrt’ library.  This has
+     not been necessary with the GNU C Library since version 2.17.
+
+   For systems that remain up and running for long periods, it is not
+enough to set the time once; one should also “discipline” the clock so
+that it does not drift away from the true calendar time.
+
+   The ‘ntp_gettime’ and ‘ntp_adjtime’ functions provide an interface to
+monitor and discipline the system clock.  For example, you can fine-tune
+the rate at which the clock “ticks,” and make small adjustments to the
+current reported calendar time smoothly, by temporarily speeding up or
+slowing down the clock.
+
+   These functions’ names begin with ‘ntp_’ because they were designed
+for use by programs implementing the Network Time Protocol to
+synchronize a system’s clock with other systems’ clocks and/or with
+external high-precision clock hardware.
+
+   These functions, and the constants and structures they use, are
+declared in ‘sys/timex.h’.
+
+ -- Data Type: struct ntptimeval
+     This structure is used to report information about the system
+     clock.  It contains the following members:
+     ‘struct timeval time’
+          The current calendar time, as if retrieved by ‘gettimeofday’.
+          The ‘struct timeval’ data type is described in *note Time
+          Types::.
+
+     ‘long int maxerror’
+          This is the maximum error, measured in microseconds.  Unless
+          updated via ‘ntp_adjtime’ periodically, this value will reach
+          some platform-specific maximum value.
+
+     ‘long int esterror’
+          This is the estimated error, measured in microseconds.  This
+          value can be set by ‘ntp_adjtime’ to indicate the estimated
+          offset of the system clock from the true calendar time.
+
+ -- Function: int ntp_gettime (struct ntptimeval *TPTR)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘ntp_gettime’ function sets the structure pointed to by TPTR to
+     current values.  The elements of the structure afterwards contain
+     the values the timer implementation in the kernel assumes.  They
+     might or might not be correct.  If they are not, an ‘ntp_adjtime’
+     call is necessary.
+
+     The return value is ‘0’ on success and other values on failure.
+     The following ‘errno’ error conditions are defined for this
+     function:
+
+     ‘TIME_ERROR’
+          The precision clock model is not properly set up at the
+          moment, thus the clock must be considered unsynchronized, and
+          the values should be treated with care.
+
+ -- Data Type: struct timex
+     This structure is used to control and monitor the system clock.  It
+     contains the following members:
+     ‘unsigned int modes’
+          This variable controls whether and which values are set.
+          Several symbolic constants have to be combined with _binary
+          or_ to specify the effective mode.  These constants start with
+          ‘MOD_’.
+
+     ‘long int offset’
+          This value indicates the current offset of the system clock
+          from the true calendar time.  The value is given in
+          microseconds.  If bit ‘MOD_OFFSET’ is set in ‘modes’, the
+          offset (and possibly other dependent values) can be set.  The
+          offset’s absolute value must not exceed ‘MAXPHASE’.
+
+     ‘long int frequency’
+          This value indicates the difference in frequency between the
+          true calendar time and the system clock.  The value is
+          expressed as scaled PPM (parts per million, 0.0001%).  The
+          scaling is ‘1 << SHIFT_USEC’.  The value can be set with bit
+          ‘MOD_FREQUENCY’, but the absolute value must not exceed
+          ‘MAXFREQ’.
+
+     ‘long int maxerror’
+          This is the maximum error, measured in microseconds.  A new
+          value can be set using bit ‘MOD_MAXERROR’.  Unless updated via
+          ‘ntp_adjtime’ periodically, this value will increase steadily
+          and reach some platform-specific maximum value.
+
+     ‘long int esterror’
+          This is the estimated error, measured in microseconds.  This
+          value can be set using bit ‘MOD_ESTERROR’.
+
+     ‘int status’
+          This variable reflects the various states of the clock
+          machinery.  There are symbolic constants for the significant
+          bits, starting with ‘STA_’.  Some of these flags can be
+          updated using the ‘MOD_STATUS’ bit.
+
+     ‘long int constant’
+          This value represents the bandwidth or stiffness of the PLL
+          (phase locked loop) implemented in the kernel.  The value can
+          be changed using bit ‘MOD_TIMECONST’.
+
+     ‘long int precision’
+          This value represents the accuracy or the maximum error when
+          reading the system clock.  The value is expressed in
+          microseconds.
+
+     ‘long int tolerance’
+          This value represents the maximum frequency error of the
+          system clock in scaled PPM. This value is used to increase the
+          ‘maxerror’ every second.
+
+     ‘struct timeval time’
+          The current calendar time.
+
+     ‘long int tick’
+          The elapsed time between clock ticks in microseconds.  A clock
+          tick is a periodic timer interrupt on which the system clock
+          is based.
+
+     ‘long int ppsfreq’
+          This is the first of a few optional variables that are present
+          only if the system clock can use a PPS (pulse per second)
+          signal to discipline the system clock.  The value is expressed
+          in scaled PPM and it denotes the difference in frequency
+          between the system clock and the PPS signal.
+
+     ‘long int jitter’
+          This value expresses a median filtered average of the PPS
+          signal’s dispersion in microseconds.
+
+     ‘int shift’
+          This value is a binary exponent for the duration of the PPS
+          calibration interval, ranging from ‘PPS_SHIFT’ to
+          ‘PPS_SHIFTMAX’.
+
+     ‘long int stabil’
+          This value represents the median filtered dispersion of the
+          PPS frequency in scaled PPM.
+
+     ‘long int jitcnt’
+          This counter represents the number of pulses where the jitter
+          exceeded the allowed maximum ‘MAXTIME’.
+
+     ‘long int calcnt’
+          This counter reflects the number of successful calibration
+          intervals.
+
+     ‘long int errcnt’
+          This counter represents the number of calibration errors
+          (caused by large offsets or jitter).
+
+     ‘long int stbcnt’
+          This counter denotes the number of calibrations where the
+          stability exceeded the threshold.
+
+ -- Function: int ntp_adjtime (struct timex *TPTR)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘ntp_adjtime’ function sets the structure specified by TPTR to
+     current values.
+
+     In addition, ‘ntp_adjtime’ updates some settings to match what you
+     pass to it in ‘*TPTR’.  Use the ‘modes’ element of ‘*TPTR’ to
+     select what settings to update.  You can set ‘offset’, ‘freq’,
+     ‘maxerror’, ‘esterror’, ‘status’, ‘constant’, and ‘tick’.
+
+     ‘modes’ = zero means set nothing.
+
+     Only the superuser can update settings.
+
+     The return value is ‘0’ on success and other values on failure.
+     The following ‘errno’ error conditions are defined for this
+     function:
+
+     ‘TIME_ERROR’
+          The high accuracy clock model is not properly set up at the
+          moment, thus the clock must be considered unsynchronized, and
+          the values should be treated with care.  Another reason could
+          be that the specified new values are not allowed.
+
+     ‘EPERM’
+          The process specified a settings update, but is not superuser.
+
+     For more details see RFC1305 (Network Time Protocol, Version 3) and
+     related documents.
+
+     *Portability note:* Early versions of the GNU C Library did not
+     have this function, but did have the synonymous ‘adjtimex’.
+
+ -- Function: int adjtime (const struct timeval *DELTA, struct timeval
+          *OLDDELTA)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This simpler version of ‘ntp_adjtime’ speeds up or slows down the
+     system clock for a short time, in order to correct it by a small
+     amount.  This avoids a discontinuous change in the calendar time
+     reported by the ‘CLOCK_REALTIME’ clock, at the price of having to
+     wait longer for the time to become correct.
+
+     The DELTA argument specifies a relative adjustment to be made to
+     the clock time.  If negative, the system clock is slowed down for a
+     while until it has lost this much elapsed time.  If positive, the
+     system clock is speeded up for a while.
+
+     If the OLDDELTA argument is not a null pointer, the ‘adjtime’
+     function returns information about any previous time adjustment
+     that has not yet completed.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error condition is defined for this function:
+
+     ‘EPERM’
+          This process does not have the privileges required to adjust
+          the ‘CLOCK_REALTIME’ clock.
+
+   For compatibility, the GNU C Library also provides several older
+functions for controlling the system time.  New programs should prefer
+to use the functions above.
+
+ -- Function: int stime (const time_t *NEWTIME)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     Change the ‘CLOCK_REALTIME’ calendar time to be the simple calendar
+     time in ‘*NEWTIME’.  Calling this function is exactly the same as
+     calling ‘clock_settime (CLOCK_REALTIME)’, except that the new time
+     can only be set to a precision of one second.
+
+     This function is no longer available on GNU systems, but it may be
+     the _only_ way to set the time on very old Unix systems, so we
+     continue to document it.  If it is available, it is declared in
+     ‘time.h’.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error condition is defined for this function:
+
+     ‘EPERM’
+          This process does not have the privileges required to adjust
+          the ‘CLOCK_REALTIME’ clock.
+
+ -- Function: int adjtimex (struct timex *TIMEX)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     ‘adjtimex’ is an older name for ‘ntp_adjtime’.  This function is
+     only available on GNU/Linux systems.  It is declared in
+     ‘sys/timex.h’.
+
+ -- Function: int settimeofday (const struct timeval *TP, const void
+          *TZP)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     Change the ‘CLOCK_REALTIME’ calendar time to be the simple calendar
+     time in ‘*NEWTIME’.  This function is declared in ‘sys/time.h’.
+
+     When TZP is a null pointer, calling this function is exactly the
+     same as calling ‘clock_settime (CLOCK_REALTIME)’, except that the
+     new time can only be set to a precision of one microsecond.
+
+     When TZP is not a null pointer, the data it points to _may_ be used
+     to set a system-wide idea of the current timezone.  This feature is
+     obsolete and not supported on GNU systems.  Instead, use the
+     facilities described in *note Time Zone Functions:: and in *note
+     Broken-down Time:: for working with time zones.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error conditions are defined for this function:
+
+     ‘EPERM’
+          This process does not have the privileges required to set the
+          ‘CLOCK_REALTIME’ clock.
+
+     ‘EINVAL’
+          Neither TP nor TZP is a null pointer.  (For historical
+          reasons, it is not possible to set the current time and the
+          current time zone in the same call.)
+
+     ‘ENOSYS’
+          The operating system does not support setting time zone
+          information, and TZP is not a null pointer.
 
 
 File: libc.info,  Node: Broken-down Time,  Next: Formatting Calendar Time,  Prev: Setting and Adjusting the Time,  Up: Calendar Time
@@ -6994,231 +7357,4 @@ example because these are designed to provide information for debugging
 
      The value of this macro is used as the return value from ‘signal’
      to indicate an error.
-
-
-File: libc.info,  Node: Advanced Signal Handling,  Next: Signal and Sigaction,  Prev: Basic Signal Handling,  Up: Signal Actions
-
-24.3.2 Advanced Signal Handling
--------------------------------
-
-The ‘sigaction’ function has the same basic effect as ‘signal’: to
-specify how a signal should be handled by the process.  However,
-‘sigaction’ offers more control, at the expense of more complexity.  In
-particular, ‘sigaction’ allows you to specify additional flags to
-control when the signal is generated and how the handler is invoked.
-
-   The ‘sigaction’ function is declared in ‘signal.h’.
-
- -- Data Type: struct sigaction
-
-     Structures of type ‘struct sigaction’ are used in the ‘sigaction’
-     function to specify all the information about how to handle a
-     particular signal.  This structure contains at least the following
-     members:
-
-     ‘sighandler_t sa_handler’
-          This is used in the same way as the ACTION argument to the
-          ‘signal’ function.  The value can be ‘SIG_DFL’, ‘SIG_IGN’, or
-          a function pointer.  *Note Basic Signal Handling::.
-
-     ‘sigset_t sa_mask’
-          This specifies a set of signals to be blocked while the
-          handler runs.  Blocking is explained in *note Blocking for
-          Handler::.  Note that the signal that was delivered is
-          automatically blocked by default before its handler is
-          started; this is true regardless of the value in ‘sa_mask’.
-          If you want that signal not to be blocked within its handler,
-          you must write code in the handler to unblock it.
-
-     ‘int sa_flags’
-          This specifies various flags which can affect the behavior of
-          the signal.  These are described in more detail in *note Flags
-          for Sigaction::.
-
- -- Function: int sigaction (int SIGNUM, const struct sigaction
-          *restrict ACTION, struct sigaction *restrict OLD-ACTION)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ACTION argument is used to set up a new action for the signal
-     SIGNUM, while the OLD-ACTION argument is used to return information
-     about the action previously associated with this signal.  (In other
-     words, OLD-ACTION has the same purpose as the ‘signal’ function’s
-     return value—you can check to see what the old action in effect for
-     the signal was, and restore it later if you want.)
-
-     Either ACTION or OLD-ACTION can be a null pointer.  If OLD-ACTION
-     is a null pointer, this simply suppresses the return of information
-     about the old action.  If ACTION is a null pointer, the action
-     associated with the signal SIGNUM is unchanged; this allows you to
-     inquire about how a signal is being handled without changing that
-     handling.
-
-     The return value from ‘sigaction’ is zero if it succeeds, and ‘-1’
-     on failure.  The following ‘errno’ error conditions are defined for
-     this function:
-
-     ‘EINVAL’
-          The SIGNUM argument is not valid, or you are trying to trap or
-          ignore ‘SIGKILL’ or ‘SIGSTOP’.
-
-
-File: libc.info,  Node: Signal and Sigaction,  Next: Sigaction Function Example,  Prev: Advanced Signal Handling,  Up: Signal Actions
-
-24.3.3 Interaction of ‘signal’ and ‘sigaction’
-----------------------------------------------
-
-It’s possible to use both the ‘signal’ and ‘sigaction’ functions within
-a single program, but you have to be careful because they can interact
-in slightly strange ways.
-
-   The ‘sigaction’ function specifies more information than the ‘signal’
-function, so the return value from ‘signal’ cannot express the full
-range of ‘sigaction’ possibilities.  Therefore, if you use ‘signal’ to
-save and later reestablish an action, it may not be able to reestablish
-properly a handler that was established with ‘sigaction’.
-
-   To avoid having problems as a result, always use ‘sigaction’ to save
-and restore a handler if your program uses ‘sigaction’ at all.  Since
-‘sigaction’ is more general, it can properly save and reestablish any
-action, regardless of whether it was established originally with
-‘signal’ or ‘sigaction’.
-
-   On some systems if you establish an action with ‘signal’ and then
-examine it with ‘sigaction’, the handler address that you get may not be
-the same as what you specified with ‘signal’.  It may not even be
-suitable for use as an action argument with ‘signal’.  But you can rely
-on using it as an argument to ‘sigaction’.  This problem never happens
-on GNU systems.
-
-   So, you’re better off using one or the other of the mechanisms
-consistently within a single program.
-
-   *Portability Note:* The basic ‘signal’ function is a feature of
-ISO C, while ‘sigaction’ is part of the POSIX.1 standard.  If you are
-concerned about portability to non-POSIX systems, then you should use
-the ‘signal’ function instead.
-
-
-File: libc.info,  Node: Sigaction Function Example,  Next: Flags for Sigaction,  Prev: Signal and Sigaction,  Up: Signal Actions
-
-24.3.4 ‘sigaction’ Function Example
------------------------------------
-
-In *note Basic Signal Handling::, we gave an example of establishing a
-simple handler for termination signals using ‘signal’.  Here is an
-equivalent example using ‘sigaction’:
-
-     #include <signal.h>
-
-     void
-     termination_handler (int signum)
-     {
-       struct temp_file *p;
-
-       for (p = temp_file_list; p; p = p->next)
-         unlink (p->name);
-     }
-
-     int
-     main (void)
-     {
-       ...
-       struct sigaction new_action, old_action;
-
-       /* Set up the structure to specify the new action. */
-       new_action.sa_handler = termination_handler;
-       sigemptyset (&new_action.sa_mask);
-       new_action.sa_flags = 0;
-
-       sigaction (SIGINT, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGINT, &new_action, NULL);
-       sigaction (SIGHUP, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGHUP, &new_action, NULL);
-       sigaction (SIGTERM, NULL, &old_action);
-       if (old_action.sa_handler != SIG_IGN)
-         sigaction (SIGTERM, &new_action, NULL);
-       ...
-     }
-
-   The program just loads the ‘new_action’ structure with the desired
-parameters and passes it in the ‘sigaction’ call.  The usage of
-‘sigemptyset’ is described later; see *note Blocking Signals::.
-
-   As in the example using ‘signal’, we avoid handling signals
-previously set to be ignored.  Here we can avoid altering the signal
-handler even momentarily, by using the feature of ‘sigaction’ that lets
-us examine the current action without specifying a new one.
-
-   Here is another example.  It retrieves information about the current
-action for ‘SIGINT’ without changing that action.
-
-     struct sigaction query_action;
-
-     if (sigaction (SIGINT, NULL, &query_action) < 0)
-       /* ‘sigaction’ returns -1 in case of error. */
-     else if (query_action.sa_handler == SIG_DFL)
-       /* ‘SIGINT’ is handled in the default, fatal manner. */
-     else if (query_action.sa_handler == SIG_IGN)
-       /* ‘SIGINT’ is ignored. */
-     else
-       /* A programmer-defined signal handler is in effect. */
-
-
-File: libc.info,  Node: Flags for Sigaction,  Next: Initial Signal Actions,  Prev: Sigaction Function Example,  Up: Signal Actions
-
-24.3.5 Flags for ‘sigaction’
-----------------------------
-
-The ‘sa_flags’ member of the ‘sigaction’ structure is a catch-all for
-special features.  Most of the time, ‘SA_RESTART’ is a good value to use
-for this field.
-
-   The value of ‘sa_flags’ is interpreted as a bit mask.  Thus, you
-should choose the flags you want to set, OR those flags together, and
-store the result in the ‘sa_flags’ member of your ‘sigaction’ structure.
-
-   Each signal number has its own set of flags.  Each call to
-‘sigaction’ affects one particular signal number, and the flags that you
-specify apply only to that particular signal.
-
-   In the GNU C Library, establishing a handler with ‘signal’ sets all
-the flags to zero except for ‘SA_RESTART’, whose value depends on the
-settings you have made with ‘siginterrupt’.  *Note Interrupted
-Primitives::, to see what this is about.
-
-   These macros are defined in the header file ‘signal.h’.
-
- -- Macro: int SA_NOCLDSTOP
-
-     This flag is meaningful only for the ‘SIGCHLD’ signal.  When the
-     flag is set, the system delivers the signal for a terminated child
-     process but not for one that is stopped.  By default, ‘SIGCHLD’ is
-     delivered for both terminated children and stopped children.
-
-     Setting this flag for a signal other than ‘SIGCHLD’ has no effect.
-
- -- Macro: int SA_ONSTACK
-
-     If this flag is set for a particular signal number, the system uses
-     the signal stack when delivering that kind of signal.  *Note Signal
-     Stack::.  If a signal with this flag arrives and you have not set a
-     signal stack, the system terminates the program with ‘SIGILL’.
-
- -- Macro: int SA_RESTART
-
-     This flag controls what happens when a signal is delivered during
-     certain primitives (such as ‘open’, ‘read’ or ‘write’), and the
-     signal handler returns normally.  There are two alternatives: the
-     library function can resume, or it can return failure with error
-     code ‘EINTR’.
-
-     The choice is controlled by the ‘SA_RESTART’ flag for the
-     particular kind of signal that was delivered.  If the flag is set,
-     returning from a handler resumes the library function.  If the flag
-     is clear, returning from a handler makes the function fail.  *Note
-     Interrupted Primitives::.
 

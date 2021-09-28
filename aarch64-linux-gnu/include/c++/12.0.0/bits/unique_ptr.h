@@ -169,10 +169,10 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
 	return *this;
       }
 
-      pointer&   _M_ptr() { return std::get<0>(_M_t); }
-      pointer    _M_ptr() const { return std::get<0>(_M_t); }
-      _Dp&       _M_deleter() { return std::get<1>(_M_t); }
-      const _Dp& _M_deleter() const { return std::get<1>(_M_t); }
+      pointer&   _M_ptr() noexcept { return std::get<0>(_M_t); }
+      pointer    _M_ptr() const noexcept { return std::get<0>(_M_t); }
+      _Dp&       _M_deleter() noexcept { return std::get<1>(_M_t); }
+      const _Dp& _M_deleter() const noexcept { return std::get<1>(_M_t); }
 
       void reset(pointer __p) noexcept
       {
@@ -1027,8 +1027,8 @@ namespace __detail
    */
   template<typename _Tp>
     inline __detail::__unique_ptr_array_t<_Tp>
-    make_unique_for_overwrite(size_t __n)
-    { return unique_ptr<_Tp>(new remove_extent_t<_Tp>[__n]); }
+    make_unique_for_overwrite(size_t __num)
+    { return unique_ptr<_Tp>(new remove_extent_t<_Tp>[__num]); }
 
   /** Disable std::make_unique_for_overwrite for arrays of known bound.
    *  @tparam _Tp An array type of known bound, such as `U[N]`.

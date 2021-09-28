@@ -1,4 +1,4 @@
-This is libc.info, produced by makeinfo version 6.8 from libc.texinfo.
+This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
 This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
 
@@ -801,6 +801,7 @@ START-INFO-DIR-ENTRY
 * dcgettext: (libc)Translation with gettext.
 * dcngettext: (libc)Advanced gettext functions.
 * ddivl: (libc)Misc FP Arithmetic.
+* dfmal: (libc)Misc FP Arithmetic.
 * dgettext: (libc)Translation with gettext.
 * difftime: (libc)Calculating Elapsed Time.
 * dirfd: (libc)Opening a Directory.
@@ -813,6 +814,7 @@ START-INFO-DIR-ENTRY
 * drem: (libc)Remainder Functions.
 * dremf: (libc)Remainder Functions.
 * dreml: (libc)Remainder Functions.
+* dsqrtl: (libc)Misc FP Arithmetic.
 * dsubl: (libc)Misc FP Arithmetic.
 * dup2: (libc)Duplicating Descriptors.
 * dup: (libc)Duplicating Descriptors.
@@ -884,16 +886,24 @@ START-INFO-DIR-ENTRY
 * fMaddfNx: (libc)Misc FP Arithmetic.
 * fMdivfN: (libc)Misc FP Arithmetic.
 * fMdivfNx: (libc)Misc FP Arithmetic.
+* fMfmafN: (libc)Misc FP Arithmetic.
+* fMfmafNx: (libc)Misc FP Arithmetic.
 * fMmulfN: (libc)Misc FP Arithmetic.
 * fMmulfNx: (libc)Misc FP Arithmetic.
+* fMsqrtfN: (libc)Misc FP Arithmetic.
+* fMsqrtfNx: (libc)Misc FP Arithmetic.
 * fMsubfN: (libc)Misc FP Arithmetic.
 * fMsubfNx: (libc)Misc FP Arithmetic.
 * fMxaddfN: (libc)Misc FP Arithmetic.
 * fMxaddfNx: (libc)Misc FP Arithmetic.
 * fMxdivfN: (libc)Misc FP Arithmetic.
 * fMxdivfNx: (libc)Misc FP Arithmetic.
+* fMxfmafN: (libc)Misc FP Arithmetic.
+* fMxfmafNx: (libc)Misc FP Arithmetic.
 * fMxmulfN: (libc)Misc FP Arithmetic.
 * fMxmulfNx: (libc)Misc FP Arithmetic.
+* fMxsqrtfN: (libc)Misc FP Arithmetic.
+* fMxsqrtfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fabs: (libc)Absolute Value.
@@ -946,6 +956,8 @@ START-INFO-DIR-ENTRY
 * fexecve: (libc)Executing a File.
 * fflush: (libc)Flushing Buffers.
 * fflush_unlocked: (libc)Flushing Buffers.
+* ffma: (libc)Misc FP Arithmetic.
+* ffmal: (libc)Misc FP Arithmetic.
 * fgetc: (libc)Character Input.
 * fgetc_unlocked: (libc)Character Input.
 * fgetgrent: (libc)Scanning All Groups.
@@ -1048,6 +1060,8 @@ START-INFO-DIR-ENTRY
 * fseeko: (libc)File Positioning.
 * fsetpos64: (libc)Portable Positioning.
 * fsetpos: (libc)Portable Positioning.
+* fsqrt: (libc)Misc FP Arithmetic.
+* fsqrtl: (libc)Misc FP Arithmetic.
 * fstat64: (libc)Reading Attributes.
 * fstat: (libc)Reading Attributes.
 * fsub: (libc)Misc FP Arithmetic.
@@ -2113,17 +2127,17 @@ Type Index
 * Menu:
 
 * __ftw64_func_t:                        Working with Directory Trees.
-                                                              (line  60)
+                                                              (line  61)
 * __ftw_func_t:                          Working with Directory Trees.
-                                                              (line  20)
+                                                              (line  21)
 * __nftw64_func_t:                       Working with Directory Trees.
-                                                              (line  95)
+                                                              (line  96)
 * __nftw_func_t:                         Working with Directory Trees.
-                                                              (line  69)
+                                                              (line  70)
 * blkcnt64_t:                            Attribute Meanings.  (line 232)
 * blkcnt_t:                              Attribute Meanings.  (line 224)
 * cc_t:                                  Mode Data Types.     (line  48)
-* clockid_t:                             Getting the Time.    (line  39)
+* clockid_t:                             Getting the Time.    (line  41)
 * clock_t:                               Time Types.          (line   9)
 * cnd_t:                                 ISO C Condition Variables.
                                                               (line  14)
@@ -2145,9 +2159,9 @@ Type Index
 * fd_set:                                Waiting for I/O.     (line  34)
 * FILE:                                  Streams.             (line  16)
 * fpos64_t:                              Portable Positioning.
-                                                              (line  67)
+                                                              (line  68)
 * fpos_t:                                Portable Positioning.
-                                                              (line  52)
+                                                              (line  53)
 * gid_t:                                 Reading Persona.     (line  16)
 * glibc.cpu:                             Hardware Capability Tunables.
                                                               (line   6)
@@ -2223,7 +2237,7 @@ Type Index
                                                               (line  10)
 * glibc.rtld.optional_static_tls:        Dynamic Linking Tunables.
                                                               (line  24)
-* glob64_t:                              Calling Glob.        (line 154)
+* glob64_t:                              Calling Glob.        (line 156)
 * glob_t:                                Calling Glob.        (line  11)
 * iconv_t:                               Generic Conversion Interface.
                                                               (line  15)
@@ -2327,7 +2341,7 @@ Type Index
 * sigset_t:                              Signal Sets.         (line  13)
 * sig_atomic_t:                          Atomic Types.        (line  15)
 * size_t:                                Important Data Types.
-                                                              (line  22)
+                                                              (line  23)
 * speed_t:                               Line Speed.          (line  76)
 * ssize_t:                               I/O Primitives.      (line  10)
 * stack_t:                               Signal Stack.        (line  26)
@@ -2348,7 +2362,7 @@ Type Index
 * struct flock:                          File Locks.          (line  41)
 * struct fstab:                          fstab.               (line   9)
 * struct FTW:                            Working with Directory Trees.
-                                                              (line 104)
+                                                              (line 105)
 * struct group:                          Group Data Structure.
                                                               (line   9)
 * struct hostent:                        Host Names.          (line  20)
@@ -2406,16 +2420,16 @@ Type Index
                                                               (line 116)
 * struct tm:                             Time Types.          (line  82)
 * struct tm <1>:                         Broken-down Time.    (line  19)
-* struct tms:                            Processor Time.      (line  11)
+* struct tms:                            Processor Time.      (line  12)
 * struct utimbuf:                        File Times.          (line  38)
 * struct utmp:                           Manipulating the Database.
                                                               (line  21)
 * struct utmpx:                          XPG Functions.       (line   9)
 * struct utsname:                        Platform Type.       (line  15)
 * struct __gconv_step:                   glibc iconv Implementation.
-                                                              (line 203)
+                                                              (line 209)
 * struct __gconv_step_data:              glibc iconv Implementation.
-                                                              (line 272)
+                                                              (line 278)
 * tcflag_t:                              Mode Data Types.     (line  43)
 * thrd_start_t:                          ISO C Thread Management.
                                                               (line  16)
@@ -2426,17 +2440,17 @@ Type Index
                                                               (line  20)
 * tss_t:                                 ISO C Thread-local Storage.
                                                               (line  14)
-* ucontext_t:                            System V contexts.   (line  23)
+* ucontext_t:                            System V contexts.   (line  24)
 * uid_t:                                 Reading Persona.     (line  11)
 * va_list:                               Argument Macros.     (line   9)
 * VISIT:                                 Tree Search Function.
                                                               (line 116)
-* wchar_t:                               Extended Char Intro. (line  64)
+* wchar_t:                               Extended Char Intro. (line  69)
 * wctrans_t:                             Wide Character Case Conversion.
                                                               (line  11)
 * wctype_t:                              Classification of Wide Characters.
-                                                              (line  29)
-* wint_t:                                Extended Char Intro. (line  88)
+                                                              (line  30)
+* wint_t:                                Extended Char Intro. (line  94)
 * wordexp_t:                             Calling Wordexp.     (line  14)
 
 
@@ -2501,15 +2515,15 @@ Function and Macro Index
 * acosfNx:                               Inverse Trig Functions.
                                                               (line  31)
 * acosh:                                 Hyperbolic Functions.
-                                                              (line  99)
+                                                              (line 105)
 * acoshf:                                Hyperbolic Functions.
-                                                              (line 100)
+                                                              (line 106)
 * acoshfN:                               Hyperbolic Functions.
-                                                              (line 102)
+                                                              (line 108)
 * acoshfNx:                              Hyperbolic Functions.
-                                                              (line 103)
+                                                              (line 109)
 * acoshl:                                Hyperbolic Functions.
-                                                              (line 101)
+                                                              (line 107)
 * acosl:                                 Inverse Trig Functions.
                                                               (line  29)
 * addmntent:                             mtab.                (line 181)
@@ -2518,7 +2532,7 @@ Function and Macro Index
 * adjtime:                               Setting and Adjusting the Time.
                                                               (line 251)
 * adjtimex:                              Setting and Adjusting the Time.
-                                                              (line 305)
+                                                              (line 306)
 * aio_cancel:                            Cancel AIO Operations.
                                                               (line  18)
 * aio_cancel64:                          Cancel AIO Operations.
@@ -2546,9 +2560,9 @@ Function and Macro Index
 * aio_suspend64:                         Synchronizing AIO Operations.
                                                               (line 129)
 * aio_write:                             Asynchronous Reads/Writes.
-                                                              (line  90)
+                                                              (line  91)
 * aio_write64:                           Asynchronous Reads/Writes.
-                                                              (line 154)
+                                                              (line 155)
 * alarm:                                 Setting an Alarm.    (line 113)
 * aligned_alloc:                         Aligned Memory Blocks.
                                                               (line  12)
@@ -2557,13 +2571,13 @@ Function and Macro Index
 * alphasort:                             Scanning Directory Content.
                                                               (line  43)
 * alphasort64:                           Scanning Directory Content.
-                                                              (line  92)
+                                                              (line  95)
 * argp_error:                            Argp Helper Functions.
                                                               (line  21)
 * argp_failure:                          Argp Helper Functions.
                                                               (line  33)
 * argp_help:                             Argp Help.           (line  14)
-* argp_parse:                            Argp.                (line  34)
+* argp_parse:                            Argp.                (line  49)
 * argp_state_help:                       Argp Helper Functions.
                                                               (line  51)
 * argp_usage:                            Argp Helper Functions.
@@ -2593,15 +2607,15 @@ Function and Macro Index
 * asinfNx:                               Inverse Trig Functions.
                                                               (line  13)
 * asinh:                                 Hyperbolic Functions.
-                                                              (line  87)
+                                                              (line  93)
 * asinhf:                                Hyperbolic Functions.
-                                                              (line  88)
+                                                              (line  94)
 * asinhfN:                               Hyperbolic Functions.
-                                                              (line  90)
+                                                              (line  96)
 * asinhfNx:                              Hyperbolic Functions.
-                                                              (line  91)
+                                                              (line  97)
 * asinhl:                                Hyperbolic Functions.
-                                                              (line  89)
+                                                              (line  95)
 * asinl:                                 Inverse Trig Functions.
                                                               (line  11)
 * asprintf:                              Dynamic Output.      (line   9)
@@ -2628,22 +2642,22 @@ Function and Macro Index
 * atanfNx:                               Inverse Trig Functions.
                                                               (line  49)
 * atanh:                                 Hyperbolic Functions.
-                                                              (line 112)
+                                                              (line 118)
 * atanhf:                                Hyperbolic Functions.
-                                                              (line 113)
+                                                              (line 119)
 * atanhfN:                               Hyperbolic Functions.
-                                                              (line 115)
+                                                              (line 121)
 * atanhfNx:                              Hyperbolic Functions.
-                                                              (line 116)
+                                                              (line 122)
 * atanhl:                                Hyperbolic Functions.
-                                                              (line 114)
+                                                              (line 120)
 * atanl:                                 Inverse Trig Functions.
                                                               (line  47)
 * atexit:                                Cleanups on Exit.    (line  14)
-* atof:                                  Parsing of Floats.   (line 136)
-* atoi:                                  Parsing of Integers. (line 264)
-* atol:                                  Parsing of Integers. (line 254)
-* atoll:                                 Parsing of Integers. (line 272)
+* atof:                                  Parsing of Floats.   (line 137)
+* atoi:                                  Parsing of Integers. (line 265)
+* atol:                                  Parsing of Integers. (line 255)
+* atoll:                                 Parsing of Integers. (line 273)
 * backtrace:                             Backtraces.          (line  15)
 * backtrace_symbols:                     Backtraces.          (line  36)
 * backtrace_symbols_fd:                  Backtraces.          (line  69)
@@ -2682,25 +2696,25 @@ Function and Macro Index
 * cacosfNx:                              Inverse Trig Functions.
                                                               (line 103)
 * cacosh:                                Hyperbolic Functions.
-                                                              (line 138)
+                                                              (line 144)
 * cacoshf:                               Hyperbolic Functions.
-                                                              (line 139)
+                                                              (line 145)
 * cacoshfN:                              Hyperbolic Functions.
-                                                              (line 141)
+                                                              (line 147)
 * cacoshfNx:                             Hyperbolic Functions.
-                                                              (line 142)
+                                                              (line 148)
 * cacoshl:                               Hyperbolic Functions.
-                                                              (line 140)
+                                                              (line 146)
 * cacosl:                                Inverse Trig Functions.
                                                               (line 101)
 * calloc:                                Allocating Cleared Space.
                                                               (line   9)
 * call_once:                             Call Once.           (line  19)
-* canonicalize:                          FP Bit Twiddling.    (line 127)
-* canonicalizef:                         FP Bit Twiddling.    (line 128)
-* canonicalizefN:                        FP Bit Twiddling.    (line 130)
-* canonicalizefNx:                       FP Bit Twiddling.    (line 131)
-* canonicalizel:                         FP Bit Twiddling.    (line 129)
+* canonicalize:                          FP Bit Twiddling.    (line 130)
+* canonicalizef:                         FP Bit Twiddling.    (line 131)
+* canonicalizefN:                        FP Bit Twiddling.    (line 133)
+* canonicalizefNx:                       FP Bit Twiddling.    (line 134)
+* canonicalizel:                         FP Bit Twiddling.    (line 132)
 * canonicalize_file_name:                Symbolic Links.      (line 128)
 * carg:                                  Operations on Complex.
                                                               (line  46)
@@ -2721,15 +2735,15 @@ Function and Macro Index
 * casinfNx:                              Inverse Trig Functions.
                                                               (line  88)
 * casinh:                                Hyperbolic Functions.
-                                                              (line 126)
+                                                              (line 132)
 * casinhf:                               Hyperbolic Functions.
-                                                              (line 127)
+                                                              (line 133)
 * casinhfN:                              Hyperbolic Functions.
-                                                              (line 129)
+                                                              (line 135)
 * casinhfNx:                             Hyperbolic Functions.
-                                                              (line 130)
+                                                              (line 136)
 * casinhl:                               Hyperbolic Functions.
-                                                              (line 128)
+                                                              (line 134)
 * casinl:                                Inverse Trig Functions.
                                                               (line  86)
 * catan:                                 Inverse Trig Functions.
@@ -2741,15 +2755,15 @@ Function and Macro Index
 * catanfNx:                              Inverse Trig Functions.
                                                               (line 118)
 * catanh:                                Hyperbolic Functions.
-                                                              (line 151)
+                                                              (line 157)
 * catanhf:                               Hyperbolic Functions.
-                                                              (line 152)
+                                                              (line 158)
 * catanhfN:                              Hyperbolic Functions.
-                                                              (line 154)
+                                                              (line 160)
 * catanhfNx:                             Hyperbolic Functions.
-                                                              (line 155)
+                                                              (line 161)
 * catanhl:                               Hyperbolic Functions.
-                                                              (line 153)
+                                                              (line 159)
 * catanl:                                Inverse Trig Functions.
                                                               (line 116)
 * catclose:                              The catgets Functions.
@@ -2773,15 +2787,15 @@ Function and Macro Index
 * ccosfN:                                Trig Functions.      (line 105)
 * ccosfNx:                               Trig Functions.      (line 106)
 * ccosh:                                 Hyperbolic Functions.
-                                                              (line  63)
-* ccoshf:                                Hyperbolic Functions.
-                                                              (line  64)
-* ccoshfN:                               Hyperbolic Functions.
-                                                              (line  66)
-* ccoshfNx:                              Hyperbolic Functions.
                                                               (line  67)
+* ccoshf:                                Hyperbolic Functions.
+                                                              (line  68)
+* ccoshfN:                               Hyperbolic Functions.
+                                                              (line  70)
+* ccoshfNx:                              Hyperbolic Functions.
+                                                              (line  71)
 * ccoshl:                                Hyperbolic Functions.
-                                                              (line  65)
+                                                              (line  69)
 * ccosl:                                 Trig Functions.      (line 104)
 * ceil:                                  Rounding Functions.  (line  42)
 * ceilf:                                 Rounding Functions.  (line  43)
@@ -2800,7 +2814,7 @@ Function and Macro Index
                                                               (line 269)
 * cfgetispeed:                           Line Speed.          (line  40)
 * cfgetospeed:                           Line Speed.          (line  32)
-* cfmakeraw:                             Noncanonical Input.  (line  93)
+* cfmakeraw:                             Noncanonical Input.  (line  94)
 * cfsetispeed:                           Line Speed.          (line  57)
 * cfsetospeed:                           Line Speed.          (line  48)
 * cfsetspeed:                            Line Speed.          (line  66)
@@ -2822,8 +2836,8 @@ Function and Macro Index
 * clearerr:                              Error Recovery.      (line   9)
 * clearerr_unlocked:                     Error Recovery.      (line  20)
 * clock:                                 CPU Time.            (line  39)
-* clock_getres:                          Getting the Time.    (line  89)
-* clock_gettime:                         Getting the Time.    (line  72)
+* clock_getres:                          Getting the Time.    (line  91)
+* clock_gettime:                         Getting the Time.    (line  74)
 * clock_settime:                         Setting and Adjusting the Time.
                                                               (line  15)
 * clog:                                  Exponents and Logarithms.
@@ -2881,26 +2895,26 @@ Function and Macro Index
 * connect:                               Connecting.          (line  11)
 * continue:                              Actions in the NSS configuration.
                                                               (line  50)
-* copysign:                              FP Bit Twiddling.    (line  10)
-* copysignf:                             FP Bit Twiddling.    (line  11)
-* copysignfN:                            FP Bit Twiddling.    (line  13)
-* copysignfNx:                           FP Bit Twiddling.    (line  14)
-* copysignl:                             FP Bit Twiddling.    (line  12)
+* copysign:                              FP Bit Twiddling.    (line  11)
+* copysignf:                             FP Bit Twiddling.    (line  12)
+* copysignfN:                            FP Bit Twiddling.    (line  14)
+* copysignfNx:                           FP Bit Twiddling.    (line  15)
+* copysignl:                             FP Bit Twiddling.    (line  13)
 * copy_file_range:                       Copying File Data.   (line  14)
 * cos:                                   Trig Functions.      (line  30)
 * cosf:                                  Trig Functions.      (line  31)
 * cosfN:                                 Trig Functions.      (line  33)
 * cosfNx:                                Trig Functions.      (line  34)
 * cosh:                                  Hyperbolic Functions.
-                                                              (line  22)
-* coshf:                                 Hyperbolic Functions.
                                                               (line  23)
-* coshfN:                                Hyperbolic Functions.
-                                                              (line  25)
-* coshfNx:                               Hyperbolic Functions.
-                                                              (line  26)
-* coshl:                                 Hyperbolic Functions.
+* coshf:                                 Hyperbolic Functions.
                                                               (line  24)
+* coshfN:                                Hyperbolic Functions.
+                                                              (line  26)
+* coshfNx:                               Hyperbolic Functions.
+                                                              (line  27)
+* coshl:                                 Hyperbolic Functions.
+                                                              (line  25)
 * cosl:                                  Trig Functions.      (line  32)
 * cpow:                                  Exponents and Logarithms.
                                                               (line 328)
@@ -2949,15 +2963,15 @@ Function and Macro Index
 * csinfN:                                Trig Functions.      (line  91)
 * csinfNx:                               Trig Functions.      (line  92)
 * csinh:                                 Hyperbolic Functions.
-                                                              (line  51)
-* csinhf:                                Hyperbolic Functions.
-                                                              (line  52)
-* csinhfN:                               Hyperbolic Functions.
                                                               (line  54)
-* csinhfNx:                              Hyperbolic Functions.
+* csinhf:                                Hyperbolic Functions.
                                                               (line  55)
+* csinhfN:                               Hyperbolic Functions.
+                                                              (line  57)
+* csinhfNx:                              Hyperbolic Functions.
+                                                              (line  58)
 * csinhl:                                Hyperbolic Functions.
-                                                              (line  53)
+                                                              (line  56)
 * csinl:                                 Trig Functions.      (line  90)
 * csqrt:                                 Exponents and Logarithms.
                                                               (line 315)
@@ -2974,15 +2988,15 @@ Function and Macro Index
 * ctanfN:                                Trig Functions.      (line 119)
 * ctanfNx:                               Trig Functions.      (line 120)
 * ctanh:                                 Hyperbolic Functions.
-                                                              (line  75)
+                                                              (line  80)
 * ctanhf:                                Hyperbolic Functions.
-                                                              (line  76)
+                                                              (line  81)
 * ctanhfN:                               Hyperbolic Functions.
-                                                              (line  78)
+                                                              (line  83)
 * ctanhfNx:                              Hyperbolic Functions.
-                                                              (line  79)
+                                                              (line  84)
 * ctanhl:                                Hyperbolic Functions.
-                                                              (line  77)
+                                                              (line  82)
 * ctanl:                                 Trig Functions.      (line 118)
 * ctermid:                               Identifying the Terminal.
                                                               (line  15)
@@ -2997,6 +3011,7 @@ Function and Macro Index
 * dcngettext:                            Advanced gettext functions.
                                                               (line 103)
 * ddivl:                                 Misc FP Arithmetic.  (line 160)
+* dfmal:                                 Misc FP Arithmetic.  (line 191)
 * dgettext:                              Translation with gettext.
                                                               (line  78)
 * difftime:                              Calculating Elapsed Time.
@@ -3013,6 +3028,7 @@ Function and Macro Index
 * drem:                                  Remainder Functions. (line  56)
 * dremf:                                 Remainder Functions. (line  57)
 * dreml:                                 Remainder Functions. (line  58)
+* dsqrtl:                                Misc FP Arithmetic.  (line 175)
 * dsubl:                                 Misc FP Arithmetic.  (line 130)
 * DTTOIF:                                Directory Entries.   (line  78)
 * dup:                                   Duplicating Descriptors.
@@ -3053,10 +3069,10 @@ Function and Macro Index
 * erffN:                                 Special Functions.   (line  12)
 * erffNx:                                Special Functions.   (line  13)
 * erfl:                                  Special Functions.   (line  11)
-* err:                                   Error Messages.      (line 358)
-* error:                                 Error Messages.      (line 183)
-* error_at_line:                         Error Messages.      (line 221)
-* errx:                                  Error Messages.      (line 377)
+* err:                                   Error Messages.      (line 360)
+* error:                                 Error Messages.      (line 185)
+* error_at_line:                         Error Messages.      (line 223)
+* errx:                                  Error Messages.      (line 379)
 * execl:                                 Executing a File.    (line  37)
 * execle:                                Executing a File.    (line  72)
 * execlp:                                Executing a File.    (line  98)
@@ -3147,7 +3163,7 @@ Function and Macro Index
 * fegetexceptflag:                       Status bit operations.
                                                               (line 112)
 * fegetmode:                             Control Functions.   (line 104)
-* fegetround:                            Rounding.            (line  72)
+* fegetround:                            Rounding.            (line  73)
 * feholdexcept:                          Control Functions.   (line  40)
 * feof:                                  EOF and Errors.      (line  33)
 * feof_unlocked:                         EOF and Errors.      (line  43)
@@ -3161,7 +3177,7 @@ Function and Macro Index
 * fesetexceptflag:                       Status bit operations.
                                                               (line 124)
 * fesetmode:                             Control Functions.   (line 115)
-* fesetround:                            Rounding.            (line  82)
+* fesetround:                            Rounding.            (line  83)
 * fetestexcept:                          Status bit operations.
                                                               (line  77)
 * fetestexceptflag:                      Status bit operations.
@@ -3170,14 +3186,16 @@ Function and Macro Index
 * fexecve:                               Executing a File.    (line  57)
 * fflush:                                Flushing Buffers.    (line  25)
 * fflush_unlocked:                       Flushing Buffers.    (line  37)
+* ffma:                                  Misc FP Arithmetic.  (line 189)
+* ffmal:                                 Misc FP Arithmetic.  (line 190)
 * fgetc:                                 Character Input.     (line  22)
 * fgetc_unlocked:                        Character Input.     (line  41)
 * fgetgrent:                             Scanning All Groups. (line  13)
 * fgetgrent_r:                           Scanning All Groups. (line  27)
 * fgetpos:                               Portable Positioning.
-                                                              (line  78)
+                                                              (line  79)
 * fgetpos64:                             Portable Positioning.
-                                                              (line  93)
+                                                              (line  94)
 * fgetpwent:                             Scanning All Users.  (line  13)
 * fgetpwent_r:                           Scanning All Users.  (line  26)
 * fgets:                                 Line Input.          (line  82)
@@ -3191,11 +3209,11 @@ Function and Macro Index
 * fileno_unlocked:                       Descriptors and Streams.
                                                               (line  50)
 * finite:                                Floating Point Classes.
-                                                              (line 156)
-* finitef:                               Floating Point Classes.
                                                               (line 157)
-* finitel:                               Floating Point Classes.
+* finitef:                               Floating Point Classes.
                                                               (line 158)
+* finitel:                               Floating Point Classes.
+                                                              (line 159)
 * flockfile:                             Streams and Threads. (line  30)
 * floor:                                 Rounding Functions.  (line  54)
 * floorf:                                Rounding Functions.  (line  55)
@@ -3222,6 +3240,8 @@ Function and Macro Index
 * fMdivfN:                               Misc FP Arithmetic.  (line 161)
 * fMdivfNx:                              Misc FP Arithmetic.  (line 162)
 * fmemopen:                              String Streams.      (line   9)
+* fMfmafN:                               Misc FP Arithmetic.  (line 192)
+* fMfmafNx:                              Misc FP Arithmetic.  (line 193)
 * fmin:                                  Misc FP Arithmetic.  (line  11)
 * fminf:                                 Misc FP Arithmetic.  (line  12)
 * fminfN:                                Misc FP Arithmetic.  (line  14)
@@ -3239,6 +3259,8 @@ Function and Macro Index
 * fmodfN:                                Remainder Functions. (line  14)
 * fmodfNx:                               Remainder Functions. (line  15)
 * fmodl:                                 Remainder Functions. (line  12)
+* fMsqrtfN:                              Misc FP Arithmetic.  (line 176)
+* fMsqrtfNx:                             Misc FP Arithmetic.  (line 177)
 * fMsubfN:                               Misc FP Arithmetic.  (line 131)
 * fMsubfNx:                              Misc FP Arithmetic.  (line 132)
 * fmtmsg:                                Printing Formatted Messages.
@@ -3249,8 +3271,12 @@ Function and Macro Index
 * fMxaddfNx:                             Misc FP Arithmetic.  (line 119)
 * fMxdivfN:                              Misc FP Arithmetic.  (line 163)
 * fMxdivfNx:                             Misc FP Arithmetic.  (line 164)
+* fMxfmafN:                              Misc FP Arithmetic.  (line 194)
+* fMxfmafNx:                             Misc FP Arithmetic.  (line 195)
 * fMxmulfN:                              Misc FP Arithmetic.  (line 148)
 * fMxmulfNx:                             Misc FP Arithmetic.  (line 149)
+* fMxsqrtfN:                             Misc FP Arithmetic.  (line 178)
+* fMxsqrtfNx:                            Misc FP Arithmetic.  (line 179)
 * fMxsubfN:                              Misc FP Arithmetic.  (line 133)
 * fMxsubfNx:                             Misc FP Arithmetic.  (line 134)
 * fnmatch:                               Wildcard Matching.   (line  11)
@@ -3305,9 +3331,11 @@ Function and Macro Index
 * fseeko:                                File Positioning.    (line  94)
 * fseeko64:                              File Positioning.    (line 117)
 * fsetpos:                               Portable Positioning.
-                                                              (line 105)
+                                                              (line 106)
 * fsetpos64:                             Portable Positioning.
-                                                              (line 123)
+                                                              (line 124)
+* fsqrt:                                 Misc FP Arithmetic.  (line 173)
+* fsqrtl:                                Misc FP Arithmetic.  (line 174)
 * fstat:                                 Reading Attributes.  (line  50)
 * fstat64:                               Reading Attributes.  (line  69)
 * fsub:                                  Misc FP Arithmetic.  (line 128)
@@ -3320,9 +3348,9 @@ Function and Macro Index
 * ftruncate64:                           File Size.           (line 137)
 * ftrylockfile:                          Streams and Threads. (line  42)
 * ftw:                                   Working with Directory Trees.
-                                                              (line 123)
+                                                              (line 124)
 * ftw64:                                 Working with Directory Trees.
-                                                              (line 176)
+                                                              (line 177)
 * funlockfile:                           Streams and Threads. (line  54)
 * futimes:                               File Times.          (line 132)
 * fwide:                                 Streams and I18N.    (line  57)
@@ -3341,7 +3369,7 @@ Function and Macro Index
 * getc:                                  Character Input.     (line  59)
 * getchar:                               Character Input.     (line  98)
 * getchar_unlocked:                      Character Input.     (line 114)
-* getcontext:                            System V contexts.   (line  49)
+* getcontext:                            System V contexts.   (line  50)
 * getcpu:                                CPU Affinity.        (line 169)
 * getcwd:                                Working Directory.   (line  23)
 * getc_unlocked:                         Character Input.     (line  80)
@@ -3391,15 +3419,15 @@ Function and Macro Index
 * getnetgrent_r:                         Lookup Netgroup.     (line  58)
 * getopt:                                Using Getopt.        (line  38)
 * getopt_long:                           Getopt Long Options. (line  43)
-* getopt_long_only:                      Getopt Long Options. (line  98)
+* getopt_long_only:                      Getopt Long Options. (line  99)
 * getpagesize:                           Query Memory Parameters.
                                                               (line  33)
 * getpass:                               getpass.             (line  10)
-* getpayload:                            FP Bit Twiddling.    (line 155)
-* getpayloadf:                           FP Bit Twiddling.    (line 156)
-* getpayloadfN:                          FP Bit Twiddling.    (line 158)
-* getpayloadfNx:                         FP Bit Twiddling.    (line 159)
-* getpayloadl:                           FP Bit Twiddling.    (line 157)
+* getpayload:                            FP Bit Twiddling.    (line 158)
+* getpayloadf:                           FP Bit Twiddling.    (line 159)
+* getpayloadfN:                          FP Bit Twiddling.    (line 161)
+* getpayloadfNx:                         FP Bit Twiddling.    (line 162)
+* getpayloadl:                           FP Bit Twiddling.    (line 160)
 * getpeername:                           Who is Connected.    (line   6)
 * getpgid:                               Process Group Functions.
                                                               (line  62)
@@ -3439,7 +3467,7 @@ Function and Macro Index
                                                               (line  31)
 * gettid:                                Process Identification.
                                                               (line  58)
-* gettimeofday:                          Getting the Time.    (line 118)
+* gettimeofday:                          Getting the Time.    (line 120)
 * getuid:                                Reading Persona.     (line  21)
 * getumask:                              Setting Permissions. (line  65)
 * getutent:                              Manipulating the Database.
@@ -3459,7 +3487,7 @@ Function and Macro Index
 * getutxent:                             XPG Functions.       (line  93)
 * getutxid:                              XPG Functions.       (line 110)
 * getutxline:                            XPG Functions.       (line 119)
-* getw:                                  Character Input.     (line 163)
+* getw:                                  Character Input.     (line 164)
 * getwc:                                 Character Input.     (line  70)
 * getwchar:                              Character Input.     (line 106)
 * getwchar_unlocked:                     Character Input.     (line 122)
@@ -3472,14 +3500,14 @@ Function and Macro Index
 * get_nprocs_conf:                       Processor Resources. (line  28)
 * get_phys_pages:                        Query Memory Parameters.
                                                               (line  68)
-* glob:                                  Calling Glob.        (line 234)
-* glob64:                                Calling Glob.        (line 297)
+* glob:                                  Calling Glob.        (line 238)
+* glob64:                                Calling Glob.        (line 301)
 * globfree:                              More Flags for Globbing.
                                                               (line 131)
 * globfree64:                            More Flags for Globbing.
                                                               (line 141)
-* gmtime:                                Broken-down Time.    (line 127)
-* gmtime_r:                              Broken-down Time.    (line 141)
+* gmtime:                                Broken-down Time.    (line 129)
+* gmtime_r:                              Broken-down Time.    (line 143)
 * grantpt:                               Allocation.          (line  26)
 * grantpt <1>:                           Configuring and compiling.
                                                               (line 192)
@@ -3511,9 +3539,9 @@ Function and Macro Index
 * hypotl:                                Exponents and Logarithms.
                                                               (line 224)
 * iconv:                                 Generic Conversion Interface.
-                                                              (line 114)
+                                                              (line 115)
 * iconv_close:                           Generic Conversion Interface.
-                                                              (line  90)
+                                                              (line  91)
 * iconv_open:                            Generic Conversion Interface.
                                                               (line  27)
 * IFTODT:                                Directory Entries.   (line  71)
@@ -3533,7 +3561,7 @@ Function and Macro Index
                                                               (line 107)
 * imaxabs:                               Absolute Value.      (line  19)
 * imaxdiv:                               Integer Division.    (line 114)
-* index:                                 Search Functions.    (line 341)
+* index:                                 Search Functions.    (line 343)
 * inet_addr:                             Host Address Functions.
                                                               (line  22)
 * inet_aton:                             Host Address Functions.
@@ -3562,32 +3590,32 @@ Function and Macro Index
 * isalpha:                               Classification of Characters.
                                                               (line  43)
 * isascii:                               Classification of Characters.
-                                                              (line 151)
+                                                              (line 153)
 * isatty:                                Is It a Terminal.    (line  13)
 * isblank:                               Classification of Characters.
                                                               (line 117)
 * iscanonical:                           Floating Point Classes.
-                                                              (line  49)
+                                                              (line  50)
 * iscntrl:                               Classification of Characters.
-                                                              (line 143)
+                                                              (line 145)
 * isdigit:                               Classification of Characters.
                                                               (line  57)
 * iseqsig:                               FP Comparison Functions.
                                                               (line  80)
 * isfinite:                              Floating Point Classes.
-                                                              (line  67)
+                                                              (line  68)
 * isgraph:                               Classification of Characters.
-                                                              (line 126)
+                                                              (line 128)
 * isgreater:                             FP Comparison Functions.
                                                               (line  23)
 * isgreaterequal:                        FP Comparison Functions.
                                                               (line  32)
 * isinf:                                 Floating Point Classes.
-                                                              (line 129)
-* isinff:                                Floating Point Classes.
                                                               (line 130)
-* isinfl:                                Floating Point Classes.
+* isinff:                                Floating Point Classes.
                                                               (line 131)
+* isinfl:                                Floating Point Classes.
+                                                              (line 132)
 * isless:                                FP Comparison Functions.
                                                               (line  41)
 * islessequal:                           FP Comparison Functions.
@@ -3597,59 +3625,59 @@ Function and Macro Index
 * islower:                               Classification of Characters.
                                                               (line  27)
 * isnan:                                 Floating Point Classes.
-                                                              (line  90)
+                                                              (line  91)
 * isnan <1>:                             Floating Point Classes.
-                                                              (line 139)
-* isnanf:                                Floating Point Classes.
                                                               (line 140)
-* isnanl:                                Floating Point Classes.
+* isnanf:                                Floating Point Classes.
                                                               (line 141)
+* isnanl:                                Floating Point Classes.
+                                                              (line 142)
 * isnormal:                              Floating Point Classes.
-                                                              (line  80)
+                                                              (line  81)
 * isprint:                               Classification of Characters.
-                                                              (line 135)
+                                                              (line 137)
 * ispunct:                               Classification of Characters.
                                                               (line  82)
 * issignaling:                           Floating Point Classes.
-                                                              (line  99)
+                                                              (line 100)
 * isspace:                               Classification of Characters.
                                                               (line  90)
 * issubnormal:                           Floating Point Classes.
-                                                              (line 107)
+                                                              (line 108)
 * isunordered:                           FP Comparison Functions.
                                                               (line  72)
 * isupper:                               Classification of Characters.
                                                               (line  35)
 * iswalnum:                              Classification of Wide Characters.
-                                                              (line  76)
+                                                              (line  77)
 * iswalpha:                              Classification of Wide Characters.
-                                                              (line  92)
+                                                              (line  93)
 * iswblank:                              Classification of Wide Characters.
-                                                              (line 273)
+                                                              (line 275)
 * iswcntrl:                              Classification of Wide Characters.
-                                                              (line 112)
+                                                              (line 113)
 * iswctype:                              Classification of Wide Characters.
-                                                              (line  59)
+                                                              (line  60)
 * iswdigit:                              Classification of Wide Characters.
-                                                              (line 126)
+                                                              (line 127)
 * iswgraph:                              Classification of Wide Characters.
-                                                              (line 150)
+                                                              (line 151)
 * iswlower:                              Classification of Wide Characters.
-                                                              (line 165)
+                                                              (line 166)
 * iswprint:                              Classification of Wide Characters.
-                                                              (line 179)
+                                                              (line 180)
 * iswpunct:                              Classification of Wide Characters.
-                                                              (line 193)
+                                                              (line 194)
 * iswspace:                              Classification of Wide Characters.
-                                                              (line 207)
+                                                              (line 208)
 * iswupper:                              Classification of Wide Characters.
-                                                              (line 240)
+                                                              (line 241)
 * iswxdigit:                             Classification of Wide Characters.
-                                                              (line 254)
+                                                              (line 255)
 * isxdigit:                              Classification of Characters.
                                                               (line  73)
 * iszero:                                Floating Point Classes.
-                                                              (line 115)
+                                                              (line 116)
 * j0:                                    Special Functions.   (line 104)
 * j0f:                                   Special Functions.   (line 105)
 * j0fN:                                  Special Functions.   (line 107)
@@ -3701,9 +3729,9 @@ Function and Macro Index
 * link:                                  Hard Links.          (line  27)
 * linkat:                                Hard Links.          (line  79)
 * lio_listio:                            Asynchronous Reads/Writes.
-                                                              (line 178)
+                                                              (line 180)
 * lio_listio64:                          Asynchronous Reads/Writes.
-                                                              (line 262)
+                                                              (line 264)
 * listen:                                Listening.           (line  29)
 * llabs:                                 Absolute Value.      (line  18)
 * lldiv:                                 Integer Division.    (line  86)
@@ -3729,8 +3757,8 @@ Function and Macro Index
 * llroundl:                              Rounding Functions.  (line 175)
 * localeconv:                            The Lame Way to Locale Data.
                                                               (line  15)
-* localtime:                             Broken-down Time.    (line  85)
-* localtime_r:                           Broken-down Time.    (line 110)
+* localtime:                             Broken-down Time.    (line  87)
+* localtime_r:                           Broken-down Time.    (line 112)
 * log:                                   Exponents and Logarithms.
                                                               (line  47)
 * log10:                                 Exponents and Logarithms.
@@ -3809,7 +3837,7 @@ Function and Macro Index
 * lutimes:                               File Times.          (line 114)
 * madvise:                               Memory-mapped I/O.   (line 279)
 * main:                                  Program Arguments.   (line   6)
-* makecontext:                           System V contexts.   (line  80)
+* makecontext:                           System V contexts.   (line  81)
 * mallinfo2:                             Statistics of Malloc.
                                                               (line  55)
 * malloc:                                Basic Allocation.    (line   9)
@@ -3821,11 +3849,11 @@ Function and Macro Index
                                                               (line 213)
 * mbrtowc:                               Converting a Character.
                                                               (line  87)
-* mbsinit:                               Keeping the state.   (line  47)
-* mbsnrtowcs:                            Converting Strings.  (line 146)
-* mbsrtowcs:                             Converting Strings.  (line  13)
+* mbsinit:                               Keeping the state.   (line  48)
+* mbsnrtowcs:                            Converting Strings.  (line 147)
+* mbsrtowcs:                             Converting Strings.  (line  14)
 * mbstowcs:                              Non-reentrant String Conversion.
-                                                              (line  11)
+                                                              (line  13)
 * mbtowc:                                Non-reentrant Character Conversion.
                                                               (line   6)
 * mcheck:                                Heap Consistency Checking.
@@ -3841,7 +3869,7 @@ Function and Macro Index
                                                               (line  32)
 * memfd_create:                          Memory-mapped I/O.   (line 384)
 * memfrob:                               Obfuscating Data.    (line  22)
-* memmem:                                Search Functions.    (line 232)
+* memmem:                                Search Functions.    (line 234)
 * memmove:                               Copying Strings and Arrays.
                                                               (line 133)
 * mempcpy:                               Copying Strings and Arrays.
@@ -3859,7 +3887,7 @@ Function and Macro Index
                                                               (line  12)
 * mkstemp:                               Temporary Files.     (line 185)
 * mktemp:                                Temporary Files.     (line 167)
-* mktime:                                Broken-down Time.    (line 153)
+* mktime:                                Broken-down Time.    (line 155)
 * mlock:                                 Page Lock Functions. (line  19)
 * mlock2:                                Page Lock Functions. (line  57)
 * mlockall:                              Page Lock Functions. (line 102)
@@ -3890,39 +3918,39 @@ Function and Macro Index
 * munlockall:                            Page Lock Functions. (line 168)
 * munmap:                                Memory-mapped I/O.   (line 175)
 * muntrace:                              Tracing malloc.      (line  36)
-* nan:                                   FP Bit Twiddling.    (line 110)
-* nanf:                                  FP Bit Twiddling.    (line 111)
-* nanfN:                                 FP Bit Twiddling.    (line 113)
-* nanfNx:                                FP Bit Twiddling.    (line 114)
-* nanl:                                  FP Bit Twiddling.    (line 112)
+* nan:                                   FP Bit Twiddling.    (line 113)
+* nanf:                                  FP Bit Twiddling.    (line 114)
+* nanfN:                                 FP Bit Twiddling.    (line 116)
+* nanfNx:                                FP Bit Twiddling.    (line 117)
+* nanl:                                  FP Bit Twiddling.    (line 115)
 * nanosleep:                             Sleeping.            (line  57)
 * nearbyint:                             Rounding Functions.  (line  99)
 * nearbyintf:                            Rounding Functions.  (line 100)
 * nearbyintfN:                           Rounding Functions.  (line 102)
 * nearbyintfNx:                          Rounding Functions.  (line 103)
 * nearbyintl:                            Rounding Functions.  (line 101)
-* nextafter:                             FP Bit Twiddling.    (line  42)
-* nextafterf:                            FP Bit Twiddling.    (line  43)
-* nextafterfN:                           FP Bit Twiddling.    (line  45)
-* nextafterfNx:                          FP Bit Twiddling.    (line  46)
-* nextafterl:                            FP Bit Twiddling.    (line  44)
-* nextdown:                              FP Bit Twiddling.    (line  92)
-* nextdownf:                             FP Bit Twiddling.    (line  93)
-* nextdownfN:                            FP Bit Twiddling.    (line  95)
-* nextdownfNx:                           FP Bit Twiddling.    (line  96)
-* nextdownl:                             FP Bit Twiddling.    (line  94)
-* nexttoward:                            FP Bit Twiddling.    (line  64)
-* nexttowardf:                           FP Bit Twiddling.    (line  65)
-* nexttowardl:                           FP Bit Twiddling.    (line  66)
-* nextup:                                FP Bit Twiddling.    (line  74)
-* nextupf:                               FP Bit Twiddling.    (line  75)
-* nextupfN:                              FP Bit Twiddling.    (line  77)
-* nextupfNx:                             FP Bit Twiddling.    (line  78)
-* nextupl:                               FP Bit Twiddling.    (line  76)
+* nextafter:                             FP Bit Twiddling.    (line  44)
+* nextafterf:                            FP Bit Twiddling.    (line  45)
+* nextafterfN:                           FP Bit Twiddling.    (line  47)
+* nextafterfNx:                          FP Bit Twiddling.    (line  48)
+* nextafterl:                            FP Bit Twiddling.    (line  46)
+* nextdown:                              FP Bit Twiddling.    (line  95)
+* nextdownf:                             FP Bit Twiddling.    (line  96)
+* nextdownfN:                            FP Bit Twiddling.    (line  98)
+* nextdownfNx:                           FP Bit Twiddling.    (line  99)
+* nextdownl:                             FP Bit Twiddling.    (line  97)
+* nexttoward:                            FP Bit Twiddling.    (line  67)
+* nexttowardf:                           FP Bit Twiddling.    (line  68)
+* nexttowardl:                           FP Bit Twiddling.    (line  69)
+* nextup:                                FP Bit Twiddling.    (line  77)
+* nextupf:                               FP Bit Twiddling.    (line  78)
+* nextupfN:                              FP Bit Twiddling.    (line  80)
+* nextupfNx:                             FP Bit Twiddling.    (line  81)
+* nextupl:                               FP Bit Twiddling.    (line  79)
 * nftw:                                  Working with Directory Trees.
-                                                              (line 191)
+                                                              (line 192)
 * nftw64:                                Working with Directory Trees.
-                                                              (line 254)
+                                                              (line 255)
 * ngettext:                              Advanced gettext functions.
                                                               (line  69)
 * nice:                                  Traditional Scheduling Functions.
@@ -3996,7 +4024,7 @@ Function and Macro Index
 * pause:                                 Using Pause.         (line  10)
 * pclose:                                Pipe to a Subprocess.
                                                               (line  42)
-* perror:                                Error Messages.      (line  53)
+* perror:                                Error Messages.      (line  54)
 * pipe:                                  Creating a Pipe.     (line  16)
 * pkey_alloc:                            Memory Protection.   (line 199)
 * pkey_free:                             Memory Protection.   (line 233)
@@ -4094,10 +4122,10 @@ Function and Macro Index
                                                               (line  98)
 * qsort:                                 Array Sort Function. (line   9)
 * raise:                                 Signaling Yourself.  (line   9)
-* rand:                                  ISO Random.          (line  20)
+* rand:                                  ISO Random.          (line  21)
 * random:                                BSD Random.          (line  12)
 * random_r:                              BSD Random.          (line  93)
-* rand_r:                                ISO Random.          (line  44)
+* rand_r:                                ISO Random.          (line  45)
 * rawmemchr:                             Search Functions.    (line  31)
 * read:                                  I/O Primitives.      (line  16)
 * readdir:                               Reading/Closing Directory.
@@ -4135,7 +4163,7 @@ Function and Macro Index
 * rewind:                                File Positioning.    (line 159)
 * rewinddir:                             Random Access Directory.
                                                               (line  10)
-* rindex:                                Search Functions.    (line 351)
+* rindex:                                Search Functions.    (line 355)
 * rint:                                  Rounding Functions.  (line  80)
 * rintf:                                 Rounding Functions.  (line  81)
 * rintfN:                                Rounding Functions.  (line  83)
@@ -4182,7 +4210,7 @@ Function and Macro Index
 * scandir:                               Scanning Directory Content.
                                                               (line  11)
 * scandir64:                             Scanning Directory Content.
-                                                              (line  71)
+                                                              (line  72)
 * scanf:                                 Formatted Input Functions.
                                                               (line   9)
 * sched_getaffinity:                     CPU Affinity.        (line 115)
@@ -4230,7 +4258,7 @@ Function and Macro Index
                                                               (line  85)
 * setbuffer:                             Controlling Buffering.
                                                               (line  98)
-* setcontext:                            System V contexts.   (line 127)
+* setcontext:                            System V contexts.   (line 128)
 * setdomainname:                         Host Identification. (line 117)
 * setegid:                               Setting Groups.      (line  10)
 * setenv:                                Environment Access.  (line  65)
@@ -4246,21 +4274,21 @@ Function and Macro Index
 * setjmp:                                Non-Local Details.   (line  16)
 * setlinebuf:                            Controlling Buffering.
                                                               (line 110)
-* setlocale:                             Setting the Locale.  (line  24)
+* setlocale:                             Setting the Locale.  (line  26)
 * setlogmask:                            setlogmask.          (line   9)
 * setmntent:                             mtab.                (line 102)
 * setnetent:                             Networks Database.   (line  63)
 * setnetgrent:                           Lookup Netgroup.     (line  12)
-* setpayload:                            FP Bit Twiddling.    (line 175)
-* setpayloadf:                           FP Bit Twiddling.    (line 176)
-* setpayloadfN:                          FP Bit Twiddling.    (line 178)
-* setpayloadfNx:                         FP Bit Twiddling.    (line 179)
-* setpayloadl:                           FP Bit Twiddling.    (line 177)
-* setpayloadsig:                         FP Bit Twiddling.    (line 192)
-* setpayloadsigf:                        FP Bit Twiddling.    (line 193)
-* setpayloadsigfN:                       FP Bit Twiddling.    (line 195)
-* setpayloadsigfNx:                      FP Bit Twiddling.    (line 196)
-* setpayloadsigl:                        FP Bit Twiddling.    (line 194)
+* setpayload:                            FP Bit Twiddling.    (line 178)
+* setpayloadf:                           FP Bit Twiddling.    (line 179)
+* setpayloadfN:                          FP Bit Twiddling.    (line 181)
+* setpayloadfNx:                         FP Bit Twiddling.    (line 182)
+* setpayloadl:                           FP Bit Twiddling.    (line 180)
+* setpayloadsig:                         FP Bit Twiddling.    (line 195)
+* setpayloadsigf:                        FP Bit Twiddling.    (line 196)
+* setpayloadsigfN:                       FP Bit Twiddling.    (line 198)
+* setpayloadsigfNx:                      FP Bit Twiddling.    (line 199)
+* setpayloadsigl:                        FP Bit Twiddling.    (line 197)
 * setpgid:                               Process Group Functions.
                                                               (line  81)
 * setpgrp:                               Process Group Functions.
@@ -4281,7 +4309,7 @@ Function and Macro Index
 * setstate:                              BSD Random.          (line  54)
 * setstate_r:                            BSD Random.          (line 122)
 * settimeofday:                          Setting and Adjusting the Time.
-                                                              (line 314)
+                                                              (line 315)
 * setuid:                                Setting User ID.     (line  37)
 * setutent:                              Manipulating the Database.
                                                               (line 125)
@@ -4308,7 +4336,7 @@ Function and Macro Index
 * sigmask:                               BSD Signal Handling. (line  34)
 * signal:                                Basic Signal Handling.
                                                               (line  20)
-* signbit:                               FP Bit Twiddling.    (line  29)
+* signbit:                               FP Bit Twiddling.    (line  31)
 * significand:                           Normalization Functions.
                                                               (line  95)
 * significandf:                          Normalization Functions.
@@ -4361,7 +4389,7 @@ Function and Macro Index
                                                               (line 200)
 * sqrtl:                                 Exponents and Logarithms.
                                                               (line 198)
-* srand:                                 ISO Random.          (line  28)
+* srand:                                 ISO Random.          (line  29)
 * srand48:                               SVID Random.         (line 110)
 * srand48_r:                             SVID Random.         (line 312)
 * srandom:                               BSD Random.          (line  25)
@@ -4379,7 +4407,7 @@ Function and Macro Index
 * stpncpy:                               Truncating Strings.  (line 101)
 * strcasecmp:                            String/Array Comparison.
                                                               (line 127)
-* strcasestr:                            Search Functions.    (line 215)
+* strcasestr:                            Search Functions.    (line 217)
 * strcat:                                Concatenating Strings.
                                                               (line  12)
 * strchr:                                Search Functions.    (line  71)
@@ -4389,15 +4417,15 @@ Function and Macro Index
 * strcoll:                               Collation Functions. (line  39)
 * strcpy:                                Copying Strings and Arrays.
                                                               (line 202)
-* strcspn:                               Search Functions.    (line 274)
+* strcspn:                               Search Functions.    (line 276)
 * strdup:                                Copying Strings and Arrays.
                                                               (line 224)
 * strdupa:                               Copying Strings and Arrays.
                                                               (line 301)
-* strerror:                              Error Messages.      (line  13)
-* strerrordesc_np:                       Error Messages.      (line  85)
-* strerrorname_np:                       Error Messages.      (line  74)
-* strerror_r:                            Error Messages.      (line  31)
+* strerror:                              Error Messages.      (line  14)
+* strerrordesc_np:                       Error Messages.      (line  86)
+* strerrorname_np:                       Error Messages.      (line  75)
+* strerror_r:                            Error Messages.      (line  32)
 * strfmon:                               Formatting Numbers.  (line  15)
 * strfromd:                              Printing of Floats.  (line   8)
 * strfromf:                              Printing of Floats.  (line  10)
@@ -4417,32 +4445,32 @@ Function and Macro Index
 * strndup:                               Truncating Strings.  (line  62)
 * strndupa:                              Truncating Strings.  (line  82)
 * strnlen:                               String Length.       (line  86)
-* strpbrk:                               Search Functions.    (line 306)
+* strpbrk:                               Search Functions.    (line 308)
 * strptime:                              Low-Level Time String Parsing.
                                                               (line  11)
 * strrchr:                               Search Functions.    (line 153)
 * strsep:                                Finding Tokens in a String.
                                                               (line 158)
 * strsignal:                             Signal Messages.     (line  14)
-* strspn:                                Search Functions.    (line 244)
+* strspn:                                Search Functions.    (line 246)
 * strstr:                                Search Functions.    (line 175)
-* strtod:                                Parsing of Floats.   (line  12)
-* strtof:                                Parsing of Floats.   (line  84)
-* strtofN:                               Parsing of Floats.   (line  99)
-* strtofNx:                              Parsing of Floats.   (line 100)
-* strtoimax:                             Parsing of Integers. (line 202)
+* strtod:                                Parsing of Floats.   (line  13)
+* strtof:                                Parsing of Floats.   (line  85)
+* strtofN:                               Parsing of Floats.   (line 100)
+* strtofNx:                              Parsing of Floats.   (line 101)
+* strtoimax:                             Parsing of Integers. (line 203)
 * strtok:                                Finding Tokens in a String.
                                                               (line  11)
 * strtok_r:                              Finding Tokens in a String.
                                                               (line 140)
-* strtol:                                Parsing of Integers. (line  12)
-* strtold:                               Parsing of Floats.   (line  85)
-* strtoll:                               Parsing of Integers. (line 113)
-* strtoq:                                Parsing of Integers. (line 142)
-* strtoul:                               Parsing of Integers. (line  83)
-* strtoull:                              Parsing of Integers. (line 161)
-* strtoumax:                             Parsing of Integers. (line 231)
-* strtouq:                               Parsing of Integers. (line 183)
+* strtol:                                Parsing of Integers. (line  13)
+* strtold:                               Parsing of Floats.   (line  86)
+* strtoll:                               Parsing of Integers. (line 114)
+* strtoq:                                Parsing of Integers. (line 143)
+* strtoul:                               Parsing of Integers. (line  84)
+* strtoull:                              Parsing of Integers. (line 162)
+* strtoumax:                             Parsing of Integers. (line 232)
+* strtouq:                               Parsing of Integers. (line 184)
 * strverscmp:                            String/Array Comparison.
                                                               (line 218)
 * strxfrm:                               Collation Functions. (line  86)
@@ -4451,7 +4479,7 @@ Function and Macro Index
                                                               (line  21)
 * SUN_LEN:                               Local Namespace Details.
                                                               (line  50)
-* swapcontext:                           System V contexts.   (line 162)
+* swapcontext:                           System V contexts.   (line 163)
 * swprintf:                              Formatted Output Functions.
                                                               (line  74)
 * swscanf:                               Formatted Input Functions.
@@ -4479,15 +4507,15 @@ Function and Macro Index
 * tanfN:                                 Trig Functions.      (line  45)
 * tanfNx:                                Trig Functions.      (line  46)
 * tanh:                                  Hyperbolic Functions.
-                                                              (line  35)
-* tanhf:                                 Hyperbolic Functions.
-                                                              (line  36)
-* tanhfN:                                Hyperbolic Functions.
-                                                              (line  38)
-* tanhfNx:                               Hyperbolic Functions.
-                                                              (line  39)
-* tanhl:                                 Hyperbolic Functions.
                                                               (line  37)
+* tanhf:                                 Hyperbolic Functions.
+                                                              (line  38)
+* tanhfN:                                Hyperbolic Functions.
+                                                              (line  40)
+* tanhfNx:                               Hyperbolic Functions.
+                                                              (line  41)
+* tanhl:                                 Hyperbolic Functions.
+                                                              (line  39)
 * tanl:                                  Trig Functions.      (line  44)
 * tcdrain:                               Line Control.        (line  38)
 * tcflow:                                Line Control.        (line 108)
@@ -4538,9 +4566,9 @@ Function and Macro Index
 * thrd_yield:                            ISO C Thread Management.
                                                               (line  74)
 * time:                                  Getting the Time.    (line   9)
-* timegm:                                Broken-down Time.    (line 193)
-* timelocal:                             Broken-down Time.    (line 181)
-* times:                                 Processor Time.      (line  48)
+* timegm:                                Broken-down Time.    (line 195)
+* timelocal:                             Broken-down Time.    (line 183)
+* times:                                 Processor Time.      (line  49)
 * tmpfile:                               Temporary Files.     (line  19)
 * tmpfile64:                             Temporary Files.     (line  36)
 * tmpnam:                                Temporary Files.     (line  52)
@@ -4639,49 +4667,49 @@ Function and Macro Index
 * va_copy:                               Argument Macros.     (line  56)
 * va_end:                                Argument Macros.     (line  36)
 * va_start:                              Argument Macros.     (line  13)
-* verr:                                  Error Messages.      (line 368)
-* verrx:                                 Error Messages.      (line 388)
+* verr:                                  Error Messages.      (line 370)
+* verrx:                                 Error Messages.      (line 390)
 * versionsort:                           Scanning Directory Content.
                                                               (line  57)
 * versionsort64:                         Scanning Directory Content.
-                                                              (line 106)
+                                                              (line 109)
 * vfork:                                 Creating a Process.  (line  76)
 * vfprintf:                              Variable Arguments Output.
                                                               (line  72)
 * vfscanf:                               Variable Arguments Input.
-                                                              (line  34)
+                                                              (line  35)
 * vfwprintf:                             Variable Arguments Output.
                                                               (line  81)
 * vfwscanf:                              Variable Arguments Input.
-                                                              (line  43)
+                                                              (line  44)
 * vlimit:                                Limits on Resources. (line 246)
 * vprintf:                               Variable Arguments Output.
                                                               (line  54)
 * vscanf:                                Variable Arguments Input.
-                                                              (line  16)
+                                                              (line  17)
 * vsnprintf:                             Variable Arguments Output.
                                                               (line 107)
 * vsprintf:                              Variable Arguments Output.
                                                               (line  90)
 * vsscanf:                               Variable Arguments Input.
-                                                              (line  52)
+                                                              (line  53)
 * vswprintf:                             Variable Arguments Output.
                                                               (line  98)
 * vswscanf:                              Variable Arguments Input.
-                                                              (line  61)
+                                                              (line  62)
 * vsyslog:                               syslog; vsyslog.     (line 126)
-* vwarn:                                 Error Messages.      (line 329)
-* vwarnx:                                Error Messages.      (line 349)
+* vwarn:                                 Error Messages.      (line 331)
+* vwarnx:                                Error Messages.      (line 351)
 * vwprintf:                              Variable Arguments Output.
                                                               (line  63)
 * vwscanf:                               Variable Arguments Input.
-                                                              (line  25)
+                                                              (line  26)
 * wait:                                  Process Completion.  (line 107)
 * wait3:                                 BSD Wait Functions.  (line  11)
 * wait4:                                 Process Completion.  (line 128)
 * waitpid:                               Process Completion.  (line  10)
-* warn:                                  Error Messages.      (line 319)
-* warnx:                                 Error Messages.      (line 338)
+* warn:                                  Error Messages.      (line 321)
+* warnx:                                 Error Messages.      (line 340)
 * WCOREDUMP:                             Process Completion Status.
                                                               (line  46)
 * wcpcpy:                                Copying Strings and Arrays.
@@ -4700,11 +4728,11 @@ Function and Macro Index
 * wcscoll:                               Collation Functions. (line  48)
 * wcscpy:                                Copying Strings and Arrays.
                                                               (line 213)
-* wcscspn:                               Search Functions.    (line 293)
+* wcscspn:                               Search Functions.    (line 295)
 * wcsdup:                                Copying Strings and Arrays.
                                                               (line 235)
 * wcsftime:                              Formatting Calendar Time.
-                                                              (line 457)
+                                                              (line 469)
 * wcslen:                                String Length.       (line  70)
 * wcsncasecmp:                           String/Array Comparison.
                                                               (line 186)
@@ -4713,29 +4741,29 @@ Function and Macro Index
                                                               (line 163)
 * wcsncpy:                               Truncating Strings.  (line  38)
 * wcsnlen:                               String Length.       (line 106)
-* wcsnrtombs:                            Converting Strings.  (line 205)
-* wcspbrk:                               Search Functions.    (line 326)
+* wcsnrtombs:                            Converting Strings.  (line 206)
+* wcspbrk:                               Search Functions.    (line 328)
 * wcsrchr:                               Search Functions.    (line 166)
-* wcsrtombs:                             Converting Strings.  (line  98)
-* wcsspn:                                Search Functions.    (line 262)
+* wcsrtombs:                             Converting Strings.  (line  99)
+* wcsspn:                                Search Functions.    (line 264)
 * wcsstr:                                Search Functions.    (line 192)
-* wcstod:                                Parsing of Floats.   (line 110)
-* wcstof:                                Parsing of Floats.   (line 112)
-* wcstofN:                               Parsing of Floats.   (line 115)
-* wcstofNx:                              Parsing of Floats.   (line 116)
-* wcstoimax:                             Parsing of Integers. (line 220)
+* wcstod:                                Parsing of Floats.   (line 111)
+* wcstof:                                Parsing of Floats.   (line 113)
+* wcstofN:                               Parsing of Floats.   (line 116)
+* wcstofNx:                              Parsing of Floats.   (line 117)
+* wcstoimax:                             Parsing of Integers. (line 221)
 * wcstok:                                Finding Tokens in a String.
                                                               (line  53)
-* wcstol:                                Parsing of Integers. (line  72)
-* wcstold:                               Parsing of Floats.   (line 113)
-* wcstoll:                               Parsing of Integers. (line 131)
+* wcstol:                                Parsing of Integers. (line  73)
+* wcstold:                               Parsing of Floats.   (line 114)
+* wcstoll:                               Parsing of Integers. (line 132)
 * wcstombs:                              Non-reentrant String Conversion.
-                                                              (line  57)
-* wcstoq:                                Parsing of Integers. (line 150)
-* wcstoul:                               Parsing of Integers. (line 102)
-* wcstoull:                              Parsing of Integers. (line 172)
-* wcstoumax:                             Parsing of Integers. (line 243)
-* wcstouq:                               Parsing of Integers. (line 191)
+                                                              (line  60)
+* wcstoq:                                Parsing of Integers. (line 151)
+* wcstoul:                               Parsing of Integers. (line 103)
+* wcstoull:                              Parsing of Integers. (line 173)
+* wcstoumax:                             Parsing of Integers. (line 244)
+* wcstouq:                               Parsing of Integers. (line 192)
 * wcswcs:                                Search Functions.    (line 205)
 * wcsxfrm:                               Collation Functions. (line 118)
 * wctob:                                 Converting a Character.
@@ -4745,7 +4773,7 @@ Function and Macro Index
 * wctrans:                               Wide Character Case Conversion.
                                                               (line  20)
 * wctype:                                Classification of Wide Characters.
-                                                              (line  37)
+                                                              (line  38)
 * WEXITSTATUS:                           Process Completion Status.
                                                               (line  20)
 * WIFEXITED:                             Process Completion Status.

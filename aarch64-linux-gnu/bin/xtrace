@@ -1,7 +1,6 @@
 #!/bin/bash
 # Copyright (C) 1999-2021 Free Software Foundation, Inc.
 # This file is part of the GNU C Library.
-# Contributed by Ulrich Drepper <drepper@gnu.org>, 1999.
 
 # The GNU C Library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,8 +16,8 @@
 # License along with the GNU C Library; if not, see
 # <https://www.gnu.org/licenses/>.
 
-pcprofileso='/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libpcprofile.so'
-pcprofiledump='/drone/src/builder/aarch64-linux-gnu/aarch64-linux-gnu/bin/pcprofiledump'
+pcprofileso='/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/\$LIB/libpcprofile.so'
+pcprofiledump='/home/runner/work/build-tools-gcc/build-tools-gcc/aarch64-linux-gnu/aarch64-linux-gnu/bin/pcprofiledump'
 TEXTDOMAIN=libc
 
 # Print usage message.

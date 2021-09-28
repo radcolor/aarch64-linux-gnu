@@ -1,11 +1,11 @@
 /* Generated at libc build time from syscall list.  */
-/* The system call list corresponds to kernel 5.13.  */
+/* The system call list corresponds to kernel 5.14.  */
 
 #ifndef _SYSCALL_H
 # error "Never use <bits/syscall.h> directly; include <sys/syscall.h> instead."
 #endif
 
-#define __GLIBC_LINUX_VERSION_CODE 331008
+#define __GLIBC_LINUX_VERSION_CODE 331264
 
 #ifdef __NR_FAST_atomic_update
 # define SYS_FAST_atomic_update __NR_FAST_atomic_update
@@ -899,6 +899,10 @@
 # define SYS_memfd_create __NR_memfd_create
 #endif
 
+#ifdef __NR_memfd_secret
+# define SYS_memfd_secret __NR_memfd_secret
+#endif
+
 #ifdef __NR_memory_ordering
 # define SYS_memory_ordering __NR_memory_ordering
 #endif
@@ -1717,6 +1721,10 @@
 
 #ifdef __NR_quotactl
 # define SYS_quotactl __NR_quotactl
+#endif
+
+#ifdef __NR_quotactl_fd
+# define SYS_quotactl_fd __NR_quotactl_fd
 #endif
 
 #ifdef __NR_read
