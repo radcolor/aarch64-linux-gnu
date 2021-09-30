@@ -733,6 +733,10 @@ extern void gt_ggc_mx_hash_table_ctfc_dvd_hasher_ (void *);
   if (X != NULL) gt_ggc_mx_ctf_container (X);\
   } while (0)
 extern void gt_ggc_mx_ctf_container (void *);
+#define gt_ggc_m_32hash_map_ctf_dvdef_ref_unsigned_(X) do { \
+  if (X != NULL) gt_ggc_mx_hash_map_ctf_dvdef_ref_unsigned_ (X);\
+  } while (0)
+extern void gt_ggc_mx_hash_map_ctf_dvdef_ref_unsigned_ (void *);
 #define gt_ggc_m_24vec_ctf_dtdef_ref_va_gc_(X) do { \
   if (X != NULL) gt_ggc_mx_vec_ctf_dtdef_ref_va_gc_ (X);\
   } while (0)
@@ -2182,6 +2186,10 @@ extern void gt_pch_nx_hash_table_ctfc_dvd_hasher_ (void *);
   if (X != NULL) gt_pch_nx_ctf_container (X);\
   } while (0)
 extern void gt_pch_nx_ctf_container (void *);
+#define gt_pch_n_32hash_map_ctf_dvdef_ref_unsigned_(X) do { \
+  if (X != NULL) gt_pch_nx_hash_map_ctf_dvdef_ref_unsigned_ (X);\
+  } while (0)
+extern void gt_pch_nx_hash_map_ctf_dvdef_ref_unsigned_ (void *);
 #define gt_pch_n_24vec_ctf_dtdef_ref_va_gc_(X) do { \
   if (X != NULL) gt_pch_nx_vec_ctf_dtdef_ref_va_gc_ (X);\
   } while (0)
@@ -3362,6 +3370,8 @@ extern void gt_pch_p_27hash_table_ctfc_dtd_hasher_
 extern void gt_pch_p_27hash_table_ctfc_dvd_hasher_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_13ctf_container
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_32hash_map_ctf_dvdef_ref_unsigned_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_24vec_ctf_dtdef_ref_va_gc_
     (void *, void *, gt_pointer_operator, void *);

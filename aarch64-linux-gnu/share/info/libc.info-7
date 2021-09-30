@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -2116,6 +2156,92 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Deleting Files,  Next: Renaming Files,  Prev: Symbolic Links,  Up: File System Interface
+
+14.6 Deleting Files
+===================
+
+You can delete a file with ‘unlink’ or ‘remove’.
+
+   Deletion actually deletes a file name.  If this is the file’s only
+name, then the file is deleted as well.  If the file has other remaining
+names (*note Hard Links::), it remains accessible under those names.
+
+ -- Function: int unlink (const char *FILENAME)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘unlink’ function deletes the file name FILENAME.  If this is a
+     file’s sole name, the file itself is also deleted.  (Actually, if
+     any process has the file open when this happens, deletion is
+     postponed until all processes have closed the file.)
+
+     The function ‘unlink’ is declared in the header file ‘unistd.h’.
+
+     This function returns ‘0’ on successful completion, and ‘-1’ on
+     error.  In addition to the usual file name errors (*note File Name
+     Errors::), the following ‘errno’ error conditions are defined for
+     this function:
+
+     ‘EACCES’
+          Write permission is denied for the directory from which the
+          file is to be removed, or the directory has the sticky bit set
+          and you do not own the file.
+
+     ‘EBUSY’
+          This error indicates that the file is being used by the system
+          in such a way that it can’t be unlinked.  For example, you
+          might see this error if the file name specifies the root
+          directory or a mount point for a file system.
+
+     ‘ENOENT’
+          The file name to be deleted doesn’t exist.
+
+     ‘EPERM’
+          On some systems ‘unlink’ cannot be used to delete the name of
+          a directory, or at least can only be used this way by a
+          privileged user.  To avoid such problems, use ‘rmdir’ to
+          delete directories.  (On GNU/Linux and GNU/Hurd systems
+          ‘unlink’ can never delete the name of a directory.)
+
+     ‘EROFS’
+          The directory containing the file name to be deleted is on a
+          read-only file system and can’t be modified.
+
+ -- Function: int rmdir (const char *FILENAME)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘rmdir’ function deletes a directory.  The directory must be
+     empty before it can be removed; in other words, it can only contain
+     entries for ‘.’ and ‘..’.
+
+     In most other respects, ‘rmdir’ behaves like ‘unlink’.  There are
+     two additional ‘errno’ error conditions defined for ‘rmdir’:
+
+     ‘ENOTEMPTY’
+     ‘EEXIST’
+          The directory to be deleted is not empty.
+
+     These two error codes are synonymous; some systems use one, and
+     some use the other.  GNU/Linux and GNU/Hurd systems always use
+     ‘ENOTEMPTY’.
+
+     The prototype for this function is declared in the header file
+     ‘unistd.h’.
+
+ -- Function: int remove (const char *FILENAME)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is the ISO C function to remove a file.  It works like
+     ‘unlink’ for files and like ‘rmdir’ for directories.  ‘remove’ is
+     declared in ‘stdio.h’.
 
 
 File: libc.info,  Node: Renaming Files,  Next: Creating Directories,  Prev: Deleting Files,  Up: File System Interface
@@ -7352,284 +7478,4 @@ up to the user running the program to kill and restart it if desired.  A
 more automatic solution could be to use ‘select’ (*note Waiting for
 I/O::) to establish a timeout period for the reply, and in case of
 timeout either re-send the message or shut down the socket and exit.
-
-
-File: libc.info,  Node: Inetd,  Next: Socket Options,  Prev: Datagrams,  Up: Sockets
-
-16.11 The ‘inetd’ Daemon
-========================
-
-We’ve explained above how to write a server program that does its own
-listening.  Such a server must already be running in order for anyone to
-connect to it.
-
-   Another way to provide a service on an Internet port is to let the
-daemon program ‘inetd’ do the listening.  ‘inetd’ is a program that runs
-all the time and waits (using ‘select’) for messages on a specified set
-of ports.  When it receives a message, it accepts the connection (if the
-socket style calls for connections) and then forks a child process to
-run the corresponding server program.  You specify the ports and their
-programs in the file ‘/etc/inetd.conf’.
-
-* Menu:
-
-* Inetd Servers::
-* Configuring Inetd::
-
-
-File: libc.info,  Node: Inetd Servers,  Next: Configuring Inetd,  Up: Inetd
-
-16.11.1 ‘inetd’ Servers
------------------------
-
-Writing a server program to be run by ‘inetd’ is very simple.  Each time
-someone requests a connection to the appropriate port, a new server
-process starts.  The connection already exists at this time; the socket
-is available as the standard input descriptor and as the standard output
-descriptor (descriptors 0 and 1) in the server process.  Thus the server
-program can begin reading and writing data right away.  Often the
-program needs only the ordinary I/O facilities; in fact, a
-general-purpose filter program that knows nothing about sockets can work
-as a byte stream server run by ‘inetd’.
-
-   You can also use ‘inetd’ for servers that use connectionless
-communication styles.  For these servers, ‘inetd’ does not try to accept
-a connection since no connection is possible.  It just starts the server
-program, which can read the incoming datagram packet from descriptor 0.
-The server program can handle one request and then exit, or you can
-choose to write it to keep reading more requests until no more arrive,
-and then exit.  You must specify which of these two techniques the
-server uses when you configure ‘inetd’.
-
-
-File: libc.info,  Node: Configuring Inetd,  Prev: Inetd Servers,  Up: Inetd
-
-16.11.2 Configuring ‘inetd’
----------------------------
-
-The file ‘/etc/inetd.conf’ tells ‘inetd’ which ports to listen to and
-what server programs to run for them.  Normally each entry in the file
-is one line, but you can split it onto multiple lines provided all but
-the first line of the entry start with whitespace.  Lines that start
-with ‘#’ are comments.
-
-   Here are two standard entries in ‘/etc/inetd.conf’:
-
-     ftp	stream	tcp	nowait	root	/libexec/ftpd	ftpd
-     talk	dgram	udp	wait	root	/libexec/talkd	talkd
-
-   An entry has this format:
-
-     SERVICE STYLE PROTOCOL WAIT USERNAME PROGRAM ARGUMENTS
-
-   The SERVICE field says which service this program provides.  It
-should be the name of a service defined in ‘/etc/services’.  ‘inetd’
-uses SERVICE to decide which port to listen on for this entry.
-
-   The fields STYLE and PROTOCOL specify the communication style and the
-protocol to use for the listening socket.  The style should be the name
-of a communication style, converted to lower case and with ‘SOCK_’
-deleted—for example, ‘stream’ or ‘dgram’.  PROTOCOL should be one of the
-protocols listed in ‘/etc/protocols’.  The typical protocol names are
-‘tcp’ for byte stream connections and ‘udp’ for unreliable datagrams.
-
-   The WAIT field should be either ‘wait’ or ‘nowait’.  Use ‘wait’ if
-STYLE is a connectionless style and the server, once started, handles
-multiple requests as they come in.  Use ‘nowait’ if ‘inetd’ should start
-a new process for each message or request that comes in.  If STYLE uses
-connections, then WAIT *must* be ‘nowait’.
-
-   USER is the user name that the server should run as.  ‘inetd’ runs as
-root, so it can set the user ID of its children arbitrarily.  It’s best
-to avoid using ‘root’ for USER if you can; but some servers, such as
-Telnet and FTP, read a username and passphrase themselves.  These
-servers need to be root initially so they can log in as commanded by the
-data coming over the network.
-
-   PROGRAM together with ARGUMENTS specifies the command to run to start
-the server.  PROGRAM should be an absolute file name specifying the
-executable file to run.  ARGUMENTS consists of any number of
-whitespace-separated words, which become the command-line arguments of
-PROGRAM.  The first word in ARGUMENTS is argument zero, which should by
-convention be the program name itself (sans directories).
-
-   If you edit ‘/etc/inetd.conf’, you can tell ‘inetd’ to reread the
-file and obey its new contents by sending the ‘inetd’ process the
-‘SIGHUP’ signal.  You’ll have to use ‘ps’ to determine the process ID of
-the ‘inetd’ process as it is not fixed.
-
-
-File: libc.info,  Node: Socket Options,  Next: Networks Database,  Prev: Inetd,  Up: Sockets
-
-16.12 Socket Options
-====================
-
-This section describes how to read or set various options that modify
-the behavior of sockets and their underlying communications protocols.
-
-   When you are manipulating a socket option, you must specify which
-“level” the option pertains to.  This describes whether the option
-applies to the socket interface, or to a lower-level communications
-protocol interface.
-
-* Menu:
-
-* Socket Option Functions::     The basic functions for setting and getting
-                                 socket options.
-* Socket-Level Options::        Details of the options at the socket level.
-
-
-File: libc.info,  Node: Socket Option Functions,  Next: Socket-Level Options,  Up: Socket Options
-
-16.12.1 Socket Option Functions
--------------------------------
-
-Here are the functions for examining and modifying socket options.  They
-are declared in ‘sys/socket.h’.
-
- -- Function: int getsockopt (int SOCKET, int LEVEL, int OPTNAME, void
-          *OPTVAL, socklen_t *OPTLEN-PTR)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘getsockopt’ function gets information about the value of
-     option OPTNAME at level LEVEL for socket SOCKET.
-
-     The option value is stored in the buffer that OPTVAL points to.
-     Before the call, you should supply in ‘*OPTLEN-PTR’ the size of
-     this buffer; on return, it contains the number of bytes of
-     information actually stored in the buffer.
-
-     Most options interpret the OPTVAL buffer as a single ‘int’ value.
-
-     The actual return value of ‘getsockopt’ is ‘0’ on success and ‘-1’
-     on failure.  The following ‘errno’ error conditions are defined:
-
-     ‘EBADF’
-          The SOCKET argument is not a valid file descriptor.
-
-     ‘ENOTSOCK’
-          The descriptor SOCKET is not a socket.
-
-     ‘ENOPROTOOPT’
-          The OPTNAME doesn’t make sense for the given LEVEL.
-
- -- Function: int setsockopt (int SOCKET, int LEVEL, int OPTNAME, const
-          void *OPTVAL, socklen_t OPTLEN)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function is used to set the socket option OPTNAME at level
-     LEVEL for socket SOCKET.  The value of the option is passed in the
-     buffer OPTVAL of size OPTLEN.
-
-     The return value and error codes for ‘setsockopt’ are the same as
-     for ‘getsockopt’.
-
-
-File: libc.info,  Node: Socket-Level Options,  Prev: Socket Option Functions,  Up: Socket Options
-
-16.12.2 Socket-Level Options
-----------------------------
-
- -- Constant: int SOL_SOCKET
-
-     Use this constant as the LEVEL argument to ‘getsockopt’ or
-     ‘setsockopt’ to manipulate the socket-level options described in
-     this section.
-
-Here is a table of socket-level option names; all are defined in the
-header file ‘sys/socket.h’.
-
-‘SO_DEBUG’
-
-     This option toggles recording of debugging information in the
-     underlying protocol modules.  The value has type ‘int’; a nonzero
-     value means “yes”.
-
-‘SO_REUSEADDR’
-
-     This option controls whether ‘bind’ (*note Setting Address::)
-     should permit reuse of local addresses for this socket.  If you
-     enable this option, you can actually have two sockets with the same
-     Internet port number; but the system won’t allow you to use the two
-     identically-named sockets in a way that would confuse the Internet.
-     The reason for this option is that some higher-level Internet
-     protocols, including FTP, require you to keep reusing the same port
-     number.
-
-     The value has type ‘int’; a nonzero value means “yes”.
-
-‘SO_KEEPALIVE’
-
-     This option controls whether the underlying protocol should
-     periodically transmit messages on a connected socket.  If the peer
-     fails to respond to these messages, the connection is considered
-     broken.  The value has type ‘int’; a nonzero value means “yes”.
-
-‘SO_DONTROUTE’
-
-     This option controls whether outgoing messages bypass the normal
-     message routing facilities.  If set, messages are sent directly to
-     the network interface instead.  The value has type ‘int’; a nonzero
-     value means “yes”.
-
-‘SO_LINGER’
-
-     This option specifies what should happen when the socket of a type
-     that promises reliable delivery still has untransmitted messages
-     when it is closed; see *note Closing a Socket::.  The value has
-     type ‘struct linger’.
-
-      -- Data Type: struct linger
-
-          This structure type has the following members:
-
-          ‘int l_onoff’
-               This field is interpreted as a boolean.  If nonzero,
-               ‘close’ blocks until the data are transmitted or the
-               timeout period has expired.
-
-          ‘int l_linger’
-               This specifies the timeout period, in seconds.
-
-‘SO_BROADCAST’
-
-     This option controls whether datagrams may be broadcast from the
-     socket.  The value has type ‘int’; a nonzero value means “yes”.
-
-‘SO_OOBINLINE’
-
-     If this option is set, out-of-band data received on the socket is
-     placed in the normal input queue.  This permits it to be read using
-     ‘read’ or ‘recv’ without specifying the ‘MSG_OOB’ flag.  *Note
-     Out-of-Band Data::.  The value has type ‘int’; a nonzero value
-     means “yes”.
-
-‘SO_SNDBUF’
-
-     This option gets or sets the size of the output buffer.  The value
-     is a ‘size_t’, which is the size in bytes.
-
-‘SO_RCVBUF’
-
-     This option gets or sets the size of the input buffer.  The value
-     is a ‘size_t’, which is the size in bytes.
-
-‘SO_STYLE’
-‘SO_TYPE’
-
-     This option can be used with ‘getsockopt’ only.  It is used to get
-     the socket’s communication style.  ‘SO_TYPE’ is the historical
-     name, and ‘SO_STYLE’ is the preferred name in GNU. The value has
-     type ‘int’ and its value designates a communication style; see
-     *note Communication Styles::.
-
-‘SO_ERROR’
-
-     This option can be used with ‘getsockopt’ only.  It is used to
-     reset the error status of the socket.  The value is an ‘int’, which
-     represents the previous error status.
 

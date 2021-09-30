@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -2116,6 +2156,482 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Time Types,  Next: Calculating Elapsed Time,  Prev: Time Basics,  Up: Date and Time
+
+21.2 Time Types
+===============
+
+ISO C and POSIX define several data types for representing elapsed
+times, simple calendar times, and broken-down times.
+
+ -- Data Type: clock_t
+
+     ‘clock_t’ is used to measure processor and CPU time.  It may be an
+     integer or a floating-point type.  Its values are counts of “clock
+     ticks” since some arbitrary event in the past.  The number of clock
+     ticks per second is system-specific.  *Note Processor And CPU
+     Time::, for further detail.
+
+ -- Data Type: time_t
+
+     ‘time_t’ is the simplest data type used to represent simple
+     calendar time.
+
+     In ISO C, ‘time_t’ can be either an integer or a floating-point
+     type, and the meaning of ‘time_t’ values is not specified.  The
+     only things a strictly conforming program can do with ‘time_t’
+     values are: pass them to ‘difftime’ to get the elapsed time between
+     two simple calendar times (*note Calculating Elapsed Time::), and
+     pass them to the functions that convert them to broken-down time
+     (*note Broken-down Time::).
+
+     On POSIX-conformant systems, ‘time_t’ is an integer type and its
+     values represent the number of seconds elapsed since the “epoch”,
+     which is 00:00:00 on January 1, 1970, Coordinated Universal Time.
+
+     The GNU C Library additionally guarantees that ‘time_t’ is a signed
+     type, and that all of its functions operate correctly on negative
+     ‘time_t’ values, which are interpreted as times before the epoch.
+
+ -- Data Type: struct timespec
+
+     ‘struct timespec’ represents a simple calendar time, or an elapsed
+     time, with sub-second resolution.  It is declared in ‘time.h’ and
+     has the following members:
+
+     ‘time_t tv_sec’
+          The number of whole seconds elapsed since the epoch (for a
+          simple calendar time) or since some other starting point (for
+          an elapsed time).
+
+     ‘long int tv_nsec’
+          The number of nanoseconds elapsed since the time given by the
+          ‘tv_sec’ member.
+
+          When ‘struct timespec’ values are produced by GNU C Library
+          functions, the value in this field will always be greater than
+          or equal to zero, and less than 1,000,000,000.  When ‘struct
+          timespec’ values are supplied to GNU C Library functions, the
+          value in this field must be in the same range.
+
+ -- Data Type: struct timeval
+
+     ‘struct timeval’ is an older type for representing a simple
+     calendar time, or an elapsed time, with sub-second resolution.  It
+     is almost the same as ‘struct timespec’, but provides only
+     microsecond resolution.  It is declared in ‘sys/time.h’ and has the
+     following members:
+
+     ‘time_t tv_sec’
+          The number of whole seconds elapsed since the epoch (for a
+          simple calendar time) or since some other starting point (for
+          an elapsed time).
+
+     ‘long int tv_usec’
+          The number of microseconds elapsed since the time given by the
+          ‘tv_sec’ member.
+
+          When ‘struct timeval’ values are produced by GNU C Library
+          functions, the value in this field will always be greater than
+          or equal to zero, and less than 1,000,000.  When ‘struct
+          timeval’ values are supplied to GNU C Library functions, the
+          value in this field must be in the same range.
+
+ -- Data Type: struct tm
+
+     This is the data type used to represent a broken-down time.  It has
+     separate fields for year, month, day, and so on.  *Note Broken-down
+     Time::, for further details.
+
+
+File: libc.info,  Node: Calculating Elapsed Time,  Next: Processor And CPU Time,  Prev: Time Types,  Up: Date and Time
+
+21.3 Calculating Elapsed Time
+=============================
+
+Often, one wishes to calculate an elapsed time as the difference between
+two simple calendar times.  The GNU C Library provides only one function
+for this purpose.
+
+ -- Function: double difftime (time_t END, time_t BEGIN)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘difftime’ function returns the number of seconds of elapsed
+     time from calendar time BEGIN to calendar time END, as a value of
+     type ‘double’.
+
+     On POSIX-conformant systems, the advantage of using ‘difftime (END,
+     BEGIN)’ over ‘END - BEGIN’ is that it will produce the
+     mathematically correct result even if END and BEGIN are so far
+     apart that a simple subtraction would overflow.  However, if they
+     are so far apart that a ‘double’ cannot exactly represent the
+     difference, the result will be inexact.
+
+     On other systems, ‘time_t’ values might be encoded in a way that
+     prevents subtraction from working directly, and then ‘difftime’
+     would be the only way to compute their difference.
+
+   The GNU C Library does not provide any functions for computing the
+difference between two values of type ‘struct timeval’ or
+‘struct timespec’.  Here is the recommended way to do this calculation
+by hand.  It works even on some peculiar operating systems where the
+‘tv_sec’ member has an unsigned type.
+
+
+     /* Subtract the ‘struct timeval’ values X and Y,
+        storing the result in RESULT.
+        Return 1 if the difference is negative, otherwise 0. */
+
+     int
+     timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y)
+     {
+       /* Perform the carry for the later subtraction by updating Y. */
+       if (x->tv_usec < y->tv_usec) {
+         int nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;
+         y->tv_usec -= 1000000 * nsec;
+         y->tv_sec += nsec;
+       }
+       if (x->tv_usec - y->tv_usec > 1000000) {
+         int nsec = (x->tv_usec - y->tv_usec) / 1000000;
+         y->tv_usec += 1000000 * nsec;
+         y->tv_sec -= nsec;
+       }
+
+       /* Compute the time remaining to wait.
+          ‘tv_usec’ is certainly positive. */
+       result->tv_sec = x->tv_sec - y->tv_sec;
+       result->tv_usec = x->tv_usec - y->tv_usec;
+
+       /* Return 1 if result is negative. */
+       return x->tv_sec < y->tv_sec;
+     }
+
+
+File: libc.info,  Node: Processor And CPU Time,  Next: Calendar Time,  Prev: Calculating Elapsed Time,  Up: Date and Time
+
+21.4 Processor And CPU Time
+===========================
+
+If you’re trying to optimize your program or measure its efficiency,
+it’s very useful to know how much processor time it uses.  For that,
+calendar time and elapsed times are useless because a process may spend
+time waiting for I/O or for other processes to use the CPU. However, you
+can get the information with the functions in this section.
+
+   CPU time (*note Time Basics::) is represented by the data type
+‘clock_t’, which is a number of “clock ticks”.  It gives the total
+amount of time a process has actively used a CPU since some arbitrary
+event.  On GNU systems, that event is the creation of the process.
+While arbitrary in general, the event is always the same event for any
+particular process, so you can always measure how much time on the CPU a
+particular computation takes by examining the process’ CPU time before
+and after the computation.
+
+   On GNU/Linux and GNU/Hurd systems, ‘clock_t’ is equivalent to ‘long
+int’ and ‘CLOCKS_PER_SEC’ is an integer value.  But in other systems,
+both ‘clock_t’ and the macro ‘CLOCKS_PER_SEC’ can be either integer or
+floating-point types.  Casting CPU time values to ‘double’, as in the
+example above, makes sure that operations such as arithmetic and
+printing work properly and consistently no matter what the underlying
+representation is.
+
+   Note that the clock can wrap around.  On a 32bit system with
+‘CLOCKS_PER_SEC’ set to one million this function will return the same
+value approximately every 72 minutes.
+
+   For additional functions to examine a process’ use of processor time,
+and to control it, see *note Resource Usage And Limitation::.
+
+* Menu:
+
+* CPU Time::                    The ‘clock’ function.
+* Processor Time::              The ‘times’ function.
+
+
+File: libc.info,  Node: CPU Time,  Next: Processor Time,  Up: Processor And CPU Time
+
+21.4.1 CPU Time Inquiry
+-----------------------
+
+To get a process’ CPU time, you can use the ‘clock’ function.  This
+facility is declared in the header file ‘time.h’.
+
+   In typical usage, you call the ‘clock’ function at the beginning and
+end of the interval you want to time, subtract the values, and then
+divide by ‘CLOCKS_PER_SEC’ (the number of clock ticks per second) to get
+processor time, like this:
+
+     #include <time.h>
+
+     clock_t start, end;
+     double cpu_time_used;
+
+     start = clock();
+     ... /* Do the work. */
+     end = clock();
+     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+   Do not use a single CPU time as an amount of time; it doesn’t work
+that way.  Either do a subtraction as shown above or query processor
+time directly.  *Note Processor Time::.
+
+   Different computers and operating systems vary wildly in how they
+keep track of CPU time.  It’s common for the internal processor clock to
+have a resolution somewhere between a hundredth and millionth of a
+second.
+
+ -- Macro: int CLOCKS_PER_SEC
+
+     The value of this macro is the number of clock ticks per second
+     measured by the ‘clock’ function.  POSIX requires that this value
+     be one million independent of the actual resolution.
+
+ -- Function: clock_t clock (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function returns the calling process’ current CPU time.  If
+     the CPU time is not available or cannot be represented, ‘clock’
+     returns the value ‘(clock_t)(-1)’.
+
+
+File: libc.info,  Node: Processor Time,  Prev: CPU Time,  Up: Processor And CPU Time
+
+21.4.2 Processor Time Inquiry
+-----------------------------
+
+The ‘times’ function returns information about a process’ consumption of
+processor time in a ‘struct tms’ object, in addition to the process’ CPU
+time.  *Note Time Basics::.  You should include the header file
+‘sys/times.h’ to use this facility.
+
+ -- Data Type: struct tms
+
+     The ‘tms’ structure is used to return information about process
+     times.  It contains at least the following members:
+
+     ‘clock_t tms_utime’
+          This is the total processor time the calling process has used
+          in executing the instructions of its program.
+
+     ‘clock_t tms_stime’
+          This is the processor time the system has used on behalf of
+          the calling process.
+
+     ‘clock_t tms_cutime’
+          This is the sum of the ‘tms_utime’ values and the ‘tms_cutime’
+          values of all terminated child processes of the calling
+          process, whose status has been reported to the parent process
+          by ‘wait’ or ‘waitpid’; see *note Process Completion::.  In
+          other words, it represents the total processor time used in
+          executing the instructions of all the terminated child
+          processes of the calling process, excluding child processes
+          which have not yet been reported by ‘wait’ or ‘waitpid’.
+
+     ‘clock_t tms_cstime’
+          This is similar to ‘tms_cutime’, but represents the total
+          processor time the system has used on behalf of all the
+          terminated child processes of the calling process.
+
+     All of the times are given in numbers of clock ticks.  Unlike CPU
+     time, these are the actual amounts of time; not relative to any
+     event.  *Note Creating a Process::.
+
+ -- Macro: int CLK_TCK
+
+     This is an obsolete name for the number of clock ticks per second.
+     Use ‘sysconf (_SC_CLK_TCK)’ instead.
+
+ -- Function: clock_t times (struct tms *BUFFER)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘times’ function stores the processor time information for the
+     calling process in BUFFER.
+
+     The return value is the number of clock ticks since an arbitrary
+     point in the past, e.g.  since system start-up.  ‘times’ returns
+     ‘(clock_t)(-1)’ to indicate failure.
+
+   *Portability Note:* The ‘clock’ function described in *note CPU
+Time:: is specified by the ISO C standard.  The ‘times’ function is a
+feature of POSIX.1.  On GNU systems, the CPU time is defined to be
+equivalent to the sum of the ‘tms_utime’ and ‘tms_stime’ fields returned
+by ‘times’.
+
+
+File: libc.info,  Node: Calendar Time,  Next: Setting an Alarm,  Prev: Processor And CPU Time,  Up: Date and Time
+
+21.5 Calendar Time
+==================
+
+This section describes the functions for getting, setting, and
+manipulating calendar times.
+
+* Menu:
+
+* Getting the Time::            Functions for finding out what time it is.
+* Setting and Adjusting the Time::
+                                Functions for setting and adjusting
+                                  the system clock.
+* Broken-down Time::            Facilities for manipulating local time.
+* Formatting Calendar Time::    Converting times to strings.
+* Parsing Date and Time::       Convert textual time and date information back
+                                 into broken-down time values.
+* TZ Variable::                 How users specify the time zone.
+* Time Zone Functions::         Functions to examine or specify the time zone.
+* Time Functions Example::      An example program showing use of some of
+				 the time functions.
+
+
+File: libc.info,  Node: Getting the Time,  Next: Setting and Adjusting the Time,  Up: Calendar Time
+
+21.5.1 Getting the Time
+-----------------------
+
+The GNU C Library provides several functions for getting the current
+calendar time, with different levels of resolution.
+
+ -- Function: time_t time (time_t *RESULT)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This is the simplest function for getting the current calendar
+     time.  It returns the calendar time as a value of type ‘time_t’; on
+     POSIX systems, that means it has a resolution of one second.  It
+     uses the same clock as ‘clock_gettime (CLOCK_REALTIME_COARSE)’,
+     when the clock is available or ‘clock_gettime (CLOCK_REALTIME)’
+     otherwise.
+
+     If the argument RESULT is not a null pointer, the calendar time
+     value is also stored in ‘*RESULT’.
+
+     This function cannot fail.
+
+   Some applications need more precise timekeeping than is possible with
+a ‘time_t’ alone.  Some applications also need more control over what is
+meant by “the current time.” For these applications, POSIX provides a
+function ‘clock_gettime’ that can retrieve the time with up to
+nanosecond precision, from a variety of different clocks.  Clocks can be
+system-wide, measuring time the same for all processes; or they can be
+per-process or per-thread, measuring CPU time consumed by a particular
+process, or some other similar resource.  Each clock has its own
+resolution and epoch.  You can find the resolution of a clock with the
+function ‘clock_getres’.  There is no function to get the epoch for a
+clock; either it is fixed and documented, or the clock is not meant to
+be used to measure absolute times.
+
+ -- Data Type: clockid_t
+
+     The type ‘clockid_t’ is used for constants that indicate which of
+     several system clocks one wishes to use.
+
+   All systems that support this family of functions will define at
+least this clock constant:
+
+ -- Macro: clockid_t CLOCK_REALTIME
+
+     This clock uses the POSIX epoch, 00:00:00 on January 1, 1970,
+     Coordinated Universal Time.  It is close to, but not necessarily in
+     lock-step with, the clocks of ‘time’ (above) and of ‘gettimeofday’
+     (below).
+
+   A second clock constant which is not universal, but still very
+common, is for a clock measuring “monotonic time”.  Monotonic time is
+useful for measuring elapsed times, because it guarantees that those
+measurements are not affected by changes to the system clock.
+
+ -- Macro: clockid_t CLOCK_MONOTONIC
+
+     System-wide clock that continuously measures the advancement of
+     calendar time, ignoring discontinuous changes to the system’s
+     setting for absolute calendar time.
+
+     The epoch for this clock is an unspecified point in the past.  The
+     epoch may change if the system is rebooted or suspended.
+     Therefore, ‘CLOCK_MONOTONIC’ cannot be used to measure absolute
+     time, only elapsed time.
+
+   Systems may support more than just these two clocks.
+
+ -- Function: int clock_gettime (clockid_t CLOCK, struct timespec *TS)
+
+     Get the current time accoding to the clock identified by CLOCK,
+     storing it as seconds and nanoseconds in ‘*TS’.  *Note Time
+     Types::, for a description of ‘struct timespec’.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error condition is defined for this function:
+
+     ‘EINVAL’
+          The clock identified by CLOCK is not supported.
+
+   ‘clock_gettime’ reports the time scaled to seconds and nanoseconds,
+but the actual resolution of each clock may not be as fine as one
+nanosecond, and may not be the same for all clocks.  POSIX also provides
+a function for finding out the actual resolution of a clock:
+
+ -- Function: int clock_getres (clockid_t CLOCK, struct timespec *RES)
+
+     Get the actual resolution of the clock identified by CLOCK, storing
+     it in ‘*TS’.
+
+     For instance, if the clock hardware for ‘CLOCK_REALTIME’ uses a
+     quartz crystal that oscillates at 32.768 kHz, then its resolution
+     would be 30.518 microseconds, and
+     ‘clock_getres (CLOCK_REALTIME, &r)’ would set ‘r.tv_sec’ to 0 and
+     ‘r.tv_nsec’ to 30518.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error condition is defined for this function:
+
+     ‘EINVAL’
+          The clock identified by CLOCK is not supported.
+
+   These functions, and the constants that identify particular clocks,
+are declared in ‘time.h’.
+
+   *Portability Note:* On some systems, including systems that use older
+versions of the GNU C Library, programs that use ‘clock_gettime’ or
+‘clock_setres’ must be linked with the ‘-lrt’ library.  This has not
+been necessary with the GNU C Library since version 2.17.
+
+   The GNU C Library also provides an older, but still widely used,
+function for getting the current time with a resolution of microseconds.
+This function is declared in ‘sys/time.h’.
+
+ -- Function: int gettimeofday (struct timeval *TP, void *TZP)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     Get the current calendar time, storing it as seconds and
+     microseconds in ‘*TP’.  *Note Time Types::, for a description of
+     ‘struct timeval’.  The clock of ‘gettimeofday’ is close to, but not
+     necessarily in lock-step with, the clocks of ‘time’ and of
+     ‘clock_gettime (CLOCK_REALTIME)’ (see above).
+
+     On some historic systems, if TZP was not a null pointer,
+     information about a system-wide time zone would be written to
+     ‘*TZP’.  This feature is obsolete and not supported on GNU systems.
+     You should always supply a null pointer for this argument.
+     Instead, use the facilities described in *note Time Zone
+     Functions:: and in *note Broken-down Time:: for working with time
+     zones.
+
+     This function cannot fail, and its return value is always ‘0’.
+
+     *Portability Note:* As of the 2008 revision of POSIX, this function
+     is considered obsolete.  The GNU C Library will continue to provide
+     this function indefinitely, but new programs should use
+     ‘clock_gettime’ instead.
 
 
 File: libc.info,  Node: Setting and Adjusting the Time,  Next: Broken-down Time,  Prev: Getting the Time,  Up: Calendar Time
@@ -6838,523 +7354,4 @@ process to terminate.
      session; this termination effectively disconnects all processes in
      the session from the controlling terminal.  For more information,
      see *note Termination Internals::.
-
-
-File: libc.info,  Node: Alarm Signals,  Next: Asynchronous I/O Signals,  Prev: Termination Signals,  Up: Standard Signals
-
-24.2.3 Alarm Signals
---------------------
-
-These signals are used to indicate the expiration of timers.  *Note
-Setting an Alarm::, for information about functions that cause these
-signals to be sent.
-
-   The default behavior for these signals is to cause program
-termination.  This default is rarely useful, but no other default would
-be useful; most of the ways of using these signals would require handler
-functions in any case.
-
- -- Macro: int SIGALRM
-
-     This signal typically indicates expiration of a timer that measures
-     real or clock time.  It is used by the ‘alarm’ function, for
-     example.
-
- -- Macro: int SIGVTALRM
-
-     This signal typically indicates expiration of a timer that measures
-     CPU time used by the current process.  The name is an abbreviation
-     for “virtual time alarm”.
-
- -- Macro: int SIGPROF
-
-     This signal typically indicates expiration of a timer that measures
-     both CPU time used by the current process, and CPU time expended on
-     behalf of the process by the system.  Such a timer is used to
-     implement code profiling facilities, hence the name of this signal.
-
-
-File: libc.info,  Node: Asynchronous I/O Signals,  Next: Job Control Signals,  Prev: Alarm Signals,  Up: Standard Signals
-
-24.2.4 Asynchronous I/O Signals
--------------------------------
-
-The signals listed in this section are used in conjunction with
-asynchronous I/O facilities.  You have to take explicit action by
-calling ‘fcntl’ to enable a particular file descriptor to generate these
-signals (*note Interrupt Input::).  The default action for these signals
-is to ignore them.
-
- -- Macro: int SIGIO
-
-     This signal is sent when a file descriptor is ready to perform
-     input or output.
-
-     On most operating systems, terminals and sockets are the only kinds
-     of files that can generate ‘SIGIO’; other kinds, including ordinary
-     files, never generate ‘SIGIO’ even if you ask them to.
-
-     On GNU systems ‘SIGIO’ will always be generated properly if you
-     successfully set asynchronous mode with ‘fcntl’.
-
- -- Macro: int SIGURG
-
-     This signal is sent when “urgent” or out-of-band data arrives on a
-     socket.  *Note Out-of-Band Data::.
-
- -- Macro: int SIGPOLL
-
-     This is a System V signal name, more or less similar to ‘SIGIO’.
-     It is defined only for compatibility.
-
-
-File: libc.info,  Node: Job Control Signals,  Next: Operation Error Signals,  Prev: Asynchronous I/O Signals,  Up: Standard Signals
-
-24.2.5 Job Control Signals
---------------------------
-
-These signals are used to support job control.  If your system doesn’t
-support job control, then these macros are defined but the signals
-themselves can’t be raised or handled.
-
-   You should generally leave these signals alone unless you really
-understand how job control works.  *Note Job Control::.
-
- -- Macro: int SIGCHLD
-
-     This signal is sent to a parent process whenever one of its child
-     processes terminates or stops.
-
-     The default action for this signal is to ignore it.  If you
-     establish a handler for this signal while there are child processes
-     that have terminated but not reported their status via ‘wait’ or
-     ‘waitpid’ (*note Process Completion::), whether your new handler
-     applies to those processes or not depends on the particular
-     operating system.
-
- -- Macro: int SIGCLD
-
-     This is an obsolete name for ‘SIGCHLD’.
-
- -- Macro: int SIGCONT
-
-     You can send a ‘SIGCONT’ signal to a process to make it continue.
-     This signal is special—it always makes the process continue if it
-     is stopped, before the signal is delivered.  The default behavior
-     is to do nothing else.  You cannot block this signal.  You can set
-     a handler, but ‘SIGCONT’ always makes the process continue
-     regardless.
-
-     Most programs have no reason to handle ‘SIGCONT’; they simply
-     resume execution without realizing they were ever stopped.  You can
-     use a handler for ‘SIGCONT’ to make a program do something special
-     when it is stopped and continued—for example, to reprint a prompt
-     when it is suspended while waiting for input.
-
- -- Macro: int SIGSTOP
-
-     The ‘SIGSTOP’ signal stops the process.  It cannot be handled,
-     ignored, or blocked.
-
- -- Macro: int SIGTSTP
-
-     The ‘SIGTSTP’ signal is an interactive stop signal.  Unlike
-     ‘SIGSTOP’, this signal can be handled and ignored.
-
-     Your program should handle this signal if you have a special need
-     to leave files or system tables in a secure state when a process is
-     stopped.  For example, programs that turn off echoing should handle
-     ‘SIGTSTP’ so they can turn echoing back on before stopping.
-
-     This signal is generated when the user types the SUSP character
-     (normally ‘C-z’).  For more information about terminal driver
-     support, see *note Special Characters::.
-
- -- Macro: int SIGTTIN
-
-     A process cannot read from the user’s terminal while it is running
-     as a background job.  When any process in a background job tries to
-     read from the terminal, all of the processes in the job are sent a
-     ‘SIGTTIN’ signal.  The default action for this signal is to stop
-     the process.  For more information about how this interacts with
-     the terminal driver, see *note Access to the Terminal::.
-
- -- Macro: int SIGTTOU
-
-     This is similar to ‘SIGTTIN’, but is generated when a process in a
-     background job attempts to write to the terminal or set its modes.
-     Again, the default action is to stop the process.  ‘SIGTTOU’ is
-     only generated for an attempt to write to the terminal if the
-     ‘TOSTOP’ output mode is set; *note Output Modes::.
-
-   While a process is stopped, no more signals can be delivered to it
-until it is continued, except ‘SIGKILL’ signals and (obviously)
-‘SIGCONT’ signals.  The signals are marked as pending, but not delivered
-until the process is continued.  The ‘SIGKILL’ signal always causes
-termination of the process and can’t be blocked, handled or ignored.
-You can ignore ‘SIGCONT’, but it always causes the process to be
-continued anyway if it is stopped.  Sending a ‘SIGCONT’ signal to a
-process causes any pending stop signals for that process to be
-discarded.  Likewise, any pending ‘SIGCONT’ signals for a process are
-discarded when it receives a stop signal.
-
-   When a process in an orphaned process group (*note Orphaned Process
-Groups::) receives a ‘SIGTSTP’, ‘SIGTTIN’, or ‘SIGTTOU’ signal and does
-not handle it, the process does not stop.  Stopping the process would
-probably not be very useful, since there is no shell program that will
-notice it stop and allow the user to continue it.  What happens instead
-depends on the operating system you are using.  Some systems may do
-nothing; others may deliver another signal instead, such as ‘SIGKILL’ or
-‘SIGHUP’.  On GNU/Hurd systems, the process dies with ‘SIGKILL’; this
-avoids the problem of many stopped, orphaned processes lying around the
-system.
-
-
-File: libc.info,  Node: Operation Error Signals,  Next: Miscellaneous Signals,  Prev: Job Control Signals,  Up: Standard Signals
-
-24.2.6 Operation Error Signals
-------------------------------
-
-These signals are used to report various errors generated by an
-operation done by the program.  They do not necessarily indicate a
-programming error in the program, but an error that prevents an
-operating system call from completing.  The default action for all of
-them is to cause the process to terminate.
-
- -- Macro: int SIGPIPE
-
-     Broken pipe.  If you use pipes or FIFOs, you have to design your
-     application so that one process opens the pipe for reading before
-     another starts writing.  If the reading process never starts, or
-     terminates unexpectedly, writing to the pipe or FIFO raises a
-     ‘SIGPIPE’ signal.  If ‘SIGPIPE’ is blocked, handled or ignored, the
-     offending call fails with ‘EPIPE’ instead.
-
-     Pipes and FIFO special files are discussed in more detail in *note
-     Pipes and FIFOs::.
-
-     Another cause of ‘SIGPIPE’ is when you try to output to a socket
-     that isn’t connected.  *Note Sending Data::.
-
- -- Macro: int SIGLOST
-
-     Resource lost.  This signal is generated when you have an advisory
-     lock on an NFS file, and the NFS server reboots and forgets about
-     your lock.
-
-     On GNU/Hurd systems, ‘SIGLOST’ is generated when any server program
-     dies unexpectedly.  It is usually fine to ignore the signal;
-     whatever call was made to the server that died just returns an
-     error.
-
- -- Macro: int SIGXCPU
-
-     CPU time limit exceeded.  This signal is generated when the process
-     exceeds its soft resource limit on CPU time.  *Note Limits on
-     Resources::.
-
- -- Macro: int SIGXFSZ
-
-     File size limit exceeded.  This signal is generated when the
-     process attempts to extend a file so it exceeds the process’s soft
-     resource limit on file size.  *Note Limits on Resources::.
-
-
-File: libc.info,  Node: Miscellaneous Signals,  Next: Signal Messages,  Prev: Operation Error Signals,  Up: Standard Signals
-
-24.2.7 Miscellaneous Signals
-----------------------------
-
-These signals are used for various other purposes.  In general, they
-will not affect your program unless it explicitly uses them for
-something.
-
- -- Macro: int SIGUSR1
- -- Macro: int SIGUSR2
-
-     The ‘SIGUSR1’ and ‘SIGUSR2’ signals are set aside for you to use
-     any way you want.  They’re useful for simple interprocess
-     communication, if you write a signal handler for them in the
-     program that receives the signal.
-
-     There is an example showing the use of ‘SIGUSR1’ and ‘SIGUSR2’ in
-     *note Signaling Another Process::.
-
-     The default action is to terminate the process.
-
- -- Macro: int SIGWINCH
-
-     Window size change.  This is generated on some systems (including
-     GNU) when the terminal driver’s record of the number of rows and
-     columns on the screen is changed.  The default action is to ignore
-     it.
-
-     If a program does full-screen display, it should handle ‘SIGWINCH’.
-     When the signal arrives, it should fetch the new screen size and
-     reformat its display accordingly.
-
- -- Macro: int SIGINFO
-
-     Information request.  On 4.4 BSD and GNU/Hurd systems, this signal
-     is sent to all the processes in the foreground process group of the
-     controlling terminal when the user types the STATUS character in
-     canonical mode; *note Signal Characters::.
-
-     If the process is the leader of the process group, the default
-     action is to print some status information about the system and
-     what the process is doing.  Otherwise the default is to do nothing.
-
-
-File: libc.info,  Node: Signal Messages,  Prev: Miscellaneous Signals,  Up: Standard Signals
-
-24.2.8 Signal Messages
-----------------------
-
-We mentioned above that the shell prints a message describing the signal
-that terminated a child process.  The clean way to print a message
-describing a signal is to use the functions ‘strsignal’ and ‘psignal’.
-These functions use a signal number to specify which kind of signal to
-describe.  The signal number may come from the termination status of a
-child process (*note Process Completion::) or it may come from a signal
-handler in the same process.
-
- -- Function: char * strsignal (int SIGNUM)
-
-     Preliminary: | MT-Unsafe race:strsignal locale | AS-Unsafe init
-     i18n corrupt heap | AC-Unsafe init corrupt mem | *Note POSIX Safety
-     Concepts::.
-
-     This function returns a pointer to a statically-allocated string
-     containing a message describing the signal SIGNUM.  You should not
-     modify the contents of this string; and, since it can be rewritten
-     on subsequent calls, you should save a copy of it if you need to
-     reference it later.
-
-     This function is a GNU extension, declared in the header file
-     ‘string.h’.
-
- -- Function: void psignal (int SIGNUM, const char *MESSAGE)
-
-     Preliminary: | MT-Safe locale | AS-Unsafe corrupt i18n heap |
-     AC-Unsafe lock corrupt mem | *Note POSIX Safety Concepts::.
-
-     This function prints a message describing the signal SIGNUM to the
-     standard error output stream ‘stderr’; see *note Standard
-     Streams::.
-
-     If you call ‘psignal’ with a MESSAGE that is either a null pointer
-     or an empty string, ‘psignal’ just prints the message corresponding
-     to SIGNUM, adding a trailing newline.
-
-     If you supply a non-null MESSAGE argument, then ‘psignal’ prefixes
-     its output with this string.  It adds a colon and a space character
-     to separate the MESSAGE from the string corresponding to SIGNUM.
-
-     This function is a BSD feature, declared in the header file
-     ‘signal.h’.
-
- -- Function: const char * sigdescr_np (int SIGNUM)
-
-     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
-
-     This function returns the message describing the signal SIGNUM or
-     ‘NULL’ for invalid signal number (e.g "Hangup" for ‘SIGHUP’).
-     Different than ‘strsignal’ the returned description is not
-     translated.  The message points to a static storage whose lifetime
-     is the whole lifetime of the program.
-
-     This function is a GNU extension, declared in the header file
-     ‘string.h’.
-
- -- Function: const char * sigabbrev_np (int SIGNUM)
-
-     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
-
-     This function returns the abbreviation describing the signal SIGNUM
-     or ‘NULL’ for invalid signal number.  The message points to a
-     static storage whose lifetime is the whole lifetime of the program.
-
-     This function is a GNU extension, declared in the header file
-     ‘string.h’.
-
-
-File: libc.info,  Node: Signal Actions,  Next: Defining Handlers,  Prev: Standard Signals,  Up: Signal Handling
-
-24.3 Specifying Signal Actions
-==============================
-
-The simplest way to change the action for a signal is to use the
-‘signal’ function.  You can specify a built-in action (such as to ignore
-the signal), or you can “establish a handler”.
-
-   The GNU C Library also implements the more versatile ‘sigaction’
-facility.  This section describes both facilities and gives suggestions
-on which to use when.
-
-* Menu:
-
-* Basic Signal Handling::       The simple ‘signal’ function.
-* Advanced Signal Handling::    The more powerful ‘sigaction’ function.
-* Signal and Sigaction::        How those two functions interact.
-* Sigaction Function Example::  An example of using the sigaction function.
-* Flags for Sigaction::         Specifying options for signal handling.
-* Initial Signal Actions::      How programs inherit signal actions.
-
-
-File: libc.info,  Node: Basic Signal Handling,  Next: Advanced Signal Handling,  Up: Signal Actions
-
-24.3.1 Basic Signal Handling
-----------------------------
-
-The ‘signal’ function provides a simple interface for establishing an
-action for a particular signal.  The function and associated macros are
-declared in the header file ‘signal.h’.
-
- -- Data Type: sighandler_t
-
-     This is the type of signal handler functions.  Signal handlers take
-     one integer argument specifying the signal number, and have return
-     type ‘void’.  So, you should define handler functions like this:
-
-          void HANDLER (int signum) { ... }
-
-     The name ‘sighandler_t’ for this data type is a GNU extension.
-
- -- Function: sighandler_t signal (int SIGNUM, sighandler_t ACTION)
-
-     Preliminary: | MT-Safe sigintr | AS-Safe | AC-Safe | *Note POSIX
-     Safety Concepts::.
-
-     The ‘signal’ function establishes ACTION as the action for the
-     signal SIGNUM.
-
-     The first argument, SIGNUM, identifies the signal whose behavior
-     you want to control, and should be a signal number.  The proper way
-     to specify a signal number is with one of the symbolic signal names
-     (*note Standard Signals::)—don’t use an explicit number, because
-     the numerical code for a given kind of signal may vary from
-     operating system to operating system.
-
-     The second argument, ACTION, specifies the action to use for the
-     signal SIGNUM.  This can be one of the following:
-
-     ‘SIG_DFL’
-          ‘SIG_DFL’ specifies the default action for the particular
-          signal.  The default actions for various kinds of signals are
-          stated in *note Standard Signals::.
-
-     ‘SIG_IGN’
-          ‘SIG_IGN’ specifies that the signal should be ignored.
-
-          Your program generally should not ignore signals that
-          represent serious events or that are normally used to request
-          termination.  You cannot ignore the ‘SIGKILL’ or ‘SIGSTOP’
-          signals at all.  You can ignore program error signals like
-          ‘SIGSEGV’, but ignoring the error won’t enable the program to
-          continue executing meaningfully.  Ignoring user requests such
-          as ‘SIGINT’, ‘SIGQUIT’, and ‘SIGTSTP’ is unfriendly.
-
-          When you do not wish signals to be delivered during a certain
-          part of the program, the thing to do is to block them, not
-          ignore them.  *Note Blocking Signals::.
-
-     ‘HANDLER’
-          Supply the address of a handler function in your program, to
-          specify running this handler as the way to deliver the signal.
-
-          For more information about defining signal handler functions,
-          see *note Defining Handlers::.
-
-     If you set the action for a signal to ‘SIG_IGN’, or if you set it
-     to ‘SIG_DFL’ and the default action is to ignore that signal, then
-     any pending signals of that type are discarded (even if they are
-     blocked).  Discarding the pending signals means that they will
-     never be delivered, not even if you subsequently specify another
-     action and unblock this kind of signal.
-
-     The ‘signal’ function returns the action that was previously in
-     effect for the specified SIGNUM.  You can save this value and
-     restore it later by calling ‘signal’ again.
-
-     If ‘signal’ can’t honor the request, it returns ‘SIG_ERR’ instead.
-     The following ‘errno’ error conditions are defined for this
-     function:
-
-     ‘EINVAL’
-          You specified an invalid SIGNUM; or you tried to ignore or
-          provide a handler for ‘SIGKILL’ or ‘SIGSTOP’.
-
-   *Compatibility Note:* A problem encountered when working with the
-‘signal’ function is that it has different semantics on BSD and SVID
-systems.  The difference is that on SVID systems the signal handler is
-deinstalled after signal delivery.  On BSD systems the handler must be
-explicitly deinstalled.  In the GNU C Library we use the BSD version by
-default.  To use the SVID version you can either use the function
-‘sysv_signal’ (see below) or use the ‘_XOPEN_SOURCE’ feature select
-macro (*note Feature Test Macros::).  In general, use of these functions
-should be avoided because of compatibility problems.  It is better to
-use ‘sigaction’ if it is available since the results are much more
-reliable.
-
-   Here is a simple example of setting up a handler to delete temporary
-files when certain fatal signals happen:
-
-     #include <signal.h>
-
-     void
-     termination_handler (int signum)
-     {
-       struct temp_file *p;
-
-       for (p = temp_file_list; p; p = p->next)
-         unlink (p->name);
-     }
-
-     int
-     main (void)
-     {
-       ...
-       if (signal (SIGINT, termination_handler) == SIG_IGN)
-         signal (SIGINT, SIG_IGN);
-       if (signal (SIGHUP, termination_handler) == SIG_IGN)
-         signal (SIGHUP, SIG_IGN);
-       if (signal (SIGTERM, termination_handler) == SIG_IGN)
-         signal (SIGTERM, SIG_IGN);
-       ...
-     }
-
-Note that if a given signal was previously set to be ignored, this code
-avoids altering that setting.  This is because non-job-control shells
-often ignore certain signals when starting children, and it is important
-for the children to respect this.
-
-   We do not handle ‘SIGQUIT’ or the program error signals in this
-example because these are designed to provide information for debugging
-(a core dump), and the temporary files may give useful information.
-
- -- Function: sighandler_t sysv_signal (int SIGNUM, sighandler_t ACTION)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘sysv_signal’ implements the behavior of the standard ‘signal’
-     function as found on SVID systems.  The difference to BSD systems
-     is that the handler is deinstalled after a delivery of a signal.
-
-     *Compatibility Note:* As said above for ‘signal’, this function
-     should be avoided when possible.  ‘sigaction’ is the preferred
-     method.
-
- -- Function: sighandler_t ssignal (int SIGNUM, sighandler_t ACTION)
-
-     Preliminary: | MT-Safe sigintr | AS-Safe | AC-Safe | *Note POSIX
-     Safety Concepts::.
-
-     The ‘ssignal’ function does the same thing as ‘signal’; it is
-     provided only for compatibility with SVID.
-
- -- Macro: sighandler_t SIG_ERR
-
-     The value of this macro is used as the return value from ‘signal’
-     to indicate an error.
 

@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -4755,8 +4795,9 @@ perform these operations faster than the equivalent C code.
           ((x) < (y) ? (x) : (y))
      except that X and Y are only evaluated once.
 
-     If an argument is NaN, the other argument is returned.  If both
-     arguments are NaN, NaN is returned.
+     If an argument is a quiet NaN, the other argument is returned.  If
+     both arguments are NaN, or either is a signaling NaN, NaN is
+     returned.
 
  -- Function: double fmax (double X, double Y)
  -- Function: float fmaxf (float X, float Y)
@@ -4769,8 +4810,63 @@ perform these operations faster than the equivalent C code.
 
      The ‘fmax’ function returns the greater of the two values X and Y.
 
-     If an argument is NaN, the other argument is returned.  If both
-     arguments are NaN, NaN is returned.
+     If an argument is a quiet NaN, the other argument is returned.  If
+     both arguments are NaN, or either is a signaling NaN, NaN is
+     returned.
+
+ -- Function: double fminimum (double X, double Y)
+ -- Function: float fminimumf (float X, float Y)
+ -- Function: long double fminimuml (long double X, long double Y)
+ -- Function: _FloatN fminimumfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fminimumfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fminimum’ function returns the lesser of the two values X and
+     Y.  Unlike ‘fmin’, if either argument is a NaN, NaN is returned.
+     Positive zero is treated as greater than negative zero.
+
+ -- Function: double fmaximum (double X, double Y)
+ -- Function: float fmaximumf (float X, float Y)
+ -- Function: long double fmaximuml (long double X, long double Y)
+ -- Function: _FloatN fmaximumfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fmaximumfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fmaximum’ function returns the greater of the two values X and
+     Y.  Unlike ‘fmax’, if either argument is a NaN, NaN is returned.
+     Positive zero is treated as greater than negative zero.
+
+ -- Function: double fminimum_num (double X, double Y)
+ -- Function: float fminimum_numf (float X, float Y)
+ -- Function: long double fminimum_numl (long double X, long double Y)
+ -- Function: _FloatN fminimum_numfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fminimum_numfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fminimum_num’ function returns the lesser of the two values X
+     and Y.  If one argument is a number and the other is a NaN, even a
+     signaling NaN, the number is returned.  Positive zero is treated as
+     greater than negative zero.
+
+ -- Function: double fmaximum_num (double X, double Y)
+ -- Function: float fmaximum_numf (float X, float Y)
+ -- Function: long double fmaximum_numl (long double X, long double Y)
+ -- Function: _FloatN fmaximum_numfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fmaximum_numfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘fmaximum_num’ function returns the greater of the two values X
+     and Y.  If one argument is a number and the other is a NaN, even a
+     signaling NaN, the number is returned.  Positive zero is treated as
+     greater than negative zero.
 
  -- Function: double fminmag (double X, double Y)
  -- Function: float fminmagf (float X, float Y)
@@ -4799,6 +4895,62 @@ perform these operations faster than the equivalent C code.
      values X and Y has the greater absolute value.  If both have the
      same absolute value, or either is NaN, they behave the same as the
      ‘fmax’ functions.
+
+ -- Function: double fminimum_mag (double X, double Y)
+ -- Function: float fminimum_magf (float X, float Y)
+ -- Function: long double fminimum_magl (long double X, long double Y)
+ -- Function: _FloatN fminimum_magfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fminimum_magfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     These functions return whichever of the two values X and Y has the
+     smaller absolute value.  If both have the same absolute value, or
+     either is NaN, they behave the same as the ‘fminimum’ functions.
+
+ -- Function: double fmaximum_mag (double X, double Y)
+ -- Function: float fmaximum_magf (float X, float Y)
+ -- Function: long double fmaximum_magl (long double X, long double Y)
+ -- Function: _FloatN fmaximum_magfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fmaximum_magfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     These functions return whichever of the two values X and Y has the
+     greater absolute value.  If both have the same absolute value, or
+     either is NaN, they behave the same as the ‘fmaximum’ functions.
+
+ -- Function: double fminimum_mag_num (double X, double Y)
+ -- Function: float fminimum_mag_numf (float X, float Y)
+ -- Function: long double fminimum_mag_numl (long double X, long double
+          Y)
+ -- Function: _FloatN fminimum_mag_numfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fminimum_mag_numfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     These functions return whichever of the two values X and Y has the
+     smaller absolute value.  If both have the same absolute value, or
+     either is NaN, they behave the same as the ‘fminimum_num’
+     functions.
+
+ -- Function: double fmaximum_mag_num (double X, double Y)
+ -- Function: float fmaximum_mag_numf (float X, float Y)
+ -- Function: long double fmaximum_mag_numl (long double X, long double
+          Y)
+ -- Function: _FloatN fmaximum_mag_numfN (_FloatN X, _FloatN Y)
+ -- Function: _FloatNx fmaximum_mag_numfNx (_FloatNx X, _FloatNx Y)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     These functions return whichever of the two values X and Y has the
+     greater absolute value.  If both have the same absolute value, or
+     either is NaN, they behave the same as the ‘fmaximum_num’
+     functions.
 
  -- Function: double fdim (double X, double Y)
  -- Function: float fdimf (float X, float Y)
@@ -5868,480 +6020,4 @@ the interval times the number of CPUs in the computer)
 
    People often call this CPU time, but we reserve the latter term in
 this manual for the definition above.
-
-
-File: libc.info,  Node: Time Types,  Next: Calculating Elapsed Time,  Prev: Time Basics,  Up: Date and Time
-
-21.2 Time Types
-===============
-
-ISO C and POSIX define several data types for representing elapsed
-times, simple calendar times, and broken-down times.
-
- -- Data Type: clock_t
-
-     ‘clock_t’ is used to measure processor and CPU time.  It may be an
-     integer or a floating-point type.  Its values are counts of “clock
-     ticks” since some arbitrary event in the past.  The number of clock
-     ticks per second is system-specific.  *Note Processor And CPU
-     Time::, for further detail.
-
- -- Data Type: time_t
-
-     ‘time_t’ is the simplest data type used to represent simple
-     calendar time.
-
-     In ISO C, ‘time_t’ can be either an integer or a floating-point
-     type, and the meaning of ‘time_t’ values is not specified.  The
-     only things a strictly conforming program can do with ‘time_t’
-     values are: pass them to ‘difftime’ to get the elapsed time between
-     two simple calendar times (*note Calculating Elapsed Time::), and
-     pass them to the functions that convert them to broken-down time
-     (*note Broken-down Time::).
-
-     On POSIX-conformant systems, ‘time_t’ is an integer type and its
-     values represent the number of seconds elapsed since the “epoch”,
-     which is 00:00:00 on January 1, 1970, Coordinated Universal Time.
-
-     The GNU C Library additionally guarantees that ‘time_t’ is a signed
-     type, and that all of its functions operate correctly on negative
-     ‘time_t’ values, which are interpreted as times before the epoch.
-
- -- Data Type: struct timespec
-
-     ‘struct timespec’ represents a simple calendar time, or an elapsed
-     time, with sub-second resolution.  It is declared in ‘time.h’ and
-     has the following members:
-
-     ‘time_t tv_sec’
-          The number of whole seconds elapsed since the epoch (for a
-          simple calendar time) or since some other starting point (for
-          an elapsed time).
-
-     ‘long int tv_nsec’
-          The number of nanoseconds elapsed since the time given by the
-          ‘tv_sec’ member.
-
-          When ‘struct timespec’ values are produced by GNU C Library
-          functions, the value in this field will always be greater than
-          or equal to zero, and less than 1,000,000,000.  When ‘struct
-          timespec’ values are supplied to GNU C Library functions, the
-          value in this field must be in the same range.
-
- -- Data Type: struct timeval
-
-     ‘struct timeval’ is an older type for representing a simple
-     calendar time, or an elapsed time, with sub-second resolution.  It
-     is almost the same as ‘struct timespec’, but provides only
-     microsecond resolution.  It is declared in ‘sys/time.h’ and has the
-     following members:
-
-     ‘time_t tv_sec’
-          The number of whole seconds elapsed since the epoch (for a
-          simple calendar time) or since some other starting point (for
-          an elapsed time).
-
-     ‘long int tv_usec’
-          The number of microseconds elapsed since the time given by the
-          ‘tv_sec’ member.
-
-          When ‘struct timeval’ values are produced by GNU C Library
-          functions, the value in this field will always be greater than
-          or equal to zero, and less than 1,000,000.  When ‘struct
-          timeval’ values are supplied to GNU C Library functions, the
-          value in this field must be in the same range.
-
- -- Data Type: struct tm
-
-     This is the data type used to represent a broken-down time.  It has
-     separate fields for year, month, day, and so on.  *Note Broken-down
-     Time::, for further details.
-
-
-File: libc.info,  Node: Calculating Elapsed Time,  Next: Processor And CPU Time,  Prev: Time Types,  Up: Date and Time
-
-21.3 Calculating Elapsed Time
-=============================
-
-Often, one wishes to calculate an elapsed time as the difference between
-two simple calendar times.  The GNU C Library provides only one function
-for this purpose.
-
- -- Function: double difftime (time_t END, time_t BEGIN)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘difftime’ function returns the number of seconds of elapsed
-     time from calendar time BEGIN to calendar time END, as a value of
-     type ‘double’.
-
-     On POSIX-conformant systems, the advantage of using ‘difftime (END,
-     BEGIN)’ over ‘END - BEGIN’ is that it will produce the
-     mathematically correct result even if END and BEGIN are so far
-     apart that a simple subtraction would overflow.  However, if they
-     are so far apart that a ‘double’ cannot exactly represent the
-     difference, the result will be inexact.
-
-     On other systems, ‘time_t’ values might be encoded in a way that
-     prevents subtraction from working directly, and then ‘difftime’
-     would be the only way to compute their difference.
-
-   The GNU C Library does not provide any functions for computing the
-difference between two values of type ‘struct timeval’ or
-‘struct timespec’.  Here is the recommended way to do this calculation
-by hand.  It works even on some peculiar operating systems where the
-‘tv_sec’ member has an unsigned type.
-
-
-     /* Subtract the ‘struct timeval’ values X and Y,
-        storing the result in RESULT.
-        Return 1 if the difference is negative, otherwise 0. */
-
-     int
-     timeval_subtract (struct timeval *result, struct timeval *x, struct timeval *y)
-     {
-       /* Perform the carry for the later subtraction by updating Y. */
-       if (x->tv_usec < y->tv_usec) {
-         int nsec = (y->tv_usec - x->tv_usec) / 1000000 + 1;
-         y->tv_usec -= 1000000 * nsec;
-         y->tv_sec += nsec;
-       }
-       if (x->tv_usec - y->tv_usec > 1000000) {
-         int nsec = (x->tv_usec - y->tv_usec) / 1000000;
-         y->tv_usec += 1000000 * nsec;
-         y->tv_sec -= nsec;
-       }
-
-       /* Compute the time remaining to wait.
-          ‘tv_usec’ is certainly positive. */
-       result->tv_sec = x->tv_sec - y->tv_sec;
-       result->tv_usec = x->tv_usec - y->tv_usec;
-
-       /* Return 1 if result is negative. */
-       return x->tv_sec < y->tv_sec;
-     }
-
-
-File: libc.info,  Node: Processor And CPU Time,  Next: Calendar Time,  Prev: Calculating Elapsed Time,  Up: Date and Time
-
-21.4 Processor And CPU Time
-===========================
-
-If you’re trying to optimize your program or measure its efficiency,
-it’s very useful to know how much processor time it uses.  For that,
-calendar time and elapsed times are useless because a process may spend
-time waiting for I/O or for other processes to use the CPU. However, you
-can get the information with the functions in this section.
-
-   CPU time (*note Time Basics::) is represented by the data type
-‘clock_t’, which is a number of “clock ticks”.  It gives the total
-amount of time a process has actively used a CPU since some arbitrary
-event.  On GNU systems, that event is the creation of the process.
-While arbitrary in general, the event is always the same event for any
-particular process, so you can always measure how much time on the CPU a
-particular computation takes by examining the process’ CPU time before
-and after the computation.
-
-   On GNU/Linux and GNU/Hurd systems, ‘clock_t’ is equivalent to ‘long
-int’ and ‘CLOCKS_PER_SEC’ is an integer value.  But in other systems,
-both ‘clock_t’ and the macro ‘CLOCKS_PER_SEC’ can be either integer or
-floating-point types.  Casting CPU time values to ‘double’, as in the
-example above, makes sure that operations such as arithmetic and
-printing work properly and consistently no matter what the underlying
-representation is.
-
-   Note that the clock can wrap around.  On a 32bit system with
-‘CLOCKS_PER_SEC’ set to one million this function will return the same
-value approximately every 72 minutes.
-
-   For additional functions to examine a process’ use of processor time,
-and to control it, see *note Resource Usage And Limitation::.
-
-* Menu:
-
-* CPU Time::                    The ‘clock’ function.
-* Processor Time::              The ‘times’ function.
-
-
-File: libc.info,  Node: CPU Time,  Next: Processor Time,  Up: Processor And CPU Time
-
-21.4.1 CPU Time Inquiry
------------------------
-
-To get a process’ CPU time, you can use the ‘clock’ function.  This
-facility is declared in the header file ‘time.h’.
-
-   In typical usage, you call the ‘clock’ function at the beginning and
-end of the interval you want to time, subtract the values, and then
-divide by ‘CLOCKS_PER_SEC’ (the number of clock ticks per second) to get
-processor time, like this:
-
-     #include <time.h>
-
-     clock_t start, end;
-     double cpu_time_used;
-
-     start = clock();
-     ... /* Do the work. */
-     end = clock();
-     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-   Do not use a single CPU time as an amount of time; it doesn’t work
-that way.  Either do a subtraction as shown above or query processor
-time directly.  *Note Processor Time::.
-
-   Different computers and operating systems vary wildly in how they
-keep track of CPU time.  It’s common for the internal processor clock to
-have a resolution somewhere between a hundredth and millionth of a
-second.
-
- -- Macro: int CLOCKS_PER_SEC
-
-     The value of this macro is the number of clock ticks per second
-     measured by the ‘clock’ function.  POSIX requires that this value
-     be one million independent of the actual resolution.
-
- -- Function: clock_t clock (void)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function returns the calling process’ current CPU time.  If
-     the CPU time is not available or cannot be represented, ‘clock’
-     returns the value ‘(clock_t)(-1)’.
-
-
-File: libc.info,  Node: Processor Time,  Prev: CPU Time,  Up: Processor And CPU Time
-
-21.4.2 Processor Time Inquiry
------------------------------
-
-The ‘times’ function returns information about a process’ consumption of
-processor time in a ‘struct tms’ object, in addition to the process’ CPU
-time.  *Note Time Basics::.  You should include the header file
-‘sys/times.h’ to use this facility.
-
- -- Data Type: struct tms
-
-     The ‘tms’ structure is used to return information about process
-     times.  It contains at least the following members:
-
-     ‘clock_t tms_utime’
-          This is the total processor time the calling process has used
-          in executing the instructions of its program.
-
-     ‘clock_t tms_stime’
-          This is the processor time the system has used on behalf of
-          the calling process.
-
-     ‘clock_t tms_cutime’
-          This is the sum of the ‘tms_utime’ values and the ‘tms_cutime’
-          values of all terminated child processes of the calling
-          process, whose status has been reported to the parent process
-          by ‘wait’ or ‘waitpid’; see *note Process Completion::.  In
-          other words, it represents the total processor time used in
-          executing the instructions of all the terminated child
-          processes of the calling process, excluding child processes
-          which have not yet been reported by ‘wait’ or ‘waitpid’.
-
-     ‘clock_t tms_cstime’
-          This is similar to ‘tms_cutime’, but represents the total
-          processor time the system has used on behalf of all the
-          terminated child processes of the calling process.
-
-     All of the times are given in numbers of clock ticks.  Unlike CPU
-     time, these are the actual amounts of time; not relative to any
-     event.  *Note Creating a Process::.
-
- -- Macro: int CLK_TCK
-
-     This is an obsolete name for the number of clock ticks per second.
-     Use ‘sysconf (_SC_CLK_TCK)’ instead.
-
- -- Function: clock_t times (struct tms *BUFFER)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘times’ function stores the processor time information for the
-     calling process in BUFFER.
-
-     The return value is the number of clock ticks since an arbitrary
-     point in the past, e.g.  since system start-up.  ‘times’ returns
-     ‘(clock_t)(-1)’ to indicate failure.
-
-   *Portability Note:* The ‘clock’ function described in *note CPU
-Time:: is specified by the ISO C standard.  The ‘times’ function is a
-feature of POSIX.1.  On GNU systems, the CPU time is defined to be
-equivalent to the sum of the ‘tms_utime’ and ‘tms_stime’ fields returned
-by ‘times’.
-
-
-File: libc.info,  Node: Calendar Time,  Next: Setting an Alarm,  Prev: Processor And CPU Time,  Up: Date and Time
-
-21.5 Calendar Time
-==================
-
-This section describes the functions for getting, setting, and
-manipulating calendar times.
-
-* Menu:
-
-* Getting the Time::            Functions for finding out what time it is.
-* Setting and Adjusting the Time::
-                                Functions for setting and adjusting
-                                  the system clock.
-* Broken-down Time::            Facilities for manipulating local time.
-* Formatting Calendar Time::    Converting times to strings.
-* Parsing Date and Time::       Convert textual time and date information back
-                                 into broken-down time values.
-* TZ Variable::                 How users specify the time zone.
-* Time Zone Functions::         Functions to examine or specify the time zone.
-* Time Functions Example::      An example program showing use of some of
-				 the time functions.
-
-
-File: libc.info,  Node: Getting the Time,  Next: Setting and Adjusting the Time,  Up: Calendar Time
-
-21.5.1 Getting the Time
------------------------
-
-The GNU C Library provides several functions for getting the current
-calendar time, with different levels of resolution.
-
- -- Function: time_t time (time_t *RESULT)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This is the simplest function for getting the current calendar
-     time.  It returns the calendar time as a value of type ‘time_t’; on
-     POSIX systems, that means it has a resolution of one second.  It
-     uses the same clock as ‘clock_gettime (CLOCK_REALTIME_COARSE)’,
-     when the clock is available or ‘clock_gettime (CLOCK_REALTIME)’
-     otherwise.
-
-     If the argument RESULT is not a null pointer, the calendar time
-     value is also stored in ‘*RESULT’.
-
-     This function cannot fail.
-
-   Some applications need more precise timekeeping than is possible with
-a ‘time_t’ alone.  Some applications also need more control over what is
-meant by “the current time.” For these applications, POSIX provides a
-function ‘clock_gettime’ that can retrieve the time with up to
-nanosecond precision, from a variety of different clocks.  Clocks can be
-system-wide, measuring time the same for all processes; or they can be
-per-process or per-thread, measuring CPU time consumed by a particular
-process, or some other similar resource.  Each clock has its own
-resolution and epoch.  You can find the resolution of a clock with the
-function ‘clock_getres’.  There is no function to get the epoch for a
-clock; either it is fixed and documented, or the clock is not meant to
-be used to measure absolute times.
-
- -- Data Type: clockid_t
-
-     The type ‘clockid_t’ is used for constants that indicate which of
-     several system clocks one wishes to use.
-
-   All systems that support this family of functions will define at
-least this clock constant:
-
- -- Macro: clockid_t CLOCK_REALTIME
-
-     This clock uses the POSIX epoch, 00:00:00 on January 1, 1970,
-     Coordinated Universal Time.  It is close to, but not necessarily in
-     lock-step with, the clocks of ‘time’ (above) and of ‘gettimeofday’
-     (below).
-
-   A second clock constant which is not universal, but still very
-common, is for a clock measuring “monotonic time”.  Monotonic time is
-useful for measuring elapsed times, because it guarantees that those
-measurements are not affected by changes to the system clock.
-
- -- Macro: clockid_t CLOCK_MONOTONIC
-
-     System-wide clock that continuously measures the advancement of
-     calendar time, ignoring discontinuous changes to the system’s
-     setting for absolute calendar time.
-
-     The epoch for this clock is an unspecified point in the past.  The
-     epoch may change if the system is rebooted or suspended.
-     Therefore, ‘CLOCK_MONOTONIC’ cannot be used to measure absolute
-     time, only elapsed time.
-
-   Systems may support more than just these two clocks.
-
- -- Function: int clock_gettime (clockid_t CLOCK, struct timespec *TS)
-
-     Get the current time accoding to the clock identified by CLOCK,
-     storing it as seconds and nanoseconds in ‘*TS’.  *Note Time
-     Types::, for a description of ‘struct timespec’.
-
-     The return value is ‘0’ on success and ‘-1’ on failure.  The
-     following ‘errno’ error condition is defined for this function:
-
-     ‘EINVAL’
-          The clock identified by CLOCK is not supported.
-
-   ‘clock_gettime’ reports the time scaled to seconds and nanoseconds,
-but the actual resolution of each clock may not be as fine as one
-nanosecond, and may not be the same for all clocks.  POSIX also provides
-a function for finding out the actual resolution of a clock:
-
- -- Function: int clock_getres (clockid_t CLOCK, struct timespec *RES)
-
-     Get the actual resolution of the clock identified by CLOCK, storing
-     it in ‘*TS’.
-
-     For instance, if the clock hardware for ‘CLOCK_REALTIME’ uses a
-     quartz crystal that oscillates at 32.768 kHz, then its resolution
-     would be 30.518 microseconds, and
-     ‘clock_getres (CLOCK_REALTIME, &r)’ would set ‘r.tv_sec’ to 0 and
-     ‘r.tv_nsec’ to 30518.
-
-     The return value is ‘0’ on success and ‘-1’ on failure.  The
-     following ‘errno’ error condition is defined for this function:
-
-     ‘EINVAL’
-          The clock identified by CLOCK is not supported.
-
-   These functions, and the constants that identify particular clocks,
-are declared in ‘time.h’.
-
-   *Portability Note:* On some systems, including systems that use older
-versions of the GNU C Library, programs that use ‘clock_gettime’ or
-‘clock_setres’ must be linked with the ‘-lrt’ library.  This has not
-been necessary with the GNU C Library since version 2.17.
-
-   The GNU C Library also provides an older, but still widely used,
-function for getting the current time with a resolution of microseconds.
-This function is declared in ‘sys/time.h’.
-
- -- Function: int gettimeofday (struct timeval *TP, void *TZP)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     Get the current calendar time, storing it as seconds and
-     microseconds in ‘*TP’.  *Note Time Types::, for a description of
-     ‘struct timeval’.  The clock of ‘gettimeofday’ is close to, but not
-     necessarily in lock-step with, the clocks of ‘time’ and of
-     ‘clock_gettime (CLOCK_REALTIME)’ (see above).
-
-     On some historic systems, if TZP was not a null pointer,
-     information about a system-wide time zone would be written to
-     ‘*TZP’.  This feature is obsolete and not supported on GNU systems.
-     You should always supply a null pointer for this argument.
-     Instead, use the facilities described in *note Time Zone
-     Functions:: and in *note Broken-down Time:: for working with time
-     zones.
-
-     This function cannot fail, and its return value is always ‘0’.
-
-     *Portability Note:* As of the 2008 revision of POSIX, this function
-     is considered obsolete.  The GNU C Library will continue to provide
-     this function indefinitely, but new programs should use
-     ‘clock_gettime’ instead.
 

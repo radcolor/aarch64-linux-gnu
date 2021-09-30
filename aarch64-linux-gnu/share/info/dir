@@ -143,7 +143,6 @@ GNU C library functions and macros
 * atan2fNx: (libc)Inverse Trig Functions.
 * atan2fN: (libc)Inverse Trig Functions.
 * atan2f: (libc)Inverse Trig Functions.
-* atan2l: (libc)Inverse Trig Functions.
 * atan2: (libc)Inverse Trig Functions.
 * atanfNx: (libc)Inverse Trig Functions.
 * atanfN: (libc)Inverse Trig Functions.
@@ -155,6 +154,7 @@ GNU C library functions and macros
 * atanh: (libc)Hyperbolic Functions.
 * atanl: (libc)Inverse Trig Functions.
 * atan: (libc)Inverse Trig Functions.
+* atan2l: (libc)Inverse Trig Functions.
 * atexit: (libc)Cleanups on Exit.
 * atof: (libc)Parsing of Floats.
 * atoi: (libc)Parsing of Integers.
@@ -750,6 +750,26 @@ GNU C library functions and macros
 * fmaxfNx: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmagfNx: (libc)Misc FP Arithmetic.
 * fmaxmagfN: (libc)Misc FP Arithmetic.
@@ -766,6 +786,26 @@ GNU C library functions and macros
 * fminfNx: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmagfNx: (libc)Misc FP Arithmetic.
 * fminmagfN: (libc)Misc FP Arithmetic.
@@ -909,10 +949,10 @@ GNU C library functions and macros
 * getgroups: (libc)Reading Persona.
 * gethostbyaddr_r: (libc)Host Names.
 * gethostbyaddr: (libc)Host Names.
-* gethostbyname2: (libc)Host Names.
 * gethostbyname_r: (libc)Host Names.
 * gethostbyname: (libc)Host Names.
 * gethostbyname2_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
 * gethostent: (libc)Host Names.
 * gethostid: (libc)Host Identification.
 * gethostname: (libc)Host Identification.
@@ -1276,9 +1316,9 @@ GNU C library functions and macros
 * mkstemp: (libc)Temporary Files.
 * mktemp: (libc)Temporary Files.
 * mktime: (libc)Broken-down Time.
-* mlock2: (libc)Page Lock Functions.
 * mlockall: (libc)Page Lock Functions.
 * mlock: (libc)Page Lock Functions.
+* mlock2: (libc)Page Lock Functions.
 * mmap: (libc)Memory-mapped I/O.
 * mmap64: (libc)Memory-mapped I/O.
 * modffNx: (libc)Rounding Functions.
@@ -1412,13 +1452,13 @@ GNU C library functions and macros
 * on_exit: (libc)Cleanups on Exit.
 * ONLCR: (libc)Output Modes.
 * ONOEOT: (libc)Output Modes.
+* open64: (libc)Opening and Closing Files.
 * OPEN_MAX: (libc)General Limits.
 * open_memstream: (libc)String Streams.
 * opendir: (libc)Opening a Directory.
 * openlog: (libc)openlog.
 * openpty: (libc)Pseudo-Terminal Pairs.
 * open: (libc)Opening and Closing Files.
-* open64: (libc)Opening and Closing Files.
 * OPOST: (libc)Output Modes.
 * OXTABS: (libc)Output Modes.
 * P_tmpdir: (libc)Temporary Files.
@@ -1495,12 +1535,12 @@ GNU C library functions and macros
 * putwchar: (libc)Simple Output.
 * putwc: (libc)Simple Output.
 * putw: (libc)Simple Output.
-* pwrite64: (libc)I/O Primitives.
 * pwritev: (libc)Scatter-Gather.
 * pwritev2: (libc)Scatter-Gather.
 * pwritev64v2: (libc)Scatter-Gather.
 * pwritev64: (libc)Scatter-Gather.
 * pwrite: (libc)I/O Primitives.
+* pwrite64: (libc)I/O Primitives.
 * qecvt_r: (libc)System V Number Conversion.
 * qecvt: (libc)System V Number Conversion.
 * qfcvt_r: (libc)System V Number Conversion.
@@ -1516,10 +1556,10 @@ GNU C library functions and macros
 * rand: (libc)ISO Random.
 * rawmemchr: (libc)Search Functions.
 * RE_DUP_MAX: (libc)General Limits.
-* readdir_r: (libc)Reading/Closing Directory.
-* readdir: (libc)Reading/Closing Directory.
 * readdir64_r: (libc)Reading/Closing Directory.
 * readdir64: (libc)Reading/Closing Directory.
+* readdir_r: (libc)Reading/Closing Directory.
+* readdir: (libc)Reading/Closing Directory.
 * readlink: (libc)Symbolic Links.
 * readv: (libc)Scatter-Gather.
 * read: (libc)I/O Primitives.
@@ -1780,11 +1820,11 @@ GNU C library functions and macros
 * sqrtf: (libc)Exponents and Logarithms.
 * sqrtl: (libc)Exponents and Logarithms.
 * sqrt: (libc)Exponents and Logarithms.
+* srand48_r: (libc)SVID Random.
 * srand48: (libc)SVID Random.
 * srandom_r: (libc)BSD Random.
 * srandom: (libc)BSD Random.
 * srand: (libc)ISO Random.
-* srand48_r: (libc)SVID Random.
 * sscanf: (libc)Formatted Input Functions.
 * ssignal: (libc)Basic Signal Handling.
 * SSIZE_MAX: (libc)General Limits.
@@ -2017,9 +2057,9 @@ GNU C library functions and macros
 * vwscanf: (libc)Variable Arguments Input.
 * W_OK: (libc)Testing File Access.
 * wait3: (libc)BSD Wait Functions.
-* wait4: (libc)Process Completion.
 * waitpid: (libc)Process Completion.
 * wait: (libc)Process Completion.
+* wait4: (libc)Process Completion.
 * warnx: (libc)Error Messages.
 * warn: (libc)Error Messages.
 * WCHAR_MAX: (libc)Extended Char Intro.

@@ -892,12 +892,20 @@
 /* Return positive difference between X and Y.  */
 #define fdim(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fdim)
 
+#if __GLIBC_USE (ISOC2X) && !defined __USE_GNU
 /* Return maximum numeric value from X and Y.  */
-#define fmax(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmax)
+# define fmax(Val1, Val2) __TGMATH_BINARY_REAL_STD_ONLY (Val1, Val2, fmax)
 
 /* Return minimum numeric value from X and Y.  */
-#define fmin(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmin)
+# define fmin(Val1, Val2) __TGMATH_BINARY_REAL_STD_ONLY (Val1, Val2, fmin)
+#else
+/* Return maximum numeric value from X and Y.  */
+# define fmax(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmax)
 
+/* Return minimum numeric value from X and Y.  */
+# define fmin(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmin)
+#endif
+  
 
 /* Multiply-add function computed as a ternary operation.  */
 #define fma(Val1, Val2, Val3) \
@@ -921,12 +929,46 @@
 
 /* Like ilogb, but returning long int.  */
 # define llogb(Val) __TGMATH_UNARY_REAL_RET_ONLY (Val, llogb)
+#endif
 
+#if __GLIBC_USE (IEC_60559_BFP_EXT)
 /* Return value with maximum magnitude.  */
 # define fmaxmag(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmaxmag)
 
 /* Return value with minimum magnitude.  */
 # define fminmag(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fminmag)
+#endif
+
+#if __GLIBC_USE (ISOC2X)
+/* Return maximum value from X and Y.  */
+# define fmaximum(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmaximum)
+
+/* Return minimum value from X and Y.  */
+# define fminimum(Val1, Val2) __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fminimum)
+
+/* Return maximum numeric value from X and Y.  */
+# define fmaximum_num(Val1, Val2)			\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmaximum_num)
+
+/* Return minimum numeric value from X and Y.  */
+# define fminimum_num(Val1, Val2)			\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fminimum_num)
+
+/* Return value with maximum magnitude.  */
+# define fmaximum_mag(Val1, Val2)			\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmaximum_mag)
+
+/* Return value with minimum magnitude.  */
+# define fminimum_mag(Val1, Val2)			\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fminimum_mag)
+
+/* Return numeric value with maximum magnitude.  */
+# define fmaximum_mag_num(Val1, Val2)				\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fmaximum_mag_num)
+
+/* Return numeric value with minimum magnitude.  */
+# define fminimum_mag_num(Val1, Val2)				\
+  __TGMATH_BINARY_REAL_ONLY (Val1, Val2, fminimum_mag_num)
 #endif
 
 

@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -2116,6 +2156,525 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Alarm Signals,  Next: Asynchronous I/O Signals,  Prev: Termination Signals,  Up: Standard Signals
+
+24.2.3 Alarm Signals
+--------------------
+
+These signals are used to indicate the expiration of timers.  *Note
+Setting an Alarm::, for information about functions that cause these
+signals to be sent.
+
+   The default behavior for these signals is to cause program
+termination.  This default is rarely useful, but no other default would
+be useful; most of the ways of using these signals would require handler
+functions in any case.
+
+ -- Macro: int SIGALRM
+
+     This signal typically indicates expiration of a timer that measures
+     real or clock time.  It is used by the ‘alarm’ function, for
+     example.
+
+ -- Macro: int SIGVTALRM
+
+     This signal typically indicates expiration of a timer that measures
+     CPU time used by the current process.  The name is an abbreviation
+     for “virtual time alarm”.
+
+ -- Macro: int SIGPROF
+
+     This signal typically indicates expiration of a timer that measures
+     both CPU time used by the current process, and CPU time expended on
+     behalf of the process by the system.  Such a timer is used to
+     implement code profiling facilities, hence the name of this signal.
+
+
+File: libc.info,  Node: Asynchronous I/O Signals,  Next: Job Control Signals,  Prev: Alarm Signals,  Up: Standard Signals
+
+24.2.4 Asynchronous I/O Signals
+-------------------------------
+
+The signals listed in this section are used in conjunction with
+asynchronous I/O facilities.  You have to take explicit action by
+calling ‘fcntl’ to enable a particular file descriptor to generate these
+signals (*note Interrupt Input::).  The default action for these signals
+is to ignore them.
+
+ -- Macro: int SIGIO
+
+     This signal is sent when a file descriptor is ready to perform
+     input or output.
+
+     On most operating systems, terminals and sockets are the only kinds
+     of files that can generate ‘SIGIO’; other kinds, including ordinary
+     files, never generate ‘SIGIO’ even if you ask them to.
+
+     On GNU systems ‘SIGIO’ will always be generated properly if you
+     successfully set asynchronous mode with ‘fcntl’.
+
+ -- Macro: int SIGURG
+
+     This signal is sent when “urgent” or out-of-band data arrives on a
+     socket.  *Note Out-of-Band Data::.
+
+ -- Macro: int SIGPOLL
+
+     This is a System V signal name, more or less similar to ‘SIGIO’.
+     It is defined only for compatibility.
+
+
+File: libc.info,  Node: Job Control Signals,  Next: Operation Error Signals,  Prev: Asynchronous I/O Signals,  Up: Standard Signals
+
+24.2.5 Job Control Signals
+--------------------------
+
+These signals are used to support job control.  If your system doesn’t
+support job control, then these macros are defined but the signals
+themselves can’t be raised or handled.
+
+   You should generally leave these signals alone unless you really
+understand how job control works.  *Note Job Control::.
+
+ -- Macro: int SIGCHLD
+
+     This signal is sent to a parent process whenever one of its child
+     processes terminates or stops.
+
+     The default action for this signal is to ignore it.  If you
+     establish a handler for this signal while there are child processes
+     that have terminated but not reported their status via ‘wait’ or
+     ‘waitpid’ (*note Process Completion::), whether your new handler
+     applies to those processes or not depends on the particular
+     operating system.
+
+ -- Macro: int SIGCLD
+
+     This is an obsolete name for ‘SIGCHLD’.
+
+ -- Macro: int SIGCONT
+
+     You can send a ‘SIGCONT’ signal to a process to make it continue.
+     This signal is special—it always makes the process continue if it
+     is stopped, before the signal is delivered.  The default behavior
+     is to do nothing else.  You cannot block this signal.  You can set
+     a handler, but ‘SIGCONT’ always makes the process continue
+     regardless.
+
+     Most programs have no reason to handle ‘SIGCONT’; they simply
+     resume execution without realizing they were ever stopped.  You can
+     use a handler for ‘SIGCONT’ to make a program do something special
+     when it is stopped and continued—for example, to reprint a prompt
+     when it is suspended while waiting for input.
+
+ -- Macro: int SIGSTOP
+
+     The ‘SIGSTOP’ signal stops the process.  It cannot be handled,
+     ignored, or blocked.
+
+ -- Macro: int SIGTSTP
+
+     The ‘SIGTSTP’ signal is an interactive stop signal.  Unlike
+     ‘SIGSTOP’, this signal can be handled and ignored.
+
+     Your program should handle this signal if you have a special need
+     to leave files or system tables in a secure state when a process is
+     stopped.  For example, programs that turn off echoing should handle
+     ‘SIGTSTP’ so they can turn echoing back on before stopping.
+
+     This signal is generated when the user types the SUSP character
+     (normally ‘C-z’).  For more information about terminal driver
+     support, see *note Special Characters::.
+
+ -- Macro: int SIGTTIN
+
+     A process cannot read from the user’s terminal while it is running
+     as a background job.  When any process in a background job tries to
+     read from the terminal, all of the processes in the job are sent a
+     ‘SIGTTIN’ signal.  The default action for this signal is to stop
+     the process.  For more information about how this interacts with
+     the terminal driver, see *note Access to the Terminal::.
+
+ -- Macro: int SIGTTOU
+
+     This is similar to ‘SIGTTIN’, but is generated when a process in a
+     background job attempts to write to the terminal or set its modes.
+     Again, the default action is to stop the process.  ‘SIGTTOU’ is
+     only generated for an attempt to write to the terminal if the
+     ‘TOSTOP’ output mode is set; *note Output Modes::.
+
+   While a process is stopped, no more signals can be delivered to it
+until it is continued, except ‘SIGKILL’ signals and (obviously)
+‘SIGCONT’ signals.  The signals are marked as pending, but not delivered
+until the process is continued.  The ‘SIGKILL’ signal always causes
+termination of the process and can’t be blocked, handled or ignored.
+You can ignore ‘SIGCONT’, but it always causes the process to be
+continued anyway if it is stopped.  Sending a ‘SIGCONT’ signal to a
+process causes any pending stop signals for that process to be
+discarded.  Likewise, any pending ‘SIGCONT’ signals for a process are
+discarded when it receives a stop signal.
+
+   When a process in an orphaned process group (*note Orphaned Process
+Groups::) receives a ‘SIGTSTP’, ‘SIGTTIN’, or ‘SIGTTOU’ signal and does
+not handle it, the process does not stop.  Stopping the process would
+probably not be very useful, since there is no shell program that will
+notice it stop and allow the user to continue it.  What happens instead
+depends on the operating system you are using.  Some systems may do
+nothing; others may deliver another signal instead, such as ‘SIGKILL’ or
+‘SIGHUP’.  On GNU/Hurd systems, the process dies with ‘SIGKILL’; this
+avoids the problem of many stopped, orphaned processes lying around the
+system.
+
+
+File: libc.info,  Node: Operation Error Signals,  Next: Miscellaneous Signals,  Prev: Job Control Signals,  Up: Standard Signals
+
+24.2.6 Operation Error Signals
+------------------------------
+
+These signals are used to report various errors generated by an
+operation done by the program.  They do not necessarily indicate a
+programming error in the program, but an error that prevents an
+operating system call from completing.  The default action for all of
+them is to cause the process to terminate.
+
+ -- Macro: int SIGPIPE
+
+     Broken pipe.  If you use pipes or FIFOs, you have to design your
+     application so that one process opens the pipe for reading before
+     another starts writing.  If the reading process never starts, or
+     terminates unexpectedly, writing to the pipe or FIFO raises a
+     ‘SIGPIPE’ signal.  If ‘SIGPIPE’ is blocked, handled or ignored, the
+     offending call fails with ‘EPIPE’ instead.
+
+     Pipes and FIFO special files are discussed in more detail in *note
+     Pipes and FIFOs::.
+
+     Another cause of ‘SIGPIPE’ is when you try to output to a socket
+     that isn’t connected.  *Note Sending Data::.
+
+ -- Macro: int SIGLOST
+
+     Resource lost.  This signal is generated when you have an advisory
+     lock on an NFS file, and the NFS server reboots and forgets about
+     your lock.
+
+     On GNU/Hurd systems, ‘SIGLOST’ is generated when any server program
+     dies unexpectedly.  It is usually fine to ignore the signal;
+     whatever call was made to the server that died just returns an
+     error.
+
+ -- Macro: int SIGXCPU
+
+     CPU time limit exceeded.  This signal is generated when the process
+     exceeds its soft resource limit on CPU time.  *Note Limits on
+     Resources::.
+
+ -- Macro: int SIGXFSZ
+
+     File size limit exceeded.  This signal is generated when the
+     process attempts to extend a file so it exceeds the process’s soft
+     resource limit on file size.  *Note Limits on Resources::.
+
+
+File: libc.info,  Node: Miscellaneous Signals,  Next: Signal Messages,  Prev: Operation Error Signals,  Up: Standard Signals
+
+24.2.7 Miscellaneous Signals
+----------------------------
+
+These signals are used for various other purposes.  In general, they
+will not affect your program unless it explicitly uses them for
+something.
+
+ -- Macro: int SIGUSR1
+ -- Macro: int SIGUSR2
+
+     The ‘SIGUSR1’ and ‘SIGUSR2’ signals are set aside for you to use
+     any way you want.  They’re useful for simple interprocess
+     communication, if you write a signal handler for them in the
+     program that receives the signal.
+
+     There is an example showing the use of ‘SIGUSR1’ and ‘SIGUSR2’ in
+     *note Signaling Another Process::.
+
+     The default action is to terminate the process.
+
+ -- Macro: int SIGWINCH
+
+     Window size change.  This is generated on some systems (including
+     GNU) when the terminal driver’s record of the number of rows and
+     columns on the screen is changed.  The default action is to ignore
+     it.
+
+     If a program does full-screen display, it should handle ‘SIGWINCH’.
+     When the signal arrives, it should fetch the new screen size and
+     reformat its display accordingly.
+
+ -- Macro: int SIGINFO
+
+     Information request.  On 4.4 BSD and GNU/Hurd systems, this signal
+     is sent to all the processes in the foreground process group of the
+     controlling terminal when the user types the STATUS character in
+     canonical mode; *note Signal Characters::.
+
+     If the process is the leader of the process group, the default
+     action is to print some status information about the system and
+     what the process is doing.  Otherwise the default is to do nothing.
+
+
+File: libc.info,  Node: Signal Messages,  Prev: Miscellaneous Signals,  Up: Standard Signals
+
+24.2.8 Signal Messages
+----------------------
+
+We mentioned above that the shell prints a message describing the signal
+that terminated a child process.  The clean way to print a message
+describing a signal is to use the functions ‘strsignal’ and ‘psignal’.
+These functions use a signal number to specify which kind of signal to
+describe.  The signal number may come from the termination status of a
+child process (*note Process Completion::) or it may come from a signal
+handler in the same process.
+
+ -- Function: char * strsignal (int SIGNUM)
+
+     Preliminary: | MT-Unsafe race:strsignal locale | AS-Unsafe init
+     i18n corrupt heap | AC-Unsafe init corrupt mem | *Note POSIX Safety
+     Concepts::.
+
+     This function returns a pointer to a statically-allocated string
+     containing a message describing the signal SIGNUM.  You should not
+     modify the contents of this string; and, since it can be rewritten
+     on subsequent calls, you should save a copy of it if you need to
+     reference it later.
+
+     This function is a GNU extension, declared in the header file
+     ‘string.h’.
+
+ -- Function: void psignal (int SIGNUM, const char *MESSAGE)
+
+     Preliminary: | MT-Safe locale | AS-Unsafe corrupt i18n heap |
+     AC-Unsafe lock corrupt mem | *Note POSIX Safety Concepts::.
+
+     This function prints a message describing the signal SIGNUM to the
+     standard error output stream ‘stderr’; see *note Standard
+     Streams::.
+
+     If you call ‘psignal’ with a MESSAGE that is either a null pointer
+     or an empty string, ‘psignal’ just prints the message corresponding
+     to SIGNUM, adding a trailing newline.
+
+     If you supply a non-null MESSAGE argument, then ‘psignal’ prefixes
+     its output with this string.  It adds a colon and a space character
+     to separate the MESSAGE from the string corresponding to SIGNUM.
+
+     This function is a BSD feature, declared in the header file
+     ‘signal.h’.
+
+ -- Function: const char * sigdescr_np (int SIGNUM)
+
+     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
+
+     This function returns the message describing the signal SIGNUM or
+     ‘NULL’ for invalid signal number (e.g "Hangup" for ‘SIGHUP’).
+     Different than ‘strsignal’ the returned description is not
+     translated.  The message points to a static storage whose lifetime
+     is the whole lifetime of the program.
+
+     This function is a GNU extension, declared in the header file
+     ‘string.h’.
+
+ -- Function: const char * sigabbrev_np (int SIGNUM)
+
+     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
+
+     This function returns the abbreviation describing the signal SIGNUM
+     or ‘NULL’ for invalid signal number.  The message points to a
+     static storage whose lifetime is the whole lifetime of the program.
+
+     This function is a GNU extension, declared in the header file
+     ‘string.h’.
+
+
+File: libc.info,  Node: Signal Actions,  Next: Defining Handlers,  Prev: Standard Signals,  Up: Signal Handling
+
+24.3 Specifying Signal Actions
+==============================
+
+The simplest way to change the action for a signal is to use the
+‘signal’ function.  You can specify a built-in action (such as to ignore
+the signal), or you can “establish a handler”.
+
+   The GNU C Library also implements the more versatile ‘sigaction’
+facility.  This section describes both facilities and gives suggestions
+on which to use when.
+
+* Menu:
+
+* Basic Signal Handling::       The simple ‘signal’ function.
+* Advanced Signal Handling::    The more powerful ‘sigaction’ function.
+* Signal and Sigaction::        How those two functions interact.
+* Sigaction Function Example::  An example of using the sigaction function.
+* Flags for Sigaction::         Specifying options for signal handling.
+* Initial Signal Actions::      How programs inherit signal actions.
+
+
+File: libc.info,  Node: Basic Signal Handling,  Next: Advanced Signal Handling,  Up: Signal Actions
+
+24.3.1 Basic Signal Handling
+----------------------------
+
+The ‘signal’ function provides a simple interface for establishing an
+action for a particular signal.  The function and associated macros are
+declared in the header file ‘signal.h’.
+
+ -- Data Type: sighandler_t
+
+     This is the type of signal handler functions.  Signal handlers take
+     one integer argument specifying the signal number, and have return
+     type ‘void’.  So, you should define handler functions like this:
+
+          void HANDLER (int signum) { ... }
+
+     The name ‘sighandler_t’ for this data type is a GNU extension.
+
+ -- Function: sighandler_t signal (int SIGNUM, sighandler_t ACTION)
+
+     Preliminary: | MT-Safe sigintr | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     The ‘signal’ function establishes ACTION as the action for the
+     signal SIGNUM.
+
+     The first argument, SIGNUM, identifies the signal whose behavior
+     you want to control, and should be a signal number.  The proper way
+     to specify a signal number is with one of the symbolic signal names
+     (*note Standard Signals::)—don’t use an explicit number, because
+     the numerical code for a given kind of signal may vary from
+     operating system to operating system.
+
+     The second argument, ACTION, specifies the action to use for the
+     signal SIGNUM.  This can be one of the following:
+
+     ‘SIG_DFL’
+          ‘SIG_DFL’ specifies the default action for the particular
+          signal.  The default actions for various kinds of signals are
+          stated in *note Standard Signals::.
+
+     ‘SIG_IGN’
+          ‘SIG_IGN’ specifies that the signal should be ignored.
+
+          Your program generally should not ignore signals that
+          represent serious events or that are normally used to request
+          termination.  You cannot ignore the ‘SIGKILL’ or ‘SIGSTOP’
+          signals at all.  You can ignore program error signals like
+          ‘SIGSEGV’, but ignoring the error won’t enable the program to
+          continue executing meaningfully.  Ignoring user requests such
+          as ‘SIGINT’, ‘SIGQUIT’, and ‘SIGTSTP’ is unfriendly.
+
+          When you do not wish signals to be delivered during a certain
+          part of the program, the thing to do is to block them, not
+          ignore them.  *Note Blocking Signals::.
+
+     ‘HANDLER’
+          Supply the address of a handler function in your program, to
+          specify running this handler as the way to deliver the signal.
+
+          For more information about defining signal handler functions,
+          see *note Defining Handlers::.
+
+     If you set the action for a signal to ‘SIG_IGN’, or if you set it
+     to ‘SIG_DFL’ and the default action is to ignore that signal, then
+     any pending signals of that type are discarded (even if they are
+     blocked).  Discarding the pending signals means that they will
+     never be delivered, not even if you subsequently specify another
+     action and unblock this kind of signal.
+
+     The ‘signal’ function returns the action that was previously in
+     effect for the specified SIGNUM.  You can save this value and
+     restore it later by calling ‘signal’ again.
+
+     If ‘signal’ can’t honor the request, it returns ‘SIG_ERR’ instead.
+     The following ‘errno’ error conditions are defined for this
+     function:
+
+     ‘EINVAL’
+          You specified an invalid SIGNUM; or you tried to ignore or
+          provide a handler for ‘SIGKILL’ or ‘SIGSTOP’.
+
+   *Compatibility Note:* A problem encountered when working with the
+‘signal’ function is that it has different semantics on BSD and SVID
+systems.  The difference is that on SVID systems the signal handler is
+deinstalled after signal delivery.  On BSD systems the handler must be
+explicitly deinstalled.  In the GNU C Library we use the BSD version by
+default.  To use the SVID version you can either use the function
+‘sysv_signal’ (see below) or use the ‘_XOPEN_SOURCE’ feature select
+macro (*note Feature Test Macros::).  In general, use of these functions
+should be avoided because of compatibility problems.  It is better to
+use ‘sigaction’ if it is available since the results are much more
+reliable.
+
+   Here is a simple example of setting up a handler to delete temporary
+files when certain fatal signals happen:
+
+     #include <signal.h>
+
+     void
+     termination_handler (int signum)
+     {
+       struct temp_file *p;
+
+       for (p = temp_file_list; p; p = p->next)
+         unlink (p->name);
+     }
+
+     int
+     main (void)
+     {
+       ...
+       if (signal (SIGINT, termination_handler) == SIG_IGN)
+         signal (SIGINT, SIG_IGN);
+       if (signal (SIGHUP, termination_handler) == SIG_IGN)
+         signal (SIGHUP, SIG_IGN);
+       if (signal (SIGTERM, termination_handler) == SIG_IGN)
+         signal (SIGTERM, SIG_IGN);
+       ...
+     }
+
+Note that if a given signal was previously set to be ignored, this code
+avoids altering that setting.  This is because non-job-control shells
+often ignore certain signals when starting children, and it is important
+for the children to respect this.
+
+   We do not handle ‘SIGQUIT’ or the program error signals in this
+example because these are designed to provide information for debugging
+(a core dump), and the temporary files may give useful information.
+
+ -- Function: sighandler_t sysv_signal (int SIGNUM, sighandler_t ACTION)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘sysv_signal’ implements the behavior of the standard ‘signal’
+     function as found on SVID systems.  The difference to BSD systems
+     is that the handler is deinstalled after a delivery of a signal.
+
+     *Compatibility Note:* As said above for ‘signal’, this function
+     should be avoided when possible.  ‘sigaction’ is the preferred
+     method.
+
+ -- Function: sighandler_t ssignal (int SIGNUM, sighandler_t ACTION)
+
+     Preliminary: | MT-Safe sigintr | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     The ‘ssignal’ function does the same thing as ‘signal’; it is
+     provided only for compatibility with SVID.
+
+ -- Macro: sighandler_t SIG_ERR
+
+     The value of this macro is used as the return value from ‘signal’
+     to indicate an error.
 
 
 File: libc.info,  Node: Advanced Signal Handling,  Next: Signal and Sigaction,  Prev: Basic Signal Handling,  Up: Signal Actions
@@ -7047,588 +7606,4 @@ code as a specification of the interface between them anyway.
           if (rc == -1)
              fprintf(stderr, "chmod failed, errno = %d\n", errno);
 
-
-
-File: libc.info,  Node: Program Termination,  Prev: System Calls,  Up: Program Basics
-
-25.7 Program Termination
-========================
-
-The usual way for a program to terminate is simply for its ‘main’
-function to return.  The “exit status value” returned from the ‘main’
-function is used to report information back to the process’s parent
-process or shell.
-
-   A program can also terminate normally by calling the ‘exit’ function.
-
-   In addition, programs can be terminated by signals; this is discussed
-in more detail in *note Signal Handling::.  The ‘abort’ function causes
-a signal that kills the program.
-
-* Menu:
-
-* Normal Termination::          If a program calls ‘exit’, a
-                                 process terminates normally.
-* Exit Status::                 The ‘exit status’ provides information
-                                 about why the process terminated.
-* Cleanups on Exit::            A process can run its own cleanup
-                                 functions upon normal termination.
-* Aborting a Program::          The ‘abort’ function causes
-                                 abnormal program termination.
-* Termination Internals::       What happens when a process terminates.
-
-
-File: libc.info,  Node: Normal Termination,  Next: Exit Status,  Up: Program Termination
-
-25.7.1 Normal Termination
--------------------------
-
-A process terminates normally when its program signals it is done by
-calling ‘exit’.  Returning from ‘main’ is equivalent to calling ‘exit’,
-and the value that ‘main’ returns is used as the argument to ‘exit’.
-
- -- Function: void exit (int STATUS)
-
-     Preliminary: | MT-Unsafe race:exit | AS-Unsafe corrupt | AC-Unsafe
-     corrupt lock | *Note POSIX Safety Concepts::.
-
-     The ‘exit’ function tells the system that the program is done,
-     which causes it to terminate the process.
-
-     STATUS is the program’s exit status, which becomes part of the
-     process’ termination status.  This function does not return.
-
-   Normal termination causes the following actions:
-
-  1. Functions that were registered with the ‘atexit’ or ‘on_exit’
-     functions are called in the reverse order of their registration.
-     This mechanism allows your application to specify its own “cleanup”
-     actions to be performed at program termination.  Typically, this is
-     used to do things like saving program state information in a file,
-     or unlocking locks in shared data bases.
-
-  2. All open streams are closed, writing out any buffered output data.
-     See *note Closing Streams::.  In addition, temporary files opened
-     with the ‘tmpfile’ function are removed; see *note Temporary
-     Files::.
-
-  3. ‘_exit’ is called, terminating the program.  *Note Termination
-     Internals::.
-
-
-File: libc.info,  Node: Exit Status,  Next: Cleanups on Exit,  Prev: Normal Termination,  Up: Program Termination
-
-25.7.2 Exit Status
-------------------
-
-When a program exits, it can return to the parent process a small amount
-of information about the cause of termination, using the “exit status”.
-This is a value between 0 and 255 that the exiting process passes as an
-argument to ‘exit’.
-
-   Normally you should use the exit status to report very broad
-information about success or failure.  You can’t provide a lot of detail
-about the reasons for the failure, and most parent processes would not
-want much detail anyway.
-
-   There are conventions for what sorts of status values certain
-programs should return.  The most common convention is simply 0 for
-success and 1 for failure.  Programs that perform comparison use a
-different convention: they use status 1 to indicate a mismatch, and
-status 2 to indicate an inability to compare.  Your program should
-follow an existing convention if an existing convention makes sense for
-it.
-
-   A general convention reserves status values 128 and up for special
-purposes.  In particular, the value 128 is used to indicate failure to
-execute another program in a subprocess.  This convention is not
-universally obeyed, but it is a good idea to follow it in your programs.
-
-   *Warning:* Don’t try to use the number of errors as the exit status.
-This is actually not very useful; a parent process would generally not
-care how many errors occurred.  Worse than that, it does not work,
-because the status value is truncated to eight bits.  Thus, if the
-program tried to report 256 errors, the parent would receive a report of
-0 errors—that is, success.
-
-   For the same reason, it does not work to use the value of ‘errno’ as
-the exit status—these can exceed 255.
-
-   *Portability note:* Some non-POSIX systems use different conventions
-for exit status values.  For greater portability, you can use the macros
-‘EXIT_SUCCESS’ and ‘EXIT_FAILURE’ for the conventional status value for
-success and failure, respectively.  They are declared in the file
-‘stdlib.h’.
-
- -- Macro: int EXIT_SUCCESS
-
-     This macro can be used with the ‘exit’ function to indicate
-     successful program completion.
-
-     On POSIX systems, the value of this macro is ‘0’.  On other
-     systems, the value might be some other (possibly non-constant)
-     integer expression.
-
- -- Macro: int EXIT_FAILURE
-
-     This macro can be used with the ‘exit’ function to indicate
-     unsuccessful program completion in a general sense.
-
-     On POSIX systems, the value of this macro is ‘1’.  On other
-     systems, the value might be some other (possibly non-constant)
-     integer expression.  Other nonzero status values also indicate
-     failures.  Certain programs use different nonzero status values to
-     indicate particular kinds of "non-success".  For example, ‘diff’
-     uses status value ‘1’ to mean that the files are different, and ‘2’
-     or more to mean that there was difficulty in opening the files.
-
-   Don’t confuse a program’s exit status with a process’ termination
-status.  There are lots of ways a process can terminate besides having
-its program finish.  In the event that the process termination _is_
-caused by program termination (i.e., ‘exit’), though, the program’s exit
-status becomes part of the process’ termination status.
-
-
-File: libc.info,  Node: Cleanups on Exit,  Next: Aborting a Program,  Prev: Exit Status,  Up: Program Termination
-
-25.7.3 Cleanups on Exit
------------------------
-
-Your program can arrange to run its own cleanup functions if normal
-termination happens.  If you are writing a library for use in various
-application programs, then it is unreliable to insist that all
-applications call the library’s cleanup functions explicitly before
-exiting.  It is much more robust to make the cleanup invisible to the
-application, by setting up a cleanup function in the library itself
-using ‘atexit’ or ‘on_exit’.
-
- -- Function: int atexit (void (*FUNCTION) (void))
-
-     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe lock mem |
-     *Note POSIX Safety Concepts::.
-
-     The ‘atexit’ function registers the function FUNCTION to be called
-     at normal program termination.  The FUNCTION is called with no
-     arguments.
-
-     The return value from ‘atexit’ is zero on success and nonzero if
-     the function cannot be registered.
-
- -- Function: int on_exit (void (*FUNCTION)(int STATUS, void *ARG), void
-          *ARG)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe lock mem |
-     *Note POSIX Safety Concepts::.
-
-     This function is a somewhat more powerful variant of ‘atexit’.  It
-     accepts two arguments, a function FUNCTION and an arbitrary pointer
-     ARG.  At normal program termination, the FUNCTION is called with
-     two arguments: the STATUS value passed to ‘exit’, and the ARG.
-
-     This function is included in the GNU C Library only for
-     compatibility for SunOS, and may not be supported by other
-     implementations.
-
-   Here’s a trivial program that illustrates the use of ‘exit’ and
-‘atexit’:
-
-
-     #include <stdio.h>
-     #include <stdlib.h>
-
-     void
-     bye (void)
-     {
-       puts ("Goodbye, cruel world....");
-     }
-
-     int
-     main (void)
-     {
-       atexit (bye);
-       exit (EXIT_SUCCESS);
-     }
-
-When this program is executed, it just prints the message and exits.
-
-
-File: libc.info,  Node: Aborting a Program,  Next: Termination Internals,  Prev: Cleanups on Exit,  Up: Program Termination
-
-25.7.4 Aborting a Program
--------------------------
-
-You can abort your program using the ‘abort’ function.  The prototype
-for this function is in ‘stdlib.h’.
-
- -- Function: void abort (void)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
-     | *Note POSIX Safety Concepts::.
-
-     The ‘abort’ function causes abnormal program termination.  This
-     does not execute cleanup functions registered with ‘atexit’ or
-     ‘on_exit’.
-
-     This function actually terminates the process by raising a
-     ‘SIGABRT’ signal, and your program can include a handler to
-     intercept this signal; see *note Signal Handling::.
-
-
-File: libc.info,  Node: Termination Internals,  Prev: Aborting a Program,  Up: Program Termination
-
-25.7.5 Termination Internals
-----------------------------
-
-The ‘_exit’ function is the primitive used for process termination by
-‘exit’.  It is declared in the header file ‘unistd.h’.
-
- -- Function: void _exit (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘_exit’ function is the primitive for causing a process to
-     terminate with status STATUS.  Calling this function does not
-     execute cleanup functions registered with ‘atexit’ or ‘on_exit’.
-
- -- Function: void _Exit (int STATUS)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘_Exit’ function is the ISO C equivalent to ‘_exit’.  The ISO C
-     committee members were not sure whether the definitions of ‘_exit’
-     and ‘_Exit’ were compatible so they have not used the POSIX name.
-
-     This function was introduced in ISO C99 and is declared in
-     ‘stdlib.h’.
-
-   When a process terminates for any reason—either because the program
-terminates, or as a result of a signal—the following things happen:
-
-   • All open file descriptors in the process are closed.  *Note
-     Low-Level I/O::.  Note that streams are not flushed automatically
-     when the process terminates; see *note I/O on Streams::.
-
-   • A process exit status is saved to be reported back to the parent
-     process via ‘wait’ or ‘waitpid’; see *note Process Completion::.
-     If the program exited, this status includes as its low-order 8 bits
-     the program exit status.
-
-   • Any child processes of the process being terminated are assigned a
-     new parent process.  (On most systems, including GNU, this is the
-     ‘init’ process, with process ID 1.)
-
-   • A ‘SIGCHLD’ signal is sent to the parent process.
-
-   • If the process is a session leader that has a controlling terminal,
-     then a ‘SIGHUP’ signal is sent to each process in the foreground
-     job, and the controlling terminal is disassociated from that
-     session.  *Note Job Control::.
-
-   • If termination of a process causes a process group to become
-     orphaned, and any member of that process group is stopped, then a
-     ‘SIGHUP’ signal and a ‘SIGCONT’ signal are sent to each process in
-     the group.  *Note Job Control::.
-
-
-File: libc.info,  Node: Processes,  Next: Inter-Process Communication,  Prev: Program Basics,  Up: Top
-
-26 Processes
-************
-
-“Processes” are the primitive units for allocation of system resources.
-Each process has its own address space and (usually) one thread of
-control.  A process executes a program; you can have multiple processes
-executing the same program, but each process has its own copy of the
-program within its own address space and executes it independently of
-the other copies.
-
-   Processes are organized hierarchically.  Each process has a “parent
-process” which explicitly arranged to create it.  The processes created
-by a given parent are called its “child processes”.  A child inherits
-many of its attributes from the parent process.
-
-   This chapter describes how a program can create, terminate, and
-control child processes.  Actually, there are three distinct operations
-involved: creating a new child process, causing the new process to
-execute a program, and coordinating the completion of the child process
-with the original program.
-
-   The ‘system’ function provides a simple, portable mechanism for
-running another program; it does all three steps automatically.  If you
-need more control over the details of how this is done, you can use the
-primitive functions to do each step individually instead.
-
-* Menu:
-
-* Running a Command::           The easy way to run another program.
-* Process Creation Concepts::   An overview of the hard way to do it.
-* Process Identification::      How to get the process ID of a process.
-* Creating a Process::          How to fork a child process.
-* Executing a File::            How to make a process execute another program.
-* Process Completion::          How to tell when a child process has completed.
-* Process Completion Status::   How to interpret the status value
-                                 returned from a child process.
-* BSD Wait Functions::  	More functions, for backward compatibility.
-* Process Creation Example::    A complete example program.
-
-
-File: libc.info,  Node: Running a Command,  Next: Process Creation Concepts,  Up: Processes
-
-26.1 Running a Command
-======================
-
-The easy way to run another program is to use the ‘system’ function.
-This function does all the work of running a subprogram, but it doesn’t
-give you much control over the details: you have to wait until the
-subprogram terminates before you can do anything else.
-
- -- Function: int system (const char *COMMAND)
-
-     Preliminary: | MT-Safe | AS-Unsafe plugin heap lock | AC-Unsafe
-     lock mem | *Note POSIX Safety Concepts::.
-
-     This function executes COMMAND as a shell command.  In the GNU C
-     Library, it always uses the default shell ‘sh’ to run the command.
-     In particular, it searches the directories in ‘PATH’ to find
-     programs to execute.  The return value is ‘-1’ if it wasn’t
-     possible to create the shell process, and otherwise is the status
-     of the shell process.  *Note Process Completion::, for details on
-     how this status code can be interpreted.
-
-     If the COMMAND argument is a null pointer, a return value of zero
-     indicates that no command processor is available.
-
-     This function is a cancellation point in multi-threaded programs.
-     This is a problem if the thread allocates some resources (like
-     memory, file descriptors, semaphores or whatever) at the time
-     ‘system’ is called.  If the thread gets canceled these resources
-     stay allocated until the program ends.  To avoid this calls to
-     ‘system’ should be protected using cancellation handlers.
-
-     The ‘system’ function is declared in the header file ‘stdlib.h’.
-
-   *Portability Note:* Some C implementations may not have any notion of
-a command processor that can execute other programs.  You can determine
-whether a command processor exists by executing ‘system (NULL)’; if the
-return value is nonzero, a command processor is available.
-
-   The ‘popen’ and ‘pclose’ functions (*note Pipe to a Subprocess::) are
-closely related to the ‘system’ function.  They allow the parent process
-to communicate with the standard input and output channels of the
-command being executed.
-
-
-File: libc.info,  Node: Process Creation Concepts,  Next: Process Identification,  Prev: Running a Command,  Up: Processes
-
-26.2 Process Creation Concepts
-==============================
-
-This section gives an overview of processes and of the steps involved in
-creating a process and making it run another program.
-
-   A new processes is created when one of the functions ‘posix_spawn’,
-‘fork’, ‘_Fork’ or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also
-create new processes internally.)  Due to the name of the ‘fork’
-function, the act of creating a new process is sometimes called
-“forking” a process.  Each new process (the “child process” or
-“subprocess”) is allocated a process ID, distinct from the process ID of
-the parent process.  *Note Process Identification::.
-
-   After forking a child process, both the parent and child processes
-continue to execute normally.  If you want your program to wait for a
-child process to finish executing before continuing, you must do this
-explicitly after the fork operation, by calling ‘wait’ or ‘waitpid’
-(*note Process Completion::).  These functions give you limited
-information about why the child terminated—for example, its exit status
-code.
-
-   A newly forked child process continues to execute the same program as
-its parent process, at the point where the ‘fork’ or ‘_Fork’ call
-returns.  You can use the return value from ‘fork’ or ‘_Fork’ to tell
-whether the program is running in the parent process or the child.
-
-   Having several processes run the same program is only occasionally
-useful.  But the child can execute another program using one of the
-‘exec’ functions; see *note Executing a File::.  The program that the
-process is executing is called its “process image”.  Starting execution
-of a new program causes the process to forget all about its previous
-process image; when the new program exits, the process exits too,
-instead of returning to the previous process image.
-
-
-File: libc.info,  Node: Process Identification,  Next: Creating a Process,  Prev: Process Creation Concepts,  Up: Processes
-
-26.3 Process Identification
-===========================
-
-Each process is named by a “process ID” number, a value of type ‘pid_t’.
-A process ID is allocated to each process when it is created.  Process
-IDs are reused over time.  The lifetime of a process ends when the
-parent process of the corresponding process waits on the process ID
-after the process has terminated.  *Note Process Completion::.  (The
-parent process can arrange for such waiting to happen implicitly.)  A
-process ID uniquely identifies a process only during the lifetime of the
-process.  As a rule of thumb, this means that the process must still be
-running.
-
-   Process IDs can also denote process groups and sessions.  *Note Job
-Control::.
-
-   On Linux, threads created by ‘pthread_create’ also receive a “thread
-ID”. The thread ID of the initial (main) thread is the same as the
-process ID of the entire process.  Thread IDs for subsequently created
-threads are distinct.  They are allocated from the same numbering space
-as process IDs.  Process IDs and thread IDs are sometimes also referred
-to collectively as “task IDs”.  In contrast to processes, threads are
-never waited for explicitly, so a thread ID becomes eligible for reuse
-as soon as a thread exits or is canceled.  This is true even for
-joinable threads, not just detached threads.  Threads are assigned to a
-“thread group”.  In the GNU C Library implementation running on Linux,
-the process ID is the thread group ID of all threads in the process.
-
-   You can get the process ID of a process by calling ‘getpid’.  The
-function ‘getppid’ returns the process ID of the parent of the current
-process (this is also known as the “parent process ID”). Your program
-should include the header files ‘unistd.h’ and ‘sys/types.h’ to use
-these functions.
-
- -- Data Type: pid_t
-
-     The ‘pid_t’ data type is a signed integer type which is capable of
-     representing a process ID. In the GNU C Library, this is an ‘int’.
-
- -- Function: pid_t getpid (void)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘getpid’ function returns the process ID of the current
-     process.
-
- -- Function: pid_t getppid (void)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘getppid’ function returns the process ID of the parent of the
-     current process.
-
- -- Function: pid_t gettid (void)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘gettid’ function returns the thread ID of the current thread.
-     The returned value is obtained from the Linux kernel and is not
-     subject to caching.  See the discussion of thread IDs above,
-     especially regarding reuse of the IDs of threads which have exited.
-
-     This function is specific to Linux.
-
-
-File: libc.info,  Node: Creating a Process,  Next: Executing a File,  Prev: Process Identification,  Up: Processes
-
-26.4 Creating a Process
-=======================
-
-The ‘fork’ function is the primitive for creating a process.  It is
-declared in the header file ‘unistd.h’.
-
- -- Function: pid_t fork (void)
-
-     Preliminary: | MT-Safe | AS-Unsafe plugin | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     The ‘fork’ function creates a new process.
-
-     If the operation is successful, there are then both parent and
-     child processes and both see ‘fork’ return, but with different
-     values: it returns a value of ‘0’ in the child process and returns
-     the child’s process ID in the parent process.
-
-     If process creation failed, ‘fork’ returns a value of ‘-1’ in the
-     parent process.  The following ‘errno’ error conditions are defined
-     for ‘fork’:
-
-     ‘EAGAIN’
-          There aren’t enough system resources to create another
-          process, or the user already has too many processes running.
-          This means exceeding the ‘RLIMIT_NPROC’ resource limit, which
-          can usually be increased; *note Limits on Resources::.
-
-     ‘ENOMEM’
-          The process requires more space than the system can supply.
-
-   The specific attributes of the child process that differ from the
-parent process are:
-
-   • The child process has its own unique process ID.
-
-   • The parent process ID of the child process is the process ID of its
-     parent process.
-
-   • The child process gets its own copies of the parent process’s open
-     file descriptors.  Subsequently changing attributes of the file
-     descriptors in the parent process won’t affect the file descriptors
-     in the child, and vice versa.  *Note Control Operations::.
-     However, the file position associated with each descriptor is
-     shared by both processes; *note File Position::.
-
-   • The elapsed processor times for the child process are set to zero;
-     see *note Processor Time::.
-
-   • The child doesn’t inherit file locks set by the parent process.
-     *Note Control Operations::.
-
-   • The child doesn’t inherit alarms set by the parent process.  *Note
-     Setting an Alarm::.
-
-   • The set of pending signals (*note Delivery of Signal::) for the
-     child process is cleared.  (The child process inherits its mask of
-     blocked signals and signal actions from the parent process.)
-
- -- Function: pid_t _Fork (void)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘_Fork’ function is similar to ‘fork’, but it does not invoke
-     any callbacks registered with ‘pthread_atfork’, nor does it reset
-     any internal state or locks (such as the ‘malloc’ locks).  In the
-     new subprocess, only async-signal-safe functions may be called,
-     such as ‘dup2’ or ‘execve’.
-
-     The ‘_Fork’ function is an async-signal-safe replacement of ‘fork’.
-     It is a GNU extension.
-
- -- Function: pid_t vfork (void)
-
-     Preliminary: | MT-Safe | AS-Unsafe plugin | AC-Unsafe lock | *Note
-     POSIX Safety Concepts::.
-
-     The ‘vfork’ function is similar to ‘fork’ but on some systems it is
-     more efficient; however, there are restrictions you must follow to
-     use it safely.
-
-     While ‘fork’ makes a complete copy of the calling process’s address
-     space and allows both the parent and child to execute
-     independently, ‘vfork’ does not make this copy.  Instead, the child
-     process created with ‘vfork’ shares its parent’s address space
-     until it calls ‘_exit’ or one of the ‘exec’ functions.  In the
-     meantime, the parent process suspends execution.
-
-     You must be very careful not to allow the child process created
-     with ‘vfork’ to modify any global data or even local variables
-     shared with the parent.  Furthermore, the child process cannot
-     return from (or do a long jump out of) the function that called
-     ‘vfork’!  This would leave the parent process’s control information
-     very confused.  If in doubt, use ‘fork’ instead.
-
-     Some operating systems don’t really implement ‘vfork’.  The GNU C
-     Library permits you to use ‘vfork’ on all systems, but actually
-     executes ‘fork’ if ‘vfork’ isn’t available.  If you follow the
-     proper precautions for using ‘vfork’, your program will still work
-     even if the system uses ‘fork’ instead.
 

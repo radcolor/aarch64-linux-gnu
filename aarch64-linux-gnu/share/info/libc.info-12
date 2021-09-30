@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -2116,6 +2156,590 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Program Termination,  Prev: System Calls,  Up: Program Basics
+
+25.7 Program Termination
+========================
+
+The usual way for a program to terminate is simply for its ‘main’
+function to return.  The “exit status value” returned from the ‘main’
+function is used to report information back to the process’s parent
+process or shell.
+
+   A program can also terminate normally by calling the ‘exit’ function.
+
+   In addition, programs can be terminated by signals; this is discussed
+in more detail in *note Signal Handling::.  The ‘abort’ function causes
+a signal that kills the program.
+
+* Menu:
+
+* Normal Termination::          If a program calls ‘exit’, a
+                                 process terminates normally.
+* Exit Status::                 The ‘exit status’ provides information
+                                 about why the process terminated.
+* Cleanups on Exit::            A process can run its own cleanup
+                                 functions upon normal termination.
+* Aborting a Program::          The ‘abort’ function causes
+                                 abnormal program termination.
+* Termination Internals::       What happens when a process terminates.
+
+
+File: libc.info,  Node: Normal Termination,  Next: Exit Status,  Up: Program Termination
+
+25.7.1 Normal Termination
+-------------------------
+
+A process terminates normally when its program signals it is done by
+calling ‘exit’.  Returning from ‘main’ is equivalent to calling ‘exit’,
+and the value that ‘main’ returns is used as the argument to ‘exit’.
+
+ -- Function: void exit (int STATUS)
+
+     Preliminary: | MT-Unsafe race:exit | AS-Unsafe corrupt | AC-Unsafe
+     corrupt lock | *Note POSIX Safety Concepts::.
+
+     The ‘exit’ function tells the system that the program is done,
+     which causes it to terminate the process.
+
+     STATUS is the program’s exit status, which becomes part of the
+     process’ termination status.  This function does not return.
+
+   Normal termination causes the following actions:
+
+  1. Functions that were registered with the ‘atexit’ or ‘on_exit’
+     functions are called in the reverse order of their registration.
+     This mechanism allows your application to specify its own “cleanup”
+     actions to be performed at program termination.  Typically, this is
+     used to do things like saving program state information in a file,
+     or unlocking locks in shared data bases.
+
+  2. All open streams are closed, writing out any buffered output data.
+     See *note Closing Streams::.  In addition, temporary files opened
+     with the ‘tmpfile’ function are removed; see *note Temporary
+     Files::.
+
+  3. ‘_exit’ is called, terminating the program.  *Note Termination
+     Internals::.
+
+
+File: libc.info,  Node: Exit Status,  Next: Cleanups on Exit,  Prev: Normal Termination,  Up: Program Termination
+
+25.7.2 Exit Status
+------------------
+
+When a program exits, it can return to the parent process a small amount
+of information about the cause of termination, using the “exit status”.
+This is a value between 0 and 255 that the exiting process passes as an
+argument to ‘exit’.
+
+   Normally you should use the exit status to report very broad
+information about success or failure.  You can’t provide a lot of detail
+about the reasons for the failure, and most parent processes would not
+want much detail anyway.
+
+   There are conventions for what sorts of status values certain
+programs should return.  The most common convention is simply 0 for
+success and 1 for failure.  Programs that perform comparison use a
+different convention: they use status 1 to indicate a mismatch, and
+status 2 to indicate an inability to compare.  Your program should
+follow an existing convention if an existing convention makes sense for
+it.
+
+   A general convention reserves status values 128 and up for special
+purposes.  In particular, the value 128 is used to indicate failure to
+execute another program in a subprocess.  This convention is not
+universally obeyed, but it is a good idea to follow it in your programs.
+
+   *Warning:* Don’t try to use the number of errors as the exit status.
+This is actually not very useful; a parent process would generally not
+care how many errors occurred.  Worse than that, it does not work,
+because the status value is truncated to eight bits.  Thus, if the
+program tried to report 256 errors, the parent would receive a report of
+0 errors—that is, success.
+
+   For the same reason, it does not work to use the value of ‘errno’ as
+the exit status—these can exceed 255.
+
+   *Portability note:* Some non-POSIX systems use different conventions
+for exit status values.  For greater portability, you can use the macros
+‘EXIT_SUCCESS’ and ‘EXIT_FAILURE’ for the conventional status value for
+success and failure, respectively.  They are declared in the file
+‘stdlib.h’.
+
+ -- Macro: int EXIT_SUCCESS
+
+     This macro can be used with the ‘exit’ function to indicate
+     successful program completion.
+
+     On POSIX systems, the value of this macro is ‘0’.  On other
+     systems, the value might be some other (possibly non-constant)
+     integer expression.
+
+ -- Macro: int EXIT_FAILURE
+
+     This macro can be used with the ‘exit’ function to indicate
+     unsuccessful program completion in a general sense.
+
+     On POSIX systems, the value of this macro is ‘1’.  On other
+     systems, the value might be some other (possibly non-constant)
+     integer expression.  Other nonzero status values also indicate
+     failures.  Certain programs use different nonzero status values to
+     indicate particular kinds of "non-success".  For example, ‘diff’
+     uses status value ‘1’ to mean that the files are different, and ‘2’
+     or more to mean that there was difficulty in opening the files.
+
+   Don’t confuse a program’s exit status with a process’ termination
+status.  There are lots of ways a process can terminate besides having
+its program finish.  In the event that the process termination _is_
+caused by program termination (i.e., ‘exit’), though, the program’s exit
+status becomes part of the process’ termination status.
+
+
+File: libc.info,  Node: Cleanups on Exit,  Next: Aborting a Program,  Prev: Exit Status,  Up: Program Termination
+
+25.7.3 Cleanups on Exit
+-----------------------
+
+Your program can arrange to run its own cleanup functions if normal
+termination happens.  If you are writing a library for use in various
+application programs, then it is unreliable to insist that all
+applications call the library’s cleanup functions explicitly before
+exiting.  It is much more robust to make the cleanup invisible to the
+application, by setting up a cleanup function in the library itself
+using ‘atexit’ or ‘on_exit’.
+
+ -- Function: int atexit (void (*FUNCTION) (void))
+
+     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe lock mem |
+     *Note POSIX Safety Concepts::.
+
+     The ‘atexit’ function registers the function FUNCTION to be called
+     at normal program termination.  The FUNCTION is called with no
+     arguments.
+
+     The return value from ‘atexit’ is zero on success and nonzero if
+     the function cannot be registered.
+
+ -- Function: int on_exit (void (*FUNCTION)(int STATUS, void *ARG), void
+          *ARG)
+
+     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe lock mem |
+     *Note POSIX Safety Concepts::.
+
+     This function is a somewhat more powerful variant of ‘atexit’.  It
+     accepts two arguments, a function FUNCTION and an arbitrary pointer
+     ARG.  At normal program termination, the FUNCTION is called with
+     two arguments: the STATUS value passed to ‘exit’, and the ARG.
+
+     This function is included in the GNU C Library only for
+     compatibility for SunOS, and may not be supported by other
+     implementations.
+
+   Here’s a trivial program that illustrates the use of ‘exit’ and
+‘atexit’:
+
+
+     #include <stdio.h>
+     #include <stdlib.h>
+
+     void
+     bye (void)
+     {
+       puts ("Goodbye, cruel world....");
+     }
+
+     int
+     main (void)
+     {
+       atexit (bye);
+       exit (EXIT_SUCCESS);
+     }
+
+When this program is executed, it just prints the message and exits.
+
+
+File: libc.info,  Node: Aborting a Program,  Next: Termination Internals,  Prev: Cleanups on Exit,  Up: Program Termination
+
+25.7.4 Aborting a Program
+-------------------------
+
+You can abort your program using the ‘abort’ function.  The prototype
+for this function is in ‘stdlib.h’.
+
+ -- Function: void abort (void)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock corrupt
+     | *Note POSIX Safety Concepts::.
+
+     The ‘abort’ function causes abnormal program termination.  This
+     does not execute cleanup functions registered with ‘atexit’ or
+     ‘on_exit’.
+
+     This function actually terminates the process by raising a
+     ‘SIGABRT’ signal, and your program can include a handler to
+     intercept this signal; see *note Signal Handling::.
+
+
+File: libc.info,  Node: Termination Internals,  Prev: Aborting a Program,  Up: Program Termination
+
+25.7.5 Termination Internals
+----------------------------
+
+The ‘_exit’ function is the primitive used for process termination by
+‘exit’.  It is declared in the header file ‘unistd.h’.
+
+ -- Function: void _exit (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘_exit’ function is the primitive for causing a process to
+     terminate with status STATUS.  Calling this function does not
+     execute cleanup functions registered with ‘atexit’ or ‘on_exit’.
+
+ -- Function: void _Exit (int STATUS)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘_Exit’ function is the ISO C equivalent to ‘_exit’.  The ISO C
+     committee members were not sure whether the definitions of ‘_exit’
+     and ‘_Exit’ were compatible so they have not used the POSIX name.
+
+     This function was introduced in ISO C99 and is declared in
+     ‘stdlib.h’.
+
+   When a process terminates for any reason—either because the program
+terminates, or as a result of a signal—the following things happen:
+
+   • All open file descriptors in the process are closed.  *Note
+     Low-Level I/O::.  Note that streams are not flushed automatically
+     when the process terminates; see *note I/O on Streams::.
+
+   • A process exit status is saved to be reported back to the parent
+     process via ‘wait’ or ‘waitpid’; see *note Process Completion::.
+     If the program exited, this status includes as its low-order 8 bits
+     the program exit status.
+
+   • Any child processes of the process being terminated are assigned a
+     new parent process.  (On most systems, including GNU, this is the
+     ‘init’ process, with process ID 1.)
+
+   • A ‘SIGCHLD’ signal is sent to the parent process.
+
+   • If the process is a session leader that has a controlling terminal,
+     then a ‘SIGHUP’ signal is sent to each process in the foreground
+     job, and the controlling terminal is disassociated from that
+     session.  *Note Job Control::.
+
+   • If termination of a process causes a process group to become
+     orphaned, and any member of that process group is stopped, then a
+     ‘SIGHUP’ signal and a ‘SIGCONT’ signal are sent to each process in
+     the group.  *Note Job Control::.
+
+
+File: libc.info,  Node: Processes,  Next: Inter-Process Communication,  Prev: Program Basics,  Up: Top
+
+26 Processes
+************
+
+“Processes” are the primitive units for allocation of system resources.
+Each process has its own address space and (usually) one thread of
+control.  A process executes a program; you can have multiple processes
+executing the same program, but each process has its own copy of the
+program within its own address space and executes it independently of
+the other copies.
+
+   Processes are organized hierarchically.  Each process has a “parent
+process” which explicitly arranged to create it.  The processes created
+by a given parent are called its “child processes”.  A child inherits
+many of its attributes from the parent process.
+
+   This chapter describes how a program can create, terminate, and
+control child processes.  Actually, there are three distinct operations
+involved: creating a new child process, causing the new process to
+execute a program, and coordinating the completion of the child process
+with the original program.
+
+   The ‘system’ function provides a simple, portable mechanism for
+running another program; it does all three steps automatically.  If you
+need more control over the details of how this is done, you can use the
+primitive functions to do each step individually instead.
+
+* Menu:
+
+* Running a Command::           The easy way to run another program.
+* Process Creation Concepts::   An overview of the hard way to do it.
+* Process Identification::      How to get the process ID of a process.
+* Creating a Process::          How to fork a child process.
+* Executing a File::            How to make a process execute another program.
+* Process Completion::          How to tell when a child process has completed.
+* Process Completion Status::   How to interpret the status value
+                                 returned from a child process.
+* BSD Wait Functions::  	More functions, for backward compatibility.
+* Process Creation Example::    A complete example program.
+
+
+File: libc.info,  Node: Running a Command,  Next: Process Creation Concepts,  Up: Processes
+
+26.1 Running a Command
+======================
+
+The easy way to run another program is to use the ‘system’ function.
+This function does all the work of running a subprogram, but it doesn’t
+give you much control over the details: you have to wait until the
+subprogram terminates before you can do anything else.
+
+ -- Function: int system (const char *COMMAND)
+
+     Preliminary: | MT-Safe | AS-Unsafe plugin heap lock | AC-Unsafe
+     lock mem | *Note POSIX Safety Concepts::.
+
+     This function executes COMMAND as a shell command.  In the GNU C
+     Library, it always uses the default shell ‘sh’ to run the command.
+     In particular, it searches the directories in ‘PATH’ to find
+     programs to execute.  The return value is ‘-1’ if it wasn’t
+     possible to create the shell process, and otherwise is the status
+     of the shell process.  *Note Process Completion::, for details on
+     how this status code can be interpreted.
+
+     If the COMMAND argument is a null pointer, a return value of zero
+     indicates that no command processor is available.
+
+     This function is a cancellation point in multi-threaded programs.
+     This is a problem if the thread allocates some resources (like
+     memory, file descriptors, semaphores or whatever) at the time
+     ‘system’ is called.  If the thread gets canceled these resources
+     stay allocated until the program ends.  To avoid this calls to
+     ‘system’ should be protected using cancellation handlers.
+
+     The ‘system’ function is declared in the header file ‘stdlib.h’.
+
+   *Portability Note:* Some C implementations may not have any notion of
+a command processor that can execute other programs.  You can determine
+whether a command processor exists by executing ‘system (NULL)’; if the
+return value is nonzero, a command processor is available.
+
+   The ‘popen’ and ‘pclose’ functions (*note Pipe to a Subprocess::) are
+closely related to the ‘system’ function.  They allow the parent process
+to communicate with the standard input and output channels of the
+command being executed.
+
+
+File: libc.info,  Node: Process Creation Concepts,  Next: Process Identification,  Prev: Running a Command,  Up: Processes
+
+26.2 Process Creation Concepts
+==============================
+
+This section gives an overview of processes and of the steps involved in
+creating a process and making it run another program.
+
+   A new processes is created when one of the functions ‘posix_spawn’,
+‘fork’, ‘_Fork’ or ‘vfork’ is called.  (The ‘system’ and ‘popen’ also
+create new processes internally.)  Due to the name of the ‘fork’
+function, the act of creating a new process is sometimes called
+“forking” a process.  Each new process (the “child process” or
+“subprocess”) is allocated a process ID, distinct from the process ID of
+the parent process.  *Note Process Identification::.
+
+   After forking a child process, both the parent and child processes
+continue to execute normally.  If you want your program to wait for a
+child process to finish executing before continuing, you must do this
+explicitly after the fork operation, by calling ‘wait’ or ‘waitpid’
+(*note Process Completion::).  These functions give you limited
+information about why the child terminated—for example, its exit status
+code.
+
+   A newly forked child process continues to execute the same program as
+its parent process, at the point where the ‘fork’ or ‘_Fork’ call
+returns.  You can use the return value from ‘fork’ or ‘_Fork’ to tell
+whether the program is running in the parent process or the child.
+
+   Having several processes run the same program is only occasionally
+useful.  But the child can execute another program using one of the
+‘exec’ functions; see *note Executing a File::.  The program that the
+process is executing is called its “process image”.  Starting execution
+of a new program causes the process to forget all about its previous
+process image; when the new program exits, the process exits too,
+instead of returning to the previous process image.
+
+
+File: libc.info,  Node: Process Identification,  Next: Creating a Process,  Prev: Process Creation Concepts,  Up: Processes
+
+26.3 Process Identification
+===========================
+
+Each process is named by a “process ID” number, a value of type ‘pid_t’.
+A process ID is allocated to each process when it is created.  Process
+IDs are reused over time.  The lifetime of a process ends when the
+parent process of the corresponding process waits on the process ID
+after the process has terminated.  *Note Process Completion::.  (The
+parent process can arrange for such waiting to happen implicitly.)  A
+process ID uniquely identifies a process only during the lifetime of the
+process.  As a rule of thumb, this means that the process must still be
+running.
+
+   Process IDs can also denote process groups and sessions.  *Note Job
+Control::.
+
+   On Linux, threads created by ‘pthread_create’ also receive a “thread
+ID”. The thread ID of the initial (main) thread is the same as the
+process ID of the entire process.  Thread IDs for subsequently created
+threads are distinct.  They are allocated from the same numbering space
+as process IDs.  Process IDs and thread IDs are sometimes also referred
+to collectively as “task IDs”.  In contrast to processes, threads are
+never waited for explicitly, so a thread ID becomes eligible for reuse
+as soon as a thread exits or is canceled.  This is true even for
+joinable threads, not just detached threads.  Threads are assigned to a
+“thread group”.  In the GNU C Library implementation running on Linux,
+the process ID is the thread group ID of all threads in the process.
+
+   You can get the process ID of a process by calling ‘getpid’.  The
+function ‘getppid’ returns the process ID of the parent of the current
+process (this is also known as the “parent process ID”). Your program
+should include the header files ‘unistd.h’ and ‘sys/types.h’ to use
+these functions.
+
+ -- Data Type: pid_t
+
+     The ‘pid_t’ data type is a signed integer type which is capable of
+     representing a process ID. In the GNU C Library, this is an ‘int’.
+
+ -- Function: pid_t getpid (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘getpid’ function returns the process ID of the current
+     process.
+
+ -- Function: pid_t getppid (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘getppid’ function returns the process ID of the parent of the
+     current process.
+
+ -- Function: pid_t gettid (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘gettid’ function returns the thread ID of the current thread.
+     The returned value is obtained from the Linux kernel and is not
+     subject to caching.  See the discussion of thread IDs above,
+     especially regarding reuse of the IDs of threads which have exited.
+
+     This function is specific to Linux.
+
+
+File: libc.info,  Node: Creating a Process,  Next: Executing a File,  Prev: Process Identification,  Up: Processes
+
+26.4 Creating a Process
+=======================
+
+The ‘fork’ function is the primitive for creating a process.  It is
+declared in the header file ‘unistd.h’.
+
+ -- Function: pid_t fork (void)
+
+     Preliminary: | MT-Safe | AS-Unsafe plugin | AC-Unsafe lock | *Note
+     POSIX Safety Concepts::.
+
+     The ‘fork’ function creates a new process.
+
+     If the operation is successful, there are then both parent and
+     child processes and both see ‘fork’ return, but with different
+     values: it returns a value of ‘0’ in the child process and returns
+     the child’s process ID in the parent process.
+
+     If process creation failed, ‘fork’ returns a value of ‘-1’ in the
+     parent process.  The following ‘errno’ error conditions are defined
+     for ‘fork’:
+
+     ‘EAGAIN’
+          There aren’t enough system resources to create another
+          process, or the user already has too many processes running.
+          This means exceeding the ‘RLIMIT_NPROC’ resource limit, which
+          can usually be increased; *note Limits on Resources::.
+
+     ‘ENOMEM’
+          The process requires more space than the system can supply.
+
+   The specific attributes of the child process that differ from the
+parent process are:
+
+   • The child process has its own unique process ID.
+
+   • The parent process ID of the child process is the process ID of its
+     parent process.
+
+   • The child process gets its own copies of the parent process’s open
+     file descriptors.  Subsequently changing attributes of the file
+     descriptors in the parent process won’t affect the file descriptors
+     in the child, and vice versa.  *Note Control Operations::.
+     However, the file position associated with each descriptor is
+     shared by both processes; *note File Position::.
+
+   • The elapsed processor times for the child process are set to zero;
+     see *note Processor Time::.
+
+   • The child doesn’t inherit file locks set by the parent process.
+     *Note Control Operations::.
+
+   • The child doesn’t inherit alarms set by the parent process.  *Note
+     Setting an Alarm::.
+
+   • The set of pending signals (*note Delivery of Signal::) for the
+     child process is cleared.  (The child process inherits its mask of
+     blocked signals and signal actions from the parent process.)
+
+ -- Function: pid_t _Fork (void)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘_Fork’ function is similar to ‘fork’, but it does not invoke
+     any callbacks registered with ‘pthread_atfork’, nor does it reset
+     any internal state or locks (such as the ‘malloc’ locks).  In the
+     new subprocess, only async-signal-safe functions may be called,
+     such as ‘dup2’ or ‘execve’.
+
+     The ‘_Fork’ function is an async-signal-safe replacement of ‘fork’.
+     It is a GNU extension.
+
+ -- Function: pid_t vfork (void)
+
+     Preliminary: | MT-Safe | AS-Unsafe plugin | AC-Unsafe lock | *Note
+     POSIX Safety Concepts::.
+
+     The ‘vfork’ function is similar to ‘fork’ but on some systems it is
+     more efficient; however, there are restrictions you must follow to
+     use it safely.
+
+     While ‘fork’ makes a complete copy of the calling process’s address
+     space and allows both the parent and child to execute
+     independently, ‘vfork’ does not make this copy.  Instead, the child
+     process created with ‘vfork’ shares its parent’s address space
+     until it calls ‘_exit’ or one of the ‘exec’ functions.  In the
+     meantime, the parent process suspends execution.
+
+     You must be very careful not to allow the child process created
+     with ‘vfork’ to modify any global data or even local variables
+     shared with the parent.  Furthermore, the child process cannot
+     return from (or do a long jump out of) the function that called
+     ‘vfork’!  This would leave the parent process’s control information
+     very confused.  If in doubt, use ‘fork’ instead.
+
+     Some operating systems don’t really implement ‘vfork’.  The GNU C
+     Library permits you to use ‘vfork’ on all systems, but actually
+     executes ‘fork’ if ‘vfork’ isn’t available.  If you follow the
+     proper precautions for using ‘vfork’, your program will still work
+     even if the system uses ‘fork’ instead.
 
 
 File: libc.info,  Node: Executing a File,  Next: Process Completion,  Prev: Creating a Process,  Up: Processes
@@ -6919,542 +7543,4 @@ these functions.
           The operating system does not support setting the host ID. On
           some systems, the host ID is a meaningless but unique number
           hard-coded for each machine.
-
-
-File: libc.info,  Node: Platform Type,  Next: Filesystem Handling,  Prev: Host Identification,  Up: System Management
-
-31.2 Platform Type Identification
-=================================
-
-You can use the ‘uname’ function to find out some information about the
-type of computer your program is running on.  This function and the
-associated data type are declared in the header file ‘sys/utsname.h’.
-
-   As a bonus, ‘uname’ also gives some information identifying the
-particular system your program is running on.  This is the same
-information which you can get with functions targeted to this purpose
-described in *note Host Identification::.
-
- -- Data Type: struct utsname
-
-     The ‘utsname’ structure is used to hold information returned by the
-     ‘uname’ function.  It has the following members:
-
-     ‘char sysname[]’
-          This is the name of the operating system in use.
-
-     ‘char release[]’
-          This is the current release level of the operating system
-          implementation.
-
-     ‘char version[]’
-          This is the current version level within the release of the
-          operating system.
-
-     ‘char machine[]’
-          This is a description of the type of hardware that is in use.
-
-          Some systems provide a mechanism to interrogate the kernel
-          directly for this information.  On systems without such a
-          mechanism, the GNU C Library fills in this field based on the
-          configuration name that was specified when building and
-          installing the library.
-
-          GNU uses a three-part name to describe a system configuration;
-          the three parts are CPU, MANUFACTURER and SYSTEM-TYPE, and
-          they are separated with dashes.  Any possible combination of
-          three names is potentially meaningful, but most such
-          combinations are meaningless in practice and even the
-          meaningful ones are not necessarily supported by any
-          particular GNU program.
-
-          Since the value in ‘machine’ is supposed to describe just the
-          hardware, it consists of the first two parts of the
-          configuration name: ‘CPU-MANUFACTURER’.  For example, it might
-          be one of these:
-
-               ‘"sparc-sun"’, ‘"i386-ANYTHING"’, ‘"m68k-hp"’,
-               ‘"m68k-sony"’, ‘"m68k-sun"’, ‘"mips-dec"’
-
-     ‘char nodename[]’
-          This is the host name of this particular computer.  In the GNU
-          C Library, the value is the same as that returned by
-          ‘gethostname’; see *note Host Identification::.
-
-          ‘gethostname’ is implemented with a call to ‘uname’.
-
-     ‘char domainname[]’
-          This is the NIS or YP domain name.  It is the same value
-          returned by ‘getdomainname’; see *note Host Identification::.
-          This element is a relatively recent invention and use of it is
-          not as portable as use of the rest of the structure.
-
- -- Function: int uname (struct utsname *INFO)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘uname’ function fills in the structure pointed to by INFO with
-     information about the operating system and host machine.  A
-     non-negative return value indicates that the data was successfully
-     stored.
-
-     ‘-1’ as the return value indicates an error.  The only error
-     possible is ‘EFAULT’, which we normally don’t mention as it is
-     always a possibility.
-
-
-File: libc.info,  Node: Filesystem Handling,  Prev: Platform Type,  Up: System Management
-
-31.3 Controlling and Querying Mounts
-====================================
-
-All files are in filesystems, and before you can access any file, its
-filesystem must be mounted.  Because of Unix’s concept of _Everything is
-a file_, mounting of filesystems is central to doing almost anything.
-This section explains how to find out what filesystems are currently
-mounted and what filesystems are available for mounting, and how to
-change what is mounted.
-
-   The classic filesystem is the contents of a disk drive.  The concept
-is considerably more abstract, though, and lots of things other than
-disk drives can be mounted.
-
-   Some block devices don’t correspond to traditional devices like disk
-drives.  For example, a loop device is a block device whose driver uses
-a regular file in another filesystem as its medium.  So if that regular
-file contains appropriate data for a filesystem, you can by mounting the
-loop device essentially mount a regular file.
-
-   Some filesystems aren’t based on a device of any kind.  The “proc”
-filesystem, for example, contains files whose data is made up by the
-filesystem driver on the fly whenever you ask for it.  And when you
-write to it, the data you write causes changes in the system.  No data
-gets stored.
-
-* Menu:
-
-* Mount Information::           What is or could be mounted?
-* Mount-Unmount-Remount::       Controlling what is mounted and how
-
-
-File: libc.info,  Node: Mount Information,  Next: Mount-Unmount-Remount,  Up: Filesystem Handling
-
-31.3.1 Mount Information
-------------------------
-
-For some programs it is desirable and necessary to access information
-about whether a certain filesystem is mounted and, if it is, where, or
-simply to get lists of all the available filesystems.  The GNU C Library
-provides some functions to retrieve this information portably.
-
-   Traditionally Unix systems have a file named ‘/etc/fstab’ which
-describes all possibly mounted filesystems.  The ‘mount’ program uses
-this file to mount at startup time of the system all the necessary
-filesystems.  The information about all the filesystems actually mounted
-is normally kept in a file named either ‘/var/run/mtab’ or ‘/etc/mtab’.
-Both files share the same syntax and it is crucial that this syntax is
-followed all the time.  Therefore it is best to never directly write to
-the files.  The functions described in this section can do this and they
-also provide the functionality to convert the external textual
-representation to the internal representation.
-
-   Note that the ‘fstab’ and ‘mtab’ files are maintained on a system by
-_convention_.  It is possible for the files not to exist or not to be
-consistent with what is really mounted or available to mount, if the
-system’s administration policy allows it.  But programs that mount and
-unmount filesystems typically maintain and use these files as described
-herein.
-
-   The filenames given above should never be used directly.  The
-portable way to handle these files is to use the macros ‘_PATH_FSTAB’,
-defined in ‘fstab.h’, or ‘_PATH_MNTTAB’, defined in ‘mntent.h’ and
-‘paths.h’, for ‘fstab’; and the macro ‘_PATH_MOUNTED’, also defined in
-‘mntent.h’ and ‘paths.h’, for ‘mtab’.  There are also two alternate
-macro names ‘FSTAB’, ‘MNTTAB’, and ‘MOUNTED’ defined but these names are
-deprecated and kept only for backward compatibility.  The names
-‘_PATH_MNTTAB’ and ‘_PATH_MOUNTED’ should always be used.
-
-* Menu:
-
-* fstab::                       The ‘fstab’ file
-* mtab::                        The ‘mtab’ file
-* Other Mount Information::     Other (non-libc) sources of mount information
-
-
-File: libc.info,  Node: fstab,  Next: mtab,  Up: Mount Information
-
-31.3.1.1 The ‘fstab’ file
-.........................
-
-The internal representation for entries of the file is ‘struct fstab’,
-defined in ‘fstab.h’.
-
- -- Data Type: struct fstab
-
-     This structure is used with the ‘getfsent’, ‘getfsspec’, and
-     ‘getfsfile’ functions.
-
-     ‘char *fs_spec’
-          This element describes the device from which the filesystem is
-          mounted.  Normally this is the name of a special device, such
-          as a hard disk partition, but it could also be a more or less
-          generic string.  For “NFS” it would be a hostname and
-          directory name combination.
-
-          Even though the element is not declared ‘const’ it shouldn’t
-          be modified.  The missing ‘const’ has historic reasons, since
-          this function predates ISO C. The same is true for the other
-          string elements of this structure.
-
-     ‘char *fs_file’
-          This describes the mount point on the local system.  I.e.,
-          accessing any file in this filesystem has implicitly or
-          explicitly this string as a prefix.
-
-     ‘char *fs_vfstype’
-          This is the type of the filesystem.  Depending on what the
-          underlying kernel understands it can be any string.
-
-     ‘char *fs_mntops’
-          This is a string containing options passed to the kernel with
-          the ‘mount’ call.  Again, this can be almost anything.  There
-          can be more than one option, separated from the others by a
-          comma.  Each option consists of a name and an optional value
-          part, introduced by an ‘=’ character.
-
-          If the value of this element must be processed it should
-          ideally be done using the ‘getsubopt’ function; see *note
-          Suboptions::.
-
-     ‘const char *fs_type’
-          This name is poorly chosen.  This element points to a string
-          (possibly in the ‘fs_mntops’ string) which describes the modes
-          with which the filesystem is mounted.  ‘fstab’ defines five
-          macros to describe the possible values:
-
-          ‘FSTAB_RW’
-               The filesystem gets mounted with read and write enabled.
-          ‘FSTAB_RQ’
-               The filesystem gets mounted with read and write enabled.
-               Write access is restricted by quotas.
-          ‘FSTAB_RO’
-               The filesystem gets mounted read-only.
-          ‘FSTAB_SW’
-               This is not a real filesystem, it is a swap device.
-          ‘FSTAB_XX’
-               This entry from the ‘fstab’ file is totally ignored.
-
-          Testing for equality with these values must happen using
-          ‘strcmp’ since these are all strings.  Comparing the pointer
-          will probably always fail.
-
-     ‘int fs_freq’
-          This element describes the dump frequency in days.
-
-     ‘int fs_passno’
-          This element describes the pass number on parallel dumps.  It
-          is closely related to the ‘dump’ utility used on Unix systems.
-
-   To read the entire content of the of the ‘fstab’ file the GNU C
-Library contains a set of three functions which are designed in the
-usual way.
-
- -- Function: int setfsent (void)
-
-     Preliminary: | MT-Unsafe race:fsent | AS-Unsafe heap corrupt lock |
-     AC-Unsafe corrupt lock mem fd | *Note POSIX Safety Concepts::.
-
-     This function makes sure that the internal read pointer for the
-     ‘fstab’ file is at the beginning of the file.  This is done by
-     either opening the file or resetting the read pointer.
-
-     Since the file handle is internal to the libc this function is not
-     thread-safe.
-
-     This function returns a non-zero value if the operation was
-     successful and the ‘getfs*’ functions can be used to read the
-     entries of the file.
-
- -- Function: void endfsent (void)
-
-     Preliminary: | MT-Unsafe race:fsent | AS-Unsafe heap corrupt lock |
-     AC-Unsafe corrupt lock mem fd | *Note POSIX Safety Concepts::.
-
-     This function makes sure that all resources acquired by a prior
-     call to ‘setfsent’ (explicitly or implicitly by calling ‘getfsent’)
-     are freed.
-
- -- Function: struct fstab * getfsent (void)
-
-     Preliminary: | MT-Unsafe race:fsent locale | AS-Unsafe corrupt heap
-     lock | AC-Unsafe corrupt lock mem | *Note POSIX Safety Concepts::.
-
-     This function returns the next entry of the ‘fstab’ file.  If this
-     is the first call to any of the functions handling ‘fstab’ since
-     program start or the last call of ‘endfsent’, the file will be
-     opened.
-
-     The function returns a pointer to a variable of type ‘struct
-     fstab’.  This variable is shared by all threads and therefore this
-     function is not thread-safe.  If an error occurred ‘getfsent’
-     returns a ‘NULL’ pointer.
-
- -- Function: struct fstab * getfsspec (const char *NAME)
-
-     Preliminary: | MT-Unsafe race:fsent locale | AS-Unsafe corrupt heap
-     lock | AC-Unsafe corrupt lock mem | *Note POSIX Safety Concepts::.
-
-     This function returns the next entry of the ‘fstab’ file which has
-     a string equal to NAME pointed to by the ‘fs_spec’ element.  Since
-     there is normally exactly one entry for each special device it
-     makes no sense to call this function more than once for the same
-     argument.  If this is the first call to any of the functions
-     handling ‘fstab’ since program start or the last call of
-     ‘endfsent’, the file will be opened.
-
-     The function returns a pointer to a variable of type ‘struct
-     fstab’.  This variable is shared by all threads and therefore this
-     function is not thread-safe.  If an error occurred ‘getfsent’
-     returns a ‘NULL’ pointer.
-
- -- Function: struct fstab * getfsfile (const char *NAME)
-
-     Preliminary: | MT-Unsafe race:fsent locale | AS-Unsafe corrupt heap
-     lock | AC-Unsafe corrupt lock mem | *Note POSIX Safety Concepts::.
-
-     This function returns the next entry of the ‘fstab’ file which has
-     a string equal to NAME pointed to by the ‘fs_file’ element.  Since
-     there is normally exactly one entry for each mount point it makes
-     no sense to call this function more than once for the same
-     argument.  If this is the first call to any of the functions
-     handling ‘fstab’ since program start or the last call of
-     ‘endfsent’, the file will be opened.
-
-     The function returns a pointer to a variable of type ‘struct
-     fstab’.  This variable is shared by all threads and therefore this
-     function is not thread-safe.  If an error occurred ‘getfsent’
-     returns a ‘NULL’ pointer.
-
-
-File: libc.info,  Node: mtab,  Next: Other Mount Information,  Prev: fstab,  Up: Mount Information
-
-31.3.1.2 The ‘mtab’ file
-........................
-
-The following functions and data structure access the ‘mtab’ file.
-
- -- Data Type: struct mntent
-
-     This structure is used with the ‘getmntent’, ‘getmntent_r’,
-     ‘addmntent’, and ‘hasmntopt’ functions.
-
-     ‘char *mnt_fsname’
-          This element contains a pointer to a string describing the
-          name of the special device from which the filesystem is
-          mounted.  It corresponds to the ‘fs_spec’ element in ‘struct
-          fstab’.
-
-     ‘char *mnt_dir’
-          This element points to a string describing the mount point of
-          the filesystem.  It corresponds to the ‘fs_file’ element in
-          ‘struct fstab’.
-
-     ‘char *mnt_type’
-          ‘mnt_type’ describes the filesystem type and is therefore
-          equivalent to ‘fs_vfstype’ in ‘struct fstab’.  ‘mntent.h’
-          defines a few symbolic names for some of the values this
-          string can have.  But since the kernel can support arbitrary
-          filesystems it does not make much sense to give them symbolic
-          names.  If one knows the symbol name one also knows the
-          filesystem name.  Nevertheless here follows the list of the
-          symbols provided in ‘mntent.h’.
-
-          ‘MNTTYPE_IGNORE’
-               This symbol expands to ‘"ignore"’.  The value is
-               sometimes used in ‘fstab’ files to make sure entries are
-               not used without removing them.
-          ‘MNTTYPE_NFS’
-               Expands to ‘"nfs"’.  Using this macro sometimes could
-               make sense since it names the default NFS implementation,
-               in case both version 2 and 3 are supported.
-          ‘MNTTYPE_SWAP’
-               This symbol expands to ‘"swap"’.  It names the special
-               ‘fstab’ entry which names one of the possibly multiple
-               swap partitions.
-
-     ‘char *mnt_opts’
-          The element contains a string describing the options used
-          while mounting the filesystem.  As for the equivalent element
-          ‘fs_mntops’ of ‘struct fstab’ it is best to use the function
-          ‘getsubopt’ (*note Suboptions::) to access the parts of this
-          string.
-
-          The ‘mntent.h’ file defines a number of macros with string
-          values which correspond to some of the options understood by
-          the kernel.  There might be many more options which are
-          possible so it doesn’t make much sense to rely on these macros
-          but to be consistent here is the list:
-
-          ‘MNTOPT_DEFAULTS’
-               Expands to ‘"defaults"’.  This option should be used
-               alone since it indicates all values for the customizable
-               values are chosen to be the default.
-          ‘MNTOPT_RO’
-               Expands to ‘"ro"’.  See the ‘FSTAB_RO’ value, it means
-               the filesystem is mounted read-only.
-          ‘MNTOPT_RW’
-               Expands to ‘"rw"’.  See the ‘FSTAB_RW’ value, it means
-               the filesystem is mounted with read and write
-               permissions.
-          ‘MNTOPT_SUID’
-               Expands to ‘"suid"’.  This means that the SUID bit (*note
-               How Change Persona::) is respected when a program from
-               the filesystem is started.
-          ‘MNTOPT_NOSUID’
-               Expands to ‘"nosuid"’.  This is the opposite of
-               ‘MNTOPT_SUID’, the SUID bit for all files from the
-               filesystem is ignored.
-          ‘MNTOPT_NOAUTO’
-               Expands to ‘"noauto"’.  At startup time the ‘mount’
-               program will ignore this entry if it is started with the
-               ‘-a’ option to mount all filesystems mentioned in the
-               ‘fstab’ file.
-
-          As for the ‘FSTAB_*’ entries introduced above it is important
-          to use ‘strcmp’ to check for equality.
-
-     ‘mnt_freq’
-          This elements corresponds to ‘fs_freq’ and also specifies the
-          frequency in days in which dumps are made.
-
-     ‘mnt_passno’
-          This element is equivalent to ‘fs_passno’ with the same
-          meaning which is uninteresting for all programs beside ‘dump’.
-
-   For accessing the ‘mtab’ file there is again a set of three functions
-to access all entries in a row.  Unlike the functions to handle ‘fstab’
-these functions do not access a fixed file and there is even a thread
-safe variant of the get function.  Besides this the GNU C Library
-contains functions to alter the file and test for specific options.
-
- -- Function: FILE * setmntent (const char *FILE, const char *MODE)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe mem fd
-     lock | *Note POSIX Safety Concepts::.
-
-     The ‘setmntent’ function prepares the file named FILE which must be
-     in the format of a ‘fstab’ and ‘mtab’ file for the upcoming
-     processing through the other functions of the family.  The MODE
-     parameter can be chosen in the way the OPENTYPE parameter for
-     ‘fopen’ (*note Opening Streams::) can be chosen.  If the file is
-     opened for writing the file is also allowed to be empty.
-
-     If the file was successfully opened ‘setmntent’ returns a file
-     handle for future use.  Otherwise the return value is ‘NULL’ and
-     ‘errno’ is set accordingly.
-
- -- Function: int endmntent (FILE *STREAM)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap lock | AC-Unsafe lock mem
-     fd | *Note POSIX Safety Concepts::.
-
-     This function takes for the STREAM parameter a file handle which
-     previously was returned from the ‘setmntent’ call.  ‘endmntent’
-     closes the stream and frees all resources.
-
-     The return value is 1 unless an error occurred in which case it is
-     0.
-
- -- Function: struct mntent * getmntent (FILE *STREAM)
-
-     Preliminary: | MT-Unsafe race:mntentbuf locale | AS-Unsafe corrupt
-     heap init | AC-Unsafe init corrupt lock mem | *Note POSIX Safety
-     Concepts::.
-
-     The ‘getmntent’ function takes as the parameter a file handle
-     previously returned by a successful call to ‘setmntent’.  It
-     returns a pointer to a static variable of type ‘struct mntent’
-     which is filled with the information from the next entry from the
-     file currently read.
-
-     The file format used prescribes the use of spaces or tab characters
-     to separate the fields.  This makes it harder to use names
-     containing one of these characters (e.g., mount points using
-     spaces).  Therefore these characters are encoded in the files and
-     the ‘getmntent’ function takes care of the decoding while reading
-     the entries back in.  ‘'\040'’ is used to encode a space character,
-     ‘'\011'’ to encode a tab character, ‘'\012'’ to encode a newline
-     character, and ‘'\\'’ to encode a backslash.
-
-     If there was an error or the end of the file is reached the return
-     value is ‘NULL’.
-
-     This function is not thread-safe since all calls to this function
-     return a pointer to the same static variable.  ‘getmntent_r’ should
-     be used in situations where multiple threads access the file.
-
- -- Function: struct mntent * getmntent_r (FILE *STREAM, struct mntent
-          *RESULT, char *BUFFER, int BUFSIZE)
-
-     Preliminary: | MT-Safe locale | AS-Unsafe corrupt heap | AC-Unsafe
-     corrupt lock mem | *Note POSIX Safety Concepts::.
-
-     The ‘getmntent_r’ function is the reentrant variant of ‘getmntent’.
-     It also returns the next entry from the file and returns a pointer.
-     The actual variable the values are stored in is not static, though.
-     Instead the function stores the values in the variable pointed to
-     by the RESULT parameter.  Additional information (e.g., the strings
-     pointed to by the elements of the result) are kept in the buffer of
-     size BUFSIZE pointed to by BUFFER.
-
-     Escaped characters (space, tab, backslash) are converted back in
-     the same way as it happens for ‘getmentent’.
-
-     The function returns a ‘NULL’ pointer in error cases.  Errors could
-     be:
-        • error while reading the file,
-        • end of file reached,
-        • BUFSIZE is too small for reading a complete new entry.
-
- -- Function: int addmntent (FILE *STREAM, const struct mntent *MNT)
-
-     Preliminary: | MT-Safe race:stream locale | AS-Unsafe corrupt |
-     AC-Unsafe corrupt | *Note POSIX Safety Concepts::.
-
-     The ‘addmntent’ function allows adding a new entry to the file
-     previously opened with ‘setmntent’.  The new entries are always
-     appended.  I.e., even if the position of the file descriptor is not
-     at the end of the file this function does not overwrite an existing
-     entry following the current position.
-
-     The implication of this is that to remove an entry from a file one
-     has to create a new file while leaving out the entry to be removed
-     and after closing the file remove the old one and rename the new
-     file to the chosen name.
-
-     This function takes care of spaces and tab characters in the names
-     to be written to the file.  It converts them and the backslash
-     character into the format described in the ‘getmntent’ description
-     above.
-
-     This function returns 0 in case the operation was successful.
-     Otherwise the return value is 1 and ‘errno’ is set appropriately.
-
- -- Function: char * hasmntopt (const struct mntent *MNT, const char
-          *OPT)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function can be used to check whether the string pointed to by
-     the ‘mnt_opts’ element of the variable pointed to by MNT contains
-     the option OPT.  If this is true a pointer to the beginning of the
-     option in the ‘mnt_opts’ element is returned.  If no such option
-     exists the function returns ‘NULL’.
-
-     This function is useful to test whether a specific option is
-     present but when all options have to be processed one is better off
-     with using the ‘getsubopt’ function to iterate over all options in
-     the string.
 

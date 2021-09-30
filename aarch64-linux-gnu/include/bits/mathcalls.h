@@ -328,11 +328,13 @@ __MATHDECL (long long int,llround,, (_Mdouble_ __x));
 /* Return positive difference between X and Y.  */
 __MATHCALL (fdim,, (_Mdouble_ __x, _Mdouble_ __y));
 
+# if !__MATH_DECLARING_FLOATN || defined __USE_GNU || !__GLIBC_USE (ISOC2X)
 /* Return maximum numeric value from X and Y.  */
 __MATHCALLX (fmax,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
 
 /* Return minimum numeric value from X and Y.  */
 __MATHCALLX (fmin,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+# endif
 
 /* Multiply-add function computed as a ternary operation.  */
 __MATHCALL (fma,, (_Mdouble_ __x, _Mdouble_ __y, _Mdouble_ __z));
@@ -376,6 +378,32 @@ __MATHCALLX (fmaxmag,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
 
 /* Return value with minimum magnitude.  */
 __MATHCALLX (fminmag,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+#endif
+
+#if __GLIBC_USE (ISOC2X)
+/* Return maximum value from X and Y.  */
+__MATHCALLX (fmaximum,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return minimum value from X and Y.  */
+__MATHCALLX (fminimum,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return maximum numeric value from X and Y.  */
+__MATHCALLX (fmaximum_num,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return minimum numeric value from X and Y.  */
+__MATHCALLX (fminimum_num,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return value with maximum magnitude.  */
+__MATHCALLX (fmaximum_mag,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return value with minimum magnitude.  */
+__MATHCALLX (fminimum_mag,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return numeric value with maximum magnitude.  */
+__MATHCALLX (fmaximum_mag_num,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
+
+/* Return numeric value with minimum magnitude.  */
+__MATHCALLX (fminimum_mag_num,, (_Mdouble_ __x, _Mdouble_ __y), (__const__));
 #endif
 
 #if __GLIBC_USE (IEC_60559_EXT) || __MATH_DECLARING_FLOATN

@@ -992,6 +992,26 @@ START-INFO-DIR-ENTRY
 * fmaxf: (libc)Misc FP Arithmetic.
 * fmaxfN: (libc)Misc FP Arithmetic.
 * fmaxfNx: (libc)Misc FP Arithmetic.
+* fmaximum: (libc)Misc FP Arithmetic.
+* fmaximum_mag: (libc)Misc FP Arithmetic.
+* fmaximum_mag_num: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numf: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_mag_numl: (libc)Misc FP Arithmetic.
+* fmaximum_magf: (libc)Misc FP Arithmetic.
+* fmaximum_magfN: (libc)Misc FP Arithmetic.
+* fmaximum_magfNx: (libc)Misc FP Arithmetic.
+* fmaximum_magl: (libc)Misc FP Arithmetic.
+* fmaximum_num: (libc)Misc FP Arithmetic.
+* fmaximum_numf: (libc)Misc FP Arithmetic.
+* fmaximum_numfN: (libc)Misc FP Arithmetic.
+* fmaximum_numfNx: (libc)Misc FP Arithmetic.
+* fmaximum_numl: (libc)Misc FP Arithmetic.
+* fmaximumf: (libc)Misc FP Arithmetic.
+* fmaximumfN: (libc)Misc FP Arithmetic.
+* fmaximumfNx: (libc)Misc FP Arithmetic.
+* fmaximuml: (libc)Misc FP Arithmetic.
 * fmaxl: (libc)Misc FP Arithmetic.
 * fmaxmag: (libc)Misc FP Arithmetic.
 * fmaxmagf: (libc)Misc FP Arithmetic.
@@ -1003,6 +1023,26 @@ START-INFO-DIR-ENTRY
 * fminf: (libc)Misc FP Arithmetic.
 * fminfN: (libc)Misc FP Arithmetic.
 * fminfNx: (libc)Misc FP Arithmetic.
+* fminimum: (libc)Misc FP Arithmetic.
+* fminimum_mag: (libc)Misc FP Arithmetic.
+* fminimum_mag_num: (libc)Misc FP Arithmetic.
+* fminimum_mag_numf: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfN: (libc)Misc FP Arithmetic.
+* fminimum_mag_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_mag_numl: (libc)Misc FP Arithmetic.
+* fminimum_magf: (libc)Misc FP Arithmetic.
+* fminimum_magfN: (libc)Misc FP Arithmetic.
+* fminimum_magfNx: (libc)Misc FP Arithmetic.
+* fminimum_magl: (libc)Misc FP Arithmetic.
+* fminimum_num: (libc)Misc FP Arithmetic.
+* fminimum_numf: (libc)Misc FP Arithmetic.
+* fminimum_numfN: (libc)Misc FP Arithmetic.
+* fminimum_numfNx: (libc)Misc FP Arithmetic.
+* fminimum_numl: (libc)Misc FP Arithmetic.
+* fminimumf: (libc)Misc FP Arithmetic.
+* fminimumfN: (libc)Misc FP Arithmetic.
+* fminimumfNx: (libc)Misc FP Arithmetic.
+* fminimuml: (libc)Misc FP Arithmetic.
 * fminl: (libc)Misc FP Arithmetic.
 * fminmag: (libc)Misc FP Arithmetic.
 * fminmagf: (libc)Misc FP Arithmetic.
@@ -2118,6 +2158,1786 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: Concept Index,  Next: Type Index,  Prev: Documentation License,  Up: Top
+
+Concept Index
+*************
+
+ [index ]
+* Menu:
+
+* !posix:                                Other Safety Remarks.
+                                                              (line 135)
+* .lib section in a.out corrupted:       Error Codes.         (line 754)
+* /condition:                            Other Safety Remarks.
+                                                              (line 168)
+* /etc/hostname:                         Host Identification. (line  93)
+* /etc/nsswitch.conf:                    NSS Configuration File.
+                                                              (line   6)
+* 4.N BSD Unix:                          Berkeley Unix.       (line   6)
+* :identifier:                           Other Safety Remarks.
+                                                              (line 147)
+* ?:                                     Error Codes.         (line 563)
+* _POSIX_OPTION_ORDER environment variable.: Standard Environment.
+                                                              (line 118)
+* _POSIX_SAVED_IDS:                      How Change Persona.  (line   6)
+* abort signal:                          Program Error Signals.
+                                                              (line 141)
+* aborting a program:                    Aborting a Program.  (line   6)
+* absolute file name:                    File Name Resolution.
+                                                              (line  19)
+* absolute priority:                     Absolute Priority.   (line   6)
+* absolute value functions:              Absolute Value.      (line   6)
+* AC-Safe:                               POSIX Safety Concepts.
+                                                              (line  49)
+* AC-Unsafe:                             POSIX Safety Concepts.
+                                                              (line  68)
+* accepting connections:                 Accepting Connections.
+                                                              (line   6)
+* access permission for a file:          Access Permission.   (line   6)
+* access, testing for:                   Testing File Access. (line   6)
+* Accessing a corrupted shared library:  Error Codes.         (line 750)
+* accessing directories:                 Accessing Directories.
+                                                              (line   6)
+* Address already in use:                Error Codes.         (line 330)
+* Address family not supported by protocol: Error Codes.      (line 324)
+* address of socket:                     Socket Addresses.    (line   6)
+* address space:                         Memory Subsystem.    (line   6)
+* address space <1>:                     Program Basics.      (line   6)
+* Advertise error:                       Error Codes.         (line 718)
+* alarm signal:                          Alarm Signals.       (line  20)
+* alarms, setting:                       Setting an Alarm.    (line  10)
+* aliases:                               NSS Basics.          (line  24)
+* alignment (in obstacks):               Obstacks Data Alignment.
+                                                              (line   6)
+* alignment (with malloc):               Aligned Memory Blocks.
+                                                              (line   6)
+* alloca disadvantages:                  Disadvantages of Alloca.
+                                                              (line   6)
+* alloca function:                       Variable Size Automatic.
+                                                              (line   6)
+* allocating file storage:               Storage Allocation.  (line   6)
+* allocating pseudo-terminals:           Allocation.          (line   6)
+* allocation (obstacks):                 Allocation in an Obstack.
+                                                              (line   6)
+* allocation debugging:                  Allocation Debugging.
+                                                              (line   6)
+* allocation of memory with malloc:      Basic Allocation.    (line   6)
+* allocation size of string:             Representation of Strings.
+                                                              (line  61)
+* allocation statistics:                 Statistics of Malloc.
+                                                              (line   6)
+* alphabetic character:                  Classification of Characters.
+                                                              (line  43)
+* alphabetic character <1>:              Classification of Wide Characters.
+                                                              (line  93)
+* alphanumeric character:                Classification of Characters.
+                                                              (line  64)
+* alphanumeric character <1>:            Classification of Wide Characters.
+                                                              (line  77)
+* alternative malloc implementations:    Replacing malloc.    (line   6)
+* append-access files:                   File Position.       (line  28)
+* argc (program argument count):         Program Arguments.   (line  16)
+* argp (program argument parser):        Argp.                (line   6)
+* argp parser functions:                 Argp Parser Functions.
+                                                              (line  13)
+* ARGP_HELP_FMT environment variable:    Argp User Customization.
+                                                              (line   6)
+* Argument list too long:                Error Codes.         (line  52)
+* argument parsing with argp:            Argp.                (line   6)
+* argument promotion:                    Calling Variadics.   (line  27)
+* argument vectors, null-byte separated: Argz and Envz Vectors.
+                                                              (line   6)
+* arguments (variadic functions):        Receiving Arguments. (line   6)
+* arguments, how many:                   How Many Arguments.  (line   6)
+* arguments, to program:                 Program Arguments.   (line   6)
+* argv (program argument vector):        Program Arguments.   (line  16)
+* argz vectors (string vectors):         Argz and Envz Vectors.
+                                                              (line   6)
+* arithmetic expansion:                  Expansion Stages.    (line  23)
+* array comparison functions:            String/Array Comparison.
+                                                              (line   6)
+* array copy functions:                  Copying Strings and Arrays.
+                                                              (line   9)
+* array search function:                 Array Search Function.
+                                                              (line   6)
+* array sort function:                   Array Sort Function. (line   6)
+* AS-Safe:                               POSIX Safety Concepts.
+                                                              (line  35)
+* AS-Unsafe:                             POSIX Safety Concepts.
+                                                              (line  68)
+* ASCII character:                       Classification of Characters.
+                                                              (line 153)
+* assertions:                            Consistency Checking.
+                                                              (line   6)
+* Async-Cancel-Safe:                     POSIX Safety Concepts.
+                                                              (line  49)
+* Async-Cancel-Unsafe:                   POSIX Safety Concepts.
+                                                              (line  68)
+* Async-Signal-Safe:                     POSIX Safety Concepts.
+                                                              (line  35)
+* Async-Signal-Unsafe:                   POSIX Safety Concepts.
+                                                              (line  68)
+* Attempting to link in too many shared libraries: Error Codes.
+                                                              (line 758)
+* attributes of a file:                  Attribute Meanings.  (line   6)
+* Authentication error:                  Error Codes.         (line 508)
+* automatic freeing:                     Variable Size Automatic.
+                                                              (line   6)
+* automatic memory allocation:           Memory Allocation and C.
+                                                              (line  19)
+* automatic storage class:               Memory Allocation and C.
+                                                              (line  19)
+* automatic storage with variable size:  Variable Size Automatic.
+                                                              (line   6)
+* auxiliary vector:                      Auxiliary Vector.    (line   6)
+* background job:                        Concepts of Job Control.
+                                                              (line  47)
+* background job, launching:             Foreground and Background.
+                                                              (line  62)
+* backtrace:                             Backtraces.          (line   6)
+* backtrace_fd:                          Backtraces.          (line   6)
+* backtrace_symbols:                     Backtraces.          (line   6)
+* Bad address:                           Error Codes.         (line  95)
+* Bad file descriptor:                   Error Codes.         (line  65)
+* Bad font file format:                  Error Codes.         (line 706)
+* Bad message:                           Error Codes.         (line 580)
+* base (of floating point number):       Floating Point Concepts.
+                                                              (line  20)
+* baud rate:                             Line Speed.          (line   6)
+* Berkeley Unix:                         Berkeley Unix.       (line   6)
+* Bessel functions:                      Special Functions.   (line   6)
+* bias (of floating point number exponent): Floating Point Concepts.
+                                                              (line  27)
+* big-endian:                            Byte Order.          (line   6)
+* binary I/O to a stream:                Block Input/Output.  (line   9)
+* binary search function (for arrays):   Array Search Function.
+                                                              (line   6)
+* binary stream:                         Binary Streams.      (line  14)
+* binding a socket address:              Socket Addresses.    (line   6)
+* blank character:                       Classification of Characters.
+                                                              (line 117)
+* blank character <1>:                   Classification of Wide Characters.
+                                                              (line 275)
+* Block device required:                 Error Codes.         (line 100)
+* block I/O to a stream:                 Block Input/Output.  (line   9)
+* blocked signals:                       Delivery of Signal.  (line   6)
+* blocked signals, checking for:         Checking for Pending Signals.
+                                                              (line   6)
+* blocking signals:                      Blocking Signals.    (line   6)
+* blocking signals, in a handler:        Blocking for Handler.
+                                                              (line   6)
+* bootstrapping, and services:           Actions in the NSS configuration.
+                                                              (line 112)
+* break condition, detecting:            Input Modes.         (line  63)
+* break condition, generating:           Line Control.        (line  14)
+* breaking a string into tokens:         Finding Tokens in a String.
+                                                              (line   6)
+* Broken pipe:                           Error Codes.         (line 202)
+* broken pipe signal:                    Operation Error Signals.
+                                                              (line  14)
+* broken-down time:                      Time Basics.         (line  52)
+* broken-down time <1>:                  Broken-down Time.    (line   6)
+* BSD Unix:                              Berkeley Unix.       (line   6)
+* buffering of streams:                  Stream Buffering.    (line   6)
+* buffering, controlling:                Controlling Buffering.
+                                                              (line   8)
+* bugs, reporting:                       Reporting Bugs.      (line   6)
+* bus error:                             Program Error Signals.
+                                                              (line 138)
+* butterfly:                             Misc FP Arithmetic.  (line 204)
+* byte order conversion, for socket:     Byte Order.          (line   6)
+* byte stream:                           Socket Concepts.     (line  12)
+* C threads:                             ISO C Threads.       (line   6)
+* C++ streams:                           Streams and I18N.    (line  30)
+* calendar time:                         Time Basics.         (line  13)
+* calendar time and broken-down time:    Broken-down Time.    (line   6)
+* calendar time, simple:                 Time Basics.         (line  45)
+* calendar, Gregorian:                   Time Basics.         (line  52)
+* call once:                             Call Once.           (line   6)
+* calling variadic functions:            Calling Variadics.   (line   6)
+* Can not access a needed shared library: Error Codes.        (line 746)
+* Cannot allocate memory:                Error Codes.         (line  85)
+* Cannot assign requested address:       Error Codes.         (line 335)
+* Cannot exec a shared library directly: Error Codes.         (line 762)
+* Cannot send after transport endpoint shutdown: Error Codes. (line 394)
+* canonical input processing:            Canonical or Not.    (line   9)
+* capacity limits, POSIX:                General Limits.      (line   6)
+* carrier detect:                        Control Modes.       (line  22)
+* case conversion of characters:         Case Conversion.     (line   6)
+* catching signals:                      Delivery of Signal.  (line  13)
+* categories for locales:                Locale Categories.   (line   6)
+* change working directory:              Working Directory.   (line   6)
+* changing the locale:                   Setting the Locale.  (line  20)
+* changing the size of a block (malloc): Changing Block Size. (line   6)
+* changing the size of a block (obstacks): Growing Objects.   (line   6)
+* Channel number out of range:           Error Codes.         (line 646)
+* channels:                              Stream/Descriptor Precautions.
+                                                              (line   6)
+* character case conversion:             Case Conversion.     (line   6)
+* character predicates:                  Classification of Characters.
+                                                              (line   6)
+* character testing:                     Classification of Characters.
+                                                              (line   6)
+* checking for pending signals:          Checking for Pending Signals.
+                                                              (line   6)
+* child process:                         Processor Time.      (line  33)
+* child process <1>:                     Processes.           (line  13)
+* child process <2>:                     Process Creation Concepts.
+                                                              (line   9)
+* child process signal:                  Job Control Signals. (line  15)
+* chunks:                                Obstack Chunks.      (line   6)
+* classes, floating-point:               Floating Point Classes.
+                                                              (line   6)
+* classification of characters:          Classification of Characters.
+                                                              (line   6)
+* cleaning up a stream:                  Linked Channels.     (line  15)
+* clearing terminal input queue:         Line Control.        (line  67)
+* client:                                Connections.         (line   6)
+* clock ticks:                           Time Types.          (line  15)
+* clock ticks <1>:                       Processor And CPU Time.
+                                                              (line  19)
+* clock, disciplining:                   Setting and Adjusting the Time.
+                                                              (line  60)
+* clock, high accuracy:                  Setting and Adjusting the Time.
+                                                              (line  60)
+* close-on-exec (file descriptor flag):  Descriptor Flags.    (line  54)
+* closing a file descriptor:             Opening and Closing Files.
+                                                              (line   6)
+* closing a socket:                      Closing a Socket.    (line   6)
+* closing a stream:                      Closing Streams.     (line   6)
+* collating strings:                     Collation Functions. (line   6)
+* combining locales:                     Choosing Locale.     (line  19)
+* command argument syntax:               Argument Syntax.     (line   6)
+* command arguments, parsing:            Parsing Program Arguments.
+                                                              (line   6)
+* command line arguments:                Program Arguments.   (line   6)
+* command substitution:                  Expansion Stages.    (line  18)
+* Communication error on send:           Error Codes.         (line 726)
+* communication style (of a socket):     Socket Concepts.     (line   6)
+* comparing strings and arrays:          String/Array Comparison.
+                                                              (line   6)
+* Comparison Function:                   Comparison Functions.
+                                                              (line   6)
+* compiling:                             Configuring and compiling.
+                                                              (line   6)
+* complex exponentiation functions:      Exponents and Logarithms.
+                                                              (line 264)
+* complex logarithm functions:           Exponents and Logarithms.
+                                                              (line 264)
+* complex numbers:                       Complex Numbers.     (line   6)
+* complex trigonometric functions:       Trig Functions.      (line  82)
+* Computer bought the farm:              Error Codes.         (line 571)
+* concatenating strings:                 Copying Strings and Arrays.
+                                                              (line   9)
+* concatenating strings <1>:             Concatenating Strings.
+                                                              (line   6)
+* condition variables:                   ISO C Condition Variables.
+                                                              (line   6)
+* Conditionally Safe Features:           Conditionally Safe Features.
+                                                              (line   6)
+* condvar:                               ISO C Condition Variables.
+                                                              (line   6)
+* configuring:                           Configuring and compiling.
+                                                              (line   6)
+* conjugate complex numbers:             Operations on Complex.
+                                                              (line   6)
+* connecting a socket:                   Connecting.          (line   6)
+* connection:                            Connections.         (line   6)
+* Connection refused:                    Error Codes.         (line 408)
+* Connection reset by peer:              Error Codes.         (line 361)
+* Connection timed out:                  Error Codes.         (line 403)
+* consistency checking:                  Consistency Checking.
+                                                              (line   6)
+* consistency checking, of heap:         Heap Consistency Checking.
+                                                              (line   6)
+* const:                                 Conditionally Safe Features.
+                                                              (line 131)
+* constants:                             Memory Concepts.     (line  67)
+* constants <1>:                         Mathematical Constants.
+                                                              (line   6)
+* continue signal:                       Job Control Signals. (line  31)
+* control character:                     Classification of Characters.
+                                                              (line 145)
+* control character <1>:                 Classification of Wide Characters.
+                                                              (line 113)
+* control operations on files:           Control Operations.  (line   6)
+* controlling process:                   Controlling Terminal.
+                                                              (line  13)
+* controlling terminal:                  Concepts of Job Control.
+                                                              (line  40)
+* controlling terminal, access to:       Access to the Terminal.
+                                                              (line   6)
+* controlling terminal, determining:     Identifying the Terminal.
+                                                              (line   6)
+* controlling terminal, setting:         Open-time Flags.     (line  97)
+* conversion specifications (printf):    Formatted Output Basics.
+                                                              (line  14)
+* conversion specifications (scanf):     Formatted Input Basics.
+                                                              (line  18)
+* converting byte order:                 Byte Order.          (line   6)
+* converting case of characters:         Case Conversion.     (line   6)
+* converting file descriptor to stream:  Descriptors and Streams.
+                                                              (line   6)
+* converting floats to integers:         Rounding Functions.  (line   6)
+* converting group ID to group name:     Lookup Group.        (line   6)
+* converting group name to group ID:     Lookup Group.        (line   6)
+* converting host address to name:       Host Names.          (line   6)
+* converting host name to address:       Host Names.          (line   6)
+* converting network name to network number: Networks Database.
+                                                              (line   6)
+* converting network number to network name: Networks Database.
+                                                              (line   6)
+* converting port number to service name: Services Database.  (line   6)
+* converting service name to port number: Services Database.  (line   6)
+* converting string to collation order:  Collation Functions. (line  86)
+* converting strings to numbers:         Parsing of Numbers.  (line   6)
+* converting user ID to user name:       Lookup User.         (line   6)
+* converting user name to user ID:       Lookup User.         (line   6)
+* cookie, for custom stream:             Streams and Cookies. (line   6)
+* copy-on-write page fault:              Locked Memory Details.
+                                                              (line  40)
+* copying files:                         Copying File Data.   (line   6)
+* copying strings and arrays:            Copying Strings and Arrays.
+                                                              (line   9)
+* corrupt:                               Unsafe Features.     (line  26)
+* cpu priority:                          Priority.            (line   6)
+* CPU time:                              Time Basics.         (line  57)
+* CPU time <1>:                          Processor And CPU Time.
+                                                              (line  19)
+* CPU time <2>:                          Processor Time.      (line  10)
+* create on open (file status flag):     Open-time Flags.     (line  23)
+* creating a directory:                  Creating Directories.
+                                                              (line   6)
+* creating a FIFO special file:          FIFO Special Files.  (line   6)
+* creating a pipe:                       Creating a Pipe.     (line   6)
+* creating a pipe to a subprocess:       Pipe to a Subprocess.
+                                                              (line   6)
+* creating a process:                    Process Creation Concepts.
+                                                              (line   9)
+* creating a socket:                     Creating a Socket.   (line   6)
+* creating a socket pair:                Socket Pairs.        (line   6)
+* creating special files:                Making Special Files.
+                                                              (line   6)
+* CRNG:                                  Unpredictable Bytes. (line   6)
+* cryptographic random number generator: Unpredictable Bytes. (line   6)
+* CSPRNG:                                Unpredictable Bytes. (line   6)
+* cube root function:                    Exponents and Logarithms.
+                                                              (line 210)
+* currency symbols:                      Currency Symbol.     (line   6)
+* current limit:                         Limits on Resources. (line  17)
+* current working directory:             Working Directory.   (line   6)
+* custom streams:                        Custom Streams.      (line   6)
+* customizing malloc:                    Replacing malloc.    (line   6)
+* customizing printf:                    Customizing Printf.  (line   6)
+* cwd:                                   Other Safety Remarks.
+                                                              (line 121)
+* data loss on sockets:                  Socket Concepts.     (line  17)
+* databases:                             Name Service Switch. (line   6)
+* datagram socket:                       Datagrams.           (line   6)
+* datagrams, transmitting:               Sending Datagrams.   (line   6)
+* data_cache_size tunables:              Hardware Capability Tunables.
+                                                              (line   6)
+* date:                                  Time Basics.         (line  16)
+* Daylight Saving Time:                  Broken-down Time.    (line  63)
+* decimal digit character:               Classification of Characters.
+                                                              (line  57)
+* decimal-point separator:               General Numeric.     (line  13)
+* declaration (compared to definition):  Header Files.        (line  17)
+* declaring variadic functions:          Calling Variadics.   (line   6)
+* decompose complex numbers:             Operations on Complex.
+                                                              (line   6)
+* default action (for a signal):         Delivery of Signal.  (line  13)
+* default action for a signal:           Basic Signal Handling.
+                                                              (line  39)
+* default argument promotions:           Calling Variadics.   (line  27)
+* default value, and NSS:                Notes on NSS Configuration File.
+                                                              (line  11)
+* defining new printf conversions:       Customizing Printf.  (line   6)
+* definition (compared to declaration):  Header Files.        (line  17)
+* delayed suspend character:             Signal Characters.   (line  57)
+* deleting a directory:                  Deleting Files.      (line  59)
+* deleting a file:                       Deleting Files.      (line   6)
+* delivery of signals:                   Delivery of Signal.  (line   6)
+* descriptors and streams:               Stream/Descriptor Precautions.
+                                                              (line   6)
+* Destination address required:          Error Codes.         (line 387)
+* deterministic random bit generator:    Unpredictable Bytes. (line   6)
+* Device not a stream:                   Error Codes.         (line 608)
+* Device or resource busy:               Error Codes.         (line 106)
+* digit character:                       Classification of Characters.
+                                                              (line  57)
+* digit character <1>:                   Classification of Wide Characters.
+                                                              (line 127)
+* directories, accessing:                Accessing Directories.
+                                                              (line   6)
+* directories, creating:                 Creating Directories.
+                                                              (line   6)
+* directories, deleting:                 Deleting Files.      (line  59)
+* directory:                             Directories.         (line   9)
+* directory entry:                       Directories.         (line   9)
+* directory hierarchy:                   Working with Directory Trees.
+                                                              (line   6)
+* Directory not empty:                   Error Codes.         (line 436)
+* directory stream:                      Accessing Directories.
+                                                              (line  10)
+* disadvantages of alloca:               Disadvantages of Alloca.
+                                                              (line   6)
+* DISCARD character:                     Other Special.       (line  26)
+* Disk quota exceeded:                   Error Codes.         (line 453)
+* division by zero:                      FP Exceptions.       (line   6)
+* dlopen:                                Unsafe Features.     (line  49)
+* DNS:                                   Host Identification. (line  17)
+* DNS server unavailable:                Actions in the NSS configuration.
+                                                              (line  30)
+* domain (of socket):                    Socket Concepts.     (line  33)
+* domain error:                          Math Error Reporting.
+                                                              (line   6)
+* domain name:                           Host Identification. (line  20)
+* Domain Name System:                    Host Identification. (line  17)
+* dot notation, for Internet addresses:  Abstract Host Addresses.
+                                                              (line  47)
+* DRBG:                                  Unpredictable Bytes. (line   6)
+* DSUSP character:                       Signal Characters.   (line  57)
+* duplicating file descriptors:          Duplicating Descriptors.
+                                                              (line   6)
+* dynamic linking tunables:              Dynamic Linking Tunables.
+                                                              (line   6)
+* dynamic memory allocation:             Memory Allocation and C.
+                                                              (line  26)
+* dynamic memory allocation <1>:         Memory Allocation and C.
+                                                              (line  31)
+* EBCDIC:                                Extended Char Intro. (line 167)
+* echo of terminal input:                Local Modes.         (line  26)
+* effective group ID:                    Process Persona.     (line   6)
+* effective user ID:                     Process Persona.     (line   6)
+* efficiency and obstacks:               Extra Fast Growing.  (line   6)
+* efficiency of chunks:                  Obstack Chunks.      (line   6)
+* EINTR, and restarting interrupted primitives: Interrupted Primitives.
+                                                              (line  47)
+* elapsed time:                          Time Basics.         (line  24)
+* elision tunables:                      Elision Tunables.    (line   6)
+* end of file, on a stream:              EOF and Errors.      (line   6)
+* end-of-file, on a file descriptor:     I/O Primitives.      (line  26)
+* env:                                   Other Safety Remarks.
+                                                              (line  26)
+* environment:                           Environment Variables.
+                                                              (line  22)
+* environment access:                    Environment Access.  (line   6)
+* environment representation:            Environment Access.  (line   6)
+* environment variable:                  Environment Variables.
+                                                              (line   6)
+* environment vectors, null-byte separated: Argz and Envz Vectors.
+                                                              (line   9)
+* envz vectors (environment vectors):    Argz and Envz Vectors.
+                                                              (line   9)
+* EOF character:                         Editing Characters.  (line  11)
+* EOL character:                         Editing Characters.  (line  24)
+* EOL2 character:                        Editing Characters.  (line  38)
+* epoch:                                 Time Basics.         (line  45)
+* epoch <1>:                             Time Types.          (line  36)
+* ERASE character:                       Editing Characters.  (line  51)
+* errno:                                 System Calls.        (line  59)
+* error codes:                           Error Reporting.     (line   6)
+* error messages, in argp:               Argp Helper Functions.
+                                                              (line  33)
+* error reporting:                       Error Reporting.     (line   6)
+* errors, mathematical:                  Math Error Reporting.
+                                                              (line   6)
+* establishing a handler:                Signal Actions.      (line   6)
+* ethers:                                NSS Basics.          (line  24)
+* EUC:                                   Extended Char Intro. (line 199)
+* EUC-JP:                                glibc iconv Implementation.
+                                                              (line  56)
+* exception:                             FP Exceptions.       (line   6)
+* exception <1>:                         Program Error Signals.
+                                                              (line  49)
+* Exchange full:                         Error Codes.         (line 686)
+* exclusive lock:                        File Locks.          (line  15)
+* Exec format error:                     Error Codes.         (line  59)
+* exec functions:                        Executing a File.    (line   6)
+* execing a program:                     Memory Concepts.     (line  90)
+* executable:                            Memory Concepts.     (line  67)
+* executing a file:                      Executing a File.    (line   6)
+* exit status:                           Exit Status.         (line   6)
+* exit status value:                     Program Termination. (line   6)
+* exiting a program:                     Memory Concepts.     (line  90)
+* expansion of shell words:              Word Expansion.      (line   6)
+* exponent (of floating point number):   Floating Point Concepts.
+                                                              (line  23)
+* exponentiation functions:              Exponents and Logarithms.
+                                                              (line   6)
+* extending printf:                      Customizing Printf.  (line   6)
+* extracting file descriptor from stream: Descriptors and Streams.
+                                                              (line   6)
+* fcntl function:                        Control Operations.  (line   6)
+* fd:                                    Other Safety Remarks.
+                                                              (line  67)
+* FDL, GNU Free Documentation License:   Documentation License.
+                                                              (line   6)
+* feature test macros:                   Feature Test Macros. (line   6)
+* field splitting:                       Expansion Stages.    (line  26)
+* FIFO special file:                     Pipes and FIFOs.     (line  12)
+* file access permission:                Access Permission.   (line   6)
+* file access time:                      File Times.          (line   6)
+* file allocation:                       Storage Allocation.  (line   6)
+* file attribute modification time:      File Times.          (line   6)
+* file attributes:                       Attribute Meanings.  (line   6)
+* file copy:                             Copying File Data.   (line   6)
+* file creation mask:                    Setting Permissions. (line   6)
+* file descriptor flags:                 Descriptor Flags.    (line   6)
+* File descriptor in bad state:          Error Codes.         (line 738)
+* file descriptor sets, for select:      Waiting for I/O.     (line  30)
+* file descriptors, standard:            Descriptors and Streams.
+                                                              (line  61)
+* File exists:                           Error Codes.         (line 112)
+* file fragmentation:                    Storage Allocation.  (line   6)
+* File locking deadlock error:           Error Codes.         (line 702)
+* file locks:                            File Locks.          (line   6)
+* file modification time:                File Times.          (line   6)
+* file name:                             File Names.          (line  14)
+* file name component:                   Directories.         (line  15)
+* file name errors:                      File Name Errors.    (line   6)
+* file name resolution:                  File Name Resolution.
+                                                              (line  10)
+* File name too long:                    Error Codes.         (line 420)
+* file name translation flags:           Open-time Flags.     (line  14)
+* file names, multiple:                  Hard Links.          (line   6)
+* file owner:                            File Owner.          (line   6)
+* file permission bits:                  Permission Bits.     (line  15)
+* file pointer:                          Streams.             (line  12)
+* file position:                         File Position.       (line  14)
+* file positioning on a file descriptor: File Position Primitive.
+                                                              (line  15)
+* file positioning on a stream:          File Positioning.    (line   6)
+* file status flags:                     File Status Flags.   (line   6)
+* File too large:                        Error Codes.         (line 177)
+* files, accessing:                      Memory Concepts.     (line  83)
+* files, sparse:                         Storage Allocation.  (line   6)
+* filtering i/o through subprocess:      Pipe to a Subprocess.
+                                                              (line   6)
+* flag character (printf):               Output Conversion Syntax.
+                                                              (line  60)
+* flag character (scanf):                Input Conversion Syntax.
+                                                              (line  35)
+* flags for sigaction:                   Flags for Sigaction. (line   6)
+* flags, file name translation:          Open-time Flags.     (line  14)
+* flags, open-time action:               Open-time Flags.     (line  17)
+* floating point:                        Floating Point Numbers.
+                                                              (line   6)
+* floating point, IEEE:                  IEEE Floating Point. (line   6)
+* floating type measurements:            Floating Type Macros.
+                                                              (line   6)
+* floating-point classes:                Floating Point Classes.
+                                                              (line   6)
+* floating-point exception:              Program Error Signals.
+                                                              (line  49)
+* flow control, terminal:                Line Control.        (line 108)
+* flow label:                            Internet Address Formats.
+                                                              (line  55)
+* flushing a stream:                     Flushing Buffers.    (line   6)
+* flushing terminal output queue:        Line Control.        (line  38)
+* foreground job:                        Concepts of Job Control.
+                                                              (line  47)
+* foreground job, launching:             Foreground and Background.
+                                                              (line  10)
+* forking a process:                     Process Creation Concepts.
+                                                              (line   9)
+* format string, for printf:             Formatted Output.    (line   6)
+* format string, for scanf:              Formatted Input.     (line   6)
+* formatted input from a stream:         Formatted Input.     (line   6)
+* formatted messages:                    Formatted Messages.  (line   6)
+* formatted output to a stream:          Formatted Output.    (line   6)
+* FP arithmetic:                         FP Bit Twiddling.    (line   6)
+* FQDN:                                  Host Identification. (line  31)
+* fragmentation of files:                Storage Allocation.  (line   6)
+* frame, real memory:                    Memory Concepts.     (line  18)
+* free documentation:                    Free Manuals.        (line   6)
+* freeing (obstacks):                    Freeing Obstack Objects.
+                                                              (line   6)
+* freeing memory:                        Memory Concepts.     (line  90)
+* freeing memory allocated with malloc:  Freeing after Malloc.
+                                                              (line   6)
+* fully buffered stream:                 Buffering Concepts.  (line  15)
+* Function not implemented:              Error Codes.         (line 516)
+* function prototypes (variadic):        Variadic Prototypes. (line   6)
+* gamma function:                        Special Functions.   (line   6)
+* gcvt_r:                                System V Number Conversion.
+                                                              (line 107)
+* gencat:                                The gencat program.  (line   6)
+* generation of signals:                 Signal Generation.   (line   6)
+* generic i/o control operations:        IOCTLs.              (line   6)
+* globbing:                              Globbing.            (line   6)
+* gnu allocator:                         The GNU Allocator.   (line   6)
+* graphic character:                     Classification of Characters.
+                                                              (line 128)
+* graphic character <1>:                 Classification of Wide Characters.
+                                                              (line 151)
+* Gratuitous error:                      Error Codes.         (line 576)
+* Gregorian calendar:                    Time Basics.         (line  52)
+* group:                                 NSS Basics.          (line  24)
+* group database:                        Group Database.      (line   6)
+* group ID:                              User and Group IDs.  (line  12)
+* group name:                            User and Group IDs.  (line  12)
+* group owner of a file:                 File Owner.          (line   6)
+* grouping of digits:                    General Numeric.     (line  28)
+* growing objects (in obstacks):         Growing Objects.     (line   6)
+* gshadow:                               NSS Basics.          (line  24)
+* handling multiple signals:             Merged Signals.      (line   6)
+* hangup signal:                         Termination Signals. (line  77)
+* hard limit:                            Limits on Resources. (line  24)
+* hard link:                             Hard Links.          (line   6)
+* hardware capability tunables:          Hardware Capability Tunables.
+                                                              (line   6)
+* hashing, passphrase:                   Passphrase Storage.  (line   6)
+* header files:                          Header Files.        (line   6)
+* heap:                                  Unsafe Features.     (line  41)
+* heap consistency checking:             Heap Consistency Checking.
+                                                              (line   6)
+* heap, dynamic allocation from:         Unconstrained Allocation.
+                                                              (line   6)
+* heap, freeing memory from:             Freeing after Malloc.
+                                                              (line   6)
+* hexadecimal digit character:           Classification of Characters.
+                                                              (line  73)
+* hexadecimal digit character <1>:       Classification of Wide Characters.
+                                                              (line 255)
+* hidden bit (of floating point number mantissa): Floating Point Concepts.
+                                                              (line  42)
+* hierarchy, directory:                  Working with Directory Trees.
+                                                              (line   6)
+* high-priority data:                    Out-of-Band Data.    (line   6)
+* holes in files:                        File Position Primitive.
+                                                              (line  63)
+* home directory:                        Standard Environment.
+                                                              (line  12)
+* HOME environment variable:             Standard Environment.
+                                                              (line  12)
+* hook functions (of custom streams):    Hook Functions.      (line   6)
+* host address, Internet:                Abstract Host Addresses.
+                                                              (line   6)
+* Host is down:                          Error Codes.         (line 426)
+* host name:                             Host Identification. (line  14)
+* hostid:                                Other Safety Remarks.
+                                                              (line  40)
+* hostname:                              Host Identification. (line  19)
+* hosts:                                 NSS Basics.          (line  24)
+* hosts database:                        Host Names.          (line   6)
+* how many arguments:                    How Many Arguments.  (line   6)
+* hwcap tunables:                        Hardware Capability Tunables.
+                                                              (line   6)
+* hwcaps tunables:                       Hardware Capability Tunables.
+                                                              (line   6)
+* hyperbolic functions:                  Hyperbolic Functions.
+                                                              (line   6)
+* hyperbolic functions <1>:              Hyperbolic Functions.
+                                                              (line  51)
+* i18n:                                  Unsafe Features.     (line  79)
+* iconv:                                 Unsafe Features.     (line  67)
+* Identifier removed:                    Error Codes.         (line 584)
+* identifying terminals:                 Is It a Terminal.    (line   6)
+* IEEE 754:                              Floating Point Numbers.
+                                                              (line   6)
+* IEEE floating point:                   Floating Point Numbers.
+                                                              (line   6)
+* IEEE floating point representation:    IEEE Floating Point. (line   6)
+* IEEE Std 1003.1:                       POSIX.               (line   6)
+* IEEE Std 1003.2:                       POSIX.               (line   6)
+* ignore action for a signal:            Basic Signal Handling.
+                                                              (line  44)
+* illegal instruction:                   Program Error Signals.
+                                                              (line 109)
+* Illegal seek:                          Error Codes.         (line 187)
+* impossible events:                     Consistency Checking.
+                                                              (line   6)
+* Inappropriate file type or format:     Error Codes.         (line 500)
+* Inappropriate ioctl for device:        Error Codes.         (line 162)
+* Inappropriate operation for background process: Error Codes.
+                                                              (line 546)
+* independent channels:                  Independent Channels.
+                                                              (line   6)
+* inexact exception:                     FP Exceptions.       (line   6)
+* infinity:                              Infinity and NaN.    (line   6)
+* init:                                  Conditionally Safe Features.
+                                                              (line  16)
+* initgroups:                            NSS Basics.          (line  24)
+* initial signal actions:                Initial Signal Actions.
+                                                              (line   6)
+* inode number:                          Attribute Meanings.  (line 195)
+* input available signal:                Asynchronous I/O Signals.
+                                                              (line  14)
+* input conversions, for scanf:          Table of Input Conversions.
+                                                              (line   6)
+* input from multiple files:             Waiting for I/O.     (line   6)
+* Input/output error:                    Error Codes.         (line  39)
+* installation tools:                    Tools for Compilation.
+                                                              (line   6)
+* installing:                            Running make install.
+                                                              (line   6)
+* integer:                               Integers.            (line   6)
+* integer division functions:            Integer Division.    (line   6)
+* integer type range:                    Range of Type.       (line   6)
+* integer type width:                    Width of Type.       (line   6)
+* interactive signals, from terminal:    Local Modes.         (line 103)
+* interactive stop signal:               Job Control Signals. (line  62)
+* internal representation:               Extended Char Intro. (line  13)
+* internationalization:                  Locales.             (line  11)
+* Internet host address:                 Abstract Host Addresses.
+                                                              (line   6)
+* Internet namespace, for sockets:       Internet Namespace.  (line   6)
+* interposing malloc:                    Replacing malloc.    (line   6)
+* interprocess communication, with FIFO: FIFO Special Files.  (line   6)
+* interprocess communication, with pipes: Creating a Pipe.    (line   6)
+* interprocess communication, with signals: Kill Example.     (line   6)
+* interprocess communication, with sockets: Sockets.          (line   9)
+* interrupt character:                   Signal Characters.   (line  12)
+* interrupt signal:                      Termination Signals. (line  32)
+* interrupt-driven input:                Interrupt Input.     (line   6)
+* Interrupted system call:               Error Codes.         (line  29)
+* Interrupted system call should be restarted: Error Codes.   (line 642)
+* interrupting primitives:               Interrupted Primitives.
+                                                              (line  47)
+* interval:                              Time Basics.         (line  20)
+* interval timer, setting:               Setting an Alarm.    (line  10)
+* INTR character:                        Signal Characters.   (line  12)
+* Invalid argument:                      Error Codes.         (line 139)
+* Invalid cross-device link:             Error Codes.         (line 117)
+* invalid exception:                     FP Exceptions.       (line   6)
+* Invalid exchange:                      Error Codes.         (line 678)
+* Invalid or incomplete multibyte or wide character: Error Codes.
+                                                              (line 539)
+* Invalid request code:                  Error Codes.         (line 694)
+* Invalid request descriptor:            Error Codes.         (line 682)
+* Invalid slot:                          Error Codes.         (line 698)
+* inverse complex hyperbolic functions:  Hyperbolic Functions.
+                                                              (line 132)
+* inverse complex trigonometric functions: Inverse Trig Functions.
+                                                              (line  82)
+* inverse hyperbolic functions:          Hyperbolic Functions.
+                                                              (line  93)
+* inverse trigonometric functions:       Inverse Trig Functions.
+                                                              (line   6)
+* invocation of program:                 Program Arguments.   (line   6)
+* IOCTLs:                                IOCTLs.              (line   6)
+* ipc:                                   Inter-Process Communication.
+                                                              (line   6)
+* IPv6 flow label:                       Internet Address Formats.
+                                                              (line  55)
+* IPv6 scope ID:                         Internet Address Formats.
+                                                              (line  63)
+* IPv6 traffic class:                    Internet Address Formats.
+                                                              (line  55)
+* Is a directory:                        Error Codes.         (line 134)
+* Is a named type file:                  Error Codes.         (line 782)
+* ISO 10646:                             Extended Char Intro. (line  38)
+* ISO 2022:                              Extended Char Intro. (line 190)
+* ISO 6937:                              Extended Char Intro. (line 213)
+* ISO C:                                 ISO C.               (line   6)
+* ISO C threads:                         ISO C Threads.       (line   6)
+* ISO-2022-JP:                           glibc iconv Implementation.
+                                                              (line  56)
+* ISO/IEC 9945-1:                        POSIX.               (line   6)
+* ISO/IEC 9945-2:                        POSIX.               (line   6)
+* job:                                   Job Control.         (line   6)
+* job control:                           Job Control.         (line   6)
+* job control functions:                 Functions for Job Control.
+                                                              (line   6)
+* job control signals:                   Job Control Signals. (line   6)
+* job control, enabling:                 Initializing the Shell.
+                                                              (line   6)
+* job control, enabling <1>:             Initializing the Shell.
+                                                              (line  24)
+* Kermit the frog:                       Search/Sort Example. (line 107)
+* kernel call:                           System Calls.        (line  16)
+* kernel header files:                   Linux.               (line   6)
+* Key has been revoked:                  Error Codes.         (line 806)
+* Key has expired:                       Error Codes.         (line 802)
+* Key was rejected by service:           Error Codes.         (line 810)
+* KILL character:                        Editing Characters.  (line  91)
+* kill signal:                           Termination Signals. (line  74)
+* killing a process:                     Signaling Another Process.
+                                                              (line   6)
+* Korn Shell:                            Wildcard Matching.   (line  79)
+* LANG environment variable:             The catgets Functions.
+                                                              (line 101)
+* LANG environment variable <1>:         Standard Environment.
+                                                              (line  73)
+* launching jobs:                        Launching Jobs.      (line   6)
+* LC_ALL environment variable:           The catgets Functions.
+                                                              (line 101)
+* LC_ALL environment variable <1>:       Standard Environment.
+                                                              (line  80)
+* LC_COLLATE environment variable:       Standard Environment.
+                                                              (line  87)
+* LC_CTYPE environment variable:         Standard Environment.
+                                                              (line  91)
+* LC_MESSAGES environment variable:      The catgets Functions.
+                                                              (line 101)
+* LC_MESSAGES environment variable <1>:  Standard Environment.
+                                                              (line  96)
+* LC_MONETARY environment variable:      Standard Environment.
+                                                              (line 101)
+* LC_NUMERIC environment variable:       Standard Environment.
+                                                              (line 105)
+* LC_TIME environment variable:          Standard Environment.
+                                                              (line 109)
+* LD_PRELOAD and malloc:                 Replacing malloc.    (line   6)
+* leap second:                           Broken-down Time.    (line  29)
+* leap seconds:                          Time Basics.         (line  45)
+* length of string:                      Representation of Strings.
+                                                              (line  61)
+* Level 2 halted:                        Error Codes.         (line 674)
+* Level 2 not synchronized:              Error Codes.         (line 650)
+* Level 3 halted:                        Error Codes.         (line 654)
+* Level 3 reset:                         Error Codes.         (line 658)
+* level, for socket options:             Socket Options.      (line   9)
+* library:                               Introduction.        (line   9)
+* limit:                                 Limits on Resources. (line  12)
+* limits on resource usage:              Limits on Resources. (line   6)
+* limits, file name length:              Limits for Files.    (line  39)
+* limits, floating types:                Floating Type Macros.
+                                                              (line   6)
+* limits, integer types:                 Range of Type.       (line   6)
+* limits, link count of files:           Limits for Files.    (line  24)
+* limits, number of open files:          General Limits.      (line  36)
+* limits, number of processes:           General Limits.      (line  29)
+* limits, number of supplementary group IDs: General Limits.  (line  55)
+* limits, pipe buffer size:              Limits for Files.    (line  56)
+* limits, POSIX:                         General Limits.      (line   6)
+* limits, program argument size:         General Limits.      (line  24)
+* limits, terminal input queue:          Limits for Files.    (line  29)
+* limits, time zone name length:         General Limits.      (line  48)
+* line buffered stream:                  Buffering Concepts.  (line  12)
+* line speed:                            Line Speed.          (line   6)
+* lines (in a text file):                Binary Streams.      (line  26)
+* link:                                  Directories.         (line   9)
+* Link has been severed:                 Error Codes.         (line 596)
+* Link number out of range:              Error Codes.         (line 662)
+* link, hard:                            Hard Links.          (line   6)
+* link, soft:                            Symbolic Links.      (line   6)
+* link, symbolic:                        Symbolic Links.      (line   6)
+* linked channels:                       Linked Channels.     (line   6)
+* listening (sockets):                   Listening.           (line   6)
+* literals:                              Memory Concepts.     (line  67)
+* little-endian:                         Byte Order.          (line   6)
+* LNEXT character:                       Other Special.       (line   8)
+* load average:                          Processor Resources. (line  48)
+* local namespace, for sockets:          Local Namespace.     (line   6)
+* local network address number:          Abstract Host Addresses.
+                                                              (line   9)
+* local time:                            Time Basics.         (line  52)
+* locale:                                Other Safety Remarks.
+                                                              (line  10)
+* locale categories:                     Locale Categories.   (line   6)
+* locale, changing:                      Setting the Locale.  (line  20)
+* locales:                               Locales.             (line  11)
+* lock:                                  Unsafe Features.     (line  13)
+* locking pages:                         Locking Pages.       (line   6)
+* logarithm functions:                   Exponents and Logarithms.
+                                                              (line   6)
+* login name:                            User and Group IDs.  (line   6)
+* login name, determining:               Who Logged In.       (line   6)
+* LOGNAME environment variable:          Standard Environment.
+                                                              (line  25)
+* long jumps:                            Non-Local Exits.     (line   6)
+* long-named options:                    Argument Syntax.     (line  51)
+* longjmp:                               Advantages of Alloca.
+                                                              (line  15)
+* loss of data on sockets:               Socket Concepts.     (line  17)
+* lost resource signal:                  Operation Error Signals.
+                                                              (line  29)
+* lower-case character:                  Classification of Characters.
+                                                              (line  27)
+* lower-case character <1>:              Classification of Wide Characters.
+                                                              (line 166)
+* Machine is not on the network:         Error Codes.         (line 710)
+* macros:                                Obstack Functions.   (line   6)
+* main function:                         Program Arguments.   (line   6)
+* malloc debugger:                       Allocation Debugging.
+                                                              (line   6)
+* malloc function:                       Unconstrained Allocation.
+                                                              (line   6)
+* malloc replacement:                    Replacing malloc.    (line   6)
+* malloc tunables:                       Memory Allocation Tunables.
+                                                              (line   6)
+* mantissa (of floating point number):   Floating Point Concepts.
+                                                              (line  35)
+* matching failure, in scanf:            Formatted Input Basics.
+                                                              (line  32)
+* math errors:                           Errors in Math Functions.
+                                                              (line   6)
+* mathematical constants:                Mathematical Constants.
+                                                              (line   6)
+* maximum:                               Misc FP Arithmetic.  (line   6)
+* maximum field width (scanf):           Input Conversion Syntax.
+                                                              (line  50)
+* maximum limit:                         Limits on Resources. (line  24)
+* maximum possible integer:              Integers.            (line  82)
+* measurements of floating types:        Floating Type Macros.
+                                                              (line   6)
+* mem:                                   Other Safety Remarks.
+                                                              (line 103)
+* memory allocation:                     Memory.              (line   6)
+* memory allocation tunables:            Memory Allocation Tunables.
+                                                              (line   6)
+* memory lock:                           Locking Pages.       (line   6)
+* memory mapped file:                    Memory Concepts.     (line  83)
+* memory mapped I/O:                     Memory Concepts.     (line  83)
+* memory page:                           Memory Subsystem.    (line  33)
+* Memory page has hardware error:        Error Codes.         (line 818)
+* memory protection:                     Memory Protection.   (line   6)
+* memory protection key:                 Memory Protection.   (line 123)
+* memory related tunables:               Memory Related Tunables.
+                                                              (line   6)
+* merging of signals:                    Merged Signals.      (line   6)
+* Message too long:                      Error Codes.         (line 283)
+* MIN termios slot:                      Noncanonical Input.  (line  27)
+* minimum:                               Misc FP Arithmetic.  (line   6)
+* minimum field width (printf):          Output Conversion Syntax.
+                                                              (line  67)
+* minimum possible integer:              Integers.            (line  82)
+* mixing descriptors and streams:        Stream/Descriptor Precautions.
+                                                              (line   6)
+* modem disconnect:                      Control Modes.       (line  34)
+* modem status lines:                    Control Modes.       (line  22)
+* monetary value formatting:             The Lame Way to Locale Data.
+                                                              (line  13)
+* monotonic time:                        Getting the Time.    (line  56)
+* MPK:                                   Memory Protection.   (line 123)
+* MT-Safe:                               POSIX Safety Concepts.
+                                                              (line  16)
+* MT-Unsafe:                             POSIX Safety Concepts.
+                                                              (line  68)
+* multi-threaded application:            Streams and Threads. (line   6)
+* multibyte character:                   Representation of Strings.
+                                                              (line  22)
+* multibyte character <1>:               Extended Char Intro. (line 167)
+* multibyte string:                      Representation of Strings.
+                                                              (line  22)
+* multibyte string <1>:                  Representation of Strings.
+                                                              (line  71)
+* Multihop attempted:                    Error Codes.         (line 588)
+* multiple names for one file:           Hard Links.          (line   6)
+* multiplexing input:                    Waiting for I/O.     (line   6)
+* multiply-add:                          Misc FP Arithmetic.  (line   6)
+* mutex:                                 ISO C Mutexes.       (line   6)
+* mutex tunables:                        POSIX Thread Tunables.
+                                                              (line   6)
+* mutual exclusion:                      ISO C Mutexes.       (line   6)
+* Name not unique on network:            Error Codes.         (line 734)
+* name of running program:               Error Messages.      (line 104)
+* name of socket:                        Socket Addresses.    (line   6)
+* Name Service Switch:                   Name Service Switch. (line   6)
+* name space:                            Reserved Names.      (line   6)
+* names of signals:                      Standard Signals.    (line   6)
+* namespace (of socket):                 Socket Concepts.     (line  33)
+* NaN:                                   Infinity and NaN.    (line   6)
+* NaN <1>:                               FP Bit Twiddling.    (line 113)
+* Need authenticator:                    Error Codes.         (line 512)
+* netgroup:                              NSS Basics.          (line  24)
+* Netgroup:                              Netgroup Data.       (line   6)
+* network byte order:                    Byte Order.          (line  11)
+* Network dropped connection on reset:   Error Codes.         (line 351)
+* Network is down:                       Error Codes.         (line 341)
+* Network is unreachable:                Error Codes.         (line 346)
+* network number:                        Abstract Host Addresses.
+                                                              (line   9)
+* network protocol:                      Socket Concepts.     (line  42)
+* networks:                              NSS Basics.          (line  24)
+* networks database:                     Networks Database.   (line   6)
+* NIS:                                   Host Identification. (line  37)
+* NIS domain name:                       Host Identification. (line  37)
+* NIS domain name <1>:                   Host Identification. (line 110)
+* NIS domain name <2>:                   Host Identification. (line 122)
+* nisplus, and booting:                  Actions in the NSS configuration.
+                                                              (line 112)
+* nisplus, and completeness:             Actions in the NSS configuration.
+                                                              (line 105)
+* NLSPATH environment variable:          The catgets Functions.
+                                                              (line  33)
+* NLSPATH environment variable <1>:      Standard Environment.
+                                                              (line 113)
+* No anode:                              Error Codes.         (line 690)
+* No buffer space available:             Error Codes.         (line 367)
+* No child processes:                    Error Codes.         (line  71)
+* No CSI structure available:            Error Codes.         (line 670)
+* No data available:                     Error Codes.         (line 592)
+* No locks available:                    Error Codes.         (line 493)
+* No medium found:                       Error Codes.         (line 790)
+* No message of desired type:            Error Codes.         (line 600)
+* No route to host:                      Error Codes.         (line 431)
+* No space left on device:               Error Codes.         (line 182)
+* No such device:                        Error Codes.         (line 124)
+* No such device or address:             Error Codes.         (line  44)
+* No such file or directory:             Error Codes.         (line  19)
+* No such process:                       Error Codes.         (line  25)
+* No XENIX semaphores available:         Error Codes.         (line 778)
+* non-blocking open:                     Open-time Flags.     (line  72)
+* non-local exit, from signal handler:   Longjmp in Handler.  (line   6)
+* non-local exits:                       Non-Local Exits.     (line   6)
+* noncanonical input processing:         Canonical or Not.    (line  26)
+* non_temporal_threshold tunables:       Hardware Capability Tunables.
+                                                              (line   6)
+* normalization functions (floating-point): Normalization Functions.
+                                                              (line   6)
+* normalized floating point number:      Floating Point Concepts.
+                                                              (line  58)
+* Not a directory:                       Error Codes.         (line 129)
+* not a number:                          Infinity and NaN.    (line   6)
+* Not a XENIX named type file:           Error Codes.         (line 774)
+* Not supported:                         Error Codes.         (line 524)
+* NSS:                                   Unsafe Features.     (line  66)
+* NSS <1>:                               Name Service Switch. (line   6)
+* nsswitch.conf:                         NSS Configuration File.
+                                                              (line   6)
+* null byte:                             Representation of Strings.
+                                                              (line  31)
+* null pointer constant:                 Null Pointer Constant.
+                                                              (line   6)
+* null wide character:                   Representation of Strings.
+                                                              (line  31)
+* number of arguments passed:            How Many Arguments.  (line   6)
+* number syntax, parsing:                Parsing of Numbers.  (line   6)
+* numeric value formatting:              The Lame Way to Locale Data.
+                                                              (line  13)
+* Numerical argument out of domain:      Error Codes.         (line 210)
+* Numerical result out of range:         Error Codes.         (line 216)
+* Object is remote:                      Error Codes.         (line 465)
+* obstack status:                        Status of an Obstack.
+                                                              (line   6)
+* obstacks:                              Obstacks.            (line   6)
+* one-way hashing:                       Passphrase Storage.  (line   6)
+* open-time action flags:                Open-time Flags.     (line  17)
+* opening a file:                        I/O Concepts.        (line   9)
+* opening a file descriptor:             Opening and Closing Files.
+                                                              (line   6)
+* opening a pipe:                        Creating a Pipe.     (line   6)
+* opening a pseudo-terminal pair:        Pseudo-Terminal Pairs.
+                                                              (line   6)
+* opening a socket:                      Creating a Socket.   (line   6)
+* opening a socket pair:                 Socket Pairs.        (line   6)
+* opening a stream:                      Opening Streams.     (line   6)
+* Operation already in progress:         Error Codes.         (line 273)
+* Operation canceled:                    Error Codes.         (line 624)
+* Operation not permitted:               Error Codes.         (line  13)
+* Operation not possible due to RF-kill: Error Codes.         (line 814)
+* Operation not supported:               Error Codes.         (line 309)
+* Operation now in progress:             Error Codes.         (line 261)
+* Operation would block:                 Error Codes.         (line 252)
+* Optimization:                          FP Function Optimizations.
+                                                              (line   6)
+* optimizing NSS:                        Notes on NSS Configuration File.
+                                                              (line  25)
+* option parsing with argp:              Argp.                (line   6)
+* optional arguments:                    Variadic Functions.  (line   6)
+* optional POSIX features:               System Options.      (line   6)
+* orientation, stream:                   Opening Streams.     (line 101)
+* orientation, stream <1>:               Streams and I18N.    (line  37)
+* orphaned process group:                Orphaned Process Groups.
+                                                              (line   6)
+* Other Safety Remarks:                  Other Safety Remarks.
+                                                              (line   6)
+* Out of streams resources:              Error Codes.         (line 604)
+* out-of-band data:                      Out-of-Band Data.    (line   6)
+* output conversions, for printf:        Table of Output Conversions.
+                                                              (line   6)
+* output possible signal:                Asynchronous I/O Signals.
+                                                              (line  14)
+* overflow exception:                    FP Exceptions.       (line   6)
+* Owner died:                            Error Codes.         (line 631)
+* owner of a file:                       File Owner.          (line   6)
+* Package not installed:                 Error Codes.         (line 714)
+* packet:                                Socket Concepts.     (line  12)
+* page boundary:                         Aligned Memory Blocks.
+                                                              (line   6)
+* page fault:                            Memory Concepts.     (line  45)
+* page fault, copy-on-write:             Locked Memory Details.
+                                                              (line  40)
+* page frame:                            Memory Concepts.     (line  18)
+* page protection:                       Memory Protection.   (line   6)
+* page, memory:                          Memory Subsystem.    (line  33)
+* page, virtual memory:                  Memory Concepts.     (line  18)
+* paging:                                Memory Concepts.     (line  45)
+* paging <1>:                            Locking Pages.       (line   6)
+* parameter promotion:                   String/Array Conventions.
+                                                              (line  41)
+* parent directory:                      File Name Resolution.
+                                                              (line  28)
+* parent process:                        Processes.           (line  13)
+* parent process <1>:                    Process Creation Concepts.
+                                                              (line   9)
+* parity checking:                       Input Modes.         (line  18)
+* parsing a template string:             Parsing a Template String.
+                                                              (line   6)
+* parsing numbers (in formatted input):  Parsing of Numbers.  (line   6)
+* parsing program arguments:             Parsing Program Arguments.
+                                                              (line   6)
+* parsing tokens from a string:          Finding Tokens in a String.
+                                                              (line   6)
+* passphrase hashing:                    Passphrase Storage.  (line   6)
+* passwd:                                NSS Basics.          (line  24)
+* password database:                     User Database.       (line   6)
+* PATH environment variable:             Standard Environment.
+                                                              (line  35)
+* pause function:                        Waiting for a Signal.
+                                                              (line   6)
+* peeking at input:                      Unreading.           (line   6)
+* pending signals:                       Delivery of Signal.  (line   6)
+* pending signals, checking for:         Checking for Pending Signals.
+                                                              (line   6)
+* period of time:                        Time Basics.         (line  33)
+* Permission denied:                     Error Codes.         (line  90)
+* permission to access a file:           Access Permission.   (line   6)
+* persona:                               Process Persona.     (line   6)
+* physical address:                      Memory Subsystem.    (line   6)
+* physical memory:                       Memory Subsystem.    (line   6)
+* pi (trigonometric constant):           Trig Functions.      (line  10)
+* pipe:                                  Pipes and FIFOs.     (line   6)
+* pipe signal:                           Operation Error Signals.
+                                                              (line  14)
+* pipe to a subprocess:                  Pipe to a Subprocess.
+                                                              (line   6)
+* plugin:                                Unsafe Features.     (line  61)
+* port number:                           Ports.               (line   6)
+* positioning a file descriptor:         File Position Primitive.
+                                                              (line  15)
+* positioning a stream:                  File Positioning.    (line   6)
+* positive difference:                   Misc FP Arithmetic.  (line   6)
+* POSIX:                                 POSIX.               (line   6)
+* POSIX capacity limits:                 General Limits.      (line   6)
+* POSIX optional features:               System Options.      (line   6)
+* POSIX Safety Concepts:                 POSIX Safety Concepts.
+                                                              (line   6)
+* POSIX.1:                               POSIX.               (line   6)
+* POSIX.2:                               POSIX.               (line   6)
+* power functions:                       Exponents and Logarithms.
+                                                              (line   6)
+* precision (of floating point number):  Floating Point Concepts.
+                                                              (line  38)
+* precision (printf):                    Output Conversion Syntax.
+                                                              (line  78)
+* predicates on arrays:                  String/Array Comparison.
+                                                              (line   6)
+* predicates on characters:              Classification of Characters.
+                                                              (line   6)
+* predicates on strings:                 String/Array Comparison.
+                                                              (line   6)
+* preempting malloc:                     Replacing malloc.    (line   6)
+* preemptive scheduling:                 Absolute Priority.   (line  17)
+* Preliminary:                           POSIX Safety Concepts.
+                                                              (line  75)
+* primitives, interrupting:              Interrupted Primitives.
+                                                              (line  47)
+* printing character:                    Classification of Characters.
+                                                              (line 137)
+* printing character <1>:                Classification of Wide Characters.
+                                                              (line 180)
+* priority of a process:                 Priority.            (line   6)
+* priority, absolute:                    Absolute Priority.   (line   6)
+* process:                               Program Basics.      (line   6)
+* process <1>:                           Processes.           (line   6)
+* process completion:                    Process Completion.  (line   6)
+* process group functions:               Functions for Job Control.
+                                                              (line   6)
+* process group ID:                      Launching Jobs.      (line  23)
+* process group leader:                  Launching Jobs.      (line  23)
+* process groups:                        Job Control.         (line   6)
+* process ID:                            Process Identification.
+                                                              (line   6)
+* process image:                         Process Creation Concepts.
+                                                              (line  30)
+* process priority:                      Priority.            (line   6)
+* process signal mask:                   Process Signal Mask. (line   6)
+* process termination:                   Program Termination. (line   6)
+* processor time:                        Time Basics.         (line  65)
+* processor time <1>:                    Processor Time.      (line  10)
+* profiling alarm signal:                Alarm Signals.       (line  32)
+* profiling timer:                       Setting an Alarm.    (line  22)
+* program:                               Program Basics.      (line   6)
+* program argument syntax:               Argument Syntax.     (line   6)
+* program arguments:                     Program Arguments.   (line   6)
+* program arguments, parsing:            Parsing Program Arguments.
+                                                              (line   6)
+* program error signals:                 Program Error Signals.
+                                                              (line   6)
+* program name:                          Error Messages.      (line 104)
+* program startup:                       Program Arguments.   (line   6)
+* program termination:                   Program Termination. (line   6)
+* program termination signals:           Termination Signals. (line   6)
+* programming your own streams:          Custom Streams.      (line   6)
+* project complex numbers:               Operations on Complex.
+                                                              (line   6)
+* protection flags:                      Memory Protection.   (line   6)
+* protection key:                        Memory Protection.   (line 123)
+* protocol (of socket):                  Socket Concepts.     (line  42)
+* Protocol driver not attached:          Error Codes.         (line 666)
+* Protocol error:                        Error Codes.         (line 616)
+* protocol family:                       Socket Concepts.     (line  42)
+* Protocol family not supported:         Error Codes.         (line 319)
+* Protocol not available:                Error Codes.         (line 293)
+* Protocol not supported:                Error Codes.         (line 299)
+* Protocol wrong type for socket:        Error Codes.         (line 288)
+* protocols:                             NSS Basics.          (line  24)
+* protocols database:                    Protocols Database.  (line   6)
+* prototypes for variadic functions:     Variadic Prototypes. (line   6)
+* pseudo-random numbers:                 Pseudo-Random Numbers.
+                                                              (line   6)
+* pseudo-random numbers, cryptographic:  Unpredictable Bytes. (line   6)
+* pseudo-terminals:                      Pseudo-Terminals.    (line   6)
+* pthread mutex tunables:                POSIX Thread Tunables.
+                                                              (line   6)
+* pthreads:                              POSIX Threads.       (line   6)
+* publickey:                             NSS Basics.          (line  24)
+* punctuation character:                 Classification of Characters.
+                                                              (line  82)
+* punctuation character <1>:             Classification of Wide Characters.
+                                                              (line 194)
+* pushing input back:                    Unreading.           (line   6)
+* quick sort function (for arrays):      Array Sort Function. (line   6)
+* QUIT character:                        Signal Characters.   (line  24)
+* quit signal:                           Termination Signals. (line  39)
+* quit signal <1>:                       Termination Signals. (line  39)
+* quote removal:                         Expansion Stages.    (line  33)
+* race:                                  Conditionally Safe Features.
+                                                              (line  46)
+* race conditions, relating to job control: Launching Jobs.   (line  28)
+* race conditions, relating to signals:  Signals in Handler.  (line   6)
+* radix (of floating point number):      Floating Point Concepts.
+                                                              (line  20)
+* raising signals:                       Generating Signals.  (line   6)
+* random numbers:                        Pseudo-Random Numbers.
+                                                              (line   6)
+* random numbers, cryptographic:         Unpredictable Bytes. (line   6)
+* random-access files:                   File Position.       (line  22)
+* randomness source:                     Unpredictable Bytes. (line   6)
+* range error:                           Math Error Reporting.
+                                                              (line   6)
+* range of integer type:                 Range of Type.       (line   6)
+* read lock:                             File Locks.          (line  19)
+* Read-only file system:                 Error Codes.         (line 191)
+* reading from a directory:              Accessing Directories.
+                                                              (line   6)
+* reading from a file descriptor:        I/O Primitives.      (line  16)
+* reading from a socket:                 Transferring Data.   (line   6)
+* reading from a stream, by blocks:      Block Input/Output.  (line   9)
+* reading from a stream, by characters:  Character Input.     (line   6)
+* reading from a stream, formatted:      Formatted Input.     (line   6)
+* ready to run:                          Absolute Priority.   (line  17)
+* real group ID:                         Process Persona.     (line  17)
+* real user ID:                          Process Persona.     (line  17)
+* real-time timer:                       Setting an Alarm.    (line  13)
+* realtime CPU scheduling:               Absolute Priority.   (line   9)
+* realtime processing:                   Why Lock Pages.      (line  14)
+* realtime scheduling:                   Realtime Scheduling. (line   6)
+* receiving datagrams:                   Receiving Datagrams. (line   6)
+* record locking:                        File Locks.          (line   6)
+* redirecting input and output:          Duplicating Descriptors.
+                                                              (line   6)
+* reentrant functions:                   Nonreentrancy.       (line  26)
+* reentrant NSS functions:               NSS Module Names.    (line  21)
+* relative file name:                    File Name Resolution.
+                                                              (line  24)
+* Remote address changed:                Error Codes.         (line 742)
+* Remote I/O error:                      Error Codes.         (line 786)
+* removal of quotes:                     Expansion Stages.    (line  33)
+* removing a file:                       Deleting Files.      (line   6)
+* removing macros that shadow functions: Macro Definitions.   (line   6)
+* renaming a file:                       Renaming Files.      (line   8)
+* replacing malloc:                      Replacing malloc.    (line   6)
+* reporting bugs:                        Reporting Bugs.      (line   6)
+* reporting errors:                      Error Reporting.     (line   6)
+* REPRINT character:                     Editing Characters.  (line 103)
+* Required key not available:            Error Codes.         (line 798)
+* reserved names:                        Reserved Names.      (line   6)
+* Resource deadlock avoided:             Error Codes.         (line  77)
+* resource limits:                       Limits on Resources. (line   6)
+* Resource temporarily unavailable:      Error Codes.         (line 222)
+* restarting interrupted primitives:     Interrupted Primitives.
+                                                              (line  47)
+* restrictions on signal handler functions: Nonreentrancy.    (line   6)
+* RFS specific error:                    Error Codes.         (line 730)
+* root directory:                        File Name Resolution.
+                                                              (line  19)
+* Rot13:                                 Obfuscating Data.    (line   6)
+* rpc:                                   NSS Basics.          (line  24)
+* RPC bad procedure for program:         Error Codes.         (line 489)
+* RPC program not available:             Error Codes.         (line 481)
+* RPC program version wrong:             Error Codes.         (line 485)
+* RPC struct is bad:                     Error Codes.         (line 473)
+* RPC version wrong:                     Error Codes.         (line 477)
+* rtld tunables:                         Dynamic Linking Tunables.
+                                                              (line   6)
+* runnable process:                      Absolute Priority.   (line  25)
+* running a command:                     Running a Command.   (line   6)
+* saved set-group-ID:                    How Change Persona.  (line   6)
+* saved set-user-ID:                     How Change Persona.  (line   6)
+* scanning the group list:               Scanning All Groups. (line   6)
+* scanning the user list:                Scanning All Users.  (line   6)
+* scatter-gather:                        Scatter-Gather.      (line   6)
+* scheduling, traditional:               Traditional Scheduling.
+                                                              (line   6)
+* scope ID:                              Internet Address Formats.
+                                                              (line  63)
+* search function (for arrays):          Array Search Function.
+                                                              (line   6)
+* search functions (for strings):        Search Functions.    (line   8)
+* seconds, leap:                         Time Basics.         (line  45)
+* seed (for random numbers):             Pseudo-Random Numbers.
+                                                              (line   6)
+* seeking on a file descriptor:          File Position Primitive.
+                                                              (line  15)
+* seeking on a stream:                   File Positioning.    (line   6)
+* segmentation violation:                Program Error Signals.
+                                                              (line 112)
+* sending a datagram:                    Sending Datagrams.   (line   6)
+* sending signals:                       Generating Signals.  (line   6)
+* sequential-access files:               File Position.       (line  14)
+* server:                                Connections.         (line   6)
+* services:                              NSS Basics.          (line  24)
+* services database:                     Services Database.   (line   6)
+* session:                               Job Control.         (line   6)
+* session <1>:                           Concepts of Job Control.
+                                                              (line  24)
+* session leader:                        Concepts of Job Control.
+                                                              (line  32)
+* setting an alarm:                      Setting an Alarm.    (line  10)
+* setuid programs:                       How Change Persona.  (line   6)
+* setuid programs and file access:       Testing File Access. (line   6)
+* severity class:                        Printing Formatted Messages.
+                                                              (line  86)
+* severity class <1>:                    Adding Severity Classes.
+                                                              (line   6)
+* sgettext:                              GUI program problems.
+                                                              (line  57)
+* sgettext <1>:                          GUI program problems.
+                                                              (line  82)
+* shadow:                                NSS Basics.          (line  24)
+* shadowing functions with macros:       Macro Definitions.   (line   6)
+* shared lock:                           File Locks.          (line  19)
+* shared memory:                         Memory Subsystem.    (line  13)
+* shared_cache_size tunables:            Hardware Capability Tunables.
+                                                              (line   6)
+* shell:                                 Concepts of Job Control.
+                                                              (line   6)
+* shift state:                           Keeping the state.   (line  16)
+* Shift_JIS:                             Extended Char Intro. (line 199)
+* shrinking objects:                     Growing Objects.     (line 121)
+* shutting down a socket:                Closing a Socket.    (line   6)
+* sig:                                   Conditionally Safe Features.
+                                                              (line 155)
+* sigaction flags:                       Flags for Sigaction. (line   6)
+* sigaction function:                    Advanced Signal Handling.
+                                                              (line   6)
+* SIGCHLD, handling of:                  Stopped and Terminated Jobs.
+                                                              (line  18)
+* sigintr:                               Other Safety Remarks.
+                                                              (line  53)
+* sign (of floating point number):       Floating Point Concepts.
+                                                              (line  18)
+* signal:                                FP Exceptions.       (line   6)
+* signal <1>:                            Signal Handling.     (line   6)
+* signal action:                         Delivery of Signal.  (line  13)
+* signal actions:                        Signal Actions.      (line   6)
+* signal flags:                          Flags for Sigaction. (line   6)
+* signal function:                       Basic Signal Handling.
+                                                              (line   6)
+* signal handler function:               Defining Handlers.   (line   6)
+* signal mask:                           Process Signal Mask. (line   6)
+* signal messages:                       Signal Messages.     (line   6)
+* signal names:                          Standard Signals.    (line   6)
+* signal number:                         Standard Signals.    (line   6)
+* signal set:                            Signal Sets.         (line   9)
+* signals, generating:                   Generating Signals.  (line   6)
+* signedness:                            Integers.            (line   9)
+* significand (of floating point number): Floating Point Concepts.
+                                                              (line  35)
+* SIGTTIN, from background job:          Access to the Terminal.
+                                                              (line  11)
+* SIGTTOU, from background job:          Access to the Terminal.
+                                                              (line  18)
+* simple calendar time:                  Time Basics.         (line  45)
+* simple time:                           Time Basics.         (line  45)
+* single-byte string:                    Representation of Strings.
+                                                              (line  71)
+* single-call functions:                 Call Once.           (line   6)
+* size of string:                        Representation of Strings.
+                                                              (line  61)
+* SJIS:                                  Extended Char Intro. (line 199)
+* socket:                                Sockets.             (line   9)
+* socket address (name) binding:         Socket Addresses.    (line   6)
+* socket domain:                         Socket Concepts.     (line  33)
+* socket namespace:                      Socket Concepts.     (line  33)
+* Socket operation on non-socket:        Error Codes.         (line 278)
+* socket option level:                   Socket Options.      (line   9)
+* socket options:                        Socket Options.      (line   6)
+* socket pair:                           Socket Pairs.        (line   6)
+* socket protocol:                       Socket Concepts.     (line  42)
+* socket shutdown:                       Closing a Socket.    (line   6)
+* Socket type not supported:             Error Codes.         (line 305)
+* socket, client actions:                Connecting.          (line   6)
+* socket, closing:                       Closing a Socket.    (line   6)
+* socket, connecting:                    Connecting.          (line   6)
+* socket, creating:                      Creating a Socket.   (line   6)
+* socket, initiating a connection:       Connecting.          (line   6)
+* sockets, accepting connections:        Accepting Connections.
+                                                              (line   6)
+* sockets, listening:                    Listening.           (line   6)
+* sockets, server actions:               Listening.           (line   6)
+* soft limit:                            Limits on Resources. (line  17)
+* soft link:                             Symbolic Links.      (line   6)
+* Software caused connection abort:      Error Codes.         (line 356)
+* sort function (for arrays):            Array Sort Function. (line   6)
+* sparse files:                          File Position Primitive.
+                                                              (line  63)
+* sparse files <1>:                      Storage Allocation.  (line   6)
+* special files:                         Making Special Files.
+                                                              (line   6)
+* special functions:                     Special Functions.   (line   6)
+* specified action (for a signal):       Delivery of Signal.  (line  13)
+* speed of execution:                    Why Lock Pages.      (line  14)
+* square root function:                  Exponents and Logarithms.
+                                                              (line 196)
+* Srmount error:                         Error Codes.         (line 722)
+* stable sorting:                        Array Sort Function. (line  24)
+* Stale file handle:                     Error Codes.         (line 457)
+* standard dot notation, for Internet addresses: Abstract Host Addresses.
+                                                              (line  47)
+* standard environment variables:        Standard Environment.
+                                                              (line   6)
+* standard error file descriptor:        Descriptors and Streams.
+                                                              (line  78)
+* standard error stream:                 Standard Streams.    (line  27)
+* standard file descriptors:             Descriptors and Streams.
+                                                              (line  61)
+* standard input file descriptor:        Descriptors and Streams.
+                                                              (line  68)
+* standard input stream:                 Standard Streams.    (line  17)
+* standard output file descriptor:       Descriptors and Streams.
+                                                              (line  73)
+* standard output stream:                Standard Streams.    (line  22)
+* standard streams:                      Standard Streams.    (line   6)
+* standards:                             Standards and Portability.
+                                                              (line   6)
+* START character:                       Start/Stop Characters.
+                                                              (line  12)
+* startup of program:                    Program Arguments.   (line   6)
+* State not recoverable:                 Error Codes.         (line 635)
+* stateful:                              Keeping the state.   (line   6)
+* stateful <1>:                          Converting a Character.
+                                                              (line  94)
+* stateful <2>:                          Converting Strings.  (line  75)
+* stateful <3>:                          Generic Conversion Interface.
+                                                              (line 121)
+* stateful <4>:                          iconv Examples.      (line  96)
+* stateful <5>:                          glibc iconv Implementation.
+                                                              (line 600)
+* static memory allocation:              Memory Allocation and C.
+                                                              (line  13)
+* static storage class:                  Memory Allocation and C.
+                                                              (line  13)
+* STATUS character:                      Other Special.       (line  41)
+* status codes:                          Error Reporting.     (line   6)
+* status of a file:                      Attribute Meanings.  (line   6)
+* status of obstack:                     Status of an Obstack.
+                                                              (line   6)
+* sticky bit:                            Permission Bits.     (line  85)
+* STOP character:                        Start/Stop Characters.
+                                                              (line  30)
+* stop signal:                           Job Control Signals. (line  48)
+* stopped job:                           Concepts of Job Control.
+                                                              (line  53)
+* stopped jobs, continuing:              Continuing Stopped Jobs.
+                                                              (line   6)
+* stopped jobs, detecting:               Stopped and Terminated Jobs.
+                                                              (line   6)
+* storage allocating:                    Storage Allocation.  (line   6)
+* storage allocation:                    Memory.              (line   6)
+* stream (sockets):                      Socket Concepts.     (line  12)
+* stream orientation:                    Opening Streams.     (line 101)
+* stream orientation <1>:                Streams and I18N.    (line  37)
+* stream, for I/O to a string:           String Streams.      (line   6)
+* streams and descriptors:               Stream/Descriptor Precautions.
+                                                              (line   6)
+* Streams pipe error:                    Error Codes.         (line 766)
+* streams, and file descriptors:         Descriptors and Streams.
+                                                              (line   6)
+* streams, C++:                          Streams and I18N.    (line  30)
+* streams, standard:                     Standard Streams.    (line   6)
+* string:                                Representation of Strings.
+                                                              (line  11)
+* string allocation:                     Representation of Strings.
+                                                              (line  61)
+* string collation functions:            Collation Functions. (line   6)
+* string comparison functions:           String/Array Comparison.
+                                                              (line   6)
+* string concatenation functions:        Copying Strings and Arrays.
+                                                              (line   9)
+* string concatenation functions <1>:    Concatenating Strings.
+                                                              (line   6)
+* string copy functions:                 Copying Strings and Arrays.
+                                                              (line   9)
+* string length:                         Representation of Strings.
+                                                              (line  61)
+* string literal:                        Representation of Strings.
+                                                              (line  40)
+* string search functions:               Search Functions.    (line   8)
+* string stream:                         String Streams.      (line   6)
+* string truncation:                     Truncating Strings.  (line   6)
+* string vectors, null-byte separated:   Argz and Envz Vectors.
+                                                              (line   6)
+* string, representation of:             Representation of Strings.
+                                                              (line   6)
+* Structure needs cleaning:              Error Codes.         (line 770)
+* style of communication (of a socket):  Socket Concepts.     (line   6)
+* subprocess:                            Process Creation Concepts.
+                                                              (line   9)
+* subshell:                              Initializing the Shell.
+                                                              (line   6)
+* substitution of variables and commands: Expansion Stages.   (line  15)
+* successive signals:                    Merged Signals.      (line   6)
+* summer time:                           Broken-down Time.    (line  63)
+* SunOS:                                 Berkeley Unix.       (line   6)
+* supplementary group IDs:               Process Persona.     (line   6)
+* SUSP character:                        Signal Characters.   (line  36)
+* suspend character:                     Signal Characters.   (line  36)
+* SVID:                                  SVID.                (line   6)
+* swap space:                            Memory Concepts.     (line  18)
+* symbolic link:                         Symbolic Links.      (line   6)
+* symbolic link, opening:                Open-time Flags.     (line 113)
+* synchronizing:                         Synchronizing I/O.   (line   6)
+* synchronizing <1>:                     Synchronizing AIO Operations.
+                                                              (line  17)
+* syntax error messages, in argp:        Argp Helper Functions.
+                                                              (line  21)
+* syntax, for program arguments:         Argument Syntax.     (line   6)
+* syntax, for reading numbers:           Parsing of Numbers.  (line   6)
+* sysconf:                               Query Memory Parameters.
+                                                              (line  47)
+* sysconf <1>:                           Query Memory Parameters.
+                                                              (line  53)
+* sysconf <2>:                           Processor Resources. (line  13)
+* sysconf <3>:                           Processor Resources. (line  19)
+* system call:                           System Calls.        (line   6)
+* system call number:                    System Calls.        (line  46)
+* System V Unix:                         SVID.                (line   6)
+* task ID:                               Process Identification.
+                                                              (line  19)
+* TCP (Internet protocol):               Protocols Database.  (line  12)
+* template, for printf:                  Formatted Output.    (line   6)
+* template, for scanf:                   Formatted Input.     (line   6)
+* term:                                  Conditionally Safe Features.
+                                                              (line 178)
+* TERM environment variable:             Standard Environment.
+                                                              (line  59)
+* terminal flow control:                 Line Control.        (line 108)
+* terminal identification:               Is It a Terminal.    (line   6)
+* terminal input queue:                  I/O Queues.          (line  11)
+* terminal input queue, clearing:        Line Control.        (line  67)
+* terminal input signal:                 Job Control Signals. (line  71)
+* terminal line control functions:       Line Control.        (line   6)
+* terminal line speed:                   Line Speed.          (line   6)
+* terminal line speed <1>:               Line Speed.          (line   6)
+* terminal mode data types:              Mode Data Types.     (line   6)
+* terminal mode functions:               Mode Functions.      (line   6)
+* terminal modes, BSD:                   BSD Terminal Modes.  (line   6)
+* terminal output queue:                 I/O Queues.          (line  27)
+* terminal output queue, flushing:       Line Control.        (line  38)
+* terminal output signal:                Job Control Signals. (line  79)
+* terminated jobs, detecting:            Stopped and Terminated Jobs.
+                                                              (line   6)
+* termination signal:                    Termination Signals. (line  23)
+* testing access permission:             Testing File Access. (line   6)
+* testing exit status of child process:  Process Completion.  (line   6)
+* Text file busy:                        Error Codes.         (line 168)
+* text stream:                           Binary Streams.      (line  14)
+* thrashing:                             Memory Subsystem.    (line  31)
+* thread control:                        ISO C Thread Management.
+                                                              (line   6)
+* thread creation:                       ISO C Thread Management.
+                                                              (line   6)
+* thread group:                          Process Identification.
+                                                              (line  19)
+* thread ID:                             Process Identification.
+                                                              (line  19)
+* thread management:                     ISO C Thread Management.
+                                                              (line   6)
+* thread mutex tunables:                 POSIX Thread Tunables.
+                                                              (line   6)
+* thread of control:                     Program Basics.      (line   6)
+* thread-local storage:                  ISO C Thread-local Storage.
+                                                              (line   6)
+* Thread-Safe:                           POSIX Safety Concepts.
+                                                              (line  16)
+* Thread-Unsafe:                         POSIX Safety Concepts.
+                                                              (line  68)
+* threads:                               Streams and Threads. (line   6)
+* threads <1>:                           Threads.             (line   6)
+* ticks, clock:                          Time Types.          (line  15)
+* ticks, clock <1>:                      Processor And CPU Time.
+                                                              (line  19)
+* tilde expansion:                       Expansion Stages.    (line   9)
+* time:                                  Time Basics.         (line   6)
+* TIME termios slot:                     Noncanonical Input.  (line  36)
+* time zone:                             TZ Variable.         (line   9)
+* time zone database:                    TZ Variable.         (line 143)
+* time, elapsed:                         Time Basics.         (line  24)
+* time, high precision:                  Setting and Adjusting the Time.
+                                                              (line  60)
+* timer:                                 Unsafe Features.     (line  87)
+* Timer expired:                         Error Codes.         (line 620)
+* timer, profiling:                      Setting an Alarm.    (line  22)
+* timer, real-time:                      Setting an Alarm.    (line  13)
+* timer, virtual:                        Setting an Alarm.    (line  17)
+* timers, setting:                       Setting an Alarm.    (line  10)
+* timespec:                              Time Types.          (line  40)
+* timeval:                               Time Types.          (line  61)
+* timing error in signal handling:       Remembering a Signal.
+                                                              (line  72)
+* TMPDIR environment variable:           Temporary Files.     (line 147)
+* tokenizing strings:                    Finding Tokens in a String.
+                                                              (line   6)
+* Too many levels of symbolic links:     Error Codes.         (line 414)
+* Too many links:                        Error Codes.         (line 196)
+* Too many open files:                   Error Codes.         (line 144)
+* Too many open files in system:         Error Codes.         (line 155)
+* Too many processes:                    Error Codes.         (line 442)
+* Too many references: cannot splice:    Error Codes.         (line 399)
+* Too many users:                        Error Codes.         (line 448)
+* tools, for installing library:         Tools for Compilation.
+                                                              (line   6)
+* traffic class:                         Internet Address Formats.
+                                                              (line  55)
+* Translator died:                       Error Codes.         (line 556)
+* transmitting datagrams:                Sending Datagrams.   (line   6)
+* Transport endpoint is already connected: Error Codes.       (line 374)
+* Transport endpoint is not connected:   Error Codes.         (line 379)
+* tree, directory:                       Working with Directory Trees.
+                                                              (line   6)
+* triangulation:                         glibc iconv Implementation.
+                                                              (line  42)
+* trigonometric functions:               Trig Functions.      (line   6)
+* truncating strings:                    Truncating Strings.  (line   6)
+* Tunable names:                         Tunable names.       (line   6)
+* Tunable namespaces:                    Tunable names.       (line   6)
+* tunables:                              Tunables.            (line   6)
+* tunables thread mutex:                 POSIX Thread Tunables.
+                                                              (line   6)
+* tunables, data_cache_size:             Hardware Capability Tunables.
+                                                              (line   6)
+* tunables, elision:                     Elision Tunables.    (line   6)
+* tunables, hwcap:                       Hardware Capability Tunables.
+                                                              (line   6)
+* tunables, hwcaps:                      Hardware Capability Tunables.
+                                                              (line   6)
+* tunables, malloc:                      Memory Allocation Tunables.
+                                                              (line   6)
+* tunables, non_temporal_threshold:      Hardware Capability Tunables.
+                                                              (line   6)
+* tunables, shared_cache_size:           Hardware Capability Tunables.
+                                                              (line   6)
+* type measurements, floating:           Floating Type Macros.
+                                                              (line   6)
+* type measurements, integer:            Width of Type.       (line   6)
+* type modifier character (printf):      Output Conversion Syntax.
+                                                              (line  92)
+* type modifier character (scanf):       Input Conversion Syntax.
+                                                              (line  55)
+* typeahead buffer:                      I/O Queues.          (line  11)
+* TZ environment variable:               Standard Environment.
+                                                              (line  68)
+* UCS-2:                                 Extended Char Intro. (line  53)
+* UCS-4:                                 Extended Char Intro. (line  53)
+* ulps:                                  Errors in Math Functions.
+                                                              (line   6)
+* umask:                                 Setting Permissions. (line   6)
+* unbuffered stream:                     Buffering Concepts.  (line   9)
+* unconstrained memory allocation:       Unconstrained Allocation.
+                                                              (line   6)
+* undefining macros that shadow functions: Macro Definitions. (line   6)
+* underflow exception:                   FP Exceptions.       (line   6)
+* Unicode:                               Extended Char Intro. (line  38)
+* Unix, Berkeley:                        Berkeley Unix.       (line   6)
+* Unix, System V:                        SVID.                (line   6)
+* unlinking a file:                      Deleting Files.      (line   6)
+* unordered comparison:                  FP Comparison Functions.
+                                                              (line   6)
+* unreading characters:                  Unreading.           (line   6)
+* Unsafe Features:                       Unsafe Features.     (line   6)
+* upper-case character:                  Classification of Characters.
+                                                              (line  35)
+* upper-case character <1>:              Classification of Wide Characters.
+                                                              (line 241)
+* urgent data signal:                    Asynchronous I/O Signals.
+                                                              (line  26)
+* urgent socket condition:               Out-of-Band Data.    (line  18)
+* usage limits:                          Limits on Resources. (line   6)
+* usage messages, in argp:               Argp Helper Functions.
+                                                              (line  11)
+* user accounting database:              User Accounting Database.
+                                                              (line   6)
+* user database:                         User Database.       (line   6)
+* user ID:                               User and Group IDs.  (line   6)
+* user ID, determining:                  Who Logged In.       (line   6)
+* user name:                             User and Group IDs.  (line   6)
+* user signals:                          Miscellaneous Signals.
+                                                              (line  13)
+* usual file name errors:                File Name Errors.    (line   6)
+* UTF-16:                                Extended Char Intro. (line  53)
+* UTF-7:                                 Extended Char Intro. (line 234)
+* UTF-8:                                 Extended Char Intro. (line  53)
+* UTF-8 <1>:                             Extended Char Intro. (line 226)
+* Value too large for defined data type: Error Codes.         (line 612)
+* variable number of arguments:          Variadic Functions.  (line   6)
+* variable substitution:                 Expansion Stages.    (line  15)
+* variable-sized arrays:                 GNU C Variable-Size Arrays.
+                                                              (line   6)
+* variadic function argument access:     Receiving Arguments. (line   6)
+* variadic function prototypes:          Variadic Prototypes. (line   6)
+* variadic functions:                    Variadic Functions.  (line   6)
+* variadic functions, calling:           Calling Variadics.   (line   6)
+* va_copy:                               Concatenating Strings.
+                                                              (line  72)
+* virtual time alarm signal:             Alarm Signals.       (line  26)
+* virtual timer:                         Setting an Alarm.    (line  17)
+* volatile declarations:                 Nonreentrancy.       (line  20)
+* waiting for a signal:                  Waiting for a Signal.
+                                                              (line   6)
+* waiting for completion of child process: Process Completion.
+                                                              (line   6)
+* waiting for input or output:           Waiting for I/O.     (line   6)
+* WERASE character:                      Editing Characters.  (line  66)
+* whitespace character:                  Classification of Characters.
+                                                              (line  90)
+* whitespace character <1>:              Classification of Wide Characters.
+                                                              (line 208)
+* wide character:                        Extended Char Intro. (line  32)
+* wide string:                           Representation of Strings.
+                                                              (line  22)
+* wide string <1>:                       Representation of Strings.
+                                                              (line  86)
+* width of integer type:                 Width of Type.       (line   6)
+* wildcard expansion:                    Expansion Stages.    (line  28)
+* wint_t:                                String/Array Conventions.
+                                                              (line  41)
+* word expansion:                        Word Expansion.      (line   6)
+* working directory:                     Working Directory.   (line   6)
+* write lock:                            File Locks.          (line  15)
+* writing to a file descriptor:          I/O Primitives.      (line 168)
+* writing to a socket:                   Transferring Data.   (line   6)
+* writing to a stream, by blocks:        Block Input/Output.  (line   9)
+* writing to a stream, by characters:    Simple Output.       (line   6)
+* writing to a stream, formatted:        Formatted Output.    (line   6)
+* Wrong medium type:                     Error Codes.         (line 794)
+* xmalloc function:                      Malloc Examples.     (line  10)
+* xrealloc and xreallocarray functions:  Changing Block Size. (line  64)
+* You really blew it this time:          Error Codes.         (line 567)
+* YP:                                    Host Identification. (line  37)
+* YP domain name:                        Host Identification. (line  37)
+* YP domain name <1>:                    Host Identification. (line 110)
+* YP domain name <2>:                    Host Identification. (line 122)
+* zero divide:                           FP Exceptions.       (line   6)
+
+
 File: libc.info,  Node: Type Index,  Next: Function Index,  Prev: Concept Index,  Up: Top
 
 Type Index
@@ -3005,13 +4825,13 @@ Function and Macro Index
 * ctime_r:                               Formatting Calendar Time.
                                                               (line  60)
 * cuserid:                               Who Logged In.       (line  28)
-* daddl:                                 Misc FP Arithmetic.  (line 115)
+* daddl:                                 Misc FP Arithmetic.  (line 227)
 * dcgettext:                             Translation with gettext.
                                                               (line  94)
 * dcngettext:                            Advanced gettext functions.
                                                               (line 103)
-* ddivl:                                 Misc FP Arithmetic.  (line 160)
-* dfmal:                                 Misc FP Arithmetic.  (line 191)
+* ddivl:                                 Misc FP Arithmetic.  (line 272)
+* dfmal:                                 Misc FP Arithmetic.  (line 303)
 * dgettext:                              Translation with gettext.
                                                               (line  78)
 * difftime:                              Calculating Elapsed Time.
@@ -3020,7 +4840,7 @@ Function and Macro Index
 * dirname:                               Finding Tokens in a String.
                                                               (line 274)
 * div:                                   Integer Division.    (line  30)
-* dmull:                                 Misc FP Arithmetic.  (line 145)
+* dmull:                                 Misc FP Arithmetic.  (line 257)
 * dngettext:                             Advanced gettext functions.
                                                               (line  92)
 * drand48:                               SVID Random.         (line  33)
@@ -3028,8 +4848,8 @@ Function and Macro Index
 * drem:                                  Remainder Functions. (line  56)
 * dremf:                                 Remainder Functions. (line  57)
 * dreml:                                 Remainder Functions. (line  58)
-* dsqrtl:                                Misc FP Arithmetic.  (line 175)
-* dsubl:                                 Misc FP Arithmetic.  (line 130)
+* dsqrtl:                                Misc FP Arithmetic.  (line 287)
+* dsubl:                                 Misc FP Arithmetic.  (line 242)
 * DTTOIF:                                Directory Entries.   (line  78)
 * dup:                                   Duplicating Descriptors.
                                                               (line  23)
@@ -3127,8 +4947,8 @@ Function and Macro Index
 * fabsfN:                                Absolute Value.      (line  37)
 * fabsfNx:                               Absolute Value.      (line  38)
 * fabsl:                                 Absolute Value.      (line  36)
-* fadd:                                  Misc FP Arithmetic.  (line 113)
-* faddl:                                 Misc FP Arithmetic.  (line 114)
+* fadd:                                  Misc FP Arithmetic.  (line 225)
+* faddl:                                 Misc FP Arithmetic.  (line 226)
 * fchdir:                                Working Directory.   (line 124)
 * fchmod:                                Setting Permissions. (line 114)
 * fchown:                                File Owner.          (line  68)
@@ -3140,13 +4960,13 @@ Function and Macro Index
 * fcvt_r:                                System V Number Conversion.
                                                               (line 129)
 * fdatasync:                             Synchronizing I/O.   (line  67)
-* fdim:                                  Misc FP Arithmetic.  (line  70)
-* fdimf:                                 Misc FP Arithmetic.  (line  71)
-* fdimfN:                                Misc FP Arithmetic.  (line  73)
-* fdimfNx:                               Misc FP Arithmetic.  (line  74)
-* fdiml:                                 Misc FP Arithmetic.  (line  72)
-* fdiv:                                  Misc FP Arithmetic.  (line 158)
-* fdivl:                                 Misc FP Arithmetic.  (line 159)
+* fdim:                                  Misc FP Arithmetic.  (line 182)
+* fdimf:                                 Misc FP Arithmetic.  (line 183)
+* fdimfN:                                Misc FP Arithmetic.  (line 185)
+* fdimfNx:                               Misc FP Arithmetic.  (line 186)
+* fdiml:                                 Misc FP Arithmetic.  (line 184)
+* fdiv:                                  Misc FP Arithmetic.  (line 270)
+* fdivl:                                 Misc FP Arithmetic.  (line 271)
 * fdopen:                                Descriptors and Streams.
                                                               (line  11)
 * fdopendir:                             Opening a Directory. (line  61)
@@ -3186,8 +5006,8 @@ Function and Macro Index
 * fexecve:                               Executing a File.    (line  57)
 * fflush:                                Flushing Buffers.    (line  25)
 * fflush_unlocked:                       Flushing Buffers.    (line  37)
-* ffma:                                  Misc FP Arithmetic.  (line 189)
-* ffmal:                                 Misc FP Arithmetic.  (line 190)
+* ffma:                                  Misc FP Arithmetic.  (line 301)
+* ffmal:                                 Misc FP Arithmetic.  (line 302)
 * fgetc:                                 Character Input.     (line  22)
 * fgetc_unlocked:                        Character Input.     (line  41)
 * fgetgrent:                             Scanning All Groups. (line  13)
@@ -3220,65 +5040,105 @@ Function and Macro Index
 * floorfN:                               Rounding Functions.  (line  57)
 * floorfNx:                              Rounding Functions.  (line  58)
 * floorl:                                Rounding Functions.  (line  56)
-* fma:                                   Misc FP Arithmetic.  (line  85)
-* fMaddfN:                               Misc FP Arithmetic.  (line 116)
-* fMaddfNx:                              Misc FP Arithmetic.  (line 117)
-* fmaf:                                  Misc FP Arithmetic.  (line  86)
-* fmafN:                                 Misc FP Arithmetic.  (line  89)
-* fmafNx:                                Misc FP Arithmetic.  (line  90)
-* fmal:                                  Misc FP Arithmetic.  (line  87)
-* fmax:                                  Misc FP Arithmetic.  (line  28)
-* fmaxf:                                 Misc FP Arithmetic.  (line  29)
-* fmaxfN:                                Misc FP Arithmetic.  (line  31)
-* fmaxfNx:                               Misc FP Arithmetic.  (line  32)
-* fmaxl:                                 Misc FP Arithmetic.  (line  30)
-* fmaxmag:                               Misc FP Arithmetic.  (line  56)
-* fmaxmagf:                              Misc FP Arithmetic.  (line  57)
-* fmaxmagfN:                             Misc FP Arithmetic.  (line  59)
-* fmaxmagfNx:                            Misc FP Arithmetic.  (line  60)
-* fmaxmagl:                              Misc FP Arithmetic.  (line  58)
-* fMdivfN:                               Misc FP Arithmetic.  (line 161)
-* fMdivfNx:                              Misc FP Arithmetic.  (line 162)
+* fma:                                   Misc FP Arithmetic.  (line 197)
+* fMaddfN:                               Misc FP Arithmetic.  (line 228)
+* fMaddfNx:                              Misc FP Arithmetic.  (line 229)
+* fmaf:                                  Misc FP Arithmetic.  (line 198)
+* fmafN:                                 Misc FP Arithmetic.  (line 201)
+* fmafNx:                                Misc FP Arithmetic.  (line 202)
+* fmal:                                  Misc FP Arithmetic.  (line 199)
+* fmax:                                  Misc FP Arithmetic.  (line  29)
+* fmaxf:                                 Misc FP Arithmetic.  (line  30)
+* fmaxfN:                                Misc FP Arithmetic.  (line  32)
+* fmaxfNx:                               Misc FP Arithmetic.  (line  33)
+* fmaximum:                              Misc FP Arithmetic.  (line  57)
+* fmaximumf:                             Misc FP Arithmetic.  (line  58)
+* fmaximumfN:                            Misc FP Arithmetic.  (line  60)
+* fmaximumfNx:                           Misc FP Arithmetic.  (line  61)
+* fmaximuml:                             Misc FP Arithmetic.  (line  59)
+* fmaximum_mag:                          Misc FP Arithmetic.  (line 139)
+* fmaximum_magf:                         Misc FP Arithmetic.  (line 140)
+* fmaximum_magfN:                        Misc FP Arithmetic.  (line 142)
+* fmaximum_magfNx:                       Misc FP Arithmetic.  (line 143)
+* fmaximum_magl:                         Misc FP Arithmetic.  (line 141)
+* fmaximum_mag_num:                      Misc FP Arithmetic.  (line 167)
+* fmaximum_mag_numf:                     Misc FP Arithmetic.  (line 168)
+* fmaximum_mag_numfN:                    Misc FP Arithmetic.  (line 171)
+* fmaximum_mag_numfNx:                   Misc FP Arithmetic.  (line 172)
+* fmaximum_mag_numl:                     Misc FP Arithmetic.  (line 169)
+* fmaximum_num:                          Misc FP Arithmetic.  (line  84)
+* fmaximum_numf:                         Misc FP Arithmetic.  (line  85)
+* fmaximum_numfN:                        Misc FP Arithmetic.  (line  87)
+* fmaximum_numfNx:                       Misc FP Arithmetic.  (line  88)
+* fmaximum_numl:                         Misc FP Arithmetic.  (line  86)
+* fmaxl:                                 Misc FP Arithmetic.  (line  31)
+* fmaxmag:                               Misc FP Arithmetic.  (line 112)
+* fmaxmagf:                              Misc FP Arithmetic.  (line 113)
+* fmaxmagfN:                             Misc FP Arithmetic.  (line 115)
+* fmaxmagfNx:                            Misc FP Arithmetic.  (line 116)
+* fmaxmagl:                              Misc FP Arithmetic.  (line 114)
+* fMdivfN:                               Misc FP Arithmetic.  (line 273)
+* fMdivfNx:                              Misc FP Arithmetic.  (line 274)
 * fmemopen:                              String Streams.      (line   9)
-* fMfmafN:                               Misc FP Arithmetic.  (line 192)
-* fMfmafNx:                              Misc FP Arithmetic.  (line 193)
+* fMfmafN:                               Misc FP Arithmetic.  (line 304)
+* fMfmafNx:                              Misc FP Arithmetic.  (line 305)
 * fmin:                                  Misc FP Arithmetic.  (line  11)
 * fminf:                                 Misc FP Arithmetic.  (line  12)
 * fminfN:                                Misc FP Arithmetic.  (line  14)
 * fminfNx:                               Misc FP Arithmetic.  (line  15)
+* fminimum:                              Misc FP Arithmetic.  (line  44)
+* fminimumf:                             Misc FP Arithmetic.  (line  45)
+* fminimumfN:                            Misc FP Arithmetic.  (line  47)
+* fminimumfNx:                           Misc FP Arithmetic.  (line  48)
+* fminimuml:                             Misc FP Arithmetic.  (line  46)
+* fminimum_mag:                          Misc FP Arithmetic.  (line 126)
+* fminimum_magf:                         Misc FP Arithmetic.  (line 127)
+* fminimum_magfN:                        Misc FP Arithmetic.  (line 129)
+* fminimum_magfNx:                       Misc FP Arithmetic.  (line 130)
+* fminimum_magl:                         Misc FP Arithmetic.  (line 128)
+* fminimum_mag_num:                      Misc FP Arithmetic.  (line 152)
+* fminimum_mag_numf:                     Misc FP Arithmetic.  (line 153)
+* fminimum_mag_numfN:                    Misc FP Arithmetic.  (line 156)
+* fminimum_mag_numfNx:                   Misc FP Arithmetic.  (line 157)
+* fminimum_mag_numl:                     Misc FP Arithmetic.  (line 154)
+* fminimum_num:                          Misc FP Arithmetic.  (line  70)
+* fminimum_numf:                         Misc FP Arithmetic.  (line  71)
+* fminimum_numfN:                        Misc FP Arithmetic.  (line  73)
+* fminimum_numfNx:                       Misc FP Arithmetic.  (line  74)
+* fminimum_numl:                         Misc FP Arithmetic.  (line  72)
 * fminl:                                 Misc FP Arithmetic.  (line  13)
-* fminmag:                               Misc FP Arithmetic.  (line  42)
-* fminmagf:                              Misc FP Arithmetic.  (line  43)
-* fminmagfN:                             Misc FP Arithmetic.  (line  45)
-* fminmagfNx:                            Misc FP Arithmetic.  (line  46)
-* fminmagl:                              Misc FP Arithmetic.  (line  44)
-* fMmulfN:                               Misc FP Arithmetic.  (line 146)
-* fMmulfNx:                              Misc FP Arithmetic.  (line 147)
+* fminmag:                               Misc FP Arithmetic.  (line  98)
+* fminmagf:                              Misc FP Arithmetic.  (line  99)
+* fminmagfN:                             Misc FP Arithmetic.  (line 101)
+* fminmagfNx:                            Misc FP Arithmetic.  (line 102)
+* fminmagl:                              Misc FP Arithmetic.  (line 100)
+* fMmulfN:                               Misc FP Arithmetic.  (line 258)
+* fMmulfNx:                              Misc FP Arithmetic.  (line 259)
 * fmod:                                  Remainder Functions. (line  10)
 * fmodf:                                 Remainder Functions. (line  11)
 * fmodfN:                                Remainder Functions. (line  14)
 * fmodfNx:                               Remainder Functions. (line  15)
 * fmodl:                                 Remainder Functions. (line  12)
-* fMsqrtfN:                              Misc FP Arithmetic.  (line 176)
-* fMsqrtfNx:                             Misc FP Arithmetic.  (line 177)
-* fMsubfN:                               Misc FP Arithmetic.  (line 131)
-* fMsubfNx:                              Misc FP Arithmetic.  (line 132)
+* fMsqrtfN:                              Misc FP Arithmetic.  (line 288)
+* fMsqrtfNx:                             Misc FP Arithmetic.  (line 289)
+* fMsubfN:                               Misc FP Arithmetic.  (line 243)
+* fMsubfNx:                              Misc FP Arithmetic.  (line 244)
 * fmtmsg:                                Printing Formatted Messages.
                                                               (line  46)
-* fmul:                                  Misc FP Arithmetic.  (line 143)
-* fmull:                                 Misc FP Arithmetic.  (line 144)
-* fMxaddfN:                              Misc FP Arithmetic.  (line 118)
-* fMxaddfNx:                             Misc FP Arithmetic.  (line 119)
-* fMxdivfN:                              Misc FP Arithmetic.  (line 163)
-* fMxdivfNx:                             Misc FP Arithmetic.  (line 164)
-* fMxfmafN:                              Misc FP Arithmetic.  (line 194)
-* fMxfmafNx:                             Misc FP Arithmetic.  (line 195)
-* fMxmulfN:                              Misc FP Arithmetic.  (line 148)
-* fMxmulfNx:                             Misc FP Arithmetic.  (line 149)
-* fMxsqrtfN:                             Misc FP Arithmetic.  (line 178)
-* fMxsqrtfNx:                            Misc FP Arithmetic.  (line 179)
-* fMxsubfN:                              Misc FP Arithmetic.  (line 133)
-* fMxsubfNx:                             Misc FP Arithmetic.  (line 134)
+* fmul:                                  Misc FP Arithmetic.  (line 255)
+* fmull:                                 Misc FP Arithmetic.  (line 256)
+* fMxaddfN:                              Misc FP Arithmetic.  (line 230)
+* fMxaddfNx:                             Misc FP Arithmetic.  (line 231)
+* fMxdivfN:                              Misc FP Arithmetic.  (line 275)
+* fMxdivfNx:                             Misc FP Arithmetic.  (line 276)
+* fMxfmafN:                              Misc FP Arithmetic.  (line 306)
+* fMxfmafNx:                             Misc FP Arithmetic.  (line 307)
+* fMxmulfN:                              Misc FP Arithmetic.  (line 260)
+* fMxmulfNx:                             Misc FP Arithmetic.  (line 261)
+* fMxsqrtfN:                             Misc FP Arithmetic.  (line 290)
+* fMxsqrtfNx:                            Misc FP Arithmetic.  (line 291)
+* fMxsubfN:                              Misc FP Arithmetic.  (line 245)
+* fMxsubfNx:                             Misc FP Arithmetic.  (line 246)
 * fnmatch:                               Wildcard Matching.   (line  11)
 * fopen:                                 Opening Streams.     (line  13)
 * fopen64:                               Opening Streams.     (line 131)
@@ -3334,12 +5194,12 @@ Function and Macro Index
                                                               (line 106)
 * fsetpos64:                             Portable Positioning.
                                                               (line 124)
-* fsqrt:                                 Misc FP Arithmetic.  (line 173)
-* fsqrtl:                                Misc FP Arithmetic.  (line 174)
+* fsqrt:                                 Misc FP Arithmetic.  (line 285)
+* fsqrtl:                                Misc FP Arithmetic.  (line 286)
 * fstat:                                 Reading Attributes.  (line  50)
 * fstat64:                               Reading Attributes.  (line  69)
-* fsub:                                  Misc FP Arithmetic.  (line 128)
-* fsubl:                                 Misc FP Arithmetic.  (line 129)
+* fsub:                                  Misc FP Arithmetic.  (line 240)
+* fsubl:                                 Misc FP Arithmetic.  (line 241)
 * fsync:                                 Synchronizing I/O.   (line  31)
 * ftell:                                 File Positioning.    (line  21)
 * ftello:                                File Positioning.    (line  34)
