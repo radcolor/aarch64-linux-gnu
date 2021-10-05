@@ -5,10 +5,10 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libasan.so.7'
+dlname='libasan.so.8'
 
 # Names of this library.
-library_names='libasan.so.7.0.0 libasan.so.7 libasan.so'
+library_names='libasan.so.8.0.0 libasan.so.8 libasan.so'
 
 # The name of the static archive.
 old_library='libasan.a'
@@ -23,7 +23,7 @@ dependency_libs=' -ldl -lrt -lpthread '/home/runner/work/build-tools-gcc/build-t
 weak_library_names=''
 
 # Version information for libasan.
-current=7
+current=8
 age=0
 revision=0
 

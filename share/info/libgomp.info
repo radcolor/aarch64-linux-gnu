@@ -326,7 +326,7 @@ routine
 'omp_target_memcpy_rect_async' runtime
 routines
 'omp_get_mapped_ptr' runtime routine        N
-'omp_calloc', 'omp_realloc',                N
+'omp_calloc', 'omp_realloc',                Y
 'omp_aligned_alloc' and
 'omp_aligned_calloc' runtime routines
 'omp_alloctrait_key_t' enum:                Y

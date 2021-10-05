@@ -3391,7 +3391,10 @@ as necessary to represent the value exactly.
    If the value to be printed represents infinity or a NaN, the output
 is [‘-’]‘inf’ or ‘nan’ respectively if the conversion specifier is ‘%a’,
 ‘%e’, ‘%f’, or ‘%g’ and it is [‘-’]‘INF’ or ‘NAN’ respectively if the
-conversion is ‘%A’, ‘%E’, or ‘%G’.
+conversion is ‘%A’, ‘%E’, or ‘%G’.  On some implementations, a NaN may
+result in longer output with information about the payload of the NaN;
+ISO C2X defines a macro ‘_PRINTF_NAN_LEN_MAX’ giving the maximum length
+of such output.
 
    The following flags can be used to modify the behavior:
 

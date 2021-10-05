@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20210930
+#define __GLIBCXX__ 20211005
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -506,11 +506,12 @@ namespace std
 # define __glibcxx_constexpr_assert(unevaluated)
 #endif
 
+#define _GLIBCXX_VERBOSE_ASSERT 1
 
 // Assert.
 #if defined(_GLIBCXX_ASSERTIONS) \
   || defined(_GLIBCXX_PARALLEL) || defined(_GLIBCXX_PARALLEL_ASSERTIONS)
-# if _GLIBCXX_HOSTED && _GLIBCXX_VERBOSE
+# ifdef _GLIBCXX_VERBOSE_ASSERT
 namespace std
 {
   // Avoid the use of assert, because we're trying to keep the <cassert>
@@ -533,7 +534,7 @@ namespace std
     std::__replacement_assert(__FILE__, __LINE__, __PRETTY_FUNCTION__, \
 			      #_Condition);			       \
   }
-# else // ! VERBOSE
+# else // ! VERBOSE_ASSERT
 # define __glibcxx_assert_impl(_Condition)		\
   if (__builtin_expect(!bool(_Condition), false))	\
   {							\
