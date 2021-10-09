@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "12.0.0 20211008 (experimental)")
+(!version  "12.0.0 20211009 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 10 ada c cp d fortran go jit lto objc objcp)
 (!fileslist 228 0
@@ -20384,13 +20384,13 @@
      (!type user_struct 1123 
       (!type already_seen 1122)
       gc_pointed_to "int_range<1>"
-      (!srcfileloc  "value-range.h" 181)
+      (!srcfileloc  "value-range.h" 182)
       (!fields 1 
        (!pair  "1"
         (!type undefined 1124 nil  gc_unused "1"
-         (!srcfileloc  "value-range.h" 181)
+         (!srcfileloc  "value-range.h" 182)
         )
-        (!srcfileloc  "value-range.h" 181)
+        (!srcfileloc  "value-range.h" 182)
         nil )
       )
      )
@@ -25290,12 +25290,12 @@
   nil 0 nil nil )
  
  (!type user_struct 1687 nil  gc_unused "irange"
-  (!srcfileloc  "value-range.h" 141)
+  (!srcfileloc  "value-range.h" 142)
   (!fields 0 )
  )
  
  (!type user_struct 1688 nil  gc_unused "int_range"
-  (!srcfileloc  "value-range.h" 171)
+  (!srcfileloc  "value-range.h" 172)
   (!fields 0 )
  )
  
@@ -25304,13 +25304,13 @@
  (!type already_seen 1124)
  
  (!type user_struct 1689 nil  gc_unused "int_range<255>"
-  (!srcfileloc  "value-range.h" 185)
+  (!srcfileloc  "value-range.h" 186)
   (!fields 1 
    (!pair  "255"
     (!type undefined 1690 nil  gc_unused "255"
-     (!srcfileloc  "value-range.h" 185)
+     (!srcfileloc  "value-range.h" 186)
     )
-    (!srcfileloc  "value-range.h" 185)
+    (!srcfileloc  "value-range.h" 186)
     nil )
   )
  )
@@ -28266,7 +28266,7 @@
    (!type already_seen 2028)
   )
   gc_pointed_to "cp_parser"
-  (!srcfileloc  "cp/parser.c" 47289)
+  (!srcfileloc  "cp/parser.c" 47325)
   (!fields 39 
    (!pair  "lexer"
     (!type already_seen 2014)
@@ -30819,7 +30819,7 @@
   nil )
  (!pair  "cp_parser"
   (!type already_seen 2028)
-  (!srcfileloc  "cp/parser.c" 47289)
+  (!srcfileloc  "cp/parser.c" 47325)
   nil )
  (!pair  "iter_t"
   (!type already_seen 2189)
@@ -31861,35 +31861,35 @@
   nil )
  (!pair  "int_range_max"
   (!type already_seen 1689)
-  (!srcfileloc  "value-range.h" 185)
+  (!srcfileloc  "value-range.h" 186)
   nil )
  (!pair  "255"
   (!type already_seen 1690)
-  (!srcfileloc  "value-range.h" 185)
+  (!srcfileloc  "value-range.h" 186)
   nil )
  (!pair  "int_range<255>"
   (!type already_seen 1689)
-  (!srcfileloc  "value-range.h" 185)
+  (!srcfileloc  "value-range.h" 186)
   nil )
  (!pair  "value_range"
   (!type already_seen 1123)
-  (!srcfileloc  "value-range.h" 181)
+  (!srcfileloc  "value-range.h" 182)
   nil )
  (!pair  "1"
   (!type already_seen 1124)
-  (!srcfileloc  "value-range.h" 181)
+  (!srcfileloc  "value-range.h" 182)
   nil )
  (!pair  "int_range<1>"
   (!type already_seen 1123)
-  (!srcfileloc  "value-range.h" 181)
+  (!srcfileloc  "value-range.h" 182)
   nil )
  (!pair  "int_range"
   (!type already_seen 1688)
-  (!srcfileloc  "value-range.h" 171)
+  (!srcfileloc  "value-range.h" 172)
   nil )
  (!pair  "irange"
   (!type already_seen 1687)
-  (!srcfileloc  "value-range.h" 141)
+  (!srcfileloc  "value-range.h" 142)
   nil )
  (!pair  "TRAILING_WIDE_INT_ACCESSOR"
   (!type already_seen 1685)
@@ -35377,11 +35377,11 @@
   nil )
  (!pair  "generic_parm_count"
   (!type already_seen 2)
-  (!srcfileloc  "cp/parser.c" 47801)
+  (!srcfileloc  "cp/parser.c" 47837)
   nil )
  (!pair  "the_parser"
   (!type already_seen 2029)
-  (!srcfileloc  "cp/parser.c" 47289)
+  (!srcfileloc  "cp/parser.c" 47325)
   nil )
  (!pair  "cp_parser_decl_specs_attrs"
   (!type already_seen 84)
