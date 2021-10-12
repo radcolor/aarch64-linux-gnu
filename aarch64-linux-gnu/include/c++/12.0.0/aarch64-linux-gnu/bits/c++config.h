@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20211009
+#define __GLIBCXX__ 20211012
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -293,6 +293,15 @@ namespace std
 #if __cplusplus >= 201103L
   typedef decltype(nullptr)	nullptr_t;
 #endif
+
+  // This allows the library to terminate without including all of <exception>
+  // and without making the declaration of std::terminate visible to users.
+  __attribute__ ((__noreturn__, __always_inline__))
+  inline void __terminate() _GLIBCXX_USE_NOEXCEPT
+  {
+    void terminate() _GLIBCXX_USE_NOEXCEPT __attribute__ ((__noreturn__));
+    terminate();
+  }
 }
 
 # define _GLIBCXX_USE_DUAL_ABI 1

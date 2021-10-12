@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2021-10-09" "gcc-12.0.0" "GNU"
+.TH GCC 1 "2021-10-12" "gcc-12.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -14240,7 +14240,8 @@ The option cannot be combined with \fB\-fsanitize=thread\fR.
 .IX Item "-fsanitize=undefined"
 Enable UndefinedBehaviorSanitizer, a fast undefined behavior detector.
 Various computations are instrumented to detect undefined behavior
-at runtime.  Current suboptions are:
+at runtime.  See <\fBhttps://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html\fR> for more details.   The run-time behavior can be influenced using the
+\&\fB\s-1UBSAN_OPTIONS\s0\fR environment variable.  Current suboptions are:
 .RS 4
 .IP "\fB\-fsanitize=shift\fR" 4
 .IX Item "-fsanitize=shift"
