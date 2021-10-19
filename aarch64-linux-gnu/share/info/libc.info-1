@@ -4818,9 +4818,9 @@ on semantics undefined within the standard.
      extension (LFS).
 
  -- Macro: _TIME_BITS
-     This macro determines the bit size of ‘time_t’, and therefore the
-     bit size of all ‘time_t’-derived types and the prototypes of all
-     related functions.
+     Define this macro to control the bit size of ‘time_t’, and
+     therefore the bit size of all ‘time_t’-derived types and the
+     prototypes of all related functions.
 
        1. If ‘_TIME_BITS’ is undefined, the bit size of ‘time_t’ is
           architecture dependent.  Currently it defaults to 64 bits on
