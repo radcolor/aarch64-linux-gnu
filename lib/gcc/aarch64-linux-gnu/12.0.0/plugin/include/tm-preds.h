@@ -115,6 +115,7 @@ extern bool aarch64_simd_shift_imm_offset_qi (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_offset_hi (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_offset_si (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_offset_di (rtx, machine_mode);
+extern bool aarch64_simd_shift_imm_vec_exact_top (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_vec_qi (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_vec_hi (rtx, machine_mode);
 extern bool aarch64_simd_shift_imm_vec_si (rtx, machine_mode);
@@ -279,6 +280,7 @@ enum constraint_num
   CONSTRAINT_Dq,
   CONSTRAINT_Dt,
   CONSTRAINT_Dl,
+  CONSTRAINT_D1,
   CONSTRAINT_Dr,
   CONSTRAINT_Dz,
   CONSTRAINT_Dm,

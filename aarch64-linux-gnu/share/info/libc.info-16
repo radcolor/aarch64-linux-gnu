@@ -4053,6 +4053,8 @@ Type Index
                                                               (line  24)
 * glibc.rtld:                            Dynamic Linking Tunables.
                                                               (line   6)
+* glibc.rtld.dynamic_sort:               Dynamic Linking Tunables.
+                                                              (line  41)
 * glibc.rtld.nns:                        Dynamic Linking Tunables.
                                                               (line  10)
 * glibc.rtld.optional_static_tls:        Dynamic Linking Tunables.

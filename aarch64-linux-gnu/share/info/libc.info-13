@@ -6640,6 +6640,17 @@ File: libc.info,  Node: Dynamic Linking Tunables,  Next: Elision Tunables,  Prev
      process startup.  The default allocation of optional static TLS is
      512 bytes and is allocated in every thread.
 
+ -- Tunable: glibc.rtld.dynamic_sort
+     Sets the algorithm to use for DSO sorting, valid values are ‘1’ and
+     ‘2’.  For value of ‘1’, an older O(n^3) algorithm is used, which is
+     long time tested, but may have performance issues when dependencies
+     between shared objects contain cycles due to circular dependencies.
+     When set to the value of ‘2’, a different algorithm is used, which
+     implements a topological sort through depth-first search, and does
+     not exhibit the performance issues of ‘1’.
+
+     The default value of this tunable is ‘1’.
+
 
 File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: Dynamic Linking Tunables,  Up: Tunables
 

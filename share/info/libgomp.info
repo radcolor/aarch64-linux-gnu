@@ -354,7 +354,7 @@ Other new OpenMP 5.1 features
 
 Description                                 Status  Comments
 -----------------------------------------------------------------------
-Support of strictly structured blocks in    N
+Support of strictly structured blocks in    Y
 Fortran
 Support of structured block sequences in    Y
 C/C++

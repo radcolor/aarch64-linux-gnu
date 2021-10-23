@@ -1,4 +1,5 @@
 /* Copyright (C) 1991-2021 Free Software Foundation, Inc.
+   Copyright The GNU Toolchain Authors.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -589,7 +590,8 @@ extern int posix_memalign (void **__memptr, size_t __alignment, size_t __size)
 #ifdef __USE_ISOC11
 /* ISO C variant of aligned allocation.  */
 extern void *aligned_alloc (size_t __alignment, size_t __size)
-     __THROW __attribute_malloc__ __attribute_alloc_size__ ((2)) __wur;
+     __THROW __attribute_malloc__ __attribute_alloc_align__ ((1))
+     __attribute_alloc_size__ ((2)) __wur;
 #endif
 
 /* Abort execution and generate a core-dump.  */
@@ -943,7 +945,8 @@ extern size_t mbstowcs (wchar_t *__restrict  __pwcs,
 extern size_t wcstombs (char *__restrict __s,
 			const wchar_t *__restrict __pwcs, size_t __n)
      __THROW
-  __attr_access ((__write_only__, 1, 3)) __attr_access ((__read_only__, 2));
+  __fortified_attr_access (__write_only__, 1, 3)
+  __attr_access ((__read_only__, 2));
 
 #ifdef __USE_MISC
 /* Determine whether the string value of RESPONSE matches the affirmation
@@ -997,7 +1000,7 @@ extern char *ptsname (int __fd) __THROW __wur;
    terminal associated with the master FD is open on in BUF.
    Return 0 on success, otherwise an error number.  */
 extern int ptsname_r (int __fd, char *__buf, size_t __buflen)
-     __THROW __nonnull ((2)) __attr_access ((__write_only__, 2, 3));
+     __THROW __nonnull ((2)) __fortified_attr_access (__write_only__, 2, 3);
 
 /* Open a master pseudo terminal and return its file descriptor.  */
 extern int getpt (void);
