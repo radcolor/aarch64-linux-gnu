@@ -257,6 +257,7 @@ enum constraint_num
   CONSTRAINT_Y,
   CONSTRAINT_Ush,
   CONSTRAINT_Usa,
+  CONSTRAINT_Usw,
   CONSTRAINT_Uss,
   CONSTRAINT_Usn,
   CONSTRAINT_Usd,
