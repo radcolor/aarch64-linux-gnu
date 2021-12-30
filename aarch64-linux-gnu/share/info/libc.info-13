@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2156,6 +2161,240 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Netgroup Membership,  Prev: Lookup Netgroup,  Up: Netgroup Database
+
+30.16.3 Testing for Netgroup Membership
+---------------------------------------
+
+It is often not necessary to scan the whole netgroup since often the
+only interesting question is whether a given entry is part of the
+selected netgroup.
+
+ -- Function: int innetgr (const char *NETGROUP, const char *HOST, const
+          char *USER, const char *DOMAIN)
+
+     Preliminary: | MT-Unsafe race:netgrent locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function tests whether the triple specified by the parameters
+     HOST, USER, and DOMAIN is part of the netgroup NETGROUP.  Using
+     this function has the advantage that
+
+       1. no other netgroup function can use the global netgroup state
+          since internal locking is used and
+       2. the function is implemented more efficiently than successive
+          calls to the other ‘set’/‘get’/‘endnetgrent’ functions.
+
+     Any of the pointers HOST, USER, or DOMAIN can be ‘NULL’ which means
+     any value is accepted in this position.  This is also true for the
+     name ‘-’ which should not match any other string otherwise.
+
+     The return value is ‘1’ if an entry matching the given triple is
+     found in the netgroup.  The return value is ‘0’ if the netgroup
+     itself is not found, the netgroup does not contain the triple or
+     internal errors occurred.
+
+
+File: libc.info,  Node: System Management,  Next: System Configuration,  Prev: Users and Groups,  Up: Top
+
+31 System Management
+********************
+
+This chapter describes facilities for controlling the system that
+underlies a process (including the operating system and hardware) and
+for getting information about it.  Anyone can generally use the
+informational facilities, but usually only a properly privileged process
+can make changes.
+
+* Menu:
+
+* Host Identification::         Determining the name of the machine.
+* Platform Type::               Determining operating system and basic
+                                  machine type
+* Filesystem Handling::         Controlling/querying mounts
+
+   To get information on parameters of the system that are built into
+the system, such as the maximum length of a filename, *note System
+Configuration::.
+
+
+File: libc.info,  Node: Host Identification,  Next: Platform Type,  Up: System Management
+
+31.1 Host Identification
+========================
+
+This section explains how to identify the particular system on which
+your program is running.  First, let’s review the various ways computer
+systems are named, which is a little complicated because of the history
+of the development of the Internet.
+
+   Every Unix system (also known as a host) has a host name, whether
+it’s connected to a network or not.  In its simplest form, as used
+before computer networks were an issue, it’s just a word like ‘chicken’.
+
+   But any system attached to the Internet or any network like it
+conforms to a more rigorous naming convention as part of the Domain Name
+System (DNS). In the DNS, every host name is composed of two parts:
+
+  1. hostname
+  2. domain name
+
+   You will note that “hostname” looks a lot like “host name”, but is
+not the same thing, and that people often incorrectly refer to entire
+host names as “domain names.”
+
+   In the DNS, the full host name is properly called the FQDN (Fully
+Qualified Domain Name) and consists of the hostname, then a period, then
+the domain name.  The domain name itself usually has multiple components
+separated by periods.  So for example, a system’s hostname may be
+‘chicken’ and its domain name might be ‘ai.mit.edu’, so its FQDN (which
+is its host name) is ‘chicken.ai.mit.edu’.
+
+   Adding to the confusion, though, is that the DNS is not the only name
+space in which a computer needs to be known.  Another name space is the
+NIS (aka YP) name space.  For NIS purposes, there is another domain
+name, which is called the NIS domain name or the YP domain name.  It
+need not have anything to do with the DNS domain name.
+
+   Confusing things even more is the fact that in the DNS, it is
+possible for multiple FQDNs to refer to the same system.  However, there
+is always exactly one of them that is the true host name, and it is
+called the canonical FQDN.
+
+   In some contexts, the host name is called a “node name.”
+
+   For more information on DNS host naming, see *note Host Names::.
+
+   Prototypes for these functions appear in ‘unistd.h’.
+
+   The programs ‘hostname’, ‘hostid’, and ‘domainname’ work by calling
+these functions.
+
+ -- Function: int gethostname (char *NAME, size_t SIZE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function returns the host name of the system on which it is
+     called, in the array NAME.  The SIZE argument specifies the size of
+     this array, in bytes.  Note that this is _not_ the DNS hostname.
+     If the system participates in the DNS, this is the FQDN (see
+     above).
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  In the GNU
+     C Library, ‘gethostname’ fails if SIZE is not large enough; then
+     you can try again with a larger array.  The following ‘errno’ error
+     condition is defined for this function:
+
+     ‘ENAMETOOLONG’
+          The SIZE argument is less than the size of the host name plus
+          one.
+
+     On some systems, there is a symbol for the maximum possible host
+     name length: ‘MAXHOSTNAMELEN’.  It is defined in ‘sys/param.h’.
+     But you can’t count on this to exist, so it is cleaner to handle
+     failure and try again.
+
+     ‘gethostname’ stores the beginning of the host name in NAME even if
+     the host name won’t entirely fit.  For some purposes, a truncated
+     host name is good enough.  If it is, you can ignore the error code.
+
+ -- Function: int sethostname (const char *NAME, size_t LENGTH)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘sethostname’ function sets the host name of the system that
+     calls it to NAME, a string with length LENGTH.  Only privileged
+     processes are permitted to do this.
+
+     Usually ‘sethostname’ gets called just once, at system boot time.
+     Often, the program that calls it sets it to the value it finds in
+     the file ‘/etc/hostname’.
+
+     Be sure to set the host name to the full host name, not just the
+     DNS hostname (see above).
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error condition is defined for this function:
+
+     ‘EPERM’
+          This process cannot set the host name because it is not
+          privileged.
+
+ -- Function: int getdomainnname (char *NAME, size_t LENGTH)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     ‘getdomainname’ returns the NIS (aka YP) domain name of the system
+     on which it is called.  Note that this is not the more popular DNS
+     domain name.  Get that with ‘gethostname’.
+
+     The specifics of this function are analogous to ‘gethostname’,
+     above.
+
+ -- Function: int setdomainname (const char *NAME, size_t LENGTH)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     ‘setdomainname’ sets the NIS (aka YP) domain name of the system on
+     which it is called.  Note that this is not the more popular DNS
+     domain name.  Set that with ‘sethostname’.
+
+     The specifics of this function are analogous to ‘sethostname’,
+     above.
+
+ -- Function: long int gethostid (void)
+
+     Preliminary: | MT-Safe hostid env locale | AS-Unsafe dlopen plugin
+     corrupt heap lock | AC-Unsafe lock corrupt mem fd | *Note POSIX
+     Safety Concepts::.
+
+     This function returns the “host ID” of the machine the program is
+     running on.  By convention, this is usually the primary Internet IP
+     address of that machine, converted to a ‘long int’.  However, on
+     some systems it is a meaningless but unique number which is
+     hard-coded for each machine.
+
+     This is not widely used.  It arose in BSD 4.2, but was dropped in
+     BSD 4.4.  It is not required by POSIX.
+
+     The proper way to query the IP address is to use ‘gethostbyname’ on
+     the results of ‘gethostname’.  For more information on IP
+     addresses, *Note Host Addresses::.
+
+ -- Function: int sethostid (long int ID)
+
+     Preliminary: | MT-Unsafe const:hostid | AS-Unsafe | AC-Unsafe
+     corrupt fd | *Note POSIX Safety Concepts::.
+
+     The ‘sethostid’ function sets the “host ID” of the host machine to
+     ID.  Only privileged processes are permitted to do this.  Usually
+     it happens just once, at system boot time.
+
+     The proper way to establish the primary IP address of a system is
+     to configure the IP address resolver to associate that IP address
+     with the system’s host name as returned by ‘gethostname’.  For
+     example, put a record for the system in ‘/etc/hosts’.
+
+     See ‘gethostid’ above for more information on host ids.
+
+     The return value is ‘0’ on success and ‘-1’ on failure.  The
+     following ‘errno’ error conditions are defined for this function:
+
+     ‘EPERM’
+          This process cannot set the host name because it is not
+          privileged.
+
+     ‘ENOSYS’
+          The operating system does not support setting the host ID. On
+          some systems, the host ID is a meaningless but unique number
+          hard-coded for each machine.
 
 
 File: libc.info,  Node: Platform Type,  Next: Filesystem Handling,  Prev: Host Identification,  Up: System Management
@@ -5142,7 +5381,7 @@ probably all programs should be covered.
      }
 
 
-File: libc.info,  Node: Threads,  Next: Internal Probes,  Prev: Debugging Support,  Up: Top
+File: libc.info,  Node: Threads,  Next: Dynamic Linker,  Prev: Debugging Support,  Up: Top
 
 35 Threads
 **********
@@ -5777,6 +6016,8 @@ not specified in the standard.
 * Waiting with Explicit Clocks::          Functions for waiting with an
                                           explicit clock specification.
 * Single-Threaded::                       Detecting single-threaded execution.
+* Restartable Sequences::                 Linux-specific restartable sequences
+                                          integration.
 
 
 File: libc.info,  Node: Default Thread Attributes,  Next: Initial Thread Signal Mask,  Up: Non-POSIX Extensions
@@ -5966,7 +6207,7 @@ explicit ‘clockid_t’ argument.
      ‘CLOCK_REALTIME’.
 
 
-File: libc.info,  Node: Single-Threaded,  Prev: Waiting with Explicit Clocks,  Up: Non-POSIX Extensions
+File: libc.info,  Node: Single-Threaded,  Next: Restartable Sequences,  Prev: Waiting with Explicit Clocks,  Up: Non-POSIX Extensions
 
 35.2.2.4 Detecting Single-Threaded Execution
 ............................................
@@ -6065,9 +6306,207 @@ and the application has no way of knowning that these threads are
 present.
 
 
-File: libc.info,  Node: Internal Probes,  Next: Tunables,  Prev: Threads,  Up: Top
+File: libc.info,  Node: Restartable Sequences,  Prev: Single-Threaded,  Up: Non-POSIX Extensions
 
-36 Internal probes
+35.2.2.5 Restartable Sequences
+..............................
+
+This section describes restartable sequences integration for the GNU C
+Library.  This functionality is only available on Linux.
+
+ -- Data Type: struct rseq
+
+     The type of the restartable sequences area.  Future versions of
+     Linux may add additional fields to the end of this structure.
+
+     Users need to obtain the address of the restartable sequences area
+     using the thread pointer and the ‘__rseq_offset’ variable,
+     described below.
+
+     One use of the restartable sequences area is to read the current
+     CPU number from its ‘cpu_id’ field, as an inline version of
+     ‘sched_getcpu’.  The GNU C Library sets the ‘cpu_id’ field to
+     ‘RSEQ_CPU_ID_REGISTRATION_FAILED’ if registration failed or was
+     explicitly disabled.
+
+     Furthermore, users can store the address of a ‘struct rseq_cs’
+     object into the ‘rseq_cs’ field of ‘struct rseq’, thus informing
+     the kernel that the thread enters a restartable sequence critical
+     section.  This pointer and the code areas it itself points to must
+     not be left pointing to memory areas which are freed or re-used.
+     Several approaches can guarantee this.  If the application or
+     library can guarantee that the memory used to hold the ‘struct
+     rseq_cs’ and the code areas it refers to are never freed or
+     re-used, no special action must be taken.  Else, before that memory
+     is re-used of freed, the application is responsible for setting the
+     ‘rseq_cs’ field to ‘NULL’ in each thread’s restartable sequence
+     area to guarantee that it does not leak dangling references.
+     Because the application does not typically have knowledge of
+     libraries’ use of restartable sequences, it is recommended that
+     libraries using restartable sequences which may end up freeing or
+     re-using their memory set the ‘rseq_cs’ field to ‘NULL’ before
+     returning from library functions which use restartable sequences.
+
+     The manual for the ‘rseq’ system call can be found at
+     <https://git.kernel.org/pub/scm/libs/librseq/librseq.git/tree/doc/man/rseq.2>.
+
+ -- Variable: int __rseq_offset
+
+     This variable contains the offset between the thread pointer (as
+     defined by ‘__builtin_thread_pointer’ or the thread pointer
+     register for the architecture) and the restartable sequences area.
+     This value is the same for all threads in the process.  If the
+     restartable sequences area is located at a lower address than the
+     location to which the thread pointer points, the value is negative.
+
+ -- Variable: unsigned int __rseq_size
+
+     This variable is either zero (if restartable sequence registration
+     failed or has been disabled) or the size of the restartable
+     sequence registration.  This can be different from the size of
+     ‘struct rseq’ if the kernel has extended the size of the
+     registration.  If registration is successful, ‘__rseq_size’ is at
+     least 32 (the initial size of ‘struct rseq’).
+
+ -- Variable: unsigned int __rseq_flags
+
+     The flags used during restartable sequence registration with the
+     kernel.  Currently zero.
+
+ -- Macro: int RSEQ_SIG
+
+     Each supported architecture provides a ‘RSEQ_SIG’ macro in
+     ‘sys/rseq.h’ which contains a signature.  That signature is
+     expected to be present in the code before each restartable
+     sequences abort handler.  Failure to provide the expected signature
+     may terminate the process with a segmentation fault.
+
+
+File: libc.info,  Node: Dynamic Linker,  Next: Internal Probes,  Prev: Threads,  Up: Top
+
+36 Dynamic Linker
+*****************
+
+The “dynamic linker” is responsible for loading dynamically linked
+programs and their dependencies (in the form of shared objects).  The
+dynamic linker in the GNU C Library also supports loading shared objects
+(such as plugins) later at run time.
+
+   Dynamic linkers are sometimes called “dynamic loaders”.
+
+* Menu:
+
+* Dynamic Linker Introspection::    Interfaces for querying mapping information.
+
+
+File: libc.info,  Node: Dynamic Linker Introspection,  Up: Dynamic Linker
+
+36.1 Dynamic Linker Introspection
+=================================
+
+The GNU C Library provides various functions for querying information
+from the dynamic linker.
+
+ -- Data Type: struct dl_find_object
+
+     This structure contains information about a main program or loaded
+     object.  The ‘_dl_find_object’ function uses it to return result
+     data to the caller.
+
+     ‘unsigned long long int dlfo_flags’
+          Currently unused and always 0.
+
+     ‘void *dlfo_map_start’
+          The start address of the inspected mapping.  This information
+          comes from the program header, so it follows its convention,
+          and the address is not necessarily page-aligned.
+
+     ‘void *dlfo_map_end’
+          The end address of the mapping.
+
+     ‘struct link_map *dlf_link_map’
+          This member contains a pointer to the link map of the object.
+
+     ‘struct link_map *dlf_link_map’
+          This member contains a pointer to the exception handling data
+          of the object.  See ‘DLFO_EH_SEGMENT_TYPE’ below.
+
+     This structure is a GNU extension.
+
+ -- Macro: int DLFO_STRUCT_HAS_EH_DBASE
+
+     On most targets, this macro is defined as ‘0’.  If it is defined to
+     ‘1’, ‘struct dl_find_object’ contains an additional member
+     ‘dlfo_eh_dbase’ of type ‘void *’.  It is the base address for
+     ‘DW_EH_PE_datarel’ DWARF encodings to this location.
+
+     This macro is a GNU extension.
+
+ -- Macro: int DLFO_STRUCT_HAS_EH_COUNT
+
+     On most targets, this macro is defined as ‘0’.  If it is defined to
+     ‘1’, ‘struct dl_find_object’ contains an additional member
+     ‘dlfo_eh_count’ of type ‘int’.  It is the number of exception
+     handling entries in the EH frame segment identified by the
+     ‘dlfo_eh_frame’ member.
+
+     This macro is a GNU extension.
+
+ -- Macro: int DLFO_EH_SEGMENT_TYPE
+
+     On targets using DWARF-based exception unwinding, this macro
+     expands to ‘PT_GNU_EH_FRAME’.  This indicates that ‘dlfo_eh_frame’
+     in ‘struct dl_find_object’ points to the ‘PT_GNU_EH_FRAME’ segment
+     of the object.  On targets that use other unwinding formats, the
+     macro expands to the program header type for the unwinding data.
+
+     This macro is a GNU extension.
+
+ -- Function: int _dl_find_object (void *ADDRESS, struct dl_find_object
+          *RESULT)
+
+     | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety Concepts::.
+
+     On success, this function returns 0 and writes about the object
+     surrounding the address to ‘*RESULT’.  On failure, -1 is returned.
+
+     The ADDRESS can be a code address or data address.  On
+     architectures using function descriptors, no attempt is made to
+     decode the function descriptor.  Depending on how these descriptors
+     are implemented, ‘_dl_find_object’ may return the object that
+     defines the function descriptor (and not the object that contains
+     the code implementing the function), or fail to find any object at
+     all.
+
+     On success ADDRESS is greater than or equal to
+     ‘RESULT->dlfo_map_start’ and less than ‘RESULT->dlfo_map_end’, that
+     is, the supplied code address is located within the reported
+     mapping.
+
+     This function returns a pointer to the unwinding information for
+     the object that contains the program code ADDRESS in
+     ‘RESULT->dlfo_eh_frame’.  If the platform uses DWARF unwinding
+     information, this is the in-memory address of the ‘PT_GNU_EH_FRAME’
+     segment.  See ‘DLFO_EH_SEGMENT_TYPE’ above.  In case ADDRESS
+     resides in an object that lacks unwinding information, the function
+     still returns 0, but sets ‘RESULT->dlfo_eh_frame’ to a null
+     pointer.
+
+     ‘_dl_find_object’ itself is thread-safe.  However, if the
+     application invokes ‘dlclose’ for the object that contains ADDRESS
+     concurrently with ‘_dl_find_object’ or after the call returns,
+     accessing the unwinding data for that object or the link map
+     (through ‘RESULT->dlfo_link_map’) is not safe.  Therefore, the
+     application needs to ensure by other means (e.g., by convention)
+     that ADDRESS remains a valid code address while the unwinding
+     information is processed.
+
+     This function is a GNU extension.
+
+
+File: libc.info,  Node: Internal Probes,  Next: Tunables,  Prev: Dynamic Linker,  Up: Top
+
+37 Internal probes
 ******************
 
 In order to aid in debugging and monitoring internal behavior, the GNU C
@@ -6089,7 +6528,7 @@ arguments.
 
 File: libc.info,  Node: Memory Allocation Probes,  Next: Non-local Goto Probes,  Up: Internal Probes
 
-36.1 Memory Allocation Probes
+37.1 Memory Allocation Probes
 =============================
 
 These probes are designed to signal relatively unusual situations within
@@ -6302,7 +6741,7 @@ the virtual memory subsystem of the GNU C Library.
 
 File: libc.info,  Node: Non-local Goto Probes,  Prev: Memory Allocation Probes,  Up: Internal Probes
 
-36.2 Non-local Goto Probes
+37.2 Non-local Goto Probes
 ==========================
 
 These probes are used to signal calls to ‘setjmp’, ‘sigsetjmp’,
@@ -6340,7 +6779,7 @@ These probes are used to signal calls to ‘setjmp’, ‘sigsetjmp’,
 
 File: libc.info,  Node: Tunables,  Next: Language Features,  Prev: Internal Probes,  Up: Top
 
-37 Tunables
+38 Tunables
 ***********
 
 “Tunables” are a feature in the GNU C Library that allows application
@@ -6417,7 +6856,7 @@ with minimum and maximum values:
 
 File: libc.info,  Node: Tunable names,  Next: Memory Allocation Tunables,  Up: Tunables
 
-37.1 Tunable names
+38.1 Tunable names
 ==================
 
 A tunable name is split into three components, a top namespace, a
@@ -6439,7 +6878,7 @@ namespace, tunable namespace and tunable name, separated by periods.
 
 File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunables,  Prev: Tunable names,  Up: Tunables
 
-37.2 Memory Allocation Tunables
+38.2 Memory Allocation Tunables
 ===============================
 
  -- Tunable namespace: glibc.malloc
@@ -6599,10 +7038,27 @@ File: libc.info,  Node: Memory Allocation Tunables,  Next: Dynamic Linking Tunab
      systems to the size passed to ‘malloc’ for the largest bin size to
      enable.
 
+ -- Tunable: glibc.malloc.hugetlb
+     This tunable controls the usage of Huge Pages on ‘malloc’ calls.
+     The default value is ‘0’, which disables any additional support on
+     ‘malloc’.
+
+     Setting its value to ‘1’ enables the use of ‘madvise’ with
+     ‘MADV_HUGEPAGE’ after memory allocation with ‘mmap’.  It is enabled
+     only if the system supports Transparent Huge Page (currently only
+     on Linux).
+
+     Setting its value to ‘2’ enables the use of Huge Page directly with
+     ‘mmap’ with the use of ‘MAP_HUGETLB’ flag.  The huge page size to
+     use will be the default one provided by the system.  A value larger
+     than ‘2’ specifies huge page size, which will be matched against
+     the system supported ones.  If provided value is invalid,
+     ‘MAP_HUGETLB’ will not be used.
+
 
 File: libc.info,  Node: Dynamic Linking Tunables,  Next: Elision Tunables,  Prev: Memory Allocation Tunables,  Up: Tunables
 
-37.3 Dynamic Linking Tunables
+38.3 Dynamic Linking Tunables
 =============================
 
  -- Tunable namespace: glibc.rtld
@@ -6649,12 +7105,12 @@ File: libc.info,  Node: Dynamic Linking Tunables,  Next: Elision Tunables,  Prev
      implements a topological sort through depth-first search, and does
      not exhibit the performance issues of ‘1’.
 
-     The default value of this tunable is ‘1’.
+     The default value of this tunable is ‘2’.
 
 
 File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: Dynamic Linking Tunables,  Up: Tunables
 
-37.4 Elision Tunables
+38.4 Elision Tunables
 =====================
 
  -- Tunable namespace: glibc.elision
@@ -6719,7 +7175,7 @@ File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: D
 
 File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunables,  Prev: Elision Tunables,  Up: Tunables
 
-37.5 POSIX Thread Tunables
+38.5 POSIX Thread Tunables
 ==========================
 
  -- Tunable namespace: glibc.pthread
@@ -6748,10 +7204,19 @@ File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunabl
      The value is measured in bytes.  The default is ‘41943040’ (fourty
      mibibytes).
 
+ -- Tunable: glibc.pthread.rseq
+     The ‘glibc.pthread.rseq’ tunable can be set to ‘0’, to disable
+     restartable sequences support in the GNU C Library.  This enables
+     applications to perform direct restartable sequence registration
+     with the kernel.  The default is ‘1’, which means that the GNU C
+     Library performs registration on behalf of the application.
+
+     Restartable sequences are a Linux-specific extension.
+
 
 File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
 
-37.6 Hardware Capability Tunables
+38.6 Hardware Capability Tunables
 =================================
 
  -- Tunable namespace: glibc.cpu
@@ -6858,7 +7323,7 @@ File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tuna
 
 File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tunables,  Up: Tunables
 
-37.7 Memory Related Tunables
+38.7 Memory Related Tunables
 ============================
 
  -- Tunable namespace: glibc.mem
@@ -7112,368 +7577,4 @@ Defining and using a variadic function involves three steps:
 			  variable arguments functions.
 * Argument Macros::      Detailed specification of the macros
         		  for accessing variable arguments.
-
-
-File: libc.info,  Node: Variadic Prototypes,  Next: Receiving Arguments,  Up: How Variadic
-
-A.2.2.1 Syntax for Variable Arguments
-.....................................
-
-A function that accepts a variable number of arguments must be declared
-with a prototype that says so.  You write the fixed arguments as usual,
-and then tack on ‘...’ to indicate the possibility of additional
-arguments.  The syntax of ISO C requires at least one fixed argument
-before the ‘...’.  For example,
-
-     int
-     func (const char *a, int b, ...)
-     {
-       ...
-     }
-
-defines a function ‘func’ which returns an ‘int’ and takes two required
-arguments, a ‘const char *’ and an ‘int’.  These are followed by any
-number of anonymous arguments.
-
-   *Portability note:* For some C compilers, the last required argument
-must not be declared ‘register’ in the function definition.
-Furthermore, this argument’s type must be “self-promoting”: that is, the
-default promotions must not change its type.  This rules out array and
-function types, as well as ‘float’, ‘char’ (whether signed or not) and
-‘short int’ (whether signed or not).  This is actually an ISO C
-requirement.
-
-
-File: libc.info,  Node: Receiving Arguments,  Next: How Many Arguments,  Prev: Variadic Prototypes,  Up: How Variadic
-
-A.2.2.2 Receiving the Argument Values
-.....................................
-
-Ordinary fixed arguments have individual names, and you can use these
-names to access their values.  But optional arguments have no
-names—nothing but ‘...’.  How can you access them?
-
-   The only way to access them is sequentially, in the order they were
-written, and you must use special macros from ‘stdarg.h’ in the
-following three step process:
-
-  1. You initialize an argument pointer variable of type ‘va_list’ using
-     ‘va_start’.  The argument pointer when initialized points to the
-     first optional argument.
-
-  2. You access the optional arguments by successive calls to ‘va_arg’.
-     The first call to ‘va_arg’ gives you the first optional argument,
-     the next call gives you the second, and so on.
-
-     You can stop at any time if you wish to ignore any remaining
-     optional arguments.  It is perfectly all right for a function to
-     access fewer arguments than were supplied in the call, but you will
-     get garbage values if you try to access too many arguments.
-
-  3. You indicate that you are finished with the argument pointer
-     variable by calling ‘va_end’.
-
-     (In practice, with most C compilers, calling ‘va_end’ does nothing.
-     This is always true in the GNU C compiler.  But you might as well
-     call ‘va_end’ just in case your program is someday compiled with a
-     peculiar compiler.)
-
-   *Note Argument Macros::, for the full definitions of ‘va_start’,
-‘va_arg’ and ‘va_end’.
-
-   Steps 1 and 3 must be performed in the function that accepts the
-optional arguments.  However, you can pass the ‘va_list’ variable as an
-argument to another function and perform all or part of step 2 there.
-
-   You can perform the entire sequence of three steps multiple times
-within a single function invocation.  If you want to ignore the optional
-arguments, you can do these steps zero times.
-
-   You can have more than one argument pointer variable if you like.
-You can initialize each variable with ‘va_start’ when you wish, and then
-you can fetch arguments with each argument pointer as you wish.  Each
-argument pointer variable will sequence through the same set of argument
-values, but at its own pace.
-
-   *Portability note:* With some compilers, once you pass an argument
-pointer value to a subroutine, you must not keep using the same argument
-pointer value after that subroutine returns.  For full portability, you
-should just pass it to ‘va_end’.  This is actually an ISO C requirement,
-but most ANSI C compilers work happily regardless.
-
-
-File: libc.info,  Node: How Many Arguments,  Next: Calling Variadics,  Prev: Receiving Arguments,  Up: How Variadic
-
-A.2.2.3 How Many Arguments Were Supplied
-........................................
-
-There is no general way for a function to determine the number and type
-of the optional arguments it was called with.  So whoever designs the
-function typically designs a convention for the caller to specify the
-number and type of arguments.  It is up to you to define an appropriate
-calling convention for each variadic function, and write all calls
-accordingly.
-
-   One kind of calling convention is to pass the number of optional
-arguments as one of the fixed arguments.  This convention works provided
-all of the optional arguments are of the same type.
-
-   A similar alternative is to have one of the required arguments be a
-bit mask, with a bit for each possible purpose for which an optional
-argument might be supplied.  You would test the bits in a predefined
-sequence; if the bit is set, fetch the value of the next argument,
-otherwise use a default value.
-
-   A required argument can be used as a pattern to specify both the
-number and types of the optional arguments.  The format string argument
-to ‘printf’ is one example of this (*note Formatted Output Functions::).
-
-   Another possibility is to pass an “end marker” value as the last
-optional argument.  For example, for a function that manipulates an
-arbitrary number of pointer arguments, a null pointer might indicate the
-end of the argument list.  (This assumes that a null pointer isn’t
-otherwise meaningful to the function.)  The ‘execl’ function works in
-just this way; see *note Executing a File::.
-
-
-File: libc.info,  Node: Calling Variadics,  Next: Argument Macros,  Prev: How Many Arguments,  Up: How Variadic
-
-A.2.2.4 Calling Variadic Functions
-..................................
-
-You don’t have to do anything special to call a variadic function.  Just
-put the arguments (required arguments, followed by optional ones) inside
-parentheses, separated by commas, as usual.  But you must declare the
-function with a prototype and know how the argument values are
-converted.
-
-   In principle, functions that are _defined_ to be variadic must also
-be _declared_ to be variadic using a function prototype whenever you
-call them.  (*Note Variadic Prototypes::, for how.)  This is because
-some C compilers use a different calling convention to pass the same set
-of argument values to a function depending on whether that function
-takes variable arguments or fixed arguments.
-
-   In practice, the GNU C compiler always passes a given set of argument
-types in the same way regardless of whether they are optional or
-required.  So, as long as the argument types are self-promoting, you can
-safely omit declaring them.  Usually it is a good idea to declare the
-argument types for variadic functions, and indeed for all functions.
-But there are a few functions which it is extremely convenient not to
-have to declare as variadic—for example, ‘open’ and ‘printf’.
-
-   Since the prototype doesn’t specify types for optional arguments, in
-a call to a variadic function the “default argument promotions” are
-performed on the optional argument values.  This means the objects of
-type ‘char’ or ‘short int’ (whether signed or not) are promoted to
-either ‘int’ or ‘unsigned int’, as appropriate; and that objects of type
-‘float’ are promoted to type ‘double’.  So, if the caller passes a
-‘char’ as an optional argument, it is promoted to an ‘int’, and the
-function can access it with ‘va_arg (AP, int)’.
-
-   Conversion of the required arguments is controlled by the function
-prototype in the usual way: the argument expression is converted to the
-declared argument type as if it were being assigned to a variable of
-that type.
-
-
-File: libc.info,  Node: Argument Macros,  Prev: Calling Variadics,  Up: How Variadic
-
-A.2.2.5 Argument Access Macros
-..............................
-
-Here are descriptions of the macros used to retrieve variable arguments.
-These macros are defined in the header file ‘stdarg.h’.
-
- -- Data Type: va_list
-
-     The type ‘va_list’ is used for argument pointer variables.
-
- -- Macro: void va_start (va_list AP, LAST-REQUIRED)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This macro initializes the argument pointer variable AP to point to
-     the first of the optional arguments of the current function;
-     LAST-REQUIRED must be the last required argument to the function.
-
- -- Macro: TYPE va_arg (va_list AP, TYPE)
-
-     Preliminary: | MT-Safe race:ap | AS-Safe | AC-Unsafe corrupt |
-     *Note POSIX Safety Concepts::.
-
-     The ‘va_arg’ macro returns the value of the next optional argument,
-     and modifies the value of AP to point to the subsequent argument.
-     Thus, successive uses of ‘va_arg’ return successive optional
-     arguments.
-
-     The type of the value returned by ‘va_arg’ is TYPE as specified in
-     the call.  TYPE must be a self-promoting type (not ‘char’ or ‘short
-     int’ or ‘float’) that matches the type of the actual argument.
-
- -- Macro: void va_end (va_list AP)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This ends the use of AP.  After a ‘va_end’ call, further ‘va_arg’
-     calls with the same AP may not work.  You should invoke ‘va_end’
-     before returning from the function in which ‘va_start’ was invoked
-     with the same AP argument.
-
-     In the GNU C Library, ‘va_end’ does nothing, and you need not ever
-     use it except for reasons of portability.
-
-   Sometimes it is necessary to parse the list of parameters more than
-once or one wants to remember a certain position in the parameter list.
-To do this, one will have to make a copy of the current value of the
-argument.  But ‘va_list’ is an opaque type and one cannot necessarily
-assign the value of one variable of type ‘va_list’ to another variable
-of the same type.
-
- -- Macro: void va_copy (va_list DEST, va_list SRC)
- -- Macro: void __va_copy (va_list DEST, va_list SRC)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘va_copy’ macro allows copying of objects of type ‘va_list’
-     even if this is not an integral type.  The argument pointer in DEST
-     is initialized to point to the same argument as the pointer in SRC.
-
-     ‘va_copy’ was added in ISO C99.  When building for strict
-     conformance to ISO C90 (‘gcc -std=c90’), it is not available.  GCC
-     provides ‘__va_copy’, as an extension, in any standards mode;
-     before GCC 3.0, it was the only macro for this functionality.
-
-     These macros are no longer provided by the GNU C Library, but
-     rather by the compiler.
-
-   If you want to use ‘va_copy’ and be portable to pre-C99 systems, you
-should always be prepared for the possibility that this macro will not
-be available.  On architectures where a simple assignment is invalid,
-hopefully ‘va_copy’ _will_ be available, so one should always write
-something like this if concerned about pre-C99 portability:
-
-     {
-       va_list ap, save;
-       ...
-     #ifdef va_copy
-       va_copy (save, ap);
-     #else
-       save = ap;
-     #endif
-       ...
-     }
-
-
-File: libc.info,  Node: Variadic Example,  Prev: How Variadic,  Up: Variadic Functions
-
-A.2.3 Example of a Variadic Function
-------------------------------------
-
-Here is a complete sample function that accepts a variable number of
-arguments.  The first argument to the function is the count of remaining
-arguments, which are added up and the result returned.  While trivial,
-this function is sufficient to illustrate how to use the variable
-arguments facility.
-
-
-     #include <stdarg.h>
-     #include <stdio.h>
-
-     int
-     add_em_up (int count,...)
-     {
-       va_list ap;
-       int i, sum;
-
-       va_start (ap, count);         /* Initialize the argument list. */
-
-       sum = 0;
-       for (i = 0; i < count; i++)
-         sum += va_arg (ap, int);    /* Get the next argument value. */
-
-       va_end (ap);                  /* Clean up. */
-       return sum;
-     }
-
-     int
-     main (void)
-     {
-       /* This call prints 16. */
-       printf ("%d\n", add_em_up (3, 5, 5, 6));
-
-       /* This call prints 55. */
-       printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-
-       return 0;
-     }
-
-
-File: libc.info,  Node: Null Pointer Constant,  Next: Important Data Types,  Prev: Variadic Functions,  Up: Language Features
-
-A.3 Null Pointer Constant
-=========================
-
-The null pointer constant is guaranteed not to point to any real object.
-You can assign it to any pointer variable since it has type ‘void *’.
-The preferred way to write a null pointer constant is with ‘NULL’.
-
- -- Macro: void * NULL
-
-     This is a null pointer constant.
-
-   You can also use ‘0’ or ‘(void *)0’ as a null pointer constant, but
-using ‘NULL’ is cleaner because it makes the purpose of the constant
-more evident.
-
-   If you use the null pointer constant as a function argument, then for
-complete portability you should make sure that the function has a
-prototype declaration.  Otherwise, if the target machine has two
-different pointer representations, the compiler won’t know which
-representation to use for that argument.  You can avoid the problem by
-explicitly casting the constant to the proper pointer type, but we
-recommend instead adding a prototype for the function you are calling.
-
-
-File: libc.info,  Node: Important Data Types,  Next: Data Type Measurements,  Prev: Null Pointer Constant,  Up: Language Features
-
-A.4 Important Data Types
-========================
-
-The result of subtracting two pointers in C is always an integer, but
-the precise data type varies from C compiler to C compiler.  Likewise,
-the data type of the result of ‘sizeof’ also varies between compilers.
-ISO C defines standard aliases for these two types, so you can refer to
-them in a portable fashion.  They are defined in the header file
-‘stddef.h’.
-
- -- Data Type: ptrdiff_t
-
-     This is the signed integer type of the result of subtracting two
-     pointers.  For example, with the declaration ‘char *p1, *p2;’, the
-     expression ‘p2 - p1’ is of type ‘ptrdiff_t’.  This will probably be
-     one of the standard signed integer types (‘short int’, ‘int’ or
-     ‘long int’), but might be a nonstandard type that exists only for
-     this purpose.
-
- -- Data Type: size_t
-
-     This is an unsigned integer type used to represent the sizes of
-     objects.  The result of the ‘sizeof’ operator is of this type, and
-     functions such as ‘malloc’ (*note Unconstrained Allocation::) and
-     ‘memcpy’ (*note Copying Strings and Arrays::) accept arguments of
-     this type to specify object sizes.  On systems using the GNU C
-     Library, this will be ‘unsigned int’ or ‘unsigned long int’.
-
-     *Usage Note:* ‘size_t’ is the preferred way to declare any
-     arguments or variables that hold the size of an object.
-
-   *Compatibility Note:* Implementations of C before the advent of ISO C
-generally used ‘unsigned int’ for representing object sizes and ‘int’
-for pointer subtraction results.  They did not necessarily define either
-‘size_t’ or ‘ptrdiff_t’.  Unix systems did define ‘size_t’, in
-‘sys/types.h’, but the definition was usually a signed type.
 

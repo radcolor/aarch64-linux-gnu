@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.

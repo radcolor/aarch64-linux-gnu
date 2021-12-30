@@ -35,7 +35,7 @@ _GLIBCXX_BEGIN_NAMESPACE_CXX11
   template<typename, typename>
     class basic_regex;
 
-  template<typename, typename>
+  template<typename _Bi_iter, typename _Alloc>
     class match_results;
 
 _GLIBCXX_END_NAMESPACE_CXX11
@@ -2109,7 +2109,7 @@ _GLIBCXX_BEGIN_NAMESPACE_CXX11
       _M_suffix()
       { return _Unchecked::operator[](_Unchecked::size() - 1); }
 
-      _Bi_iter _M_begin;
+      _Bi_iter _M_begin {};
       /// @endcond
     };
 
@@ -2488,6 +2488,15 @@ _GLIBCXX_END_NAMESPACE_CXX11
 		 = regex_constants::match_default) = delete;
 
   // std [28.11.4] Function template regex_replace
+
+  template<typename _Out_iter, typename _Bi_iter,
+	   typename _Rx_traits, typename _Ch_type>
+    _Out_iter
+    __regex_replace(_Out_iter __out, _Bi_iter __first, _Bi_iter __last,
+		    const basic_regex<_Ch_type, _Rx_traits>& __e,
+		    const _Ch_type* __fmt, size_t __len,
+		    regex_constants::match_flag_type __flags);
+
   /**
    * @brief Search for a regular expression within a range for multiple times,
    and replace the matched parts through filling a format string.
@@ -2511,7 +2520,8 @@ _GLIBCXX_END_NAMESPACE_CXX11
 		  regex_constants::match_flag_type __flags
 		  = regex_constants::match_default)
     {
-      return regex_replace(__out, __first, __last, __e, __fmt.c_str(), __flags);
+      return std::__regex_replace(__out, __first, __last, __e, __fmt.c_str(),
+				  __fmt.length(), __flags);
     }
 
   /**
@@ -2534,7 +2544,13 @@ _GLIBCXX_END_NAMESPACE_CXX11
 		  const basic_regex<_Ch_type, _Rx_traits>& __e,
 		  const _Ch_type* __fmt,
 		  regex_constants::match_flag_type __flags
-		  = regex_constants::match_default);
+		  = regex_constants::match_default)
+    {
+      return std::__regex_replace(__out, __first, __last, __e, __fmt,
+				  char_traits<_Ch_type>::length(__fmt),
+				  __flags);
+    }
+
 
   /**
    * @brief Search for a regular expression within a string for multiple times,

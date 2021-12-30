@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2156,6 +2161,94 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Termination Signals,  Next: Alarm Signals,  Prev: Program Error Signals,  Up: Standard Signals
+
+24.2.2 Termination Signals
+--------------------------
+
+These signals are all used to tell a process to terminate, in one way or
+another.  They have different names because they’re used for slightly
+different purposes, and programs might want to handle them differently.
+
+   The reason for handling these signals is usually so your program can
+tidy up as appropriate before actually terminating.  For example, you
+might want to save state information, delete temporary files, or restore
+the previous terminal modes.  Such a handler should end by specifying
+the default action for the signal that happened and then reraising it;
+this will cause the program to terminate with that signal, as if it had
+not had a handler.  (*Note Termination in Handler::.)
+
+   The (obvious) default action for all of these signals is to cause the
+process to terminate.
+
+ -- Macro: int SIGTERM
+
+     The ‘SIGTERM’ signal is a generic signal used to cause program
+     termination.  Unlike ‘SIGKILL’, this signal can be blocked,
+     handled, and ignored.  It is the normal way to politely ask a
+     program to terminate.
+
+     The shell command ‘kill’ generates ‘SIGTERM’ by default.
+
+ -- Macro: int SIGINT
+
+     The ‘SIGINT’ (“program interrupt”) signal is sent when the user
+     types the INTR character (normally ‘C-c’).  *Note Special
+     Characters::, for information about terminal driver support for
+     ‘C-c’.
+
+ -- Macro: int SIGQUIT
+
+     The ‘SIGQUIT’ signal is similar to ‘SIGINT’, except that it’s
+     controlled by a different key—the QUIT character, usually ‘C-\’—and
+     produces a core dump when it terminates the process, just like a
+     program error signal.  You can think of this as a program error
+     condition “detected” by the user.
+
+     *Note Program Error Signals::, for information about core dumps.
+     *Note Special Characters::, for information about terminal driver
+     support.
+
+     Certain kinds of cleanups are best omitted in handling ‘SIGQUIT’.
+     For example, if the program creates temporary files, it should
+     handle the other termination requests by deleting the temporary
+     files.  But it is better for ‘SIGQUIT’ not to delete them, so that
+     the user can examine them in conjunction with the core dump.
+
+ -- Macro: int SIGKILL
+
+     The ‘SIGKILL’ signal is used to cause immediate program
+     termination.  It cannot be handled or ignored, and is therefore
+     always fatal.  It is also not possible to block this signal.
+
+     This signal is usually generated only by explicit request.  Since
+     it cannot be handled, you should generate it only as a last resort,
+     after first trying a less drastic method such as ‘C-c’ or
+     ‘SIGTERM’.  If a process does not respond to any other termination
+     signals, sending it a ‘SIGKILL’ signal will almost always cause it
+     to go away.
+
+     In fact, if ‘SIGKILL’ fails to terminate a process, that by itself
+     constitutes an operating system bug which you should report.
+
+     The system will generate ‘SIGKILL’ for a process itself under some
+     unusual conditions where the program cannot possibly continue to
+     run (even to run a signal handler).
+
+ -- Macro: int SIGHUP
+
+     The ‘SIGHUP’ (“hang-up”) signal is used to report that the user’s
+     terminal is disconnected, perhaps because a network or telephone
+     connection was broken.  For more information about this, see *note
+     Control Modes::.
+
+     This signal is also used to report the termination of the
+     controlling process on a terminal to jobs associated with that
+     session; this termination effectively disconnects all processes in
+     the session from the controlling terminal.  For more information,
+     see *note Termination Internals::.
 
 
 File: libc.info,  Node: Alarm Signals,  Next: Asynchronous I/O Signals,  Prev: Termination Signals,  Up: Standard Signals
@@ -7474,136 +7567,4 @@ environment variable names for some other purpose.
      If this environment variable is defined, it suppresses the usual
      reordering of command line arguments by ‘getopt’ and ‘argp_parse’.
      *Note Argument Syntax::.
-
-
-File: libc.info,  Node: Auxiliary Vector,  Next: System Calls,  Prev: Environment Variables,  Up: Program Basics
-
-25.5 Auxiliary Vector
-=====================
-
-When a program is executed, it receives information from the operating
-system about the environment in which it is operating.  The form of this
-information is a table of key-value pairs, where the keys are from the
-set of ‘AT_’ values in ‘elf.h’.  Some of the data is provided by the
-kernel for libc consumption, and may be obtained by ordinary interfaces,
-such as ‘sysconf’.  However, on a platform-by-platform basis there may
-be information that is not available any other way.
-
-25.5.1 Definition of ‘getauxval’
---------------------------------
-
- -- Function: unsigned long int getauxval (unsigned long int TYPE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function is used to inquire about the entries in the auxiliary
-     vector.  The TYPE argument should be one of the ‘AT_’ symbols
-     defined in ‘elf.h’.  If a matching entry is found, the value is
-     returned; if the entry is not found, zero is returned and ‘errno’
-     is set to ‘ENOENT’.
-
-   For some platforms, the key ‘AT_HWCAP’ is the easiest way to inquire
-about any instruction set extensions available at runtime.  In this
-case, there will (of necessity) be a platform-specific set of ‘HWCAP_’
-values masked together that describe the capabilities of the cpu on
-which the program is being executed.
-
-
-File: libc.info,  Node: System Calls,  Next: Program Termination,  Prev: Auxiliary Vector,  Up: Program Basics
-
-25.6 System Calls
-=================
-
-A system call is a request for service that a program makes of the
-kernel.  The service is generally something that only the kernel has the
-privilege to do, such as doing I/O. Programmers don’t normally need to
-be concerned with system calls because there are functions in the GNU C
-Library to do virtually everything that system calls do.  These
-functions work by making system calls themselves.  For example, there is
-a system call that changes the permissions of a file, but you don’t need
-to know about it because you can just use the GNU C Library’s ‘chmod’
-function.
-
-   System calls are sometimes called kernel calls.
-
-   However, there are times when you want to make a system call
-explicitly, and for that, the GNU C Library provides the ‘syscall’
-function.  ‘syscall’ is harder to use and less portable than functions
-like ‘chmod’, but easier and more portable than coding the system call
-in assembler instructions.
-
-   ‘syscall’ is most useful when you are working with a system call
-which is special to your system or is newer than the GNU C Library you
-are using.  ‘syscall’ is implemented in an entirely generic way; the
-function does not know anything about what a particular system call does
-or even if it is valid.
-
-   The description of ‘syscall’ in this section assumes a certain
-protocol for system calls on the various platforms on which the GNU C
-Library runs.  That protocol is not defined by any strong authority, but
-we won’t describe it here either because anyone who is coding ‘syscall’
-probably won’t accept anything less than kernel and C library source
-code as a specification of the interface between them anyway.
-
-   ‘syscall’ is declared in ‘unistd.h’.
-
- -- Function: long int syscall (long int SYSNO, ...)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘syscall’ performs a generic system call.
-
-     SYSNO is the system call number.  Each kind of system call is
-     identified by a number.  Macros for all the possible system call
-     numbers are defined in ‘sys/syscall.h’
-
-     The remaining arguments are the arguments for the system call, in
-     order, and their meanings depend on the kind of system call.  Each
-     kind of system call has a definite number of arguments, from zero
-     to five.  If you code more arguments than the system call takes,
-     the extra ones to the right are ignored.
-
-     The return value is the return value from the system call, unless
-     the system call failed.  In that case, ‘syscall’ returns ‘-1’ and
-     sets ‘errno’ to an error code that the system call returned.  Note
-     that system calls do not return ‘-1’ when they succeed.
-
-     If you specify an invalid SYSNO, ‘syscall’ returns ‘-1’ with
-     ‘errno’ = ‘ENOSYS’.
-
-     Example:
-
-
-          #include <unistd.h>
-          #include <sys/syscall.h>
-          #include <errno.h>
-
-          ...
-
-          int rc;
-
-          rc = syscall(SYS_chmod, "/etc/passwd", 0444);
-
-          if (rc == -1)
-             fprintf(stderr, "chmod failed, errno = %d\n", errno);
-
-
-     This, if all the compatibility stars are aligned, is equivalent to
-     the following preferable code:
-
-
-          #include <sys/types.h>
-          #include <sys/stat.h>
-          #include <errno.h>
-
-          ...
-
-          int rc;
-
-          rc = chmod("/etc/passwd", 0444);
-          if (rc == -1)
-             fprintf(stderr, "chmod failed, errno = %d\n", errno);
-
 

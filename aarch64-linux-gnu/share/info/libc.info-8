@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2156,6 +2161,85 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Example Receiver,  Prev: Datagram Example,  Up: Datagrams
+
+16.10.4 Example of Reading Datagrams
+------------------------------------
+
+Here is the client program corresponding to the server above.
+
+   It sends a datagram to the server and then waits for a reply.  Notice
+that the socket for the client (as well as for the server) in this
+example has to be given a name.  This is so that the server can direct a
+message back to the client.  Since the socket has no associated
+connection state, the only way the server can do this is by referencing
+the name of the client.
+
+
+     #include <stdio.h>
+     #include <errno.h>
+     #include <unistd.h>
+     #include <stdlib.h>
+     #include <sys/socket.h>
+     #include <sys/un.h>
+
+     #define SERVER  "/tmp/serversocket"
+     #define CLIENT  "/tmp/mysocket"
+     #define MAXMSG  512
+     #define MESSAGE "Yow!!! Are we having fun yet?!?"
+
+     int
+     main (void)
+     {
+       extern int make_named_socket (const char *name);
+       int sock;
+       char message[MAXMSG];
+       struct sockaddr_un name;
+       size_t size;
+       int nbytes;
+
+       /* Make the socket. */
+       sock = make_named_socket (CLIENT);
+
+       /* Initialize the server socket address. */
+       name.sun_family = AF_LOCAL;
+       strcpy (name.sun_path, SERVER);
+       size = strlen (name.sun_path) + sizeof (name.sun_family);
+
+       /* Send the datagram. */
+       nbytes = sendto (sock, MESSAGE, strlen (MESSAGE) + 1, 0,
+                        (struct sockaddr *) & name, size);
+       if (nbytes < 0)
+         {
+           perror ("sendto (client)");
+           exit (EXIT_FAILURE);
+         }
+
+       /* Wait for a reply. */
+       nbytes = recvfrom (sock, message, MAXMSG, 0, NULL, 0);
+       if (nbytes < 0)
+         {
+           perror ("recfrom (client)");
+           exit (EXIT_FAILURE);
+         }
+
+       /* Print a diagnostic message. */
+       fprintf (stderr, "Client: got message: %s\n", message);
+
+       /* Clean up. */
+       remove (CLIENT);
+       close (sock);
+     }
+
+   Keep in mind that datagram socket communications are unreliable.  In
+this example, the client program waits indefinitely if the message never
+reaches the server or if the server’s response never comes back.  It’s
+up to the user running the program to kill and restart it if desired.  A
+more automatic solution could be to use ‘select’ (*note Waiting for
+I/O::) to establish a timeout period for the reply, and in case of
+timeout either re-send the message or shut down the socket and exit.
 
 
 File: libc.info,  Node: Inetd,  Next: Socket Options,  Prev: Datagrams,  Up: Sockets

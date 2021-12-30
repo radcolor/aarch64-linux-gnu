@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2158,6 +2163,370 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: Variadic Prototypes,  Next: Receiving Arguments,  Up: How Variadic
+
+A.2.2.1 Syntax for Variable Arguments
+.....................................
+
+A function that accepts a variable number of arguments must be declared
+with a prototype that says so.  You write the fixed arguments as usual,
+and then tack on ‘...’ to indicate the possibility of additional
+arguments.  The syntax of ISO C requires at least one fixed argument
+before the ‘...’.  For example,
+
+     int
+     func (const char *a, int b, ...)
+     {
+       ...
+     }
+
+defines a function ‘func’ which returns an ‘int’ and takes two required
+arguments, a ‘const char *’ and an ‘int’.  These are followed by any
+number of anonymous arguments.
+
+   *Portability note:* For some C compilers, the last required argument
+must not be declared ‘register’ in the function definition.
+Furthermore, this argument’s type must be “self-promoting”: that is, the
+default promotions must not change its type.  This rules out array and
+function types, as well as ‘float’, ‘char’ (whether signed or not) and
+‘short int’ (whether signed or not).  This is actually an ISO C
+requirement.
+
+
+File: libc.info,  Node: Receiving Arguments,  Next: How Many Arguments,  Prev: Variadic Prototypes,  Up: How Variadic
+
+A.2.2.2 Receiving the Argument Values
+.....................................
+
+Ordinary fixed arguments have individual names, and you can use these
+names to access their values.  But optional arguments have no
+names—nothing but ‘...’.  How can you access them?
+
+   The only way to access them is sequentially, in the order they were
+written, and you must use special macros from ‘stdarg.h’ in the
+following three step process:
+
+  1. You initialize an argument pointer variable of type ‘va_list’ using
+     ‘va_start’.  The argument pointer when initialized points to the
+     first optional argument.
+
+  2. You access the optional arguments by successive calls to ‘va_arg’.
+     The first call to ‘va_arg’ gives you the first optional argument,
+     the next call gives you the second, and so on.
+
+     You can stop at any time if you wish to ignore any remaining
+     optional arguments.  It is perfectly all right for a function to
+     access fewer arguments than were supplied in the call, but you will
+     get garbage values if you try to access too many arguments.
+
+  3. You indicate that you are finished with the argument pointer
+     variable by calling ‘va_end’.
+
+     (In practice, with most C compilers, calling ‘va_end’ does nothing.
+     This is always true in the GNU C compiler.  But you might as well
+     call ‘va_end’ just in case your program is someday compiled with a
+     peculiar compiler.)
+
+   *Note Argument Macros::, for the full definitions of ‘va_start’,
+‘va_arg’ and ‘va_end’.
+
+   Steps 1 and 3 must be performed in the function that accepts the
+optional arguments.  However, you can pass the ‘va_list’ variable as an
+argument to another function and perform all or part of step 2 there.
+
+   You can perform the entire sequence of three steps multiple times
+within a single function invocation.  If you want to ignore the optional
+arguments, you can do these steps zero times.
+
+   You can have more than one argument pointer variable if you like.
+You can initialize each variable with ‘va_start’ when you wish, and then
+you can fetch arguments with each argument pointer as you wish.  Each
+argument pointer variable will sequence through the same set of argument
+values, but at its own pace.
+
+   *Portability note:* With some compilers, once you pass an argument
+pointer value to a subroutine, you must not keep using the same argument
+pointer value after that subroutine returns.  For full portability, you
+should just pass it to ‘va_end’.  This is actually an ISO C requirement,
+but most ANSI C compilers work happily regardless.
+
+
+File: libc.info,  Node: How Many Arguments,  Next: Calling Variadics,  Prev: Receiving Arguments,  Up: How Variadic
+
+A.2.2.3 How Many Arguments Were Supplied
+........................................
+
+There is no general way for a function to determine the number and type
+of the optional arguments it was called with.  So whoever designs the
+function typically designs a convention for the caller to specify the
+number and type of arguments.  It is up to you to define an appropriate
+calling convention for each variadic function, and write all calls
+accordingly.
+
+   One kind of calling convention is to pass the number of optional
+arguments as one of the fixed arguments.  This convention works provided
+all of the optional arguments are of the same type.
+
+   A similar alternative is to have one of the required arguments be a
+bit mask, with a bit for each possible purpose for which an optional
+argument might be supplied.  You would test the bits in a predefined
+sequence; if the bit is set, fetch the value of the next argument,
+otherwise use a default value.
+
+   A required argument can be used as a pattern to specify both the
+number and types of the optional arguments.  The format string argument
+to ‘printf’ is one example of this (*note Formatted Output Functions::).
+
+   Another possibility is to pass an “end marker” value as the last
+optional argument.  For example, for a function that manipulates an
+arbitrary number of pointer arguments, a null pointer might indicate the
+end of the argument list.  (This assumes that a null pointer isn’t
+otherwise meaningful to the function.)  The ‘execl’ function works in
+just this way; see *note Executing a File::.
+
+
+File: libc.info,  Node: Calling Variadics,  Next: Argument Macros,  Prev: How Many Arguments,  Up: How Variadic
+
+A.2.2.4 Calling Variadic Functions
+..................................
+
+You don’t have to do anything special to call a variadic function.  Just
+put the arguments (required arguments, followed by optional ones) inside
+parentheses, separated by commas, as usual.  But you must declare the
+function with a prototype and know how the argument values are
+converted.
+
+   In principle, functions that are _defined_ to be variadic must also
+be _declared_ to be variadic using a function prototype whenever you
+call them.  (*Note Variadic Prototypes::, for how.)  This is because
+some C compilers use a different calling convention to pass the same set
+of argument values to a function depending on whether that function
+takes variable arguments or fixed arguments.
+
+   In practice, the GNU C compiler always passes a given set of argument
+types in the same way regardless of whether they are optional or
+required.  So, as long as the argument types are self-promoting, you can
+safely omit declaring them.  Usually it is a good idea to declare the
+argument types for variadic functions, and indeed for all functions.
+But there are a few functions which it is extremely convenient not to
+have to declare as variadic—for example, ‘open’ and ‘printf’.
+
+   Since the prototype doesn’t specify types for optional arguments, in
+a call to a variadic function the “default argument promotions” are
+performed on the optional argument values.  This means the objects of
+type ‘char’ or ‘short int’ (whether signed or not) are promoted to
+either ‘int’ or ‘unsigned int’, as appropriate; and that objects of type
+‘float’ are promoted to type ‘double’.  So, if the caller passes a
+‘char’ as an optional argument, it is promoted to an ‘int’, and the
+function can access it with ‘va_arg (AP, int)’.
+
+   Conversion of the required arguments is controlled by the function
+prototype in the usual way: the argument expression is converted to the
+declared argument type as if it were being assigned to a variable of
+that type.
+
+
+File: libc.info,  Node: Argument Macros,  Prev: Calling Variadics,  Up: How Variadic
+
+A.2.2.5 Argument Access Macros
+..............................
+
+Here are descriptions of the macros used to retrieve variable arguments.
+These macros are defined in the header file ‘stdarg.h’.
+
+ -- Data Type: va_list
+
+     The type ‘va_list’ is used for argument pointer variables.
+
+ -- Macro: void va_start (va_list AP, LAST-REQUIRED)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This macro initializes the argument pointer variable AP to point to
+     the first of the optional arguments of the current function;
+     LAST-REQUIRED must be the last required argument to the function.
+
+ -- Macro: TYPE va_arg (va_list AP, TYPE)
+
+     Preliminary: | MT-Safe race:ap | AS-Safe | AC-Unsafe corrupt |
+     *Note POSIX Safety Concepts::.
+
+     The ‘va_arg’ macro returns the value of the next optional argument,
+     and modifies the value of AP to point to the subsequent argument.
+     Thus, successive uses of ‘va_arg’ return successive optional
+     arguments.
+
+     The type of the value returned by ‘va_arg’ is TYPE as specified in
+     the call.  TYPE must be a self-promoting type (not ‘char’ or ‘short
+     int’ or ‘float’) that matches the type of the actual argument.
+
+ -- Macro: void va_end (va_list AP)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This ends the use of AP.  After a ‘va_end’ call, further ‘va_arg’
+     calls with the same AP may not work.  You should invoke ‘va_end’
+     before returning from the function in which ‘va_start’ was invoked
+     with the same AP argument.
+
+     In the GNU C Library, ‘va_end’ does nothing, and you need not ever
+     use it except for reasons of portability.
+
+   Sometimes it is necessary to parse the list of parameters more than
+once or one wants to remember a certain position in the parameter list.
+To do this, one will have to make a copy of the current value of the
+argument.  But ‘va_list’ is an opaque type and one cannot necessarily
+assign the value of one variable of type ‘va_list’ to another variable
+of the same type.
+
+ -- Macro: void va_copy (va_list DEST, va_list SRC)
+ -- Macro: void __va_copy (va_list DEST, va_list SRC)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The ‘va_copy’ macro allows copying of objects of type ‘va_list’
+     even if this is not an integral type.  The argument pointer in DEST
+     is initialized to point to the same argument as the pointer in SRC.
+
+     ‘va_copy’ was added in ISO C99.  When building for strict
+     conformance to ISO C90 (‘gcc -std=c90’), it is not available.  GCC
+     provides ‘__va_copy’, as an extension, in any standards mode;
+     before GCC 3.0, it was the only macro for this functionality.
+
+     These macros are no longer provided by the GNU C Library, but
+     rather by the compiler.
+
+   If you want to use ‘va_copy’ and be portable to pre-C99 systems, you
+should always be prepared for the possibility that this macro will not
+be available.  On architectures where a simple assignment is invalid,
+hopefully ‘va_copy’ _will_ be available, so one should always write
+something like this if concerned about pre-C99 portability:
+
+     {
+       va_list ap, save;
+       ...
+     #ifdef va_copy
+       va_copy (save, ap);
+     #else
+       save = ap;
+     #endif
+       ...
+     }
+
+
+File: libc.info,  Node: Variadic Example,  Prev: How Variadic,  Up: Variadic Functions
+
+A.2.3 Example of a Variadic Function
+------------------------------------
+
+Here is a complete sample function that accepts a variable number of
+arguments.  The first argument to the function is the count of remaining
+arguments, which are added up and the result returned.  While trivial,
+this function is sufficient to illustrate how to use the variable
+arguments facility.
+
+
+     #include <stdarg.h>
+     #include <stdio.h>
+
+     int
+     add_em_up (int count,...)
+     {
+       va_list ap;
+       int i, sum;
+
+       va_start (ap, count);         /* Initialize the argument list. */
+
+       sum = 0;
+       for (i = 0; i < count; i++)
+         sum += va_arg (ap, int);    /* Get the next argument value. */
+
+       va_end (ap);                  /* Clean up. */
+       return sum;
+     }
+
+     int
+     main (void)
+     {
+       /* This call prints 16. */
+       printf ("%d\n", add_em_up (3, 5, 5, 6));
+
+       /* This call prints 55. */
+       printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+       return 0;
+     }
+
+
+File: libc.info,  Node: Null Pointer Constant,  Next: Important Data Types,  Prev: Variadic Functions,  Up: Language Features
+
+A.3 Null Pointer Constant
+=========================
+
+The null pointer constant is guaranteed not to point to any real object.
+You can assign it to any pointer variable since it has type ‘void *’.
+The preferred way to write a null pointer constant is with ‘NULL’.
+
+ -- Macro: void * NULL
+
+     This is a null pointer constant.
+
+   You can also use ‘0’ or ‘(void *)0’ as a null pointer constant, but
+using ‘NULL’ is cleaner because it makes the purpose of the constant
+more evident.
+
+   If you use the null pointer constant as a function argument, then for
+complete portability you should make sure that the function has a
+prototype declaration.  Otherwise, if the target machine has two
+different pointer representations, the compiler won’t know which
+representation to use for that argument.  You can avoid the problem by
+explicitly casting the constant to the proper pointer type, but we
+recommend instead adding a prototype for the function you are calling.
+
+
+File: libc.info,  Node: Important Data Types,  Next: Data Type Measurements,  Prev: Null Pointer Constant,  Up: Language Features
+
+A.4 Important Data Types
+========================
+
+The result of subtracting two pointers in C is always an integer, but
+the precise data type varies from C compiler to C compiler.  Likewise,
+the data type of the result of ‘sizeof’ also varies between compilers.
+ISO C defines standard aliases for these two types, so you can refer to
+them in a portable fashion.  They are defined in the header file
+‘stddef.h’.
+
+ -- Data Type: ptrdiff_t
+
+     This is the signed integer type of the result of subtracting two
+     pointers.  For example, with the declaration ‘char *p1, *p2;’, the
+     expression ‘p2 - p1’ is of type ‘ptrdiff_t’.  This will probably be
+     one of the standard signed integer types (‘short int’, ‘int’ or
+     ‘long int’), but might be a nonstandard type that exists only for
+     this purpose.
+
+ -- Data Type: size_t
+
+     This is an unsigned integer type used to represent the sizes of
+     objects.  The result of the ‘sizeof’ operator is of this type, and
+     functions such as ‘malloc’ (*note Unconstrained Allocation::) and
+     ‘memcpy’ (*note Copying Strings and Arrays::) accept arguments of
+     this type to specify object sizes.  On systems using the GNU C
+     Library, this will be ‘unsigned int’ or ‘unsigned long int’.
+
+     *Usage Note:* ‘size_t’ is the preferred way to declare any
+     arguments or variables that hold the size of an object.
+
+   *Compatibility Note:* Implementations of C before the advent of ISO C
+generally used ‘unsigned int’ for representing object sizes and ‘int’
+for pointer subtraction results.  They did not necessarily define either
+‘size_t’ or ‘ptrdiff_t’.  Unix systems did define ‘size_t’, in
+‘sys/types.h’, but the definition was usually a signed type.
+
+
 File: libc.info,  Node: Data Type Measurements,  Prev: Important Data Types,  Up: Language Features
 
 A.5 Data Type Measurements
@@ -3104,6 +3473,18 @@ it.
 ‘DIR’
 
      ‘dirent.h’ (POSIX.1): *note Opening a Directory::.
+
+‘int DLFO_EH_SEGMENT_TYPE’
+
+     ‘dlfcn.h’ (GNU): *note Dynamic Linker Introspection::.
+
+‘int DLFO_STRUCT_HAS_EH_COUNT’
+
+     ‘dlfcn.h’ (GNU): *note Dynamic Linker Introspection::.
+
+‘int DLFO_STRUCT_HAS_EH_DBASE’
+
+     ‘dlfcn.h’ (GNU): *note Dynamic Linker Introspection::.
 
 ‘mode_t DTTOIF (int DTYPE)’
 
@@ -5011,6 +5392,10 @@ it.
 
      ‘sys/resource.h’ (BSD): *note Limits on Resources::.
 
+‘int RSEQ_SIG’
+
+     ‘sys/rseq.h’ (Linux): *note Restartable Sequences::.
+
 ‘RUN_LVL’
 
      ‘utmp.h’ (SVID): *note Manipulating the Database::.
@@ -6761,9 +7146,25 @@ it.
 
      ‘ftw.h’ (GNU): *note Working with Directory Trees::.
 
+‘unsigned int __rseq_flags’
+
+     ‘sys/rseq.h’ (Linux): *note Restartable Sequences::.
+
+‘int __rseq_offset’
+
+     ‘sys/rseq.h’ (Linux): *note Restartable Sequences::.
+
+‘unsigned int __rseq_size’
+
+     ‘sys/rseq.h’ (Linux): *note Restartable Sequences::.
+
 ‘void __va_copy (va_list DEST, va_list SRC)’
 
      ‘stdarg.h’ (GNU): *note Argument Macros::.
+
+‘int _dl_find_object (void *ADDRESS, struct dl_find_object *RESULT)’
+
+     ‘dlfcn.h’ (GNU): *note Dynamic Linker Introspection::.
 
 ‘void _exit (int STATUS)’
 
@@ -8104,6 +8505,10 @@ it.
 ‘div_t’
 
      ‘stdlib.h’ (ISO): *note Integer Division::.
+
+‘struct dl_find_object’
+
+     ‘dlfcn.h’ (GNU): *note Dynamic Linker Introspection::.
 
 ‘double dmull (long double X, long double Y)’
 
@@ -11981,6 +12386,10 @@ const void *NEEDLE, size_t NEEDLE-LEN)’
 ‘int rpmatch (const char *RESPONSE)’
 
      ‘stdlib.h’ (GNU): *note Yes-or-No Questions::.
+
+‘struct rseq’
+
+     ‘sys/rseq.h’ (Linux): *note Restartable Sequences::.
 
 ‘struct rusage’
 

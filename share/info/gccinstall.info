@@ -65,7 +65,7 @@ File: gccinstall.info,  Node: Installing GCC,  Next: Binaries,  Up: Top
 ****************
 
 The latest version of this document is always available at
-http://gcc.gnu.org/install/.  It refers to the current development
+https://gcc.gnu.org/install/.  It refers to the current development
 sources, instructions for specific released versions are included with
 the sources.
 
@@ -81,7 +81,7 @@ host/target specific installation notes: Specific.  We recommend you
 browse the entire generic installation instructions before you proceed.
 
    Lists of successful builds for released versions of GCC are available
-at <http://gcc.gnu.org/buildstat.html>.  These lists are updated as new
+at <https://gcc.gnu.org/buildstat.html>.  These lists are updated as new
 information becomes available.
 
    The installation procedure itself is broken into five steps.
@@ -179,6 +179,28 @@ GNAT
      Ada runtime libraries.  You can check that your build environment
      is clean by verifying that 'gnatls -v' lists only one explicit path
      in each section.
+
+GDC
+
+     In order to build GDC, the D compiler, you need a working GDC
+     compiler (GCC version 9.1 or later), as the D front end is written
+     in D.
+
+     Versions of GDC prior to 12 can be built with an ISO C++11
+     compiler, which can then be installed and used to bootstrap newer
+     versions of the D front end.
+
+     It is strongly recommended to use an older version of GDC to build
+     GDC. More recent versions of GDC than the version built are not
+     guaranteed to work and will often fail during the build with
+     compilation errors relating to deprecations or removed features.
+
+     Note that 'configure' does not test whether the GDC installation
+     works and has a sufficiently recent version.  Though the
+     implementation of the D front end does not make use of any
+     GDC-specific extensions, or novel features of the D language, if
+     too old a GDC version is installed and '--enable-languages=d' is
+     used, the build will fail.
 
 A "working" POSIX compatible shell, or GNU bash
 
@@ -2655,7 +2677,12 @@ filesystems.
 
 *note GNAT-prerequisite::.
 
-5.5 Building with profile feedback
+5.5 Building the D compiler
+===========================
+
+*note GDC-prerequisite::.
+
+5.6 Building with profile feedback
 ==================================
 
 It is possible to use profile feedback to optimize the compiler itself.
@@ -2695,10 +2722,10 @@ Before you install GCC, we encourage you to run the testsuites and to
 compare your results with results from a similar configuration that have
 been submitted to the gcc-testresults mailing list.  Some of these
 archived results are linked from the build status lists at
-<http://gcc.gnu.org/buildstat.html>, although not everyone who reports a
-successful build runs the testsuites and submits the results.  This step
-is optional and may require you to download additional software, but it
-can give you confidence in your new GCC installation or point out
+<https://gcc.gnu.org/buildstat.html>, although not everyone who reports
+a successful build runs the testsuites and submits the results.  This
+step is optional and may require you to download additional software,
+but it can give you confidence in your new GCC installation or point out
 problems before you install and start using your new GCC.
 
    First, you must have downloaded the testsuites.  These are part of
@@ -2732,7 +2759,7 @@ ignored.
 
    If you are testing a cross-compiler, you may want to run the
 testsuite on a simulator as described at
-<http://gcc.gnu.org/simtest-howto.html>.
+<https://gcc.gnu.org/simtest-howto.html>.
 
 6.1 How can you run the testsuite on selected tests?
 ====================================================
@@ -2921,7 +2948,7 @@ feature.
 
    If you are bootstrapping a released version of GCC then please
 quickly review the build status page for your release, available from
-<http://gcc.gnu.org/buildstat.html>.  If your system is not listed for
+<https://gcc.gnu.org/buildstat.html>.  If your system is not listed for
 the version of GCC that you built, send a note to <gcc@gcc.gnu.org>
 indicating that you successfully built and installed GCC.  Include the
 following information:
@@ -3209,15 +3236,11 @@ Adapteva Epiphany.  This configuration is intended for embedded systems.
 *-*-freebsd*
 ============
 
-Support for FreeBSD 1 was discontinued in GCC 3.2.  Support for FreeBSD
-2 (and any mutant a.out variants of FreeBSD 3) was discontinued in GCC
-4.0.
-
-   In order to better utilize FreeBSD base system functionality and
-match the configuration of the system compiler, GCC 4.5 and above as
-well as GCC 4.4 past 2010-06-20 leverage SSP support in libc (which is
-present on FreeBSD 7 or later) and the use of '__cxa_atexit' by default
-(on FreeBSD 6 or later).  The use of 'dl_iterate_phdr' inside
+In order to better utilize FreeBSD base system functionality and match
+the configuration of the system compiler, GCC 4.5 and above as well as
+GCC 4.4 past 2010-06-20 leverage SSP support in libc (which is present
+on FreeBSD 7 or later) and the use of '__cxa_atexit' by default (on
+FreeBSD 6 or later).  The use of 'dl_iterate_phdr' inside
 'libgcc_s.so.1' and boehm-gc (on FreeBSD 7 or later) is enabled by GCC
 4.5 and above.
 
@@ -3827,7 +3850,7 @@ binaries are available at <https://opensource.apple.com>.
 
    This version of GCC requires at least cctools-590.36.  The
 cctools-590.36 package referenced from
-<http://gcc.gnu.org/ml/gcc/2006-03/msg00507.html> will not work on
+<https://gcc.gnu.org/ml/gcc/2006-03/msg00507.html> will not work on
 systems older than 10.3.9 (aka darwin7.9.0).
 
 powerpc-*-elf
@@ -4299,7 +4322,7 @@ GNU Free Documentation License
                      Version 1.3, 3 November 2008
 
      Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
-     <http://fsf.org/>
+     <https://fsf.org/>
 
      Everyone is permitted to copy and distribute verbatim copies
      of this license document, but changing it is not allowed.
@@ -4696,7 +4719,7 @@ GNU Free Documentation License
      the GNU Free Documentation License from time to time.  Such new
      versions will be similar in spirit to the present version, but may
      differ in detail to address new problems or concerns.  See
-     <http://www.gnu.org/copyleft/>.
+     <https://www.gnu.org/copyleft/>.
 
      Each version of the License is given a distinguishing version
      number.  If the Document specifies that a particular numbered
@@ -4810,104 +4833,105 @@ Concept Index
 Tag Table:
 Node: Top1696
 Node: Installing GCC2201
-Node: Prerequisites3835
-Ref: GNAT-prerequisite5901
-Node: Downloading the source15676
-Node: Configuration17347
-Ref: with-gnu-as35634
-Ref: with-as36529
-Ref: with-gnu-ld37938
-Ref: WithAixSoname62645
-Ref: AixLdCommand63306
-Node: Building105471
-Node: Testing121594
-Node: Final install129423
-Node: Binaries134723
-Node: Specific135830
-Ref: aarch64-x-x136364
-Ref: alpha-x-x138384
-Ref: amd64-x-solaris2138598
-Ref: amdgcn-x-amdhsa138680
-Ref: arc-x-elf32139206
-Ref: arc-linux-uclibc139382
-Ref: arm-x-eabi139523
-Ref: avr139776
-Ref: bfin140357
-Ref: cr16140620
-Ref: cris141036
-Ref: dos141734
-Ref: epiphany-x-elf142057
-Ref: x-x-freebsd142162
-Ref: ft32-x-elf143962
-Ref: h8300-hms144060
-Ref: hppa-hp-hpux144412
-Ref: hppa-hp-hpux10146784
-Ref: hppa-hp-hpux11147197
-Ref: x-x-linux-gnu152599
-Ref: ix86-x-linux152922
-Ref: ix86-x-solaris2153235
-Ref: ia64-x-linux154311
-Ref: ia64-x-hpux154558
-Ref: x-ibm-aix155113
-Ref: TransferAixShobj158775
-Ref: iq2000-x-elf162585
-Ref: lm32-x-elf162725
-Ref: lm32-x-uclinux162829
-Ref: m32c-x-elf162957
-Ref: m32r-x-elf163059
-Ref: m68k-x-x163161
-Ref: m68k-x-uclinux164199
-Ref: microblaze-x-elf164444
-Ref: mips-x-x164563
-Ref: moxie-x-elf166473
-Ref: msp430-x-elf166520
-Ref: nds32le-x-elf167077
-Ref: nds32be-x-elf167149
-Ref: nvptx-x-none167218
-Ref: or1k-x-elf167781
-Ref: or1k-x-linux167912
-Ref: powerpc-x-x167993
-Ref: powerpc-x-darwin168184
-Ref: powerpc-x-elf168678
-Ref: powerpc-x-linux-gnu168763
-Ref: powerpc-x-netbsd168858
-Ref: powerpc-x-eabisim168946
-Ref: powerpc-x-eabi169072
-Ref: powerpcle-x-elf169148
-Ref: powerpcle-x-eabisim169240
-Ref: powerpcle-x-eabi169373
-Ref: rl78-x-elf169456
-Ref: riscv32-x-elf169562
-Ref: riscv32-x-linux169751
-Ref: riscv64-x-elf169908
-Ref: riscv64-x-linux170097
-Ref: rx-x-elf170254
-Ref: s390-x-linux170300
-Ref: s390x-x-linux170372
-Ref: s390x-ibm-tpf170459
-Ref: x-x-solaris2170590
-Ref: sparc-x-x173697
-Ref: sparc-sun-solaris2174199
-Ref: sparc-x-linux175342
-Ref: sparc64-x-solaris2175373
-Ref: sparcv9-x-solaris2176091
-Ref: c6x-x-x176178
-Ref: tilegx-*-linux176270
-Ref: tilegxbe-*-linux176412
-Ref: tilepro-*-linux176555
-Ref: visium-x-elf176676
-Ref: x-x-vxworks176784
-Ref: x86-64-x-x178307
-Ref: x86-64-x-solaris2178635
-Ref: xtensa-x-elf179285
-Ref: xtensa-x-linux179956
-Ref: windows180297
-Ref: x-x-cygwin182087
-Ref: x-x-mingw32182640
-Ref: older183022
-Ref: elf185139
-Node: GNU Free Documentation License185397
-Node: Concept Index210530
+Node: Prerequisites3837
+Ref: GNAT-prerequisite5903
+Ref: GDC-prerequisite7300
+Node: Downloading the source16651
+Node: Configuration18322
+Ref: with-gnu-as36609
+Ref: with-as37504
+Ref: with-gnu-ld38913
+Ref: WithAixSoname63620
+Ref: AixLdCommand64281
+Node: Building106446
+Node: Testing122653
+Node: Final install130484
+Node: Binaries135785
+Node: Specific136892
+Ref: aarch64-x-x137426
+Ref: alpha-x-x139446
+Ref: amd64-x-solaris2139660
+Ref: amdgcn-x-amdhsa139742
+Ref: arc-x-elf32140268
+Ref: arc-linux-uclibc140444
+Ref: arm-x-eabi140585
+Ref: avr140838
+Ref: bfin141419
+Ref: cr16141682
+Ref: cris142098
+Ref: dos142796
+Ref: epiphany-x-elf143119
+Ref: x-x-freebsd143224
+Ref: ft32-x-elf144872
+Ref: h8300-hms144970
+Ref: hppa-hp-hpux145322
+Ref: hppa-hp-hpux10147694
+Ref: hppa-hp-hpux11148107
+Ref: x-x-linux-gnu153509
+Ref: ix86-x-linux153832
+Ref: ix86-x-solaris2154145
+Ref: ia64-x-linux155221
+Ref: ia64-x-hpux155468
+Ref: x-ibm-aix156023
+Ref: TransferAixShobj159685
+Ref: iq2000-x-elf163495
+Ref: lm32-x-elf163635
+Ref: lm32-x-uclinux163739
+Ref: m32c-x-elf163867
+Ref: m32r-x-elf163969
+Ref: m68k-x-x164071
+Ref: m68k-x-uclinux165109
+Ref: microblaze-x-elf165354
+Ref: mips-x-x165473
+Ref: moxie-x-elf167383
+Ref: msp430-x-elf167430
+Ref: nds32le-x-elf167987
+Ref: nds32be-x-elf168059
+Ref: nvptx-x-none168128
+Ref: or1k-x-elf168691
+Ref: or1k-x-linux168822
+Ref: powerpc-x-x168903
+Ref: powerpc-x-darwin169094
+Ref: powerpc-x-elf169589
+Ref: powerpc-x-linux-gnu169674
+Ref: powerpc-x-netbsd169769
+Ref: powerpc-x-eabisim169857
+Ref: powerpc-x-eabi169983
+Ref: powerpcle-x-elf170059
+Ref: powerpcle-x-eabisim170151
+Ref: powerpcle-x-eabi170284
+Ref: rl78-x-elf170367
+Ref: riscv32-x-elf170473
+Ref: riscv32-x-linux170662
+Ref: riscv64-x-elf170819
+Ref: riscv64-x-linux171008
+Ref: rx-x-elf171165
+Ref: s390-x-linux171211
+Ref: s390x-x-linux171283
+Ref: s390x-ibm-tpf171370
+Ref: x-x-solaris2171501
+Ref: sparc-x-x174608
+Ref: sparc-sun-solaris2175110
+Ref: sparc-x-linux176253
+Ref: sparc64-x-solaris2176284
+Ref: sparcv9-x-solaris2177002
+Ref: c6x-x-x177089
+Ref: tilegx-*-linux177181
+Ref: tilegxbe-*-linux177323
+Ref: tilepro-*-linux177466
+Ref: visium-x-elf177587
+Ref: x-x-vxworks177695
+Ref: x86-64-x-x179218
+Ref: x86-64-x-solaris2179546
+Ref: xtensa-x-elf180196
+Ref: xtensa-x-linux180867
+Ref: windows181208
+Ref: x-x-cygwin182998
+Ref: x-x-mingw32183551
+Ref: older183933
+Ref: elf186050
+Node: GNU Free Documentation License186308
+Node: Concept Index211443
 
 End Tag Table
 

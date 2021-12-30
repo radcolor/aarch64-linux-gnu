@@ -50,13 +50,13 @@
 /* Trigonometric functions.  */
 
 /* Arc cosine of X.  */
-__MATHCALL (acos,, (_Mdouble_ __x));
+__MATHCALL_VEC (acos,, (_Mdouble_ __x));
 /* Arc sine of X.  */
-__MATHCALL (asin,, (_Mdouble_ __x));
+__MATHCALL_VEC (asin,, (_Mdouble_ __x));
 /* Arc tangent of X.  */
-__MATHCALL (atan,, (_Mdouble_ __x));
+__MATHCALL_VEC (atan,, (_Mdouble_ __x));
 /* Arc tangent of Y/X.  */
-__MATHCALL (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
+__MATHCALL_VEC (atan2,, (_Mdouble_ __y, _Mdouble_ __x));
 
 /* Cosine of X.  */
 __MATHCALL_VEC (cos,, (_Mdouble_ __x));
@@ -68,11 +68,11 @@ __MATHCALL (tan,, (_Mdouble_ __x));
 /* Hyperbolic functions.  */
 
 /* Hyperbolic cosine of X.  */
-__MATHCALL (cosh,, (_Mdouble_ __x));
+__MATHCALL_VEC (cosh,, (_Mdouble_ __x));
 /* Hyperbolic sine of X.  */
-__MATHCALL (sinh,, (_Mdouble_ __x));
+__MATHCALL_VEC (sinh,, (_Mdouble_ __x));
 /* Hyperbolic tangent of X.  */
-__MATHCALL (tanh,, (_Mdouble_ __x));
+__MATHCALL_VEC (tanh,, (_Mdouble_ __x));
 
 #ifdef __USE_GNU
 /* Cosine and sine of X.  */
@@ -82,11 +82,11 @@ __MATHDECL_VEC (void,sincos,,
 
 #if defined __USE_XOPEN_EXTENDED || defined __USE_ISOC99
 /* Hyperbolic arc cosine of X.  */
-__MATHCALL (acosh,, (_Mdouble_ __x));
+__MATHCALL_VEC (acosh,, (_Mdouble_ __x));
 /* Hyperbolic arc sine of X.  */
-__MATHCALL (asinh,, (_Mdouble_ __x));
+__MATHCALL_VEC (asinh,, (_Mdouble_ __x));
 /* Hyperbolic arc tangent of X.  */
-__MATHCALL (atanh,, (_Mdouble_ __x));
+__MATHCALL_VEC (atanh,, (_Mdouble_ __x));
 #endif
 
 /* Exponential and logarithmic functions.  */
@@ -104,22 +104,22 @@ __MATHCALL (ldexp,, (_Mdouble_ __x, int __exponent));
 __MATHCALL_VEC (log,, (_Mdouble_ __x));
 
 /* Base-ten logarithm of X.  */
-__MATHCALL (log10,, (_Mdouble_ __x));
+__MATHCALL_VEC (log10,, (_Mdouble_ __x));
 
 /* Break VALUE into integral and fractional parts.  */
 __MATHCALL (modf,, (_Mdouble_ __x, _Mdouble_ *__iptr)) __nonnull ((2));
 
 #if __GLIBC_USE (IEC_60559_FUNCS_EXT_C2X)
 /* Compute exponent to base ten.  */
-__MATHCALL (exp10,, (_Mdouble_ __x));
+__MATHCALL_VEC (exp10,, (_Mdouble_ __x));
 #endif
 
 #if defined __USE_XOPEN_EXTENDED || defined __USE_ISOC99
 /* Return exp(X) - 1.  */
-__MATHCALL (expm1,, (_Mdouble_ __x));
+__MATHCALL_VEC (expm1,, (_Mdouble_ __x));
 
 /* Return log(1 + X).  */
-__MATHCALL (log1p,, (_Mdouble_ __x));
+__MATHCALL_VEC (log1p,, (_Mdouble_ __x));
 
 /* Return the base 2 signed integral exponent of X.  */
 __MATHCALL (logb,, (_Mdouble_ __x));
@@ -127,10 +127,10 @@ __MATHCALL (logb,, (_Mdouble_ __x));
 
 #ifdef __USE_ISOC99
 /* Compute base-2 exponential of X.  */
-__MATHCALL (exp2,, (_Mdouble_ __x));
+__MATHCALL_VEC (exp2,, (_Mdouble_ __x));
 
 /* Compute base-2 logarithm of X.  */
-__MATHCALL (log2,, (_Mdouble_ __x));
+__MATHCALL_VEC (log2,, (_Mdouble_ __x));
 #endif
 
 
@@ -144,12 +144,12 @@ __MATHCALL (sqrt,, (_Mdouble_ __x));
 
 #if defined __USE_XOPEN || defined __USE_ISOC99
 /* Return `sqrt(X*X + Y*Y)'.  */
-__MATHCALL (hypot,, (_Mdouble_ __x, _Mdouble_ __y));
+__MATHCALL_VEC (hypot,, (_Mdouble_ __x, _Mdouble_ __y));
 #endif
 
 #if defined __USE_XOPEN_EXTENDED || defined __USE_ISOC99
 /* Return the cube root of X.  */
-__MATHCALL (cbrt,, (_Mdouble_ __x));
+__MATHCALL_VEC (cbrt,, (_Mdouble_ __x));
 #endif
 
 
@@ -228,7 +228,7 @@ __MATHCALL (yn,, (int, _Mdouble_));
 
 #if defined __USE_XOPEN || defined __USE_ISOC99
 /* Error and gamma functions.  */
-__MATHCALL (erf,, (_Mdouble_));
+__MATHCALL_VEC (erf,, (_Mdouble_));
 __MATHCALL (erfc,, (_Mdouble_));
 __MATHCALL (lgamma,, (_Mdouble_));
 #endif

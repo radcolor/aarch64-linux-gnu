@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2158,6 +2163,135 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
+File: libc.info,  Node: Streams and I18N,  Next: Simple Output,  Prev: Streams and Threads,  Up: I/O on Streams
+
+12.6 Streams in Internationalized Applications
+==============================================
+
+ISO C90 introduced the new type ‘wchar_t’ to allow handling larger
+character sets.  What was missing was a possibility to output strings of
+‘wchar_t’ directly.  One had to convert them into multibyte strings
+using ‘mbstowcs’ (there was no ‘mbsrtowcs’ yet) and then use the normal
+stream functions.  While this is doable it is very cumbersome since
+performing the conversions is not trivial and greatly increases program
+complexity and size.
+
+   The Unix standard early on (I think in XPG4.2) introduced two
+additional format specifiers for the ‘printf’ and ‘scanf’ families of
+functions.  Printing and reading of single wide characters was made
+possible using the ‘%C’ specifier and wide character strings can be
+handled with ‘%S’.  These modifiers behave just like ‘%c’ and ‘%s’ only
+that they expect the corresponding argument to have the wide character
+type and that the wide character and string are transformed into/from
+multibyte strings before being used.
+
+   This was a beginning but it is still not good enough.  Not always is
+it desirable to use ‘printf’ and ‘scanf’.  The other, smaller and faster
+functions cannot handle wide characters.  Second, it is not possible to
+have a format string for ‘printf’ and ‘scanf’ consisting of wide
+characters.  The result is that format strings would have to be
+generated if they have to contain non-basic characters.
+
+   In the Amendment 1 to ISO C90 a whole new set of functions was added
+to solve the problem.  Most of the stream functions got a counterpart
+which take a wide character or wide character string instead of a
+character or string respectively.  The new functions operate on the same
+streams (like ‘stdout’).  This is different from the model of the C++
+runtime library where separate streams for wide and normal I/O are used.
+
+   Being able to use the same stream for wide and normal operations
+comes with a restriction: a stream can be used either for wide
+operations or for normal operations.  Once it is decided there is no way
+back.  Only a call to ‘freopen’ or ‘freopen64’ can reset the
+“orientation”.  The orientation can be decided in three ways:
+
+   • If any of the normal character functions are used (this includes
+     the ‘fread’ and ‘fwrite’ functions) the stream is marked as not
+     wide oriented.
+
+   • If any of the wide character functions are used the stream is
+     marked as wide oriented.
+
+   • The ‘fwide’ function can be used to set the orientation either way.
+
+   It is important to never mix the use of wide and not wide operations
+on a stream.  There are no diagnostics issued.  The application behavior
+will simply be strange or the application will simply crash.  The
+‘fwide’ function can help avoid this.
+
+ -- Function: int fwide (FILE *STREAM, int MODE)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe lock | *Note
+     POSIX Safety Concepts::.
+
+     The ‘fwide’ function can be used to set and query the state of the
+     orientation of the stream STREAM.  If the MODE parameter has a
+     positive value the streams get wide oriented, for negative values
+     narrow oriented.  It is not possible to overwrite previous
+     orientations with ‘fwide’.  I.e., if the stream STREAM was already
+     oriented before the call nothing is done.
+
+     If MODE is zero the current orientation state is queried and
+     nothing is changed.
+
+     The ‘fwide’ function returns a negative value, zero, or a positive
+     value if the stream is narrow, not at all, or wide oriented
+     respectively.
+
+     This function was introduced in Amendment 1 to ISO C90 and is
+     declared in ‘wchar.h’.
+
+   It is generally a good idea to orient a stream as early as possible.
+This can prevent surprise especially for the standard streams ‘stdin’,
+‘stdout’, and ‘stderr’.  If some library function in some situations
+uses one of these streams and this use orients the stream in a different
+way the rest of the application expects it one might end up with hard to
+reproduce errors.  Remember that no errors are signal if the streams are
+used incorrectly.  Leaving a stream unoriented after creation is
+normally only necessary for library functions which create streams which
+can be used in different contexts.
+
+   When writing code which uses streams and which can be used in
+different contexts it is important to query the orientation of the
+stream before using it (unless the rules of the library interface demand
+a specific orientation).  The following little, silly function
+illustrates this.
+
+     void
+     print_f (FILE *fp)
+     {
+       if (fwide (fp, 0) > 0)
+         /* Positive return value means wide orientation.  */
+         fputwc (L'f', fp);
+       else
+         fputc ('f', fp);
+     }
+
+   Note that in this case the function ‘print_f’ decides about the
+orientation of the stream if it was unoriented before (will not happen
+if the advice above is followed).
+
+   The encoding used for the ‘wchar_t’ values is unspecified and the
+user must not make any assumptions about it.  For I/O of ‘wchar_t’
+values this means that it is impossible to write these values directly
+to the stream.  This is not what follows from the ISO C locale model
+either.  What happens instead is that the bytes read from or written to
+the underlying media are first converted into the internal encoding
+chosen by the implementation for ‘wchar_t’.  The external encoding is
+determined by the ‘LC_CTYPE’ category of the current locale or by the
+‘ccs’ part of the mode specification given to ‘fopen’, ‘fopen64’,
+‘freopen’, or ‘freopen64’.  How and when the conversion happens is
+unspecified and it happens invisibly to the user.
+
+   Since a stream is created in the unoriented state it has at that
+point no conversion associated with it.  The conversion which will be
+used is determined by the ‘LC_CTYPE’ category selected at the time the
+stream is oriented.  If the locales are changed at the runtime this
+might produce surprising results unless one pays attention.  This is
+just another good reason to orient the stream explicitly as soon as
+possible, perhaps with a call to ‘fwide’.
+
+
 File: libc.info,  Node: Simple Output,  Next: Character Input,  Prev: Streams and I18N,  Up: I/O on Streams
 
 12.7 Simple Output by Characters or Lines
@@ -2984,8 +3118,8 @@ conversion to specify printing of a string argument, and the ‘%%’
 conversion to print a literal ‘%’ character.
 
    There are also conversions for printing an integer argument as an
-unsigned value in octal, decimal, or hexadecimal radix (‘%o’, ‘%u’, or
-‘%x’, respectively); or as a character value (‘%c’).
+unsigned value in binary, octal, decimal, or hexadecimal radix (‘%b’,
+‘%o’, ‘%u’, or ‘%x’, respectively); or as a character value (‘%c’).
 
    Floating-point numbers can be printed in normal, fixed-point notation
 using the ‘%f’ conversion or in exponential notation using the ‘%e’
@@ -3130,6 +3264,12 @@ Here is a table summarizing what all the different conversions do:
      output, but are different when used with ‘scanf’ for input (*note
      Table of Input Conversions::).
 
+‘%b’, ‘%B’
+     Print an integer as an unsigned binary number.  ‘%b’ uses
+     lower-case ‘b’ with the ‘#’ flag and ‘%B’ uses upper-case.  ‘%b’ is
+     an ISO C2X feature; ‘%B’ is an extension recommended by ISO C2X.
+     *Note Integer Conversions::, for details.
+
 ‘%o’
      Print an integer as an unsigned octal number.  *Note Integer
      Conversions::, for details.
@@ -3207,16 +3347,17 @@ File: libc.info,  Node: Integer Conversions,  Next: Floating-Point Conversions, 
 12.12.4 Integer Conversions
 ---------------------------
 
-This section describes the options for the ‘%d’, ‘%i’, ‘%o’, ‘%u’, ‘%x’,
-and ‘%X’ conversion specifications.  These conversions print integers in
-various formats.
+This section describes the options for the ‘%d’, ‘%i’, ‘%b’, ‘%B’, ‘%o’,
+‘%u’, ‘%x’, and ‘%X’ conversion specifications.  These conversions print
+integers in various formats.
 
    The ‘%d’ and ‘%i’ conversion specifications both print an ‘int’
-argument as a signed decimal number; while ‘%o’, ‘%u’, and ‘%x’ print
-the argument as an unsigned octal, decimal, or hexadecimal number
-(respectively).  The ‘%X’ conversion specification is just like ‘%x’
-except that it uses the characters ‘ABCDEF’ as digits instead of
-‘abcdef’.
+argument as a signed decimal number; while ‘b’, ‘%o’, ‘%u’, and ‘%x’
+print the argument as an unsigned binary, octal, decimal, or hexadecimal
+number (respectively).  The ‘%X’ conversion specification is just like
+‘%x’ except that it uses the characters ‘ABCDEF’ as digits instead of
+‘abcdef’.  The ‘%B’ conversion specification is just like ‘%b’ except
+that, with the ‘#’ flag, the output starts with ‘0B’ instead of ‘0b’.
 
    The following flags are meaningful:
 
@@ -3237,11 +3378,16 @@ except that it uses the characters ‘ABCDEF’ as digits instead of
 ‘#’
      For the ‘%o’ conversion, this forces the leading digit to be ‘0’,
      as if by increasing the precision.  For ‘%x’ or ‘%X’, this prefixes
-     a leading ‘0x’ or ‘0X’ (respectively) to the result.  This doesn’t
-     do anything useful for the ‘%d’, ‘%i’, or ‘%u’ conversions.  Using
-     this flag produces output which can be parsed by the ‘strtoul’
-     function (*note Parsing of Integers::) and ‘scanf’ with the ‘%i’
-     conversion (*note Numeric Input Conversions::).
+     a leading ‘0x’ or ‘0X’ (respectively) to the result.  For ‘%b’ or
+     ‘%B’, this prefixes a leading ‘0b’ or ‘0B’ (respectively) to the
+     result.  This doesn’t do anything useful for the ‘%d’, ‘%i’, or
+     ‘%u’ conversions.  Using this flag produces output which can be
+     parsed by the ‘strtoul’ function (*note Parsing of Integers::) and
+     ‘scanf’ with the ‘%i’ conversion (*note Numeric Input
+     Conversions::).
+
+     For the ‘%m’ conversion, print an error constant or decimal error
+     number, instead of a (possibly translated) error message.
 
 ‘'’
      Separate the digits into groups as specified by the locale
@@ -3261,10 +3407,11 @@ zero, then no characters at all are produced.
 
    Without a type modifier, the corresponding argument is treated as an
 ‘int’ (for the signed conversions ‘%i’ and ‘%d’) or ‘unsigned int’ (for
-the unsigned conversions ‘%o’, ‘%u’, ‘%x’, and ‘%X’).  Recall that since
-‘printf’ and friends are variadic, any ‘char’ and ‘short’ arguments are
-automatically converted to ‘int’ by the default argument promotions.
-For arguments of other integer types, you can use these modifiers:
+the unsigned conversions ‘%b’, ‘%B’, ‘%o’, ‘%u’, ‘%x’, and ‘%X’).
+Recall that since ‘printf’ and friends are variadic, any ‘char’ and
+‘short’ arguments are automatically converted to ‘int’ by the default
+argument promotions.  For arguments of other integer types, you can use
+these modifiers:
 
 ‘hh’
      Specifies that the argument is a ‘signed char’ or ‘unsigned char’,
@@ -3522,7 +3669,9 @@ is equivalent to:
 
      fprintf (stderr, "can't open `%s': %s\n", filename, strerror (errno));
 
-The ‘%m’ conversion is a GNU C Library extension.
+   The ‘%m’ conversion can be used with the ‘#’ flag to print an error
+constant, as provided by ‘strerrorname_np’.  Both ‘%m’ and ‘%#m’ are GNU
+C Library extensions.
 
    The ‘%p’ conversion prints a pointer value.  The corresponding
 argument must be of type ‘void *’.  In practice, you can use any type of

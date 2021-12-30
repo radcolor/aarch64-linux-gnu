@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2156,6 +2161,138 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Auxiliary Vector,  Next: System Calls,  Prev: Environment Variables,  Up: Program Basics
+
+25.5 Auxiliary Vector
+=====================
+
+When a program is executed, it receives information from the operating
+system about the environment in which it is operating.  The form of this
+information is a table of key-value pairs, where the keys are from the
+set of ‘AT_’ values in ‘elf.h’.  Some of the data is provided by the
+kernel for libc consumption, and may be obtained by ordinary interfaces,
+such as ‘sysconf’.  However, on a platform-by-platform basis there may
+be information that is not available any other way.
+
+25.5.1 Definition of ‘getauxval’
+--------------------------------
+
+ -- Function: unsigned long int getauxval (unsigned long int TYPE)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     This function is used to inquire about the entries in the auxiliary
+     vector.  The TYPE argument should be one of the ‘AT_’ symbols
+     defined in ‘elf.h’.  If a matching entry is found, the value is
+     returned; if the entry is not found, zero is returned and ‘errno’
+     is set to ‘ENOENT’.
+
+   For some platforms, the key ‘AT_HWCAP’ is the easiest way to inquire
+about any instruction set extensions available at runtime.  In this
+case, there will (of necessity) be a platform-specific set of ‘HWCAP_’
+values masked together that describe the capabilities of the cpu on
+which the program is being executed.
+
+
+File: libc.info,  Node: System Calls,  Next: Program Termination,  Prev: Auxiliary Vector,  Up: Program Basics
+
+25.6 System Calls
+=================
+
+A system call is a request for service that a program makes of the
+kernel.  The service is generally something that only the kernel has the
+privilege to do, such as doing I/O. Programmers don’t normally need to
+be concerned with system calls because there are functions in the GNU C
+Library to do virtually everything that system calls do.  These
+functions work by making system calls themselves.  For example, there is
+a system call that changes the permissions of a file, but you don’t need
+to know about it because you can just use the GNU C Library’s ‘chmod’
+function.
+
+   System calls are sometimes called kernel calls.
+
+   However, there are times when you want to make a system call
+explicitly, and for that, the GNU C Library provides the ‘syscall’
+function.  ‘syscall’ is harder to use and less portable than functions
+like ‘chmod’, but easier and more portable than coding the system call
+in assembler instructions.
+
+   ‘syscall’ is most useful when you are working with a system call
+which is special to your system or is newer than the GNU C Library you
+are using.  ‘syscall’ is implemented in an entirely generic way; the
+function does not know anything about what a particular system call does
+or even if it is valid.
+
+   The description of ‘syscall’ in this section assumes a certain
+protocol for system calls on the various platforms on which the GNU C
+Library runs.  That protocol is not defined by any strong authority, but
+we won’t describe it here either because anyone who is coding ‘syscall’
+probably won’t accept anything less than kernel and C library source
+code as a specification of the interface between them anyway.
+
+   ‘syscall’ is declared in ‘unistd.h’.
+
+ -- Function: long int syscall (long int SYSNO, ...)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     ‘syscall’ performs a generic system call.
+
+     SYSNO is the system call number.  Each kind of system call is
+     identified by a number.  Macros for all the possible system call
+     numbers are defined in ‘sys/syscall.h’
+
+     The remaining arguments are the arguments for the system call, in
+     order, and their meanings depend on the kind of system call.  Each
+     kind of system call has a definite number of arguments, from zero
+     to five.  If you code more arguments than the system call takes,
+     the extra ones to the right are ignored.
+
+     The return value is the return value from the system call, unless
+     the system call failed.  In that case, ‘syscall’ returns ‘-1’ and
+     sets ‘errno’ to an error code that the system call returned.  Note
+     that system calls do not return ‘-1’ when they succeed.
+
+     If you specify an invalid SYSNO, ‘syscall’ returns ‘-1’ with
+     ‘errno’ = ‘ENOSYS’.
+
+     Example:
+
+
+          #include <unistd.h>
+          #include <sys/syscall.h>
+          #include <errno.h>
+
+          ...
+
+          int rc;
+
+          rc = syscall(SYS_chmod, "/etc/passwd", 0444);
+
+          if (rc == -1)
+             fprintf(stderr, "chmod failed, errno = %d\n", errno);
+
+
+     This, if all the compatibility stars are aligned, is equivalent to
+     the following preferable code:
+
+
+          #include <sys/types.h>
+          #include <sys/stat.h>
+          #include <errno.h>
+
+          ...
+
+          int rc;
+
+          rc = chmod("/etc/passwd", 0444);
+          if (rc == -1)
+             fprintf(stderr, "chmod failed, errno = %d\n", errno);
+
 
 
 File: libc.info,  Node: Program Termination,  Prev: System Calls,  Up: Program Basics
@@ -4811,10 +4948,9 @@ helpless if ‘/etc/nsswitch.conf’ does not exist.  For all supported
 databases there is a default value so it should normally be possible to
 get the system running even if the file is corrupted or missing.
 
-   For the ‘hosts’ and ‘networks’ databases the default value is ‘dns
-[!UNAVAIL=return] files’.  I.e., the system is prepared for the DNS
-service not to be available but if it is available the answer it returns
-is definitive.
+   For the ‘hosts’ and ‘networks’ databases the default value is ‘files
+dns’.  I.e., local configuration will override the contents of the
+domain name system (DNS).
 
    The ‘passwd’, ‘group’, and ‘shadow’ databases was traditionally
 handled in a special way.  The appropriate files in the ‘/etc’ directory
@@ -7309,238 +7445,4 @@ are the ‘innetgr’ function and parts of the implementation of the
      This function frees all buffers which were allocated to process the
      last selected netgroup.  As a result all string pointers returned
      by calls to ‘getnetgrent’ are invalid afterwards.
-
-
-File: libc.info,  Node: Netgroup Membership,  Prev: Lookup Netgroup,  Up: Netgroup Database
-
-30.16.3 Testing for Netgroup Membership
----------------------------------------
-
-It is often not necessary to scan the whole netgroup since often the
-only interesting question is whether a given entry is part of the
-selected netgroup.
-
- -- Function: int innetgr (const char *NETGROUP, const char *HOST, const
-          char *USER, const char *DOMAIN)
-
-     Preliminary: | MT-Unsafe race:netgrent locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function tests whether the triple specified by the parameters
-     HOST, USER, and DOMAIN is part of the netgroup NETGROUP.  Using
-     this function has the advantage that
-
-       1. no other netgroup function can use the global netgroup state
-          since internal locking is used and
-       2. the function is implemented more efficiently than successive
-          calls to the other ‘set’/‘get’/‘endnetgrent’ functions.
-
-     Any of the pointers HOST, USER, or DOMAIN can be ‘NULL’ which means
-     any value is accepted in this position.  This is also true for the
-     name ‘-’ which should not match any other string otherwise.
-
-     The return value is ‘1’ if an entry matching the given triple is
-     found in the netgroup.  The return value is ‘0’ if the netgroup
-     itself is not found, the netgroup does not contain the triple or
-     internal errors occurred.
-
-
-File: libc.info,  Node: System Management,  Next: System Configuration,  Prev: Users and Groups,  Up: Top
-
-31 System Management
-********************
-
-This chapter describes facilities for controlling the system that
-underlies a process (including the operating system and hardware) and
-for getting information about it.  Anyone can generally use the
-informational facilities, but usually only a properly privileged process
-can make changes.
-
-* Menu:
-
-* Host Identification::         Determining the name of the machine.
-* Platform Type::               Determining operating system and basic
-                                  machine type
-* Filesystem Handling::         Controlling/querying mounts
-
-   To get information on parameters of the system that are built into
-the system, such as the maximum length of a filename, *note System
-Configuration::.
-
-
-File: libc.info,  Node: Host Identification,  Next: Platform Type,  Up: System Management
-
-31.1 Host Identification
-========================
-
-This section explains how to identify the particular system on which
-your program is running.  First, let’s review the various ways computer
-systems are named, which is a little complicated because of the history
-of the development of the Internet.
-
-   Every Unix system (also known as a host) has a host name, whether
-it’s connected to a network or not.  In its simplest form, as used
-before computer networks were an issue, it’s just a word like ‘chicken’.
-
-   But any system attached to the Internet or any network like it
-conforms to a more rigorous naming convention as part of the Domain Name
-System (DNS). In the DNS, every host name is composed of two parts:
-
-  1. hostname
-  2. domain name
-
-   You will note that “hostname” looks a lot like “host name”, but is
-not the same thing, and that people often incorrectly refer to entire
-host names as “domain names.”
-
-   In the DNS, the full host name is properly called the FQDN (Fully
-Qualified Domain Name) and consists of the hostname, then a period, then
-the domain name.  The domain name itself usually has multiple components
-separated by periods.  So for example, a system’s hostname may be
-‘chicken’ and its domain name might be ‘ai.mit.edu’, so its FQDN (which
-is its host name) is ‘chicken.ai.mit.edu’.
-
-   Adding to the confusion, though, is that the DNS is not the only name
-space in which a computer needs to be known.  Another name space is the
-NIS (aka YP) name space.  For NIS purposes, there is another domain
-name, which is called the NIS domain name or the YP domain name.  It
-need not have anything to do with the DNS domain name.
-
-   Confusing things even more is the fact that in the DNS, it is
-possible for multiple FQDNs to refer to the same system.  However, there
-is always exactly one of them that is the true host name, and it is
-called the canonical FQDN.
-
-   In some contexts, the host name is called a “node name.”
-
-   For more information on DNS host naming, see *note Host Names::.
-
-   Prototypes for these functions appear in ‘unistd.h’.
-
-   The programs ‘hostname’, ‘hostid’, and ‘domainname’ work by calling
-these functions.
-
- -- Function: int gethostname (char *NAME, size_t SIZE)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     This function returns the host name of the system on which it is
-     called, in the array NAME.  The SIZE argument specifies the size of
-     this array, in bytes.  Note that this is _not_ the DNS hostname.
-     If the system participates in the DNS, this is the FQDN (see
-     above).
-
-     The return value is ‘0’ on success and ‘-1’ on failure.  In the GNU
-     C Library, ‘gethostname’ fails if SIZE is not large enough; then
-     you can try again with a larger array.  The following ‘errno’ error
-     condition is defined for this function:
-
-     ‘ENAMETOOLONG’
-          The SIZE argument is less than the size of the host name plus
-          one.
-
-     On some systems, there is a symbol for the maximum possible host
-     name length: ‘MAXHOSTNAMELEN’.  It is defined in ‘sys/param.h’.
-     But you can’t count on this to exist, so it is cleaner to handle
-     failure and try again.
-
-     ‘gethostname’ stores the beginning of the host name in NAME even if
-     the host name won’t entirely fit.  For some purposes, a truncated
-     host name is good enough.  If it is, you can ignore the error code.
-
- -- Function: int sethostname (const char *NAME, size_t LENGTH)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     The ‘sethostname’ function sets the host name of the system that
-     calls it to NAME, a string with length LENGTH.  Only privileged
-     processes are permitted to do this.
-
-     Usually ‘sethostname’ gets called just once, at system boot time.
-     Often, the program that calls it sets it to the value it finds in
-     the file ‘/etc/hostname’.
-
-     Be sure to set the host name to the full host name, not just the
-     DNS hostname (see above).
-
-     The return value is ‘0’ on success and ‘-1’ on failure.  The
-     following ‘errno’ error condition is defined for this function:
-
-     ‘EPERM’
-          This process cannot set the host name because it is not
-          privileged.
-
- -- Function: int getdomainnname (char *NAME, size_t LENGTH)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘getdomainname’ returns the NIS (aka YP) domain name of the system
-     on which it is called.  Note that this is not the more popular DNS
-     domain name.  Get that with ‘gethostname’.
-
-     The specifics of this function are analogous to ‘gethostname’,
-     above.
-
- -- Function: int setdomainname (const char *NAME, size_t LENGTH)
-
-     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
-     Concepts::.
-
-     ‘setdomainname’ sets the NIS (aka YP) domain name of the system on
-     which it is called.  Note that this is not the more popular DNS
-     domain name.  Set that with ‘sethostname’.
-
-     The specifics of this function are analogous to ‘sethostname’,
-     above.
-
- -- Function: long int gethostid (void)
-
-     Preliminary: | MT-Safe hostid env locale | AS-Unsafe dlopen plugin
-     corrupt heap lock | AC-Unsafe lock corrupt mem fd | *Note POSIX
-     Safety Concepts::.
-
-     This function returns the “host ID” of the machine the program is
-     running on.  By convention, this is usually the primary Internet IP
-     address of that machine, converted to a ‘long int’.  However, on
-     some systems it is a meaningless but unique number which is
-     hard-coded for each machine.
-
-     This is not widely used.  It arose in BSD 4.2, but was dropped in
-     BSD 4.4.  It is not required by POSIX.
-
-     The proper way to query the IP address is to use ‘gethostbyname’ on
-     the results of ‘gethostname’.  For more information on IP
-     addresses, *Note Host Addresses::.
-
- -- Function: int sethostid (long int ID)
-
-     Preliminary: | MT-Unsafe const:hostid | AS-Unsafe | AC-Unsafe
-     corrupt fd | *Note POSIX Safety Concepts::.
-
-     The ‘sethostid’ function sets the “host ID” of the host machine to
-     ID.  Only privileged processes are permitted to do this.  Usually
-     it happens just once, at system boot time.
-
-     The proper way to establish the primary IP address of a system is
-     to configure the IP address resolver to associate that IP address
-     with the system’s host name as returned by ‘gethostname’.  For
-     example, put a record for the system in ‘/etc/hosts’.
-
-     See ‘gethostid’ above for more information on host ids.
-
-     The return value is ‘0’ on success and ‘-1’ on failure.  The
-     following ‘errno’ error conditions are defined for this function:
-
-     ‘EPERM’
-          This process cannot set the host name because it is not
-          privileged.
-
-     ‘ENOSYS’
-          The operating system does not support setting the host ID. On
-          some systems, the host ID is a meaningless but unique number
-          hard-coded for each machine.
 

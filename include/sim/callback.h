@@ -45,11 +45,12 @@
 #ifndef SIM_CALLBACK_H
 #define SIM_CALLBACK_H
 
-#include <ansidecl.h>
 #include <stdarg.h>
 #include <stdint.h>
+
+#include <ansidecl.h>
 /* Needed for enum bfd_endian.  */
-#include "bfd.h"
+#include <bfd.h>
 
 /* Mapping of host/target values.  */
 /* ??? For debugging purposes, one might want to add a string of the
@@ -177,6 +178,12 @@ struct host_callback_struct
   const char *stat_map;
 
   enum bfd_endian target_endian;
+
+  /* Program command line options.  */
+  char **argv;
+
+  /* Program environment.  */
+  char **envp;
 
   /* Size of an "int" on the target (for syscalls whose ABI uses "int").
      This must include padding, and only padding-at-higher-address is

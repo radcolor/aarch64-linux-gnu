@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2156,6 +2161,94 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+
+File: libc.info,  Node: Date and Time,  Next: Resource Usage And Limitation,  Prev: Arithmetic,  Up: Top
+
+21 Date and Time
+****************
+
+This chapter describes functions for manipulating dates and times,
+including functions for determining what time it is and conversion
+between different time representations.
+
+* Menu:
+
+* Time Basics::                 Concepts and definitions.
+* Time Types::                  Data types to represent time.
+* Calculating Elapsed Time::    How to calculate the length of an interval.
+* Processor And CPU Time::      Time a program has spent executing.
+* Calendar Time::               Manipulation of “real” dates and times.
+* Setting an Alarm::            Sending a signal after a specified time.
+* Sleeping::                    Waiting for a period of time.
+
+
+File: libc.info,  Node: Time Basics,  Next: Time Types,  Up: Date and Time
+
+21.1 Time Basics
+================
+
+Discussing time in a technical manual can be difficult because the word
+“time” in English refers to lots of different things.  In this manual,
+we use a rigorous terminology to avoid confusion, and the only thing we
+use the simple word “time” for is to talk about the abstract concept.
+
+   A “calendar time” is a point in the time continuum, for example
+November 4, 1990, at 18:02.5 UTC. Sometimes this is called “absolute
+time”.
+
+   We don’t speak of a “date”, because that is inherent in a calendar
+time.
+
+   An “interval” is a contiguous part of the time continuum between two
+calendar times, for example the hour between 9:00 and 10:00 on July 4,
+1980.
+
+   An “elapsed time” is the length of an interval, for example, 35
+minutes.  People sometimes sloppily use the word “interval” to refer to
+the elapsed time of some interval.
+
+   An “amount of time” is a sum of elapsed times, which need not be of
+any specific intervals.  For example, the amount of time it takes to
+read a book might be 9 hours, independently of when and in how many
+sittings it is read.
+
+   A “period” is the elapsed time of an interval between two events,
+especially when they are part of a sequence of regularly repeating
+events.
+
+   A “simple calendar time” is a calendar time represented as an elapsed
+time since a fixed, implementation-specific calendar time called the
+“epoch”.  This representation is convenient for doing calculations on
+calendar times, such as finding the elapsed time between two calendar
+times.  Simple calendar times are independent of time zone; they
+represent the same instant in time regardless of where on the globe the
+computer is.
+
+   POSIX says that simple calendar times do not include leap seconds,
+but some (otherwise POSIX-conformant) systems can be configured to
+include leap seconds in simple calendar times.
+
+   A “broken-down time” is a calendar time represented by its components
+in the Gregorian calendar: year, month, day, hour, minute, and second.
+A broken-down time value is relative to a specific time zone, and so it
+is also sometimes called a “local time”.  Broken-down times are most
+useful for input and output, as they are easier for people to
+understand, but more difficult to calculate with.
+
+   “CPU time” measures the amount of time that a single process has
+actively used a CPU to perform computations.  It does not include the
+time that process has spent waiting for external events.  The system
+tracks the CPU time used by each process separately.
+
+   “Processor time” measures the amount of time _any_ CPU has been in
+use by _any_ process.  It is a basic system resource, since there’s a
+limit to how much can exist in any given interval (the elapsed time of
+the interval times the number of CPUs in the computer)
+
+   People often call this CPU time, but we reserve the latter term in
+this manual for the definition above.
 
 
 File: libc.info,  Node: Time Types,  Next: Calculating Elapsed Time,  Prev: Time Basics,  Up: Date and Time
@@ -7266,92 +7359,4 @@ provide the information (BSD systems and GNU systems).
      Bad system call; that is to say, the instruction to trap to the
      operating system was executed, but the code number for the system
      call to perform was invalid.
-
-
-File: libc.info,  Node: Termination Signals,  Next: Alarm Signals,  Prev: Program Error Signals,  Up: Standard Signals
-
-24.2.2 Termination Signals
---------------------------
-
-These signals are all used to tell a process to terminate, in one way or
-another.  They have different names because they’re used for slightly
-different purposes, and programs might want to handle them differently.
-
-   The reason for handling these signals is usually so your program can
-tidy up as appropriate before actually terminating.  For example, you
-might want to save state information, delete temporary files, or restore
-the previous terminal modes.  Such a handler should end by specifying
-the default action for the signal that happened and then reraising it;
-this will cause the program to terminate with that signal, as if it had
-not had a handler.  (*Note Termination in Handler::.)
-
-   The (obvious) default action for all of these signals is to cause the
-process to terminate.
-
- -- Macro: int SIGTERM
-
-     The ‘SIGTERM’ signal is a generic signal used to cause program
-     termination.  Unlike ‘SIGKILL’, this signal can be blocked,
-     handled, and ignored.  It is the normal way to politely ask a
-     program to terminate.
-
-     The shell command ‘kill’ generates ‘SIGTERM’ by default.
-
- -- Macro: int SIGINT
-
-     The ‘SIGINT’ (“program interrupt”) signal is sent when the user
-     types the INTR character (normally ‘C-c’).  *Note Special
-     Characters::, for information about terminal driver support for
-     ‘C-c’.
-
- -- Macro: int SIGQUIT
-
-     The ‘SIGQUIT’ signal is similar to ‘SIGINT’, except that it’s
-     controlled by a different key—the QUIT character, usually ‘C-\’—and
-     produces a core dump when it terminates the process, just like a
-     program error signal.  You can think of this as a program error
-     condition “detected” by the user.
-
-     *Note Program Error Signals::, for information about core dumps.
-     *Note Special Characters::, for information about terminal driver
-     support.
-
-     Certain kinds of cleanups are best omitted in handling ‘SIGQUIT’.
-     For example, if the program creates temporary files, it should
-     handle the other termination requests by deleting the temporary
-     files.  But it is better for ‘SIGQUIT’ not to delete them, so that
-     the user can examine them in conjunction with the core dump.
-
- -- Macro: int SIGKILL
-
-     The ‘SIGKILL’ signal is used to cause immediate program
-     termination.  It cannot be handled or ignored, and is therefore
-     always fatal.  It is also not possible to block this signal.
-
-     This signal is usually generated only by explicit request.  Since
-     it cannot be handled, you should generate it only as a last resort,
-     after first trying a less drastic method such as ‘C-c’ or
-     ‘SIGTERM’.  If a process does not respond to any other termination
-     signals, sending it a ‘SIGKILL’ signal will almost always cause it
-     to go away.
-
-     In fact, if ‘SIGKILL’ fails to terminate a process, that by itself
-     constitutes an operating system bug which you should report.
-
-     The system will generate ‘SIGKILL’ for a process itself under some
-     unusual conditions where the program cannot possibly continue to
-     run (even to run a signal handler).
-
- -- Macro: int SIGHUP
-
-     The ‘SIGHUP’ (“hang-up”) signal is used to report that the user’s
-     terminal is disconnected, perhaps because a network or telephone
-     connection was broken.  For more information about this, see *note
-     Control Modes::.
-
-     This signal is also used to report the termination of the
-     controlling process on a terminal to jobs associated with that
-     session; this termination effectively disconnects all processes in
-     the session from the controlling terminal.  For more information,
-     see *note Termination Internals::.
 

@@ -57,6 +57,9 @@ START-INFO-DIR-ENTRY
 * CS8: (libc)Control Modes.
 * CSIZE: (libc)Control Modes.
 * CSTOPB: (libc)Control Modes.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * DTTOIF: (libc)Directory Entries.
 * E2BIG: (libc)Error Codes.
 * EACCES: (libc)Error Codes.
@@ -350,6 +353,7 @@ START-INFO-DIR-ENTRY
 * RAND_MAX: (libc)ISO Random.
 * RE_DUP_MAX: (libc)General Limits.
 * RLIM_INFINITY: (libc)Limits on Resources.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * R_OK: (libc)Testing File Access.
 * SA_NOCLDSTOP: (libc)Flags for Sigaction.
 * SA_ONSTACK: (libc)Flags for Sigaction.
@@ -498,6 +502,7 @@ START-INFO-DIR-ENTRY
 * __riscv_flush_icache: (libc)RISC-V.
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
 * _tolower: (libc)Case Conversion.
@@ -2557,6 +2562,12 @@ Variable and Constant Macro Index
 * _XOPEN_SOURCE:                         Feature Test Macros. (line  90)
 * _XOPEN_SOURCE_EXTENDED:                Feature Test Macros. (line  91)
 * __libc_single_threaded:                Single-Threaded.     (line  15)
+* __rseq_flags:                          Restartable Sequences.
+                                                              (line  63)
+* __rseq_offset:                         Restartable Sequences.
+                                                              (line  45)
+* __rseq_size:                           Restartable Sequences.
+                                                              (line  54)
 * __STDC_WANT_IEC_60559_BFP_EXT__:       Feature Test Macros. (line 230)
 * __STDC_WANT_IEC_60559_EXT__:           Feature Test Macros. (line 251)
 * __STDC_WANT_IEC_60559_FUNCS_EXT__:     Feature Test Macros. (line 237)
@@ -2792,6 +2803,12 @@ Variable and Constant Macro Index
 * DEAD_PROCESS <1>:                      XPG Functions.       (line  78)
 * DECIMAL_POINT:                         The Elegant and Fast Way.
                                                               (line 240)
+* DLFO_EH_SEGMENT_TYPE:                  Dynamic Linker Introspection.
+                                                              (line  54)
+* DLFO_STRUCT_HAS_EH_COUNT:              Dynamic Linker Introspection.
+                                                              (line  44)
+* DLFO_STRUCT_HAS_EH_DBASE:              Dynamic Linker Introspection.
+                                                              (line  35)
 * DT_BLK:                                Directory Entries.   (line  58)
 * DT_CHR:                                Directory Entries.   (line  55)
 * DT_DIR:                                Directory Entries.   (line  46)
@@ -3766,6 +3783,8 @@ Variable and Constant Macro Index
 * RLIMIT_STACK:                          Limits on Resources. (line 145)
 * RLIM_INFINITY:                         Limits on Resources. (line 196)
 * RLIM_NLIMITS:                          Limits on Resources. (line 191)
+* RSEQ_SIG:                              Restartable Sequences.
+                                                              (line  68)
 * RUN_LVL:                               Manipulating the Database.
                                                               (line  77)
 * RUN_LVL <1>:                           XPG Functions.       (line  46)

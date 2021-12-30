@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2021-11-06" "gcc-12.0.0" "GNU"
+.TH GCC 1 "2021-12-30" "gcc-12.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -351,7 +351,9 @@ in the following sections.
 \&\-Warith\-conversion 
 \&\-Warray\-bounds  \-Warray\-bounds=\fR\fIn\fR  \fB\-Warray\-compare 
 \&\-Wno\-attributes  \-Wattribute\-alias=\fR\fIn\fR \fB\-Wno\-attribute\-alias 
-\&\-Wno\-attribute\-warning  \-Wbool\-compare  \-Wbool\-operation 
+\&\-Wno\-attribute\-warning  
+\&\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR] 
+\&\fB\-Wbool\-compare  \-Wbool\-operation 
 \&\-Wno\-builtin\-declaration\-mismatch 
 \&\-Wno\-builtin\-macro\-redefined  \-Wc90\-c99\-compat  \-Wc99\-c11\-compat 
 \&\-Wc11\-c2x\-compat 
@@ -381,6 +383,7 @@ in the following sections.
 \&\-Wignored\-qualifiers  \-Wno\-incompatible\-pointer\-types 
 \&\-Wimplicit  \-Wimplicit\-fallthrough  \-Wimplicit\-fallthrough=\fR\fIn\fR 
 \&\fB\-Wno\-implicit\-function\-declaration  \-Wno\-implicit\-int 
+\&\-Winfinite\-recursion 
 \&\-Winit\-self  \-Winline  \-Wno\-int\-conversion  \-Wint\-in\-bool\-context 
 \&\-Wno\-int\-to\-pointer\-cast  \-Wno\-invalid\-memory\-model 
 \&\-Winvalid\-pch  \-Wjump\-misses\-init  \-Wlarger\-than=\fR\fIbyte-size\fR 
@@ -472,7 +475,11 @@ in the following sections.
 \&\-Wno\-analyzer\-shift\-count\-negative 
 \&\-Wno\-analyzer\-shift\-count\-overflow 
 \&\-Wno\-analyzer\-stale\-setjmp\-buffer 
+\&\-Wno\-analyzer\-tainted\-allocation\-size 
 \&\-Wno\-analyzer\-tainted\-array\-index 
+\&\-Wno\-analyzer\-tainted\-divisor 
+\&\-Wno\-analyzer\-tainted\-offset 
+\&\-Wno\-analyzer\-tainted\-size 
 \&\-Wanalyzer\-too\-complex 
 \&\-Wno\-analyzer\-unsafe\-call\-within\-signal\-handler 
 \&\-Wno\-analyzer\-use\-after\-free 
@@ -583,7 +590,7 @@ in the following sections.
 \&\-fsingle\-precision\-constant  \-fsplit\-ivs\-in\-unroller  \-fsplit\-loops
 \&\-fsplit\-paths 
 \&\-fsplit\-wide\-types  \-fsplit\-wide\-types\-early  \-fssa\-backprop  \-fssa\-phiopt 
-\&\-fstdarg\-opt  \-fstore\-merging  \-fstrict\-aliasing 
+\&\-fstdarg\-opt  \-fstore\-merging  \-fstrict\-aliasing \-fipa\-strict\-aliasing 
 \&\-fthread\-jumps  \-ftracer  \-ftree\-bit\-ccp 
 \&\-ftree\-builtin\-call\-dce  \-ftree\-ccp  \-ftree\-ch 
 \&\-ftree\-coalesce\-vars  \-ftree\-copy\-prop  \-ftree\-dce  \-ftree\-dominator\-opts 
@@ -601,7 +608,7 @@ in the following sections.
 \&\-fipa\-ra  \-fvariable\-expansion\-in\-unroller  \-fvect\-cost\-model  \-fvpt 
 \&\-fweb  \-fwhole\-program  \-fwpa  \-fuse\-linker\-plugin \-fzero\-call\-used\-regs 
 \&\-\-param\fR \fIname\fR\fB=\fR\fIvalue\fR
-\&\fB\-O  \-O0  \-O1  \-O2  \-O3  \-Os  \-Ofast  \-Og\fR
+\&\fB\-O  \-O0  \-O1  \-O2  \-O3  \-Os  \-Ofast  \-Og  \-Oz\fR
 .IP "\fIProgram Instrumentation Options\fR" 4
 .IX Item "Program Instrumentation Options"
 \&\fB\-p  \-pg  \-fprofile\-arcs  \-\-coverage  \-ftest\-coverage 
@@ -625,7 +632,8 @@ in the following sections.
 \&\fB\-fvtv\-counts  \-fvtv\-debug 
 \&\-finstrument\-functions 
 \&\-finstrument\-functions\-exclude\-function\-list=\fR\fIsym\fR\fB,\fR\fIsym\fR\fB,... 
-\&\-finstrument\-functions\-exclude\-file\-list=\fR\fIfile\fR\fB,\fR\fIfile\fR\fB,...\fR
+\&\-finstrument\-functions\-exclude\-file\-list=\fR\fIfile\fR\fB,\fR\fIfile\fR\fB,...\fR 
+\&\-fprofile\-prefix\-map=\fIold\fR=\fInew\fR
 .IP "\fIPreprocessor Options\fR" 4
 .IX Item "Preprocessor Options"
 \&\fB\-A\fR\fIquestion\fR\fB=\fR\fIanswer\fR 
@@ -778,7 +786,7 @@ in the following sections.
 \&\fB\-malign\-call  \-mauto\-modify\-reg  \-mbbit\-peephole  \-mno\-brcc 
 \&\-mcase\-vector\-pcrel  \-mcompact\-casesi  \-mno\-cond\-exec  \-mearly\-cbranchsi 
 \&\-mexpand\-adddi  \-mindexed\-loads  \-mlra  \-mlra\-priority\-none 
-\&\-mlra\-priority\-compact mlra-priority-noncompact  \-mmillicode 
+\&\-mlra\-priority\-compact \-mlra\-priority\-noncompact  \-mmillicode 
 \&\-mmixed\-code  \-mq\-class  \-mRcq  \-mRcw  \-msize\-level=\fR\fIlevel\fR 
 \&\fB\-mtune=\fR\fIcpu\fR  \fB\-mmultcost=\fR\fInum\fR  \fB\-mcode\-density\-frame 
 \&\-munalign\-prob\-threshold=\fR\fIprobability\fR  \fB\-mmpy\-option=\fR\fImulto\fR 
@@ -1079,6 +1087,7 @@ in the following sections.
 \&\-mcheck\-zero\-division  \-mno\-check\-zero\-division 
 \&\-mdivide\-traps  \-mdivide\-breaks 
 \&\-mload\-store\-pairs  \-mno\-load\-store\-pairs 
+\&\-munaligned\-access  \-mno\-unaligned\-access 
 \&\-mmemcpy  \-mno\-memcpy  \-mlong\-calls  \-mno\-long\-calls 
 \&\-mmad  \-mno\-mad  \-mimadd  \-mno\-imadd  \-mfused\-madd  \-mno\-fused\-madd  \-nocpp 
 \&\-mfix\-24k  \-mno\-fix\-24k 
@@ -1368,7 +1377,7 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\-mbig\-switch\fR
 .Sp
 \&\fI\s-1VAX\s0 Options\fR
-\&\fB\-mg  \-mgnu  \-munix\fR
+\&\fB\-mg  \-mgnu  \-munix  \-mlra\fR
 .Sp
 \&\fIVisium Options\fR
 \&\fB\-mdebug  \-msim  \-mfpu  \-mno\-fpu  \-mhard\-float  \-msoft\-float 
@@ -1394,6 +1403,7 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\fB\-mcld  \-mcx16  \-msahf  \-mmovbe  \-mcrc32 \-mmwait 
 \&\-mrecip  \-mrecip=\fR\fIopt\fR 
 \&\fB\-mvzeroupper  \-mprefer\-avx128  \-mprefer\-vector\-width=\fR\fIopt\fR 
+\&\fB\-mmove\-max=\fR\fIbits\fR \fB\-mstore\-max=\fR\fIbits\fR 
 \&\fB\-mmmx  \-msse  \-msse2  \-msse3  \-mssse3  \-msse4.1  \-msse4.2  \-msse4  \-mavx 
 \&\-mavx2  \-mavx512f  \-mavx512pf  \-mavx512er  \-mavx512cd  \-mavx512vl 
 \&\-mavx512bw  \-mavx512dq  \-mavx512ifma  \-mavx512vbmi  \-msha  \-maes 
@@ -1427,9 +1437,10 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\fB\-mstack\-protector\-guard\-reg=\fR\fIreg\fR 
 \&\fB\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR 
 \&\fB\-mstack\-protector\-guard\-symbol=\fR\fIsymbol\fR 
-\&\fB\-mgeneral\-regs\-only  \-mcall\-ms2sysv\-xlogues 
+\&\fB\-mgeneral\-regs\-only  \-mcall\-ms2sysv\-xlogues \-mrelax\-cmpxchg\-loop 
 \&\-mindirect\-branch=\fR\fIchoice\fR  \fB\-mfunction\-return=\fR\fIchoice\fR 
-\&\fB\-mindirect\-branch\-register \-mneeded\fR
+\&\fB\-mindirect\-branch\-register \-mharden\-sls=\fR\fIchoice\fR 
+\&\fB\-mindirect\-branch\-cs\-prefix \-mneeded\fR
 .Sp
 \&\fIx86 Windows Options\fR
 \&\fB\-mconsole  \-mcygwin  \-mno\-cygwin  \-mdll 
@@ -1902,7 +1913,8 @@ named \fIdir/bar.*\fR, combining the given \fIdumppfx\fR with the
 default \fIdumpbase\fR derived from the primary output name.  Dump
 outputs also take the input name suffix: \fIdir/bar.c.*\fR.
 .Sp
-It defaults to the location of the output file; options
+It defaults to the location of the output file, unless the output
+file is a special file like \f(CW\*(C`/dev/null\*(C'\fR. Options
 \&\fB\-save\-temps=cwd\fR and \fB\-save\-temps=obj\fR override this
 default, just like an explicit \fB\-dumpdir\fR option.  In case
 multiple such options are given, the last one prevails:
@@ -2192,7 +2204,8 @@ files resided in directory \fI\fInew\fI\fR instead.  Specifying this
 option is equivalent to specifying all the individual
 \&\fB\-f*\-prefix\-map\fR options.  This can be used to make reproducible
 builds that are location independent.  See also
-\&\fB\-fmacro\-prefix\-map\fR and \fB\-fdebug\-prefix\-map\fR.
+\&\fB\-fmacro\-prefix\-map\fR, \fB\-fdebug\-prefix\-map\fR and
+\&\fB\-fprofile\-prefix\-map\fR.
 .IP "\fB\-fplugin=\fR\fIname\fR\fB.so\fR" 4
 .IX Item "-fplugin=name.so"
 Load the plugin code in file \fIname\fR.so, assumed to be a
@@ -2349,7 +2362,7 @@ with \s-1ISO C90\s0 are disabled). Same as \fB\-ansi\fR for C code.
 bugs and floating-point issues
 (mainly but not entirely relating to optional C99 features from
 Annexes F and G).  See
-<\fBhttp://gcc.gnu.org/c99status.html\fR> for more information.  The
+<\fBhttps://gcc.gnu.org/c99status.html\fR> for more information.  The
 names \fBc9x\fR and \fBiso9899:199x\fR are deprecated.
 .IP "\fBc11\fR" 4
 .IX Item "c11"
@@ -3026,6 +3039,19 @@ large from highly recursive evaluations).  The default is 8.  Very few
 users are likely to want to adjust it, but if your code does heavy
 constexpr calculations you might want to experiment to find which
 value works best for you.
+.IP "\fB\-fconstexpr\-fp\-except\fR" 4
+.IX Item "-fconstexpr-fp-except"
+Annex F of the C standard specifies that \s-1IEC559\s0 floating point
+exceptions encountered at compile time should not stop compilation.
+\&\*(C+ compilers have historically not followed this guidance, instead
+treating floating point division by zero as non-constant even though
+it has a well defined value.  This flag tells the compiler to give
+Annex F priority over other rules saying that a particular operation
+is undefined.
+.Sp
+.Vb 1
+\&        constexpr float inf = 1./0.; // OK with \-fconstexpr\-fp\-except
+.Ve
 .IP "\fB\-fconstexpr\-loop\-limit=\fR\fIn\fR" 4
 .IX Item "-fconstexpr-loop-limit=n"
 Set the maximum number of iterations for a loop in \*(C+14 constexpr functions
@@ -3092,6 +3118,12 @@ Do not recognize \f(CW\*(C`typeof\*(C'\fR as a keyword, so that code can use thi
 word as an identifier.  You can use the keyword \f(CW\*(C`_\|_typeof_\|_\*(C'\fR instead.
 This option is implied by the strict \s-1ISO \*(C+\s0 dialects: \fB\-ansi\fR,
 \&\fB\-std=c++98\fR, \fB\-std=c++11\fR, etc.
+.IP "\fB\-fimplicit\-constexpr\fR" 4
+.IX Item "-fimplicit-constexpr"
+Make inline functions implicitly constexpr, if they satisfy the
+requirements for a constexpr function.  This option can be used in
+\&\*(C+14 mode or later.  This can result in initialization changing from
+dynamic to static and other optimizations.
 .IP "\fB\-fno\-implicit\-templates\fR" 4
 .IX Item "-fno-implicit-templates"
 Never emit code for non-inline templates that are instantiated
@@ -3423,17 +3455,25 @@ about \s-1ABI\s0 tags.
 .IP "\fB\-Wcomma\-subscript\fR (\*(C+ and Objective\-\*(C+ only)" 4
 .IX Item "-Wcomma-subscript ( and Objective- only)"
 Warn about uses of a comma expression within a subscripting expression.
-This usage was deprecated in \*(C+20.  However, a comma expression wrapped
-in \f(CW\*(C`( )\*(C'\fR is not deprecated.  Example:
+This usage was deprecated in \*(C+20 and is going to be removed in \*(C+23.
+However, a comma expression wrapped in \f(CW\*(C`( )\*(C'\fR is not deprecated.  Example:
 .Sp
 .Vb 4
 \&        void f(int *a, int b, int c) {
-\&            a[b,c];     // deprecated
+\&            a[b,c];     // deprecated in C++20, invalid in C++23
 \&            a[(b,c)];   // OK
 \&        }
 .Ve
 .Sp
-Enabled by default with \fB\-std=c++20\fR.
+In \*(C+23 it is valid to have comma separated expressions in a subscript
+when an overloaded subscript operator is found and supports the right
+number and types of arguments.  G++ will accept the formerly valid syntax
+for code that is not valid in \*(C+23 but used to be valid but deprecated
+in \*(C+20 with a pedantic warning that can be disabled with
+\&\fB\-Wno\-comma\-subscript\fR.
+.Sp
+Enabled by default with \fB\-std=c++20\fR unless \fB\-Wno\-deprecated\fR,
+and with \fB\-std=c++23\fR regardless of \fB\-Wno\-deprecated\fR.
 .IP "\fB\-Wctad\-maybe\-unsupported\fR (\*(C+ and Objective\-\*(C+ only)" 4
 .IX Item "-Wctad-maybe-unsupported ( and Objective- only)"
 Warn when performing class template argument deduction (\s-1CTAD\s0) on a type with
@@ -5865,6 +5905,12 @@ undefined behavior due to dereferencing a null pointer.  This option
 is only active when \fB\-fdelete\-null\-pointer\-checks\fR is active,
 which is enabled by optimizations in most targets.  The precision of
 the warnings depends on the optimization options used.
+.IP "\fB\-Winfinite\-recursion\fR" 4
+.IX Item "-Winfinite-recursion"
+Warn about infinitely recursive calls.  The warning is effective at all
+optimization levels but requires optimization in order to detect infinite
+recursion in calls between two or more functions.
+\&\fB\-Winfinite\-recursion\fR is included in \fB\-Wall\fR.
 .IP "\fB\-Winit\-self\fR (C, \*(C+, Objective-C and Objective\-\*(C+ only)" 4
 .IX Item "-Winit-self (C, , Objective-C and Objective- only)"
 Warn about uninitialized variables that are initialized with themselves.
@@ -6327,7 +6373,7 @@ The standard is worded confusingly, therefore there is some debate
 over the precise meaning of the sequence point rules in subtle cases.
 Links to discussions of the problem, including proposed formal
 definitions, may be found on the \s-1GCC\s0 readings page, at
-<\fBhttp://gcc.gnu.org/readings.html\fR>.
+<\fBhttps://gcc.gnu.org/readings.html\fR>.
 .Sp
 This warning is enabled by \fB\-Wall\fR for C and \*(C+.
 .IP "\fB\-Wno\-return\-local\-addr\fR" 4
@@ -6592,6 +6638,18 @@ Note that there may be no warning about a variable that is used only
 to compute a value that itself is never used, because such
 computations may be deleted by data flow analysis before the warnings
 are printed.
+.Sp
+In \*(C+, this warning also warns about using uninitialized objects in
+member-initializer-lists.  For example, \s-1GCC\s0 warns about \f(CW\*(C`b\*(C'\fR being
+uninitialized in the following snippet:
+.Sp
+.Vb 5
+\&        struct A {
+\&          int a;
+\&          int b;
+\&          A() : a(b) { }
+\&        };
+.Ve
 .IP "\fB\-Wno\-invalid\-memory\-model\fR" 4
 .IX Item "-Wno-invalid-memory-model"
 This option controls warnings
@@ -7242,6 +7300,20 @@ Attributes considered include \f(CW\*(C`alloc_align\*(C'\fR, \f(CW\*(C`alloc_siz
 This is the default.  You can disable these warnings with either
 \&\fB\-Wno\-attribute\-alias\fR or \fB\-Wattribute\-alias=0\fR.
 .RE
+.IP "\fB\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR]" 4
+.IX Item "-Wbidi-chars=[none|unpaired|any]"
+Warn about possibly misleading \s-1UTF\-8\s0 bidirectional control characters in
+comments, string literals, character constants, and identifiers.  Such
+characters can change left-to-right writing direction into right-to-left
+(and vice versa), which can cause confusion between the logical order and
+visual order.  This may be dangerous; for instance, it may seem that a piece
+of code is not commented out, whereas it in fact is.
+.Sp
+There are three levels of warning supported by \s-1GCC.\s0  The default is
+\&\fB\-Wbidi\-chars=unpaired\fR, which warns about improperly terminated
+bidi contexts.  \fB\-Wbidi\-chars=none\fR turns the warning off.
+\&\fB\-Wbidi\-chars=any\fR warns about any use of bidirectional control
+characters.
 .IP "\fB\-Wbool\-compare\fR" 4
 .IX Item "-Wbool-compare"
 Warn about boolean expression compared with an integer value different from
@@ -8124,6 +8196,8 @@ suppressed by casting the pointer operand to an integer type such
 as \f(CW\*(C`inptr_t\*(C'\fR or \f(CW\*(C`uinptr_t\*(C'\fR.
 Comparisons against string literals result in unspecified behavior
 and are not portable, and suggest the intent was to call \f(CW\*(C`strcmp\*(C'\fR.
+The warning is suppressed if the suspicious expression is the result
+of macro expansion.
 \&\fB\-Waddress\fR warning is enabled by \fB\-Wall\fR.
 .IP "\fB\-Wno\-address\-of\-packed\-member\fR" 4
 .IX Item "-Wno-address-of-packed-member"
@@ -8176,6 +8250,26 @@ Do not warn if an unexpected \f(CW\*(C`_\|_attribute_\|_\*(C'\fR is used, such a
 unrecognized attributes, function attributes applied to variables,
 etc.  This does not stop errors for incorrect use of supported
 attributes.
+.Sp
+Additionally, using \fB\-Wno\-attributes=\fR, it is possible to suppress
+warnings about unknown scoped attributes (in \*(C+11 and C2X).  For example,
+\&\fB\-Wno\-attributes=vendor::attr\fR disables warning about the following
+declaration:
+.Sp
+.Vb 1
+\&        [[vendor::attr]] void f();
+.Ve
+.Sp
+It is also possible to disable warning about all attributes in a namespace
+using \fB\-Wno\-attributes=vendor::\fR which prevents warning about both
+of these declarations:
+.Sp
+.Vb 2
+\&        [[vendor::safe]] void f();
+\&        [[vendor::unsafe]] void f2();
+.Ve
+.Sp
+Note that \fB\-Wno\-attributes=\fR does not imply \fB\-Wno\-attributes\fR.
 .IP "\fB\-Wno\-builtin\-declaration\-mismatch\fR" 4
 .IX Item "-Wno-builtin-declaration-mismatch"
 Warn if a built-in function is declared with an incompatible signature
@@ -8724,7 +8818,11 @@ Enabling this option effectively enables the following warnings:
 \&\-Wanalyzer\-shift\-count\-negative 
 \&\-Wanalyzer\-shift\-count\-overflow 
 \&\-Wanalyzer\-stale\-setjmp\-buffer 
+\&\-Wanalyzer\-tainted\-allocation\-size 
 \&\-Wanalyzer\-tainted\-array\-index 
+\&\-Wanalyzer\-tainted\-divisor 
+\&\-Wanalyzer\-tainted\-offset 
+\&\-Wanalyzer\-tainted\-size 
 \&\-Wanalyzer\-unsafe\-call\-within\-signal\-handler 
 \&\-Wanalyzer\-use\-after\-free 
 \&\-Wanalyzer\-use\-of\-uninitialized\-value 
@@ -8875,6 +8973,19 @@ location, it records the stack frame.  The stack frame becomes invalid
 when the function containing the \f(CW\*(C`setjmp\*(C'\fR call returns.  Attempting
 to rewind to it via \f(CW\*(C`longjmp\*(C'\fR would reference a stack frame that
 no longer exists, and likely lead to a crash (or worse).
+.IP "\fB\-Wno\-analyzer\-tainted\-allocation\-size\fR" 4
+.IX Item "-Wno-analyzer-tainted-allocation-size"
+This warning requires both \fB\-fanalyzer\fR and
+\&\fB\-fanalyzer\-checker=taint\fR to enable it;
+use \fB\-Wno\-analyzer\-tainted\-allocation\-size\fR to disable it.
+.Sp
+This diagnostic warns for paths through the code in which a value
+that could be under an attacker's control is used as the size
+of an allocation without being sanitized, so that an attacker could
+inject an excessively large allocation and potentially cause a denial
+of service attack.
+.Sp
+See \f(CW@url\fR{https://cwe.mitre.org/data/definitions/789.html, \s-1CWE\-789:\s0 Memory Allocation with Excessive Size Value}.
 .IP "\fB\-Wno\-analyzer\-tainted\-array\-index\fR" 4
 .IX Item "-Wno-analyzer-tainted-array-index"
 This warning requires both \fB\-fanalyzer\fR and
@@ -8883,7 +8994,42 @@ use \fB\-Wno\-analyzer\-tainted\-array\-index\fR to disable it.
 .Sp
 This diagnostic warns for paths through the code in which a value
 that could be under an attacker's control is used as the index
-of an array access without being sanitized.
+of an array access without being sanitized, so that an attacker
+could inject an out-of-bounds access.
+.Sp
+See \f(CW@url\fR{https://cwe.mitre.org/data/definitions/129.html, \s-1CWE\-129:\s0 Improper Validation of Array Index}.
+.IP "\fB\-Wno\-analyzer\-tainted\-divisor\fR" 4
+.IX Item "-Wno-analyzer-tainted-divisor"
+This warning requires both \fB\-fanalyzer\fR and
+\&\fB\-fanalyzer\-checker=taint\fR to enable it;
+use \fB\-Wno\-analyzer\-tainted\-divisor\fR to disable it.
+.Sp
+This diagnostic warns for paths through the code in which a value
+that could be under an attacker's control is used as the divisor
+in a division or modulus operation without being sanitized, so that
+an attacker could inject a division-by-zero.
+.IP "\fB\-Wno\-analyzer\-tainted\-offset\fR" 4
+.IX Item "-Wno-analyzer-tainted-offset"
+This warning requires both \fB\-fanalyzer\fR and
+\&\fB\-fanalyzer\-checker=taint\fR to enable it;
+use \fB\-Wno\-analyzer\-tainted\-offset\fR to disable it.
+.Sp
+This diagnostic warns for paths through the code in which a value
+that could be under an attacker's control is used as a pointer offset
+without being sanitized, so that an attacker could inject an out-of-bounds
+access.
+.Sp
+See \f(CW@url\fR{https://cwe.mitre.org/data/definitions/823.html, \s-1CWE\-823:\s0 Use of Out-of-range Pointer Offset}.
+.IP "\fB\-Wno\-analyzer\-tainted\-size\fR" 4
+.IX Item "-Wno-analyzer-tainted-size"
+This warning requires both \fB\-fanalyzer\fR and
+\&\fB\-fanalyzer\-checker=taint\fR to enable it;
+use \fB\-Wno\-analyzer\-tainted\-size\fR to disable it.
+.Sp
+This diagnostic warns for paths through the code in which a value
+that could be under an attacker's control is used as the size of
+an operation such as \f(CW\*(C`memset\*(C'\fR without being sanitized, so that an
+attacker could inject an out-of-bounds access.
 .IP "\fB\-Wno\-analyzer\-unsafe\-call\-within\-signal\-handler\fR" 4
 .IX Item "-Wno-analyzer-unsafe-call-within-signal-handler"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
@@ -9775,6 +9921,7 @@ valid for all standard-compliant programs.
 It turns on \fB\-ffast\-math\fR, \fB\-fallow\-store\-data\-races\fR
 and the Fortran-specific \fB\-fstack\-arrays\fR, unless
 \&\fB\-fmax\-stack\-var\-size\fR is specified, and \fB\-fno\-protect\-parens\fR.
+It turns off \fB\-fsemantic\-interposition\fR.
 .IP "\fB\-Og\fR" 4
 .IX Item "-Og"
 Optimize debugging experience.  \fB\-Og\fR should be the optimization
@@ -9794,6 +9941,12 @@ optimization flags except for those that may interfere with debugging:
 \&\-finline\-functions\-called\-once 
 \&\-fmove\-loop\-invariants  \-fmove\-loop\-stores  \-fssa\-phiopt 
 \&\-ftree\-bit\-ccp  \-ftree\-dse  \-ftree\-pta  \-ftree\-sra\fR
+.IP "\fB\-Oz\fR" 4
+.IX Item "-Oz"
+Optimize aggressively for size rather than speed.  This may increase
+the number of instructions executed if those instructions require
+fewer bytes to encode.  \fB\-Oz\fR behaves similarly to \fB\-Os\fR
+including enabling most \fB\-O2\fR optimizations.
 .PP
 If you use multiple \fB\-O\fR options, with or without level numbers,
 the last such option is the one that is effective.
@@ -11037,12 +11190,12 @@ and \fB\-ftree\-slp\-vectorize\fR if not explicitly specified.
 .IP "\fB\-ftree\-loop\-vectorize\fR" 4
 .IX Item "-ftree-loop-vectorize"
 Perform loop vectorization on trees. This flag is enabled by default at
-\&\fB\-O3\fR and by \fB\-ftree\-vectorize\fR, \fB\-fprofile\-use\fR,
+\&\fB\-O2\fR and by \fB\-ftree\-vectorize\fR, \fB\-fprofile\-use\fR,
 and \fB\-fauto\-profile\fR.
 .IP "\fB\-ftree\-slp\-vectorize\fR" 4
 .IX Item "-ftree-slp-vectorize"
 Perform basic block vectorization on trees. This flag is enabled by default at
-\&\fB\-O3\fR and by \fB\-ftree\-vectorize\fR, \fB\-fprofile\-use\fR,
+\&\fB\-O2\fR and by \fB\-ftree\-vectorize\fR, \fB\-fprofile\-use\fR,
 and \fB\-fauto\-profile\fR.
 .IP "\fB\-ftrivial\-auto\-var\-init=\fR\fIchoice\fR" 4
 .IX Item "-ftrivial-auto-var-init=choice"
@@ -11050,8 +11203,8 @@ Initialize automatic variables with either a pattern or with zeroes to increase
 the security and predictability of a program by preventing uninitialized memory
 disclosure and use.
 \&\s-1GCC\s0 still considers an automatic variable that doesn't have an explicit
-initializer as uninitialized, \-Wuninitialized will still report warning messages
-on such automatic variables.
+initializer as uninitialized, \fB\-Wuninitialized\fR will still report
+warning messages on such automatic variables.
 With this option, \s-1GCC\s0 will also initialize any padding of automatic variables
 that have structure or union types to zeroes.
 .Sp
@@ -11320,6 +11473,15 @@ uses a union type, e.g.:
 .Sp
 The \fB\-fstrict\-aliasing\fR option is enabled at levels
 \&\fB\-O2\fR, \fB\-O3\fR, \fB\-Os\fR.
+.IP "\fB\-fipa\-strict\-aliasing\fR" 4
+.IX Item "-fipa-strict-aliasing"
+Controls whether rules of \fB\-fstrict\-aliasing\fR are applied across
+function boundaries.  Note that if multiple functions gets inlined into a
+single function the memory accesses are no longer considered to be crossing a
+function boundary.
+.Sp
+The \fB\-fipa\-strict\-aliasing\fR option is enabled by default and is
+effective only in combination with \fB\-fstrict\-aliasing\fR.
 .IP "\fB\-falign\-functions\fR" 4
 .IX Item "-falign-functions"
 .PD 0
@@ -12460,6 +12622,14 @@ needlessly consume memory and resources.
 The maximum number of backtrack attempts the scheduler should make
 when modulo scheduling a loop.  Larger values can exponentially increase
 compilation time.
+.IP "\fBmax-inline-functions-called-once-loop-depth\fR" 4
+.IX Item "max-inline-functions-called-once-loop-depth"
+Maximal loop depth of a call considered by inline heuristics that tries to
+inline all functions called once.
+.IP "\fBmax-inline-functions-called-once-insns\fR" 4
+.IX Item "max-inline-functions-called-once-insns"
+Maximal estimated size of functions produced while inlining functions called
+once.
 .IP "\fBmax-inline-insns-single\fR" 4
 .IX Item "max-inline-insns-single"
 Several parameters control the tree inliner used in \s-1GCC.\s0  This number sets the
@@ -13032,7 +13202,7 @@ value of a shared integer constant.
 .IP "\fBssp-buffer-size\fR" 4
 .IX Item "ssp-buffer-size"
 The minimum size of buffers (i.e. arrays) that receive stack smashing
-protection when \fB\-fstack\-protection\fR is used.
+protection when \fB\-fstack\-protector\fR is used.
 .IP "\fBmin-size-for-stack-sharing\fR" 4
 .IX Item "min-size-for-stack-sharing"
 The minimum size of variables taking part in stack slot sharing when not
@@ -13551,6 +13721,9 @@ finite state automaton jump thread path.
 .IP "\fBmax-fsm-thread-length\fR" 4
 .IX Item "max-fsm-thread-length"
 Maximum number of basic blocks on a jump thread path.
+.IP "\fBthreader-debug\fR" 4
+.IX Item "threader-debug"
+threader\-debug=[none|all] Enables verbose dumping of the threader solver.
 .IP "\fBparloops-chunk-size\fR" 4
 .IX Item "parloops-chunk-size"
 Chunk size of omp schedule for loops parallelized by parloops.
@@ -13612,10 +13785,6 @@ by the \s-1RTL\s0 if-conversion pass for a branch that is considered unpredictab
 .IX Item "max-variable-expansions-in-unroller"
 If \fB\-fvariable\-expansion\-in\-unroller\fR is used, the maximum number
 of times that an individual variable will be expanded during loop unrolling.
-.IP "\fBtracer-min-branch-probability-feedback\fR" 4
-.IX Item "tracer-min-branch-probability-feedback"
-Stop forward growth if the probability of best edge is less than
-this threshold (in percent). Used when profile feedback is available.
 .IP "\fBpartial-inlining-entry-probability\fR" 4
 .IX Item "partial-inlining-entry-probability"
 Maximum probability of the entry \s-1BB\s0 of split region
@@ -13665,10 +13834,6 @@ A threshold on the average loop count considered by the swing modulo scheduler.
 .IX Item "sms-dfa-history"
 The number of cycles the swing modulo scheduler considers when checking
 conflicts using \s-1DFA.\s0
-.IP "\fBmax-inline-insns-recursive-auto\fR" 4
-.IX Item "max-inline-insns-recursive-auto"
-The maximum number of instructions non-inline function
-can grow to via recursive inlining.
 .IP "\fBgraphite-allow-codegen-errors\fR" 4
 .IX Item "graphite-allow-codegen-errors"
 Whether codegen errors should be ICEs when \fB\-fchecking\fR.
@@ -13702,14 +13867,6 @@ Maximum number of arrays per scop.
 .IP "\fBmax-vartrack-reverse-op-size\fR" 4
 .IX Item "max-vartrack-reverse-op-size"
 Max. size of loc list for which reverse ops should be added.
-.IP "\fBtracer-dynamic-coverage-feedback\fR" 4
-.IX Item "tracer-dynamic-coverage-feedback"
-The percentage of function, weighted by execution frequency,
-that must be covered by trace formation.
-Used when profile feedback is available.
-.IP "\fBmax-inline-recursive-depth-auto\fR" 4
-.IX Item "max-inline-recursive-depth-auto"
-The maximum depth of recursive inlining for non-inline functions.
 .IP "\fBfsm-scale-path-stmts\fR" 4
 .IX Item "fsm-scale-path-stmts"
 Scale factor to apply to the number of statements in a threading path
@@ -13718,10 +13875,6 @@ when comparing to the number of (scaled) blocks.
 .IX Item "uninit-control-dep-attempts"
 Maximum number of nested calls to search for control dependencies
 during uninitialized variable analysis.
-.IP "\fBsra-max-scalarization-size-Osize\fR" 4
-.IX Item "sra-max-scalarization-size-Osize"
-Maximum size, in storage units, of an aggregate
-which should be considered for scalarization when compiling for size.
 .IP "\fBfsm-scale-path-blocks\fR" 4
 .IX Item "fsm-scale-path-blocks"
 Scale factor to apply to the number of blocks in a threading path
@@ -14139,6 +14292,13 @@ feedback because the profile data will not be found during the optimized build.
 In such setups \fB\-fprofile\-prefix\-path=\fR\fIpath\fR with \fIpath\fR
 pointing to the base directory of the build can be used to strip the irrelevant
 part of the path and keep all file names relative to the main build directory.
+.IP "\fB\-fprofile\-prefix\-map=\fR\fIold\fR\fB=\fR\fInew\fR" 4
+.IX Item "-fprofile-prefix-map=old=new"
+When compiling files residing in directory \fI\fIold\fI\fR, record
+profiling information (with \fB\-\-coverage\fR)
+describing them as if the files resided in
+directory \fI\fInew\fI\fR instead.
+See also \fB\-ffile\-prefix\-map\fR.
 .IP "\fB\-fprofile\-update=\fR\fImethod\fR" 4
 .IX Item "-fprofile-update=method"
 Alter the update method for an application instrumented for profile
@@ -15446,6 +15606,9 @@ Use the \fBgold\fR linker instead of the default linker.
 .IP "\fB\-fuse\-ld=lld\fR" 4
 .IX Item "-fuse-ld=lld"
 Use the \s-1LLVM\s0 \fBlld\fR linker instead of the default linker.
+.IP "\fB\-fuse\-ld=mold\fR" 4
+.IX Item "-fuse-ld=mold"
+Use the Modern Linker (\fBmold\fR) instead of the default linker.
 .IP "\fB\-l\fR\fIlibrary\fR" 4
 .IX Item "-llibrary"
 .PD 0
@@ -16531,7 +16694,7 @@ visibility so that the \fBtype_info\fR nodes are unified between
 the DSOs.
 .Sp
 An overview of these techniques, their benefits and how to use them
-is at <\fBhttp://gcc.gnu.org/wiki/Visibility\fR>.
+is at <\fBhttps://gcc.gnu.org/wiki/Visibility\fR>.
 .IP "\fB\-fstrict\-volatile\-bitfields\fR" 4
 .IX Item "-fstrict-volatile-bitfields"
 This option should be used if accesses to volatile bit-fields (or other
@@ -17959,6 +18122,8 @@ and the features that they enable by default:
 .IX Item "armv8.6-a : Armv8.6-A : armv8.5-a, +bf16, +i8mm"
 .IP "\fBarmv8.7\-a\fR : Armv8.7\-A : \fBarmv8.6\-a\fR, \fB+ls64\fR" 4
 .IX Item "armv8.7-a : Armv8.7-A : armv8.6-a, +ls64"
+.IP "\fBarmv8.8\-a\fR : Armv8.8\-a : \fBarmv8.7\-a\fR, \fB+mops\fR" 4
+.IX Item "armv8.8-a : Armv8.8-a : armv8.7-a, +mops"
 .IP "\fBarmv9\-a\fR : Armv9\-A : \fBarmv8.5\-a\fR, \fB+sve\fR, \fB+sve2\fR" 4
 .IX Item "armv9-a : Armv9-A : armv8.5-a, +sve, +sve2"
 .IP "\fBarmv8\-r\fR : Armv8\-R : \fBarmv8\-r\fR" 4
@@ -18282,6 +18447,11 @@ prior to Armv8.2\-A is not supported.
 .IX Item "ls64"
 Enable the 64\-byte atomic load and store instructions for accelerators.
 This option is enabled by default for \fB\-march=armv8.7\-a\fR.
+.IP "\fBmops\fR" 4
+.IX Item "mops"
+Enable the instructions to accelerate memory operations like \f(CW\*(C`memcpy\*(C'\fR,
+\&\f(CW\*(C`memmove\*(C'\fR, \f(CW\*(C`memset\*(C'\fR.  This option is enabled by default for
+\&\fB\-march=armv8.8\-a\fR
 .IP "\fBflagm\fR" 4
 .IX Item "flagm"
 Enable the Flag Manipulation instructions Extension.
@@ -19279,6 +19449,7 @@ Permissible names are:
 \&\fBarmv7\-m\fR, \fBarmv7e\-m\fR,
 \&\fBarmv8\-m.base\fR, \fBarmv8\-m.main\fR,
 \&\fBarmv8.1\-m.main\fR,
+\&\fBarmv9\-a\fR,
 \&\fBiwmmxt\fR and \fBiwmmxt2\fR.
 .Sp
 Additionally, the following architectures, which lack support for the
@@ -19850,7 +20021,7 @@ Permissible names are: \fBarm7tdmi\fR, \fBarm7tdmi\-s\fR, \fBarm710t\fR,
 \&\fBcortex\-a32\fR, \fBcortex\-a35\fR, \fBcortex\-a53\fR, \fBcortex\-a55\fR,
 \&\fBcortex\-a57\fR, \fBcortex\-a72\fR, \fBcortex\-a73\fR, \fBcortex\-a75\fR,
 \&\fBcortex\-a76\fR, \fBcortex\-a76ae\fR, \fBcortex\-a77\fR,
-\&\fBcortex\-a78\fR, \fBcortex\-a78ae\fR, \fBcortex\-a78c\fR,
+\&\fBcortex\-a78\fR, \fBcortex\-a78ae\fR, \fBcortex\-a78c\fR, \fBcortex\-a710\fR,
 \&\fBares\fR, \fBcortex\-r4\fR, \fBcortex\-r4f\fR, \fBcortex\-r5\fR,
 \&\fBcortex\-r7\fR, \fBcortex\-r8\fR, \fBcortex\-r52\fR, \fBcortex\-r52plus\fR,
 \&\fBcortex\-m0\fR, \fBcortex\-m0plus\fR, \fBcortex\-m1\fR, \fBcortex\-m3\fR,
@@ -24083,7 +24254,7 @@ generates 64\-bit code when you select a 64\-bit architecture, but you
 can use \fB\-mgp32\fR to get 32\-bit code instead.
 .Sp
 For information about the O64 \s-1ABI,\s0 see
-<\fBhttp://gcc.gnu.org/projects/mipso64\-abi.html\fR>.
+<\fBhttps://gcc.gnu.org/projects/mipso64\-abi.html\fR>.
 .Sp
 \&\s-1GCC\s0 supports a variant of the o32 \s-1ABI\s0 in which floating-point registers
 are 64 rather than 32 bits wide.  You can select this combination with
@@ -24625,6 +24796,16 @@ Enable (disable) an optimization that pairs consecutive load or store
 instructions to enable load/store bonding.  This option is enabled by
 default but only takes effect when the selected architecture is known
 to support bonding.
+.IP "\fB\-munaligned\-access\fR" 4
+.IX Item "-munaligned-access"
+.PD 0
+.IP "\fB\-mno\-unaligned\-access\fR" 4
+.IX Item "-mno-unaligned-access"
+.PD
+Enable (disable) direct unaligned access for \s-1MIPS\s0 Release 6.
+MIPSr6 requires load/store unaligned-access support,
+by hardware or trap&emulate.
+So \fB\-mno\-unaligned\-access\fR may be needed by kernel.
 .IP "\fB\-mmemcpy\fR" 4
 .IX Item "-mmemcpy"
 .PD 0
@@ -26568,7 +26749,7 @@ Supported values for \fIcpu_type\fR are \fB401\fR, \fB403\fR,
 \&\fBe6500\fR, \fBec603e\fR, \fBG3\fR, \fBG4\fR, \fBG5\fR,
 \&\fBtitan\fR, \fBpower3\fR, \fBpower4\fR, \fBpower5\fR, \fBpower5+\fR,
 \&\fBpower6\fR, \fBpower6x\fR, \fBpower7\fR, \fBpower8\fR,
-\&\fBpower9\fR, \fBfuture\fR, \fBpowerpc\fR, \fBpowerpc64\fR,
+\&\fBpower9\fR, \fBpower10\fR, \fBpowerpc\fR, \fBpowerpc64\fR,
 \&\fBpowerpc64le\fR, \fBrs64\fR, and \fBnative\fR.
 .Sp
 \&\fB\-mcpu=powerpc\fR, \fB\-mcpu=powerpc64\fR, and
@@ -26755,10 +26936,9 @@ Enable/disable the \fI_\|_float128\fR keyword for \s-1IEEE\s0 128\-bit floating 
 and use either software emulation for \s-1IEEE\s0 128\-bit floating point or
 hardware instructions.
 .Sp
-The \s-1VSX\s0 instruction set (\fB\-mvsx\fR, \fB\-mcpu=power7\fR,
-\&\fB\-mcpu=power8\fR), or \fB\-mcpu=power9\fR must be enabled to
-use the \s-1IEEE\s0 128\-bit floating point support.  The \s-1IEEE\s0 128\-bit
-floating point support only works on PowerPC Linux systems.
+The \s-1VSX\s0 instruction set (\fB\-mvsx\fR) must be enabled to use the \s-1IEEE\s0
+128\-bit floating point support.  The \s-1IEEE\s0 128\-bit floating point is only
+supported on Linux.
 .Sp
 The default for \fB\-mfloat128\fR is enabled on PowerPC Linux
 systems using the \s-1VSX\s0 instruction set, and disabled on other systems.
@@ -27595,10 +27775,9 @@ the offset with a symbol reference to a canary in the \s-1TLS\s0 block.
 .IP "\fB\-mno\-pcrel\fR" 4
 .IX Item "-mno-pcrel"
 .PD
-Generate (do not generate) pc-relative addressing when the option
-\&\fB\-mcpu=future\fR is used.  The \fB\-mpcrel\fR option requires
-that the medium code model (\fB\-mcmodel=medium\fR) and prefixed
-addressing (\fB\-mprefixed\fR) options are enabled.
+Generate (do not generate) pc-relative addressing.  The \fB\-mpcrel\fR
+option requires that the medium code model (\fB\-mcmodel=medium\fR)
+and prefixed addressing (\fB\-mprefixed\fR) options are enabled.
 .IP "\fB\-mprefixed\fR" 4
 .IX Item "-mprefixed"
 .PD 0
@@ -27606,15 +27785,17 @@ addressing (\fB\-mprefixed\fR) options are enabled.
 .IX Item "-mno-prefixed"
 .PD
 Generate (do not generate) addressing modes using prefixed load and
-store instructions when the option \fB\-mcpu=future\fR is used.
+store instructions.  The \fB\-mprefixed\fR option requires that
+the option \fB\-mcpu=power10\fR (or later) is enabled.
 .IP "\fB\-mmma\fR" 4
 .IX Item "-mmma"
 .PD 0
 .IP "\fB\-mno\-mma\fR" 4
 .IX Item "-mno-mma"
 .PD
-Generate (do not generate) the \s-1MMA\s0 instructions when the option
-\&\fB\-mcpu=future\fR is used.
+Generate (do not generate) the \s-1MMA\s0 instructions.  The \fB\-mma\fR
+option requires that the option \fB\-mcpu=power10\fR (or later)
+is enabled.
 .IP "\fB\-mrop\-protect\fR" 4
 .IX Item "-mrop-protect"
 .PD 0
@@ -29333,6 +29514,14 @@ Do output those jump instructions, on the assumption that the
 .IP "\fB\-mg\fR" 4
 .IX Item "-mg"
 Output code for G\-format floating-point numbers instead of D\-format.
+.IP "\fB\-mlra\fR" 4
+.IX Item "-mlra"
+.PD 0
+.IP "\fB\-mno\-lra\fR" 4
+.IX Item "-mno-lra"
+.PD
+Enable Local Register Allocation.  This is still experimental for the \s-1VAX,\s0
+so by default the compiler uses standard reload.
 .PP
 \fIVisium Options\fR
 .IX Subsection "Visium Options"
@@ -30527,6 +30716,16 @@ This option instructs \s-1GCC\s0 to use 128\-bit \s-1AVX\s0 instructions instead
 .IX Item "-mprefer-vector-width=opt"
 This option instructs \s-1GCC\s0 to use \fIopt\fR\-bit vector width in instructions
 instead of default on the selected platform.
+.IP "\fB\-mmove\-max=\fR\fIbits\fR" 4
+.IX Item "-mmove-max=bits"
+This option instructs \s-1GCC\s0 to set the maximum number of bits can be
+moved from memory to memory efficiently to \fIbits\fR.  The valid
+\&\fIbits\fR are 128, 256 and 512.
+.IP "\fB\-mstore\-max=\fR\fIbits\fR" 4
+.IX Item "-mstore-max=bits"
+This option instructs \s-1GCC\s0 to set the maximum number of bits can be
+stored to memory efficiently to \fIbits\fR.  The valid \fIbits\fR are
+128, 256 and 512.
 .RS 4
 .IP "\fBnone\fR" 4
 .IX Item "none"
@@ -31051,6 +31250,12 @@ The default for those is as specified in the relevant \s-1ABI.\s0
 Generate code that uses only the general-purpose registers.  This
 prevents the compiler from using floating-point, vector, mask and bound
 registers.
+.IP "\fB\-mrelax\-cmpxchg\-loop\fR" 4
+.IX Item "-mrelax-cmpxchg-loop"
+Relax cmpxchg loop by emitting an early load and compare before cmpxchg,
+execute pause if load value is not expected. This reduces excessive
+cachline bouncing when and works for all atomic logic fetch builtins
+that generates compare and swap loop.
 .IP "\fB\-mindirect\-branch=\fR\fIchoice\fR" 4
 .IX Item "-mindirect-branch=choice"
 Convert indirect call and jump with \fIchoice\fR.  The default is
@@ -31091,6 +31296,19 @@ not be reachable in the large code model.
 .IP "\fB\-mindirect\-branch\-register\fR" 4
 .IX Item "-mindirect-branch-register"
 Force indirect call and jump via register.
+.IP "\fB\-mharden\-sls=\fR\fIchoice\fR" 4
+.IX Item "-mharden-sls=choice"
+Generate code to mitigate against straight line speculation (\s-1SLS\s0) with
+\&\fIchoice\fR.  The default is \fBnone\fR which disables all \s-1SLS\s0
+hardening.  \fBreturn\fR enables \s-1SLS\s0 hardening for function return.
+\&\fBindirect-branch\fR enables \s-1SLS\s0 hardening for indirect branch.
+\&\fBall\fR enables all \s-1SLS\s0 hardening.
+.IP "\fB\-mindirect\-branch\-cs\-prefix\fR" 4
+.IX Item "-mindirect-branch-cs-prefix"
+Add \s-1CS\s0 prefix to call and jmp to indirect thunk with branch target in
+r8\-r15 registers so that the call and jmp instruction length is 6 bytes
+to allow them to be replaced with \fBlfence; call *%r8\-r15\fR or
+\&\fBlfence; jmp *%r8\-r15\fR at run-time.
 .PP
 These \fB\-m\fR switches are supported in addition to the above
 on x86\-64 processors in 64\-bit environments.
@@ -31632,7 +31850,7 @@ and the Info entries for \fIgcc\fR, \fIcpp\fR, \fIas\fR,
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 See the Info entry for \fBgcc\fR, or
-<\fBhttp://gcc.gnu.org/onlinedocs/gcc/Contributors.html\fR>,
+<\fBhttps://gcc.gnu.org/onlinedocs/gcc/Contributors.html\fR>,
 for contributors to \s-1GCC.\s0
 .SH "COPYRIGHT"
 .IX Header "COPYRIGHT"

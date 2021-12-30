@@ -2979,6 +2979,14 @@ The default value of this hook is based on target's libc.",
  bool, (void),
  default_has_ifunc_p)
 
+/* True if it is OK to reference indirect function resolvers locally.  */
+DEFHOOK
+(ifunc_ref_local_ok,
+ "Return true if it is OK to reference indirect function resolvers\n\
+locally.  The default is to return false.",
+ bool, (void),
+ hook_bool_void_false)
+
 /* True if it is OK to do sibling call optimization for the specified
    call expression EXP.  DECL will be the called function, or NULL if
    this is an indirect call.  */
@@ -6776,6 +6784,16 @@ DEFHOOKPOD
  "This value is true if the target supports some ``native'' method of\n\
 collecting constructors and destructors to be run at startup and exit.\n\
 It is false if we must use @command{collect2}.",
+ bool, false)
+
+/* True if the target wants DTORs to be run from cxa_atexit.  */
+DEFHOOKPOD
+(dtors_from_cxa_atexit,
+ "This value is true if the target wants destructors to be queued to be\n\
+run from __cxa_atexit.  If this is the case then, for each priority level,\n\
+a new constructor will be entered that registers the destructors for that\n\
+level with __cxa_atexit (and there will be no destructors emitted).\n\
+It is false the method implied by @code{have_ctors_dtors} is used.",
  bool, false)
 
 /* True if thread-local storage is supported.  */

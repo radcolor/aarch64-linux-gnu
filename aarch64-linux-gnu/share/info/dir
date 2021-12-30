@@ -41,6 +41,7 @@ GNU C library functions and macros
 * __va_copy: (libc)Argument Macros.
 * __x86_get_cpuid_feature_leaf: (libc)X86.
 * _Complex_I: (libc)Complex Numbers.
+* _dl_find_object: (libc)Dynamic Linker Introspection.
 * _exit: (libc)Termination Internals.
 * _Exit: (libc)Termination Internals.
 * _flushlbf: (libc)Flushing Buffers.
@@ -404,6 +405,9 @@ GNU C library functions and macros
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
+* DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48_r: (libc)SVID Random.
@@ -840,10 +844,10 @@ GNU C library functions and macros
 * fMxsubfNx: (libc)Misc FP Arithmetic.
 * fMxsubfN: (libc)Misc FP Arithmetic.
 * fnmatch: (libc)Wildcard Matching.
-* fopen64: (libc)Opening Streams.
 * FOPEN_MAX: (libc)Opening Streams.
 * fopencookie: (libc)Streams and Cookies.
 * fopen: (libc)Opening Streams.
+* fopen64: (libc)Opening Streams.
 * forkpty: (libc)Pseudo-Terminal Pairs.
 * fork: (libc)Creating a Process.
 * FP_ILOGB0: (libc)Exponents and Logarithms.
@@ -949,10 +953,10 @@ GNU C library functions and macros
 * getgroups: (libc)Reading Persona.
 * gethostbyaddr_r: (libc)Host Names.
 * gethostbyaddr: (libc)Host Names.
-* gethostbyname_r: (libc)Host Names.
-* gethostbyname: (libc)Host Names.
 * gethostbyname2_r: (libc)Host Names.
 * gethostbyname2: (libc)Host Names.
+* gethostbyname_r: (libc)Host Names.
+* gethostbyname: (libc)Host Names.
 * gethostent: (libc)Host Names.
 * gethostid: (libc)Host Identification.
 * gethostname: (libc)Host Identification.
@@ -1316,9 +1320,9 @@ GNU C library functions and macros
 * mkstemp: (libc)Temporary Files.
 * mktemp: (libc)Temporary Files.
 * mktime: (libc)Broken-down Time.
+* mlock2: (libc)Page Lock Functions.
 * mlockall: (libc)Page Lock Functions.
 * mlock: (libc)Page Lock Functions.
-* mlock2: (libc)Page Lock Functions.
 * mmap: (libc)Memory-mapped I/O.
 * mmap64: (libc)Memory-mapped I/O.
 * modffNx: (libc)Rounding Functions.
@@ -1452,13 +1456,13 @@ GNU C library functions and macros
 * on_exit: (libc)Cleanups on Exit.
 * ONLCR: (libc)Output Modes.
 * ONOEOT: (libc)Output Modes.
-* open64: (libc)Opening and Closing Files.
 * OPEN_MAX: (libc)General Limits.
 * open_memstream: (libc)String Streams.
 * opendir: (libc)Opening a Directory.
 * openlog: (libc)openlog.
 * openpty: (libc)Pseudo-Terminal Pairs.
 * open: (libc)Opening and Closing Files.
+* open64: (libc)Opening and Closing Files.
 * OPOST: (libc)Output Modes.
 * OXTABS: (libc)Output Modes.
 * P_tmpdir: (libc)Temporary Files.
@@ -1494,12 +1498,12 @@ GNU C library functions and macros
 * powf: (libc)Exponents and Logarithms.
 * powl: (libc)Exponents and Logarithms.
 * pow: (libc)Exponents and Logarithms.
+* pread64: (libc)I/O Primitives.
 * preadv: (libc)Scatter-Gather.
 * preadv2: (libc)Scatter-Gather.
 * preadv64v2: (libc)Scatter-Gather.
 * preadv64: (libc)Scatter-Gather.
 * pread: (libc)I/O Primitives.
-* pread64: (libc)I/O Primitives.
 * printf_size_info: (libc)Predefined Printf Handlers.
 * printf_size: (libc)Predefined Printf Handlers.
 * printf: (libc)Formatted Output Functions.
@@ -1535,12 +1539,12 @@ GNU C library functions and macros
 * putwchar: (libc)Simple Output.
 * putwc: (libc)Simple Output.
 * putw: (libc)Simple Output.
+* pwrite64: (libc)I/O Primitives.
 * pwritev: (libc)Scatter-Gather.
 * pwritev2: (libc)Scatter-Gather.
 * pwritev64v2: (libc)Scatter-Gather.
 * pwritev64: (libc)Scatter-Gather.
 * pwrite: (libc)I/O Primitives.
-* pwrite64: (libc)I/O Primitives.
 * qecvt_r: (libc)System V Number Conversion.
 * qecvt: (libc)System V Number Conversion.
 * qfcvt_r: (libc)System V Number Conversion.
@@ -1556,10 +1560,10 @@ GNU C library functions and macros
 * rand: (libc)ISO Random.
 * rawmemchr: (libc)Search Functions.
 * RE_DUP_MAX: (libc)General Limits.
-* readdir64_r: (libc)Reading/Closing Directory.
 * readdir64: (libc)Reading/Closing Directory.
 * readdir_r: (libc)Reading/Closing Directory.
 * readdir: (libc)Reading/Closing Directory.
+* readdir64_r: (libc)Reading/Closing Directory.
 * readlink: (libc)Symbolic Links.
 * readv: (libc)Scatter-Gather.
 * read: (libc)I/O Primitives.
@@ -1602,6 +1606,7 @@ GNU C library functions and macros
 * roundl: (libc)Rounding Functions.
 * round: (libc)Rounding Functions.
 * rpmatch: (libc)Yes-or-No Questions.
+* RSEQ_SIG: (libc)Restartable Sequences.
 * S_IFMT: (libc)Testing File Type.
 * S_ISBLK: (libc)Testing File Type.
 * S_ISCHR: (libc)Testing File Type.
@@ -1820,11 +1825,11 @@ GNU C library functions and macros
 * sqrtf: (libc)Exponents and Logarithms.
 * sqrtl: (libc)Exponents and Logarithms.
 * sqrt: (libc)Exponents and Logarithms.
-* srand48_r: (libc)SVID Random.
-* srand48: (libc)SVID Random.
 * srandom_r: (libc)BSD Random.
 * srandom: (libc)BSD Random.
 * srand: (libc)ISO Random.
+* srand48_r: (libc)SVID Random.
+* srand48: (libc)SVID Random.
 * sscanf: (libc)Formatted Input Functions.
 * ssignal: (libc)Basic Signal Handling.
 * SSIZE_MAX: (libc)General Limits.
