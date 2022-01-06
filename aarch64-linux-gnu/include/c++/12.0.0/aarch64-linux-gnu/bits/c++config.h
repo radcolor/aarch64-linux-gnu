@@ -1,6 +1,6 @@
 // Predefined symbols and macros -*- C++ -*-
 
-// Copyright (C) 1997-2021 Free Software Foundation, Inc.
+// Copyright (C) 1997-2022 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20211230
+#define __GLIBCXX__ 20220106
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -175,10 +175,18 @@
 #endif
 
 #ifndef _GLIBCXX20_CONSTEXPR
-# if __cplusplus > 201703L
+# if __cplusplus >= 202002L
 #  define _GLIBCXX20_CONSTEXPR constexpr
 # else
 #  define _GLIBCXX20_CONSTEXPR
+# endif
+#endif
+
+#ifndef _GLIBCXX23_CONSTEXPR
+# if __cplusplus >= 202100L
+#  define _GLIBCXX23_CONSTEXPR constexpr
+# else
+#  define _GLIBCXX23_CONSTEXPR
 # endif
 #endif
 

@@ -1,5 +1,5 @@
 /* Empty definitions required for __MATHCALL_VEC unfolding in mathcalls.h.
-   Copyright (C) 2014-2021 Free Software Foundation, Inc.
+   Copyright (C) 2014-2022 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -307,4 +307,26 @@
 #define __DECL_SIMD_asinhf32x
 #define __DECL_SIMD_asinhf64x
 #define __DECL_SIMD_asinhf128x
+
+#define __DECL_SIMD_erfc
+#define __DECL_SIMD_erfcf
+#define __DECL_SIMD_erfcl
+#define __DECL_SIMD_erfcf16
+#define __DECL_SIMD_erfcf32
+#define __DECL_SIMD_erfcf64
+#define __DECL_SIMD_erfcf128
+#define __DECL_SIMD_erfcf32x
+#define __DECL_SIMD_erfcf64x
+#define __DECL_SIMD_erfcf128x
+
+#define __DECL_SIMD_tan
+#define __DECL_SIMD_tanf
+#define __DECL_SIMD_tanl
+#define __DECL_SIMD_tanf16
+#define __DECL_SIMD_tanf32
+#define __DECL_SIMD_tanf64
+#define __DECL_SIMD_tanf128
+#define __DECL_SIMD_tanf32x
+#define __DECL_SIMD_tanf64x
+#define __DECL_SIMD_tanf128x
 #endif

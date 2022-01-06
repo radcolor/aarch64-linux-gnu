@@ -1,5 +1,5 @@
 /* Prototype declarations for math functions; helper file for <math.h>.
-   Copyright (C) 1996-2021 Free Software Foundation, Inc.
+   Copyright (C) 1996-2022 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -63,7 +63,7 @@ __MATHCALL_VEC (cos,, (_Mdouble_ __x));
 /* Sine of X.  */
 __MATHCALL_VEC (sin,, (_Mdouble_ __x));
 /* Tangent of X.  */
-__MATHCALL (tan,, (_Mdouble_ __x));
+__MATHCALL_VEC (tan,, (_Mdouble_ __x));
 
 /* Hyperbolic functions.  */
 
@@ -229,7 +229,7 @@ __MATHCALL (yn,, (int, _Mdouble_));
 #if defined __USE_XOPEN || defined __USE_ISOC99
 /* Error and gamma functions.  */
 __MATHCALL_VEC (erf,, (_Mdouble_));
-__MATHCALL (erfc,, (_Mdouble_));
+__MATHCALL_VEC (erfc,, (_Mdouble_));
 __MATHCALL (lgamma,, (_Mdouble_));
 #endif
 
