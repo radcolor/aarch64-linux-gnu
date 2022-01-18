@@ -5871,7 +5871,7 @@ Function and Macro Index
 * gmtime_r:                              Broken-down Time.    (line 143)
 * grantpt:                               Allocation.          (line  26)
 * grantpt <1>:                           Configuring and compiling.
-                                                              (line 195)
+                                                              (line 203)
 * gsignal:                               Signaling Yourself.  (line  19)
 * gtty:                                  BSD Terminal Modes.  (line  31)
 * hasmntopt:                             mtab.                (line 205)

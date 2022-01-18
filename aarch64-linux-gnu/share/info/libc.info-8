@@ -5214,9 +5214,10 @@ more general feature select macro, is defined.  The default set of
 features includes these constants.  *Note Feature Test Macros::.
 
    All values are of type ‘double’.  As an extension, the GNU C Library
-also defines these constants with type ‘long double’.  The ‘long double’
-macros have a lowercase ‘l’ appended to their names: ‘M_El’, ‘M_PIl’,
-and so forth.  These are only available if ‘_GNU_SOURCE’ is defined.
+also defines these constants with type ‘long double’ and ‘float’.  The
+‘long double’ macros have a lowercase ‘l’ while the ‘float’ macros have
+a lowercase ‘f’ appended to their names: ‘M_El’, ‘M_PIl’, and so forth.
+These are only available if ‘_GNU_SOURCE’ is defined.
 
    Likewise, the GNU C Library also defines these constants with the
 types ‘_FloatN’ and ‘_FloatNx’ for the machines that have support for
@@ -7088,36 +7089,36 @@ ynf128        5               -               -               -               -
 Function      Nios II         OpenRISC        PowerPC         PowerPC         RISC-V
                                                               soft-float
 acosf         1               1               1               1               1
-acos          1               1               1               1               1
+acos          1               1               1               1               -
 acosl         -               -               1               1               1
 acosf128      -               -               1               -               -
 acoshf        2               2               2               2               2
 acosh         2               2               2               2               2
-acoshl        -               -               2               1               4
+acoshl        -               -               2               1               2
 acoshf128     -               -               4               -               -
 add_ldoublef  -               -               1               1               -
 add_ldouble   -               -               1               1               -
 add_ldoublel  -               -               -               -               -
 add_ldoublef128-              -               -               -               -
 asinf         1               1               1               1               1
-asin          1               1               1               1               1
+asin          1               1               1               1               -
 asinl         -               -               2               2               1
 asinf128      -               -               1               -               -
 asinhf        2               2               2               2               2
-asinh         2               2               2               2               2
-asinhl        -               -               2               2               4
+asinh         2               2               2               2               1
+asinhl        -               -               2               2               3
 asinhf128     -               -               4               -               -
 atanf         1               1               1               1               1
-atan          1               1               1               1               1
+atan          1               1               1               1               -
 atanl         -               -               1               1               1
 atanf128      -               -               1               -               -
 atan2f        2               2               1               2               1
 atan2         -               -               -               -               -
-atan2l        -               -               2               2               2
+atan2l        -               -               2               2               1
 atan2f128     -               -               2               -               -
 atanhf        2               2               2               2               2
 atanh         2               2               2               2               2
-atanhl        -               -               2               2               4
+atanhl        -               -               2               2               3
 atanhf128     -               -               4               -               -
 cabsf         -               -               -               -               -
 cabs          1               1               1               1               1
@@ -7152,7 +7153,7 @@ catanh        1 + i 1         1 + i 1         1 + i 1         1 + i 1         1 
 catanhl       -               -               2 + i 3         2 + i 3         1 + i 1
 catanhf128    -               -               1 + i 1         -               -
 cbrtf         1               1               1               1               1
-cbrt          4               4               4               4               4
+cbrt          4               4               4               4               3
 cbrtl         -               -               1               1               1
 cbrtf128      -               -               1               -               -
 ccosf         1 + i 1         1 + i 1         1 + i 1         1 + i 1         1 + i 1
@@ -7168,7 +7169,7 @@ cexp          2 + i 1         2 + i 1         2 + i 1         2 + i 1         2 
 cexpl         -               -               2 + i 2         1 + i 1         1 + i 1
 cexpf128      -               -               1 + i 1         -               -
 clogf         3 + i 1         3 + i 1         3 + i 1         3 + i 1         3 + i 1
-clog          3 + i 1         3 + i 1         3 + i 1         3 + i 1         3 + i 1
+clog          3 + i 1         3 + i 1         3 + i 1         3 + i 1         3 + i 0
 clogl         -               -               5 + i 2         2 + i 2         2 + i 1
 clogf128      -               -               2 + i 1         -               -
 clog10f       4 + i 2         4 + i 2         4 + i 2         4 + i 2         4 + i 2
@@ -7177,11 +7178,11 @@ clog10l       -               -               3 + i 2         3 + i 2         2 
 clog10f128    -               -               2 + i 2         -               -
 cosf          1               1               3               1               1
 cos           1               1               1               1               1
-cosl          -               -               4               4               2
+cosl          -               -               4               4               1
 cosf128       -               -               2               -               -
 coshf         2               2               2               2               2
-cosh          2               2               2               2               2
-coshl         -               -               3               3               2
+cosh          2               2               2               2               1
+coshl         -               -               3               3               1
 coshf128      -               -               2               -               -
 cpowf         5 + i 2         5 + i 2         5 + i 2         5 + i 2         5 + i 2
 cpow          2 + i 0         2 + i 0         2 + i 0         2 + i 0         2 + i 0
@@ -7217,10 +7218,10 @@ erfl          -               -               1               1               1
 erff128       -               -               1               -               -
 erfcf         3               3               2               3               2
 erfc          5               5               2               5               2
-erfcl         -               -               3               3               4
+erfcl         -               -               3               3               2
 erfcf128      -               -               4               -               -
 expf          1               1               1               1               1
-exp           1               1               1               1               1
+exp           1               1               1               1               -
 expl          -               -               1               1               1
 expf128       -               -               1               -               -
 exp10f        -               1               1               -               -
@@ -7233,7 +7234,7 @@ exp2l         -               -               2               1               1
 exp2f128      -               -               1               -               -
 expm1f        1               1               1               1               1
 expm1         1               1               1               1               1
-expm1l        -               -               1               1               2
+expm1l        -               -               1               1               1
 expm1f128     -               -               2               -               -
 fmaf          -               -               -               -               -
 fma           -               -               -               -               -
@@ -7255,12 +7256,12 @@ hypotf        -               -               -               -               -
 hypot         1               1               1               1               1
 hypotl        -               -               1               1               1
 hypotf128     -               -               1               -               -
-j0f           8               9               9               9               9
-j0            2               2               3               2               3
+j0f           8               9               9               9               8
+j0            2               2               3               2               2
 j0l           -               -               5               4               2
 j0f128        -               -               7               -               -
-j1f           9               9               9               9               9
-j1            2               4               4               4               4
+j1f           9               9               9               9               8
+j1            2               4               4               4               2
 j1l           -               -               6               10              4
 j1f128        -               -               4               -               -
 jnf           4               4               4               4               4
@@ -7272,20 +7273,20 @@ lgamma        4               4               3               4               3
 lgammal       -               -               3               3               5
 lgammaf128    -               -               5               -               -
 logf          1               -               1               1               -
-log           -               -               1               -               1
+log           -               -               1               -               -
 logl          -               -               1               1               1
 logf128       -               -               1               -               -
 log10f        2               2               2               2               2
 log10         2               2               2               2               2
-log10l        -               -               1               1               2
+log10l        -               -               1               1               1
 log10f128     -               -               2               -               -
 log1pf        1               1               1               1               1
 log1p         1               1               1               1               1
-log1pl        -               -               2               2               3
+log1pl        -               -               2               2               2
 log1pf128     -               -               3               -               -
 log2f         1               1               1               1               1
 log2          2               -               1               2               1
-log2l         -               -               1               1               3
+log2l         -               -               1               1               2
 log2f128      -               -               3               -               -
 mul_ldoublef  -               -               1               1               -
 mul_ldouble   -               -               1               1               -
@@ -7301,7 +7302,7 @@ pow10l        -               -               -               -               -
 pow10f128     -               -               -               -               -
 sinf          1               1               1               1               1
 sin           1               1               1               1               1
-sinl          -               -               1               1               2
+sinl          -               -               1               1               1
 sinf128       -               -               2               -               -
 sincosf       1               -               1               1               -
 sincos        1               1               1               1               1
@@ -7332,16 +7333,16 @@ tanh          2               2               2               2               2
 tanhl         -               -               1               1               2
 tanhf128      -               -               2               -               -
 tgammaf       8               8               8               8               8
-tgamma        9               9               9               9               9
+tgamma        9               9               9               9               5
 tgammal       -               -               5               5               4
 tgammaf128    -               -               4               -               -
-y0f           8               9               8               9               8
+y0f           8               9               8               9               6
 y0            3               3               2               3               2
 y0l           -               -               10              10              3
 y0f128        -               -               3               -               -
-y1f           2               9               9               9               9
+y1f           2               9               9               9               2
 y1            3               3               3               3               3
-y1l           -               -               2               2               5
+y1l           -               -               2               2               2
 y1f128        -               -               5               -               -
 ynf           3               3               3               3               3
 yn            3               3               3               3               3

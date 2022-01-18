@@ -1,11 +1,11 @@
 /* Generated at libc build time from syscall list.  */
-/* The system call list corresponds to kernel 5.15.  */
+/* The system call list corresponds to kernel 5.16.  */
 
 #ifndef _SYSCALL_H
 # error "Never use <bits/syscall.h> directly; include <sys/syscall.h> instead."
 #endif
 
-#define __GLIBC_LINUX_VERSION_CODE 331520
+#define __GLIBC_LINUX_VERSION_CODE 331776
 
 #ifdef __NR_FAST_atomic_update
 # define SYS_FAST_atomic_update __NR_FAST_atomic_update
@@ -493,6 +493,10 @@
 
 #ifdef __NR_futex_time64
 # define SYS_futex_time64 __NR_futex_time64
+#endif
+
+#ifdef __NR_futex_waitv
+# define SYS_futex_waitv __NR_futex_waitv
 #endif
 
 #ifdef __NR_futimesat
