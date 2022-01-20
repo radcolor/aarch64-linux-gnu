@@ -6298,8 +6298,9 @@ space.
 Different architectures have different results since their hardware
 support for floating-point operations varies and also the existing
 hardware support is different.  Only the round-to-nearest rounding mode
-is covered by this table, and vector versions of functions are not
-covered.  Functions not listed do not have known errors.
+is covered by this table.  Functions not listed do not have known
+errors.  Vector versions of functions in the x86_64 libmvec library have
+a maximum error of 4 ulps.
 
 Function      AArch64         ARC             ARC             ARM             Alpha
                                               soft-float

@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2022-01-18" "gcc-12.0.1" "GNU"
+.TH GCC 1 "2022-01-20" "gcc-12.0.1" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -820,6 +820,8 @@ in the following sections.
 \&\-mtp=\fR\fIname\fR  \fB\-mtls\-dialect=\fR\fIdialect\fR 
 \&\fB\-mword\-relocations 
 \&\-mfix\-cortex\-m3\-ldrd 
+\&\-mfix\-cortex\-a57\-aes\-1742098 
+\&\-mfix\-cortex\-a72\-aes\-1655431 
 \&\-munaligned\-access 
 \&\-mneon\-for\-64bits 
 \&\-mslow\-flash\-data 
@@ -14115,6 +14117,9 @@ per supernode, before terminating analysis.
 .IX Item "ranger-logical-depth"
 Maximum depth of logical expression evaluation ranger will look through
 when evaluating outgoing edge ranges.
+.IP "\fBrelation-block-limit\fR" 4
+.IX Item "relation-block-limit"
+Maximum number of relations the oracle will register in a basic block.
 .IP "\fBopenacc-kernels\fR" 4
 .IX Item "openacc-kernels"
 Specify mode of OpenACC `kernels' constructs handling.
@@ -20504,6 +20509,20 @@ Some Cortex\-M3 cores can cause data corruption when \f(CW\*(C`ldrd\*(C'\fR inst
 with overlapping destination and base registers are used.  This option avoids
 generating these instructions.  This option is enabled by default when
 \&\fB\-mcpu=cortex\-m3\fR is specified.
+.IP "\fB\-mfix\-cortex\-a57\-aes\-1742098\fR" 4
+.IX Item "-mfix-cortex-a57-aes-1742098"
+.PD 0
+.IP "\fB\-mno\-fix\-cortex\-a57\-aes\-1742098\fR" 4
+.IX Item "-mno-fix-cortex-a57-aes-1742098"
+.IP "\fB\-mfix\-cortex\-a72\-aes\-1655431\fR" 4
+.IX Item "-mfix-cortex-a72-aes-1655431"
+.IP "\fB\-mno\-fix\-cortex\-a72\-aes\-1655431\fR" 4
+.IX Item "-mno-fix-cortex-a72-aes-1655431"
+.PD
+Enable (disable) mitigation for an erratum on Cortex\-A57 and
+Cortex\-A72 that affects the \s-1AES\s0 cryptographic instructions.  This
+option is enabled by default when either \fB\-mcpu=cortex\-a57\fR or
+\&\fB\-mcpu=cortex\-a72\fR is specified.
 .IP "\fB\-munaligned\-access\fR" 4
 .IX Item "-munaligned-access"
 .PD 0
