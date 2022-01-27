@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2022-01-20" "gcc-12.0.1" "GNU"
+.TH GCC 1 "2022-01-27" "gcc-12.0.1" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -352,7 +352,7 @@ in the following sections.
 \&\-Warray\-bounds  \-Warray\-bounds=\fR\fIn\fR  \fB\-Warray\-compare 
 \&\-Wno\-attributes  \-Wattribute\-alias=\fR\fIn\fR \fB\-Wno\-attribute\-alias 
 \&\-Wno\-attribute\-warning  
-\&\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR] 
+\&\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR|\fBucn\fR] 
 \&\fB\-Wbool\-compare  \-Wbool\-operation 
 \&\-Wno\-builtin\-declaration\-mismatch 
 \&\-Wno\-builtin\-macro\-redefined  \-Wc90\-c99\-compat  \-Wc99\-c11\-compat 
@@ -831,7 +831,8 @@ in the following sections.
 \&\-mpure\-code 
 \&\-mcmse 
 \&\-mfix\-cmse\-cve\-2021\-35465 
-\&\-mfdpic\fR
+\&\-mstack\-protector\-guard=\fR\fIguard\fR \fB\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR 
+\&\fB\-mfdpic\fR
 .Sp
 \&\fI\s-1AVR\s0 Options\fR
 \&\fB\-mmcu=\fR\fImcu\fR  \fB\-mabsdata  \-maccumulate\-args 
@@ -7374,8 +7375,8 @@ Attributes considered include \f(CW\*(C`alloc_align\*(C'\fR, \f(CW\*(C`alloc_siz
 This is the default.  You can disable these warnings with either
 \&\fB\-Wno\-attribute\-alias\fR or \fB\-Wattribute\-alias=0\fR.
 .RE
-.IP "\fB\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR]" 4
-.IX Item "-Wbidi-chars=[none|unpaired|any]"
+.IP "\fB\-Wbidi\-chars=\fR[\fBnone\fR|\fBunpaired\fR|\fBany\fR|\fBucn\fR]" 4
+.IX Item "-Wbidi-chars=[none|unpaired|any|ucn]"
 Warn about possibly misleading \s-1UTF\-8\s0 bidirectional control characters in
 comments, string literals, character constants, and identifiers.  Such
 characters can change left-to-right writing direction into right-to-left
@@ -7388,6 +7389,10 @@ There are three levels of warning supported by \s-1GCC.\s0  The default is
 bidi contexts.  \fB\-Wbidi\-chars=none\fR turns the warning off.
 \&\fB\-Wbidi\-chars=any\fR warns about any use of bidirectional control
 characters.
+.Sp
+By default, this warning does not warn about UCNs.  It is, however, possible
+to turn on such checking by using \fB\-Wbidi\-chars=unpaired,ucn\fR or
+\&\fB\-Wbidi\-chars=any,ucn\fR.
 .IP "\fB\-Wbool\-compare\fR" 4
 .IX Item "-Wbool-compare"
 Warn about boolean expression compared with an integer value different from
@@ -20589,6 +20594,17 @@ in some M\-profile devices when using \s-1CMSE\s0 (\s-1CVE\-2021\-365465\s0).  T
 enabled by default when the option \fB\-mcpu=\fR is used with
 \&\f(CW\*(C`cortex\-m33\*(C'\fR, \f(CW\*(C`cortex\-m35p\*(C'\fR or \f(CW\*(C`cortex\-m55\*(C'\fR.  The option
 \&\fB\-mno\-fix\-cmse\-cve\-2021\-35465\fR can be used to disable the mitigation.
+.IP "\fB\-mstack\-protector\-guard=\fR\fIguard\fR" 4
+.IX Item "-mstack-protector-guard=guard"
+.PD 0
+.IP "\fB\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR" 4
+.IX Item "-mstack-protector-guard-offset=offset"
+.PD
+Generate stack protection code using canary at \fIguard\fR.  Supported
+locations are \fBglobal\fR for a global canary or \fBtls\fR for a
+canary accessible via the \s-1TLS\s0 register. The option
+\&\fB\-mstack\-protector\-guard\-offset=\fR is for use with
+\&\fB\-fstack\-protector\-guard=tls\fR and not for use in user-land code.
 .IP "\fB\-mfdpic\fR" 4
 .IX Item "-mfdpic"
 .PD 0

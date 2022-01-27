@@ -9420,263 +9420,10 @@ NULL if the allocation failed.
 
 File: bfd.info,  Node: Internal,  Next: File Caching,  Prev: Opening and Closing,  Up: BFD front end
 
-2.15 Implementation details
-===========================
-
-2.15.1 Internal functions
--------------------------
-
-*Description*
-These routines are used within BFD. They are not intended for export,
-but are documented here for completeness.
-
-2.15.1.1 'bfd_malloc'
-.....................
-
-*Synopsis*
-     extern void * bfd_malloc (bfd_size_type SIZE) ATTRIBUTE_HIDDEN;
-   *Description*
-Returns a pointer to an allocated block of memory that is at least SIZE
-bytes long.  If SIZE is 0 then it will be treated as if it were 1.  If
-SIZE is too big then NULL will be returned.  Returns NULL upon error and
-sets bfd_error.
-
-2.15.1.2 'bfd_realloc'
-......................
-
-*Synopsis*
-     extern void * bfd_realloc (void * MEM, bfd_size_type SIZE) ATTRIBUTE_HIDDEN;
-   *Description*
-Returns a pointer to an allocated block of memory that is at least SIZE
-bytes long.  If SIZE is 0 then it will be treated as if it were 1.  If
-SIZE is too big then NULL will be returned.  If MEM is not NULL then it
-must point to an allocated block of memory.  If this block is large
-enough then MEM may be used as the return value for this function, but
-this is not guaranteed.
-
-   If MEM is not returned then the first N bytes in the returned block
-will be identical to the first N bytes in region pointed to by MEM,
-where N is the lessor of SIZE and the length of the region of memory
-currently addressed by MEM.
-
-   Returns NULL upon error and sets bfd_error.
-
-2.15.1.3 'bfd_realloc_or_free'
-..............................
-
-*Synopsis*
-     extern void * bfd_realloc_or_free (void * MEM, bfd_size_type SIZE) ATTRIBUTE_HIDDEN;
-   *Description*
-Returns a pointer to an allocated block of memory that is at least SIZE
-bytes long.  If SIZE is 0 then no memory will be allocated, MEM will be
-freed, and NULL will be returned.  This will not cause bfd_error to be
-set.
-
-   If SIZE is too big then NULL will be returned and bfd_error will be
-set.  If MEM is not NULL then it must point to an allocated block of
-memory.  If this block is large enough then MEM may be used as the
-return value for this function, but this is not guaranteed.
-
-   If MEM is not returned then the first N bytes in the returned block
-will be identical to the first N bytes in region pointed to by MEM,
-where N is the lessor of SIZE and the length of the region of memory
-currently addressed by MEM.
-
-2.15.1.4 'bfd_zmalloc'
-......................
-
-*Synopsis*
-     extern void * bfd_zmalloc (bfd_size_type SIZE) ATTRIBUTE_HIDDEN;
-   *Description*
-Returns a pointer to an allocated block of memory that is at least SIZE
-bytes long.  If SIZE is 0 then it will be treated as if it were 1.  If
-SIZE is too big then NULL will be returned.  Returns NULL upon error and
-sets bfd_error.
-
-   If NULL is not returned then the allocated block of memory will have
-been cleared.
-
-2.15.1.5 'bfd_write_bigendian_4byte_int'
-........................................
-
-*Synopsis*
-     bool bfd_write_bigendian_4byte_int (bfd *, unsigned int);
-   *Description*
-Write a 4 byte integer I to the output BFD ABFD, in big endian order
-regardless of what else is going on.  This is useful in archives.
-
-2.15.1.6 'bfd_put_size'
-.......................
-
-2.15.1.7 'bfd_get_size'
-.......................
-
-*Description*
-These macros as used for reading and writing raw data in sections; each
-access (except for bytes) is vectored through the target format of the
-BFD and mangled accordingly.  The mangling performs any necessary endian
-translations and removes alignment restrictions.  Note that types
-accepted and returned by these macros are identical so they can be
-swapped around in macros--for example, 'libaout.h' defines 'GET_WORD' to
-either 'bfd_get_32' or 'bfd_get_64'.
-
-   In the put routines, VAL must be a 'bfd_vma'.  If we are on a system
-without prototypes, the caller is responsible for making sure that is
-true, with a cast if necessary.  We don't cast them in the macro
-definitions because that would prevent 'lint' or 'gcc -Wall' from
-detecting sins such as passing a pointer.  To detect calling these with
-less than a 'bfd_vma', use 'gcc -Wconversion' on a host with 64 bit
-'bfd_vma''s.
-
-     /* Byte swapping macros for user section data.  */
-
-     #define bfd_put_8(abfd, val, ptr) \
-       ((void) (*((unsigned char *) (ptr)) = (val) & 0xff))
-     #define bfd_put_signed_8 \
-       bfd_put_8
-     #define bfd_get_8(abfd, ptr) \
-       ((bfd_vma) *(const unsigned char *) (ptr) & 0xff)
-     #define bfd_get_signed_8(abfd, ptr) \
-       ((((bfd_signed_vma) *(const unsigned char *) (ptr) & 0xff) ^ 0x80) - 0x80)
-
-     #define bfd_put_16(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_putx16, ((val),(ptr)))
-     #define bfd_put_signed_16 \
-       bfd_put_16
-     #define bfd_get_16(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx16, (ptr))
-     #define bfd_get_signed_16(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx_signed_16, (ptr))
-
-     #define bfd_put_24(abfd, val, ptr) \
-       do                                   \
-         if (bfd_big_endian (abfd))         \
-           bfd_putb24 ((val), (ptr));       \
-         else                               \
-           bfd_putl24 ((val), (ptr));       \
-       while (0)
-
-     bfd_vma bfd_getb24 (const void *p);
-     bfd_vma bfd_getl24 (const void *p);
-
-     #define bfd_get_24(abfd, ptr) \
-       (bfd_big_endian (abfd) ? bfd_getb24 (ptr) : bfd_getl24 (ptr))
-
-     #define bfd_put_32(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_putx32, ((val),(ptr)))
-     #define bfd_put_signed_32 \
-       bfd_put_32
-     #define bfd_get_32(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx32, (ptr))
-     #define bfd_get_signed_32(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx_signed_32, (ptr))
-
-     #define bfd_put_64(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_putx64, ((val), (ptr)))
-     #define bfd_put_signed_64 \
-       bfd_put_64
-     #define bfd_get_64(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx64, (ptr))
-     #define bfd_get_signed_64(abfd, ptr) \
-       BFD_SEND (abfd, bfd_getx_signed_64, (ptr))
-
-     #define bfd_get(bits, abfd, ptr)                       \
-       ((bits) == 8 ? bfd_get_8 (abfd, ptr)                 \
-        : (bits) == 16 ? bfd_get_16 (abfd, ptr)             \
-        : (bits) == 32 ? bfd_get_32 (abfd, ptr)             \
-        : (bits) == 64 ? bfd_get_64 (abfd, ptr)             \
-        : (abort (), (bfd_vma) - 1))
-
-     #define bfd_put(bits, abfd, val, ptr)                  \
-       ((bits) == 8 ? bfd_put_8  (abfd, val, ptr)           \
-        : (bits) == 16 ? bfd_put_16 (abfd, val, ptr)        \
-        : (bits) == 32 ? bfd_put_32 (abfd, val, ptr)        \
-        : (bits) == 64 ? bfd_put_64 (abfd, val, ptr)        \
-        : (abort (), (void) 0))
-
-
-2.15.1.8 'bfd_h_put_size'
-.........................
-
-*Description*
-These macros have the same function as their 'bfd_get_x' brethren,
-except that they are used for removing information for the header
-records of object files.  Believe it or not, some object files keep
-their header records in big endian order and their data in little endian
-order.
-
-     /* Byte swapping macros for file header data.  */
-
-     #define bfd_h_put_8(abfd, val, ptr) \
-       bfd_put_8 (abfd, val, ptr)
-     #define bfd_h_put_signed_8(abfd, val, ptr) \
-       bfd_put_8 (abfd, val, ptr)
-     #define bfd_h_get_8(abfd, ptr) \
-       bfd_get_8 (abfd, ptr)
-     #define bfd_h_get_signed_8(abfd, ptr) \
-       bfd_get_signed_8 (abfd, ptr)
-
-     #define bfd_h_put_16(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_h_putx16, (val, ptr))
-     #define bfd_h_put_signed_16 \
-       bfd_h_put_16
-     #define bfd_h_get_16(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx16, (ptr))
-     #define bfd_h_get_signed_16(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx_signed_16, (ptr))
-
-     #define bfd_h_put_32(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_h_putx32, (val, ptr))
-     #define bfd_h_put_signed_32 \
-       bfd_h_put_32
-     #define bfd_h_get_32(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx32, (ptr))
-     #define bfd_h_get_signed_32(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx_signed_32, (ptr))
-
-     #define bfd_h_put_64(abfd, val, ptr) \
-       BFD_SEND (abfd, bfd_h_putx64, (val, ptr))
-     #define bfd_h_put_signed_64 \
-       bfd_h_put_64
-     #define bfd_h_get_64(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx64, (ptr))
-     #define bfd_h_get_signed_64(abfd, ptr) \
-       BFD_SEND (abfd, bfd_h_getx_signed_64, (ptr))
-
-     /* Aliases for the above, which should eventually go away.  */
-
-     #define H_PUT_64  bfd_h_put_64
-     #define H_PUT_32  bfd_h_put_32
-     #define H_PUT_16  bfd_h_put_16
-     #define H_PUT_8   bfd_h_put_8
-     #define H_PUT_S64 bfd_h_put_signed_64
-     #define H_PUT_S32 bfd_h_put_signed_32
-     #define H_PUT_S16 bfd_h_put_signed_16
-     #define H_PUT_S8  bfd_h_put_signed_8
-     #define H_GET_64  bfd_h_get_64
-     #define H_GET_32  bfd_h_get_32
-     #define H_GET_16  bfd_h_get_16
-     #define H_GET_8   bfd_h_get_8
-     #define H_GET_S64 bfd_h_get_signed_64
-     #define H_GET_S32 bfd_h_get_signed_32
-     #define H_GET_S16 bfd_h_get_signed_16
-     #define H_GET_S8  bfd_h_get_signed_8
-
-
-
-2.15.1.9 'bfd_log2'
-...................
-
-*Synopsis*
-     unsigned int bfd_log2 (bfd_vma x);
-   *Description*
-Return the log base 2 of the value supplied, rounded up.  E.g., an X of
-1025 returns 11.  A X of 0 returns 0.
-
 
 File: bfd.info,  Node: File Caching,  Next: Linker Functions,  Prev: Internal,  Up: BFD front end
 
-2.16 File caching
+2.15 File caching
 =================
 
 The file caching mechanism is embedded within BFD and allows the
@@ -9688,10 +9435,10 @@ list of 'bfd_cache_max_open' files, and exports the name
 BFD is open.  If not, then it chooses a file to close, closes it and
 opens the one wanted, returning its file handle.
 
-2.16.1 Caching functions
+2.15.1 Caching functions
 ------------------------
 
-2.16.1.1 'bfd_cache_init'
+2.15.1.1 'bfd_cache_init'
 .........................
 
 *Synopsis*
@@ -9699,7 +9446,7 @@ opens the one wanted, returning its file handle.
    *Description*
 Add a newly opened BFD to the cache.
 
-2.16.1.2 'bfd_cache_close'
+2.15.1.2 'bfd_cache_close'
 ..........................
 
 *Synopsis*
@@ -9712,7 +9459,7 @@ close it too.
 'FALSE' is returned if closing the file fails, 'TRUE' is returned if all
 is well.
 
-2.16.1.3 'bfd_cache_close_all'
+2.15.1.3 'bfd_cache_close_all'
 ..............................
 
 *Synopsis*
@@ -9725,7 +9472,7 @@ close it too.
 'FALSE' is returned if closing one of the file fails, 'TRUE' is returned
 if all is well.
 
-2.16.1.4 'bfd_open_file'
+2.15.1.4 'bfd_open_file'
 ........................
 
 *Synopsis*
@@ -9740,7 +9487,7 @@ from it.
 
 File: bfd.info,  Node: Linker Functions,  Next: Hash Tables,  Prev: File Caching,  Up: BFD front end
 
-2.17 Linker Functions
+2.16 Linker Functions
 =====================
 
 The linker uses three special entry points in the BFD target vector.  It
@@ -9779,7 +9526,7 @@ throughout this section.
 
 File: bfd.info,  Node: Creating a Linker Hash Table,  Next: Adding Symbols to the Hash Table,  Prev: Linker Functions,  Up: Linker Functions
 
-2.17.1 Creating a linker hash table
+2.16.1 Creating a linker hash table
 -----------------------------------
 
 The linker routines must create a hash table, which must be derived from
@@ -9812,7 +9559,7 @@ additional fields, and then simply add fields as they become necessary.
 
 File: bfd.info,  Node: Adding Symbols to the Hash Table,  Next: Performing the Final Link,  Prev: Creating a Linker Hash Table,  Up: Linker Functions
 
-2.17.2 Adding symbols to the hash table
+2.16.2 Adding symbols to the hash table
 ---------------------------------------
 
 The linker proper will call the '_bfd_link_add_symbols' entry point for
@@ -9835,7 +9582,7 @@ archive should be used and adding them to the link.
 
 File: bfd.info,  Node: Differing file formats,  Next: Adding symbols from an object file,  Prev: Adding Symbols to the Hash Table,  Up: Adding Symbols to the Hash Table
 
-2.17.2.1 Differing file formats
+2.16.2.1 Differing file formats
 ...............................
 
 Normally all the files involved in a link will be of the same format,
@@ -9869,7 +9616,7 @@ symbol debugging information) in a hash table entry.
 
 File: bfd.info,  Node: Adding symbols from an object file,  Next: Adding symbols from an archive,  Prev: Differing file formats,  Up: Adding Symbols to the Hash Table
 
-2.17.2.2 Adding symbols from an object file
+2.16.2.2 Adding symbols from an object file
 ...........................................
 
 When the '_bfd_link_add_symbols' routine is passed an object file, it
@@ -9909,7 +9656,7 @@ hash table lookup routine to locate the entry.
 
 File: bfd.info,  Node: Adding symbols from an archive,  Prev: Adding symbols from an object file,  Up: Adding Symbols to the Hash Table
 
-2.17.2.3 Adding symbols from an archive
+2.16.2.3 Adding symbols from an archive
 .......................................
 
 When the '_bfd_link_add_symbols' routine is passed an archive, it must
@@ -9952,7 +9699,7 @@ archive itself to avoid the overhead of creating a new hash table.
 
 File: bfd.info,  Node: Performing the Final Link,  Prev: Adding Symbols to the Hash Table,  Up: Linker Functions
 
-2.17.3 Performing the final link
+2.16.3 Performing the final link
 --------------------------------
 
 When all the input files have been processed, the linker calls the
@@ -9982,7 +9729,7 @@ specific object file format.  The a.out '_bfd_final_link' routine is
 
 File: bfd.info,  Node: Information provided by the linker,  Next: Relocating the section contents,  Prev: Performing the Final Link,  Up: Performing the Final Link
 
-2.17.3.1 Information provided by the linker
+2.16.3.1 Information provided by the linker
 ...........................................
 
 Before the linker calls the '_bfd_final_link' entry point, it sets up
@@ -10005,7 +9752,7 @@ object file.
 
 File: bfd.info,  Node: Relocating the section contents,  Next: Writing the symbol table,  Prev: Information provided by the linker,  Up: Performing the Final Link
 
-2.17.3.2 Relocating the section contents
+2.16.3.2 Relocating the section contents
 ........................................
 
 The '_bfd_final_link' function should look through the 'link_order'
@@ -10038,7 +9785,7 @@ done in 'aout_link_input_section_std' and 'aout_link_input_section_ext'.
 
 File: bfd.info,  Node: Writing the symbol table,  Prev: Relocating the section contents,  Up: Performing the Final Link
 
-2.17.3.3 Writing the symbol table
+2.16.3.3 Writing the symbol table
 .................................
 
 The '_bfd_final_link' function must gather all the symbols in the input
@@ -10079,7 +9826,7 @@ global hash table with the function 'aout_link_write_other_symbol'.  It
 builds a string table while writing out the symbols, which is written to
 the output file at the end of 'NAME(aout,final_link)'.
 
-2.17.3.4 'bfd_link_split_section'
+2.16.3.4 'bfd_link_split_section'
 .................................
 
 *Synopsis*
@@ -10091,7 +9838,7 @@ link.
             BFD_SEND (abfd, _bfd_link_split_section, (abfd, sec))
 
 
-2.17.3.5 'bfd_section_already_linked'
+2.16.3.5 'bfd_section_already_linked'
 .....................................
 
 *Synopsis*
@@ -10105,7 +9852,7 @@ link.  Return TRUE if it has.
             BFD_SEND (abfd, _section_already_linked, (abfd, sec, info))
 
 
-2.17.3.6 'bfd_generic_define_common_symbol'
+2.16.3.6 'bfd_generic_define_common_symbol'
 ...........................................
 
 *Synopsis*
@@ -10119,7 +9866,7 @@ and FALSE on failure.
             BFD_SEND (output_bfd, _bfd_define_common_symbol, (output_bfd, info, h))
 
 
-2.17.3.7 '_bfd_generic_link_hide_symbol'
+2.16.3.7 '_bfd_generic_link_hide_symbol'
 ........................................
 
 *Synopsis*
@@ -10133,7 +9880,7 @@ from outside the BFD library.
             BFD_SEND (output_bfd, _bfd_link_hide_symbol, (output_bfd, info, h))
 
 
-2.17.3.8 'bfd_generic_define_start_stop'
+2.16.3.8 'bfd_generic_define_start_stop'
 ........................................
 
 *Synopsis*
@@ -10147,7 +9894,7 @@ symbol or NULL if no such undefined symbol exists.
             BFD_SEND (output_bfd, _bfd_define_start_stop, (info, symbol, sec))
 
 
-2.17.3.9 'bfd_find_version_for_sym'
+2.16.3.9 'bfd_find_version_for_sym'
 ...................................
 
 *Synopsis*
@@ -10159,7 +9906,7 @@ Search an elf version script tree for symbol versioning info and export
 / don't-export status for a given symbol.  Return non-NULL on success
 and NULL on failure; also sets the output 'hide' boolean parameter.
 
-2.17.3.10 'bfd_hide_sym_by_version'
+2.16.3.10 'bfd_hide_sym_by_version'
 ...................................
 
 *Synopsis*
@@ -10169,7 +9916,7 @@ and NULL on failure; also sets the output 'hide' boolean parameter.
 Search an elf version script tree for symbol versioning info for a given
 symbol.  Return TRUE if the symbol is hidden.
 
-2.17.3.11 'bfd_link_check_relocs'
+2.16.3.11 'bfd_link_check_relocs'
 .................................
 
 *Synopsis*
@@ -10180,7 +9927,7 @@ Checks the relocs in ABFD for validity.  Does not execute the relocs.
 Return TRUE if everything is OK, FALSE otherwise.  This is the external
 entry point to this code.
 
-2.17.3.12 '_bfd_generic_link_check_relocs'
+2.16.3.12 '_bfd_generic_link_check_relocs'
 ..........................................
 
 *Synopsis*
@@ -10191,7 +9938,7 @@ Stub function for targets that do not implement reloc checking.  Return
 TRUE. This is an internal function.  It should not be called from
 outside the BFD library.
 
-2.17.3.13 'bfd_merge_private_bfd_data'
+2.16.3.13 'bfd_merge_private_bfd_data'
 ......................................
 
 *Synopsis*
@@ -10208,7 +9955,7 @@ error returns are:
             BFD_SEND ((info)->output_bfd, _bfd_merge_private_bfd_data, \
                       (ibfd, info))
 
-2.17.3.14 '_bfd_generic_verify_endian_match'
+2.16.3.14 '_bfd_generic_verify_endian_match'
 ............................................
 
 *Synopsis*
@@ -10222,7 +9969,7 @@ match, otherwise returns FALSE and emits an error.
 
 File: bfd.info,  Node: Hash Tables,  Prev: Linker Functions,  Up: BFD front end
 
-2.18 Hash Tables
+2.17 Hash Tables
 ================
 
 BFD provides a simple set of hash table functions.  Routines are
@@ -10253,7 +10000,7 @@ pointers becomes noticeable.
 
 File: bfd.info,  Node: Creating and Freeing a Hash Table,  Next: Looking Up or Entering a String,  Prev: Hash Tables,  Up: Hash Tables
 
-2.18.1 Creating and freeing a hash table
+2.17.1 Creating and freeing a hash table
 ----------------------------------------
 
 To create a hash table, create an instance of a 'struct bfd_hash_table'
@@ -10281,7 +10028,7 @@ to use.
 
 File: bfd.info,  Node: Looking Up or Entering a String,  Next: Traversing a Hash Table,  Prev: Creating and Freeing a Hash Table,  Up: Hash Tables
 
-2.18.2 Looking up or entering a string
+2.17.2 Looking up or entering a string
 --------------------------------------
 
 The function 'bfd_hash_lookup' is used both to look up a string in the
@@ -10308,7 +10055,7 @@ exists.
 
 File: bfd.info,  Node: Traversing a Hash Table,  Next: Deriving a New Hash Table Type,  Prev: Looking Up or Entering a String,  Up: Hash Tables
 
-2.18.3 Traversing a hash table
+2.17.3 Traversing a hash table
 ------------------------------
 
 The function 'bfd_hash_traverse' may be used to traverse a hash table,
@@ -10326,7 +10073,7 @@ and return immediately.
 
 File: bfd.info,  Node: Deriving a New Hash Table Type,  Prev: Traversing a Hash Table,  Up: Hash Tables
 
-2.18.4 Deriving a new hash table type
+2.17.4 Deriving a new hash table type
 -------------------------------------
 
 Many uses of hash tables want to store additional information which each
@@ -10355,7 +10102,7 @@ from the linker hash table.
 
 File: bfd.info,  Node: Define the Derived Structures,  Next: Write the Derived Creation Routine,  Prev: Deriving a New Hash Table Type,  Up: Deriving a New Hash Table Type
 
-2.18.4.1 Define the derived structures
+2.17.4.1 Define the derived structures
 ......................................
 
 You must define a structure for an entry in the hash table, and a
@@ -10377,7 +10124,7 @@ bfd_link_hash_table', 'table', is of type 'struct bfd_hash_table'.
 
 File: bfd.info,  Node: Write the Derived Creation Routine,  Next: Write Other Derived Routines,  Prev: Define the Derived Structures,  Up: Deriving a New Hash Table Type
 
-2.18.4.2 Write the derived creation routine
+2.17.4.2 Write the derived creation routine
 ...........................................
 
 You must write a routine which will create and initialize an entry in
@@ -10442,7 +10189,7 @@ linker hash table entry: 'type', 'written' and 'next'.
 
 File: bfd.info,  Node: Write Other Derived Routines,  Prev: Write the Derived Creation Routine,  Up: Deriving a New Hash Table Type
 
-2.18.4.3 Write other derived routines
+2.17.4.3 Write other derived routines
 .....................................
 
 You will want to write other routines for your new hash table, as well.
@@ -12350,7 +12097,6 @@ BFD Index
 * bfd_get_section_contents:              section prototypes. (line  252)
 * bfd_get_sign_extend_vma:               Miscellaneous.      (line   78)
 * bfd_get_size:                          Miscellaneous.      (line  454)
-* bfd_get_size <1>:                      Internal.           (line   90)
 * bfd_get_symtab_upper_bound:            symbol handling functions.
                                                              (line    5)
 * bfd_get_target_info:                   bfd_target.         (line  597)
@@ -12373,7 +12119,6 @@ BFD Index
                                                              (line    6)
 * bfd_hide_sym_by_version:               Writing the symbol table.
                                                              (line  123)
-* bfd_h_put_size:                        Internal.           (line  177)
 * bfd_init:                              Initialization.     (line   10)
 * bfd_install_relocation:                typedef arelent.    (line  382)
 * bfd_is_local_label:                    symbol handling functions.
@@ -12389,7 +12134,6 @@ BFD Index
                                                              (line  133)
 * bfd_link_split_section:                Writing the symbol table.
                                                              (line   43)
-* bfd_log2:                              Internal.           (line  246)
 * bfd_lookup_arch:                       Architectures.      (line  706)
 * bfd_make_debug_symbol:                 symbol handling functions.
                                                              (line  106)
@@ -12404,7 +12148,6 @@ BFD Index
 * bfd_make_section_with_flags:           section prototypes. (line  131)
 * bfd_make_writable:                     Opening and Closing.
                                                              (line  220)
-* bfd_malloc:                            Internal.           (line   12)
 * bfd_malloc_and_get_section:            section prototypes. (line  269)
 * bfd_map_over_sections:                 section prototypes. (line  176)
 * bfd_merge_private_bfd_data:            Writing the symbol table.
@@ -12427,9 +12170,6 @@ BFD Index
 * bfd_printable_name:                    Architectures.      (line  577)
 * bfd_print_symbol_vandf:                symbol handling functions.
                                                              (line   73)
-* bfd_put_size:                          Internal.           (line   87)
-* bfd_realloc:                           Internal.           (line   23)
-* bfd_realloc_or_free:                   Internal.           (line   43)
 * BFD_RELOC_12_PCREL:                    howto manager.      (line   37)
 * BFD_RELOC_14:                          howto manager.      (line   30)
 * BFD_RELOC_16:                          howto manager.      (line   29)
@@ -14894,10 +14634,8 @@ BFD Index
                                                              (line  135)
 * bfd_target_list:                       bfd_target.         (line  623)
 * bfd_update_compression_header:         Miscellaneous.      (line  345)
-* bfd_write_bigendian_4byte_int:         Internal.           (line   78)
 * bfd_zalloc:                            Opening and Closing.
                                                              (line  257)
-* bfd_zmalloc:                           Internal.           (line   64)
 * check_build_id_file:                   Opening and Closing.
                                                              (line  482)
 * coff_symbol_type:                      coff.               (line  233)
@@ -14965,36 +14703,36 @@ Node: bfd_target276537
 Node: Architectures303298
 Node: Opening and Closing335149
 Node: Internal353317
-Node: File Caching362710
-Node: Linker Functions364607
-Node: Creating a Linker Hash Table366281
-Node: Adding Symbols to the Hash Table368020
-Node: Differing file formats368920
-Node: Adding symbols from an object file370645
-Node: Adding symbols from an archive372795
-Node: Performing the Final Link375141
-Node: Information provided by the linker376382
-Node: Relocating the section contents377536
-Node: Writing the symbol table379288
-Node: Hash Tables386379
-Node: Creating and Freeing a Hash Table387577
-Node: Looking Up or Entering a String388827
-Node: Traversing a Hash Table390080
-Node: Deriving a New Hash Table Type390869
-Node: Define the Derived Structures391935
-Node: Write the Derived Creation Routine393016
-Node: Write Other Derived Routines395641
-Node: BFD back ends396956
-Node: What to Put Where397226
-Node: aout397406
-Node: coff403660
-Node: elf431800
-Node: mmo432201
-Node: File layout433071
-Node: Symbol-table438984
-Node: mmo section mapping442747
-Node: GNU Free Documentation License446401
-Node: BFD Index471465
+Node: File Caching353421
+Node: Linker Functions355318
+Node: Creating a Linker Hash Table356992
+Node: Adding Symbols to the Hash Table358731
+Node: Differing file formats359631
+Node: Adding symbols from an object file361356
+Node: Adding symbols from an archive363506
+Node: Performing the Final Link365852
+Node: Information provided by the linker367093
+Node: Relocating the section contents368247
+Node: Writing the symbol table369999
+Node: Hash Tables377090
+Node: Creating and Freeing a Hash Table378288
+Node: Looking Up or Entering a String379538
+Node: Traversing a Hash Table380791
+Node: Deriving a New Hash Table Type381580
+Node: Define the Derived Structures382646
+Node: Write the Derived Creation Routine383727
+Node: Write Other Derived Routines386352
+Node: BFD back ends387667
+Node: What to Put Where387937
+Node: aout388117
+Node: coff394371
+Node: elf422511
+Node: mmo422912
+Node: File layout423782
+Node: Symbol-table429695
+Node: mmo section mapping433458
+Node: GNU Free Documentation License437112
+Node: BFD Index462176
 
 End Tag Table
 

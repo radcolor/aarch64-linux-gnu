@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20220120
+#define __GLIBCXX__ 20220127
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -944,6 +944,9 @@ namespace std
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #define _GLIBCXX_HAVE_FCNTL_H 1
+
+/* Define if fdopendir is available in <dirent.h>. */
+#define _GLIBCXX_HAVE_FDOPENDIR 1
 
 /* Define to 1 if you have the <fenv.h> header file. */
 #define _GLIBCXX_HAVE_FENV_H 1
