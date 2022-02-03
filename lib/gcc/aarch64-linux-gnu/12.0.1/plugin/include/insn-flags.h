@@ -7183,6 +7183,10 @@
 #define HAVE_movmisalignv2si (TARGET_SIMD && !STRICT_ALIGNMENT)
 #define HAVE_movmisalignv4si (TARGET_SIMD && !STRICT_ALIGNMENT)
 #define HAVE_movmisalignv2di (TARGET_SIMD && !STRICT_ALIGNMENT)
+#define HAVE_movmisalignv4hf (TARGET_SIMD && !STRICT_ALIGNMENT)
+#define HAVE_movmisalignv8hf (TARGET_SIMD && !STRICT_ALIGNMENT)
+#define HAVE_movmisalignv4bf (TARGET_SIMD && !STRICT_ALIGNMENT)
+#define HAVE_movmisalignv8bf (TARGET_SIMD && !STRICT_ALIGNMENT)
 #define HAVE_movmisalignv2sf (TARGET_SIMD && !STRICT_ALIGNMENT)
 #define HAVE_movmisalignv4sf (TARGET_SIMD && !STRICT_ALIGNMENT)
 #define HAVE_movmisalignv2df (TARGET_SIMD && !STRICT_ALIGNMENT)
@@ -18367,6 +18371,10 @@ extern rtx        gen_movmisalignv8hi                                (rtx, rtx);
 extern rtx        gen_movmisalignv2si                                (rtx, rtx);
 extern rtx        gen_movmisalignv4si                                (rtx, rtx);
 extern rtx        gen_movmisalignv2di                                (rtx, rtx);
+extern rtx        gen_movmisalignv4hf                                (rtx, rtx);
+extern rtx        gen_movmisalignv8hf                                (rtx, rtx);
+extern rtx        gen_movmisalignv4bf                                (rtx, rtx);
+extern rtx        gen_movmisalignv8bf                                (rtx, rtx);
 extern rtx        gen_movmisalignv2sf                                (rtx, rtx);
 extern rtx        gen_movmisalignv4sf                                (rtx, rtx);
 extern rtx        gen_movmisalignv2df                                (rtx, rtx);

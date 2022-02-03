@@ -1,6 +1,6 @@
 This is libc.info, produced by makeinfo version 6.7 from libc.texinfo.
 
-This is ‘The GNU C Library Reference Manual’, for version 2.34.9000.
+This is ‘The GNU C Library Reference Manual’, for version 2.35.9000.
 
    Copyright © 1993–2022 Free Software Foundation, Inc.
 
@@ -6439,7 +6439,7 @@ Library.  This functionality is only available on Linux.
      The manual for the ‘rseq’ system call can be found at
      <https://git.kernel.org/pub/scm/libs/librseq/librseq.git/tree/doc/man/rseq.2>.
 
- -- Variable: int __rseq_offset
+ -- Variable: ptrdiff_t __rseq_offset
 
      This variable contains the offset between the thread pointer (as
      defined by ‘__builtin_thread_pointer’ or the thread pointer
