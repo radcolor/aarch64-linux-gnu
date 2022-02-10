@@ -297,7 +297,7 @@ directive/clause and 'allocator'                    only
 directive
 'thread_limit' clause to 'target'           Y
 construct
-'has_device_addr' clause to 'target'        N
+'has_device_addr' clause to 'target'        Y
 construct
 iterators in 'target update' motion         N
 clauses and 'map' clauses

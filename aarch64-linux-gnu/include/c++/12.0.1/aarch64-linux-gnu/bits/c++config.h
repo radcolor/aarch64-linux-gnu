@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20220203
+#define __GLIBCXX__ 20220210
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -918,6 +918,9 @@ namespace std
 /* Define to 1 if you have the <dirent.h> header file. */
 #define _GLIBCXX_HAVE_DIRENT_H 1
 
+/* Define if dirfd is available in <dirent.h>. */
+#define _GLIBCXX_HAVE_DIRFD 1
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define _GLIBCXX_HAVE_DLFCN_H 1
 
@@ -1330,6 +1333,9 @@ namespace std
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #define _GLIBCXX_HAVE_UNISTD_H 1
+
+/* Define if unlinkat is available in <fcntl.h>. */
+#define _GLIBCXX_HAVE_UNLINKAT 1
 
 /* Define to 1 if you have the `uselocale' function. */
 #define _GLIBCXX_HAVE_USELOCALE 1

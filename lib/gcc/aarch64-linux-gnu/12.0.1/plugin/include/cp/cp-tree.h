@@ -4201,6 +4201,18 @@ more_aggr_init_expr_args_p (const aggr_init_expr_arg_iterator *iter)
 #define VEC_INIT_EXPR_VALUE_INIT(NODE) \
   TREE_LANG_FLAG_1 (VEC_INIT_EXPR_CHECK (NODE))
 
+/* If T is a VEC_INIT_EXPR, return it, possibly stripping a TARGET_EXPR
+   wrapper.  Otherwise, return null.  */
+inline tree
+get_vec_init_expr (tree t)
+{
+  if (t && TREE_CODE (t) == TARGET_EXPR)
+    t = TARGET_EXPR_INITIAL (t);
+  if (t && TREE_CODE (t) == VEC_INIT_EXPR)
+    return t;
+  return NULL_TREE;
+}
+
 /* The condition under which this MUST_NOT_THROW_EXPR actually blocks
    exceptions.  NULL_TREE means 'true'.  */
 #define MUST_NOT_THROW_COND(NODE) \
@@ -5360,6 +5372,21 @@ more_aggr_init_expr_args_p (const aggr_init_expr_arg_iterator *iter)
   (TREE_CODE (NODE) == TARGET_EXPR				\
    && TARGET_EXPR_INITIAL (NODE)				\
    && !VOID_TYPE_P (TREE_TYPE (TARGET_EXPR_INITIAL (NODE))))
+
+/* True if T is a TARGET_EXPR for which we'll need to replace_decl to use it as
+   an initializer.  */
+inline bool
+target_expr_needs_replace (tree t)
+{
+  if (!t || TREE_CODE (t) != TARGET_EXPR)
+    return false;
+  tree init = TARGET_EXPR_INITIAL (t);
+  if (!init || !VOID_TYPE_P (TREE_TYPE (init)))
+    return false;
+  while (TREE_CODE (init) == COMPOUND_EXPR)
+    init = TREE_OPERAND (init, 1);
+  return TREE_CODE (init) != AGGR_INIT_EXPR;
+}
 
 /* True if EXPR expresses direct-initialization of a TYPE.  */
 #define DIRECT_INIT_EXPR_P(TYPE,EXPR)					\
@@ -7393,6 +7420,7 @@ extern bool copy_guide_p			(const_tree);
 extern bool template_guide_p			(const_tree);
 extern bool builtin_guide_p			(const_tree);
 extern void store_explicit_specifier		(tree, tree);
+extern tree lookup_explicit_specifier		(tree);
 extern void walk_specializations		(bool,
 						 void (*)(bool, spec_entry *,
 							  void *),
@@ -7715,6 +7743,7 @@ extern void finish_lambda_scope			(void);
 extern tree start_lambda_function		(tree fn, tree lambda_expr);
 extern void finish_lambda_function		(tree body);
 extern bool regenerated_lambda_fn_p		(tree);
+extern tree lambda_regenerating_args		(tree);
 extern tree most_general_lambda			(tree);
 extern tree finish_omp_target			(location_t, tree, tree, bool);
 extern void finish_omp_target_clauses		(location_t, tree, tree *);

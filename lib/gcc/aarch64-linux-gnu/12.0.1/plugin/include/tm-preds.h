@@ -75,6 +75,7 @@ extern bool aarch64_imm24 (rtx, machine_mode);
 extern bool aarch64_mem_pair_offset (rtx, machine_mode);
 extern bool aarch64_mem_pair_operand (rtx, machine_mode);
 extern bool aarch64_mem_pair_lanes_operand (rtx, machine_mode);
+extern bool aarch64_reg_or_mem_pair_operand (rtx, machine_mode);
 extern bool aarch64_prefetch_operand (rtx, machine_mode);
 extern bool aarch64_valid_symref (rtx, machine_mode);
 extern bool aarch64_tls_ie_symref (rtx, machine_mode);
