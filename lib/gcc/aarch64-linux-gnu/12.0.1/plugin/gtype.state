@@ -4,7 +4,7 @@
 ;;; Don't parse this file wihout knowing GCC gengtype internals.
 ;;; This file should be parsed by the same gengtype which wrote it.
 
-(!version  "12.0.1 20220210 (experimental)")
+(!version  "12.0.1 20220217 (experimental)")
 (!srcdir  "../../gcc/gcc")
 (!languages 10 ada c cp d fortran go jit lto objc objcp)
 (!fileslist 228 0
@@ -26869,15 +26869,15 @@
    (!type already_seen 1903)
   )
   gc_pointed_to "vec<const_char_p,va_gc>"
-  (!srcfileloc  "c-family/c-common.cc" 5845)
+  (!srcfileloc  "c-family/c-common.cc" 5849)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "c-family/c-common.cc" 5845)
+    (!srcfileloc  "c-family/c-common.cc" 5849)
     nil )
    (!pair  "const_char_p"
     (!type already_seen 11)
-    (!srcfileloc  "c-family/c-common.cc" 5845)
+    (!srcfileloc  "c-family/c-common.cc" 5849)
     nil )
   )
  )
@@ -26887,31 +26887,31 @@
    (!type already_seen 1905)
   )
   gc_pointed_to "vec<tree_gc_vec,va_gc>"
-  (!srcfileloc  "c-family/c-common.cc" 8244)
+  (!srcfileloc  "c-family/c-common.cc" 8248)
   (!fields 2 
    (!pair  "va_gc"
     (!type already_seen 79)
-    (!srcfileloc  "c-family/c-common.cc" 8244)
+    (!srcfileloc  "c-family/c-common.cc" 8248)
     nil )
    (!pair  "tree_gc_vec"
     (!type already_seen 84)
-    (!srcfileloc  "c-family/c-common.cc" 8244)
+    (!srcfileloc  "c-family/c-common.cc" 8248)
     nil )
   )
  )
  
  (!type user_struct 1907 nil  gc_unused "hash_set<char*,false,nofree_string_hash>"
-  (!srcfileloc  "c-family/c-common.cc" 9213)
+  (!srcfileloc  "c-family/c-common.cc" 9217)
   (!fields 2 
    (!pair  "nofree_string_hash"
     (!type undefined 1908 nil  gc_unused "nofree_string_hash"
-     (!srcfileloc  "c-family/c-common.cc" 9213)
+     (!srcfileloc  "c-family/c-common.cc" 9217)
     )
-    (!srcfileloc  "c-family/c-common.cc" 9213)
+    (!srcfileloc  "c-family/c-common.cc" 9217)
     nil )
    (!pair  "false"
     (!type already_seen 866)
-    (!srcfileloc  "c-family/c-common.cc" 9213)
+    (!srcfileloc  "c-family/c-common.cc" 9217)
     nil )
   )
  )
@@ -26919,7 +26919,7 @@
  (!type already_seen 1908)
  
  (!type user_struct 1909 nil  gc_unused "hash_map<char*,per_file_includes_t*>"
-  (!srcfileloc  "c-family/c-common.cc" 9218)
+  (!srcfileloc  "c-family/c-common.cc" 9222)
   (!fields 1 
    (!pair  "per_file_includes_t"
     (!type pointer 1910 nil  gc_unused
@@ -26929,7 +26929,7 @@
       (!fields 0 )
       nil 0 nil nil )
     )
-    (!srcfileloc  "c-family/c-common.cc" 9218)
+    (!srcfileloc  "c-family/c-common.cc" 9222)
     nil )
   )
  )
@@ -27873,7 +27873,7 @@
    (!type already_seen 1993)
   )
   gc_pointed_to "tinst_level"
-  (!srcfileloc  "cp/pt.cc" 9539)
+  (!srcfileloc  "cp/pt.cc" 9560)
   (!fields 8 
    (!pair  "next"
     (!type already_seen 1994)
@@ -29770,7 +29770,7 @@
    (!type already_seen 2203)
   )
   gc_pointed_to "pending_template"
-  (!srcfileloc  "cp/pt.cc" 9548)
+  (!srcfileloc  "cp/pt.cc" 9569)
   (!fields 2 
    (!pair  "next"
     (!type already_seen 2204)
@@ -29842,15 +29842,15 @@
    (!type already_seen 2216)
   )
   gc_pointed_to "hash_map<tree,tree_pair_p>"
-  (!srcfileloc  "cp/pt.cc" 29713)
+  (!srcfileloc  "cp/pt.cc" 29742)
   (!fields 2 
    (!pair  "tree_pair_p"
     (!type already_seen 535)
-    (!srcfileloc  "cp/pt.cc" 29713)
+    (!srcfileloc  "cp/pt.cc" 29742)
     nil )
    (!pair  "tree"
     (!type already_seen 23)
-    (!srcfileloc  "cp/pt.cc" 29713)
+    (!srcfileloc  "cp/pt.cc" 29742)
     nil )
   )
  )
@@ -30995,15 +30995,15 @@
   nil )
  (!pair  "hash_map<tree,tree_pair_p>"
   (!type already_seen 2216)
-  (!srcfileloc  "cp/pt.cc" 29713)
+  (!srcfileloc  "cp/pt.cc" 29742)
   nil )
  (!pair  "pending_template"
   (!type already_seen 2203)
-  (!srcfileloc  "cp/pt.cc" 9548)
+  (!srcfileloc  "cp/pt.cc" 9569)
   nil )
  (!pair  "tinst_level"
   (!type already_seen 1993)
-  (!srcfileloc  "cp/pt.cc" 9539)
+  (!srcfileloc  "cp/pt.cc" 9560)
   nil )
  (!pair  "spec_hash_table"
   (!type already_seen 2206)
@@ -31607,39 +31607,39 @@
   nil )
  (!pair  "added_includes_t"
   (!type already_seen 1909)
-  (!srcfileloc  "c-family/c-common.cc" 9218)
+  (!srcfileloc  "c-family/c-common.cc" 9222)
   nil )
  (!pair  "hash_map<char*,per_file_includes_t*>"
   (!type already_seen 1909)
-  (!srcfileloc  "c-family/c-common.cc" 9218)
+  (!srcfileloc  "c-family/c-common.cc" 9222)
   nil )
  (!pair  "per_file_includes_t"
   (!type already_seen 1907)
-  (!srcfileloc  "c-family/c-common.cc" 9213)
+  (!srcfileloc  "c-family/c-common.cc" 9217)
   nil )
  (!pair  "nofree_string_hash"
   (!type already_seen 1908)
-  (!srcfileloc  "c-family/c-common.cc" 9213)
+  (!srcfileloc  "c-family/c-common.cc" 9217)
   nil )
  (!pair  "hash_set<char*,false,nofree_string_hash>"
   (!type already_seen 1907)
-  (!srcfileloc  "c-family/c-common.cc" 9213)
+  (!srcfileloc  "c-family/c-common.cc" 9217)
   nil )
  (!pair  "vec<tree_gc_vec,va_gc>"
   (!type already_seen 1905)
-  (!srcfileloc  "c-family/c-common.cc" 8244)
+  (!srcfileloc  "c-family/c-common.cc" 8248)
   nil )
  (!pair  "tree_gc_vec"
   (!type already_seen 84)
-  (!srcfileloc  "c-family/c-common.cc" 8243)
+  (!srcfileloc  "c-family/c-common.cc" 8247)
   nil )
  (!pair  "vec<const_char_p,va_gc>"
   (!type already_seen 1903)
-  (!srcfileloc  "c-family/c-common.cc" 5845)
+  (!srcfileloc  "c-family/c-common.cc" 5849)
   nil )
  (!pair  "const_char_p"
   (!type already_seen 9)
-  (!srcfileloc  "c-family/c-common.cc" 5844)
+  (!srcfileloc  "c-family/c-common.cc" 5848)
   nil )
  (!pair  "c_binding_ptr"
   (!type already_seen 636)
@@ -35490,46 +35490,46 @@
   nil )
  (!pair  "dguide_cache"
   (!type already_seen 2217)
-  (!srcfileloc  "cp/pt.cc" 29713)
+  (!srcfileloc  "cp/pt.cc" 29742)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "explicit_specifier_map"
   (!type already_seen 932)
-  (!srcfileloc  "cp/pt.cc" 13858)
+  (!srcfileloc  "cp/pt.cc" 13879)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "defarg_inst"
   (!type already_seen 1551)
-  (!srcfileloc  "cp/pt.cc" 13721)
+  (!srcfileloc  "cp/pt.cc" 13742)
   (!options 
    (!option cache string  "")
   )
  )
  (!pair  "last_error_tinst_level"
   (!type already_seen 1994)
-  (!srcfileloc  "cp/pt.cc" 11003)
+  (!srcfileloc  "cp/pt.cc" 11024)
   nil )
  (!pair  "pending_template_freelist_head"
   (!type already_seen 2204)
-  (!srcfileloc  "cp/pt.cc" 9548)
+  (!srcfileloc  "cp/pt.cc" 9569)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "tinst_level_freelist_head"
   (!type already_seen 1994)
-  (!srcfileloc  "cp/pt.cc" 9539)
+  (!srcfileloc  "cp/pt.cc" 9560)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "tree_list_freelist_head"
   (!type already_seen 23)
-  (!srcfileloc  "cp/pt.cc" 9530)
+  (!srcfileloc  "cp/pt.cc" 9551)
   (!options 
    (!option deletable string  "")
   )
@@ -35727,19 +35727,19 @@
   nil )
  (!pair  "ssdf_decls"
   (!type already_seen 84)
-  (!srcfileloc  "cp/decl2.cc" 3926)
+  (!srcfileloc  "cp/decl2.cc" 3918)
   nil )
  (!pair  "ssdf_decl"
   (!type already_seen 23)
-  (!srcfileloc  "cp/decl2.cc" 3922)
+  (!srcfileloc  "cp/decl2.cc" 3914)
   nil )
  (!pair  "priority_decl"
   (!type already_seen 23)
-  (!srcfileloc  "cp/decl2.cc" 3919)
+  (!srcfileloc  "cp/decl2.cc" 3911)
   nil )
  (!pair  "initialize_p_decl"
   (!type already_seen 23)
-  (!srcfileloc  "cp/decl2.cc" 3916)
+  (!srcfileloc  "cp/decl2.cc" 3908)
   nil )
  (!pair  "mangled_decls"
   (!type already_seen 2116)
@@ -35981,7 +35981,7 @@
  )
  (!pair  "cv_cache"
   (!type already_seen 393)
-  (!srcfileloc  "cp/constexpr.cc" 7962)
+  (!srcfileloc  "cp/constexpr.cc" 7959)
   (!options 
    (!option deletable string  "")
   )
@@ -36164,24 +36164,24 @@
  )
  (!pair  "tree_vector_cache"
   (!type already_seen 1906)
-  (!srcfileloc  "c-family/c-common.cc" 8244)
+  (!srcfileloc  "c-family/c-common.cc" 8248)
   (!options 
    (!option deletable string  "")
   )
  )
  (!pair  "optimize_args"
   (!type already_seen 1904)
-  (!srcfileloc  "c-family/c-common.cc" 5845)
+  (!srcfileloc  "c-family/c-common.cc" 5849)
   nil )
  (!pair  "compound_literal_number"
   (!type already_seen 2)
-  (!srcfileloc  "c-family/c-common.cc" 4722)
+  (!srcfileloc  "c-family/c-common.cc" 4726)
   nil )
  (!pair  "built_in_attributes"
   (!type array 2367 nil  gc_used "(int) ATTR_LAST" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "c-family/c-common.cc" 4011)
+  (!srcfileloc  "c-family/c-common.cc" 4015)
   nil )
  (!pair  "ext_block"
   (!type already_seen 23)
@@ -36493,29 +36493,29 @@
  )
  (!pair  "hwasan_ctor_statements"
   (!type already_seen 23)
-  (!srcfileloc  "asan.cc" 4516)
+  (!srcfileloc  "asan.cc" 4552)
   nil )
  (!pair  "asan_ctor_statements"
   (!type already_seen 23)
-  (!srcfileloc  "asan.cc" 3473)
+  (!srcfileloc  "asan.cc" 3509)
   nil )
  (!pair  "asan_detect_stack_use_after_return"
   (!type already_seen 23)
-  (!srcfileloc  "asan.cc" 432)
+  (!srcfileloc  "asan.cc" 433)
   nil )
  (!pair  "shadow_ptr_types"
   (!type array 2384 nil  gc_used "3" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "asan.cc" 429)
+  (!srcfileloc  "asan.cc" 430)
   nil )
  (!pair  "hwasan_frame_base_init_seq"
   (!type already_seen 296)
-  (!srcfileloc  "asan.cc" 282)
+  (!srcfileloc  "asan.cc" 283)
   nil )
  (!pair  "hwasan_frame_base_ptr"
   (!type already_seen 99)
-  (!srcfileloc  "asan.cc" 271)
+  (!srcfileloc  "asan.cc" 272)
   nil )
  (!pair  "vtbl_mangled_name_ids"
   (!type already_seen 84)
@@ -36571,25 +36571,25 @@
   nil )
  (!pair  "aarch64_sls_shared_thunks_needed"
   (!type already_seen 2)
-  (!srcfileloc  "config/aarch64/aarch64.cc" 25976)
+  (!srcfileloc  "config/aarch64/aarch64.cc" 26220)
   nil )
  (!pair  "aarch64_sls_shared_thunks"
   (!type array 2386 nil  gc_used "30" 
    (!type already_seen 23)
   )
-  (!srcfileloc  "config/aarch64/aarch64.cc" 25975)
+  (!srcfileloc  "config/aarch64/aarch64.cc" 26219)
   nil )
  (!pair  "va_list_type"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.cc" 18473)
+  (!srcfileloc  "config/aarch64/aarch64.cc" 18717)
   nil )
  (!pair  "aarch64_previous_fndecl"
   (!type already_seen 23)
-  (!srcfileloc  "config/aarch64/aarch64.cc" 17449)
+  (!srcfileloc  "config/aarch64/aarch64.cc" 17693)
   nil )
  (!pair  "tls_get_addr_libfunc"
   (!type already_seen 99)
-  (!srcfileloc  "config/aarch64/aarch64.cc" 3786)
+  (!srcfileloc  "config/aarch64/aarch64.cc" 3890)
   nil )
  (!pair  "stack_chk_fail_decl"
   (!type already_seen 23)
@@ -36601,7 +36601,7 @@
   nil )
  (!pair  "critical_name_mutexes"
   (!type already_seen 393)
-  (!srcfileloc  "omp-low.cc" 10309)
+  (!srcfileloc  "omp-low.cc" 10307)
   nil )
  (!pair  "omp_declare_variant_alt"
   (!type already_seen 1648)

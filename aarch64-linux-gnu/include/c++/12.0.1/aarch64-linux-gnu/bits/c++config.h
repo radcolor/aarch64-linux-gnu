@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 12
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20220210
+#define __GLIBCXX__ 20220217
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -809,11 +809,6 @@ namespace std
 #endif
 
 #undef _GLIBCXX_HAS_BUILTIN
-
-#if __cplusplus >= 202002L && __cpp_concepts && __GNUC__ >= 12
-// XXX workaround for missing feature test macro for P0848R3 (see P2493R0).
-# define _GLIBCXX_HAVE_COND_TRIVIAL_SPECIAL_MEMBERS 1
-#endif
 
 // PSTL configuration
 
