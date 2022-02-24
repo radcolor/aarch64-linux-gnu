@@ -7085,6 +7085,8 @@
 #define HAVE_tlsgd_small_di (ptr_mode == DImode)
 #define HAVE_tlsdesc_small_si ((TARGET_TLS_DESC) && (ptr_mode == SImode))
 #define HAVE_tlsdesc_small_di ((TARGET_TLS_DESC) && (ptr_mode == DImode))
+#define HAVE_scs_push 1
+#define HAVE_scs_pop 1
 #define HAVE_get_thread_pointerdi 1
 #define HAVE_stack_protect_set 1
 #define HAVE_stack_protect_combined_set 1
@@ -18215,6 +18217,8 @@ extern rtx        gen_tlsgd_small_si                                 (rtx, rtx);
 extern rtx        gen_tlsgd_small_di                                 (rtx, rtx);
 extern rtx        gen_tlsdesc_small_si                               (rtx);
 extern rtx        gen_tlsdesc_small_di                               (rtx);
+extern rtx        gen_scs_push                                       (void);
+extern rtx        gen_scs_pop                                        (void);
 extern rtx        gen_get_thread_pointerdi                           (rtx);
 extern rtx        gen_stack_protect_set                              (rtx, rtx);
 extern rtx        gen_stack_protect_combined_set                     (rtx, rtx);
