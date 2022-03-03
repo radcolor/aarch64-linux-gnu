@@ -3798,7 +3798,7 @@ Variable and Constant Macro Index
 * R_OK:                                  Testing File Access. (line  79)
 * SA_NOCLDSTOP:                          Flags for Sigaction. (line  25)
 * SA_ONSTACK:                            Flags for Sigaction. (line  34)
-* SA_RESTART:                            Flags for Sigaction. (line  41)
+* SA_RESTART:                            Flags for Sigaction. (line  42)
 * SCHAR_MAX:                             Range of Type.       (line  29)
 * SCHAR_MIN:                             Range of Type.       (line  23)
 * SCHAR_WIDTH:                           Width of Type.       (line  12)

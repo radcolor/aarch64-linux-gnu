@@ -2980,7 +2980,8 @@ Primitives::, to see what this is about.
      If this flag is set for a particular signal number, the system uses
      the signal stack when delivering that kind of signal.  *Note Signal
      Stack::.  If a signal with this flag arrives and you have not set a
-     signal stack, the system terminates the program with ‘SIGILL’.
+     signal stack, the normal user stack is used instead, as if the flag
+     had not been set.
 
  -- Macro: int SA_RESTART
 
