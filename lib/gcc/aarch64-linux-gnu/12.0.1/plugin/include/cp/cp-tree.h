@@ -2829,6 +2829,12 @@ struct GTY(()) lang_decl_base {
 
   /* The following apply to VAR, FUNCTION, TYPE, CONCEPT, & NAMESPACE
      decls.  */
+  // FIXME: Purview and Attachment are not the same thing, due to
+  // linkage-declarations.  The modules code presumes they are the
+  // same.  (For context, linkage-decl semantics was a very late
+  // change). We need a module_attachment_p flag, and this will allow
+  // some simplification of how we handle header unit entities.
+  // Hurrah!
   unsigned module_purview_p : 1;	   /* in module purview (not GMF) */
   unsigned module_import_p : 1;     	   /* from an import */
   unsigned module_entity_p : 1;		   /* is in the entitity ary &
@@ -6781,6 +6787,7 @@ extern void note_iteration_stmt_body_end	(bool);
 extern void determine_local_discriminator	(tree);
 extern int decls_match				(tree, tree, bool = true);
 extern bool maybe_version_functions		(tree, tree, bool);
+extern bool merge_default_template_args		(tree, tree, bool);
 extern tree duplicate_decls			(tree, tree,
 						 bool hiding = false,
 						 bool was_hidden = false);
@@ -7030,6 +7037,7 @@ extern void emit_mem_initializers		(tree);
 extern tree build_aggr_init			(tree, tree, int,
                                                  tsubst_flags_t);
 extern int is_class_type			(tree, int);
+extern bool is_copy_initialization		(tree);
 extern tree build_zero_init			(tree, tree, bool);
 extern tree build_value_init			(tree, tsubst_flags_t);
 extern tree build_value_init_noctor		(tree, tsubst_flags_t);
@@ -8180,7 +8188,7 @@ extern char *get_mangled_vtable_map_var_name    (tree);
 extern bool mangle_return_type_p		(tree);
 extern tree mangle_decomp			(tree, vec<tree> &);
 extern void mangle_module_substitution		(int);
-extern void mangle_identifier			(char, tree);
+extern int mangle_module_component		(tree id, bool partition);
 extern tree mangle_module_global_init		(int);
 
 /* in dump.cc */
