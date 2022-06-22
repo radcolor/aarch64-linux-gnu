@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -2655,7 +2656,7 @@ Concept Index
 
 * !posix:                                Other Safety Remarks.
                                                               (line 135)
-* .lib section in a.out corrupted:       Error Codes.         (line 754)
+* .lib section in a.out corrupted:       Error Codes.         (line 758)
 * /condition:                            Other Safety Remarks.
                                                               (line 168)
 * /etc/hostname:                         Host Identification. (line  93)
@@ -2664,7 +2665,7 @@ Concept Index
 * 4.N BSD Unix:                          Berkeley Unix.       (line   6)
 * :identifier:                           Other Safety Remarks.
                                                               (line 147)
-* ?:                                     Error Codes.         (line 563)
+* ?:                                     Error Codes.         (line 567)
 * _POSIX_OPTION_ORDER environment variable.: Standard Environment.
                                                               (line 118)
 * _POSIX_SAVED_IDS:                      How Change Persona.  (line   6)
@@ -2683,7 +2684,7 @@ Concept Index
                                                               (line   6)
 * access permission for a file:          Access Permission.   (line   6)
 * access, testing for:                   Testing File Access. (line   6)
-* Accessing a corrupted shared library:  Error Codes.         (line 750)
+* Accessing a corrupted shared library:  Error Codes.         (line 754)
 * accessing directories:                 Accessing Directories.
                                                               (line   6)
 * Address already in use:                Error Codes.         (line 330)
@@ -2691,7 +2692,7 @@ Concept Index
 * address of socket:                     Socket Addresses.    (line   6)
 * address space:                         Memory Subsystem.    (line   6)
 * address space <1>:                     Program Basics.      (line   6)
-* Advertise error:                       Error Codes.         (line 718)
+* Advertise error:                       Error Codes.         (line 722)
 * alarm signal:                          Alarm Signals.       (line  20)
 * alarms, setting:                       Setting an Alarm.    (line  10)
 * aliases:                               NSS Basics.          (line  24)
@@ -2766,7 +2767,7 @@ Concept Index
 * Async-Signal-Unsafe:                   POSIX Safety Concepts.
                                                               (line  68)
 * Attempting to link in too many shared libraries: Error Codes.
-                                                              (line 758)
+                                                              (line 762)
 * attributes of a file:                  Attribute Meanings.  (line   6)
 * Authentication error:                  Error Codes.         (line 508)
 * automatic freeing:                     Variable Size Automatic.
@@ -2787,8 +2788,8 @@ Concept Index
 * backtrace_symbols:                     Backtraces.          (line   6)
 * Bad address:                           Error Codes.         (line  95)
 * Bad file descriptor:                   Error Codes.         (line  65)
-* Bad font file format:                  Error Codes.         (line 706)
-* Bad message:                           Error Codes.         (line 580)
+* Bad font file format:                  Error Codes.         (line 710)
+* Bad message:                           Error Codes.         (line 584)
 * base (of floating point number):       Floating Point Concepts.
                                                               (line  20)
 * baud rate:                             Line Speed.          (line   6)
@@ -2843,10 +2844,10 @@ Concept Index
 * calendar, Gregorian:                   Time Basics.         (line  52)
 * call once:                             Call Once.           (line   6)
 * calling variadic functions:            Calling Variadics.   (line   6)
-* Can not access a needed shared library: Error Codes.        (line 746)
+* Can not access a needed shared library: Error Codes.        (line 750)
 * Cannot allocate memory:                Error Codes.         (line  85)
 * Cannot assign requested address:       Error Codes.         (line 335)
-* Cannot exec a shared library directly: Error Codes.         (line 762)
+* Cannot exec a shared library directly: Error Codes.         (line 524)
 * Cannot send after transport endpoint shutdown: Error Codes. (line 394)
 * canonical input processing:            Canonical or Not.    (line   9)
 * capacity limits, POSIX:                General Limits.      (line   6)
@@ -2858,7 +2859,7 @@ Concept Index
 * changing the locale:                   Setting the Locale.  (line  20)
 * changing the size of a block (malloc): Changing Block Size. (line   6)
 * changing the size of a block (obstacks): Growing Objects.   (line   6)
-* Channel number out of range:           Error Codes.         (line 646)
+* Channel number out of range:           Error Codes.         (line 650)
 * channels:                              Stream/Descriptor Precautions.
                                                               (line   6)
 * character case conversion:             Case Conversion.     (line   6)
@@ -2900,7 +2901,7 @@ Concept Index
                                                               (line   6)
 * command line arguments:                Program Arguments.   (line   6)
 * command substitution:                  Expansion Stages.    (line  18)
-* Communication error on send:           Error Codes.         (line 726)
+* Communication error on send:           Error Codes.         (line 730)
 * communication style (of a socket):     Socket Concepts.     (line   6)
 * comparing strings and arrays:          String/Array Comparison.
                                                               (line   6)
@@ -2914,7 +2915,7 @@ Concept Index
                                                               (line 264)
 * complex numbers:                       Complex Numbers.     (line   6)
 * complex trigonometric functions:       Trig Functions.      (line  82)
-* Computer bought the farm:              Error Codes.         (line 571)
+* Computer bought the farm:              Error Codes.         (line 575)
 * concatenating strings:                 Copying Strings and Arrays.
                                                               (line   9)
 * concatenating strings <1>:             Concatenating Strings.
@@ -3050,7 +3051,7 @@ Concept Index
                                                               (line   6)
 * Destination address required:          Error Codes.         (line 387)
 * deterministic random bit generator:    Unpredictable Bytes. (line   6)
-* Device not a stream:                   Error Codes.         (line 608)
+* Device not a stream:                   Error Codes.         (line 612)
 * Device or resource busy:               Error Codes.         (line 106)
 * digit character:                       Classification of Characters.
                                                               (line  57)
@@ -3141,7 +3142,7 @@ Concept Index
 * exception:                             FP Exceptions.       (line   6)
 * exception <1>:                         Program Error Signals.
                                                               (line  49)
-* Exchange full:                         Error Codes.         (line 686)
+* Exchange full:                         Error Codes.         (line 690)
 * exclusive lock:                        File Locks.          (line  15)
 * Exec format error:                     Error Codes.         (line  59)
 * exec functions:                        Executing a File.    (line   6)
@@ -3175,13 +3176,13 @@ Concept Index
 * file copy:                             Copying File Data.   (line   6)
 * file creation mask:                    Setting Permissions. (line   6)
 * file descriptor flags:                 Descriptor Flags.    (line   6)
-* File descriptor in bad state:          Error Codes.         (line 738)
+* File descriptor in bad state:          Error Codes.         (line 742)
 * file descriptor sets, for select:      Waiting for I/O.     (line  30)
 * file descriptors, standard:            Descriptors and Streams.
                                                               (line  61)
 * File exists:                           Error Codes.         (line 112)
 * file fragmentation:                    Storage Allocation.  (line   6)
-* File locking deadlock error:           Error Codes.         (line 702)
+* File locking deadlock error:           Error Codes.         (line 706)
 * file locks:                            File Locks.          (line   6)
 * file modification time:                File Times.          (line   6)
 * file name:                             File Names.          (line  14)
@@ -3262,7 +3263,7 @@ Concept Index
                                                               (line 128)
 * graphic character <1>:                 Classification of Wide Characters.
                                                               (line 151)
-* Gratuitous error:                      Error Codes.         (line 576)
+* Gratuitous error:                      Error Codes.         (line 580)
 * Gregorian calendar:                    Time Basics.         (line  52)
 * group:                                 NSS Basics.          (line  24)
 * group database:                        Group Database.      (line   6)
@@ -3323,7 +3324,7 @@ Concept Index
                                                               (line  51)
 * i18n:                                  Unsafe Features.     (line  79)
 * iconv:                                 Unsafe Features.     (line  67)
-* Identifier removed:                    Error Codes.         (line 584)
+* Identifier removed:                    Error Codes.         (line 588)
 * identifying terminals:                 Is It a Terminal.    (line   6)
 * IEEE 754:                              Floating Point Numbers.
                                                               (line   6)
@@ -3342,7 +3343,7 @@ Concept Index
 * Inappropriate file type or format:     Error Codes.         (line 500)
 * Inappropriate ioctl for device:        Error Codes.         (line 162)
 * Inappropriate operation for background process: Error Codes.
-                                                              (line 546)
+                                                              (line 550)
 * independent channels:                  Independent Channels.
                                                               (line   6)
 * inexact exception:                     FP Exceptions.       (line   6)
@@ -3383,7 +3384,7 @@ Concept Index
 * interrupt signal:                      Termination Signals. (line  32)
 * interrupt-driven input:                Interrupt Input.     (line   6)
 * Interrupted system call:               Error Codes.         (line  29)
-* Interrupted system call should be restarted: Error Codes.   (line 642)
+* Interrupted system call should be restarted: Error Codes.   (line 646)
 * interrupting primitives:               Interrupted Primitives.
                                                               (line  47)
 * interval:                              Time Basics.         (line  20)
@@ -3392,12 +3393,12 @@ Concept Index
 * Invalid argument:                      Error Codes.         (line 139)
 * Invalid cross-device link:             Error Codes.         (line 117)
 * invalid exception:                     FP Exceptions.       (line   6)
-* Invalid exchange:                      Error Codes.         (line 678)
+* Invalid exchange:                      Error Codes.         (line 682)
 * Invalid or incomplete multibyte or wide character: Error Codes.
-                                                              (line 539)
-* Invalid request code:                  Error Codes.         (line 694)
-* Invalid request descriptor:            Error Codes.         (line 682)
-* Invalid slot:                          Error Codes.         (line 698)
+                                                              (line 543)
+* Invalid request code:                  Error Codes.         (line 698)
+* Invalid request descriptor:            Error Codes.         (line 686)
+* Invalid slot:                          Error Codes.         (line 702)
 * inverse complex hyperbolic functions:  Hyperbolic Functions.
                                                               (line 132)
 * inverse complex trigonometric functions: Inverse Trig Functions.
@@ -3475,10 +3476,10 @@ Concept Index
 * leap seconds:                          Time Basics.         (line  45)
 * length of string:                      Representation of Strings.
                                                               (line  61)
-* Level 2 halted:                        Error Codes.         (line 674)
-* Level 2 not synchronized:              Error Codes.         (line 650)
-* Level 3 halted:                        Error Codes.         (line 654)
-* Level 3 reset:                         Error Codes.         (line 658)
+* Level 2 halted:                        Error Codes.         (line 678)
+* Level 2 not synchronized:              Error Codes.         (line 654)
+* Level 3 halted:                        Error Codes.         (line 658)
+* Level 3 reset:                         Error Codes.         (line 662)
 * level, for socket options:             Socket Options.      (line   9)
 * library:                               Introduction.        (line   9)
 * limit:                                 Limits on Resources. (line  12)
@@ -3500,8 +3501,8 @@ Concept Index
 * line speed:                            Line Speed.          (line   6)
 * lines (in a text file):                Binary Streams.      (line  26)
 * link:                                  Directories.         (line   9)
-* Link has been severed:                 Error Codes.         (line 596)
-* Link number out of range:              Error Codes.         (line 662)
+* Link has been severed:                 Error Codes.         (line 600)
+* Link number out of range:              Error Codes.         (line 666)
 * link, hard:                            Hard Links.          (line   6)
 * link, soft:                            Symbolic Links.      (line   6)
 * link, symbolic:                        Symbolic Links.      (line   6)
@@ -3539,7 +3540,7 @@ Concept Index
                                                               (line  27)
 * lower-case character <1>:              Classification of Wide Characters.
                                                               (line 166)
-* Machine is not on the network:         Error Codes.         (line 710)
+* Machine is not on the network:         Error Codes.         (line 714)
 * macros:                                Obstack Functions.   (line   6)
 * main function:                         Program Arguments.   (line   6)
 * malloc debugger:                       Allocation Debugging.
@@ -3605,7 +3606,7 @@ Concept Index
                                                               (line  22)
 * multibyte string <1>:                  Representation of Strings.
                                                               (line  71)
-* Multihop attempted:                    Error Codes.         (line 588)
+* Multihop attempted:                    Error Codes.         (line 592)
 * multiple names for one file:           Hard Links.          (line   6)
 * multiplexing input:                    Waiting for I/O.     (line   6)
 * multiply-add:                          Misc FP Arithmetic.  (line   6)
@@ -3613,7 +3614,7 @@ Concept Index
 * mutex tunables:                        POSIX Thread Tunables.
                                                               (line   6)
 * mutual exclusion:                      ISO C Mutexes.       (line   6)
-* Name not unique on network:            Error Codes.         (line 734)
+* Name not unique on network:            Error Codes.         (line 738)
 * name of running program:               Error Messages.      (line 104)
 * name of socket:                        Socket Addresses.    (line   6)
 * Name Service Switch:                   Name Service Switch. (line   6)
@@ -3646,14 +3647,14 @@ Concept Index
                                                               (line  33)
 * NLSPATH environment variable <1>:      Standard Environment.
                                                               (line 113)
-* No anode:                              Error Codes.         (line 690)
+* No anode:                              Error Codes.         (line 694)
 * No buffer space available:             Error Codes.         (line 367)
 * No child processes:                    Error Codes.         (line  71)
-* No CSI structure available:            Error Codes.         (line 670)
-* No data available:                     Error Codes.         (line 592)
+* No CSI structure available:            Error Codes.         (line 674)
+* No data available:                     Error Codes.         (line 596)
 * No locks available:                    Error Codes.         (line 493)
 * No medium found:                       Error Codes.         (line 790)
-* No message of desired type:            Error Codes.         (line 600)
+* No message of desired type:            Error Codes.         (line 604)
 * No route to host:                      Error Codes.         (line 431)
 * No space left on device:               Error Codes.         (line 182)
 * No such device:                        Error Codes.         (line 124)
@@ -3674,7 +3675,7 @@ Concept Index
 * Not a directory:                       Error Codes.         (line 129)
 * not a number:                          Infinity and NaN.    (line   6)
 * Not a XENIX named type file:           Error Codes.         (line 774)
-* Not supported:                         Error Codes.         (line 524)
+* Not supported:                         Error Codes.         (line 528)
 * NSS:                                   Unsafe Features.     (line  66)
 * NSS <1>:                               Name Service Switch. (line   6)
 * nsswitch.conf:                         NSS Configuration File.
@@ -3707,7 +3708,7 @@ Concept Index
 * opening a socket pair:                 Socket Pairs.        (line   6)
 * opening a stream:                      Opening Streams.     (line   6)
 * Operation already in progress:         Error Codes.         (line 273)
-* Operation canceled:                    Error Codes.         (line 624)
+* Operation canceled:                    Error Codes.         (line 628)
 * Operation not permitted:               Error Codes.         (line  13)
 * Operation not possible due to RF-kill: Error Codes.         (line 814)
 * Operation not supported:               Error Codes.         (line 309)
@@ -3726,16 +3727,16 @@ Concept Index
                                                               (line   6)
 * Other Safety Remarks:                  Other Safety Remarks.
                                                               (line   6)
-* Out of streams resources:              Error Codes.         (line 604)
+* Out of streams resources:              Error Codes.         (line 608)
 * out-of-band data:                      Out-of-Band Data.    (line   6)
 * output conversions, for printf:        Table of Output Conversions.
                                                               (line   6)
 * output possible signal:                Asynchronous I/O Signals.
                                                               (line  14)
 * overflow exception:                    FP Exceptions.       (line   6)
-* Owner died:                            Error Codes.         (line 631)
+* Owner died:                            Error Codes.         (line 635)
 * owner of a file:                       File Owner.          (line   6)
-* Package not installed:                 Error Codes.         (line 714)
+* Package not installed:                 Error Codes.         (line 718)
 * packet:                                Socket Concepts.     (line  12)
 * page boundary:                         Aligned Memory Blocks.
                                                               (line   6)
@@ -3859,8 +3860,8 @@ Concept Index
 * protection flags:                      Memory Protection.   (line   6)
 * protection key:                        Memory Protection.   (line 123)
 * protocol (of socket):                  Socket Concepts.     (line  42)
-* Protocol driver not attached:          Error Codes.         (line 666)
-* Protocol error:                        Error Codes.         (line 616)
+* Protocol driver not attached:          Error Codes.         (line 670)
+* Protocol error:                        Error Codes.         (line 620)
 * protocol family:                       Socket Concepts.     (line  42)
 * Protocol family not supported:         Error Codes.         (line 319)
 * Protocol not available:                Error Codes.         (line 293)
@@ -3926,7 +3927,7 @@ Concept Index
 * reentrant NSS functions:               NSS Module Names.    (line  21)
 * relative file name:                    File Name Resolution.
                                                               (line  24)
-* Remote address changed:                Error Codes.         (line 742)
+* Remote address changed:                Error Codes.         (line 746)
 * Remote I/O error:                      Error Codes.         (line 786)
 * removal of quotes:                     Expansion Stages.    (line  33)
 * removing a file:                       Deleting Files.      (line   6)
@@ -3944,7 +3945,7 @@ Concept Index
 * restarting interrupted primitives:     Interrupted Primitives.
                                                               (line  47)
 * restrictions on signal handler functions: Nonreentrancy.    (line   6)
-* RFS specific error:                    Error Codes.         (line 730)
+* RFS specific error:                    Error Codes.         (line 734)
 * root directory:                        File Name Resolution.
                                                               (line  19)
 * Rot13:                                 Obfuscating Data.    (line   6)
@@ -4086,7 +4087,7 @@ Concept Index
 * speed of execution:                    Why Lock Pages.      (line  14)
 * square root function:                  Exponents and Logarithms.
                                                               (line 196)
-* Srmount error:                         Error Codes.         (line 722)
+* Srmount error:                         Error Codes.         (line 726)
 * stable sorting:                        Array Sort Function. (line  24)
 * Stale file handle:                     Error Codes.         (line 457)
 * standard dot notation, for Internet addresses: Abstract Host Addresses.
@@ -4110,7 +4111,7 @@ Concept Index
 * START character:                       Start/Stop Characters.
                                                               (line  12)
 * startup of program:                    Program Arguments.   (line   6)
-* State not recoverable:                 Error Codes.         (line 635)
+* State not recoverable:                 Error Codes.         (line 639)
 * stateful:                              Keeping the state.   (line   6)
 * stateful <1>:                          Converting a Character.
                                                               (line  94)
@@ -4273,7 +4274,7 @@ Concept Index
 * time, high precision:                  Setting and Adjusting the Time.
                                                               (line  60)
 * timer:                                 Unsafe Features.     (line  87)
-* Timer expired:                         Error Codes.         (line 620)
+* Timer expired:                         Error Codes.         (line 624)
 * timer, profiling:                      Setting an Alarm.    (line  22)
 * timer, real-time:                      Setting an Alarm.    (line  13)
 * timer, virtual:                        Setting an Alarm.    (line  17)
@@ -4296,7 +4297,7 @@ Concept Index
                                                               (line   6)
 * traffic class:                         Internet Address Formats.
                                                               (line  55)
-* Translator died:                       Error Codes.         (line 556)
+* Translator died:                       Error Codes.         (line 560)
 * transmitting datagrams:                Sending Datagrams.   (line   6)
 * Transport endpoint is already connected: Error Codes.       (line 374)
 * Transport endpoint is not connected:   Error Codes.         (line 379)
@@ -4375,7 +4376,7 @@ Concept Index
 * UTF-7:                                 Extended Char Intro. (line 234)
 * UTF-8:                                 Extended Char Intro. (line  53)
 * UTF-8 <1>:                             Extended Char Intro. (line 226)
-* Value too large for defined data type: Error Codes.         (line 612)
+* Value too large for defined data type: Error Codes.         (line 616)
 * variable number of arguments:          Variadic Functions.  (line   6)
 * variable substitution:                 Expansion Stages.    (line  15)
 * variable-sized arrays:                 GNU C Variable-Size Arrays.
@@ -4419,7 +4420,7 @@ Concept Index
 * Wrong medium type:                     Error Codes.         (line 794)
 * xmalloc function:                      Malloc Examples.     (line  10)
 * xrealloc and xreallocarray functions:  Changing Block Size. (line  64)
-* You really blew it this time:          Error Codes.         (line 567)
+* You really blew it this time:          Error Codes.         (line 571)
 * YP:                                    Host Identification. (line  37)
 * YP domain name:                        Host Identification. (line  37)
 * YP domain name <1>:                    Host Identification. (line 110)
@@ -4671,7 +4672,7 @@ Type Index
 * struct crypt_data:                     Passphrase Storage.  (line 123)
 * struct dirent:                         Directory Entries.   (line  10)
 * struct dl_find_object:                 Dynamic Linker Introspection.
-                                                              (line   9)
+                                                              (line  87)
 * struct entry:                          Hash Search Function.
                                                               (line  84)
 * struct exit_status:                    Manipulating the Database.
@@ -4787,7 +4788,7 @@ Function and Macro Index
                                                               (line  46)
 * *sem_open:                             Semaphores.          (line  43)
 * _dl_find_object:                       Dynamic Linker Introspection.
-                                                              (line  64)
+                                                              (line 142)
 * _exit:                                 Termination Internals.
                                                               (line   9)
 * _Exit:                                 Termination Internals.
@@ -5341,6 +5342,8 @@ Function and Macro Index
 * dirname:                               Finding Tokens in a String.
                                                               (line 274)
 * div:                                   Integer Division.    (line  30)
+* dlinfo:                                Dynamic Linker Introspection.
+                                                              (line   9)
 * dmull:                                 Misc FP Arithmetic.  (line 257)
 * dngettext:                             Advanced gettext functions.
                                                               (line  92)
@@ -5780,7 +5783,7 @@ Function and Macro Index
 * getnetgrent_r:                         Lookup Netgroup.     (line  58)
 * getopt:                                Using Getopt.        (line  38)
 * getopt_long:                           Getopt Long Options. (line  43)
-* getopt_long_only:                      Getopt Long Options. (line  99)
+* getopt_long_only:                      Getopt Long Options. (line 101)
 * getpagesize:                           Query Memory Parameters.
                                                               (line  33)
 * getpass:                               getpass.             (line  10)
@@ -5871,7 +5874,7 @@ Function and Macro Index
 * gmtime_r:                              Broken-down Time.    (line 143)
 * grantpt:                               Allocation.          (line  26)
 * grantpt <1>:                           Configuring and compiling.
-                                                              (line 203)
+                                                              (line 209)
 * gsignal:                               Signaling Yourself.  (line  19)
 * gtty:                                  BSD Terminal Modes.  (line  31)
 * hasmntopt:                             mtab.                (line 205)

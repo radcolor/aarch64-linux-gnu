@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.

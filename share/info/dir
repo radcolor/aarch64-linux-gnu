@@ -68,4 +68,5 @@ Software development
 * gcov-tool: (gcc) Gcov-tool.   'gcov-tool'--an offline gcda profile 
                                   processing program.
 * gprof: (gprof).               Profiling your program's execution
+* gprofng: (gprofng).           The next generation profiling tool for Linux
 * lto-dump: (gcc) lto-dump.     'lto-dump'--Tool for dumping LTO object files.

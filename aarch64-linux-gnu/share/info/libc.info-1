@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -5755,6 +5756,10 @@ on other systems.
      this particular function will always fail with ‘ENOSYS’ unless you
      install a new version of the C library or the operating system.
 
+ -- Macro: int ELIBEXEC
+
+     “Cannot exec a shared library directly.”
+
  -- Macro: int ENOTSUP
 
      “Not supported.” A function returns this error when certain
@@ -5992,10 +5997,6 @@ They are not yet documented._
  -- Macro: int ELIBMAX
 
      “Attempting to link in too many shared libraries.”
-
- -- Macro: int ELIBEXEC
-
-     “Cannot exec a shared library directly.”
 
  -- Macro: int ESTRPIPE
 

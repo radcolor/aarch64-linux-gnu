@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -2268,6 +2269,12 @@ if ‘CFLAGS’ is specified it must enable optimization.  For example:
      detect the problem and suppress these constructs, so that the
      library will still be usable, but functionality may be lost—for
      example, you can’t build a shared libc with old binutils.
+
+‘--with-default-link’
+     With ‘--with-default-link’, the build system does not use a custom
+     linker script for linking shared objects.  The default is
+     ‘--without-default-link’, because the custom linker script is
+     needed for full RELRO protection.
 
 ‘--with-nonshared-cflags=CFLAGS’
      Use additional compiler flags CFLAGS to build the parts of the

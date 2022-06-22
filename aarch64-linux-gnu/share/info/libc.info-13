@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -2161,6 +2162,128 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Database Example,  Next: Netgroup Database,  Prev: Group Database,  Up: Users and Groups
+
+30.15 User and Group Database Example
+=====================================
+
+Here is an example program showing the use of the system database
+inquiry functions.  The program prints some information about the user
+running the program.
+
+
+     #include <grp.h>
+     #include <pwd.h>
+     #include <sys/types.h>
+     #include <unistd.h>
+     #include <stdlib.h>
+
+     int
+     main (void)
+     {
+       uid_t me;
+       struct passwd *my_passwd;
+       struct group *my_group;
+       char **members;
+
+       /* Get information about the user ID. */
+       me = getuid ();
+       my_passwd = getpwuid (me);
+       if (!my_passwd)
+         {
+           printf ("Couldn't find out about user %d.\n", (int) me);
+           exit (EXIT_FAILURE);
+         }
+
+       /* Print the information. */
+       printf ("I am %s.\n", my_passwd->pw_gecos);
+       printf ("My login name is %s.\n", my_passwd->pw_name);
+       printf ("My uid is %d.\n", (int) (my_passwd->pw_uid));
+       printf ("My home directory is %s.\n", my_passwd->pw_dir);
+       printf ("My default shell is %s.\n", my_passwd->pw_shell);
+
+       /* Get information about the default group ID. */
+       my_group = getgrgid (my_passwd->pw_gid);
+       if (!my_group)
+         {
+           printf ("Couldn't find out about group %d.\n",
+                   (int) my_passwd->pw_gid);
+           exit (EXIT_FAILURE);
+         }
+
+       /* Print the information. */
+       printf ("My default group is %s (%d).\n",
+               my_group->gr_name, (int) (my_passwd->pw_gid));
+       printf ("The members of this group are:\n");
+       members = my_group->gr_mem;
+       while (*members)
+         {
+           printf ("  %s\n", *(members));
+           members++;
+         }
+
+       return EXIT_SUCCESS;
+     }
+
+   Here is some output from this program:
+
+     I am Throckmorton Snurd.
+     My login name is snurd.
+     My uid is 31093.
+     My home directory is /home/fsg/snurd.
+     My default shell is /bin/sh.
+     My default group is guest (12).
+     The members of this group are:
+       friedman
+       tami
+
+
+File: libc.info,  Node: Netgroup Database,  Prev: Database Example,  Up: Users and Groups
+
+30.16 Netgroup Database
+=======================
+
+* Menu:
+
+* Netgroup Data::                  Data in the Netgroup database and where
+                                   it comes from.
+* Lookup Netgroup::                How to look for a particular netgroup.
+* Netgroup Membership::            How to test for netgroup membership.
+
+
+File: libc.info,  Node: Netgroup Data,  Next: Lookup Netgroup,  Up: Netgroup Database
+
+30.16.1 Netgroup Data
+---------------------
+
+Sometimes it is useful to group users according to other criteria (*note
+Group Database::).  E.g., it is useful to associate a certain group of
+users with a certain machine.  On the other hand grouping of host names
+is not supported so far.
+
+   In Sun Microsystems’ SunOS appeared a new kind of database, the
+netgroup database.  It allows grouping hosts, users, and domains freely,
+giving them individual names.  To be more concrete, a netgroup is a list
+of triples consisting of a host name, a user name, and a domain name
+where any of the entries can be a wildcard entry matching all inputs.  A
+last possibility is that names of other netgroups can also be given in
+the list specifying a netgroup.  So one can construct arbitrary
+hierarchies without loops.
+
+   Sun’s implementation allows netgroups only for the ‘nis’ or ‘nisplus’
+service, *note Services in the NSS configuration::.  The implementation
+in the GNU C Library has no such restriction.  An entry in either of the
+input services must have the following form:
+
+     GROUPNAME ( GROUPNAME | (HOSTNAME,USERNAME,domainname) )+
+
+   Any of the fields in the triple can be empty which means anything
+matches.  While describing the functions we will see that the opposite
+case is useful as well.  I.e., there may be entries which will not match
+any input.  For entries like this, a name consisting of the single
+character ‘-’ shall be used.
 
 
 File: libc.info,  Node: Lookup Netgroup,  Next: Netgroup Membership,  Prev: Netgroup Data,  Up: Netgroup Database
@@ -6496,6 +6619,84 @@ File: libc.info,  Node: Dynamic Linker Introspection,  Up: Dynamic Linker
 The GNU C Library provides various functions for querying information
 from the dynamic linker.
 
+ -- Function: int dlinfo (void *HANDLE, int REQUEST, void *ARG)
+     | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt | *Note POSIX
+     Safety Concepts::.
+
+     This function returns information about HANDLE in the memory
+     location ARG, based on REQUEST.  The HANDLE argument must be a
+     pointer returned by ‘dlopen’ or ‘dlmopen’; it must not have been
+     closed by ‘dlclose’.
+
+     On success, ‘dlinfo’ returns 0 for most request types; exceptions
+     are noted below.  If there is an error, the function returns -1,
+     and ‘dlerror’ can be used to obtain a corresponding error message.
+
+     The following operations are defined for use with REQUEST:
+
+     ‘RTLD_DI_LINKMAP’
+          The corresponding ‘struct link_map’ pointer for HANDLE is
+          written to ‘*ARG’.  The ARG argument must be the address of an
+          object of type ‘struct link_map *’.
+
+     ‘RTLD_DI_LMID’
+          The namespace identifier of HANDLE is written to ‘*ARG’.  The
+          ARG argument must be the address of an object of type
+          ‘Lmid_t’.
+
+     ‘RTLD_DI_ORIGIN’
+          The value of the ‘$ORIGIN’ dynamic string token for HANDLE is
+          written to the character array starting at ARG as a
+          null-terminated string.
+
+          This request type should not be used because it is prone to
+          buffer overflows.
+
+     ‘RTLD_DI_SERINFO’
+     ‘RTLD_DI_SERINFOSIZE’
+          These requests can be used to obtain search path information
+          for HANDLE.  For both requests, ARG must point to a
+          ‘Dl_serinfo’ object.  The ‘RTLD_DI_SERINFOSIZE’ request must
+          be made first; it updates the ‘dls_size’ and ‘dls_cnt’ members
+          of the ‘Dl_serinfo’ object.  The caller should then allocate
+          memory to store at least ‘dls_size’ bytes and pass that buffer
+          to a ‘RTLD_DI_SERINFO’ request.  This second request fills the
+          ‘dls_serpath’ array.  The number of array elements was
+          returned in the ‘dls_cnt’ member in the initial
+          ‘RTLD_DI_SERINFOSIZE’ request.  The caller is responsible for
+          freeing the allocated buffer.
+
+          This interface is prone to buffer overflows in multi-threaded
+          processes because the required size can change between the
+          ‘RTLD_DI_SERINFOSIZE’ and ‘RTLD_DI_SERINFO’ requests.
+
+     ‘RTLD_DI_TLS_DATA’
+          This request writes the address of the TLS block (in the
+          current thread) for the shared object identified by HANDLE to
+          ‘*ARG’.  The argument ARG must be the address of an object of
+          type ‘void *’.  A null pointer is written if the object does
+          not have any associated TLS block.
+
+     ‘RTLD_DI_TLS_MODID’
+          This request writes the TLS module ID for the shared object
+          HANDLE to ‘*ARG’.  The argument ARG must be the address of an
+          object of type ‘size_t’.  The module ID is zero if the object
+          does not have an associated TLS block.
+
+     ‘RTLD_DI_PHDR’
+          This request writes the address of the program header array to
+          ‘*ARG’.  The argument ARG must be the address of an object of
+          type ‘const ElfW(Phdr) *’ (that is, ‘const Elf32_Phdr *’ or
+          ‘const Elf64_Phdr *’, as appropriate for the current
+          architecture).  For this request, the value returned by
+          ‘dlinfo’ is the number of program headers in the program
+          header array.
+
+     The ‘dlinfo’ function is a GNU extension.
+
+   The remainder of this section documents the ‘_dl_find_object’
+function and supporting types and constants.
+
  -- Data Type: struct dl_find_object
 
      This structure contains information about a main program or loaded
@@ -6911,7 +7112,7 @@ with minimum and maximum values:
      glibc.elision.skip_lock_busy: 3 (min: -2147483648, max: 2147483647)
      glibc.malloc.top_pad: 0x0 (min: 0x0, max: 0xffffffffffffffff)
      glibc.cpu.x86_rep_stosb_threshold: 0x800 (min: 0x1, max: 0xffffffffffffffff)
-     glibc.cpu.x86_non_temporal_threshold: 0xc0000 (min: 0x0, max: 0xffffffffffffffff)
+     glibc.cpu.x86_non_temporal_threshold: 0xc0000 (min: 0x4040, max: 0x0fffffffffffffff)
      glibc.cpu.x86_shstk:
      glibc.cpu.hwcap_mask: 0x6 (min: 0x0, max: 0xffffffffffffffff)
      glibc.malloc.mmap_max: 0 (min: -2147483648, max: 2147483647)
@@ -7327,7 +7528,7 @@ File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tuna
      The ‘glibc.cpu.hwcaps=-xxx,yyy,-zzz...’ tunable allows the user to
      enable CPU/ARCH feature ‘yyy’, disable CPU/ARCH feature ‘xxx’ and
      ‘zzz’ where the feature name is case-sensitive and has to match the
-     ones in ‘sysdeps/x86/cpu-features.h’.
+     ones in ‘sysdeps/x86/include/cpu-features.h’.
 
      This tunable is specific to i386 and x86-64.
 
@@ -7408,164 +7609,4 @@ File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tuna
      ‘permissive’, it turns off SHSTK instead.
 
      This tunable is specific to i386 and x86-64.
-
-
-File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tunables,  Up: Tunables
-
-38.7 Memory Related Tunables
-============================
-
- -- Tunable namespace: glibc.mem
-     This tunable namespace supports operations that affect the way the
-     GNU C Library and the process manage memory.
-
- -- Tunable: glibc.mem.tagging
-     If the hardware supports memory tagging, this tunable can be used
-     to control the way the GNU C Library uses this feature.  At present
-     this is only supported on AArch64 systems with the MTE extention;
-     it is ignored for all other systems.
-
-     This tunable takes a value between 0 and 255 and acts as a bitmask
-     that enables various capabilities.
-
-     Bit 0 (the least significant bit) causes the ‘malloc’ subsystem to
-     allocate tagged memory, with each allocation being assigned a
-     random tag.
-
-     Bit 1 enables precise faulting mode for tag violations on systems
-     that support deferred tag violation reporting.  This may cause
-     programs to run more slowly.
-
-     Other bits are currently reserved.
-
-     The GNU C Library startup code will automatically enable memory
-     tagging support in the kernel if this tunable has any non-zero
-     value.
-
-     The default value is ‘0’, which disables all memory tagging.
-
-
-File: libc.info,  Node: Language Features,  Next: Library Summary,  Prev: Tunables,  Up: Top
-
-Appendix A C Language Facilities in the Library
-***********************************************
-
-Some of the facilities implemented by the C library really should be
-thought of as parts of the C language itself.  These facilities ought to
-be documented in the C Language Manual, not in the library manual; but
-since we don’t have the language manual yet, and documentation for these
-features has been written, we are publishing it here.
-
-* Menu:
-
-* Consistency Checking::        Using ‘assert’ to abort if
-				 something “impossible” happens.
-* Variadic Functions::          Defining functions with varying numbers
-                                 of args.
-* Null Pointer Constant::       The macro ‘NULL’.
-* Important Data Types::        Data types for object sizes.
-* Data Type Measurements::      Parameters of data type representations.
-
-
-File: libc.info,  Node: Consistency Checking,  Next: Variadic Functions,  Up: Language Features
-
-A.1 Explicitly Checking Internal Consistency
-============================================
-
-When you’re writing a program, it’s often a good idea to put in checks
-at strategic places for “impossible” errors or violations of basic
-assumptions.  These kinds of checks are helpful in debugging problems
-with the interfaces between different parts of the program, for example.
-
-   The ‘assert’ macro, defined in the header file ‘assert.h’, provides a
-convenient way to abort the program while printing a message about where
-in the program the error was detected.
-
-   Once you think your program is debugged, you can disable the error
-checks performed by the ‘assert’ macro by recompiling with the macro
-‘NDEBUG’ defined.  This means you don’t actually have to change the
-program source code to disable these checks.
-
-   But disabling these consistency checks is undesirable unless they
-make the program significantly slower.  All else being equal, more error
-checking is good no matter who is running the program.  A wise user
-would rather have a program crash, visibly, than have it return nonsense
-without indicating anything might be wrong.
-
- -- Macro: void assert (int EXPRESSION)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap corrupt | AC-Unsafe mem
-     lock corrupt | *Note POSIX Safety Concepts::.
-
-     Verify the programmer’s belief that EXPRESSION is nonzero at this
-     point in the program.
-
-     If ‘NDEBUG’ is not defined, ‘assert’ tests the value of EXPRESSION.
-     If it is false (zero), ‘assert’ aborts the program (*note Aborting
-     a Program::) after printing a message of the form:
-
-          FILE:LINENUM: FUNCTION: Assertion `EXPRESSION' failed.
-
-     on the standard error stream ‘stderr’ (*note Standard Streams::).
-     The filename and line number are taken from the C preprocessor
-     macros ‘__FILE__’ and ‘__LINE__’ and specify where the call to
-     ‘assert’ was made.  When using the GNU C compiler, the name of the
-     function which calls ‘assert’ is taken from the built-in variable
-     ‘__PRETTY_FUNCTION__’; with older compilers, the function name and
-     following colon are omitted.
-
-     If the preprocessor macro ‘NDEBUG’ is defined before ‘assert.h’ is
-     included, the ‘assert’ macro is defined to do absolutely nothing.
-
-     *Warning:* Even the argument expression EXPRESSION is not evaluated
-     if ‘NDEBUG’ is in effect.  So never use ‘assert’ with arguments
-     that involve side effects.  For example, ‘assert (++i > 0);’ is a
-     bad idea, because ‘i’ will not be incremented if ‘NDEBUG’ is
-     defined.
-
-   Sometimes the “impossible” condition you want to check for is an
-error return from an operating system function.  Then it is useful to
-display not only where the program crashes, but also what error was
-returned.  The ‘assert_perror’ macro makes this easy.
-
- -- Macro: void assert_perror (int ERRNUM)
-
-     Preliminary: | MT-Safe | AS-Unsafe heap corrupt | AC-Unsafe mem
-     lock corrupt | *Note POSIX Safety Concepts::.
-
-     Similar to ‘assert’, but verifies that ERRNUM is zero.
-
-     If ‘NDEBUG’ is not defined, ‘assert_perror’ tests the value of
-     ERRNUM.  If it is nonzero, ‘assert_perror’ aborts the program after
-     printing a message of the form:
-
-          FILE:LINENUM: FUNCTION: ERROR TEXT
-
-     on the standard error stream.  The file name, line number, and
-     function name are as for ‘assert’.  The error text is the result of
-     ‘strerror (ERRNUM)’.  *Note Error Messages::.
-
-     Like ‘assert’, if ‘NDEBUG’ is defined before ‘assert.h’ is
-     included, the ‘assert_perror’ macro does absolutely nothing.  It
-     does not evaluate the argument, so ERRNUM should not have any side
-     effects.  It is best for ERRNUM to be just a simple variable
-     reference; often it will be ‘errno’.
-
-     This macro is a GNU extension.
-
-   *Usage note:* The ‘assert’ facility is designed for detecting
-_internal inconsistency_; it is not suitable for reporting invalid input
-or improper usage by the _user_ of the program.
-
-   The information in the diagnostic messages printed by the ‘assert’
-and ‘assert_perror’ macro is intended to help you, the programmer, track
-down the cause of a bug, but is not really useful for telling a user of
-your program why his or her input was invalid or why a command could not
-be carried out.  What’s more, your program should not abort when given
-invalid input, as ‘assert’ would do—it should exit with nonzero status
-(*note Exit Status::) after printing its error messages, or perhaps read
-another command or move on to the next input file.
-
-   *Note Error Messages::, for information on printing error messages
-for problems that _do not_ represent bugs in the program.
 

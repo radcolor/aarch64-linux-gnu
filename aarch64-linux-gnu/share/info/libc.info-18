@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -2287,7 +2288,7 @@ Program and File Index
 * printf.h <1>:                          Conversion Specifier Options.
                                                               (line  13)
 * pt_chown:                              Configuring and compiling.
-                                                              (line 203)
+                                                              (line 209)
 * pwd.h:                                 Reserved Names.      (line  90)
 * pwd.h <1>:                             User Data Structure. (line   7)
 * setjmp.h:                              Non-Local Details.   (line   8)
@@ -2517,7 +2518,7 @@ Program and File Index
 * wchar.h <10>:                          Converting a Character.
                                                               (line 238)
 * wchar.h <11>:                          Converting a Character.
-                                                              (line 335)
+                                                              (line 336)
 * wchar.h <12>:                          Converting Strings.  (line  55)
 * wchar.h <13>:                          Converting Strings.  (line 138)
 * wchar.h <14>:                          Simple Output.       (line  10)

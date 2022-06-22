@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "LD 1"
-.TH LD 1 "2022-03-10" "binutils-2.38.50" "GNU Development Tools"
+.TH LD 1 "2022-06-22" "binutils-2.38.50" "GNU Development Tools"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -2464,6 +2464,33 @@ encountered in a different order.
 Warn if any global constructors are used.  This is only useful for a few
 object file formats.  For formats like \s-1COFF\s0 or \s-1ELF,\s0 the linker can not
 detect the use of global constructors.
+.IP "\fB\-\-warn\-execstack\fR" 4
+.IX Item "--warn-execstack"
+.PD 0
+.IP "\fB\-\-no\-warn\-execstack\fR" 4
+.IX Item "--no-warn-execstack"
+.PD
+On \s-1ELF\s0 platforms this option controls how the linker generates warning
+messages when it creates an output file with an executable stack.  By
+default the linker will not warn if the \fB\-z execstack\fR command
+line option has been used, but this behaviour can be overridden by the
+\&\fB\-\-warn\-execstack\fR option.
+.Sp
+On the other hand the linker will normally warn if the stack is made
+executable because one or more of the input files need an execuable
+stack and neither of the \fB\-z execstack\fR or \fB\-z
+noexecstack\fR command line options have been specified.  This warning
+can be disabled via the \fB\-\-no\-warn\-execstack\fR option.
+.Sp
+Note: \s-1ELF\s0 format input files specify that they need an executable
+stack by having a \fI.note.GNU\-stack\fR section with the executable
+bit set in its section flags.  They can specify that they do not need
+an executable stack by having that section, but without the executable
+flag bit set.  If an input file does not have a \fI.note.GNU\-stack\fR
+section present then the default behaviour is target specific.  For
+some targets, then absence of such a section implies that an
+executable stack \fIis\fR required.  This is often a problem for hand
+crafted assembler files.
 .IP "\fB\-\-warn\-multiple\-gp\fR" 4
 .IX Item "--warn-multiple-gp"
 Warn if multiple global pointer values are required in the output file.
@@ -2481,6 +2508,22 @@ option causes a warning to be issued whenever this case occurs.
 .IX Item "--warn-once"
 Only warn once for each undefined symbol, rather than once per module
 which refers to it.
+.IP "\fB\-\-warn\-rwx\-segments\fR" 4
+.IX Item "--warn-rwx-segments"
+.PD 0
+.IP "\fB\-\-no\-warn\-rwx\-segments\fR" 4
+.IX Item "--no-warn-rwx-segments"
+.PD
+Warn if the linker creates a loadable, non-zero sized segment that has
+all three of the read, write and execute permission flags set.  Such a
+segment represents a potential security vulnerability.  In addition
+warnings will be generated if a thread local storage segment is
+created with the execute permission flag set, regardless of whether or
+not it has the read and/or write flags set.
+.Sp
+These warnings are enabled by default.  They can be disabled via the
+\&\fB\-\-no\-warn\-rwx\-segments\fR option and re-enabled via the
+\&\fB\-\-warn\-rwx\-segments\fR option.
 .IP "\fB\-\-warn\-section\-align\fR" 4
 .IX Item "--warn-section-align"
 Warn if the address of an output section is changed because of
@@ -2689,6 +2732,17 @@ string identifying the original linked file does not change.
 .Sp
 Passing \f(CW\*(C`none\*(C'\fR for \fIstyle\fR disables the setting from any
 \&\f(CW\*(C`\-\-build\-id\*(C'\fR options earlier on the command line.
+.IP "\fB\-\-package\-metadata=\fR\fI\s-1JSON\s0\fR" 4
+.IX Item "--package-metadata=JSON"
+Request the creation of a \f(CW\*(C`.note.package\*(C'\fR \s-1ELF\s0 note section.  The
+contents of the note are in \s-1JSON\s0 format, as per the package metadata
+specification.  For more information see:
+https://systemd.io/ELF_PACKAGE_METADATA/
+If the \s-1JSON\s0 argument is missing/empty then this will disable the
+creation of the metadata note, if one had been enabled by an earlier
+occurrence of the \-\-package\-metdata option.
+If the linker has been built with libjansson, then the \s-1JSON\s0 string
+will be validated.
 .PP
 The i386 \s-1PE\s0 linker supports the \fB\-shared\fR option, which causes
 the output to be a dynamically linked library (\s-1DLL\s0) instead of a

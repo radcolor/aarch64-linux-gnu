@@ -1,11 +1,11 @@
 /* Generated at libc build time from syscall list.  */
-/* The system call list corresponds to kernel 5.16.  */
+/* The system call list corresponds to kernel 5.18.  */
 
 #ifndef _SYSCALL_H
 # error "Never use <bits/syscall.h> directly; include <sys/syscall.h> instead."
 #endif
 
-#define __GLIBC_LINUX_VERSION_CODE 331776
+#define __GLIBC_LINUX_VERSION_CODE 332288
 
 #ifdef __NR_FAST_atomic_update
 # define SYS_FAST_atomic_update __NR_FAST_atomic_update
@@ -2005,6 +2005,10 @@
 
 #ifdef __NR_set_mempolicy
 # define SYS_set_mempolicy __NR_set_mempolicy
+#endif
+
+#ifdef __NR_set_mempolicy_home_node
+# define SYS_set_mempolicy_home_node __NR_set_mempolicy_home_node
 #endif
 
 #ifdef __NR_set_robust_list

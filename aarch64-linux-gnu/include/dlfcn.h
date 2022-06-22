@@ -30,18 +30,6 @@
 #ifdef __USE_GNU
 #include <bits/dl_find_object.h>
 
-/* If the first argument of `dlsym' or `dlvsym' is set to RTLD_NEXT
-   the run-time address of the symbol called NAME in the next shared
-   object is returned.  The "next" relation is defined by the order
-   the shared objects were loaded.  */
-# define RTLD_NEXT	((void *) -1l)
-
-/* If the first argument to `dlsym' or `dlvsym' is set to RTLD_DEFAULT
-   the run-time address of the symbol called NAME in the global scope
-   is returned.  */
-# define RTLD_DEFAULT	((void *) 0)
-
-
 /* Type for namespace indices.  */
 typedef long int Lmid_t;
 
@@ -50,6 +38,16 @@ typedef long int Lmid_t;
 # define LM_ID_NEWLM	-1	/* For dlmopen: request new namespace.  */
 #endif
 
+/* If the first argument of `dlsym' or `dlvsym' is set to RTLD_NEXT
+   the run-time address of the symbol called NAME in the next shared
+   object is returned.  The "next" relation is defined by the order
+   the shared objects were loaded.  */
+#define RTLD_NEXT	((void *) -1l)
+
+/* If the first argument to `dlsym' or `dlvsym' is set to RTLD_DEFAULT
+   the run-time address of the symbol called NAME in the global scope
+   is returned.  */
+#define RTLD_DEFAULT	((void *) 0)
 
 __BEGIN_DECLS
 
@@ -164,7 +162,12 @@ enum
        segment, or if the calling thread has not allocated a block for it.  */
     RTLD_DI_TLS_DATA = 10,
 
-    RTLD_DI_MAX = 10
+    /* Treat ARG as const ElfW(Phdr) **, and store the address of the
+       program header array at that location.  The dlinfo call returns
+       the number of program headers in the array.  */
+    RTLD_DI_PHDR = 11,
+
+    RTLD_DI_MAX = 11
   };
 
 

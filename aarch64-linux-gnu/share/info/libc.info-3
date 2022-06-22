@@ -812,6 +812,7 @@ START-INFO-DIR-ENTRY
 * dirfd: (libc)Opening a Directory.
 * dirname: (libc)Finding Tokens in a String.
 * div: (libc)Integer Division.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48: (libc)SVID Random.
@@ -3556,11 +3557,12 @@ the work twice.
      sequences.
 
      One word about the interface of the function: there is no parameter
-     specifying the length of the array S.  Instead the function assumes
-     that there are at least ‘MB_CUR_MAX’ bytes available since this is
-     the maximum length of any byte sequence representing a single
-     character.  So the caller has to make sure that there is enough
-     space available, otherwise buffer overruns can occur.
+     specifying the length of the array S, so the caller has to make
+     sure that there is enough space available, otherwise buffer
+     overruns can occur.  This version of the GNU C Library does not
+     assume that S is at least MB_CUR_MAX bytes long, but programs that
+     need to run on GNU C Library versions that have this assumption
+     documented in the manual must comply with this limit.
 
      ‘wcrtomb’ was introduced in Amendment 1 to ISO C90 and is declared
      in ‘wchar.h’.

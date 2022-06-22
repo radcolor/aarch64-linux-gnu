@@ -408,6 +408,7 @@ GNU C library functions and macros
 * DLFO_EH_SEGMENT_TYPE: (libc)Dynamic Linker Introspection.
 * DLFO_STRUCT_HAS_EH_COUNT: (libc)Dynamic Linker Introspection.
 * DLFO_STRUCT_HAS_EH_DBASE: (libc)Dynamic Linker Introspection.
+* dlinfo: (libc)Dynamic Linker Introspection.
 * dmull: (libc)Misc FP Arithmetic.
 * dngettext: (libc)Advanced gettext functions.
 * drand48_r: (libc)SVID Random.
