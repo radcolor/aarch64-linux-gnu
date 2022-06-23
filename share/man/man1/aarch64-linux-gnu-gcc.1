@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2022-06-21" "gcc-13.0.0" "GNU"
+.TH GCC 1 "2022-06-23" "gcc-13.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -11984,6 +11984,19 @@ use attributes when possible.
 also at \fB\-O0\fR if \fB\-fsection\-anchors\fR is explicitly requested.
 Additionally \fB\-fno\-toplevel\-reorder\fR implies
 \&\fB\-fno\-section\-anchors\fR.
+.IP "\fB\-funreachable\-traps\fR" 4
+.IX Item "-funreachable-traps"
+With this option, the compiler turns calls to
+\&\f(CW\*(C`_\|_builtin_unreachable\*(C'\fR into traps, instead of using them for
+optimization.  This also affects any such calls implicitly generated
+by the compiler.
+.Sp
+This option has the same effect as \fB\-fsanitize=unreachable
+\&\-fsanitize\-trap=unreachable\fR, but does not affect the values of those
+options.  If \fB\-fsanitize=unreachable\fR is enabled, that option
+takes priority over this one.
+.Sp
+This option is enabled by default at \fB\-O0\fR and \fB\-Og\fR.
 .IP "\fB\-fweb\fR" 4
 .IX Item "-fweb"
 Constructs webs as commonly used for register allocation purposes and assign
@@ -27146,7 +27159,7 @@ Permissible values for this option are: \fBsifive\-e20\fR, \fBsifive\-e21\fR,
 Optimize the output for the given processor, specified by microarchitecture or
 particular \s-1CPU\s0 name.  Permissible values for this option are: \fBrocket\fR,
 \&\fBsifive\-3\-series\fR, \fBsifive\-5\-series\fR, \fBsifive\-7\-series\fR,
-\&\fBsize\fR, and all valid options for \fB\-mcpu=\fR.
+\&\fBthead\-c906\fR, \fBsize\fR, and all valid options for \fB\-mcpu=\fR.
 .Sp
 When \fB\-mtune=\fR is not specified, use the setting from \fB\-mcpu\fR,
 the default is \fBrocket\fR if both are not specified.
