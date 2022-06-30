@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 13
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20220623
+#define __GLIBCXX__ 20220630
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -1147,6 +1147,9 @@ namespace std
 
 /* Define if <math.h> defines obsolete isnan function. */
 /* #undef _GLIBCXX_HAVE_OBSOLETE_ISNAN */
+
+/* Define if openat is available in <fcntl.h>. */
+#define _GLIBCXX_HAVE_OPENAT 1
 
 /* Define if poll is available in <poll.h>. */
 #define _GLIBCXX_HAVE_POLL 1

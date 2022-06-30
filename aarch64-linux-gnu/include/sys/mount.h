@@ -134,6 +134,36 @@ enum
 };
 
 
+/* fsopen flags.  */
+#define FSOPEN_CLOEXEC          0x00000001
+
+/* fsmount flags.  */
+#define FSMOUNT_CLOEXEC         0x00000001
+
+/* mount attributes used on fsmount.  */
+#define MOUNT_ATTR_RDONLY       0x00000001 /* Mount read-only.  */
+#define MOUNT_ATTR_NOSUID       0x00000002 /* Ignore suid and sgid bits.  */
+#define MOUNT_ATTR_NODEV        0x00000004 /* Disallow access to device special files.  */
+#define MOUNT_ATTR_NOEXEC       0x00000008 /* Disallow program execution.  */
+#define MOUNT_ATTR__ATIME       0x00000070 /* Setting on how atime should be updated.  */
+#define MOUNT_ATTR_RELATIME     0x00000000 /* - Update atime relative to mtime/ctime.  */
+#define MOUNT_ATTR_NOATIME      0x00000010 /* - Do not update access times.  */
+#define MOUNT_ATTR_STRICTATIME  0x00000020 /* - Always perform atime updates  */
+#define MOUNT_ATTR_NODIRATIME   0x00000080 /* Do not update directory access times.  */
+#define MOUNT_ATTR_IDMAP        0x00100000 /* Idmap mount to @userns_fd in struct mount_attr.  */
+#define MOUNT_ATTR_NOSYMFOLLOW  0x00200000 /* Do not follow symlinks.  */
+
+
+/* move_mount flags.  */
+#define MOVE_MOUNT_F_SYMLINKS   0x00000001 /* Follow symlinks on from path */
+#define MOVE_MOUNT_F_AUTOMOUNTS 0x00000002 /* Follow automounts on from path */
+#define MOVE_MOUNT_F_EMPTY_PATH 0x00000004 /* Empty from path permitted */
+#define MOVE_MOUNT_T_SYMLINKS   0x00000010 /* Follow symlinks on to path */
+#define MOVE_MOUNT_T_AUTOMOUNTS 0x00000020 /* Follow automounts on to path */
+#define MOVE_MOUNT_T_EMPTY_PATH 0x00000040 /* Empty to path permitted */
+#define MOVE_MOUNT_SET_GROUP    0x00000100 /* Set sharing group instead */
+
+
 __BEGIN_DECLS
 
 /* Mount a filesystem.  */
@@ -146,6 +176,22 @@ extern int umount (const char *__special_file) __THROW;
 
 /* Unmount a filesystem.  Force unmounting if FLAGS is set to MNT_FORCE.  */
 extern int umount2 (const char *__special_file, int __flags) __THROW;
+
+/* Open the filesystem referenced by FS_NAME so it can be configured for
+   mouting.  */
+extern int fsopen (const char *__fs_name, unsigned int __flags) __THROW;
+
+/* Create a mount representation for the FD created by fsopen using
+   FLAGS with ATTR_FLAGS describing how the mount is to be performed.  */
+extern int fsmount (int __fd, unsigned int __flags,
+		    unsigned int __ms_flags) __THROW;
+
+/* Add the mounted FROM_DFD referenced by FROM_PATHNAME filesystem returned
+   by fsmount in the hierarchy in the place TO_DFD reference by TO_PATHNAME
+   using FLAGS.  */
+extern int move_mount (int __from_dfd, const char *__from_pathname,
+		       int __to_dfd, const char *__to_pathname,
+		       unsigned int flags) __THROW;
 
 __END_DECLS
 
