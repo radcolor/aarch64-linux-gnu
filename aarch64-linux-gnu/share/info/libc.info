@@ -2179,10 +2179,10 @@ libc.info-11: 3083727
 libc.info-12: 3382987
 libc.info-13: 3683710
 libc.info-14: 3984143
-libc.info-15: 4392850
-libc.info-16: 4608139
-libc.info-17: 5038068
-libc.info-18: 5256814
+libc.info-15: 4392973
+libc.info-16: 4608262
+libc.info-17: 5038191
+libc.info-18: 5256937
 
 Tag Table:
 (Indirect)
@@ -2888,55 +2888,55 @@ Node: Elision Tunables3891890
 Node: POSIX Thread Tunables3894745
 Node: Hardware Capability Tunables3896555
 Node: Memory Related Tunables3984143
-Node: Language Features3985460
-Node: Consistency Checking3986412
-Node: Variadic Functions3991371
-Node: Why Variadic3992464
-Node: How Variadic3994464
-Node: Variadic Prototypes3995710
-Node: Receiving Arguments3996909
-Node: How Many Arguments3999655
-Node: Calling Variadics4001344
-Node: Argument Macros4003511
-Node: Variadic Example4007041
-Node: Null Pointer Constant4008168
-Node: Important Data Types4009280
-Node: Data Type Measurements4011215
-Node: Width of Type4012085
-Node: Range of Type4014371
-Node: Floating Type Macros4018217
-Node: Floating Point Concepts4019490
-Node: Floating Point Parameters4023345
-Node: IEEE Floating Point4030747
-Node: Structure Measurement4032525
-Node: Library Summary4033335
-Node: Installation4392850
-Node: Configuring and compiling4393718
-Node: Running make install4414374
-Node: Tools for Compilation4419490
-Node: Linux4425492
-Node: Reporting Bugs4428264
-Node: Maintenance4430639
-Node: Source Layout4431110
-Node: Adding Platform-specific4435408
-Node: Symbol handling4438506
-Node: 64-bit time symbol handling4438831
-Node: Porting4443050
-Node: Hierarchy Conventions4451088
-Node: Porting to Unix4456033
-Node: Platform4458137
-Node: PowerPC4458583
-Node: RISC-V4463444
-Node: X864464432
-Node: Contributors4475645
-Node: Free Manuals4492399
-Node: Copying4497356
-Node: Documentation License4608139
-Node: Concept Index4633483
-Node: Type Index4760249
-Node: Function Index4784246
-Node: Variable Index5038068
-Node: File Index5256814
+Node: Language Features3985583
+Node: Consistency Checking3986535
+Node: Variadic Functions3991494
+Node: Why Variadic3992587
+Node: How Variadic3994587
+Node: Variadic Prototypes3995833
+Node: Receiving Arguments3997032
+Node: How Many Arguments3999778
+Node: Calling Variadics4001467
+Node: Argument Macros4003634
+Node: Variadic Example4007164
+Node: Null Pointer Constant4008291
+Node: Important Data Types4009403
+Node: Data Type Measurements4011338
+Node: Width of Type4012208
+Node: Range of Type4014494
+Node: Floating Type Macros4018340
+Node: Floating Point Concepts4019613
+Node: Floating Point Parameters4023468
+Node: IEEE Floating Point4030870
+Node: Structure Measurement4032648
+Node: Library Summary4033458
+Node: Installation4392973
+Node: Configuring and compiling4393841
+Node: Running make install4414497
+Node: Tools for Compilation4419613
+Node: Linux4425615
+Node: Reporting Bugs4428387
+Node: Maintenance4430762
+Node: Source Layout4431233
+Node: Adding Platform-specific4435531
+Node: Symbol handling4438629
+Node: 64-bit time symbol handling4438954
+Node: Porting4443173
+Node: Hierarchy Conventions4451211
+Node: Porting to Unix4456156
+Node: Platform4458260
+Node: PowerPC4458706
+Node: RISC-V4463567
+Node: X864464555
+Node: Contributors4475768
+Node: Free Manuals4492522
+Node: Copying4497479
+Node: Documentation License4608262
+Node: Concept Index4633606
+Node: Type Index4760372
+Node: Function Index4784369
+Node: Variable Index5038191
+Node: File Index5256937
 
 End Tag Table
 

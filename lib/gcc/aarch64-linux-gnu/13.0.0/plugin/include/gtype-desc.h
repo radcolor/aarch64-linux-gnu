@@ -161,10 +161,10 @@ extern void gt_ggc_mx_hash_map_tree_tree_decl_tree_traits_ (void *);
   if ((intptr_t)(X) != 0) gt_ggc_mx_ptr_info_def (X);\
   } while (0)
 extern void gt_ggc_mx_ptr_info_def (void *);
-#define gt_ggc_m_14range_info_def(X) do { \
-  if ((intptr_t)(X) != 0) gt_ggc_mx_range_info_def (X);\
+#define gt_ggc_m_19irange_storage_slot(X) do { \
+  if ((intptr_t)(X) != 0) gt_ggc_mx_irange_storage_slot (X);\
   } while (0)
-extern void gt_ggc_mx_range_info_def (void *);
+extern void gt_ggc_mx_irange_storage_slot (void *);
 #define gt_ggc_m_10die_struct(X) do { \
   if ((intptr_t)(X) != 0) gt_ggc_mx_die_struct (X);\
   } while (0)
@@ -1618,10 +1618,10 @@ extern void gt_pch_nx_hash_map_tree_tree_decl_tree_traits_ (void *);
   if ((intptr_t)(X) != 0) gt_pch_nx_ptr_info_def (X);\
   } while (0)
 extern void gt_pch_nx_ptr_info_def (void *);
-#define gt_pch_n_14range_info_def(X) do { \
-  if ((intptr_t)(X) != 0) gt_pch_nx_range_info_def (X);\
+#define gt_pch_n_19irange_storage_slot(X) do { \
+  if ((intptr_t)(X) != 0) gt_pch_nx_irange_storage_slot (X);\
   } while (0)
-extern void gt_pch_nx_range_info_def (void *);
+extern void gt_pch_nx_irange_storage_slot (void *);
 #define gt_pch_n_10die_struct(X) do { \
   if ((intptr_t)(X) != 0) gt_pch_nx_die_struct (X);\
   } while (0)
@@ -3093,7 +3093,7 @@ extern void gt_pch_p_36hash_map_tree_tree_decl_tree_traits_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_12ptr_info_def
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_14range_info_def
+extern void gt_pch_p_19irange_storage_slot
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_10die_struct
     (void *, void *, gt_pointer_operator, void *);

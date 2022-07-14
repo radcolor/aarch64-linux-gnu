@@ -171,11 +171,13 @@ _target-offload-var_ ICV and                Y
 'OMP_TARGET_OFFLOAD' env variable
 Nested-parallel changes to                  Y
 _max-active-levels-var_ ICV
-'requires' directive                        P       Only fulfillable
-                                                    requirement are
-                                                    'atomic_default_mem_order'
-                                                    and
-                                                    'dynamic_allocators'
+'requires' directive                        P       complete but no
+                                                    non-host devices
+                                                    provides
+                                                    'unified_address',
+                                                    'unified_shared_memory'
+                                                    or
+                                                    'reverse_offload'
 'teams' construct outside an enclosing      Y
 target region
 Non-rectangular loop nests                  Y
@@ -363,6 +365,10 @@ C/C++
 modifiers on 'order' clause
 Support 'begin/end declare target' syntax   N
 in C/C++
+Pointer predetermined firstprivate          N
+getting initialized to address of
+matching mapped list item per 5.1, Sect.
+2.21.7.2
 
 
 File: libgomp.info,  Node: OpenMP 5.2,  Prev: OpenMP 5.1,  Up: OpenMP Implementation Status
@@ -383,7 +389,7 @@ Clauses on 'end' directive can be on        N
 directive
 Deprecation of no-argument 'destroy'        N
 clause on 'depobj'
-'linear' clause syntax changes and 'step'   N
+'linear' clause syntax changes and 'step'   Y
 modifier
 Deprecation of minus operator for           N
 reductions
@@ -421,7 +427,7 @@ Reproducible semantics changed for          N
 'allocate' and 'firstprivate' clauses on    Y
 'scope'
 'ompt_callback_work'                        N
-Default map-type for 'map' clause in        N
+Default map-type for 'map' clause in        Y
 'target enter/exit data'
 New 'doacross' clause as alias for          N
 'depend' with 'source'/'sink' modifier
@@ -5651,159 +5657,159 @@ Node: Enabling OpenMP4799
 Node: OpenMP Implementation Status5605
 Node: OpenMP 4.56222
 Node: OpenMP 5.06398
-Node: OpenMP 5.111253
-Node: OpenMP 5.214920
-Node: Runtime Library Routines17654
-Node: omp_get_active_level21358
-Node: omp_get_ancestor_thread_num22058
-Node: omp_get_cancellation22988
-Node: omp_get_default_device23802
-Node: omp_get_device_num24481
-Node: omp_get_dynamic25286
-Node: omp_get_initial_device26166
-Node: omp_get_level26910
-Node: omp_get_max_active_levels27537
-Node: omp_get_max_task_priority28258
-Node: omp_get_max_teams28878
-Node: omp_get_max_threads29572
-Node: omp_get_nested30323
-Node: omp_get_num_devices31931
-Node: omp_get_num_procs32452
-Node: omp_get_num_teams32991
-Node: omp_get_num_threads33507
-Node: omp_get_proc_bind34596
-Node: omp_get_schedule35617
-Node: omp_get_supported_active_levels36586
-Node: omp_get_team_num37372
-Node: omp_get_team_size37886
-Node: omp_get_teams_thread_limit38852
-Node: omp_get_thread_limit39614
-Node: omp_get_thread_num40242
-Node: omp_in_parallel41114
-Node: omp_in_final41763
-Node: omp_is_initial_device42437
-Node: omp_set_default_device43130
-Node: omp_set_dynamic43921
-Node: omp_set_max_active_levels44807
-Node: omp_set_nested45729
-Node: omp_set_num_teams46924
-Node: omp_set_num_threads47797
-Node: omp_set_schedule48668
-Node: omp_set_teams_thread_limit49762
-Node: omp_init_lock50764
-Node: omp_set_lock51427
-Node: omp_test_lock52282
-Node: omp_unset_lock53258
-Node: omp_destroy_lock54189
-Node: omp_init_nest_lock54866
-Node: omp_set_nest_lock55601
-Node: omp_test_nest_lock56516
-Node: omp_unset_nest_lock57543
-Node: omp_destroy_nest_lock58558
-Node: omp_get_wtick59309
-Node: omp_get_wtime59901
-Node: omp_fulfill_event60703
-Node: Environment Variables61724
-Node: OMP_CANCELLATION63511
-Node: OMP_DISPLAY_ENV64044
-Node: OMP_DEFAULT_DEVICE64747
-Node: OMP_DYNAMIC65527
-Node: OMP_MAX_ACTIVE_LEVELS66123
-Node: OMP_MAX_TASK_PRIORITY67050
-Node: OMP_NESTED67708
-Node: OMP_NUM_TEAMS68735
-Node: OMP_NUM_THREADS69408
-Node: OMP_PROC_BIND70213
-Node: OMP_PLACES71552
-Node: OMP_STACKSIZE74239
-Node: OMP_SCHEDULE75063
-Node: OMP_TARGET_OFFLOAD75763
-Node: OMP_TEAMS_THREAD_LIMIT76725
-Node: OMP_THREAD_LIMIT77532
-Node: OMP_WAIT_POLICY78142
-Node: GOMP_CPU_AFFINITY78834
-Node: GOMP_DEBUG80564
-Node: GOMP_STACKSIZE81071
-Node: GOMP_SPINCOUNT81902
-Node: GOMP_RTEMS_THREAD_POOLS83106
-Node: Enabling OpenACC85289
-Node: OpenACC Runtime Library Routines86190
-Node: acc_get_num_devices90471
-Node: acc_set_device_type91197
-Node: acc_get_device_type91961
-Node: acc_set_device_num92974
-Node: acc_get_device_num93791
-Node: acc_get_property94590
-Node: acc_async_test96813
-Node: acc_async_test_all97801
-Node: acc_wait98701
-Node: acc_wait_all99564
-Node: acc_wait_all_async100325
-Node: acc_wait_async101077
-Node: acc_init101785
-Node: acc_shutdown102430
-Node: acc_on_device103097
-Node: acc_malloc104101
-Node: acc_free104600
-Node: acc_copyin105027
-Node: acc_present_or_copyin106614
-Node: acc_create108392
-Node: acc_present_or_create110024
-Node: acc_copyout111810
-Node: acc_delete114114
-Node: acc_update_device116361
-Node: acc_update_self117935
-Node: acc_map_data119525
-Node: acc_unmap_data120210
-Node: acc_deviceptr120731
-Node: acc_hostptr121301
-Node: acc_is_present121865
-Node: acc_memcpy_to_device123392
-Node: acc_memcpy_from_device124055
-Node: acc_attach124722
-Node: acc_detach125369
-Node: acc_get_current_cuda_device126148
-Node: acc_get_current_cuda_context126733
-Node: acc_get_cuda_stream127333
-Node: acc_set_cuda_stream127924
-Node: acc_prof_register128595
-Node: acc_prof_unregister129154
-Node: acc_prof_lookup129721
-Node: acc_register_library130242
-Node: OpenACC Environment Variables130808
-Node: ACC_DEVICE_TYPE131380
-Node: ACC_DEVICE_NUM131616
-Node: ACC_PROFLIB131870
-Node: GCC_ACC_NOTIFY132201
-Node: CUDA Streams Usage132421
-Ref: CUDA Streams Usage-Footnote-1134322
-Node: OpenACC Library Interoperability134431
-Ref: OpenACC Library Interoperability-Footnote-1140799
-Ref: OpenACC Library Interoperability-Footnote-2141051
-Node: OpenACC Profiling Interface141259
-Node: Offload-Target Specifics151296
-Node: OpenMP Context Selectors151588
-Node: The libgomp ABI152570
-Node: Implementing MASTER construct153420
-Node: Implementing CRITICAL construct153837
-Node: Implementing ATOMIC construct154578
-Node: Implementing FLUSH construct155061
-Node: Implementing BARRIER construct155334
-Node: Implementing THREADPRIVATE construct155605
-Node: Implementing PRIVATE clause156260
-Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses156843
-Node: Implementing REDUCTION clause158169
-Node: Implementing PARALLEL construct158729
-Node: Implementing FOR construct159988
-Node: Implementing ORDERED construct161988
-Node: Implementing SECTIONS construct162296
-Node: Implementing SINGLE construct163064
-Node: Implementing OpenACC's PARALLEL construct163778
-Node: Reporting Bugs164038
-Node: Copying164401
-Node: GNU Free Documentation License201950
-Node: Funding227075
-Node: Library Index229601
+Node: OpenMP 5.111378
+Node: OpenMP 5.215175
+Node: Runtime Library Routines17909
+Node: omp_get_active_level21613
+Node: omp_get_ancestor_thread_num22313
+Node: omp_get_cancellation23243
+Node: omp_get_default_device24057
+Node: omp_get_device_num24736
+Node: omp_get_dynamic25541
+Node: omp_get_initial_device26421
+Node: omp_get_level27165
+Node: omp_get_max_active_levels27792
+Node: omp_get_max_task_priority28513
+Node: omp_get_max_teams29133
+Node: omp_get_max_threads29827
+Node: omp_get_nested30578
+Node: omp_get_num_devices32186
+Node: omp_get_num_procs32707
+Node: omp_get_num_teams33246
+Node: omp_get_num_threads33762
+Node: omp_get_proc_bind34851
+Node: omp_get_schedule35872
+Node: omp_get_supported_active_levels36841
+Node: omp_get_team_num37627
+Node: omp_get_team_size38141
+Node: omp_get_teams_thread_limit39107
+Node: omp_get_thread_limit39869
+Node: omp_get_thread_num40497
+Node: omp_in_parallel41369
+Node: omp_in_final42018
+Node: omp_is_initial_device42692
+Node: omp_set_default_device43385
+Node: omp_set_dynamic44176
+Node: omp_set_max_active_levels45062
+Node: omp_set_nested45984
+Node: omp_set_num_teams47179
+Node: omp_set_num_threads48052
+Node: omp_set_schedule48923
+Node: omp_set_teams_thread_limit50017
+Node: omp_init_lock51019
+Node: omp_set_lock51682
+Node: omp_test_lock52537
+Node: omp_unset_lock53513
+Node: omp_destroy_lock54444
+Node: omp_init_nest_lock55121
+Node: omp_set_nest_lock55856
+Node: omp_test_nest_lock56771
+Node: omp_unset_nest_lock57798
+Node: omp_destroy_nest_lock58813
+Node: omp_get_wtick59564
+Node: omp_get_wtime60156
+Node: omp_fulfill_event60958
+Node: Environment Variables61979
+Node: OMP_CANCELLATION63766
+Node: OMP_DISPLAY_ENV64299
+Node: OMP_DEFAULT_DEVICE65002
+Node: OMP_DYNAMIC65782
+Node: OMP_MAX_ACTIVE_LEVELS66378
+Node: OMP_MAX_TASK_PRIORITY67305
+Node: OMP_NESTED67963
+Node: OMP_NUM_TEAMS68990
+Node: OMP_NUM_THREADS69663
+Node: OMP_PROC_BIND70468
+Node: OMP_PLACES71807
+Node: OMP_STACKSIZE74494
+Node: OMP_SCHEDULE75318
+Node: OMP_TARGET_OFFLOAD76018
+Node: OMP_TEAMS_THREAD_LIMIT76980
+Node: OMP_THREAD_LIMIT77787
+Node: OMP_WAIT_POLICY78397
+Node: GOMP_CPU_AFFINITY79089
+Node: GOMP_DEBUG80819
+Node: GOMP_STACKSIZE81326
+Node: GOMP_SPINCOUNT82157
+Node: GOMP_RTEMS_THREAD_POOLS83361
+Node: Enabling OpenACC85544
+Node: OpenACC Runtime Library Routines86445
+Node: acc_get_num_devices90726
+Node: acc_set_device_type91452
+Node: acc_get_device_type92216
+Node: acc_set_device_num93229
+Node: acc_get_device_num94046
+Node: acc_get_property94845
+Node: acc_async_test97068
+Node: acc_async_test_all98056
+Node: acc_wait98956
+Node: acc_wait_all99819
+Node: acc_wait_all_async100580
+Node: acc_wait_async101332
+Node: acc_init102040
+Node: acc_shutdown102685
+Node: acc_on_device103352
+Node: acc_malloc104356
+Node: acc_free104855
+Node: acc_copyin105282
+Node: acc_present_or_copyin106869
+Node: acc_create108647
+Node: acc_present_or_create110279
+Node: acc_copyout112065
+Node: acc_delete114369
+Node: acc_update_device116616
+Node: acc_update_self118190
+Node: acc_map_data119780
+Node: acc_unmap_data120465
+Node: acc_deviceptr120986
+Node: acc_hostptr121556
+Node: acc_is_present122120
+Node: acc_memcpy_to_device123647
+Node: acc_memcpy_from_device124310
+Node: acc_attach124977
+Node: acc_detach125624
+Node: acc_get_current_cuda_device126403
+Node: acc_get_current_cuda_context126988
+Node: acc_get_cuda_stream127588
+Node: acc_set_cuda_stream128179
+Node: acc_prof_register128850
+Node: acc_prof_unregister129409
+Node: acc_prof_lookup129976
+Node: acc_register_library130497
+Node: OpenACC Environment Variables131063
+Node: ACC_DEVICE_TYPE131635
+Node: ACC_DEVICE_NUM131871
+Node: ACC_PROFLIB132125
+Node: GCC_ACC_NOTIFY132456
+Node: CUDA Streams Usage132676
+Ref: CUDA Streams Usage-Footnote-1134577
+Node: OpenACC Library Interoperability134686
+Ref: OpenACC Library Interoperability-Footnote-1141054
+Ref: OpenACC Library Interoperability-Footnote-2141306
+Node: OpenACC Profiling Interface141514
+Node: Offload-Target Specifics151551
+Node: OpenMP Context Selectors151843
+Node: The libgomp ABI152825
+Node: Implementing MASTER construct153675
+Node: Implementing CRITICAL construct154092
+Node: Implementing ATOMIC construct154833
+Node: Implementing FLUSH construct155316
+Node: Implementing BARRIER construct155589
+Node: Implementing THREADPRIVATE construct155860
+Node: Implementing PRIVATE clause156515
+Node: Implementing FIRSTPRIVATE LASTPRIVATE COPYIN and COPYPRIVATE clauses157098
+Node: Implementing REDUCTION clause158424
+Node: Implementing PARALLEL construct158984
+Node: Implementing FOR construct160243
+Node: Implementing ORDERED construct162243
+Node: Implementing SECTIONS construct162551
+Node: Implementing SINGLE construct163319
+Node: Implementing OpenACC's PARALLEL construct164033
+Node: Reporting Bugs164293
+Node: Copying164656
+Node: GNU Free Documentation License202205
+Node: Funding227330
+Node: Library Index229856
 
 End Tag Table
 

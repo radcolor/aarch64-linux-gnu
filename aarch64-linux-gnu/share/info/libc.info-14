@@ -2190,6 +2190,9 @@ File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tuna
      that support deferred tag violation reporting.  This may cause
      programs to run more slowly.
 
+     Bit 2 enables either precise or deferred faulting mode for tag
+     violations whichever is preferred by the system.
+
      Other bits are currently reserved.
 
      The GNU C Library startup code will automatically enable memory

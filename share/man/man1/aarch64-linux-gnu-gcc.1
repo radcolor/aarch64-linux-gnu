@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2022-06-30" "gcc-13.0.0" "GNU"
+.TH GCC 1 "2022-07-14" "gcc-13.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -9085,9 +9085,15 @@ This analysis is much more expensive than other \s-1GCC\s0 warnings.
 .Sp
 Enabling this option effectively enables the following warnings:
 .Sp
-\&\fB\-Wanalyzer\-double\-fclose 
+\&\fB\-Wanalyzer\-allocation\-size 
+\&\-Wanalyzer\-double\-fclose 
 \&\-Wanalyzer\-double\-free 
 \&\-Wanalyzer\-exposure\-through\-output\-file 
+\&\-Wanalyzer\-fd\-access\-mode\-mismatch 
+\&\-Wanalyzer\-fd\-double\-close 
+\&\-Wanalyzer\-fd\-leak 
+\&\-Wanalyzer\-fd\-use\-after\-close 
+\&\-Wanalyzer\-fd\-use\-without\-check 
 \&\-Wanalyzer\-file\-leak 
 \&\-Wanalyzer\-free\-of\-non\-heap 
 \&\-Wanalyzer\-malloc\-leak 
@@ -9121,6 +9127,17 @@ but these can be defeated by sufficiently complicated code.
 By default, the analysis silently stops if the code is too
 complicated for the analyzer to fully explore and it reaches an internal
 limit.  The \fB\-Wanalyzer\-too\-complex\fR option warns if this occurs.
+.IP "\fB\-Wno\-analyzer\-allocation\-size\fR" 4
+.IX Item "-Wno-analyzer-allocation-size"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-allocation\-size\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through the code in which a pointer to
+a buffer is assigned to point at a buffer with a size that is not a
+multiple of \f(CW\*(C`sizeof (*pointer)\*(C'\fR.
+.Sp
+See \f(CW@url\fR{https://cwe.mitre.org/data/definitions/131.html, \s-1CWE\-131:\s0 Incorrect Calculation of Buffer Size}.
 .IP "\fB\-Wno\-analyzer\-double\-fclose\fR" 4
 .IX Item "-Wno-analyzer-double-fclose"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
@@ -9145,6 +9162,46 @@ to disable it.
 This diagnostic warns for paths through the code in which a
 security-sensitive value is written to an output file
 (such as writing a password to a log file).
+.IP "\fB\-Wno\-analyzer\-fd\-access\-mode\-mismatch\fR" 4
+.IX Item "-Wno-analyzer-fd-access-mode-mismatch"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-fd\-access\-mode\-mismatch\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through code in which a 
+\&\f(CW\*(C`read\*(C'\fR on a write-only file descriptor is attempted, or vice versa
+.IP "\fB\-Wno\-analyzer\-fd\-double\-close\fR" 4
+.IX Item "-Wno-analyzer-fd-double-close"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-fd\-double\-close\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through code in which a 
+file descriptor can be closed more than once.
+.IP "\fB\-Wno\-analyzer\-fd\-leak\fR" 4
+.IX Item "-Wno-analyzer-fd-leak"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-fd\-leak\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through code in which an 
+open file descriptor is leaked.
+.IP "\fB\-Wno\-analyzer\-fd\-use\-after\-close\fR" 4
+.IX Item "-Wno-analyzer-fd-use-after-close"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-fd\-use\-after\-close\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through code in which a 
+read or write is called on a closed file descriptor.
+.IP "\fB\-Wno\-analyzer\-fd\-use\-without\-check\fR" 4
+.IX Item "-Wno-analyzer-fd-use-without-check"
+This warning requires \fB\-fanalyzer\fR, which enables it; use
+\&\fB\-Wno\-analyzer\-fd\-use\-without\-check\fR
+to disable it.
+.Sp
+This diagnostic warns for paths through code in which a 
+file descriptor is used without being checked for validity.
 .IP "\fB\-Wno\-analyzer\-file\-leak\fR" 4
 .IX Item "-Wno-analyzer-file-leak"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
@@ -23840,7 +23897,8 @@ Set the cost of branches to roughly \fIn\fR instructions.
 .IX Item "-mno-check-zero-divison"
 .PD
 Trap (do not trap) on integer division by zero.  The default is
-\&\fB\-mcheck\-zero\-division\fR.
+\&\fB\-mcheck\-zero\-division\fR for \fB\-O0\fR or \fB\-Og\fR, and
+\&\fB\-mno\-check\-zero\-division\fR for other optimization levels.
 .IP "\fB\-mcond\-move\-int\fR" 4
 .IX Item "-mcond-move-int"
 .PD 0
