@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2365,15 +2368,16 @@ Program and File Index
 * stdlib.h <12>:                         ISO Random.          (line  11)
 * stdlib.h <13>:                         BSD Random.          (line  10)
 * stdlib.h <14>:                         SVID Random.         (line  31)
-* stdlib.h <15>:                         Integer Division.    (line  16)
-* stdlib.h <16>:                         Absolute Value.      (line  12)
-* stdlib.h <17>:                         Parsing of Integers. (line   6)
-* stdlib.h <18>:                         Parsing of Floats.   (line   6)
-* stdlib.h <19>:                         Printing of Floats.  (line   6)
-* stdlib.h <20>:                         Environment Access.  (line   7)
-* stdlib.h <21>:                         Exit Status.         (line  43)
-* stdlib.h <22>:                         Aborting a Program.  (line   7)
-* stdlib.h <23>:                         Running a Command.   (line  34)
+* stdlib.h <15>:                         High Quality Random. (line  15)
+* stdlib.h <16>:                         Integer Division.    (line  16)
+* stdlib.h <17>:                         Absolute Value.      (line  12)
+* stdlib.h <18>:                         Parsing of Integers. (line   6)
+* stdlib.h <19>:                         Parsing of Floats.   (line   6)
+* stdlib.h <20>:                         Printing of Floats.  (line   6)
+* stdlib.h <21>:                         Environment Access.  (line   7)
+* stdlib.h <22>:                         Exit Status.         (line  43)
+* stdlib.h <23>:                         Aborting a Program.  (line   7)
+* stdlib.h <24>:                         Running a Command.   (line  34)
 * string.h:                              Error Messages.      (line  83)
 * string.h <1>:                          Error Messages.      (line  95)
 * string.h <2>:                          String Length.       (line   7)

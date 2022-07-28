@@ -81,6 +81,7 @@ mode_size_inline (machine_mode mode)
     case E_V8QImode: return 8;
     case E_V4HImode: return 8;
     case E_V2SImode: return 8;
+    case E_V1DImode: return 8;
     case E_V16QImode: return 16;
     case E_V8HImode: return 16;
     case E_V4SImode: return 16;
@@ -177,6 +178,7 @@ mode_nunits_inline (machine_mode mode)
     case E_V8QImode: return 8;
     case E_V4HImode: return 4;
     case E_V2SImode: return 2;
+    case E_V1DImode: return 1;
     case E_V16QImode: return 16;
     case E_V8HImode: return 8;
     case E_V4SImode: return 4;
@@ -278,6 +280,7 @@ mode_inner_inline (machine_mode mode)
     case E_V8QImode: return E_QImode;
     case E_V4HImode: return E_HImode;
     case E_V2SImode: return E_SImode;
+    case E_V1DImode: return E_DImode;
     case E_V16QImode: return E_QImode;
     case E_V8HImode: return E_HImode;
     case E_V4SImode: return E_SImode;
@@ -470,6 +473,7 @@ mode_unit_size_inline (machine_mode mode)
     case E_V8QImode: return 1;
     case E_V4HImode: return 2;
     case E_V2SImode: return 4;
+    case E_V1DImode: return 8;
     case E_V16QImode: return 1;
     case E_V8HImode: return 2;
     case E_V4SImode: return 4;
@@ -662,6 +666,7 @@ mode_unit_precision_inline (machine_mode mode)
     case E_V8QImode: return 1*BITS_PER_UNIT;
     case E_V4HImode: return 2*BITS_PER_UNIT;
     case E_V2SImode: return 4*BITS_PER_UNIT;
+    case E_V1DImode: return 8*BITS_PER_UNIT;
     case E_V16QImode: return 1*BITS_PER_UNIT;
     case E_V8HImode: return 2*BITS_PER_UNIT;
     case E_V4SImode: return 4*BITS_PER_UNIT;

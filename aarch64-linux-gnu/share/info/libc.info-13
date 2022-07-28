@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2162,6 +2165,216 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Group Database,  Next: Database Example,  Prev: User Database,  Up: Users and Groups
+
+30.14 Group Database
+====================
+
+This section describes how to search and scan the database of registered
+groups.  The database itself is kept in the file ‘/etc/group’ on most
+systems, but on some systems a special network service provides access
+to it.
+
+* Menu:
+
+* Group Data Structure::        What each group record contains.
+* Lookup Group::                How to look for a particular group.
+* Scanning All Groups::         Scanning the list of all groups.
+
+
+File: libc.info,  Node: Group Data Structure,  Next: Lookup Group,  Up: Group Database
+
+30.14.1 The Data Structure for a Group
+--------------------------------------
+
+The functions and data structures for accessing the system group
+database are declared in the header file ‘grp.h’.
+
+ -- Data Type: struct group
+
+     The ‘group’ structure is used to hold information about an entry in
+     the system group database.  It has at least the following members:
+
+     ‘char *gr_name’
+          The name of the group.
+
+     ‘gid_t gr_gid’
+          The group ID of the group.
+
+     ‘char **gr_mem’
+          A vector of pointers to the names of users in the group.  Each
+          user name is a null-terminated string, and the vector itself
+          is terminated by a null pointer.
+
+
+File: libc.info,  Node: Lookup Group,  Next: Scanning All Groups,  Prev: Group Data Structure,  Up: Group Database
+
+30.14.2 Looking Up One Group
+----------------------------
+
+You can search the group database for information about a specific group
+using ‘getgrgid’ or ‘getgrnam’.  These functions are declared in
+‘grp.h’.
+
+ -- Function: struct group * getgrgid (gid_t GID)
+
+     Preliminary: | MT-Unsafe race:grgid locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function returns a pointer to a statically-allocated structure
+     containing information about the group whose group ID is GID.  This
+     structure may be overwritten by subsequent calls to ‘getgrgid’.
+
+     A null pointer indicates there is no group with ID GID.
+
+ -- Function: int getgrgid_r (gid_t GID, struct group *RESULT_BUF, char
+          *BUFFER, size_t BUFLEN, struct group **RESULT)
+
+     Preliminary: | MT-Safe locale | AS-Unsafe dlopen plugin heap lock |
+     AC-Unsafe corrupt lock fd mem | *Note POSIX Safety Concepts::.
+
+     This function is similar to ‘getgrgid’ in that it returns
+     information about the group whose group ID is GID.  However, it
+     fills the user supplied structure pointed to by RESULT_BUF with the
+     information instead of using a static buffer.  The first BUFLEN
+     bytes of the additional buffer pointed to by BUFFER are used to
+     contain additional information, normally strings which are pointed
+     to by the elements of the result structure.
+
+     If a group with ID GID is found, the pointer returned in RESULT
+     points to the record which contains the wanted data (i.e., RESULT
+     contains the value RESULT_BUF).  If no group is found or if an
+     error occurred, the pointer returned in RESULT is a null pointer.
+     The function returns zero or an error code.  If the buffer BUFFER
+     is too small to contain all the needed information, the error code
+     ‘ERANGE’ is returned and ‘errno’ is set to ‘ERANGE’.
+
+ -- Function: struct group * getgrnam (const char *NAME)
+
+     Preliminary: | MT-Unsafe race:grnam locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function returns a pointer to a statically-allocated structure
+     containing information about the group whose group name is NAME.
+     This structure may be overwritten by subsequent calls to
+     ‘getgrnam’.
+
+     A null pointer indicates there is no group named NAME.
+
+ -- Function: int getgrnam_r (const char *NAME, struct group
+          *RESULT_BUF, char *BUFFER, size_t BUFLEN, struct group
+          **RESULT)
+
+     Preliminary: | MT-Safe locale | AS-Unsafe dlopen plugin heap lock |
+     AC-Unsafe corrupt lock fd mem | *Note POSIX Safety Concepts::.
+
+     This function is similar to ‘getgrnam’ in that it returns
+     information about the group whose group name is NAME.  Like
+     ‘getgrgid_r’, it uses the user supplied buffers in RESULT_BUF and
+     BUFFER, not a static buffer.
+
+     The return values are the same as for ‘getgrgid_r’.
+
+
+File: libc.info,  Node: Scanning All Groups,  Prev: Lookup Group,  Up: Group Database
+
+30.14.3 Scanning the List of All Groups
+---------------------------------------
+
+This section explains how a program can read the list of all groups in
+the system, one group at a time.  The functions described here are
+declared in ‘grp.h’.
+
+   You can use the ‘fgetgrent’ function to read group entries from a
+particular file.
+
+ -- Function: struct group * fgetgrent (FILE *STREAM)
+
+     Preliminary: | MT-Unsafe race:fgrent | AS-Unsafe corrupt lock |
+     AC-Unsafe corrupt lock | *Note POSIX Safety Concepts::.
+
+     The ‘fgetgrent’ function reads the next entry from STREAM.  It
+     returns a pointer to the entry.  The structure is statically
+     allocated and is overwritten on subsequent calls to ‘fgetgrent’.
+     You must copy the contents of the structure if you wish to save the
+     information.
+
+     The stream must correspond to a file in the same format as the
+     standard group database file.
+
+ -- Function: int fgetgrent_r (FILE *STREAM, struct group *RESULT_BUF,
+          char *BUFFER, size_t BUFLEN, struct group **RESULT)
+
+     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
+     | *Note POSIX Safety Concepts::.
+
+     This function is similar to ‘fgetgrent’ in that it reads the next
+     user entry from STREAM.  But the result is returned in the
+     structure pointed to by RESULT_BUF.  The first BUFLEN bytes of the
+     additional buffer pointed to by BUFFER are used to contain
+     additional information, normally strings which are pointed to by
+     the elements of the result structure.
+
+     This stream must correspond to a file in the same format as the
+     standard group database file.
+
+     If the function returns zero RESULT points to the structure with
+     the wanted data (normally this is in RESULT_BUF).  If errors
+     occurred the return value is non-zero and RESULT contains a null
+     pointer.
+
+   The way to scan all the entries in the group database is with
+‘setgrent’, ‘getgrent’, and ‘endgrent’.
+
+ -- Function: void setgrent (void)
+
+     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function initializes a stream for reading from the group data
+     base.  You use this stream by calling ‘getgrent’ or ‘getgrent_r’.
+
+ -- Function: struct group * getgrent (void)
+
+     Preliminary: | MT-Unsafe race:grent race:grentbuf locale |
+     AS-Unsafe dlopen plugin heap lock | AC-Unsafe corrupt lock fd mem |
+     *Note POSIX Safety Concepts::.
+
+     The ‘getgrent’ function reads the next entry from the stream
+     initialized by ‘setgrent’.  It returns a pointer to the entry.  The
+     structure is statically allocated and is overwritten on subsequent
+     calls to ‘getgrent’.  You must copy the contents of the structure
+     if you wish to save the information.
+
+ -- Function: int getgrent_r (struct group *RESULT_BUF, char *BUFFER,
+          size_t BUFLEN, struct group **RESULT)
+
+     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function is similar to ‘getgrent’ in that it returns the next
+     entry from the stream initialized by ‘setgrent’.  Like
+     ‘fgetgrent_r’, it places the result in user-supplied buffers
+     pointed to by RESULT_BUF and BUFFER.
+
+     If the function returns zero RESULT contains a pointer to the data
+     (normally equal to RESULT_BUF).  If errors occurred the return
+     value is non-zero and RESULT contains a null pointer.
+
+ -- Function: void endgrent (void)
+
+     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
+     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
+     Safety Concepts::.
+
+     This function closes the internal stream used by ‘getgrent’ or
+     ‘getgrent_r’.
 
 
 File: libc.info,  Node: Database Example,  Next: Netgroup Database,  Prev: Group Database,  Up: Users and Groups
@@ -7461,152 +7674,4 @@ File: libc.info,  Node: Elision Tunables,  Next: POSIX Thread Tunables,  Prev: D
      accesses.  Expressed in number of try lock attempts.
 
      The default value of this tunable is ‘3’.
-
-
-File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunables,  Prev: Elision Tunables,  Up: Tunables
-
-38.5 POSIX Thread Tunables
-==========================
-
- -- Tunable namespace: glibc.pthread
-     The behavior of POSIX threads can be tuned to gain performance
-     improvements according to specific hardware capabilities and
-     workload characteristics by setting the following tunables in the
-     ‘pthread’ namespace:
-
- -- Tunable: glibc.pthread.mutex_spin_count
-     The ‘glibc.pthread.mutex_spin_count’ tunable sets the maximum
-     number of times a thread should spin on the lock before calling
-     into the kernel to block.  Adaptive spin is used for mutexes
-     initialized with the ‘PTHREAD_MUTEX_ADAPTIVE_NP’ GNU extension.  It
-     affects both ‘pthread_mutex_lock’ and ‘pthread_mutex_timedlock’.
-
-     The thread spins until either the maximum spin count is reached or
-     the lock is acquired.
-
-     The default value of this tunable is ‘100’.
-
- -- Tunable: glibc.pthread.stack_cache_size
-     This tunable configures the maximum size of the stack cache.  Once
-     the stack cache exceeds this size, unused thread stacks are
-     returned to the kernel, to bring the cache size below this limit.
-
-     The value is measured in bytes.  The default is ‘41943040’ (fourty
-     mibibytes).
-
- -- Tunable: glibc.pthread.rseq
-     The ‘glibc.pthread.rseq’ tunable can be set to ‘0’, to disable
-     restartable sequences support in the GNU C Library.  This enables
-     applications to perform direct restartable sequence registration
-     with the kernel.  The default is ‘1’, which means that the GNU C
-     Library performs registration on behalf of the application.
-
-     Restartable sequences are a Linux-specific extension.
-
-
-File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
-
-38.6 Hardware Capability Tunables
-=================================
-
- -- Tunable namespace: glibc.cpu
-     Behavior of the GNU C Library can be tuned to assume specific
-     hardware capabilities by setting the following tunables in the
-     ‘cpu’ namespace:
-
- -- Tunable: glibc.cpu.hwcap_mask
-     This tunable supersedes the ‘LD_HWCAP_MASK’ environment variable
-     and is identical in features.
-
-     The ‘AT_HWCAP’ key in the Auxiliary Vector specifies instruction
-     set extensions available in the processor at runtime for some
-     architectures.  The ‘glibc.cpu.hwcap_mask’ tunable allows the user
-     to mask out those capabilities at runtime, thus disabling use of
-     those extensions.
-
- -- Tunable: glibc.cpu.hwcaps
-     The ‘glibc.cpu.hwcaps=-xxx,yyy,-zzz...’ tunable allows the user to
-     enable CPU/ARCH feature ‘yyy’, disable CPU/ARCH feature ‘xxx’ and
-     ‘zzz’ where the feature name is case-sensitive and has to match the
-     ones in ‘sysdeps/x86/include/cpu-features.h’.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.cached_memopt
-     The ‘glibc.cpu.cached_memopt=[0|1]’ tunable allows the user to
-     enable optimizations recommended for cacheable memory.  If set to
-     ‘1’, the GNU C Library assumes that the process memory image
-     consists of cacheable (non-device) memory only.  The default, ‘0’,
-     indicates that the process may use device memory.
-
-     This tunable is specific to powerpc, powerpc64 and powerpc64le.
-
- -- Tunable: glibc.cpu.name
-     The ‘glibc.cpu.name=xxx’ tunable allows the user to tell the GNU C
-     Library to assume that the CPU is ‘xxx’ where xxx may have one of
-     these values: ‘generic’, ‘falkor’, ‘thunderxt88’, ‘thunderx2t99’,
-     ‘thunderx2t99p1’, ‘ares’, ‘emag’, ‘kunpeng’, ‘a64fx’.
-
-     This tunable is specific to aarch64.
-
- -- Tunable: glibc.cpu.x86_data_cache_size
-     The ‘glibc.cpu.x86_data_cache_size’ tunable allows the user to set
-     data cache size in bytes for use in memory and string routines.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.x86_shared_cache_size
-     The ‘glibc.cpu.x86_shared_cache_size’ tunable allows the user to
-     set shared cache size in bytes for use in memory and string
-     routines.
-
- -- Tunable: glibc.cpu.x86_non_temporal_threshold
-     The ‘glibc.cpu.x86_non_temporal_threshold’ tunable allows the user
-     to set threshold in bytes for non temporal store.  Non temporal
-     stores give a hint to the hardware to move data directly to memory
-     without displacing other data from the cache.  This tunable is used
-     by some platforms to determine when to use non temporal stores in
-     operations like memmove and memcpy.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.x86_rep_movsb_threshold
-     The ‘glibc.cpu.x86_rep_movsb_threshold’ tunable allows the user to
-     set threshold in bytes to start using "rep movsb".  The value must
-     be greater than zero, and currently defaults to 2048 bytes.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.x86_rep_stosb_threshold
-     The ‘glibc.cpu.x86_rep_stosb_threshold’ tunable allows the user to
-     set threshold in bytes to start using "rep stosb".  The value must
-     be greater than zero, and currently defaults to 2048 bytes.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.x86_ibt
-     The ‘glibc.cpu.x86_ibt’ tunable allows the user to control how
-     indirect branch tracking (IBT) should be enabled.  Accepted values
-     are ‘on’, ‘off’, and ‘permissive’.  ‘on’ always turns on IBT
-     regardless of whether IBT is enabled in the executable and its
-     dependent shared libraries.  ‘off’ always turns off IBT regardless
-     of whether IBT is enabled in the executable and its dependent
-     shared libraries.  ‘permissive’ is the same as the default which
-     disables IBT on non-CET executables and shared libraries.
-
-     This tunable is specific to i386 and x86-64.
-
- -- Tunable: glibc.cpu.x86_shstk
-     The ‘glibc.cpu.x86_shstk’ tunable allows the user to control how
-     the shadow stack (SHSTK) should be enabled.  Accepted values are
-     ‘on’, ‘off’, and ‘permissive’.  ‘on’ always turns on SHSTK
-     regardless of whether SHSTK is enabled in the executable and its
-     dependent shared libraries.  ‘off’ always turns off SHSTK
-     regardless of whether SHSTK is enabled in the executable and its
-     dependent shared libraries.  ‘permissive’ changes how dlopen works
-     on non-CET shared libraries.  By default, when SHSTK is enabled,
-     dlopening a non-CET shared library returns an error.  With
-     ‘permissive’, it turns off SHSTK instead.
-
-     This tunable is specific to i386 and x86-64.
 

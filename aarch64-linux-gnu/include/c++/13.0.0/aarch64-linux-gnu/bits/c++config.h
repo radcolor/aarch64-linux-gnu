@@ -34,7 +34,7 @@
 #define _GLIBCXX_RELEASE 13
 
 // The datestamp of the C++ library in compressed ISO date format.
-#define __GLIBCXX__ 20220714
+#define __GLIBCXX__ 20220728
 
 // Macros for various attributes.
 //   _GLIBCXX_PURE
@@ -866,7 +866,7 @@ namespace std
 #define _GLIBCXX_HAVE_ALIGNED_ALLOC 1
 
 /* Define if arc4random is available in <stdlib.h>. */
-/* #undef _GLIBCXX_HAVE_ARC4RANDOM */
+#define _GLIBCXX_HAVE_ARC4RANDOM 1
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #define _GLIBCXX_HAVE_ARPA_INET_H 1

@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCC 1"
-.TH GCC 1 "2022-07-14" "gcc-13.0.0" "GNU"
+.TH GCC 1 "2022-07-28" "gcc-13.0.0" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -469,6 +469,11 @@ in the following sections.
 \&\-Wno\-analyzer\-double\-fclose 
 \&\-Wno\-analyzer\-double\-free 
 \&\-Wno\-analyzer\-exposure\-through\-output\-file 
+\&\-Wno\-analyzer\-fd\-access\-mode\-mismatch 
+\&\-Wno\-analyzer\-fd\-double\-close 
+\&\-Wno\-analyzer\-fd\-leak 
+\&\-Wno\-analyzer\-fd\-use\-after\-close 
+\&\-Wno\-analyzer\-fd\-use\-without\-check 
 \&\-Wno\-analyzer\-file\-leak 
 \&\-Wno\-analyzer\-free\-of\-non\-heap 
 \&\-Wno\-analyzer\-malloc\-leak 
@@ -1222,10 +1227,10 @@ See \s-1RS/6000\s0 and PowerPC Options.
 \&\-mcmodel=medlow  \-mcmodel=medany 
 \&\-mexplicit\-relocs  \-mno\-explicit\-relocs 
 \&\-mrelax  \-mno\-relax 
-\&\-mriscv\-attribute  \-mmo\-riscv\-attribute 
+\&\-mriscv\-attribute  \-mno\-riscv\-attribute 
 \&\-malign\-data=\fR\fItype\fR 
 \&\fB\-mbig\-endian  \-mlittle\-endian 
-\&\-mstack\-protector\-guard=\fR\fIguard\fR \fB\-mstack\-protector\-guard\-reg=\fR\fIreg\fR 
+\&\-mstack\-protector\-guard=\fR\fIguard\fR  \fB\-mstack\-protector\-guard\-reg=\fR\fIreg\fR 
 \&\fB\-mstack\-protector\-guard\-offset=\fR\fIoffset\fR
 .Sp
 \&\fI\s-1RL78\s0 Options\fR
@@ -9168,15 +9173,21 @@ This warning requires \fB\-fanalyzer\fR, which enables it; use
 \&\fB\-Wno\-analyzer\-fd\-access\-mode\-mismatch\fR
 to disable it.
 .Sp
-This diagnostic warns for paths through code in which a 
-\&\f(CW\*(C`read\*(C'\fR on a write-only file descriptor is attempted, or vice versa
+This diagnostic warns for paths through code in which a
+\&\f(CW\*(C`read\*(C'\fR on a write-only file descriptor is attempted, or vice versa.
+.Sp
+This diagnostic also warns for code paths in a which a function with attribute
+\&\f(CW\*(C`fd_arg_read (N)\*(C'\fR is called with a file descriptor opened with
+\&\f(CW\*(C`O_WRONLY\*(C'\fR at referenced argument \f(CW\*(C`N\*(C'\fR or a function with attribute
+\&\f(CW\*(C`fd_arg_write (N)\*(C'\fR is called with a file descriptor opened with
+\&\f(CW\*(C`O_RDONLY\*(C'\fR at referenced argument \fIN\fR.
 .IP "\fB\-Wno\-analyzer\-fd\-double\-close\fR" 4
 .IX Item "-Wno-analyzer-fd-double-close"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
 \&\fB\-Wno\-analyzer\-fd\-double\-close\fR
 to disable it.
 .Sp
-This diagnostic warns for paths through code in which a 
+This diagnostic warns for paths through code in which a
 file descriptor can be closed more than once.
 .IP "\fB\-Wno\-analyzer\-fd\-leak\fR" 4
 .IX Item "-Wno-analyzer-fd-leak"
@@ -9184,7 +9195,7 @@ This warning requires \fB\-fanalyzer\fR, which enables it; use
 \&\fB\-Wno\-analyzer\-fd\-leak\fR
 to disable it.
 .Sp
-This diagnostic warns for paths through code in which an 
+This diagnostic warns for paths through code in which an
 open file descriptor is leaked.
 .IP "\fB\-Wno\-analyzer\-fd\-use\-after\-close\fR" 4
 .IX Item "-Wno-analyzer-fd-use-after-close"
@@ -9192,16 +9203,26 @@ This warning requires \fB\-fanalyzer\fR, which enables it; use
 \&\fB\-Wno\-analyzer\-fd\-use\-after\-close\fR
 to disable it.
 .Sp
-This diagnostic warns for paths through code in which a 
+This diagnostic warns for paths through code in which a
 read or write is called on a closed file descriptor.
+.Sp
+This diagnostic also warns for paths through code in which
+a function with attribute \f(CW\*(C`fd_arg (N)\*(C'\fR or \f(CW\*(C`fd_arg_read (N)\*(C'\fR
+or \f(CW\*(C`fd_arg_write (N)\*(C'\fR is called with a closed file descriptor at
+referenced argument \f(CW\*(C`N\*(C'\fR.
 .IP "\fB\-Wno\-analyzer\-fd\-use\-without\-check\fR" 4
 .IX Item "-Wno-analyzer-fd-use-without-check"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
 \&\fB\-Wno\-analyzer\-fd\-use\-without\-check\fR
 to disable it.
 .Sp
-This diagnostic warns for paths through code in which a 
+This diagnostic warns for paths through code in which a
 file descriptor is used without being checked for validity.
+.Sp
+This diagnostic also warns for paths through code in which
+a function with attribute \f(CW\*(C`fd_arg (N)\*(C'\fR or \f(CW\*(C`fd_arg_read (N)\*(C'\fR
+or \f(CW\*(C`fd_arg_write (N)\*(C'\fR is called with a file descriptor, at referenced
+argument \f(CW\*(C`N\*(C'\fR, without being checked for validity.
 .IP "\fB\-Wno\-analyzer\-file\-leak\fR" 4
 .IX Item "-Wno-analyzer-file-leak"
 This warning requires \fB\-fanalyzer\fR, which enables it; use
@@ -9489,6 +9510,11 @@ following warnings from \fB\-fanalyzer\fR:
 \&\fB\-Wanalyzer\-double\-fclose 
 \&\-Wanalyzer\-double\-free 
 \&\-Wanalyzer\-exposure\-through\-output\-file 
+\&\-Wanalyzer\-fd\-access\-mode\-mismatch 
+\&\-Wanalyzer\-fd\-double\-close 
+\&\-Wanalyzer\-fd\-leak 
+\&\-Wanalyzer\-fd\-use\-after\-close 
+\&\-Wanalyzer\-fd\-use\-without\-check 
 \&\-Wanalyzer\-file\-leak 
 \&\-Wanalyzer\-free\-of\-non\-heap 
 \&\-Wanalyzer\-malloc\-leak 
@@ -19258,6 +19284,15 @@ Compile for \s-1ARC HS38 CPU.\s0
 .IP "\fBhs38_linux\fR" 4
 .IX Item "hs38_linux"
 Compile for \s-1ARC HS38 CPU\s0 with all hardware extensions on.
+.IP "\fBhs4x\fR" 4
+.IX Item "hs4x"
+Compile for \s-1ARC\s0 HS4x \s-1CPU.\s0
+.IP "\fBhs4xd\fR" 4
+.IX Item "hs4xd"
+Compile for \s-1ARC\s0 HS4xD \s-1CPU.\s0
+.IP "\fBhs4x_rel31\fR" 4
+.IX Item "hs4x_rel31"
+Compile for \s-1ARC\s0 HS4x \s-1CPU\s0 release 3.10a.
 .IP "\fBarc600_norm\fR" 4
 .IX Item "arc600_norm"
 Compile for \s-1ARC 600 CPU\s0 with \f(CW\*(C`norm\*(C'\fR instructions enabled.
@@ -19813,6 +19848,13 @@ Tune for \s-1ARC725D CPU.\s0
 .IP "\fB\s-1ARC750D\s0\fR" 4
 .IX Item "ARC750D"
 Tune for \s-1ARC750D CPU.\s0
+.IP "\fBcore3\fR" 4
+.IX Item "core3"
+Tune for ARCv2 core3 type \s-1CPU.\s0  This option enable usage of
+\&\f(CW\*(C`dbnz\*(C'\fR instruction.
+.IP "\fBrelease31a\fR" 4
+.IX Item "release31a"
+Tune for ARC4x release 3.10a.
 .RE
 .RS 4
 .RE
@@ -24018,6 +24060,20 @@ global symbol: The data got table must be within +/\-8EiB addressing space.
 .Sp
 The default code model is \f(CW\*(C`normal\*(C'\fR.
 .RE
+.IP "\fB\-mexplicit\-relocs\fR" 4
+.IX Item "-mexplicit-relocs"
+.PD 0
+.IP "\fB\-mno\-explicit\-relocs\fR" 4
+.IX Item "-mno-explicit-relocs"
+.PD
+Use or do not use assembler relocation operators when dealing with symbolic
+addresses.  The alternative is to use assembler macros instead, which may
+limit optimization.  The default value for the option is determined during
+\&\s-1GCC\s0 build-time by detecting corresponding assembler support:
+\&\f(CW\*(C`\-mexplicit\-relocs\*(C'\fR if said support is present,
+\&\f(CW\*(C`\-mno\-explicit\-relocs\*(C'\fR otherwise.  This option is mostly useful for
+debugging, or interoperation with assemblers different from the build-time
+one.
 .PP
 \fIM32C Options\fR
 .IX Subsection "M32C Options"
@@ -27329,11 +27385,11 @@ limit optimization.
 Take advantage of linker relaxations to reduce the number of instructions
 required to materialize symbol addresses. The default is to take advantage of
 linker relaxations.
-.IP "\fB\-memit\-attribute\fR" 4
-.IX Item "-memit-attribute"
+.IP "\fB\-mriscv\-attribute\fR" 4
+.IX Item "-mriscv-attribute"
 .PD 0
-.IP "\fB\-mno\-emit\-attribute\fR" 4
-.IX Item "-mno-emit-attribute"
+.IP "\fB\-mno\-riscv\-attribute\fR" 4
+.IX Item "-mno-riscv-attribute"
 .PD
 Emit (do not emit) RISC-V attribute to record extra information into \s-1ELF\s0
 objects.  This feature requires at least binutils 2.32.

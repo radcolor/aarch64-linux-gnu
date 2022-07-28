@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2162,6 +2165,185 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+
+File: libc.info,  Node: Suboptions,  Next: Suboptions Example,  Prev: Argp,  Up: Parsing Program Arguments
+
+25.3.12.1 Parsing of Suboptions
+...............................
+
+Having a single level of options is sometimes not enough.  There might
+be too many options which have to be available or a set of options is
+closely related.
+
+   For this case some programs use suboptions.  One of the most
+prominent programs is certainly ‘mount’(8).  The ‘-o’ option take one
+argument which itself is a comma separated list of options.  To ease the
+programming of code like this the function ‘getsubopt’ is available.
+
+ -- Function: int getsubopt (char **OPTIONP, char *const *TOKENS, char
+          **VALUEP)
+
+     Preliminary: | MT-Safe | AS-Safe | AC-Safe | *Note POSIX Safety
+     Concepts::.
+
+     The OPTIONP parameter must be a pointer to a variable containing
+     the address of the string to process.  When the function returns,
+     the reference is updated to point to the next suboption or to the
+     terminating ‘\0’ character if there are no more suboptions
+     available.
+
+     The TOKENS parameter references an array of strings containing the
+     known suboptions.  All strings must be ‘\0’ terminated and to mark
+     the end a null pointer must be stored.  When ‘getsubopt’ finds a
+     possible legal suboption it compares it with all strings available
+     in the TOKENS array and returns the index in the string as the
+     indicator.
+
+     In case the suboption has an associated value introduced by a ‘=’
+     character, a pointer to the value is returned in VALUEP.  The
+     string is ‘\0’ terminated.  If no argument is available VALUEP is
+     set to the null pointer.  By doing this the caller can check
+     whether a necessary value is given or whether no unexpected value
+     is present.
+
+     In case the next suboption in the string is not mentioned in the
+     TOKENS array the starting address of the suboption including a
+     possible value is returned in VALUEP and the return value of the
+     function is ‘-1’.
+
+
+File: libc.info,  Node: Suboptions Example,  Prev: Suboptions,  Up: Parsing Program Arguments
+
+25.3.13 Parsing of Suboptions Example
+-------------------------------------
+
+The code which might appear in the ‘mount’(8) program is a perfect
+example of the use of ‘getsubopt’:
+
+
+     #include <stdio.h>
+     #include <stdlib.h>
+     #include <unistd.h>
+
+     int do_all;
+     const char *type;
+     int read_size;
+     int write_size;
+     int read_only;
+
+     enum
+     {
+       RO_OPTION = 0,
+       RW_OPTION,
+       READ_SIZE_OPTION,
+       WRITE_SIZE_OPTION,
+       THE_END
+     };
+
+     const char *mount_opts[] =
+     {
+       [RO_OPTION] = "ro",
+       [RW_OPTION] = "rw",
+       [READ_SIZE_OPTION] = "rsize",
+       [WRITE_SIZE_OPTION] = "wsize",
+       [THE_END] = NULL
+     };
+
+     int
+     main (int argc, char **argv)
+     {
+       char *subopts, *value;
+       int opt;
+
+       while ((opt = getopt (argc, argv, "at:o:")) != -1)
+         switch (opt)
+           {
+           case 'a':
+             do_all = 1;
+             break;
+           case 't':
+             type = optarg;
+             break;
+           case 'o':
+             subopts = optarg;
+             while (*subopts != '\0')
+               switch (getsubopt (&subopts, mount_opts, &value))
+                 {
+                 case RO_OPTION:
+                   read_only = 1;
+                   break;
+                 case RW_OPTION:
+                   read_only = 0;
+                   break;
+                 case READ_SIZE_OPTION:
+                   if (value == NULL)
+                     abort ();
+                   read_size = atoi (value);
+                   break;
+                 case WRITE_SIZE_OPTION:
+                   if (value == NULL)
+                     abort ();
+                   write_size = atoi (value);
+                   break;
+                 default:
+                   /* Unknown suboption. */
+                   printf ("Unknown suboption `%s'\n", value);
+                   break;
+                 }
+             break;
+           default:
+             abort ();
+           }
+
+       /* Do the real work. */
+
+       return 0;
+     }
+
+
+File: libc.info,  Node: Environment Variables,  Next: Auxiliary Vector,  Prev: Program Arguments,  Up: Program Basics
+
+25.4 Environment Variables
+==========================
+
+When a program is executed, it receives information about the context in
+which it was invoked in two ways.  The first mechanism uses the ARGV and
+ARGC arguments to its ‘main’ function, and is discussed in *note Program
+Arguments::.  The second mechanism uses “environment variables” and is
+discussed in this section.
+
+   The ARGV mechanism is typically used to pass command-line arguments
+specific to the particular program being invoked.  The environment, on
+the other hand, keeps track of information that is shared by many
+programs, changes infrequently, and that is less frequently used.
+
+   The environment variables discussed in this section are the same
+environment variables that you set using assignments and the ‘export’
+command in the shell.  Programs executed from the shell inherit all of
+the environment variables from the shell.
+
+   Standard environment variables are used for information about the
+user’s home directory, terminal type, current locale, and so on; you can
+define additional variables for other purposes.  The set of all
+environment variables that have values is collectively known as the
+“environment”.
+
+   Names of environment variables are case-sensitive and must not
+contain the character ‘=’.  System-defined environment variables are
+invariably uppercase.
+
+   The values of environment variables can be anything that can be
+represented as a string.  A value must not contain an embedded null
+character, since this is assumed to terminate the string.
+
+* Menu:
+
+* Environment Access::          How to get and set the values of
+				 environment variables.
+* Standard Environment::        These environment variables have
+                		 standard interpretations.
 
 
 File: libc.info,  Node: Environment Access,  Next: Standard Environment,  Up: Environment Variables
@@ -7296,214 +7478,4 @@ File: libc.info,  Node: Writing a User Entry,  Prev: Scanning All Users,  Up: Us
      name starts with a - or +.
 
      The function ‘putpwent’ is declared in ‘pwd.h’.
-
-
-File: libc.info,  Node: Group Database,  Next: Database Example,  Prev: User Database,  Up: Users and Groups
-
-30.14 Group Database
-====================
-
-This section describes how to search and scan the database of registered
-groups.  The database itself is kept in the file ‘/etc/group’ on most
-systems, but on some systems a special network service provides access
-to it.
-
-* Menu:
-
-* Group Data Structure::        What each group record contains.
-* Lookup Group::                How to look for a particular group.
-* Scanning All Groups::         Scanning the list of all groups.
-
-
-File: libc.info,  Node: Group Data Structure,  Next: Lookup Group,  Up: Group Database
-
-30.14.1 The Data Structure for a Group
---------------------------------------
-
-The functions and data structures for accessing the system group
-database are declared in the header file ‘grp.h’.
-
- -- Data Type: struct group
-
-     The ‘group’ structure is used to hold information about an entry in
-     the system group database.  It has at least the following members:
-
-     ‘char *gr_name’
-          The name of the group.
-
-     ‘gid_t gr_gid’
-          The group ID of the group.
-
-     ‘char **gr_mem’
-          A vector of pointers to the names of users in the group.  Each
-          user name is a null-terminated string, and the vector itself
-          is terminated by a null pointer.
-
-
-File: libc.info,  Node: Lookup Group,  Next: Scanning All Groups,  Prev: Group Data Structure,  Up: Group Database
-
-30.14.2 Looking Up One Group
-----------------------------
-
-You can search the group database for information about a specific group
-using ‘getgrgid’ or ‘getgrnam’.  These functions are declared in
-‘grp.h’.
-
- -- Function: struct group * getgrgid (gid_t GID)
-
-     Preliminary: | MT-Unsafe race:grgid locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function returns a pointer to a statically-allocated structure
-     containing information about the group whose group ID is GID.  This
-     structure may be overwritten by subsequent calls to ‘getgrgid’.
-
-     A null pointer indicates there is no group with ID GID.
-
- -- Function: int getgrgid_r (gid_t GID, struct group *RESULT_BUF, char
-          *BUFFER, size_t BUFLEN, struct group **RESULT)
-
-     Preliminary: | MT-Safe locale | AS-Unsafe dlopen plugin heap lock |
-     AC-Unsafe corrupt lock fd mem | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘getgrgid’ in that it returns
-     information about the group whose group ID is GID.  However, it
-     fills the user supplied structure pointed to by RESULT_BUF with the
-     information instead of using a static buffer.  The first BUFLEN
-     bytes of the additional buffer pointed to by BUFFER are used to
-     contain additional information, normally strings which are pointed
-     to by the elements of the result structure.
-
-     If a group with ID GID is found, the pointer returned in RESULT
-     points to the record which contains the wanted data (i.e., RESULT
-     contains the value RESULT_BUF).  If no group is found or if an
-     error occurred, the pointer returned in RESULT is a null pointer.
-     The function returns zero or an error code.  If the buffer BUFFER
-     is too small to contain all the needed information, the error code
-     ‘ERANGE’ is returned and ‘errno’ is set to ‘ERANGE’.
-
- -- Function: struct group * getgrnam (const char *NAME)
-
-     Preliminary: | MT-Unsafe race:grnam locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function returns a pointer to a statically-allocated structure
-     containing information about the group whose group name is NAME.
-     This structure may be overwritten by subsequent calls to
-     ‘getgrnam’.
-
-     A null pointer indicates there is no group named NAME.
-
- -- Function: int getgrnam_r (const char *NAME, struct group
-          *RESULT_BUF, char *BUFFER, size_t BUFLEN, struct group
-          **RESULT)
-
-     Preliminary: | MT-Safe locale | AS-Unsafe dlopen plugin heap lock |
-     AC-Unsafe corrupt lock fd mem | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘getgrnam’ in that it returns
-     information about the group whose group name is NAME.  Like
-     ‘getgrgid_r’, it uses the user supplied buffers in RESULT_BUF and
-     BUFFER, not a static buffer.
-
-     The return values are the same as for ‘getgrgid_r’.
-
-
-File: libc.info,  Node: Scanning All Groups,  Prev: Lookup Group,  Up: Group Database
-
-30.14.3 Scanning the List of All Groups
----------------------------------------
-
-This section explains how a program can read the list of all groups in
-the system, one group at a time.  The functions described here are
-declared in ‘grp.h’.
-
-   You can use the ‘fgetgrent’ function to read group entries from a
-particular file.
-
- -- Function: struct group * fgetgrent (FILE *STREAM)
-
-     Preliminary: | MT-Unsafe race:fgrent | AS-Unsafe corrupt lock |
-     AC-Unsafe corrupt lock | *Note POSIX Safety Concepts::.
-
-     The ‘fgetgrent’ function reads the next entry from STREAM.  It
-     returns a pointer to the entry.  The structure is statically
-     allocated and is overwritten on subsequent calls to ‘fgetgrent’.
-     You must copy the contents of the structure if you wish to save the
-     information.
-
-     The stream must correspond to a file in the same format as the
-     standard group database file.
-
- -- Function: int fgetgrent_r (FILE *STREAM, struct group *RESULT_BUF,
-          char *BUFFER, size_t BUFLEN, struct group **RESULT)
-
-     Preliminary: | MT-Safe | AS-Unsafe corrupt | AC-Unsafe corrupt lock
-     | *Note POSIX Safety Concepts::.
-
-     This function is similar to ‘fgetgrent’ in that it reads the next
-     user entry from STREAM.  But the result is returned in the
-     structure pointed to by RESULT_BUF.  The first BUFLEN bytes of the
-     additional buffer pointed to by BUFFER are used to contain
-     additional information, normally strings which are pointed to by
-     the elements of the result structure.
-
-     This stream must correspond to a file in the same format as the
-     standard group database file.
-
-     If the function returns zero RESULT points to the structure with
-     the wanted data (normally this is in RESULT_BUF).  If errors
-     occurred the return value is non-zero and RESULT contains a null
-     pointer.
-
-   The way to scan all the entries in the group database is with
-‘setgrent’, ‘getgrent’, and ‘endgrent’.
-
- -- Function: void setgrent (void)
-
-     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function initializes a stream for reading from the group data
-     base.  You use this stream by calling ‘getgrent’ or ‘getgrent_r’.
-
- -- Function: struct group * getgrent (void)
-
-     Preliminary: | MT-Unsafe race:grent race:grentbuf locale |
-     AS-Unsafe dlopen plugin heap lock | AC-Unsafe corrupt lock fd mem |
-     *Note POSIX Safety Concepts::.
-
-     The ‘getgrent’ function reads the next entry from the stream
-     initialized by ‘setgrent’.  It returns a pointer to the entry.  The
-     structure is statically allocated and is overwritten on subsequent
-     calls to ‘getgrent’.  You must copy the contents of the structure
-     if you wish to save the information.
-
- -- Function: int getgrent_r (struct group *RESULT_BUF, char *BUFFER,
-          size_t BUFLEN, struct group **RESULT)
-
-     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function is similar to ‘getgrent’ in that it returns the next
-     entry from the stream initialized by ‘setgrent’.  Like
-     ‘fgetgrent_r’, it places the result in user-supplied buffers
-     pointed to by RESULT_BUF and BUFFER.
-
-     If the function returns zero RESULT contains a pointer to the data
-     (normally equal to RESULT_BUF).  If errors occurred the return
-     value is non-zero and RESULT contains a null pointer.
-
- -- Function: void endgrent (void)
-
-     Preliminary: | MT-Unsafe race:grent locale | AS-Unsafe dlopen
-     plugin heap lock | AC-Unsafe corrupt lock fd mem | *Note POSIX
-     Safety Concepts::.
-
-     This function closes the internal stream used by ‘getgrent’ or
-     ‘getgrent_r’.
 

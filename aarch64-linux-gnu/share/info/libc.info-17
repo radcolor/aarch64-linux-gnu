@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.

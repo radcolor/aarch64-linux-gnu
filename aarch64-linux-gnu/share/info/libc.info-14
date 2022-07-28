@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2162,6 +2165,154 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: POSIX Thread Tunables,  Next: Hardware Capability Tunables,  Prev: Elision Tunables,  Up: Tunables
+
+38.5 POSIX Thread Tunables
+==========================
+
+ -- Tunable namespace: glibc.pthread
+     The behavior of POSIX threads can be tuned to gain performance
+     improvements according to specific hardware capabilities and
+     workload characteristics by setting the following tunables in the
+     ‘pthread’ namespace:
+
+ -- Tunable: glibc.pthread.mutex_spin_count
+     The ‘glibc.pthread.mutex_spin_count’ tunable sets the maximum
+     number of times a thread should spin on the lock before calling
+     into the kernel to block.  Adaptive spin is used for mutexes
+     initialized with the ‘PTHREAD_MUTEX_ADAPTIVE_NP’ GNU extension.  It
+     affects both ‘pthread_mutex_lock’ and ‘pthread_mutex_timedlock’.
+
+     The thread spins until either the maximum spin count is reached or
+     the lock is acquired.
+
+     The default value of this tunable is ‘100’.
+
+ -- Tunable: glibc.pthread.stack_cache_size
+     This tunable configures the maximum size of the stack cache.  Once
+     the stack cache exceeds this size, unused thread stacks are
+     returned to the kernel, to bring the cache size below this limit.
+
+     The value is measured in bytes.  The default is ‘41943040’ (fourty
+     mibibytes).
+
+ -- Tunable: glibc.pthread.rseq
+     The ‘glibc.pthread.rseq’ tunable can be set to ‘0’, to disable
+     restartable sequences support in the GNU C Library.  This enables
+     applications to perform direct restartable sequence registration
+     with the kernel.  The default is ‘1’, which means that the GNU C
+     Library performs registration on behalf of the application.
+
+     Restartable sequences are a Linux-specific extension.
+
+
+File: libc.info,  Node: Hardware Capability Tunables,  Next: Memory Related Tunables,  Prev: POSIX Thread Tunables,  Up: Tunables
+
+38.6 Hardware Capability Tunables
+=================================
+
+ -- Tunable namespace: glibc.cpu
+     Behavior of the GNU C Library can be tuned to assume specific
+     hardware capabilities by setting the following tunables in the
+     ‘cpu’ namespace:
+
+ -- Tunable: glibc.cpu.hwcap_mask
+     This tunable supersedes the ‘LD_HWCAP_MASK’ environment variable
+     and is identical in features.
+
+     The ‘AT_HWCAP’ key in the Auxiliary Vector specifies instruction
+     set extensions available in the processor at runtime for some
+     architectures.  The ‘glibc.cpu.hwcap_mask’ tunable allows the user
+     to mask out those capabilities at runtime, thus disabling use of
+     those extensions.
+
+ -- Tunable: glibc.cpu.hwcaps
+     The ‘glibc.cpu.hwcaps=-xxx,yyy,-zzz...’ tunable allows the user to
+     enable CPU/ARCH feature ‘yyy’, disable CPU/ARCH feature ‘xxx’ and
+     ‘zzz’ where the feature name is case-sensitive and has to match the
+     ones in ‘sysdeps/x86/include/cpu-features.h’.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.cached_memopt
+     The ‘glibc.cpu.cached_memopt=[0|1]’ tunable allows the user to
+     enable optimizations recommended for cacheable memory.  If set to
+     ‘1’, the GNU C Library assumes that the process memory image
+     consists of cacheable (non-device) memory only.  The default, ‘0’,
+     indicates that the process may use device memory.
+
+     This tunable is specific to powerpc, powerpc64 and powerpc64le.
+
+ -- Tunable: glibc.cpu.name
+     The ‘glibc.cpu.name=xxx’ tunable allows the user to tell the GNU C
+     Library to assume that the CPU is ‘xxx’ where xxx may have one of
+     these values: ‘generic’, ‘falkor’, ‘thunderxt88’, ‘thunderx2t99’,
+     ‘thunderx2t99p1’, ‘ares’, ‘emag’, ‘kunpeng’, ‘a64fx’.
+
+     This tunable is specific to aarch64.
+
+ -- Tunable: glibc.cpu.x86_data_cache_size
+     The ‘glibc.cpu.x86_data_cache_size’ tunable allows the user to set
+     data cache size in bytes for use in memory and string routines.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_shared_cache_size
+     The ‘glibc.cpu.x86_shared_cache_size’ tunable allows the user to
+     set shared cache size in bytes for use in memory and string
+     routines.
+
+ -- Tunable: glibc.cpu.x86_non_temporal_threshold
+     The ‘glibc.cpu.x86_non_temporal_threshold’ tunable allows the user
+     to set threshold in bytes for non temporal store.  Non temporal
+     stores give a hint to the hardware to move data directly to memory
+     without displacing other data from the cache.  This tunable is used
+     by some platforms to determine when to use non temporal stores in
+     operations like memmove and memcpy.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_rep_movsb_threshold
+     The ‘glibc.cpu.x86_rep_movsb_threshold’ tunable allows the user to
+     set threshold in bytes to start using "rep movsb".  The value must
+     be greater than zero, and currently defaults to 2048 bytes.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_rep_stosb_threshold
+     The ‘glibc.cpu.x86_rep_stosb_threshold’ tunable allows the user to
+     set threshold in bytes to start using "rep stosb".  The value must
+     be greater than zero, and currently defaults to 2048 bytes.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_ibt
+     The ‘glibc.cpu.x86_ibt’ tunable allows the user to control how
+     indirect branch tracking (IBT) should be enabled.  Accepted values
+     are ‘on’, ‘off’, and ‘permissive’.  ‘on’ always turns on IBT
+     regardless of whether IBT is enabled in the executable and its
+     dependent shared libraries.  ‘off’ always turns off IBT regardless
+     of whether IBT is enabled in the executable and its dependent
+     shared libraries.  ‘permissive’ is the same as the default which
+     disables IBT on non-CET executables and shared libraries.
+
+     This tunable is specific to i386 and x86-64.
+
+ -- Tunable: glibc.cpu.x86_shstk
+     The ‘glibc.cpu.x86_shstk’ tunable allows the user to control how
+     the shadow stack (SHSTK) should be enabled.  Accepted values are
+     ‘on’, ‘off’, and ‘permissive’.  ‘on’ always turns on SHSTK
+     regardless of whether SHSTK is enabled in the executable and its
+     dependent shared libraries.  ‘off’ always turns off SHSTK
+     regardless of whether SHSTK is enabled in the executable and its
+     dependent shared libraries.  ‘permissive’ changes how dlopen works
+     on non-CET shared libraries.  By default, when SHSTK is enabled,
+     dlopening a non-CET shared library returns an error.  With
+     ‘permissive’, it turns off SHSTK instead.
+
+     This tunable is specific to i386 and x86-64.
 
 
 File: libc.info,  Node: Memory Related Tunables,  Prev: Hardware Capability Tunables,  Up: Tunables
@@ -7611,6 +7762,18 @@ it.
 ‘int alphasort64 (const struct dirent64 **A, const struct dirent **B)’
 
      ‘dirent.h’ (GNU): *note Scanning Directory Content::.
+
+‘uint32_t arc4random (void)’
+
+     ‘stdlib.h’ (BSD): *note High Quality Random::.
+
+‘void arc4random_buf (void *BUFFER, size_t LENGTH)’
+
+     ‘stdlib.h’ (BSD): *note High Quality Random::.
+
+‘uint32_t arc4random_uniform (uint32_t UPPER_BOUND)’
+
+     ‘stdlib.h’ (BSD): *note High Quality Random::.
 
 ‘struct argp’
 

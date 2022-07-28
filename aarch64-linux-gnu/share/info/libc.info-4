@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2162,6 +2165,53 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+
+File: libc.info,  Node: Message Translation,  Next: Searching and Sorting,  Prev: Locales,  Up: Top
+
+8 Message Translation
+*********************
+
+The program’s interface with the user should be designed to ease the
+user’s task.  One way to ease the user’s task is to use messages in
+whatever language the user prefers.
+
+   Printing messages in different languages can be implemented in
+different ways.  One could add all the different languages in the source
+code and choose among the variants every time a message has to be
+printed.  This is certainly not a good solution since extending the set
+of languages is cumbersome (the code must be changed) and the code
+itself can become really big with dozens of message sets.
+
+   A better solution is to keep the message sets for each language in
+separate files which are loaded at runtime depending on the language
+selection of the user.
+
+   The GNU C Library provides two different sets of functions to support
+message translation.  The problem is that neither of the interfaces is
+officially defined by the POSIX standard.  The ‘catgets’ family of
+functions is defined in the X/Open standard but this is derived from
+industry decisions and therefore not necessarily based on reasonable
+decisions.
+
+   As mentioned above, the message catalog handling provides easy
+extendability by using external data files which contain the message
+translations.  I.e., these files contain for each of the messages used
+in the program a translation for the appropriate language.  So the tasks
+of the message handling functions are
+
+   • locate the external data file with the appropriate translations
+   • load the data and make it possible to address the messages
+   • map a given key to the translated message
+
+   The two approaches mainly differ in the implementation of this last
+step.  Decisions made in the last step influence the rest of the design.
+
+* Menu:
+
+* Message catalogs a la X/Open::  The ‘catgets’ family of functions.
+* The Uniforum approach::         The ‘gettext’ family of functions.
 
 
 File: libc.info,  Node: Message catalogs a la X/Open,  Next: The Uniforum approach,  Up: Message Translation

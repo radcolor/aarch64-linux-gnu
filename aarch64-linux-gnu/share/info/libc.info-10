@@ -546,6 +546,9 @@ START-INFO-DIR-ENTRY
 * alloca: (libc)Variable Size Automatic.
 * alphasort64: (libc)Scanning Directory Content.
 * alphasort: (libc)Scanning Directory Content.
+* arc4random: (libc)High Quality Random.
+* arc4random_buf: (libc)High Quality Random.
+* arc4random_uniform: (libc)High Quality Random.
 * argp_error: (libc)Argp Helper Functions.
 * argp_failure: (libc)Argp Helper Functions.
 * argp_help: (libc)Argp Help.
@@ -2162,6 +2165,157 @@ START-INFO-DIR-ENTRY
 * ynfNx: (libc)Special Functions.
 * ynl: (libc)Special Functions.
 END-INFO-DIR-ENTRY
+
+
+File: libc.info,  Node: Parsing of Floats,  Prev: Parsing of Integers,  Up: Parsing of Numbers
+
+20.11.2 Parsing of Floats
+-------------------------
+
+The ‘str’ functions are declared in ‘stdlib.h’ and those beginning with
+‘wcs’ are declared in ‘wchar.h’.  One might wonder about the use of
+‘restrict’ in the prototypes of the functions in this section.  It is
+seemingly useless but the ISO C standard uses it (for the functions
+defined there) so we have to do it as well.
+
+ -- Function: double strtod (const char *restrict STRING, char
+          **restrict TAILPTR)
+
+     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     The ‘strtod’ (“string-to-double”) function converts the initial
+     part of STRING to a floating-point number, which is returned as a
+     value of type ‘double’.
+
+     This function attempts to decompose STRING as follows:
+
+        • A (possibly empty) sequence of whitespace characters.  Which
+          characters are whitespace is determined by the ‘isspace’
+          function (*note Classification of Characters::).  These are
+          discarded.
+
+        • An optional plus or minus sign (‘+’ or ‘-’).
+
+        • A floating point number in decimal or hexadecimal format.  The
+          decimal format is:
+
+             − A nonempty sequence of digits optionally containing a
+               decimal-point character—normally ‘.’, but it depends on
+               the locale (*note General Numeric::).
+
+             − An optional exponent part, consisting of a character ‘e’
+               or ‘E’, an optional sign, and a sequence of digits.
+
+          The hexadecimal format is as follows:
+
+             − A 0x or 0X followed by a nonempty sequence of hexadecimal
+               digits optionally containing a decimal-point
+               character—normally ‘.’, but it depends on the locale
+               (*note General Numeric::).
+
+             − An optional binary-exponent part, consisting of a
+               character ‘p’ or ‘P’, an optional sign, and a sequence of
+               digits.
+
+        • Any remaining characters in the string.  If TAILPTR is not a
+          null pointer, a pointer to this tail of the string is stored
+          in ‘*TAILPTR’.
+
+     If the string is empty, contains only whitespace, or does not
+     contain an initial substring that has the expected syntax for a
+     floating-point number, no conversion is performed.  In this case,
+     ‘strtod’ returns a value of zero and the value returned in
+     ‘*TAILPTR’ is the value of STRING.
+
+     In a locale other than the standard ‘"C"’ or ‘"POSIX"’ locales,
+     this function may recognize additional locale-dependent syntax.
+
+     If the string has valid syntax for a floating-point number but the
+     value is outside the range of a ‘double’, ‘strtod’ will signal
+     overflow or underflow as described in *note Math Error Reporting::.
+
+     ‘strtod’ recognizes four special input strings.  The strings
+     ‘"inf"’ and ‘"infinity"’ are converted to oo, or to the largest
+     representable value if the floating-point format doesn’t support
+     infinities.  You can prepend a ‘"+"’ or ‘"-"’ to specify the sign.
+     Case is ignored when scanning these strings.
+
+     The strings ‘"nan"’ and ‘"nan(CHARS...)"’ are converted to NaN.
+     Again, case is ignored.  If CHARS... are provided, they are used in
+     some unspecified fashion to select a particular representation of
+     NaN (there can be several).
+
+     Since zero is a valid result as well as the value returned on
+     error, you should check for errors in the same way as for ‘strtol’,
+     by examining ‘errno’ and TAILPTR.
+
+ -- Function: float strtof (const char *STRING, char **TAILPTR)
+ -- Function: long double strtold (const char *STRING, char **TAILPTR)
+
+     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     These functions are analogous to ‘strtod’, but return ‘float’ and
+     ‘long double’ values respectively.  They report errors in the same
+     way as ‘strtod’.  ‘strtof’ can be substantially faster than
+     ‘strtod’, but has less precision; conversely, ‘strtold’ can be much
+     slower but has more precision (on systems where ‘long double’ is a
+     separate type).
+
+     These functions have been GNU extensions and are new to ISO C99.
+
+ -- Function: _FloatN strtofN (const char *STRING, char **TAILPTR)
+ -- Function: _FloatNx strtofNx (const char *STRING, char **TAILPTR)
+
+     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     These functions are like ‘strtod’, except for the return type.
+
+     They were introduced in ISO/IEC TS 18661-3 and are available on
+     machines that support the related types; *note Mathematics::.
+
+ -- Function: double wcstod (const wchar_t *restrict STRING, wchar_t
+          **restrict TAILPTR)
+ -- Function: float wcstof (const wchar_t *STRING, wchar_t **TAILPTR)
+ -- Function: long double wcstold (const wchar_t *STRING, wchar_t
+          **TAILPTR)
+ -- Function: _FloatN wcstofN (const wchar_t *STRING, wchar_t **TAILPTR)
+ -- Function: _FloatNx wcstofNx (const wchar_t *STRING, wchar_t
+          **TAILPTR)
+
+     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     The ‘wcstod’, ‘wcstof’, ‘wcstol’, ‘wcstofN’, and ‘wcstofNx’
+     functions are equivalent in nearly all aspects to the ‘strtod’,
+     ‘strtof’, ‘strtold’, ‘strtofN’, and ‘strtofNx’ functions, but they
+     handle wide character strings.
+
+     The ‘wcstod’ function was introduced in Amendment 1 of ISO C90.
+     The ‘wcstof’ and ‘wcstold’ functions were introduced in ISO C99.
+
+     The ‘wcstofN’ and ‘wcstofNx’ functions are not in any standard, but
+     are added to provide completeness for the non-deprecated interface
+     of wide character string to floating-point conversion functions.
+     They are only available on machines that support the related types;
+     *note Mathematics::.
+
+ -- Function: double atof (const char *STRING)
+
+     Preliminary: | MT-Safe locale | AS-Safe | AC-Safe | *Note POSIX
+     Safety Concepts::.
+
+     This function is similar to the ‘strtod’ function, except that it
+     need not detect overflow and underflow errors.  The ‘atof’ function
+     is provided mostly for compatibility with existing code; using
+     ‘strtod’ is more robust.
+
+   The GNU C Library also provides ‘_l’ versions of these functions,
+which take an additional argument, the locale to use in conversion.
+
+   See also *note Parsing of Integers::.
 
 
 File: libc.info,  Node: Printing of Floats,  Next: System V Number Conversion,  Prev: Parsing of Numbers,  Up: Arithmetic
@@ -7225,160 +7379,4 @@ communicate and synchronize.
 * Signal Stack::                Using a Separate Signal Stack.
 * BSD Signal Handling::         Additional functions for backward
 			         compatibility with BSD.
-
-
-File: libc.info,  Node: Concepts of Signals,  Next: Standard Signals,  Up: Signal Handling
-
-24.1 Basic Concepts of Signals
-==============================
-
-This section explains basic concepts of how signals are generated, what
-happens after a signal is delivered, and how programs can handle
-signals.
-
-* Menu:
-
-* Kinds of Signals::            Some examples of what can cause a signal.
-* Signal Generation::           Concepts of why and how signals occur.
-* Delivery of Signal::          Concepts of what a signal does to the
-                                 process.
-
-
-File: libc.info,  Node: Kinds of Signals,  Next: Signal Generation,  Up: Concepts of Signals
-
-24.1.1 Some Kinds of Signals
-----------------------------
-
-A signal reports the occurrence of an exceptional event.  These are some
-of the events that can cause (or “generate”, or “raise”) a signal:
-
-   • A program error such as dividing by zero or issuing an address
-     outside the valid range.
-
-   • A user request to interrupt or terminate the program.  Most
-     environments are set up to let a user suspend the program by typing
-     ‘C-z’, or terminate it with ‘C-c’.  Whatever key sequence is used,
-     the operating system sends the proper signal to interrupt the
-     process.
-
-   • The termination of a child process.
-
-   • Expiration of a timer or alarm.
-
-   • A call to ‘kill’ or ‘raise’ by the same process.
-
-   • A call to ‘kill’ from another process.  Signals are a limited but
-     useful form of interprocess communication.
-
-   • An attempt to perform an I/O operation that cannot be done.
-     Examples are reading from a pipe that has no writer (*note Pipes
-     and FIFOs::), and reading or writing to a terminal in certain
-     situations (*note Job Control::).
-
-   Each of these kinds of events (excepting explicit calls to ‘kill’ and
-‘raise’) generates its own particular kind of signal.  The various kinds
-of signals are listed and described in detail in *note Standard
-Signals::.
-
-
-File: libc.info,  Node: Signal Generation,  Next: Delivery of Signal,  Prev: Kinds of Signals,  Up: Concepts of Signals
-
-24.1.2 Concepts of Signal Generation
-------------------------------------
-
-In general, the events that generate signals fall into three major
-categories: errors, external events, and explicit requests.
-
-   An error means that a program has done something invalid and cannot
-continue execution.  But not all kinds of errors generate signals—in
-fact, most do not.  For example, opening a nonexistent file is an error,
-but it does not raise a signal; instead, ‘open’ returns ‘-1’.  In
-general, errors that are necessarily associated with certain library
-functions are reported by returning a value that indicates an error.
-The errors which raise signals are those which can happen anywhere in
-the program, not just in library calls.  These include division by zero
-and invalid memory addresses.
-
-   An external event generally has to do with I/O or other processes.
-These include the arrival of input, the expiration of a timer, and the
-termination of a child process.
-
-   An explicit request means the use of a library function such as
-‘kill’ whose purpose is specifically to generate a signal.
-
-   Signals may be generated “synchronously” or “asynchronously”.  A
-synchronous signal pertains to a specific action in the program, and is
-delivered (unless blocked) during that action.  Most errors generate
-signals synchronously, and so do explicit requests by a process to
-generate a signal for that same process.  On some machines, certain
-kinds of hardware errors (usually floating-point exceptions) are not
-reported completely synchronously, but may arrive a few instructions
-later.
-
-   Asynchronous signals are generated by events outside the control of
-the process that receives them.  These signals arrive at unpredictable
-times during execution.  External events generate signals
-asynchronously, and so do explicit requests that apply to some other
-process.
-
-   A given type of signal is either typically synchronous or typically
-asynchronous.  For example, signals for errors are typically synchronous
-because errors generate signals synchronously.  But any type of signal
-can be generated synchronously or asynchronously with an explicit
-request.
-
-
-File: libc.info,  Node: Delivery of Signal,  Prev: Signal Generation,  Up: Concepts of Signals
-
-24.1.3 How Signals Are Delivered
---------------------------------
-
-When a signal is generated, it becomes “pending”.  Normally it remains
-pending for just a short period of time and then is “delivered” to the
-process that was signaled.  However, if that kind of signal is currently
-“blocked”, it may remain pending indefinitely—until signals of that kind
-are “unblocked”.  Once unblocked, it will be delivered immediately.
-*Note Blocking Signals::.
-
-   When the signal is delivered, whether right away or after a long
-delay, the “specified action” for that signal is taken.  For certain
-signals, such as ‘SIGKILL’ and ‘SIGSTOP’, the action is fixed, but for
-most signals, the program has a choice: ignore the signal, specify a
-“handler function”, or accept the “default action” for that kind of
-signal.  The program specifies its choice using functions such as
-‘signal’ or ‘sigaction’ (*note Signal Actions::).  We sometimes say that
-a handler “catches” the signal.  While the handler is running, that
-particular signal is normally blocked.
-
-   If the specified action for a kind of signal is to ignore it, then
-any such signal which is generated is discarded immediately.  This
-happens even if the signal is also blocked at the time.  A signal
-discarded in this way will never be delivered, not even if the program
-subsequently specifies a different action for that kind of signal and
-then unblocks it.
-
-   If a signal arrives which the program has neither handled nor
-ignored, its “default action” takes place.  Each kind of signal has its
-own default action, documented below (*note Standard Signals::).  For
-most kinds of signals, the default action is to terminate the process.
-For certain kinds of signals that represent “harmless” events, the
-default action is to do nothing.
-
-   When a signal terminates a process, its parent process can determine
-the cause of termination by examining the termination status code
-reported by the ‘wait’ or ‘waitpid’ functions.  (This is discussed in
-more detail in *note Process Completion::.)  The information it can get
-includes the fact that termination was due to a signal and the kind of
-signal involved.  If a program you run from a shell is terminated by a
-signal, the shell typically prints some kind of error message.
-
-   The signals that normally represent program errors have a special
-property: when one of these signals terminates the process, it also
-writes a “core dump file” which records the state of the process at the
-time of termination.  You can examine the core dump with a debugger to
-investigate what caused the error.
-
-   If you raise a “program error” signal by explicit request, and this
-terminates the process, it makes a core dump file just as if the signal
-had been due directly to an error.
 

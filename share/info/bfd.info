@@ -7214,6 +7214,43 @@ attributes.
  -- : BFD_RELOC_LARCH_SUB24
  -- : BFD_RELOC_LARCH_SUB32
  -- : BFD_RELOC_LARCH_SUB64
+ -- : BFD_RELOC_LARCH_B16
+ -- : BFD_RELOC_LARCH_B21
+ -- : BFD_RELOC_LARCH_B26
+ -- : BFD_RELOC_LARCH_ABS_HI20
+ -- : BFD_RELOC_LARCH_ABS_LO12
+ -- : BFD_RELOC_LARCH_ABS64_LO20
+ -- : BFD_RELOC_LARCH_ABS64_HI12
+ -- : BFD_RELOC_LARCH_PCALA_HI20
+ -- : BFD_RELOC_LARCH_PCALA_LO12
+ -- : BFD_RELOC_LARCH_PCALA64_LO20
+ -- : BFD_RELOC_LARCH_PCALA64_HI12
+ -- : BFD_RELOC_LARCH_GOT_PC_HI20
+ -- : BFD_RELOC_LARCH_GOT_PC_LO12
+ -- : BFD_RELOC_LARCH_GOT64_PC_LO20
+ -- : BFD_RELOC_LARCH_GOT64_PC_HI12
+ -- : BFD_RELOC_LARCH_GOT_HI20
+ -- : BFD_RELOC_LARCH_GOT_LO12
+ -- : BFD_RELOC_LARCH_GOT64_LO20
+ -- : BFD_RELOC_LARCH_GOT64_HI12
+ -- : BFD_RELOC_LARCH_TLS_LE_HI20
+ -- : BFD_RELOC_LARCH_TLS_LE_LO12
+ -- : BFD_RELOC_LARCH_TLS_LE64_LO20
+ -- : BFD_RELOC_LARCH_TLS_LE64_HI12
+ -- : BFD_RELOC_LARCH_TLS_IE_PC_HI20
+ -- : BFD_RELOC_LARCH_TLS_IE_PC_LO12
+ -- : BFD_RELOC_LARCH_TLS_IE64_PC_LO20
+ -- : BFD_RELOC_LARCH_TLS_IE64_PC_HI12
+ -- : BFD_RELOC_LARCH_TLS_IE_HI20
+ -- : BFD_RELOC_LARCH_TLS_IE_LO12
+ -- : BFD_RELOC_LARCH_TLS_IE64_LO20
+ -- : BFD_RELOC_LARCH_TLS_IE64_HI12
+ -- : BFD_RELOC_LARCH_TLS_LD_PC_HI20
+ -- : BFD_RELOC_LARCH_TLS_LD_HI20
+ -- : BFD_RELOC_LARCH_TLS_GD_PC_HI20
+ -- : BFD_RELOC_LARCH_TLS_GD_HI20
+ -- : BFD_RELOC_LARCH_32_PCREL
+ -- : BFD_RELOC_LARCH_RELAX
      LARCH relocations.
 
 
@@ -11929,7 +11966,7 @@ BFD Index
                                                              (line   83)
 * _bfd_generic_make_empty_symbol:        symbol handling functions.
                                                              (line   96)
-* _bfd_generic_set_reloc:                howto manager.      (line 3584)
+* _bfd_generic_set_reloc:                howto manager.      (line 3621)
 * _bfd_generic_verify_endian_match:      Writing the symbol table.
                                                              (line  172)
 * _bfd_link_add_symbols in target vector: Adding Symbols to the Hash Table.
@@ -11940,7 +11977,7 @@ BFD Index
                                                              (line    6)
 * _bfd_relocate_contents:                Relocating the section contents.
                                                              (line   22)
-* _bfd_unrecognized_reloc:               howto manager.      (line 3596)
+* _bfd_unrecognized_reloc:               howto manager.      (line 3633)
 * aout_SIZE_machine_type:                aout.               (line  145)
 * aout_SIZE_mkobject:                    aout.               (line  137)
 * aout_SIZE_new_section_hook:            aout.               (line  175)
@@ -12015,7 +12052,7 @@ BFD Index
                                                              (line  116)
 * bfd_default_arch_struct:               Architectures.      (line  620)
 * bfd_default_compatible:                Architectures.      (line  682)
-* bfd_default_reloc_type_lookup:         howto manager.      (line 3508)
+* bfd_default_reloc_type_lookup:         howto manager.      (line 3545)
 * bfd_default_scan:                      Architectures.      (line  691)
 * bfd_default_set_arch_mach:             Architectures.      (line  638)
 * bfd_demangle:                          Miscellaneous.      (line  334)
@@ -12046,13 +12083,13 @@ BFD Index
 * bfd_generic_define_start_stop:         Writing the symbol table.
                                                              (line   97)
 * bfd_generic_discard_group:             section prototypes. (line  312)
-* bfd_generic_gc_sections:               howto manager.      (line 3539)
-* bfd_generic_get_relocated_section_contents: howto manager. (line 3569)
+* bfd_generic_gc_sections:               howto manager.      (line 3576)
+* bfd_generic_get_relocated_section_contents: howto manager. (line 3606)
 * bfd_generic_group_name:                section prototypes. (line  304)
 * bfd_generic_is_group_section:          section prototypes. (line  296)
-* bfd_generic_lookup_section_flags:      howto manager.      (line 3549)
-* bfd_generic_merge_sections:            howto manager.      (line 3559)
-* bfd_generic_relax_section:             howto manager.      (line 3526)
+* bfd_generic_lookup_section_flags:      howto manager.      (line 3586)
+* bfd_generic_merge_sections:            howto manager.      (line 3596)
+* bfd_generic_relax_section:             howto manager.      (line 3563)
 * bfd_get_alt_debug_link_info:           Opening and Closing.
                                                              (line  320)
 * bfd_get_arch:                          Architectures.      (line  649)
@@ -12071,7 +12108,7 @@ BFD Index
 * bfd_get_mtime:                         Miscellaneous.      (line  445)
 * bfd_get_next_mapent:                   Archives.           (line   57)
 * bfd_get_next_section_by_name:          section prototypes. (line   25)
-* bfd_get_reloc_code_name:               howto manager.      (line 3517)
+* bfd_get_reloc_code_name:               howto manager.      (line 3554)
 * bfd_get_reloc_upper_bound:             Miscellaneous.      (line    8)
 * bfd_get_section_by_name:               section prototypes. (line   16)
 * bfd_get_section_by_name_if:            section prototypes. (line   46)
@@ -13078,13 +13115,34 @@ BFD Index
 * BFD_RELOC_IQ2000_OFFSET_16:            howto manager.      (line 2556)
 * BFD_RELOC_IQ2000_OFFSET_21:            howto manager.      (line 2557)
 * BFD_RELOC_IQ2000_UHI16:                howto manager.      (line 2558)
+* BFD_RELOC_LARCH_32_PCREL:              howto manager.      (line 3527)
+* BFD_RELOC_LARCH_ABS64_HI12:            howto manager.      (line 3498)
+* BFD_RELOC_LARCH_ABS64_LO20:            howto manager.      (line 3497)
+* BFD_RELOC_LARCH_ABS_HI20:              howto manager.      (line 3495)
+* BFD_RELOC_LARCH_ABS_LO12:              howto manager.      (line 3496)
 * BFD_RELOC_LARCH_ADD16:                 howto manager.      (line 3483)
 * BFD_RELOC_LARCH_ADD24:                 howto manager.      (line 3484)
 * BFD_RELOC_LARCH_ADD32:                 howto manager.      (line 3485)
 * BFD_RELOC_LARCH_ADD64:                 howto manager.      (line 3486)
 * BFD_RELOC_LARCH_ADD8:                  howto manager.      (line 3482)
+* BFD_RELOC_LARCH_B16:                   howto manager.      (line 3492)
+* BFD_RELOC_LARCH_B21:                   howto manager.      (line 3493)
+* BFD_RELOC_LARCH_B26:                   howto manager.      (line 3494)
+* BFD_RELOC_LARCH_GOT64_HI12:            howto manager.      (line 3510)
+* BFD_RELOC_LARCH_GOT64_LO20:            howto manager.      (line 3509)
+* BFD_RELOC_LARCH_GOT64_PC_HI12:         howto manager.      (line 3506)
+* BFD_RELOC_LARCH_GOT64_PC_LO20:         howto manager.      (line 3505)
+* BFD_RELOC_LARCH_GOT_HI20:              howto manager.      (line 3507)
+* BFD_RELOC_LARCH_GOT_LO12:              howto manager.      (line 3508)
+* BFD_RELOC_LARCH_GOT_PC_HI20:           howto manager.      (line 3503)
+* BFD_RELOC_LARCH_GOT_PC_LO12:           howto manager.      (line 3504)
 * BFD_RELOC_LARCH_MARK_LA:               howto manager.      (line 3455)
 * BFD_RELOC_LARCH_MARK_PCREL:            howto manager.      (line 3456)
+* BFD_RELOC_LARCH_PCALA64_HI12:          howto manager.      (line 3502)
+* BFD_RELOC_LARCH_PCALA64_LO20:          howto manager.      (line 3501)
+* BFD_RELOC_LARCH_PCALA_HI20:            howto manager.      (line 3499)
+* BFD_RELOC_LARCH_PCALA_LO12:            howto manager.      (line 3500)
+* BFD_RELOC_LARCH_RELAX:                 howto manager.      (line 3528)
 * BFD_RELOC_LARCH_SOP_ADD:               howto manager.      (line 3470)
 * BFD_RELOC_LARCH_SOP_AND:               howto manager.      (line 3471)
 * BFD_RELOC_LARCH_SOP_ASSERT:            howto manager.      (line 3465)
@@ -13119,6 +13177,22 @@ BFD Index
 * BFD_RELOC_LARCH_TLS_DTPMOD64:          howto manager.      (line 3451)
 * BFD_RELOC_LARCH_TLS_DTPREL32:          howto manager.      (line 3450)
 * BFD_RELOC_LARCH_TLS_DTPREL64:          howto manager.      (line 3452)
+* BFD_RELOC_LARCH_TLS_GD_HI20:           howto manager.      (line 3526)
+* BFD_RELOC_LARCH_TLS_GD_PC_HI20:        howto manager.      (line 3525)
+* BFD_RELOC_LARCH_TLS_IE64_HI12:         howto manager.      (line 3522)
+* BFD_RELOC_LARCH_TLS_IE64_LO20:         howto manager.      (line 3521)
+* BFD_RELOC_LARCH_TLS_IE64_PC_HI12:      howto manager.      (line 3518)
+* BFD_RELOC_LARCH_TLS_IE64_PC_LO20:      howto manager.      (line 3517)
+* BFD_RELOC_LARCH_TLS_IE_HI20:           howto manager.      (line 3519)
+* BFD_RELOC_LARCH_TLS_IE_LO12:           howto manager.      (line 3520)
+* BFD_RELOC_LARCH_TLS_IE_PC_HI20:        howto manager.      (line 3515)
+* BFD_RELOC_LARCH_TLS_IE_PC_LO12:        howto manager.      (line 3516)
+* BFD_RELOC_LARCH_TLS_LD_HI20:           howto manager.      (line 3524)
+* BFD_RELOC_LARCH_TLS_LD_PC_HI20:        howto manager.      (line 3523)
+* BFD_RELOC_LARCH_TLS_LE64_HI12:         howto manager.      (line 3514)
+* BFD_RELOC_LARCH_TLS_LE64_LO20:         howto manager.      (line 3513)
+* BFD_RELOC_LARCH_TLS_LE_HI20:           howto manager.      (line 3511)
+* BFD_RELOC_LARCH_TLS_LE_LO12:           howto manager.      (line 3512)
 * BFD_RELOC_LARCH_TLS_TPREL32:           howto manager.      (line 3453)
 * BFD_RELOC_LARCH_TLS_TPREL64:           howto manager.      (line 3454)
 * BFD_RELOC_LM32_16_GOT:                 howto manager.      (line 2679)
@@ -14398,7 +14472,7 @@ BFD Index
 * BFD_RELOC_TILEPRO_TLS_GD_CALL:         howto manager.      (line 3197)
 * BFD_RELOC_TILEPRO_TLS_IE_LOAD:         howto manager.      (line 3202)
 * BFD_RELOC_TILEPRO_TLS_TPOFF32:         howto manager.      (line 3221)
-* bfd_reloc_type_lookup:                 howto manager.      (line 3495)
+* bfd_reloc_type_lookup:                 howto manager.      (line 3532)
 * BFD_RELOC_V850_16_GOT:                 howto manager.      (line 1540)
 * BFD_RELOC_V850_16_GOTOFF:              howto manager.      (line 1556)
 * BFD_RELOC_V850_16_PCREL:               howto manager.      (line 1520)
@@ -14675,42 +14749,42 @@ Node: Formats118073
 Node: Relocations121003
 Node: typedef arelent121730
 Node: howto manager136439
-Node: Core Files271848
-Node: Targets273872
-Node: bfd_target275847
-Node: Architectures302600
-Node: Opening and Closing334459
-Node: Internal352627
-Node: File Caching352731
-Node: Linker Functions354628
-Node: Creating a Linker Hash Table356302
-Node: Adding Symbols to the Hash Table358041
-Node: Differing file formats358941
-Node: Adding symbols from an object file360666
-Node: Adding symbols from an archive362816
-Node: Performing the Final Link365162
-Node: Information provided by the linker366403
-Node: Relocating the section contents367557
-Node: Writing the symbol table369309
-Node: Hash Tables376400
-Node: Creating and Freeing a Hash Table377598
-Node: Looking Up or Entering a String378848
-Node: Traversing a Hash Table380101
-Node: Deriving a New Hash Table Type380890
-Node: Define the Derived Structures381956
-Node: Write the Derived Creation Routine383037
-Node: Write Other Derived Routines385662
-Node: BFD back ends386977
-Node: What to Put Where387247
-Node: aout387427
-Node: coff393681
-Node: elf421821
-Node: mmo422222
-Node: File layout423092
-Node: Symbol-table429005
-Node: mmo section mapping432768
-Node: GNU Free Documentation License436422
-Node: BFD Index461486
+Node: Core Files273091
+Node: Targets275115
+Node: bfd_target277090
+Node: Architectures303843
+Node: Opening and Closing335702
+Node: Internal353870
+Node: File Caching353974
+Node: Linker Functions355871
+Node: Creating a Linker Hash Table357545
+Node: Adding Symbols to the Hash Table359284
+Node: Differing file formats360184
+Node: Adding symbols from an object file361909
+Node: Adding symbols from an archive364059
+Node: Performing the Final Link366405
+Node: Information provided by the linker367646
+Node: Relocating the section contents368800
+Node: Writing the symbol table370552
+Node: Hash Tables377643
+Node: Creating and Freeing a Hash Table378841
+Node: Looking Up or Entering a String380091
+Node: Traversing a Hash Table381344
+Node: Deriving a New Hash Table Type382133
+Node: Define the Derived Structures383199
+Node: Write the Derived Creation Routine384280
+Node: Write Other Derived Routines386905
+Node: BFD back ends388220
+Node: What to Put Where388490
+Node: aout388670
+Node: coff394924
+Node: elf423064
+Node: mmo423465
+Node: File layout424335
+Node: Symbol-table430248
+Node: mmo section mapping434011
+Node: GNU Free Documentation License437665
+Node: BFD Index462729
 
 End Tag Table
 
